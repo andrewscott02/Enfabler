@@ -18,14 +18,12 @@ public class PlayerCombat : MonoBehaviour
     {
         if (canAttack)
         {
-            //Debug.Log("Light attack");
-            canMove = false;
+            Debug.Log("Light attack");
             canAttack = false;
             animator.SetTrigger("LightAttack");
+            animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
 
-            //Remove later
-            ResetAttack();
-            ResetMove();
+            NextAttack();
         }
     }
 
@@ -35,7 +33,7 @@ public class PlayerCombat : MonoBehaviour
         {
             //Debug.Log("Heavy attack");
             canMove = false;
-            canAttack = false;
+            //canAttack = false;
             animator.SetTrigger("HeavyAttack");
 
             //Remove later
@@ -48,7 +46,7 @@ public class PlayerCombat : MonoBehaviour
     {
         animator.SetInteger("SwordAttackCount", animator.GetInteger("SwordAttackCount") + 1);
 
-        if (animator.GetInteger("SwordAttackCount") >= animator.GetInteger("SwordAttackMax"))
+        if (animator.GetInteger("SwordAttackCount") > animator.GetInteger("SwordAttackMax"))
         {
             animator.SetInteger("SwordAttackCount", 0);
         }
