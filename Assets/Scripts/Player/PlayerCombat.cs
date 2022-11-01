@@ -18,10 +18,14 @@ public class PlayerCombat : MonoBehaviour
     {
         if (canAttack)
         {
-            Debug.Log("Light attack");
+            //Debug.Log("Light attack");
             canMove = false;
             canAttack = false;
             animator.SetTrigger("LightAttack");
+
+            //Remove later
+            ResetAttack();
+            ResetMove();
         }
     }
 
@@ -29,10 +33,14 @@ public class PlayerCombat : MonoBehaviour
     {
         if (canAttack)
         {
-            Debug.Log("Heavy attack");
+            //Debug.Log("Heavy attack");
             canMove = false;
             canAttack = false;
             animator.SetTrigger("HeavyAttack");
+
+            //Remove later
+            ResetAttack();
+            ResetMove();
         }
     }
 

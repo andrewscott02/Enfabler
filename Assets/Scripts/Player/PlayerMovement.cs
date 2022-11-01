@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="ySpeed"> Determines the vertical movement (Forward and Backward) </param>
     public void Move(float xSpeed, float ySpeed)
     {
-        Debug.Log("Move: " + xSpeed + " | " + ySpeed);
+        //Debug.Log("Move: " + xSpeed + " | " + ySpeed);
         //Movement
         Vector3 movement = new Vector3(xSpeed, 0, ySpeed) * Time.deltaTime;
         movement = transform.TransformDirection(movement);
