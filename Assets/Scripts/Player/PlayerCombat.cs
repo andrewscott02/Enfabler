@@ -21,7 +21,7 @@ public class PlayerCombat : MonoBehaviour
             Debug.Log("Light attack");
             canMove = false;
             canAttack = false;
-            animator.SetTrigger("SwordAttack");
+            animator.SetTrigger("LightAttack");
         }
     }
 
