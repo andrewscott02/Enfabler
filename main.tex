@@ -6,8 +6,14 @@
 \usepackage{amsmath}
 \usepackage{wrapfig, framed, caption}
 
-\title{Evaluating Collaboration With AI NPCs to Build Player-Companion Relationships} 
-%\title{How effective is the use of adaptive AI at building Player-Companion Relationships?}
+%Useful links
+%G-Power downloads
+    %https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower
+    %https://learningspace.falmouth.ac.uk/mod/resource/view.php?id=245797
+
+\title{Evaluating the use of Adaptive AI to Build Player-Companion Collaboration} 
+%Evaluating Collaboration With AI NPCs to Build Player-Companion Relationships
+%\title{How effective is the use of adaptive AI at building player-companion collaboration?}
 \author{Andrew J. Scott}  
 \date{September 2022}
 
@@ -16,7 +22,7 @@
 	\pagenumbering{arabic}
 
 \begin{abstract}
-The abstract goes here.
+In this dissertation, I demonstrate the use of adaptive AI for companion characters. The adaptive AI will respond to player actions so it can collaborate with them better. I am testing to see if this adaption helps to make the companion character perceived as more collaborative by the player.
 \end{abstract}
 
  \begin{IEEEkeywords}
@@ -26,70 +32,61 @@ Artificial Intelligence, Synergy, Collaboration, Cooperation, Companion NPCs, Ad
 \section{Introduction}
 \label{Intro}
 
-First sentence should explain project aims
+I am planning to develop an AI companion, similar to Atreus in \textit{God of War} \cite{GDCAtreus} or Ellie from \textit{The Last of Us} \cite{GAIP2EllieAI}, which will aid the player in combat. The focus of this project would be on using agent modelling, outlined in section \ref{AgentModelling}, to make an adaptive AI that determines how the companion can best assist the player without requiring any explicit commands from them.
 
-Motivations for project (budget consideration)
+I am planning on building upon these companion characters by focusing on the sense of collaboration between them and the player. There are five core design pillars that I’m considering:
 
-AI is a key component of many games (ref), either as entities within the game world (ref) or behind the scenes as PGC or difficulty management systems (ref). Focusing on entities, AI agents can fall under multiple categories \cite{GDCMindYourStep}; they can be an opponent for the player to beat, an ally that aids them in their goals or they can be neutral agents in the game. There is a lot of emphasis on the first of these \cite{GDCMindYourStep}, as obstacles
-
-Games like \textit{God of War 2018}, \textit{The Last of Us} and \textit{Bioshock Infinite} are renowned for their AI companions \cite{PlayDontShow}, while games like \textit{Skyrim} are criticised for theirs \cite{tremblay2013adaptive}.
-
-I am planning to develop an AI companion, similar to Atreus in \textit{God of War} \cite{GDCAtreus} or Ellie from \textit{The Last of Us} \cite{GAIP2EllieAI}, which will aid the player in combat. The focus of this project would be on using agent modelling, outlined in section \ref{AgentModelling}, to determine how the companion can best assist the player without requiring any explicit commands from them.
-
-I am planning on building upon these companion characters by focusing on the sense of collaboration between them and the player. There are three core design pillars that I’m considering:
-
+\label{CoreDesign}
 \begin{itemize}
-	\item \textbf{Enhances Agency} - The AI will have to balance multiple duties, such as helping the player stay safe, attacking other enemies so they do not get overwhelmed and maintaining their own safety \cite{CoupledEmpowermentMaximisation} and \cite{tremblay2013adaptive}. In addition, I plan to ensure that this AI does not overshadow the player’s agency \cite{CoupledEmpowermentMaximisation} and \cite{DesignDocAIAllies} by making their behaviours mostly supportive. Additionally, I plan to enable collaboration without explicit commands, as this ruins the agent’s own agency \cite{EGXCharacterDeathGuildWars}.
-	\item \textbf{Simple Interactions} - I will keep the combat actions simple, both for the player and companion actions. One of the reasons for this is to reduce scope, but it also allows the AI to be incorporated in other action games easier, as these other games do not need to incorporate specific features. The intention is that the AI can be scaled up to use more complicated actions, but it will work with some simple behaviours if need be.
+	\item \textbf{Enhances Agency} - The AI will have to balance multiple duties, such as helping the player stay safe, attacking other enemies so they do not get overwhelmed and maintaining their own safety \cite{CoupledEmpowermentMaximisation, tremblay2013adaptive}.
+	\item \textbf{Doesn't Overshadow} - I plan to ensure that this AI does not overshadow the player \cite{CoupledEmpowermentMaximisation, DesignDocAIAllies} by making their behaviours mostly supportive.
+	\item \textbf{No Explicit Commands} - I plan to enable collaboration without explicit commands, as this ruins the companion's own agency \cite{EGXCharacterDeathGuildWars}.
+	\item \textbf{Simple Behaviours} - I will keep the combat actions simple, both for the player and companion actions. This reduces scope and allows the AI to be incorporated in other action games easier. This is standard in industry \cite{GMTGoodAI, GDCLessIsMore, GDCSimplestAITrick}.
 	\item \textbf{Low Maintenance} - While the player should be able to notice the AI, they should not need to rely on them for specific behaviours or completely change their playstyle to get the AI to be helpful.
 \end{itemize}
  
 \section{Background}
 \label{Background}
 
-Atreus in \textit{God of War 2018} is a good example of synergistic AI, as he will help the player land slow attacks and will extend enemy vulnerability by shooting them with arrows \cite{GDCAtreus}. For example, when the player launches an enemy into the air, Atreus will shoot them and keep them there. There is also a lot of emphasis on his character development over the course of the game, which is reflected in his behaviour. At the start of the game, he only takes actions when commanded, and learns to be more automated towards the middle of the game. Later, when he starts to become more brash, he starts to outright ignore the players’ commands, and performs actions that would otherwise only occur when commanded. These changes in his AI help to tie the narrative into gameplay and make him seem like a real character, which helps to immerse the player and bond with him. These changes are also noticeable when the player is separated from Atreus, which helps the players realise how much they rely on him.
+Research in 2010 highlights the lack of AI research in games \cite{RealTimeAICritique2010}. Additionally, \textit{The Elder Scrolls V: Skyrim}, released in 2011, is criticised for their AI companions \cite{tremblay2013adaptive}, specifically the poor pathfinding behaviour, which can result in companions moving in front of the player when they are trying to attack.
+
+Since then, there has been a lot of improvements in AI research. Specifically looking at companion characters, there is a lot of research on implementing adaptive behaviour \cite{tremblay2013adaptive, CompanionBotsFPS2019, GeneratingCollabBehaviourPlanRecognition2016}. In industry, games like \textit{God of War 2018}, \textit{The Last of Us} and \textit{Bioshock Infinite} are renowned for their AI companions \cite{PlayDontShow} (cite more reviews and analyses). All three of the studios behind these games have developed AI techniques to fine-tune behaviour \cite{GDCAtreus, GAIP2EllieAI, GDCElizabeth, AIGamesBioshockAI}.
+
+Atreus in \textit{God of War 2018} is a good example of synergistic AI, as he will help the player land slow attacks and will extend enemy vulnerability by shooting them with arrows \cite{GDCAtreus}. For example, when the player launches an enemy into the air, Atreus will shoot them and keep them there. There is also a lot of emphasis on his character development over the course of the game, which is reflected in his behaviour. At the start of the game, he only takes actions when commanded, and learns to be more automated towards the middle of the game. Later, he becomes brash, so he starts to outright ignore the players’ commands, and performs actions that would otherwise only occur when commanded, like his special runic abilities. These changes in his AI help to tie the narrative into gameplay and make him seem like a real character, which helps to allow the player to bond with Atreus. These changes are also noticeable when the player is separated from Atreus, which helps the players realise how much they rely on him.
 
 Pathfinding is an important aspect of AI companions. The AI needs to be close to the player so that it is not forgotten \cite{GAIP2EllieAI}, but also not too close that it gets in their way and obstructs them \cite{CoupledEmpowermentMaximisation}. An example of poor AI pathfinding is in \textit{Skyrim} \cite{tremblay2013adaptive}, where the AI will move in front of the player when they are aiming and generally get in their way when moving. Naughty Dog addressed these issues in \textit{The Last of Us} with pathfinding tools that kept companions close to the player, but will not get in the way and will move out of the way if the player moves into their personal space \cite{GAIP2EllieAI}. Vocal barks are used in such moments to add character, and while it is a good practice to use voice acting to help make the player aware of the agent’s actions, and make them feel more real \cite{GMTGoodAI}, they are not suitable for games with lower budgets.
 
-A lot of industry practice with developing AI for companion characters is to use bespoke behaviour and use animations and voice acting to give personality and character \cite{GAIP2EllieAI}, \cite{GAIPOReactions}, \cite{GMTGoodAI}, \cite{AIGamesBioshockAI} and \cite{GDCElizabeth}. In particular, Irrational Games created a smart terrain system for \textit{Bioshock Infinite} that allows Elizabeth to interact with the environment \cite{AIGamesBioshockAI} and \cite{GDCElizabeth}. A lot of these finishing touches are a key part of making the companion feel more believable, allowing the player to empathise and engage with them more. It also helps to communicate NPC actions, so the player understands that they are actually making choices, otherwise they can miss the intelligence of the AI \cite{GMTGoodAI}.
+Many action games, such as \textit{Marvel's Spiderman} and \textit{Kingdoms of Amalur: Reckoning}, use a technique known as the Kung-Fu Circle to manage the positioning of multiple agents \cite{GAIPKungFuCircle, GDCSpiderman}. An AI manager handles the positioning of enemies in this circle and manages when they can attack. While this technique is intended to manage multiple enemies in action games, I can also use it to determine where the AI companion could be placed.
 
-Instead of focusing on animation and voice lines, I am planning to focus on building the relationship between the player and an AI companion by focusing on improving the sense of collaboration between them. The intent of this would be to improve player-companion relationships in games with lower budgets and to maximise them in games that can have animations and voice acting.
+A lot of industry practice with developing AI for companion characters is to use bespoke behaviour, detailed animations and voice acting to give personality and character \cite{GAIP2EllieAI, GMTGoodAI, GAIPOReactions}. In particular, Irrational Games created a smart terrain system for \textit{Bioshock Infinite} that allows Elizabeth to interact with the environment \cite{GDCElizabeth, AIGamesBioshockAI}. A lot of these finishing touches are a key part of making the companion feel more believable, allowing the player to empathise and engage with them more. It also helps to communicate NPC actions, so the player understands that they are actually making choices, otherwise they can miss the intelligence of the AI \cite{GMTGoodAI}.
 
-\section{AI Techniques}
-\label{AITechniques}
+Instead of focusing on animation and voice lines, I am planning to focus on using adaptive AI to improve the sense of collaboration between them. The intent of this would be to improve player-companion relationships in games with lower budgets and to maximise them in games that can have animations and voice acting. To do this, I will implement AI techniques that allow a companion NPC to adapt to player actions to collaborate with them better.
 
-A critique of the field of AI in games showed that there was not much development in this field on an academic level \cite{RealTimeAICritique2010}. Since then this field has drastically improved.
+\section{Collaboration Without Communication}
+\label{Communication}
 
-Instead of focusing on animation and voice lines, I am planning to focus on building the relationship between the player and an AI companion by focusing on improving the sense of collaboration between them. The intent of this would be to improve player-companion relationships in games with lower budgets and to maximise them in games that can have animations and voice acting. To do this, I will implement AI techniques that allow a companion NPC to adapt to player actions to collaborate with them better.
+My core design, detailed in Section \ref{CoreDesign}, is that the player cannot explicitly command the companion. As a result, the AI needs to determine how to collaborate with the player without communication. The following methods are some ways in which an AI can collaborate with other agents without communication.
 
 \subsection{Plan Recognition}
 \label{PlanRecognition}
 
-Sources: \cite{PandemicPlanRecognition2021}, \cite{GeneratingCollabBehaviourPlanRecognition2016}, \cite{PlayerAdaptiveRTSAI2007}, \cite{PlanRecognitionNoise}
+Plan recognition is a useful technique for agents that need to collaborate with other agents, including players, without requiring explicit commands or communication \cite{GeneratingCollabBehaviourPlanRecognition2016, PandemicPlanRecognition2021}. Agents that use plan recognition observe the actions taken by another entity in order to determine their goals. Once an entity’s goal has been identified, the plan recognition agent will devise actions that can aid them in achieving their goals \cite{GeneratingCollabBehaviourPlanRecognition2016}. A common use for this technique is in RTS games \cite{PlayerAdaptiveRTSAI2007} as agents use observed behaviour to determine their allies' or opponents' plans.
 
-Plan recognition is a useful technique for agents that need to collaborate with other agents, including players, without requiring explicit commands or communication \cite{PandemicPlanRecognition2021} and \cite{GeneratingCollabBehaviourPlanRecognition2016}. Agents that use plan recognition observe the actions taken by another entity in order to determine their goals. Once an entity’s goal has been identified, the plan recognition agent will devise actions that can aid them in achieving their goals \cite{PandemicPlanRecognition2021} and \cite{GeneratingCollabBehaviourPlanRecognition2016}. A common use for this technique is in RTS games \cite{PlayerAdaptiveRTSAI2007}.
+Plan recognition agents can also be used for board games where multiple agents must work together for a common goal but have no or limited communication with each other \cite{PandemicPlanRecognition2021}. Agents must determine their their team member's plans based on their actions and determine what they can do to better support them.
 
 Implementing a plan recognition agent in an action game requires a more complex combat system. This type of agent could be useful in an action game with combos, where the AI will be required to determine which attack in the combo the player plans to use, and will plan attacks that collaborate well with them. For example, if the player is building up to a slow attack, they will interrupt enemies from hitting the player and will prevent the target from escaping. If the player is planning a large AOE attack, they will try to stagger enemies into the effect and keep them there. This will ideally make the AI seem intelligent and build collaboration while also appearing to give the AI more agency as it does not respond to player actions directly.
 
-However, these behaviours would be much more reliable with bespoke behaviours, especially since the actions taken by the agent in both examples are quite similar. Using a plan recognition agent in an action game would require the combat system to be complex enough that the agent needs to use unique actions for various plans, which breaks one of my core design pillars outlined in section \ref{Intro}. Looking at \textit{God of War 2018} \cite{GDCAtreus}, outlined in section \ref{Background}, all the actions Atreus uses are very similar, but it’s the timing that is important.
+However, these behaviours would be much more reliable with bespoke behaviours, especially since the actions taken by the agent in both examples are quite similar. Using a plan recognition agent in an action game would require the combat system to be complex enough that the agent needs to use unique actions for various plans, which breaks one of my core design pillars outlined in section \ref{CoreDesign}. Looking at \textit{God of War 2018} \cite{GDCAtreus}, outlined in section \ref{Background}, all the actions Atreus uses are very similar, but it’s the timing that is important.
 
 \subsection{Agent Modelling}
 \label{AgentModelling}
- 
-Sources: \cite{EvaluatingHanabiAgents}, \cite{OpponentModellingRTS2007}, \cite{bakkes2009opponentmodelling}, \cite{yannakakis2013playermodelling}
 
-Agent modelling is another technique for agents that need to take actions based on another entity. Similar to plan recognition, an agent modelling AI observes actions and acts upon them. However, instead of using the actions to determine an entity’s goals, it constructs a model of the entity, which is used to define more overall strategies. This model is then used to determine the agent's actions.
-
-Agent modelling techniques tend to be used for AI that are intended to win strategy games, but I plan to see how they can be used in games where the objective of the AI is not to win, but support the player. The agent will use this model to determine how they can compliment the players’ actions. It is important that it supports the player experience and does not overshadow them.
+Agent modelling is another technique for agents that need to take actions based on another entity. Similar to plan recognition, an agent modelling AI observes actions and acts upon them \cite{yannakakis2013playermodelling}. However, instead of using the actions to determine an entity’s goals, it constructs a model of the entity, which is used to define more overall strategies. This model is then used to determine the agent's actions in response. Like plan recognition, agent modelling techniques tend to be used for AI in RTS games \cite{OpponentModellingRTS2007, bakkes2009opponentmodelling}. It is also used in similar board games like \textit{Hanabi} \cite{EvaluatingHanabiAgents}.
 
 \subsection{Other Considerations}
 \label{OtherConsiderations}
 
-AI Managers: \cite{GAIPKungFuCircle}, \cite{GDCSpiderman}
-
-Simple AI: \cite{GMTGoodAI}, \cite{GDCLessIsMore}, \cite{GDCSimplestAITrick}
-
-Sources: \cite{WaitASecond2019}, \cite{SocialPerceptions2020}, \cite{TheoryOfMind2013}, \cite{von2017mindsofmany}
+Misc methods: \cite{WaitASecond2019, SocialPerceptions2020, TheoryOfMind2013, von2017mindsofmany}
  
 \section{Method}
 \label{Method}
