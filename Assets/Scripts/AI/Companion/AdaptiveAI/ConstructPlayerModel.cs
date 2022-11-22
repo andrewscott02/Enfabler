@@ -12,6 +12,8 @@ public class ConstructPlayerModel : MonoBehaviour
     private void Start()
     {
         descriptorValues.Add(Descriptor.Aggressive, 0);
+        descriptorValues.Add(Descriptor.Counter, 0);
+        descriptorValues.Add(Descriptor.Defensive, 0);
         descriptorValues.Add(Descriptor.Cautious, 0);
         descriptorValues.Add(Descriptor.Panic, 0);
     }
@@ -23,7 +25,13 @@ public class ConstructPlayerModel : MonoBehaviour
         Descriptor highestState = Descriptor.Null;
         float highestValue = 0;
 
-        foreach(var item in descriptorValues)
+        DescriptorValue baseValue = new DescriptorValue();
+        baseValue.descriptor = Descriptor.Null;
+        baseValue.value = 0;
+
+        showValues.Add(baseValue);
+
+        foreach (var item in descriptorValues)
         {
             DescriptorValue newValue = new DescriptorValue();
             newValue.descriptor = item.Key;
@@ -46,19 +54,56 @@ public class ConstructPlayerModel : MonoBehaviour
 
     public void PlayerAttack(bool hit)
     {
-        descriptorValues[Descriptor.Aggressive] += 0.5f;
+        if (CheckCounter())
+        {
+            descriptorValues[Descriptor.Counter] += 0.5f;
+        }
+        else
+        {
+            if (hit)
+            {
+                descriptorValues[Descriptor.Aggressive] += 0.3f;
+            }
+            else
+            {
+                descriptorValues[Descriptor.Panic] += 0.5f;
+            }
+        }
         AdjustDisplay();
     }
 
-    public void PlayerBlock(bool successful)
+    public void PlayerParry(bool beingAttacked)
     {
-        descriptorValues[Descriptor.Defensive] += 0.5f;
+        if (beingAttacked)
+        {
+            descriptorValues[Descriptor.Defensive] += 0.5f;
+            SetupCounter();
+        }
+        else
+        {
+            descriptorValues[Descriptor.Panic] += 0.5f;
+        }
         AdjustDisplay();
     }
 
-    public void PlayerDodge(bool away, bool successful, bool beingAttacked)
+    public void PlayerDodge(bool away, bool beingAttacked)
     {
-        descriptorValues[Descriptor.Cautious] += 0.5f;
+        if (beingAttacked)
+        {
+            if (away)
+            {
+                descriptorValues[Descriptor.Cautious] += 0.5f;
+            }
+            else
+            {
+                descriptorValues[Descriptor.Defensive] += 0.5f;
+            }
+            SetupCounter();
+        }
+        else
+        {
+            descriptorValues[Descriptor.Panic] += 0.5f;
+        }
         AdjustDisplay();
     }
 
@@ -67,6 +112,30 @@ public class ConstructPlayerModel : MonoBehaviour
         descriptorValues[Descriptor.Aggressive] += 0.5f;
         AdjustDisplay();
     }
+
+    #region Counter Attack Considerations
+
+    public bool counterAvailable;
+    public float counterWindow = 3f;
+
+    bool CheckCounter()
+    {
+        return counterAvailable;
+    }
+
+    void SetupCounter()
+    {
+        counterAvailable = true;
+
+        Invoke("EndCounter", counterWindow);
+    }
+
+    void EndCounter()
+    {
+        counterAvailable = false;
+    }
+
+    #endregion
 }
 
 [System.Serializable]
@@ -78,5 +147,5 @@ public struct DescriptorValue
 
 public enum Descriptor
 {
-    Null, Aggressive, Defensive, Cautious, Panic
+    Null, Aggressive, Counter, Defensive, Cautious, Panic
 }

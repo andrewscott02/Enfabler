@@ -47,9 +47,14 @@ public class PlayerController : MonoBehaviour
             playerCombat.LightAttack();
         }
 
-        if (Input.GetButtonDown("Heavy Attack"))
+        if (Input.GetButtonDown("Parry"))
         {
-            playerCombat.HeavyAttack();
+            playerCombat.Parry();
+        }
+
+        if (Input.GetButtonDown("Dodge"))
+        {
+            playerCombat.Dodge();
         }
 
         #region Camera Rotation

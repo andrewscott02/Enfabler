@@ -212,6 +212,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerState: 0
   showValues: []
+  counterAvailable: 0
+  counterWindow: 1.5
 --- !u!1 &416201510
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +483,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824119606}
-  m_LocalRotation: {x: 0.025522467, y: 0.000000001387524, z: -3.542459e-11, w: 0.99967426}
+  m_LocalRotation: {x: 0.025522482, y: 0.000000016735752, z: -4.2727727e-10, w: 0.99967426}
   m_LocalPosition: {x: 0, y: 2.83, z: -4.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -882,17 +884,17 @@ PrefabInstance:
     - target: {fileID: 1986375830274735061, guid: 0845de5f78ca8184596686a4fb36c808,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.025522467
+      value: 0.025522482
       objectReference: {fileID: 0}
     - target: {fileID: 1986375830274735061, guid: 0845de5f78ca8184596686a4fb36c808,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000001387524
+      value: 0.000000016735752
       objectReference: {fileID: 0}
     - target: {fileID: 1986375830274735061, guid: 0845de5f78ca8184596686a4fb36c808,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -3.542459e-11
+      value: -4.2727727e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2016941794238439747, guid: 0845de5f78ca8184596686a4fb36c808,
         type: 3}

@@ -22,23 +22,42 @@ public class PlayerCombat : MonoBehaviour
             canAttack = false;
             animator.SetTrigger("LightAttack");
             animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
-        }
 
-        modelConstructor.PlayerAttack(false);
+            modelConstructor.PlayerAttack(true);
+        }
     }
 
-    public void HeavyAttack()
+    public void Parry()
     {
         if (canAttack)
         {
-            //Debug.Log("Heavy attack");
+            Debug.Log("Parry");
             canMove = false;
             //canAttack = false;
-            animator.SetTrigger("HeavyAttack");
+            animator.SetTrigger("Parry");
 
             //Remove later
             ResetAttack();
             ResetMove();
+
+            modelConstructor.PlayerParry(true);
+        }
+    }
+
+    public void Dodge()
+    {
+        if (canAttack)
+        {
+            Debug.Log("Parry");
+            canMove = false;
+            //canAttack = false;
+            animator.SetTrigger("Parry");
+
+            //Remove later
+            ResetAttack();
+            ResetMove();
+
+            modelConstructor.PlayerDodge(true, true);
         }
     }
 
