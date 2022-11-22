@@ -9,13 +9,6 @@ public class PlayerCombat : MonoBehaviour
     [HideInInspector]
     public Animator animator;
 
-    int damage;
-    public Transform swordBase;
-    public Transform swordTip;
-
-    public bool canMove = true;
-    public bool canAttack = true;
-
     #endregion
 
     #region Basic Actions
@@ -71,6 +64,9 @@ public class PlayerCombat : MonoBehaviour
 
     #region Enabling/ Disabling Attacks and Movement
 
+    public bool canMove = true;
+    public bool canAttack = true;
+
     public void NextAttack()
     {
         Debug.Log("Next Attack");
@@ -103,20 +99,28 @@ public class PlayerCombat : MonoBehaviour
     List<Health> hitTargets = new List<Health>();
     public List<Health> ignore;
 
+    int damage;
+    public Transform swordBase;
+    public Transform swordTip;
+
     public void StartAttack(int currentDamage)
     {
+        //Clear damage and list of enemies hit
         hitTargets.Clear();
         damage = currentDamage;
+
         InvokeRepeating("AttackCheck", 0f, 0.04f);
-        //Clear list of enemies hit
     }
 
     public void EndAttack()
     {
         HitEnemy(hitTargets.Count > 0);
+
+        //Clear damage and list of enemies hit
         hitTargets.Clear();
+        damage = 0;
+
         CancelInvoke("AttackCheck");
-        //Clear List of enemies hit
     }
 
     public void HitEnemy(bool hit)
