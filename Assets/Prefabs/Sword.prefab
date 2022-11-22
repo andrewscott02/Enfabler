@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 368383356090651096}
   - component: {fileID: 8216781734207633394}
   - component: {fileID: 1384656941321221193}
-  - component: {fileID: 3389613041605743534}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3389613041605743534
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 649219320922756719}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1153839886533589998
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +94,6 @@ GameObject:
   - component: {fileID: 1807425725180176705}
   - component: {fileID: 8779544483603278958}
   - component: {fileID: 3021755482578683012}
-  - component: {fileID: 4147771475728845293}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -182,19 +166,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4147771475728845293
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1153839886533589998}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1601562364543256044
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +177,6 @@ GameObject:
   - component: {fileID: 3992395902635013647}
   - component: {fileID: 4112136431387623369}
   - component: {fileID: 5624612650715970633}
-  - component: {fileID: 3377304633675737504}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -279,19 +249,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3377304633675737504
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1601562364543256044}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6884049345762298487
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 315957510956445634}
+  - component: {fileID: 5788147285564243514}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -390,3 +348,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5788147285564243514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8918566545945003828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
