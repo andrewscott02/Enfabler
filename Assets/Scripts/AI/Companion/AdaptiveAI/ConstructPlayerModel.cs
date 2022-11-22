@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ConstructPlayerModel : MonoBehaviour
 {
+    #region Setup
+
     public Descriptor playerState;
 
     public Dictionary<Descriptor, float> descriptorValues = new Dictionary<Descriptor, float>();
@@ -51,6 +53,10 @@ public class ConstructPlayerModel : MonoBehaviour
             playerState = highestState;
         }
     }
+
+    #endregion
+
+    #region Player Actions
 
     public void PlayerAttack(bool hit)
     {
@@ -112,6 +118,8 @@ public class ConstructPlayerModel : MonoBehaviour
         descriptorValues[Descriptor.Aggressive] += 0.5f;
         AdjustDisplay();
     }
+
+    #endregion
 
     #region Counter Attack Considerations
 

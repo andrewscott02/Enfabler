@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Setup
+
+    #region Variables
+
     public Animator animator;
 
     float xInput;
@@ -17,20 +21,35 @@ public class PlayerController : MonoBehaviour
 
     PlayerMovement playerMovement;
     PlayerCombat playerCombat;
+    Health health;
 
     //public LayerMask layerMask;
 
+    #endregion
+
     private void Start()
     {
+        health = GetComponent<Health>();
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.animator = animator;
         playerCombat = GetComponent<PlayerCombat>();
         playerCombat.animator = animator;
+
+        Health allyHealth = GameObject.FindObjectOfType<ConstructPlayerModel>().GetComponent<Health>();
+
+        playerCombat.ignore.Add(health);
+        playerCombat.ignore.Add(allyHealth);
     }
+
+    #endregion
+
+    #region Inputs
 
     // Update is called once per frame
     void Update()
     {
+        #region Movement
+
         if (playerCombat.canMove)
         {
             xInput = Input.GetAxisRaw("Horizontal");
@@ -41,6 +60,10 @@ public class PlayerController : MonoBehaviour
                 playerMovement.ToggleSprint();
             }
         }
+
+        #endregion
+
+        #region Actions
 
         if (Input.GetButtonDown("Light Attack"))
         {
@@ -56,6 +79,8 @@ public class PlayerController : MonoBehaviour
         {
             playerCombat.Dodge();
         }
+
+        #endregion
 
         #region Camera Rotation
 
@@ -117,4 +142,6 @@ public class PlayerController : MonoBehaviour
 
         playerMovement.animator.SetBool("CanMove", playerCombat.canMove);
     }
+
+    #endregion
 }
