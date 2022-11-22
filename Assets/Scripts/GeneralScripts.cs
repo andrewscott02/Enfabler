@@ -6,7 +6,7 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void Damage(int damage);
+    void Damage(int damage, Vector3 spawnPos, Vector3 spawnRot);
     bool CheckKill();
     void Kill();
 }

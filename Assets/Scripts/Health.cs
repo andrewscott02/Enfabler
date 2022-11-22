@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour, IDamageable, IHealable
 {
+    public Object bloodFX;
     public int maxHealth = 50;
     int currentHealth = 0;
 
@@ -12,8 +13,13 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         currentHealth = maxHealth;
     }
 
-    public void Damage(int damage)
+    public void Damage(int damage, Vector3 spawnPos, Vector3 spawnRot)
     {
+        if (bloodFX != null)
+        {
+            Instantiate(bloodFX, spawnPos, Quaternion.Euler(spawnRot));
+        }
+
         currentHealth -= damage;
         if (CheckKill())
             Kill();

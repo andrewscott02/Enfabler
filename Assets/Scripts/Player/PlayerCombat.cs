@@ -107,7 +107,7 @@ public class PlayerCombat : MonoBehaviour
         hitTargets.Clear();
         damage = currentDamage;
 
-        InvokeRepeating("AttackCheck", 0f, 0.04f);
+        InvokeRepeating("AttackCheck", 0f, 0.004f);
     }
 
     public void EndAttack()
@@ -151,7 +151,7 @@ public class PlayerCombat : MonoBehaviour
 
             //If it can be hit, deal damage to target and add it to the hit targets list
             hitTargets.Add(hitHealth);
-            hitHealth.Damage(damage);
+            hitHealth.Damage(damage, hit.point, hit.normal);
         }
     }
 
