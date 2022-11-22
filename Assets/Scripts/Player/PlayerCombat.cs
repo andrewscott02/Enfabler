@@ -21,8 +21,6 @@ public class PlayerCombat : MonoBehaviour
             canAttack = false;
             animator.SetTrigger("LightAttack");
             animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
-
-            modelConstructor.PlayerAttack(false);
         }
     }
 
@@ -133,8 +131,28 @@ public class PlayerCombat : MonoBehaviour
         Debug.Log("AttackCheck " + damage);
 
         //Raycast between sword base and tip
-        //Upon hitting a character with a health component, check if it has already been hit or if it should be ignored
-        //If it can be hit, deal damage to target and add it to the hit targets list
+        RaycastHit hit;
+
+        if (Physics.Linecast(swordBase.transform.position, swordTip.transform.position, out hit))
+        {
+            Health hitHealth = hit.collider.GetComponent<Health>();
+
+            #region Guard Clauses
+
+            //Return if collided object has no health component
+            if (hitHealth == null)
+                return;
+
+            //Return if it has already been hit or if it should be ignored
+            if (hitTargets.Contains(hitHealth) || ignore.Contains(hitHealth))
+                return;
+
+            #endregion
+
+            //If it can be hit, deal damage to target and add it to the hit targets list
+            hitTargets.Add(hitHealth);
+            hitHealth.Damage(damage);
+        }
     }
 
     private void OnDrawGizmos()
