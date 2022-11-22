@@ -7,6 +7,7 @@ public class CharacterController : MonoBehaviour
     public Animator animator;
     protected CharacterCombat combat;
     protected Health health;
+    public Transform model;
 
     public virtual void Start()
     {

@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public Animator animator;
     Rigidbody rb;
-    public Transform model;
+    Transform model; public void SetModel(Transform newModel) { model = newModel; }
 
     bool isSprinting = false;
     public float walkSpeed;

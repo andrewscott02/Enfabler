@@ -182,7 +182,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7700341593630680933}
-  m_LocalRotation: {x: 0.025522478, y: 0.000000009862425, z: -2.5179553e-10, w: 0.99967426}
+  m_LocalRotation: {x: 0.025522482, y: 0.000000018674003, z: -4.7676224e-10, w: 0.99967426}
   m_LocalPosition: {x: 0, y: 2.83, z: -4.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -312,8 +312,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8874548750218582264, guid: 22bb1e8efed20934fbd323b6f0290978, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 22bb1e8efed20934fbd323b6f0290978, type: 3}
+--- !u!4 &1628624658551123326 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4150834641651458686, guid: 22bb1e8efed20934fbd323b6f0290978,
+    type: 3}
+  m_PrefabInstance: {fileID: 3386904156834156288}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3746045181440719228 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2088565613389854332, guid: 22bb1e8efed20934fbd323b6f0290978,
@@ -373,6 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7673251268057846940}
+  model: {fileID: 1628624658551123326}
   rotateInterval: {x: 1, y: -1}
   rotateDeadZone: 0.1
   followTarget: {fileID: 6837457561685370946}
@@ -389,7 +397,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  model: {fileID: 6542142234118049258}
   walkSpeed: 60
   runSpeed: 120
   lerpSpeed: 0.2
