@@ -23,6 +23,8 @@ public class PlayerCombat : MonoBehaviour
             animator.SetTrigger("LightAttack");
             animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
         }
+
+        modelConstructor.PlayerAttack(false);
     }
 
     public void HeavyAttack()
@@ -87,5 +89,12 @@ public class PlayerCombat : MonoBehaviour
     {
         if (swordBase != null && swordTip != null)
             Gizmos.DrawLine(swordBase.position, swordTip.position);
+    }
+
+    ConstructPlayerModel modelConstructor;
+
+    private void Start()
+    {
+        modelConstructor = GameObject.FindObjectOfType<ConstructPlayerModel>();
     }
 }
