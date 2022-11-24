@@ -37,6 +37,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     public void Kill()
     {
-        Destroy(gameObject);
+        AIManager.instance.CharacterDied(this.GetComponent<CharacterController>());
     }
 }

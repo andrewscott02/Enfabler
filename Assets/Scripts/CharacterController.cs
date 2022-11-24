@@ -9,6 +9,8 @@ public class CharacterController : MonoBehaviour
     protected Health health;
     public Transform model;
 
+    public bool playerTeam = true;
+
     public virtual void Start()
     {
         health = GetComponent<Health>();

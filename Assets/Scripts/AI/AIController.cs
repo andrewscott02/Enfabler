@@ -5,9 +5,12 @@ using UnityEngine.AI;
 
 public class AIController : CharacterController
 {
+    bool active = false;
+
     protected GameObject player;
     protected NavMeshAgent agent;
     protected Vector3 currentDestination;
+    protected CharacterController currentTarget;
 
     public override void Start()
     {
@@ -22,8 +25,9 @@ public class AIController : CharacterController
 
     public virtual void ActivateAI()
     {
-        NextPatrol();
-        InvokeRepeating("NextPatrol", 0, 6f);
+        AIManager.instance.AllocateTeam(this);
+
+        active = true;
     }
 
     protected void NextPatrol()
@@ -49,15 +53,21 @@ public class AIController : CharacterController
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(currentDestination, 1f);
+        Gizmos.DrawWireSphere(gameObject.transform.position, sightDistance);
     }
 
     public float lerpSpeed = 0.01f;
 
     public virtual void Update()
     {
+        if (active)
+        {
+            BehaviourTree();
+        }
+
         if (agent.destination == currentDestination)
         {
-            Debug.Log("Moving");
+            //Debug.Log("Moving");
             #region Animation
 
             Vector3 movement = new Vector3(agent.speed, 0, agent.speed) * Time.deltaTime;
@@ -77,9 +87,68 @@ public class AIController : CharacterController
         }
         else
         {
-            Debug.Log("Not Moving");
+            //Debug.Log("Not Moving");
             animator.SetFloat("xMovement", 0);
             animator.SetFloat("yMovement", 0);
         }
     }
+
+    public float sightDistance = 100;
+
+    public virtual void BehaviourTree()
+    {
+        currentTarget = GetClosestCharacter();
+
+        if (currentTarget != null)
+        {
+            currentDestination = currentTarget.transform.position;
+            agent.SetDestination(currentDestination);
+        }
+    }
+
+    #region Behaviours
+
+    protected CharacterController GetClosestCharacter()
+    {
+        CharacterController closestCharacter = null;
+        float closestDistance = 99999;
+
+        foreach (var item in AIManager.instance.GetEnemyTeam(this))
+        {
+            float itemDistance = Vector3.Distance(this.gameObject.transform.position, item.gameObject.transform.position);
+
+            //Debug.Log(item.gameObject.name + " is " + itemDistance);
+
+            if (itemDistance < sightDistance && itemDistance < closestDistance)
+            {
+                closestCharacter = item;
+                closestDistance = itemDistance;
+            }
+        }
+
+        return closestCharacter;
+    }
+
+    protected CharacterController GetFurthestCharacter()
+    {
+        CharacterController closestCharacter = null;
+        float closestDistance = 0;
+
+        foreach (var item in AIManager.instance.GetEnemyTeam(this))
+        {
+            float itemDistance = Vector3.Distance(this.gameObject.transform.position, item.gameObject.transform.position);
+
+            Debug.Log(item.gameObject.name + " is " + itemDistance);
+
+            if (itemDistance < sightDistance && itemDistance > closestDistance)
+            {
+                closestCharacter = item;
+                closestDistance = itemDistance;
+            }
+        }
+
+        return closestCharacter;
+    }
+
+    #endregion
 }

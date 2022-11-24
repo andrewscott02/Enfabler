@@ -33,6 +33,8 @@ public class PlayerController : CharacterController
         Health allyHealth = GameObject.FindObjectOfType<ConstructPlayerModel>().GetComponent<Health>();
 
         combat.ignore.Add(allyHealth);
+
+        AIManager.instance.AllocateTeam(this);
     }
 
     #endregion

@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class BuddyAIController : AIController
 {
-    public override void ActivateAI()
+    public override void BehaviourTree()
     {
-        //Empty
-    }
+        base.BehaviourTree();
 
-    public override void Update()
-    {
-        base.Update();
-        currentDestination = player.transform.position;
-        agent.SetDestination(currentDestination);
+        if (currentTarget == null || player != null)
+        {
+            currentDestination = player.transform.position;
+            agent.SetDestination(currentDestination);
+        }
     }
 }
