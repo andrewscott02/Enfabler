@@ -39,10 +39,10 @@ public class CharacterCombat : MonoBehaviour
     {
         if (canAttack)
         {
-            Debug.Log("Parry");
+            Debug.Log("Dodge");
             canMove = false;
             //canAttack = false;
-            animator.SetTrigger("Parry");
+            animator.SetTrigger("Dodge");
 
             //Remove later
             ResetAttack();

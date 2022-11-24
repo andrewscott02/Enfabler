@@ -56,6 +56,11 @@ public class PlayerController : CharacterController
                 playerMovement.ToggleSprint();
             }
         }
+        else
+        {
+            xInput = 0;
+            yInput = 0;
+        }
 
         #endregion
 
@@ -121,20 +126,7 @@ public class PlayerController : CharacterController
 
     private void FixedUpdate()
     {
-        if (combat.canMove)
-        {
-            /*
-            if (((xInput >= 0.1) || (xInput <= -0.1)) && ((yInput >= 0.1) || (yInput <= -0.1)))
-            {
-                //Partial functionality for averaging diagonal movement, needs proper implementation
-                //Debug.Log(true);
-                xInput = xInput / 2;
-                yInput = yInput / 2;
-            }
-            */
-
-            playerMovement.Move(xInput * 2, yInput * 2);
-        }
+        playerMovement.Move(xInput * 2, yInput * 2);
 
         playerMovement.animator.SetBool("CanMove", combat.canMove);
     }
