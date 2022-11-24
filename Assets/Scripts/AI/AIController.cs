@@ -97,7 +97,7 @@ public class AIController : CharacterController
 
     public virtual void BehaviourTree()
     {
-        currentTarget = GetClosestCharacter();
+        currentTarget = GetClosestEnemy(this);
 
         if (currentTarget != null)
         {
@@ -108,14 +108,14 @@ public class AIController : CharacterController
 
     #region Behaviours
 
-    protected CharacterController GetClosestCharacter()
+    protected CharacterController GetClosestEnemy(CharacterController characterCheck)
     {
         CharacterController closestCharacter = null;
         float closestDistance = 99999;
 
         foreach (var item in AIManager.instance.GetEnemyTeam(this))
         {
-            float itemDistance = Vector3.Distance(this.gameObject.transform.position, item.gameObject.transform.position);
+            float itemDistance = Vector3.Distance(characterCheck.gameObject.transform.position, item.gameObject.transform.position);
 
             //Debug.Log(item.gameObject.name + " is " + itemDistance);
 
@@ -129,14 +129,14 @@ public class AIController : CharacterController
         return closestCharacter;
     }
 
-    protected CharacterController GetFurthestCharacter()
+    protected CharacterController GetFurthestEnemy(CharacterController characterCheck)
     {
         CharacterController closestCharacter = null;
         float closestDistance = 0;
 
         foreach (var item in AIManager.instance.GetEnemyTeam(this))
         {
-            float itemDistance = Vector3.Distance(this.gameObject.transform.position, item.gameObject.transform.position);
+            float itemDistance = Vector3.Distance(characterCheck.gameObject.transform.position, item.gameObject.transform.position);
 
             Debug.Log(item.gameObject.name + " is " + itemDistance);
 
