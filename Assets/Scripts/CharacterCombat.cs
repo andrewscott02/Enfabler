@@ -177,7 +177,7 @@ public class CharacterCombat : MonoBehaviour
 
     protected bool dodging;
 
-    public bool GetDodging() { return parrying; }
+    public bool GetDodging() { return dodging; }
 
     public void StartDodge()
     {
