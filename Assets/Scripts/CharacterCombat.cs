@@ -17,7 +17,6 @@ public class CharacterCombat : MonoBehaviour
     {
         if (canAttack)
         {
-            Debug.Log("Light attack");
             canAttack = false;
             animator.SetTrigger("LightAttack");
             animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
@@ -28,7 +27,6 @@ public class CharacterCombat : MonoBehaviour
     {
         if (canAttack)
         {
-            Debug.Log("Parry");
             canMove = false;
             canAttack = false;
             animator.SetTrigger("Parry");
@@ -39,14 +37,8 @@ public class CharacterCombat : MonoBehaviour
     {
         if (canAttack)
         {
-            Debug.Log("Dodge");
-            canMove = false;
-            //canAttack = false;
+            canAttack = false;
             animator.SetTrigger("Dodge");
-
-            //Remove later
-            ResetAttack();
-            ResetMove();
         }
     }
 
@@ -83,6 +75,8 @@ public class CharacterCombat : MonoBehaviour
     }
 
     #endregion
+
+    #region Logic
 
     #region Attack Logic
 
@@ -155,7 +149,7 @@ public class CharacterCombat : MonoBehaviour
 
     #endregion
 
-    #region Defence Logic
+    #region Parry Logic
 
     protected bool parrying;
 
@@ -176,6 +170,32 @@ public class CharacterCombat : MonoBehaviour
         ResetAttack();
         ResetMove();
     }
+
+    #endregion
+
+    #region Dodge Logic
+
+    protected bool dodging;
+
+    public bool GetDodging() { return parrying; }
+
+    public void StartDodge()
+    {
+        dodging = true;
+    }
+
+    public void EndDodge()
+    {
+        dodging = false;
+    }
+
+    public void ResetDodge()
+    {
+        ResetAttack();
+        ResetMove();
+    }
+
+    #endregion
 
     #endregion
 }

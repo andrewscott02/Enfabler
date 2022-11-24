@@ -22,6 +22,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     {
         if (combat != null)
         {
+            if (combat.GetDodging())
+            {
+                return;
+            }
+
             if (combat.GetParrying())
             {
                 Instantiate(parryFX, spawnPos, Quaternion.Euler(spawnRot));
