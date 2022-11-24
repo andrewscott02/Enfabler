@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4fc7b21713e611c499d7a77c85dc15ad, type: 2}
+    - target: {fileID: 5006998096090209180, guid: 22bb1e8efed20934fbd323b6f0290978,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f332eec373590c449ae27f69ba88c747, type: 2}
     - target: {fileID: 7048375887579552703, guid: 22bb1e8efed20934fbd323b6f0290978,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -136,10 +141,9 @@ MonoBehaviour:
   animator: {fileID: 7673251268057846940}
   model: {fileID: 1628624658551123326}
   playerTeam: 0
-  allies: []
-  enemies: []
   lerpSpeed: 0.01
   sightDistance: 25
+  meleeDistance: 3
 --- !u!95 &7673251268057846940 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5006998096090209180, guid: 22bb1e8efed20934fbd323b6f0290978,

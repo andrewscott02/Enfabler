@@ -30,12 +30,8 @@ public class CharacterCombat : MonoBehaviour
         {
             Debug.Log("Parry");
             canMove = false;
-            //canAttack = false;
+            canAttack = false;
             animator.SetTrigger("Parry");
-
-            //Remove later
-            ResetAttack();
-            ResetMove();
         }
     }
 
@@ -155,6 +151,30 @@ public class CharacterCombat : MonoBehaviour
     {
         if (swordBase != null && swordTip != null)
             Gizmos.DrawLine(swordBase.position, swordTip.position);
+    }
+
+    #endregion
+
+    #region Defence Logic
+
+    protected bool parrying;
+
+    public bool GetParrying() { return parrying; }
+
+    public void StartParry()
+    {
+        parrying = true;
+    }
+
+    public void EndParry()
+    {
+        parrying = false;
+    }
+
+    public void ResetParry()
+    {
+        ResetAttack();
+        ResetMove();
     }
 
     #endregion

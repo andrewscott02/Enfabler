@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: dcf1249cb9edd0343ab7ac383694d8b1
+guid: 071fdc0bec7d8c246b2bdd46f9c0e0b9
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Left Up Light
+    second: Parry
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Left Up Light
+      name: Parry
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 35
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -60,32 +60,24 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.35774443
-        functionName: StartAttack
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
-          type: 3}
-        floatParameter: 0
-        intParameter: 5
-        messageOptions: 0
-      - time: 0.43519318
-        functionName: EndAttack
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
-          type: 3}
-        floatParameter: 0
-        intParameter: 5
-        messageOptions: 0
-      - time: 0.50725555
-        functionName: NextAttack
+      - time: 0.006534765
+        functionName: StartParry
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
           type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.8591919
-        functionName: ResetAttack
+      - time: 0.4062285
+        functionName: EndParry
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8491228
+        functionName: ResetParry
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
           type: 3}
