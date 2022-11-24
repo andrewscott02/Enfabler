@@ -54,6 +54,7 @@ public class AIController : CharacterController
     {
         Gizmos.DrawWireSphere(currentDestination, 1f);
         Gizmos.DrawWireSphere(gameObject.transform.position, sightDistance);
+        Gizmos.DrawWireSphere(gameObject.transform.position, meleeDistance);
     }
 
     public float lerpSpeed = 0.01f;
@@ -93,7 +94,8 @@ public class AIController : CharacterController
         }
     }
 
-    public float sightDistance = 100;
+    public float sightDistance = 25;
+    public float meleeDistance = 3;
 
     public virtual void BehaviourTree()
     {
@@ -103,10 +105,28 @@ public class AIController : CharacterController
         {
             currentDestination = currentTarget.transform.position;
             agent.SetDestination(currentDestination);
+            AttackTarget(currentTarget);
         }
     }
 
     #region Behaviours
+
+    protected bool AttackTarget(CharacterController targetCheck)
+    {
+        if (targetCheck == null)
+            return false;
+
+        float distance = Vector3.Distance(this.gameObject.transform.position, targetCheck.gameObject.transform.position);
+
+        if (distance < meleeDistance)
+        {
+            combat.LightAttack();
+
+            return true;
+        }
+
+        return false;
+    }
 
     protected CharacterController GetClosestEnemy(CharacterController characterCheck)
     {

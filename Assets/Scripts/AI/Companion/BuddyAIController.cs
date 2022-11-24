@@ -8,7 +8,7 @@ public class BuddyAIController : AIController
     {
         base.BehaviourTree();
 
-        if (currentTarget == null || player != null)
+        if (currentTarget == null && player != null)
         {
             currentDestination = player.transform.position;
             agent.SetDestination(currentDestination);
