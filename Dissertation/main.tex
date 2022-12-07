@@ -5,10 +5,19 @@
 \usepackage{url}
 \usepackage{amsmath}
 \usepackage{wrapfig, framed, caption}
-
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    citecolor=blue,
+    pdfpagemode=FullScreen,
+    }
 \usepackage{tabularx}
 \usepackage{tabularray}
 \usepackage[hmargin=1cm]{geometry}
+\usepackage{multirow}
 
 %Dissertation Checklist
 
@@ -25,23 +34,24 @@
 
 %Prototype (on defensive actions, check if nearby characters are attacking)
 
+%Your document must not exceed six pages of text, excluding figures, tables, references and appendices.
+%This is subject to the usual policy on word and page limits available on LearningSpace.
+
+
 %Useful links
 %G-Power downloads
     %https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower
     %https://learningspace.falmouth.ac.uk/mod/resource/view.php?id=245797
 
-\title{Evaluating the use of Adaptive AI to Build Player-Companion Collaboration} 
+%\title{Evaluating the use of Adaptive AI to Build Player-Companion Collaboration} 
 %Evaluating Collaboration With AI NPCs to Build Player-Companion Relationships
-%\title{Does the use of adaptive AI help to build player-companion collaboration?}
+\title{Does the Use of Adaptive AI Help to Build Player-Companion Collaboration?}
 \author{Andrew J. Scott}  
 \date{September 2022}
 
 \begin{document}
 	\maketitle
 	\pagenumbering{arabic}
-
-%Careful with the use of I in text, even in abstract. Sometimes we is used, but try to avoid it if possible
-%This proposal demonstrates...
 
 \begin{abstract}
 This proposal demonstrates the use of adaptive AI for companion characters. The adaptive AI will respond to player actions so it can collaborate with them better. This adaption will be tested to determine if it makes the companion character perceived as more collaborative by the player.
@@ -82,32 +92,34 @@ This research will build upon combat AI for companion characters by focusing on 
 
 Research in 2010 highlights the lack of AI research in games \cite{RealTimeAICritique2010}. Since then, there has been a lot of improvements in AI research. Specifically looking at companion characters, there is a lot of research on implementing adaptive behaviour. Tremblay and Verbugge demonstrate a companion AI that can analyse the player's experience and change its behaviour as a way to dynamically adjust game difficulty \cite{tremblay2013adaptive}.
 
-Friedman and Schrum analysed 2 companion bots in a first person shooter \cite{CompanionBotsFPS2019}. They found that their adaptive AI was not perceived as helpful as the non-adaptive one as the hard-coded agent stayed close to the player and so was seen more in gameplay. However, when shown stats, players tended to state that the adaptive agent was more helpful.
+Friedman and Schrum analysed 2 companion bots in a first person shooter \cite{CompanionBotsFPS2019}. The ratings for the helpfulness of the companions was similar, which they said may have been due to vague terms. Adaptive agents that focus on being effective were rated as helpful due to the points they scored and their ability to survive better than non-adaptive AI. However, the non-adaptive agents that stayed near the player were also scored as helpful because they were seen in gameplay often. Players that rated the non-adaptive agents as more helpful justified this as they felt a stronger sense of teamwork and the game experience mattered more to them than points.
 
 Geib et al. present a plan recognition approach that allows an agent to analyse the actions of another and use those actions to determine what plan is being attempted \cite{GeneratingCollabBehaviourPlanRecognition2016}. Once a plan has been determined, the agent can work through the already completed steps to determine what still needs to be done and take actions towards these steps.
 
-%TODO - cite more reviews and analyses
-
-In industry, games like \textit{God of War 2018}, \textit{The Last of Us} and \textit{Bioshock Infinite} are renowned for their AI companions \cite{PlayDontShow}. All three of the studios behind these games have developed AI techniques to fine-tune behaviour detailed in the next section.
+In industry, games like \textit{God of War 2018}, \textit{The Last of Us} and \textit{Bioshock Infinite} are renowned for their AI companions \cite{PlayDontShow}. All three of the studios behind these games have developed AI techniques to fine-tune behaviour.
 
 \subsection{Responsive Behaviour}
 \label{Responsive Behaviour}
 
-Atreus in \textit{God of War 2018} is a good example of synergistic AI, as he will help the player land slow attacks and will extend enemy vulnerability by shooting them with arrows \cite{GDCAtreus}. For example, when the player launches an enemy into the air, Atreus will shoot them and keep them there. There is also a lot of emphasis on his character development over the course of the game, which is reflected in his behaviour. At the start of the game, he only takes actions when commanded, and learns to be more automated towards the middle of the game. Later, he becomes brash, so he starts to outright ignore the players’ commands, and performs actions that would otherwise only occur when commanded, like his special runic abilities. These changes in his AI help to tie the narrative into gameplay and make him seem like a real character, which helps to allow the player to bond with Atreus. These changes are also noticeable when the player is separated from Atreus, which helps the players realise how much they rely on him.
+Atreus in \textit{God of War 2018} is a good example of synergistic AI, as he will help the player land slow attacks and will extend enemy vulnerability by shooting them with arrows \cite{GDCAtreus}. For example, when the player launches an enemy into the air, Atreus will shoot them and keep them there.
 
-%Image of pathfinding with caption
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{Images/TLOUPathfinding.png}
-  
-\caption{Pathfinding diagram in \textit{The Last of Us}}
-\label{fig:TLOUPathfinding}
-\end{figure}
+There is also a lot of emphasis on his character development over the course of the game, which is reflected in his behaviour. At the start of the game, he only takes actions when commanded, and learns to be more automated towards the middle of the game. Later, he becomes brash, so he starts to outright ignore the players’ commands, and performs actions that would otherwise only occur when commanded, like his special runic abilities.
+
+These changes in his AI help to tie the narrative into gameplay and make him seem like a real character, which helps to allow the player to bond with Atreus. These changes are also noticeable when the player is separated from Atreus, which helps the players realise how much they rely on him.
+
+% TOTO - Include other sources that talk about responsive behaviours
 
 \subsection{AI Movement}
 \label{Movement}
 
-%TODO - Consider talking about the theatre techniques used in Bioshock: Infinite
+%Image of pathfinding with caption
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{Images/IndustryResearch/TLOUPathfinding.png}
+  
+\caption{Pathfinding diagram in \textit{The Last of Us}}
+\label{fig:TLOUPathfinding}
+\end{figure}
 
 Pathfinding is an important aspect of AI companions. The AI needs to be close to the player so that it is not forgotten \cite{GAIP2EllieAI}, but also not too close that it gets in their way and obstructs them \cite{CoupledEmpowermentMaximisation}. An example of poor AI pathfinding is in \textit{Skyrim} \cite{tremblay2013adaptive}, where the AI will move in front of the player when they are aiming and generally get in their way when moving. Naughty Dog addressed these issues in \textit{The Last of Us} with pathfinding tools, shown in figure \ref{fig:TLOUPathfinding}, that keeps companions close to the player, but not in the way \cite{GAIP2EllieAI}. Ellie will also move out of the way if the player moves into her personal space. Vocal barks are used in such moments to add character, and while it is a good practice to use voice acting to help make the player aware of the agent’s actions, and make them feel more real \cite{GMTGoodAI}, they are not suitable for games with lower budgets.
 
@@ -116,11 +128,11 @@ Pathfinding is an important aspect of AI companions. The AI needs to be close to
   \centering
   
   \begin{subfigure}[a]{\linewidth}
-  \includegraphics[width=\linewidth]{Images/SpidermanKungFuCircle.png}
+  \includegraphics[width=\linewidth]{Images/IndustryResearch/SpidermanKungFuCircle.png}
   \end{subfigure}
   
   \begin{subfigure}[b]{\linewidth}
-  \includegraphics[width=\linewidth]{Images/KOARKungFuCircle.png}
+  \includegraphics[width=\linewidth]{Images/IndustryResearch/KOARKungFuCircle.png}
   \end{subfigure}
   
   \caption{Demonstration of Kung-Fu Circles in (a) \textit{Marvel's Spiderman} and (b) \textit{Kingdoms of Amalur: Reckoning}}
@@ -138,7 +150,7 @@ Instead of focusing on animation and voice lines, the agent will use adaptive AI
 
 \begin{figure}
   \centering
-  \includegraphics[width=\linewidth]{Images/BioshockSmartTerrain.png}
+  \includegraphics[width=\linewidth]{Images/IndustryResearch/BioshockSmartTerrain.png}
   
 \caption{Smart Terrain showcase in \textit{Bioshock: Infinite}}
 \label{fig:BioshockSmartTerrain}
@@ -153,7 +165,7 @@ Board games like \textit{Hanabi} and \textit{Pandemic} are often used in academi
 
 Walton-Rivers et al. present a an AI for \textit{Hanabi} that uses agent modelling to collaborate with other AI players \cite{EvaluatingHanabiAgents}. Agent modelling techniques involve observing actions taken by a player or another agent and using these actions to construct a model of them. This model describes how the observed entity acts and can be used by the AI determine its actions. Yannakakis et al. demonstrate the use of machine learning to determine how an agent can use a player model \cite{yannakakis2013playermodelling}.
 
-Schadd et al. demonstrate the use of agent modelling for \textit{Spring}, a Real-Time Strategy (RTS) game \cite{OpponentModellingRTS2007}. Bakkes et al. then build upon this research to use it in Case-based game AI for \textit{Spring} \cite{bakkes2009opponentmodelling}.
+Agent modelling can also be used in Real-Time Strategy (RTS) games. Schadd et al. demonstrate the use of agent modelling for \textit{Spring} \cite{OpponentModellingRTS2007}. Bakkes et al. then build upon this research to use it in Case-based game AI \cite{bakkes2009opponentmodelling}.
 
 %\cite{van2005opponent} - This tends to not be used for commercial games however (though this source is from 2005 so it may be out of date)
 
@@ -170,38 +182,55 @@ However, these behaviours would be much more reliable with bespoke behaviours, e
 \section{Proposed Research}
 \label{ProposedResearch}
 
-\subsection{Research Question}
-\label{ResearchQuestion}
-
-%TODO - Refine research question
-
-The question this research will answer is \textit{Does the use of adaptive AI help to build player-companion collaboration?}
-
-\subsection{Hypothesis}
+\subsection{Research Question \& Hypotheses}
 \label{Hypotheses}
 
-%TODO - Redo this section with new hypotheses and how they will be tested
+The use of adaptive AI companions can have an effect on various aspects of the game-play. The main aspect this research will test for is creating a sense of collaboration between the player and companion agent during combat and the question this research attempts to answer is \textit{Does the use of adaptive AI help to build player-companion collaboration?}
 
-The hypothesis is that participants that are given the adaptive AI will rate their companion as more collaborative as those without. This means that adaptability has a positive influence on player’s perception of collaboration.
+This question is the focus of the first hypothesis; the adaptive AI will be perceived as more collaborative than the non-adaptive AI. This will be tested in the experiment detailed in section \ref{ExperimentalDesign}. Comparing the rankings for the collaboration of both agent types will determine if there is a correlation between adaptability and collaboration.
 
-The null hypothesis is that participants that there will be no difference in the ratings for each of the AI companions. This means that adaptability has no discernible effect on player’s perception of collaboration.
+The null hypothesis here is that adaptability has no discernible effect on the player's perception of collaboration. This will be determined if there is no significant correlation between the agent type and the rankings for collaboration.
 
-%TODO - Fix hypothesis table
+The second hypothesis is that there will be a correlation between the rankings for the participants’ sense of collaboration and user experience. In an experiment by Friedman and Schrum, more detail in section \ref{RelatedWork}, some players rated the non-adaptive AI as more helpful was that it was seen more in gameplay, even if it scored lower in game \cite{CompanionBotsFPS2019}. Players justified this as it gave them a better player experience and sense of teamwork. 
 
-\begin{table}[h!]
-  \begin{center}
-    \caption{\newline{}Hypothesis Table}
-    \label{tab:table1}
-    \begin{tabular}{|c|c|c|c|}
-      \textbf{ } & \textbf{Hypothesis} & \textbf{Null Hypothesis} & \textbf{Data Source}\\
-      \hline
-      1 & 
-      Adaptability makes the companion agent seem more believable & 
-      The adaptive agent is not rated as more believable than the non-adaptive agent &
-      Questionnaire\\
-    \end{tabular}
-  \end{center}
-\end{table}
+Since the AI presented in this proposal focuses on collaborative behaviour and the experiment focuses on single combat encounters where the AI should be near the player at all times, it will be easier to test the effects of collaboration as both agents should be equally visible in combat. 
+
+\subsection{Hypothesis Table}
+
+\begin{tabular}{ |p{3cm}|p{3cm}|p{2cm}|  }
+ \hline
+ \multicolumn{3}{|c|}{Hypothesis Table} \\
+ \hline
+ Hypothesis & Null Hypothesis & Test\\
+ \hline
+    Adaptive companion will seen as more collaborative compared to the non-adaptive companion & 
+    The adaptive agent is not rated as more collaborative than the non-adaptive agent &
+    T-Test between the collaboration ratings of both agent types \\
+ \hline
+    Players' user experience will be improved if they felt a greater sense of collaboration & 
+    There is a negative or no correlation between user experience and their sense of collaboration &
+    T-Test between the user experience ratings of both agent types\\
+ \hline
+\end{tabular}
+
+\subsection{Artefact}
+\label{Artefact}
+
+\subsubsection{Artefact Details}
+\label{ArtefactDetails}
+
+This research will present an adaptive AI for an action game responds the the player actions to collaborate with them. The intention is that this collaboration will improve the player experience, and this is one of the factors that will be tested, see section \ref{Hypotheses} for details on the hypotheses.
+
+This agent will feature plan recognition, detailed in \ref{Communication}. When the player performs a combat action, the adaptive AI will be given information about what kind of action the player took and whether they were successful. It will use this information to construct a model that describes how the player acts. It will then use this player model in its decision making algorithm when deciding what it will do.
+
+For example, if the player is aggressive, but are getting hit a lot, the companion AI may focus on distracting other enemies from the player so they can continue to focus on their own play-style. However, if the player is very defensive, and tends to attack only after an enemy attacks, the adaptive AI may focus on the player's current target and create an opening for them to attack. If the player is getting overwhelmed by enemies, the agent may try to draw enemies away from the player to give them some space to relax.
+
+The agent will also have general path-finding behaviours that keep it close to the player and it will try to stay within their vision so the player notices it.
+
+\subsubsection{Validation and Verification}
+\label{Validation}
+
+These behaviours will be tested with pilot play-testing to ensure that the player model is constructed properly and that appropriate actions are taken. This play-testing will also give me opinions on whether the aforementioned AI behaviours are beneficial for the player experience and will allow me to adjust behaviours before the experiment. Refer to appendix \ref{AppendixQAPlan} for more details on the quality assurance test plan.
 
 \section{Research Method}
 \label{ResearchMethod}
@@ -214,6 +243,9 @@ The null hypothesis is that participants that there will be no difference in the
 %Philosophy of Science https://undsci.berkeley.edu/the-philosophy-of-science/
 %Philosophy and Paradigm of Scientific Research https://www.intechopen.com/chapters/58890 
 
+%TODO Mid - research empirical philosophy to see if it fits better
+%TODO Justify philosophies
+
 The research will be carried out using positivist philosophies \cite{Zukauskas18}. A survey will be used to collect quantitative data that analyses the effect of AI adaptability on the player's collaboration the AI agent, and how that affects their opinions on the AI. There may be some questions with qualitative answers, but these will be used to assure that there are no issues with the study.
 
 \subsection{Experimental Design}
@@ -223,39 +255,37 @@ The research will be carried out using positivist philosophies \cite{Zukauskas18
 
 %G-Power video explanation: https://web.microsoftstream.com/video/d1ec1c56-bb97-4592-ae4e-1c973e3fee20?referrer=https:%2F%2Flearningspace.falmouth.ac.uk%2F
 
-Two companion agents will be set up in an action game. The first agent will feature a simple AI which will simply attack the closest target with random attacks and use basic path-finding to keep close to the player when not attacking. The second agent will feature an adaptive AI, which will determine target's based on the player actions and will choose attacks that support the player's intentions better.
+Two companion agents will be set up in an action game. The first agent will feature a simple AI which will simply attack the closest target with random attacks and use basic path-finding to keep close to the player when not attacking. The second agent will feature an adaptive AI, which will determine targets based on the player actions and will choose attacks that support the player's intentions better.
 
 Structured observations and questionnaires will be used to collect data on the AI agents. Each participant will fill out an initial survey detailing their experience with games and any general opinions on companions in games.
 
-After completing this survey, they will play through a demo that features two combat encounters. In one encounter, the participant will be assisted by the simple AI agent, while the other encounter will have them assisted by an adaptive AI agent. To avoid priming the participant, the order the agents feature will randomly selected (cite).
-
-%TODO - Citation for priming participants
-
-%https://guilfordjournals.com/doi/abs/10.1521/soco.2014.32.supp.243?casa_token=LllPd7XTs_0AAAAA%3AOjyyDZHutusPSbLINorKbrconK1D2nxtYiADaJjME8mDuTmogdtnsKo-qkZKpETpUsee5w5sDvg)
+After completing this survey, they will play through a demo that features two combat encounters. In one encounter, the participant will be assisted by the simple AI agent, while the other encounter will have them assisted by an adaptive AI agent. To avoid observer bias, the order the agents feature will be randomly selected \cite{hrobjartsson2013observer}.
 
 Once they have played through the demo, the participants will be given a questionnaire form to fill out. Some of the questions would start out establishing the participant's prior experience with games and what kind of games they like, and will then move onto the specifics in the AI.
 
-%TODO - Need more info in this section, talk about required participants, g-power etc.
+There is a link to a draft of the questionnaire in appendix \ref{AppendixLinks}.
 
 \subsection{Data Management Plan}
-\label{DataManagementPlan}
-
-%TODO - Highlight that I am focusing on perception of AI
+\label{DataManagement}
 
 Most of the questions will use a Likert scale to distil responses into quantitative data and will include questions on how likeable, intelligent, collaborative, etc. the player thought they were, using a similar approach used by Z. Ashktorab et al. \cite{SocialPerceptions2020}. There will be some qualitative questions that allow participants to put sentence answers so they can give more specific thoughts. This will also help to determine if there are any bugs that caused one AI to not work as intended.
 
 The questions will use a 6-point Likert scale, this means that they will not have a neutral value. This will result in the answer always being useful. Additionally, using a 6-point scale will give more accuracy as it reduces a central tendency bias (cite likert scale). This is caused when participants avoid choosing extreme responses to avoid seeming like they have extremist values. Having a point scale more than 7 may be less manageable for participants
 
-%TODO - More info on the types of questions used, put draft questionnaire in abstract
+The responses to the questionnaire will be converted to a csv file, and stored on an online network drive. This data will then be analysed using R Studio. This will output various graphs that will visualise the data for readers and I will also perform statistical tests to prove or disprove the hypotheses, detailed in section \ref{Hypotheses}. Both the R-Code and graphs with sample data are in appendix \ref{AppendixRCode}.
+
+Both hypotheses will be tested using T-Tests. Using G-Power, a sample size of 111 is required for T-Tests with an effect size of 0.3. This effect size was chosen because it is a medium effect size, as defined by Cohen \cite{cohen1988statistical}. A smaller effect size would have required a sample size of 1073, which is unrealistic for this because it is too high to achieve in this research.
+
+%G-Power downloads
+    %https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower
+    %https://learningspace.falmouth.ac.uk/mod/resource/view.php?id=245797
 
 \subsection{Ethical Considerations}
 \label{EthicalConsiderations}
 
-The data collection will involve an experiment that focuses on various AI behaviours, and how different behaviours can build a stronger emotional connection between players and AI companion NPCs. As such, participants will need to be involved. Participants will test the AI and fill out survey forms to give their opinions on the various AI mechanics. Under these criteria, there are no high risk categories, but since participants are involved, it can count as a medium risk experiment.
+The data collection will involve an experiment that focuses on various AI behaviours, and how different behaviours can build a stronger emotional connection between players and AI companion NPCs. As such, participants will need to be involved. Participants will test the AI and fill out survey forms to give their opinions on the various AI mechanics. Under these criteria, there are no high risk categories, but since participants are involved, it can count as a medium risk experiment. To protect the rights of the participants, the Falmouth University guidelines and the BCS Code of Conduct have been followed \cite{BCSConductCode}.
 
-The participants will be given information forms that detail the experiment and their participation in it. There are no aspects of the experiment that are going to be hidden from the participants, and the form will have clear information on what the experiment will entail. The information form will have the following information as per the Handbook for Research Integrity and Ethics (cite research integrity handbook - 1):
-
-%TODO - citation for the research integrity handbook
+The participants will be given information forms that detail the experiment and their participation in it. There are no aspects of the experiment that are going to be hidden from the participants, and the form will have clear information on what the experiment will entail. The information form will have the following information:
 
 \begin{itemize}
 	\item The purpose of the research, expected duration, and procedures;
@@ -277,40 +307,184 @@ The questions on the survey forms will not have any questions that require the u
 
 Most of the questions will be using a Likert scale, and there will be few qualitative questions that allow them to express more opinions. None of the questions will require the participants to divulge any personal information. Once the data has been analysed, it will be archived until the study is complete, after which all responses will be deleted.
 
-The experiment will take place on campus, either at the Games Academy Warehouse or the Design Labs and members of staff will be contacted to get permission to use these spaces for the experiment. If there are not enough responses, the project and forms will be sent online to get more responses.
+The experiment will take place on campus, either at the Games Academy Warehouse or the Design Labs and members of staff will be contacted to get permission to use these spaces for the experiment. If there are not enough responses, see section \ref{DataManagement} for sample size, the project and forms will be sent online to get more responses.
 
-\section{Expected Outcomes}
-\label{ExpectedOutcomes}
-
-%TODO - Expected outcomes here
-
-Expected outcomes here
- 
 \section*{Acknowledgments}
 
-%TODO - Acknowledgements
-%Joe, Michael and Liz
-%Falmouth Uni
-Acknowledgements here
+I would like to thank the staff at Falmouth University for their support. In particular, I'd like to thank my project supervisor, Joseph Walton-Rivers, for his guidance on the project, as well as Michael Scott, the module leader for the dissertation modules.
 
-%TODO - Careful with some sources, make sure they are all correct and careful with videos
-%TODO - Specify that some are conferences
+%I would also like to thank everyone that participated in the playtesting.
+
 \bibliographystyle{IEEEtran}
 \bibliography{bibliography} 
 
-\section*{Appendix}
-\label{Appendix}
+\section{Appendices}
+\label{Appendices}
 
-%TODO - Appendix
+\subsection{Appendix - Links}
+\label{AppendixLinks}
 
-R-code
+This is the link to the Github Repository: \url{https://github.falmouth.ac.uk/Games-Academy-Student-Work-22-23/Buddy-NPC-Dissertation}
 
-QA plan
+This is the link to the questionnaire draft: \url{https://docs.google.com/forms/d/e/1FAIpQLSeOhC7PEpuYuBs3D_8r5LFBvWAq_hwGGgM-3Jaw7EKlvTLH9A/viewform?usp=sf_link}
 
-Repo Link
 
-Ethics Proposal
+\subsection{Appendix - Quality Assurance Plan}
+\label{AppendixQAPlan}
+%(Perry 1987)
+%Correctness, Reliability, Efficiency, Integrity, Usability, Maintainability, Testability, Flexibility, Portability, Interoperability
 
-Questionnaire draft
+%Types of Testing: Unit Testing, Automation and Continuous Integration, Run-Time Analyses, End-User Testing
+
+The artefact will be tested in multiple stages. First, the basic combat mechanics and enemy AI will be playtested with end-users, which would most likely be friends and family, to ensure that there are no bugs that could interfere with the results of the experiment. I will gather vocal feedback and track any issues on a Trello board, which will be used to mark progress.
+
+This is an important aspect as the basic mechanics will determine how the player interacts with the game and the decision making for the companion agent relies on this.
+
+When the basic combat mechanics and enemy AI are tested, the adaptive AI will go into testing. Unit tests will be used to confirm the calculations for generating the player model are correct and that the correct behaviours are chosen for the adaptive AI.
+
+Once the adaptive agent has passed the unit testing, run-time testing will be used for optimisation. The aim is for the game to run at a minimum of 30 fps on the machines in the Games Academy. If the game isn't performant enough, the profiler in Unity will be used to find bottlenecks and fix them.
+
+Before conducting the experiment, the game will be tested again with friends and family to ensure that the adaptive AI is behaving properly and to regulate difficulty. While game balance is not a primary concern here, the game should be challenging enough so that the companion provides clear use for the player, but not overwhelming to distract the player from noticing them.
+
+Throughout this process, regular builds will be made and tested to ensure that it works. Automated build generation may be used to make this process quicker.
+
+Additionally, generating reference codes will need to be tested to ensure that multiple participants will not be given the same code. The initial plan for constructing the reference code is to construct multiple sets of digits. The first set of digits could be the current time, then next set could be randomly generated and the final digits could be determined by which AI the participant was given first. This system will need to be tested properly when it is developed.
+
+
+\onecolumn
+\subsection{Appendix - R-Code}
+\label{AppendixRCode}
+
+\begin{verbatim}
+    #Setting up the libraries
+library(tidyverse)
+library(psych)
+library(readr)
+library(ggplot2)
+library(MASS)
+library(broom)
+
+#Getting the data, view gets data file but cannot be compiled
+rawData <- read_csv("obfuscated_data.csv")
+glimpse(rawData)
+
+#Replace the labels
+data <- rawData %>%
+  mutate(AgentType = factor(AgentType, levels = c("1", "2"),
+                            labels = c("Adaptive AI", "Non-Adaptive AI"))) %>%
+glimpse(data)
+
+#Creates a data frame for mean values and standard deviation
+sumData <- data %>%
+  group_by(AgentType) %>%
+  summarize(likeabilityMean = mean(LIKEABILITY),
+            likeabilityError = sd(LIKEABILITY)/sqrt(n()),
+            intelligenceMean = mean(INTELLIGENCE),
+            intelligenceError = sd(INTELLIGENCE)/sqrt(n()),
+            adaptabilityMean = mean(ADAPTABILITY),
+            adaptabilityError = sd(ADAPTABILITY)/sqrt(n()),
+            sampleCount = n())%>%
+  ungroup() %>%
+sumData
+
+#Group Data by Agent Type
+adaptiveData <- subset(rawData, AgentType == "1") %>%
+  mutate(AgentType = factor(AgentType, levels = c("1", "2"), 
+                            labels = c("Adaptive AI", "Non-Adaptive AI"))) %>%
+adaptiveData
+
+nonData <- subset(rawData, AgentType == "2") %>%
+  mutate(AgentType = factor(AgentType, levels = c("1", "2"), 
+                            labels = c("Adaptive AI", "Non-Adaptive AI"))) %>%
+nonData
+
+#T Tests
+#T Test for Hypothesis 1 - Adaptive companion will seen as more collaborative 
+                          #compared to the non-adaptive companion
+likeTest <- t.test(adaptiveData$COLLABORATIVE, nonData$COLLABORATIVE, 
+                   alternative="greater") %>%
+likeTest
+
+#T Test for Hypothesis 2 - Players' user experience will be improved if they 
+                            #felt a greater sense of collaboration
+likeTest <- t.test(adaptiveData$USEREXPERIENCE, nonData$USEREXPERIENCE, 
+                   alternative="greater") %>%
+likeTest
+
+#Summarize the values
+#Plots for for adaptability, likability and intelligence ratings for the agent types
+
+#Adaptability
+data %>%
+  group_by(AgentType) %>%
+  summarise(min = min(ADAPTABILITY), median = median(ADAPTABILITY), max = max(ADAPTABILITY))
+#Box Plot
+qplot(factor(data$AgentType), data$ADAPTABILITY, geom = "boxplot", 
+      main="Comparing the adaptability rating of the companions", 
+      xlab="AI Type", ylab="Adaptability")
+#Plot for mean
+ggplot(data = sumData,
+       aes(x = AgentType, y = adaptabilityMean, group = AgentType, color = AgentType)) +
+  geom_point(size = 5)
+
+#Likeability
+data %>%
+  group_by(AgentType) %>%
+  summarise(min = min(LIKEABILITY), median = median(LIKEABILITY), max = max(LIKEABILITY))
+#Box Plot
+qplot(factor(data$AgentType), data$LIKEABILITY, geom = "boxplot", 
+      main="Comparing the likability rating of the companions", 
+      xlab="AI Type", ylab="Likability")
+#Plot for mean
+ggplot(data = sumData,
+       aes(x = AgentType, y = likeabilityMean, group = AgentType, color = AgentType)) +
+  geom_point(size = 5)
+
+#Intelligence
+data %>%
+  group_by(AgentType) %>%
+  summarise(min = min(INTELLIGENCE), median = median(INTELLIGENCE), max = max(INTELLIGENCE))
+#Box Plot
+qplot(factor(data$AgentType), data$INTELLIGENCE, geom = "boxplot", 
+      main="Comparing the intelligence rating of the companions", 
+      xlab="AI Type", ylab="Intelligence")
+#Plot for mean
+ggplot(data = sumData,
+       aes(x = AgentType, y = intelligenceMean, group = AgentType, color = AgentType)) +
+  geom_point(size = 5)
+
+#Mapping Adaptability to Intelligence
+qplot(data$ADAPTABILITY, data$INTELLIGENCE, geom = c("point", "smooth"), method = "rlm",
+      main = "Correlation between ratings for Adaptability and Intelligence", 
+      xlab = "Adaptability", ylab = "Intelligence")
+
+#Mapping Intelligence to Likeability
+qplot(data$INTELLIGENCE, data$LIKEABILITY, geom = c("point", "smooth"), method = "rlm",
+      main = "Correlation between ratings for Intelligence and Likeability", 
+      xlab = "Intelligence", ylab = "Likeability")
+
+#Mapping Adaptability to Likeability
+qplot(data$ADAPTABILITY, data$LIKEABILITY, geom = c("point", "smooth"), method = "rlm",
+      main = "Correlation between ratings for Adaptability and Likeability", 
+      xlab = "Adaptability", ylab = "Likeability")
+
+
+\end{verbatim}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{Images/Graphs/LikabilityRplot.png}
+  
+\caption{Comparing the likability between companion types (sample data)}
+\label{fig:LikabilityRplot}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{Images/Graphs/IntelligenceLikabilityRplot.png}
+  
+\caption{Comparing the effect perceived intelligence has on likability (sample data)}
+\label{fig:IntelligenceLikabilityRplot}
+\end{figure}
 
 \end{document}
