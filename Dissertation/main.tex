@@ -54,7 +54,7 @@
 	\pagenumbering{arabic}
 
 \begin{abstract}
-This proposal demonstrates the use of adaptive AI for companion characters. The adaptive AI will respond to player actions so it can collaborate with them better. This adaption will be tested to determine if it makes the companion character perceived as more collaborative by the player.
+This proposal demonstrates the use of adaptive AI for companion characters that can work with players in an action game. The companion cannot be explicitly commanded, so the AI will respond to player actions to collaborate with them better, which preserves independence. This adaption will be tested to determine if it the companion character gives the player a greater sense of teamwork.
 \end{abstract}
 
  \begin{IEEEkeywords}
@@ -66,26 +66,20 @@ Artificial Intelligence, AI, Synergy, Collaboration, Cooperation, Companion, NPC
 
 This proposal presents an AI companion that will aid the player in combat, similar to \textit{Atreus} in \textit{God of War} or \textit{Ellie} from \textit{The Last of Us}. The focus of this research would be on using agent modelling, outlined in section \ref{Communication}, to make an adaptive AI that determines how the companion can best assist the player without requiring any explicit commands from them.
 
-In the next section, this proposal summarizes the motivations for the project. In section \ref{RelatedWork} , this proposal analyses common design practices for AI. Sections \ref{Responsive Behaviour} \ref{Movement} \ref{ABC} focus on various methods for AI in industry, while section \ref{Communication} focuses on analysing methods in academic research that are used to create adaptive AI. Section \ref{ProposedResearch} details the design of the experiment used in this research.
+In the next section, this proposal summarizes the motivations for the project. In section \ref{RelatedWork}, this proposal analyses common design practices for AI. Sections \ref{Responsive Behaviour} \ref{Movement} \ref{ABC} focus on various methods for AI in industry, while section \ref{Communication} focuses on analysing methods in academic research that are used to create adaptive AI. Section \ref{ProposedResearch} details the design of the experiment used in this research.
 
 \section{Background}
 \label{Background}
 
-The intention for this research is to provide a framework for developing companion AI that does not rely on using voice acting, writing and animations to make them seem like a real person. The typical approach to developing AI in industry is to focus on these out of combat actions, while the in combat behaviours are less of a focus. For example, \textit{Elizabeth} in \textit{Bioshock: Infinite} interacts with a smart terrain system outside of combat, detailed in section \ref{ABC}. However, her combat functionality is limited to staying out of harm's way and occasionally throwing useful items to the player \cite{GDCElizabeth}.
+A key motivation for this work is a developer conference by Constantine et al. that focused on building the relationship between the players and their ally, Aurene, so that their death feels more meaningful \cite{EGXCharacterDeathGuildWars}. One of their points was that allowing players to explicitly command companions can ruin their agency.
 
-When developing the AI for \textit{Atreus} in \textit{God of War}, there was a lot more of a focus on the combat AI, but it can be overshadowed as the player can explicitly command the player, which can ruin the companion's agency \cite{EGXCharacterDeathGuildWars}.
+When developing the AI for \textit{Atreus} in \textit{God of War}, there was a lot more of a focus on the sense of teamwork between Atreus and the player. This can be overshadowed as the player can explicitly command Atreus, which can ruin his agency \cite{EGXCharacterDeathGuildWars}. The intention for this research is to create an AI that can collaborate with the player like Atreus, but is independent like Aurene.
 
-This research will build upon combat AI for companion characters by focusing on the sense of collaboration between them and the player. There are five core design pillars:
+This research will build upon combat AI for companion characters by focusing on the sense of collaboration between them and the player while maintaining this independence. Collaboration in this research is defined as the sense of teamwork between the player and a companion NPC. This is built with synergistic behaviours where the AI makes it easier for the player to play the game in a noticeable way. To do this, this research presents an adaptive AI, which is where the companion will change their own behaviours in response to the player's actions. The intention is that responding to the player's actions will make them more collaborative.
 
-%List core design pillars
-\label{CoreDesign}
-\begin{itemize}
-	\item \textbf{Enhances Agency} - The AI will have to balance multiple duties, such as helping the player stay safe, attacking other enemies so they do not get overwhelmed and maintaining their own safety \cite{CoupledEmpowermentMaximisation, tremblay2013adaptive}.
-	\item \textbf{Doesn't Overshadow} - This AI should not overshadow the player and will use mostly supportive behaviours to assist them \cite{CoupledEmpowermentMaximisation, DesignDocAIAllies}.
-	\item \textbf{No Explicit Commands} - Collaboration without explicit commands maintains the companion's own agency \cite{EGXCharacterDeathGuildWars}.
-	\item \textbf{Simple Behaviours} - The combat actions for both the player and companion will be simple. This reduces scope and allows the AI to be incorporated in other action games easier. This is standard AI practice in industry \cite{GMTGoodAI, GDCLessIsMore, GDCSimplestAITrick}.
-	\item \textbf{Low Maintenance} - While the player should be able to notice the AI, they should not need to rely on them for specific behaviours or completely change their playstyle to get the AI to be helpful.
-\end{itemize}
+The AI will have to balance multiple duties, such as helping the player stay safe, attacking other enemies so they do not get overwhelmed and maintaining their own safety \cite{CoupledEmpowermentMaximisation, tremblay2013adaptive}. To preserve player agency, the AI should not overshadow the player and will use mostly supportive behaviours to assist them \cite{DesignDocAIAllies}.
+
+The combat actions for both the player and companion will be simple. This reduces scope and allows the AI to be incorporated in other action games easier. This is standard AI practice in industry \cite{GMTGoodAI, GDCLessIsMore, GDCSimplestAITrick}. While the player should be able to notice the AI, they should not need to rely on them for specific behaviours or completely change their play-style to get the AI to be helpful.
 
 \section{Related Work}
 \label{RelatedWork}
@@ -161,7 +155,7 @@ Instead of focusing on animation and voice lines, the agent will use adaptive AI
 \subsection{Collaboration Without Communication}
 \label{Communication}
 
-The core design, detailed in Section \ref{CoreDesign}, is that the player cannot explicitly command the companion. As a result, the AI needs to determine how to collaborate with the player without communication. The following methods are some ways in which an AI can collaborate with other agents without communication.
+The core design, detailed in Section \ref{Background}, is that the player cannot explicitly command the companion. As a result, the AI needs to determine how to collaborate with the player without communication. The following methods are some ways in which an AI can collaborate with other agents without communication.
 
 Board games like \textit{Hanabi} and \textit{Pandemic} are often used in academic research for collaborative AI as they involve teamwork between multiple players that cannot communicate with each-other. Eger and Grus demonstrate a technique for \textit{Hanabi} that uses timing to communicate between agents \cite{WaitASecond2019}. While this is effective for collaboration between AI agents, this method is not reliable for player-AI collaboration as a human player isn't going to perform actions at specific timings to communicate with an AI agent.
 
@@ -171,15 +165,11 @@ Agent modelling can also be used in Real-Time Strategy (RTS) games. Schadd et al
 
 %\cite{van2005opponent} - This tends to not be used for commercial games however (though this source is from 2005 so it may be out of date)
 
-Going back to AI for board games, plan recognition is another common technique that is used in board games. Plan recognition is another useful technique for agents that need to collaborate with other agents, including players, without requiring explicit commands or communication. Agents that use plan recognition observe the actions, similar to agent modelling. However, instead of constructing a model of the player, it uses these actions to their goals by comparing the steps required to achieve that goal to the steps that have been taken \cite{GeneratingCollabBehaviourPlanRecognition2016}. Once an entity’s goal has been identified, the plan recognition agent will devise actions that can aid them in achieving their goals. The unfinished steps in the plan can be used as potential behaviours.
+Plan recognition is another common technique that is used in board games. This is another technique for agents that need to collaborate with other agents, including players, without requiring explicit commands or communication. Agents that use plan recognition observe the actions, similar to agent modelling. However, instead of constructing a model of the player, it uses these actions to their goals by comparing the steps required to achieve that goal to the steps that have been taken \cite{GeneratingCollabBehaviourPlanRecognition2016}. Once an entity’s goal has been identified, the plan recognition agent will devise actions that can aid them in achieving their goals. The unfinished steps in the plan can be used as potential behaviours.
 
 Sauma-Chacón and Eger evaluate the use of plan recognition agents in \textit{Pandemic} that can play with a human player \cite{PandemicPlanRecognition2021}. This AI was able to play at a level similar to that seen in full teams of AI and was perceived as more helpful. In addition, they detected a correlation between perceived helpfulness and skill.
 
 Like agent modelling, this technique can also be used in RTS games as agents use observed behaviour to determine their allies' or opponents' plans. Jansen demonstrates the use of plan recognition as an ally in RTS games, instead of using it as an opponent \cite{PlayerAdaptiveRTSAI2007}. This agent can look at the player's actions and build units to support their plans.
-
-Implementing a plan recognition agent in an action game requires a complex combat system. This type of agent could be useful in an action game with combos, where the AI will be required to determine which attack in the combo the player plans to use, and will plan attacks that collaborate well with them. For example, if the player is building up to a slow attack, they will interrupt enemies from hitting the player and will prevent the target from escaping. If the player is planning a large AOE attack, they will try to stagger enemies into the effect and keep them there. This will ideally make the AI seem intelligent and build collaboration while also appearing to give the AI more agency as it does not respond to player actions directly.
-
-However, these behaviours would be much more reliable with bespoke behaviours, especially since the actions taken by the agent in both examples are quite similar. Using a plan recognition agent in an action game would require the combat system to be complex enough that the agent needs to use unique actions for various plans, which breaks one of the core design pillars outlined in section \ref{CoreDesign}. Looking at Atreus \textit{God of War 2018}, analysed in section \ref{RelatedWork}, all the actions Atreus uses are very similar, but it’s the timing that is important \cite{GDCAtreus}. In addition, these are bespoke behaviours, not a prediction based on what the player is planning.
 
 \section{Proposed Research}
 \label{ProposedResearch}
@@ -215,24 +205,39 @@ Since the AI presented in this proposal focuses on collaborative behaviour and t
  \hline
 \end{tabular}
 
-\subsection{Artefact}
+\section{Artefact}
 \label{Artefact}
 
-\subsubsection{Artefact Details}
+\subsection{Artefact Details}
 \label{ArtefactDetails}
 
 This research will present an adaptive AI for an action game responds the the player actions to collaborate with them. The intention is that this collaboration will improve the player experience, and this is one of the factors that will be tested, see section \ref{Hypotheses} for details on the hypotheses.
 
-This agent will feature plan recognition, detailed in \ref{Communication}. When the player performs a combat action, the adaptive AI will be given information about what kind of action the player took and whether they were successful. It will use this information to construct a model that describes how the player acts. It will then use this player model in its decision making algorithm when deciding what it will do.
+The agent will have general path-finding behaviours that keep it close to the player and it will try to stay within their vision so the player notices it. The AI will use a behaviour tree to determine its tasks. the tasks will mostly involve staying near the player and attacking nearby enemies.
+
+This agent will feature opponent modelling, detailed in \ref{Communication}. When the player performs a combat action, the adaptive AI will be given information about what kind of action the player took and whether they were successful. It will use this information to construct a model that describes how the player acts. This model will be made up of key descriptors that describe the player's actions.
+
+Every time the player takes an aggressive action, such as attacking, the AI will add to aggressive descriptor. However, if they miss, the AI will add to a panic descriptor. Each action will add to a specific descriptor and the amount they add will be tweaked in play-testing, see appendix \ref{AppendixQAPlan}. It will then use this player model in behaviour tree when deciding what it will do.
 
 For example, if the player is aggressive, but are getting hit a lot, the companion AI may focus on distracting other enemies from the player so they can continue to focus on their own play-style. However, if the player is very defensive, and tends to attack only after an enemy attacks, the adaptive AI may focus on the player's current target and create an opening for them to attack. If the player is getting overwhelmed by enemies, the agent may try to draw enemies away from the player to give them some space to relax.
 
-The agent will also have general path-finding behaviours that keep it close to the player and it will try to stay within their vision so the player notices it.
+A plan recognition approach would have required the player to think about their strategy more, which would suit a slower or more strategic game. An action game is faster paced, and because the player does not have as much time to think, they won't be able to come up with plans. As a result, this project will feature a player modelling approach because it can work better with a simpler combat system, but still enables adaptive behaviour.
 
-\subsubsection{Validation and Verification}
+\subsection{System Development Life-cycle}
+\label{DevLifecycle}
+
+The project uses version control to track changes, and feature branches are used to organize features and resolve conflicts. In addition, a task board has been made, and will be used to track the progress of the development.
+
+A basic combat system has been created with AI agents that chase the closest enemy and attack when they are in range. The player has basic combat actions that are standard in most action games; attacks, parries and dodges. There is also a basic prototype of a player modelling AI, which can take actions performed by the player and give a basic descriptor that defines their dominant play-style.
+
+The next feature planned is setting up a behaviour tree and tasks that will make designing AI behaviours quicker. Once a behaviour tree is implemented, the simple AI for the enemies and companion will be developed, and then the adaptive companion AI will be worked on.
+
+The adaptive companion will be the focus of the research, and most of the development time will be spend on this. The player model construction will need to be refined from its prototype and then it will need to be able to use this player model in its decision-making algorithm.
+
+\subsection{Validation and Verification}
 \label{Validation}
 
-These behaviours will be tested with pilot play-testing to ensure that the player model is constructed properly and that appropriate actions are taken. This play-testing will also give me opinions on whether the aforementioned AI behaviours are beneficial for the player experience and will allow me to adjust behaviours before the experiment. Refer to appendix \ref{AppendixQAPlan} for more details on the quality assurance test plan.
+These behaviours will be tested with pilot play-testing to ensure that the player model is constructed properly and that appropriate actions are taken. This play-testing will also give me opinions on whether the aforementioned AI behaviours are beneficial for the player experience and will allow me to adjust behaviours before the experiment. In addition, unit tests will be used to confirm the player model is properly constructed and the correct behaviours are taken based on this model. Refer to appendix \ref{AppendixQAPlan} for more details on the quality assurance test plan.
 
 \section{Research Method}
 \label{ResearchMethod}
@@ -257,6 +262,8 @@ The research will be carried out using positivist philosophies \cite{Zukauskas18
 
 %G-Power video explanation: https://web.microsoftstream.com/video/d1ec1c56-bb97-4592-ae4e-1c973e3fee20?referrer=https:%2F%2Flearningspace.falmouth.ac.uk%2F
 
+The experiment will take place on campus, either at the Games Academy Warehouse or the Design Labs and members of staff will be contacted to get permission to use these spaces for the experiment. If there are not enough responses, see section \ref{DataManagement} for sample size, the project and forms will be sent online to get more responses.
+
 Two companion agents will be set up in an action game. The first agent will feature a simple AI which will simply attack the closest target with random attacks and use basic path-finding to keep close to the player when not attacking. The second agent will feature an adaptive AI, which will determine targets based on the player actions and will choose attacks that support the player's intentions better.
 
 Structured observations and questionnaires will be used to collect data on the AI agents. Each participant will fill out an initial survey detailing their experience with games and any general opinions on companions in games.
@@ -274,9 +281,9 @@ Most of the questions will use a Likert scale to distil responses into quantitat
 
 The questions will use a 6-point Likert scale, this means that they will not have a neutral value. This will result in the answer always being useful. Additionally, using a 6-point scale will give more accuracy as it reduces a central tendency bias (cite likert scale). This is caused when participants avoid choosing extreme responses to avoid seeming like they have extremist values. Having a point scale more than 7 may be less manageable for participants
 
-The responses to the questionnaire will be converted to a csv file, and stored on an online network drive. This data will then be analysed using R Studio. This will output various graphs that will visualise the data for readers and I will also perform statistical tests to prove or disprove the hypotheses, detailed in section \ref{Hypotheses}. Both the R-Code and graphs with sample data are in appendix \ref{AppendixRCode}.
+The responses to the questionnaire will be converted to a csv file, and stored on an online network drive. The draft form is currently a Google form, but this will be changed to a Microsoft form because the free version for Google forms is not GDRP compliant, which presents a data risk \ref{AppendixLinks}. This data will then be analysed using R Studio. This will output various graphs that will visualise the data for readers and I will also perform statistical tests to prove or disprove the hypotheses, detailed in section \ref{Hypotheses}. Both the R-Code and graphs with sample data are in appendix \ref{AppendixRCode}.
 
-Both hypotheses will be tested using T-Tests. Using G-Power, a sample size of 111 is required for T-Tests with an effect size of 0.3. This effect size was chosen because it is a medium effect size, as defined by Cohen \cite{cohen1988statistical}. A smaller effect size would have required a sample size of 1073, which is unrealistic for this because it is too high to achieve in this research.
+Both hypotheses will be tested using T-Tests. Using G-Power, a sample size of 59 is required for T-Tests with an effect size of 0.4. This effect size was chosen because it is a medium-large effect size, as defined by Cohen \cite{cohen1988statistical}. A small or medium effect size may not be noticed by most players, especially in a fast-paced action game, as they may be more focused on their own behaviours.
 
 %G-Power downloads
     %https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower
@@ -287,19 +294,7 @@ Both hypotheses will be tested using T-Tests. Using G-Power, a sample size of 11
 
 The data collection will involve an experiment that focuses on various AI behaviours, and how different behaviours can build a stronger emotional connection between players and AI companion NPCs. As such, participants will need to be involved. Participants will test the AI and fill out survey forms to give their opinions on the various AI mechanics. Under these criteria, there are no high risk categories, but since participants are involved, it can count as a medium risk experiment. To protect the rights of the participants, the Falmouth University guidelines and the BCS Code of Conduct have been followed \cite{BCSConductCode}.
 
-The participants will be given information forms that detail the experiment and their participation in it. There are no aspects of the experiment that are going to be hidden from the participants, and the form will have clear information on what the experiment will entail. The information form will have the following information:
-
-\begin{itemize}
-	\item The purpose of the research, expected duration, and procedures;
-	\item What they are being asked to do;
-	\item Their right to decline to participate and to withdraw from the research once participation has begun;
-	\item The foreseeable consequences of declining or withdrawing;
-	\item Reasonably foreseeable factors that may be expected to influence their willingness to participate such as potential risks, discomfort, or adverse effects;
-	\item Any prospective research benefits;
-	\item Limits of confidentiality;
-	\item Incentives for participation; and,
-who to contact for questions about the research. 
-\end{itemize}
+The participants will be given information forms that detail the experiment and their participation in it. There are no aspects of the experiment that are going to be hidden from the participants, and the form will have clear information on what the experiment will entail. The form will have information on the purpose of the research, expected duration, procedures, what the participants are being asked to do, their right to decline and withdraw, confidentiality and contact info for the researcher.
 
 In order to participate within the experiment, the participant will be asked to sign that they understand and agree with the form, no signature will be required. Participants will also be required to state that they are at least 18 years of age to participate with the experiment. However they will not need to state their age, only that they are above 18 years old. There will also be no transactions or other coercion to participate with the experiment.
 
@@ -308,8 +303,6 @@ All participants will be given a right to withdraw at any time and this will als
 The questions on the survey forms will not have any questions that require the user to input personal information. The questions are mostly focused on their opinions of the AI, though they may be asked about their opinions on AI in games and how often they play games.
 
 Most of the questions will be using a Likert scale, and there will be few qualitative questions that allow them to express more opinions. None of the questions will require the participants to divulge any personal information. Once the data has been analysed, it will be archived until the study is complete, after which all responses will be deleted.
-
-The experiment will take place on campus, either at the Games Academy Warehouse or the Design Labs and members of staff will be contacted to get permission to use these spaces for the experiment. If there are not enough responses, see section \ref{DataManagement} for sample size, the project and forms will be sent online to get more responses.
 
 \section{Expected Outcomes}
 \label{ExpectedOutcomes}
@@ -325,6 +318,8 @@ I would like to thank the staff at Falmouth University for their support. In par
 \bibliographystyle{IEEEtran}
 \bibliography{bibliography} 
 
+ \newpage
+ 
 \section{Appendices}
 \label{Appendices}
 
@@ -333,7 +328,7 @@ I would like to thank the staff at Falmouth University for their support. In par
 
 This is the link to the Github Repository: \url{https://github.falmouth.ac.uk/Games-Academy-Student-Work-22-23/Buddy-NPC-Dissertation}
 
-This is the link to the questionnaire draft: \url{https://docs.google.com/forms/d/e/1FAIpQLSeOhC7PEpuYuBs3D_8r5LFBvWAq_hwGGgM-3Jaw7EKlvTLH9A/viewform?usp=sf_link}
+The draft for the questionnaire was created in Google forms, but this will not be used in the experiment as it could present a data risk, more details in section \ref{DataManagement}. This is the link to the questionnaire draft, : \url{https://docs.google.com/forms/d/e/1FAIpQLSeOhC7PEpuYuBs3D_8r5LFBvWAq_hwGGgM-3Jaw7EKlvTLH9A/viewform?usp=sf_link}
 
 
 \subsection{Appendix - Quality Assurance Plan}
