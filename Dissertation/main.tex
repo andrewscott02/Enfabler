@@ -357,6 +357,28 @@ Throughout this process, regular builds will be made and tested to ensure that i
 
 Additionally, generating reference codes will need to be tested to ensure that multiple participants will not be given the same code. The initial plan for constructing the reference code is to construct multiple sets of digits. The first set of digits could be the current time, then next set could be randomly generated and the final digits could be determined by which AI the participant was given first. This system will need to be tested properly when it is developed.
 
+\subsection{Appendix - Graphs with Random Data}
+
+Figures \ref{fig:LikabilityRplot} and \ref{fig:IntelligenceLikabilityRplot} have been created using the R-Code in appendix \ref{AppendixRCode}. Random data has been put into these graphs to show a sample of what the graphs would look like.
+
+Figure \ref{fig:LikabilityRplot} displays a box plot that compares the likability between the 2 agent types while figure \ref{fig:IntelligenceLikabilityRplot} shows a q plot that displays how the perceived intelligence of the AI relates to the ranking for likability.
+
+\label{AppendixGraphs}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\linewidth]{Images/Graphs/LikabilityRplot.png}
+  
+\caption{Comparing the likability between companion types (sample data)}
+\label{fig:LikabilityRplot}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\linewidth]{Images/Graphs/IntelligenceLikabilityRplot.png}
+  
+\caption{Comparing the effect perceived intelligence has on likability (sample data)}
+\label{fig:IntelligenceLikabilityRplot}
+\end{figure}
 
 \onecolumn
 \subsection{Appendix - R-Code}
@@ -477,21 +499,5 @@ qplot(data$ADAPTABILITY, data$LIKEABILITY, geom = c("point", "smooth"), method =
 
 
 \end{verbatim}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{Images/Graphs/LikabilityRplot.png}
-  
-\caption{Comparing the likability between companion types (sample data)}
-\label{fig:LikabilityRplot}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{Images/Graphs/IntelligenceLikabilityRplot.png}
-  
-\caption{Comparing the effect perceived intelligence has on likability (sample data)}
-\label{fig:IntelligenceLikabilityRplot}
-\end{figure}
 
 \end{document}
