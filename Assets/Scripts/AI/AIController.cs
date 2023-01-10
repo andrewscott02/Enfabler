@@ -14,10 +14,15 @@ public class AIController : CharacterController
     protected NavMeshAgent agent;
     public BehaviourTree bt;
 
+    public GameObject destinationTest;
     protected Vector3 currentDestination; public Vector3 GetDestination() { return currentDestination; }
     public void SetDestinationPos(Vector3 pos)
     {
         currentDestination = pos;
+        agent.SetDestination(currentDestination);
+    }
+    public void MoveToDestination()
+    {
         agent.SetDestination(currentDestination);
     }
     public bool NearDestination(float distanceAllowance)
@@ -78,6 +83,10 @@ public class AIController : CharacterController
 
     public virtual void Update()
     {
+        if (destinationTest != null)
+        {
+            destinationTest.transform.position = currentDestination;
+        }
         return;
 
         if (active)
