@@ -2,14 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using BehaviourTrees;
 
 public class AIController : CharacterController
 {
+    #region Setup
+
     bool active = false;
 
     protected GameObject player;
     protected NavMeshAgent agent;
-    protected Vector3 currentDestination;
+    public BehaviourTree bt;
+
+    protected Vector3 currentDestination; public Vector3 GetDestination() { return currentDestination; }
+    public void SetDestinationPos(Vector3 pos)
+    {
+        currentDestination = pos;
+        agent.SetDestination(currentDestination);
+    }
+    public bool NearDestination(float distanceAllowance)
+    {
+        return Vector3.Distance(transform.position, currentDestination) <= distanceAllowance;
+    }
+
     protected CharacterController currentTarget;
 
     public override void Start()
@@ -27,8 +42,10 @@ public class AIController : CharacterController
     {
         AIManager.instance.AllocateTeam(this);
 
-        active = true;
+        bt.Setup(this);
     }
+
+    #endregion
 
     protected void NextPatrol()
     {
@@ -61,6 +78,8 @@ public class AIController : CharacterController
 
     public virtual void Update()
     {
+        return;
+
         if (active)
         {
             BehaviourTree();

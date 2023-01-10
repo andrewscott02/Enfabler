@@ -136,6 +136,7 @@ MonoBehaviour:
   animator: {fileID: 7673251268057846940}
   model: {fileID: 1628624658551123326}
   playerTeam: 1
+  bt: {fileID: 8034274260663390704}
   lerpSpeed: 0.01
   sightDistance: 25
   meleeDistance: 3
@@ -155,6 +156,18 @@ MonoBehaviour:
   showValues: []
   counterAvailable: 0
   counterWindow: 1.5
+--- !u!114 &8034274260663390704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5873128357081618256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8da8a4ff64d548042b61679ed2f34d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &7673251268057846940 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5006998096090209180, guid: 22bb1e8efed20934fbd323b6f0290978,
