@@ -11,7 +11,7 @@ public class AIController : CharacterController
     bool active = false;
 
     protected GameObject player;
-    protected NavMeshAgent agent;
+    protected NavMeshAgent agent; public NavMeshAgent GetNavMeshAgent() { return agent; }
     public BehaviourTree bt;
 
     public GameObject destinationTest;
@@ -19,8 +19,8 @@ public class AIController : CharacterController
     public void SetDestinationPos(Vector3 pos)
     {
         currentDestination = pos;
-        agent.SetDestination(currentDestination);
     }
+    public bool roaming = false;
     public void MoveToDestination()
     {
         agent.SetDestination(currentDestination);

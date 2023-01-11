@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTrees;
 
-public class Roam : Node
+public class MoveToDestination : Node
 {
     public AIController agent;
-    public float radius;
-    public Vector3 point;
     public float distanceAllowance;
 
     float maxTime;
@@ -18,14 +16,11 @@ public class Roam : Node
     /// </summary>
     /// <param name="newAgent">The agent this command is given to</param>
     /// <param name="radius">The radius of the roam position, recommend 30</param>
-    public Roam(AIController agent, float radius, float distanceAllowance, float maxTime)
+    public MoveToDestination(AIController agent, float distanceAllowance, float maxTime)
     {
         this.agent = agent;
-        this.radius = radius;
         this.distanceAllowance = distanceAllowance;
         this.maxTime = maxTime;
-
-        agent.SetDestinationPos(GetRandomPoint(this.radius));
     }
 
     public override NodeState Evaluate()
@@ -33,9 +28,9 @@ public class Roam : Node
         if (agent.NearDestination(distanceAllowance))
         {
             state = NodeState.Success;
-            Debug.Log("Arrived at destination: " + point);
+            Debug.Log("Arrived at destination: " + agent.GetDestination());
             elapsedTime = 0;
-            agent.SetDestinationPos(GetRandomPoint(radius));
+            agent.roaming = false;
             return state;
         }
         else
@@ -44,33 +39,19 @@ public class Roam : Node
             if (elapsedTime >= maxTime)
             {
                 state = NodeState.Failure;
-                Debug.Log("Arrived at destination: " + point);
+                Debug.Log("Failed to arrive at destination: " + agent.GetDestination());
                 elapsedTime = 0;
-                agent.SetDestinationPos(GetRandomPoint(radius));
+                agent.roaming = false;
                 return state;
             }
             else
             {
                 state = NodeState.Running;
-                Debug.Log("Moving from " + agent.transform.position + " to " + point);
+                Debug.Log("Moving from " + agent.transform.position + " to " + agent.GetDestination());
+                agent.MoveToDestination();
             }
 
             return state;
         }
-    }
-
-    Vector3 GetRandomPoint(float radius)
-    {
-        Vector3 origin = agent.transform.position;
-        float randX = Random.Range(-360, 360);
-        float randY = 0;
-        float randZ = Random.Range(-360, 360);
-        Vector3 direction = new Vector3(randX, randY, randZ);
-        direction.Normalize();
-
-        float distance = Random.Range(0, radius);
-        Vector3 point = origin + (direction * distance);
-
-        return point;
     }
 }
