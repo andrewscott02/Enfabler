@@ -9,10 +9,18 @@ public class BasicBehaviourTree : BehaviourTree
     {
         //Node root = new Roam(agent, 30f, 1f, 6f);
 
-        Node root = new Sequence(new List<Node>
+        Node root = new Selector(new List<Node>
         {
-            new FindPointRadius(agent, 30f),
+            new Sequence(new List<Node>
+            {
+            new GetClosestEnemy(agent, agent.sightDistance),
             new MoveToDestination(agent, 1f, 6f)
+            }),
+            new Sequence(new List<Node>
+            {
+            new FindPointRadius(agent, agent.roamDistance),
+            new MoveToDestination(agent, 1f, 6f)
+            })
         });
 
         return root;

@@ -76,6 +76,7 @@ public class AIController : CharacterController
     {
         Gizmos.DrawWireSphere(currentDestination, 1f);
         Gizmos.DrawWireSphere(gameObject.transform.position, sightDistance);
+        Gizmos.DrawWireSphere(gameObject.transform.position, roamDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, meleeDistance);
     }
 
@@ -122,7 +123,8 @@ public class AIController : CharacterController
         }
     }
 
-    public float sightDistance = 25;
+    public float sightDistance = 40;
+    public float roamDistance = 25;
     public float meleeDistance = 3;
 
     public virtual void BehaviourTree()
