@@ -11,16 +11,19 @@ public class BasicBehaviourTree : BehaviourTree
 
         Node root = new Selector(new List<Node>
         {
+            //Checks if the closest enemy is within melee range and makes an attack if true
             new Sequence(new List<Node>
             {
             new GetClosestEnemy(agent, agent.meleeDistance),
             new MeleeAttack(agent, agent.currentTarget)
             }),
+            //Checks if the closest enemy is within sight range and moves towards it if true
             new Sequence(new List<Node>
             {
             new GetClosestEnemy(agent, agent.sightDistance),
             new MoveToDestination(agent, 1f, 6f)
             }),
+            //If there are no targets, move to a random point in the roam radius
             new Sequence(new List<Node>
             {
             new FindPointRadius(agent, agent.roamDistance),
