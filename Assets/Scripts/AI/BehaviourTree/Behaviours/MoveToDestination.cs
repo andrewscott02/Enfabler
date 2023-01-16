@@ -28,7 +28,7 @@ public class MoveToDestination : Node
         if (agent.NearDestination(distanceAllowance))
         {
             state = NodeState.Success;
-            Debug.Log("Arrived at destination: " + agent.GetDestination());
+            //Debug.Log("Arrived at destination: " + agent.GetDestination());
             elapsedTime = 0;
             agent.roaming = false;
             return state;
@@ -39,7 +39,7 @@ public class MoveToDestination : Node
             if (elapsedTime >= maxTime)
             {
                 state = NodeState.Failure;
-                Debug.Log("Failed to arrive at destination: " + agent.GetDestination());
+                //Debug.Log("Failed to arrive at destination: " + agent.GetDestination());
                 elapsedTime = 0;
                 agent.roaming = false;
                 return state;
@@ -47,7 +47,7 @@ public class MoveToDestination : Node
             else
             {
                 state = NodeState.Running;
-                Debug.Log("Moving from " + agent.transform.position + " to " + agent.GetDestination());
+                //Debug.Log("Moving from " + agent.transform.position + " to " + agent.GetDestination());
                 agent.MoveToDestination();
             }
 

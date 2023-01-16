@@ -13,6 +13,11 @@ public class BasicBehaviourTree : BehaviourTree
         {
             new Sequence(new List<Node>
             {
+            new GetClosestEnemy(agent, agent.meleeDistance),
+            new MeleeAttack(agent, agent.currentTarget)
+            }),
+            new Sequence(new List<Node>
+            {
             new GetClosestEnemy(agent, agent.sightDistance),
             new MoveToDestination(agent, 1f, 6f)
             }),

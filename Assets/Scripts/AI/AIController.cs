@@ -30,7 +30,7 @@ public class AIController : CharacterController
         return Vector3.Distance(transform.position, currentDestination) <= distanceAllowance;
     }
 
-    protected CharacterController currentTarget;
+    public CharacterController currentTarget;
 
     public override void Start()
     {
@@ -141,15 +141,16 @@ public class AIController : CharacterController
 
     #region Behaviours
 
-    protected bool AttackTarget(CharacterController targetCheck)
+    public bool AttackTarget(CharacterController targetCheck)
     {
         if (targetCheck == null)
             return false;
 
         float distance = Vector3.Distance(this.gameObject.transform.position, targetCheck.gameObject.transform.position);
-
+        Debug.Log("Attack called");
         if (distance < meleeDistance)
         {
+            Debug.Log("Attack made");
             combat.LightAttack();
 
             return true;
