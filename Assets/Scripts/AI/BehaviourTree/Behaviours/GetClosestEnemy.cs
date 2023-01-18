@@ -25,9 +25,9 @@ public class GetClosestEnemy : Node
         if (enemy != null)
         {
             agent.SetDestinationPos(enemy.transform.position);
-            Debug.Log("Generated point at: " + enemy.transform.position);
+            //Debug.Log("Generated point at: " + enemy.transform.position);
 
-
+            agent.currentTarget = enemy;
             agent.roaming = false;
             state = NodeState.Success;
         }

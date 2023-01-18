@@ -7,6 +7,12 @@ namespace BehaviourTrees
     public class Sequence : Node
     {
         public Sequence() : base() { }
+
+        public Sequence(params Node[] children) : base()
+        {
+            base.children.AddRange(children);
+        }
+
         public Sequence(List<Node> children) :base(children) { }
 
         public override NodeState Evaluate()

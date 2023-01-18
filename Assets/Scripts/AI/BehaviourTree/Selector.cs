@@ -7,6 +7,12 @@ namespace BehaviourTrees
     public class Selector : Node
     {
         public Selector() : base() { }
+
+        public Selector(params Node[] children) : base()
+        {
+            base.children.AddRange(children);
+        }
+
         public Selector(List<Node> children) : base(children) { }
 
         public override NodeState Evaluate()

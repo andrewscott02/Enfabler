@@ -6,6 +6,7 @@ public class BuddyAIController : AIController
 {
     public override void BehaviourTree()
     {
+        return;
         base.BehaviourTree();
 
         if (currentTarget == null && player != null)
