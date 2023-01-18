@@ -26,6 +26,8 @@ public class PlayerController : CharacterController
     public override void Start()
     {
         base.Start();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.animator = animator;
         playerMovement.SetModel(model);

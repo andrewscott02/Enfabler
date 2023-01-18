@@ -42,37 +42,40 @@ public class AIController : CharacterController
         Gizmos.DrawWireSphere(gameObject.transform.position, sightDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, roamDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, meleeDistance);
+
+        if (currentTarget != null)
+        {
+            Gizmos.DrawLine(transform.position, currentTarget.transform.position);
+        }
     }
 
     public virtual void Update()
     {
-
-        if (!NearDestination())
+        if (currentTarget != null)
         {
-            Debug.Log("Moving");
-            #region Animation
+            Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
 
-            Vector3 movement = agent.velocity;
-            //movement = transform.TransformDirection(movement);
+            Quaternion desiredrot = Quaternion.LookRotation(direction);
 
-            //Gets the rotation of the model to offset the animations
-            Vector2 realMovement = new Vector2(0, 0);
-            realMovement.x = Vector3.Dot(movement, model.right);
-            realMovement.y = Vector3.Dot(movement, model.forward);
-
-            //Sets the movement animations for the animator
-            //Debug.Log("X:" + rb.velocity.x + "Y:" + rb.velocity.z);
-            animator.SetFloat("xMovement", Mathf.Lerp(animator.GetFloat("xMovement"), realMovement.x, lerpSpeed));
-            animator.SetFloat("yMovement", Mathf.Lerp(animator.GetFloat("yMovement"), realMovement.y, lerpSpeed));
-
-            #endregion
+            transform.rotation = Quaternion.Slerp(transform.rotation, desiredrot, Time.deltaTime * agent.angularSpeed);
         }
-        else
-        {
-            Debug.Log("Not Moving");
-            animator.SetFloat("xMovement", 0);
-            animator.SetFloat("yMovement", 0);
-        }
+
+        #region Animation
+
+        Vector3 movement = agent.velocity;
+        //movement = transform.TransformDirection(movement);
+
+        //Gets the rotation of the model to offset the animations
+        Vector2 realMovement = new Vector2(0, 0);
+        realMovement.x = Vector3.Dot(movement, model.right);
+        realMovement.y = Vector3.Dot(movement, model.forward);
+
+        //Sets the movement animations for the animator
+        //Debug.Log("X:" + rb.velocity.x + "Y:" + rb.velocity.z);
+        animator.SetFloat("xMovement", Mathf.Lerp(animator.GetFloat("xMovement"), realMovement.x, lerpSpeed));
+        animator.SetFloat("yMovement", Mathf.Lerp(animator.GetFloat("yMovement"), realMovement.y, lerpSpeed));
+
+        #endregion
     }
 
     public float distanceAllowance = 1f;
