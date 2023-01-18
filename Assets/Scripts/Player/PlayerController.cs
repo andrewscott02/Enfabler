@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : CharacterController
 {
     #region Setup
 
     #region Variables
-
-    public Animator animator;
 
     float xInput;
     float yInput;
@@ -20,25 +18,23 @@ public class PlayerController : MonoBehaviour
     public GameObject followTarget;
 
     PlayerMovement playerMovement;
-    PlayerCombat playerCombat;
-    Health health;
 
     //public LayerMask layerMask;
 
     #endregion
 
-    private void Start()
+    public override void Start()
     {
-        health = GetComponent<Health>();
+        base.Start();
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.animator = animator;
-        playerCombat = GetComponent<PlayerCombat>();
-        playerCombat.animator = animator;
+        playerMovement.SetModel(model);
 
         Health allyHealth = GameObject.FindObjectOfType<ConstructPlayerModel>().GetComponent<Health>();
 
-        playerCombat.ignore.Add(health);
-        playerCombat.ignore.Add(allyHealth);
+        combat.ignore.Add(allyHealth);
+
+        AIManager.instance.AllocateTeam(this);
     }
 
     #endregion
@@ -50,7 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         #region Movement
 
-        if (playerCombat.canMove)
+        if (combat.canMove)
         {
             xInput = Input.GetAxisRaw("Horizontal");
             yInput = Input.GetAxisRaw("Vertical");
@@ -60,6 +56,11 @@ public class PlayerController : MonoBehaviour
                 playerMovement.ToggleSprint();
             }
         }
+        else
+        {
+            xInput = 0;
+            yInput = 0;
+        }
 
         #endregion
 
@@ -67,17 +68,17 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Light Attack"))
         {
-            playerCombat.LightAttack();
+            combat.LightAttack();
         }
 
         if (Input.GetButtonDown("Parry"))
         {
-            playerCombat.Parry();
+            combat.Parry();
         }
 
         if (Input.GetButtonDown("Dodge"))
         {
-            playerCombat.Dodge();
+            combat.Dodge();
         }
 
         #endregion
@@ -125,22 +126,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerCombat.canMove)
-        {
-            /*
-            if (((xInput >= 0.1) || (xInput <= -0.1)) && ((yInput >= 0.1) || (yInput <= -0.1)))
-            {
-                //Partial functionality for averaging diagonal movement, needs proper implementation
-                //Debug.Log(true);
-                xInput = xInput / 2;
-                yInput = yInput / 2;
-            }
-            */
+        playerMovement.Move(xInput * 2, yInput * 2);
 
-            playerMovement.Move(xInput * 2, yInput * 2);
-        }
-
-        playerMovement.animator.SetBool("CanMove", playerCombat.canMove);
+        playerMovement.animator.SetBool("CanMove", combat.canMove);
     }
 
     #endregion

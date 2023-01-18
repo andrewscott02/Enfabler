@@ -7,11 +7,12 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public Animator animator;
     Rigidbody rb;
-    public Transform model;
+    Transform model; public void SetModel(Transform newModel) { model = newModel; }
 
     bool isSprinting = false;
     public float walkSpeed;
     public float runSpeed;
+    public float dodgeSpeed;
 
     public float lerpSpeed = 0.01f;
 
@@ -32,13 +33,20 @@ public class PlayerMovement : MonoBehaviour
         Vector3 movement = new Vector3(xSpeed, 0, ySpeed) * Time.deltaTime;
         movement = transform.TransformDirection(movement);
 
-        if (!isSprinting)
+        if (GetComponent<CharacterCombat>().GetDodging())
         {
-            movement *= walkSpeed;
+            movement *= dodgeSpeed;
         }
         else
         {
-            movement *= runSpeed;
+            if (!isSprinting)
+            {
+                movement *= walkSpeed;
+            }
+            else
+            {
+                movement *= runSpeed;
+            }
         }
 
         rb.velocity = movement;

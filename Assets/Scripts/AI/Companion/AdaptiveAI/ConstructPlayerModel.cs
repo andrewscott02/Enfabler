@@ -134,7 +134,7 @@ public class ConstructPlayerModel : MonoBehaviour
     void SetupCounter()
     {
         counterAvailable = true;
-
+        CancelInvoke();
         Invoke("EndCounter", counterWindow);
     }
 
