@@ -37,24 +37,23 @@ public class AIController : CharacterController
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(currentDestination, 1f);
+        Gizmos.DrawWireSphere(currentDestination, distanceAllowance);
+
         Gizmos.DrawWireSphere(gameObject.transform.position, sightDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, roamDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, meleeDistance);
     }
 
-
-    /*
     public virtual void Update()
     {
 
-        if (agent.destination == currentDestination)
+        if (!NearDestination())
         {
-            //Debug.Log("Moving");
+            Debug.Log("Moving");
             #region Animation
 
-            Vector3 movement = new Vector3(agent.speed, 0, agent.speed) * Time.deltaTime;
-            movement = transform.TransformDirection(movement);
+            Vector3 movement = agent.velocity;
+            //movement = transform.TransformDirection(movement);
 
             //Gets the rotation of the model to offset the animations
             Vector2 realMovement = new Vector2(0, 0);
@@ -70,14 +69,13 @@ public class AIController : CharacterController
         }
         else
         {
-            //Debug.Log("Not Moving");
+            Debug.Log("Not Moving");
             animator.SetFloat("xMovement", 0);
             animator.SetFloat("yMovement", 0);
         }
     }
-    */
 
-    public float distanceAllowance = 2f;
+    public float distanceAllowance = 1f;
 
     public float lerpSpeed = 0.01f;
 
@@ -90,8 +88,6 @@ public class AIController : CharacterController
     #region Behaviours
 
     #region Movement
-
-    public GameObject destinationTest;
     protected Vector3 currentDestination; public Vector3 GetDestination() { return currentDestination; }
     public void SetDestinationPos(Vector3 pos)
     {
@@ -105,6 +101,11 @@ public class AIController : CharacterController
     public bool NearDestination(float distanceAllowance)
     {
         return Vector3.Distance(transform.position, currentDestination) <= distanceAllowance;
+    }
+
+    bool NearDestination()
+    {
+        return Vector3.Distance(transform.position, currentDestination) < distanceAllowance;
     }
 
     #endregion

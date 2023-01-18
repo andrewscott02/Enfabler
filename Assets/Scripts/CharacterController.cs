@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
+    public bool invisible = false;
     public Animator animator;
     protected CharacterCombat combat;
     protected Health health;

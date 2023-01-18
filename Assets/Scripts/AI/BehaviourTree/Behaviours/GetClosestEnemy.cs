@@ -48,6 +48,9 @@ public class GetClosestEnemy : Node
 
         foreach (var item in AIManager.instance.GetEnemyTeam(agent))
         {
+            if (item.invisible)
+                break;
+
             float itemDistance = Vector3.Distance(agent.gameObject.transform.position, item.gameObject.transform.position);
 
             //Debug.Log(item.gameObject.name + " is " + itemDistance);

@@ -115,7 +115,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5873128357081618256}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8da8a4ff64d548042b61679ed2f34d91, type: 3}
   m_Name: 
@@ -154,13 +154,14 @@ MonoBehaviour:
   model: {fileID: 1628624658551123326}
   playerTeam: 0
   bt: {fileID: 887968089973568631}
-  destinationTest: {fileID: 0}
-  roaming: 0
-  currentTarget: {fileID: 0}
+  distanceAllowance: 1
   lerpSpeed: 0.01
   sightDistance: 40
   roamDistance: 25
   meleeDistance: 3
+  destinationTest: {fileID: 0}
+  roaming: 0
+  currentTarget: {fileID: 0}
 --- !u!95 &7673251268057846940 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5006998096090209180, guid: 22bb1e8efed20934fbd323b6f0290978,

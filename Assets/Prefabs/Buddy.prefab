@@ -137,12 +137,14 @@ MonoBehaviour:
   model: {fileID: 1628624658551123326}
   playerTeam: 1
   bt: {fileID: 8034274260663390704}
-  destinationTest: {fileID: 0}
-  roaming: 0
+  distanceAllowance: 1
   lerpSpeed: 0.01
   sightDistance: 40
   roamDistance: 25
   meleeDistance: 3
+  destinationTest: {fileID: 0}
+  roaming: 0
+  currentTarget: {fileID: 0}
 --- !u!114 &6710008956972161548
 MonoBehaviour:
   m_ObjectHideFlags: 0
