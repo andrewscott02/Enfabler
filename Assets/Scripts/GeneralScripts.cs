@@ -27,12 +27,12 @@ public static class HelperFunctions
 
         if (GetRandomPointOnNavmesh(origin, radius, distanceAllowance, 30, out point) == false)
         {
-            Debug.Log("Non navmesh");
+            //Debug.Log("Non navmesh");
             point = GetRandomPointNonNavmesh(origin, radius);
         }
         else
         {
-            Debug.Log("Navmesh");
+            //Debug.Log("Navmesh");
         }
 
         return point;
@@ -61,5 +61,34 @@ public static class HelperFunctions
             }
         }
         return false;
+    }
+
+    public static CharacterController GetClosestEnemy(AIController agent, Vector3 origin, float sightRadius, bool debug)
+    {
+        CharacterController closestCharacter = null;
+        float closestDistance = 99999;
+
+        foreach (var item in AIManager.instance.GetEnemyTeam(agent))
+        {
+            if (item.invisible)
+                break;
+
+            float itemDistance = Vector3.Distance(origin, item.gameObject.transform.position);
+
+            //Debug.Log(item.gameObject.name + " is " + itemDistance);
+
+            if (itemDistance < sightRadius && itemDistance < closestDistance)
+            {
+                if (debug && closestCharacter != null)
+                {
+                    Debug.Log("Origin: " + origin);
+                    //Debug.Log("From " + closestCharacter.name + closestDistance + " to " + item.name + itemDistance);
+                }
+                closestCharacter = item;
+                closestDistance = itemDistance;
+            }
+        }
+
+        return closestCharacter;
     }
 }

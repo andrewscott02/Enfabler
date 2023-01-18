@@ -124,10 +124,10 @@ public class AIController : CharacterController
             return false;
 
         float distance = Vector3.Distance(this.gameObject.transform.position, targetCheck.gameObject.transform.position);
-        Debug.Log("Attack called");
+        //Debug.Log("Attack called");
         if (distance < meleeDistance)
         {
-            Debug.Log("Attack made");
+            //Debug.Log("Attack made");
             combat.LightAttack();
 
             return true;

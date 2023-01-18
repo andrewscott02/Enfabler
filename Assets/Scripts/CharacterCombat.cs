@@ -63,7 +63,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void NextAttack()
     {
-        Debug.Log("Next Attack");
+        //Debug.Log("Next Attack");
         animator.SetInteger("SwordAttackCount", animator.GetInteger("SwordAttackCount") + 1);
 
         if (animator.GetInteger("SwordAttackCount") > animator.GetInteger("SwordAttackMax"))
@@ -76,7 +76,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void ResetAttack()
     {
-        Debug.Log("Reset Attack");
+        //Debug.Log("Reset Attack");
         animator.SetInteger("SwordAttackCount", 0);
         canAttack = true;
     }
@@ -129,7 +129,7 @@ public class CharacterCombat : MonoBehaviour
 
     void AttackCheck()
     {
-        Debug.Log("AttackCheck " + damage);
+        //Debug.Log("AttackCheck " + damage);
 
         //Raycast between sword base and tip
         RaycastHit hit;

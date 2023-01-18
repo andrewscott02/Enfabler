@@ -9,9 +9,10 @@ public class AdaptiveBehaviourTree : BehaviourTree
 
     protected override Node SetupTree()
     {
-        Debug.Log("Setting up adaptive BT for " + agent.name);
+        //Debug.Log("Setting up adaptive BT for " + agent.name);
 
         Node root = new Selector(
+            /*
             //TODO: If player is being aggressive, focus on enemies they are not targetting
             new Sequence(
                 new CheckAggressive(playerModel),
@@ -43,17 +44,14 @@ public class AdaptiveBehaviourTree : BehaviourTree
                 new MoveToDestination(agent, agent.distanceAllowance, 6f),
                 new MeleeAttack(agent, agent.currentTarget)
                 ),
+            */
 
-            //Checks if the closest enemy is within melee range and makes an attack if true
+            //Moves to a target close to the player, and attacks the closest enemy to it
             new Sequence(
-                new GetClosestEnemy(agent, agent.meleeDistance),
+                new GetClosestEnemyToTarget(agent, playerModel.modelCharacter),
                 new MoveToDestination(agent, agent.distanceAllowance, 6f),
-                new MeleeAttack(agent, agent.currentTarget)
-                ),
-            //Checks if the closest enemy is within sight range and moves towards it if true
-            new Sequence(
                 new GetClosestEnemy(agent, agent.sightDistance),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f)
+                new MeleeAttack(agent, agent.currentTarget)
                 ),
             //If there are no targets, but the player is an ally, move to a point near the player
             new Sequence(

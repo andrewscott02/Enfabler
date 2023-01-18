@@ -21,11 +21,11 @@ public class MeleeAttack : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("Attack state is attempted at:" + agent.currentTarget.name);
+        //Debug.Log("Attack state is attempted at:" + agent.currentTarget.name);
         bool attackSuccess = agent.AttackTarget(agent.currentTarget);
         if (attackSuccess)
         {
-            Debug.Log("Attack state is successful");
+            //Debug.Log("Attack state is successful");
             return NodeState.Success;
         }
 

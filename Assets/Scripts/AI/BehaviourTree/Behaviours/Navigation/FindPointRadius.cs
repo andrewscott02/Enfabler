@@ -27,7 +27,7 @@ public class FindPointRadius : Node
 
         Vector3 point = HelperFunctions.GetRandomPoint(agent.transform.position, radius, agent.distanceAllowance);
         agent.SetDestinationPos(point);
-        Debug.Log("Generated point at: " + point);
+        //Debug.Log("Generated point at: " + point);
 
         agent.roaming = true;
         state = NodeState.Success;

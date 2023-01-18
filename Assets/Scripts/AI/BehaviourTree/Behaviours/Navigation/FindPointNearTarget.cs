@@ -36,7 +36,7 @@ public class FindPointNearTarget : Node
         Vector3 point = target.transform.position + (target.transform.TransformDirection(agent.followVector) * radius);
 
         agent.SetDestinationPos(point);
-        Debug.Log("Generated point near target at: " + point);
+        //Debug.Log("Generated point near target at: " + point);
 
         agent.roaming = true;
         state = NodeState.Success;

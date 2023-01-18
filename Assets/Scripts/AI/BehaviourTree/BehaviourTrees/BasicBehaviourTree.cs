@@ -7,7 +7,7 @@ public class BasicBehaviourTree : BehaviourTree
 {
     protected override Node SetupTree()
     {
-        Debug.Log("Setting up basic BT for " + agent.name);
+        //Debug.Log("Setting up basic BT for " + agent.name);
 
         Node root = new Selector(
             //Checks if the closest enemy is within melee range and makes an attack if true

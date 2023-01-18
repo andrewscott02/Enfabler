@@ -3,29 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTrees;
 
-public class GetClosestEnemy : Node
+public class GetClosestEnemyToTarget : Node
 {
     public AIController agent;
-    public float sightRadius;
+    public GameObject target;
 
     /// <summary>
     /// Commands an agent to roam to a random point within a specified radius
     /// </summary>
     /// <param name="newAgent">The agent this command is given to</param>
     /// <param name="radius">The radius of the roam position, recommend 30</param>
-    public GetClosestEnemy(AIController agent, float radius)
+    public GetClosestEnemyToTarget(AIController agent, CharacterCombat target)
     {
         this.agent = agent;
-        this.sightRadius = radius;
+        this.target = target.gameObject;
     }
 
     public override NodeState Evaluate()
     {
-        CharacterController enemy = HelperFunctions.GetClosestEnemy(agent, agent.transform.position, sightRadius, false);
+        CharacterController enemy = HelperFunctions.GetClosestEnemy(agent, target.transform.position, 99999999, true);
         if (enemy != null)
         {
             agent.SetDestinationPos(enemy.transform.position);
-            //Debug.Log("Generated point at: " + enemy.transform.position);
+            Debug.Log("Generated point at near target: " + enemy.name);
 
             agent.currentTarget = enemy;
             agent.roaming = false;
@@ -33,7 +33,7 @@ public class GetClosestEnemy : Node
         }
         else
         {
-            //Debug.Log("Failed to get enemy");
+            Debug.Log("Failed to get enemy near target");
 
             state = NodeState.Failure;
         }
