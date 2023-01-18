@@ -1478,7 +1478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2048148135
 Transform:
   m_ObjectHideFlags: 0
@@ -1857,11 +1857,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -20.83423
       objectReference: {fileID: 0}
-    - target: {fileID: 2698967641890957235, guid: 0845de5f78ca8184596686a4fb36c808,
-        type: 3}
-      propertyPath: invisible
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2916911965765680895, guid: 0845de5f78ca8184596686a4fb36c808,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2131,6 +2126,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -3.3889203
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766672631864719295, guid: 0845de5f78ca8184596686a4fb36c808,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5766672631864719295, guid: 0845de5f78ca8184596686a4fb36c808,
         type: 3}
@@ -2569,25 +2569,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1786635266983032474, guid: 002ba52f26b27b442ab75c1c3f5f4278,
-        type: 3}
-      propertyPath: followDistance
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1786635266983032474, guid: 002ba52f26b27b442ab75c1c3f5f4278,
-        type: 3}
-      propertyPath: followVector.x
-      value: 0.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 1786635266983032474, guid: 002ba52f26b27b442ab75c1c3f5f4278,
-        type: 3}
-      propertyPath: followVector.z
-      value: -0.54
-      objectReference: {fileID: 0}
     - target: {fileID: 7075837859132506045, guid: 002ba52f26b27b442ab75c1c3f5f4278,
         type: 3}
       propertyPath: m_Name
       value: Buddy - Adaptive
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184560957510033234, guid: 002ba52f26b27b442ab75c1c3f5f4278,
+        type: 3}
+      propertyPath: maxHealth
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 7184560957510033234, guid: 002ba52f26b27b442ab75c1c3f5f4278,
         type: 3}
@@ -2651,14 +2641,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7975131175851537121, guid: 002ba52f26b27b442ab75c1c3f5f4278,
         type: 3}
+      propertyPath: modelCharacter
+      value: 
+      objectReference: {fileID: 1263521570}
+    - target: {fileID: 7975131175851537121, guid: 002ba52f26b27b442ab75c1c3f5f4278,
+        type: 3}
       propertyPath: characterCombat
       value: 
       objectReference: {fileID: 1263521570}
-    - target: {fileID: 8463497242278987573, guid: 002ba52f26b27b442ab75c1c3f5f4278,
-        type: 3}
-      propertyPath: debugger
-      value: 
-      objectReference: {fileID: 322976822}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 002ba52f26b27b442ab75c1c3f5f4278, type: 3}
 --- !u!1001 &8928750309083163466

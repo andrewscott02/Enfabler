@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  modelConstructor: {fileID: 0}
   canMove: 1
   canAttack: 1
   ignore: []
@@ -143,6 +144,8 @@ MonoBehaviour:
   sightDistance: 40
   roamDistance: 25
   meleeDistance: 3
+  followVector: {x: 0.51, y: 0, z: -0.54}
+  followDistance: 4
   roaming: 0
   currentTarget: {fileID: 0}
 --- !u!114 &6710008956972161548
@@ -157,6 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317ebcb6720aa8d47af6e5718b5c1aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modelCharacter: {fileID: 0}
+  currentTargets: []
   playerState: 0
   showValues: []
   aggressiveDecay: 0.6

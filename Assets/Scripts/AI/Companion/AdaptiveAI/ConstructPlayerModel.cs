@@ -6,7 +6,8 @@ public class ConstructPlayerModel : MonoBehaviour
 {
     #region Setup
 
-    public CharacterCombat characterCombat;
+    public CharacterCombat modelCharacter;
+    public List<CharacterController> currentTargets;
 
     public Descriptor playerState;
 
@@ -21,10 +22,18 @@ public class ConstructPlayerModel : MonoBehaviour
         descriptorValues.Add(Descriptor.Cautious, 0);
         descriptorValues.Add(Descriptor.Panic, 0);
 
-        if (characterCombat != null)
+        if (modelCharacter != null)
         {
-            characterCombat.modelConstructor = this;
+            modelCharacter.modelConstructor = this;
         }
+
+        InvokeRepeating("CurrentTarget", 0, 0.5f);
+    }
+
+    private void Update()
+    {
+        DecayModels();
+        AdjustDisplay();
     }
 
     private void AdjustDisplay()
@@ -71,20 +80,52 @@ public class ConstructPlayerModel : MonoBehaviour
     public float cautiousDecay = 0.5f;
     public float panicDecay = 0.5f;
 
-    private void Update()
+    private void DecayModels()
     {
         descriptorValues[Descriptor.Aggressive] = Mathf.Clamp(descriptorValues[Descriptor.Aggressive] - (aggressiveDecay * Time.deltaTime), 0, Mathf.Infinity);
         descriptorValues[Descriptor.Counter] = Mathf.Clamp(descriptorValues[Descriptor.Counter] - (counterDecay * Time.deltaTime), 0, Mathf.Infinity);
         descriptorValues[Descriptor.Defensive] = Mathf.Clamp(descriptorValues[Descriptor.Defensive] - (defensiveDecay * Time.deltaTime), 0, Mathf.Infinity);
         descriptorValues[Descriptor.Cautious] = Mathf.Clamp(descriptorValues[Descriptor.Cautious] - (cautiousDecay * Time.deltaTime), 0, Mathf.Infinity);
         descriptorValues[Descriptor.Panic] = Mathf.Clamp(descriptorValues[Descriptor.Panic] - (panicDecay * Time.deltaTime), 0, Mathf.Infinity);
-
-        AdjustDisplay();
     }
 
     #endregion
 
     #region Player Actions
+
+    private void OnDrawGizmos()
+    {
+        if (modelCharacter != null)
+        {
+            RaycastHit hit;
+
+            if (Physics.SphereCast(modelCharacter.transform.position, 2f, modelCharacter.transform.forward, out hit, 10))
+            {
+                Gizmos.DrawWireSphere(hit.point, 2f);
+            }
+        }
+    }
+
+    void CurrentTarget()
+    {
+        List<CharacterController> hitCharacters = new List<CharacterController>();
+
+        RaycastHit hit;
+        if (Physics.SphereCast(modelCharacter.transform.position, 2f, modelCharacter.transform.forward, out hit, 10))
+        {
+            CharacterController[] allCharacters = GameObject.FindObjectsOfType<CharacterController>();
+
+            foreach (var item in allCharacters)
+            {
+                if (Vector3.Distance(hit.point, item.transform.position) < 2f && AIManager.instance.OnSameTeam(modelCharacter.GetComponent<CharacterController>(), item) == false)
+                {
+                    hitCharacters.Add(item);
+                }
+            }
+        }
+
+        currentTargets = hitCharacters;
+    }
 
     public void PlayerAttack(bool hit)
     {
