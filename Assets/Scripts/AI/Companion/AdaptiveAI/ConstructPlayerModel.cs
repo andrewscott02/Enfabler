@@ -83,7 +83,7 @@ public class ConstructPlayerModel : MonoBehaviour
         if (beingAttacked)
         {
             descriptorValues[Descriptor.Defensive] += 0.5f;
-            SetupCounter();
+            SetupCounter(counterWindowParry);
         }
         else
         {
@@ -104,7 +104,7 @@ public class ConstructPlayerModel : MonoBehaviour
             {
                 descriptorValues[Descriptor.Defensive] += 0.5f;
             }
-            SetupCounter();
+            SetupCounter(counterWindowDodge);
         }
         else
         {
@@ -124,14 +124,15 @@ public class ConstructPlayerModel : MonoBehaviour
     #region Counter Attack Considerations
 
     public bool counterAvailable;
-    public float counterWindow = 3f;
+    public float counterWindowParry = 1.5f;
+    public float counterWindowDodge = 3f;
 
     bool CheckCounter()
     {
         return counterAvailable;
     }
 
-    void SetupCounter()
+    void SetupCounter(float counterWindow)
     {
         counterAvailable = true;
         CancelInvoke();

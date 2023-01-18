@@ -20,20 +20,20 @@ public class PlayerCombat : CharacterCombat
 
     public override void Parry()
     {
-        base.Parry();
         if (canAttack)
         {
             modelConstructor.PlayerParry(true);
         }
+        base.Parry();
     }
 
     public override void Dodge()
     {
-        base.Dodge();
         if (canAttack)
         {
             modelConstructor.PlayerDodge(true, true);
         }
+        base.Dodge();
     }
 
     #endregion
