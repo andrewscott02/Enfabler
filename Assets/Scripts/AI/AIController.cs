@@ -8,7 +8,7 @@ public class AIController : CharacterController
 {
     #region Setup
 
-    protected GameObject player;
+    protected GameObject player; public GameObject GetPlayer() { return player; }
 
     #region Behaviour Tree
     protected NavMeshAgent agent; public NavMeshAgent GetNavMeshAgent() { return agent; }
@@ -85,6 +85,9 @@ public class AIController : CharacterController
     public float sightDistance = 40;
     public float roamDistance = 25;
     public float meleeDistance = 3;
+
+    public Vector3 followVector;
+    public float followDistance = 5;
 
     #endregion
 

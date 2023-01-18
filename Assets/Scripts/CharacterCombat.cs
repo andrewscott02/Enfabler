@@ -9,6 +9,8 @@ public class CharacterCombat : MonoBehaviour
     [HideInInspector]
     public Animator animator;
 
+    public ConstructPlayerModel modelConstructor;
+
     #endregion
 
     #region Basic Actions
@@ -27,6 +29,11 @@ public class CharacterCombat : MonoBehaviour
     {
         if (canAttack)
         {
+            if (modelConstructor != null)
+            {
+                modelConstructor.PlayerParry(true);
+            }
+
             canMove = false;
             canAttack = false;
             animator.SetTrigger("Parry");
@@ -37,6 +44,11 @@ public class CharacterCombat : MonoBehaviour
     {
         if (canAttack)
         {
+            if (modelConstructor != null)
+            {
+                modelConstructor.PlayerDodge(true, true);
+            }
+
             canAttack = false;
             animator.SetTrigger("Dodge");
         }
@@ -109,7 +121,10 @@ public class CharacterCombat : MonoBehaviour
 
     public virtual void HitEnemy(bool hit)
     {
-        //Empty, leave for player
+        if (modelConstructor != null)
+        {
+            modelConstructor.PlayerAttack(hit);
+        }
     }
 
     void AttackCheck()

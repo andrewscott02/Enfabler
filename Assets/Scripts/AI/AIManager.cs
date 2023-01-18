@@ -63,4 +63,9 @@ public class AIManager : MonoBehaviour
             return playerTeam;
         }
     }
+
+    public bool OnSameTeam(CharacterController a, CharacterController b)
+    {
+        return GetAllyTeam(a).Contains(b);
+    }
 }

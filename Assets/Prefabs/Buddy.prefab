@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662c0c5d0a58e7c45bf1f145d176638c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invisible: 0
   animator: {fileID: 7673251268057846940}
   model: {fileID: 1628624658551123326}
   playerTeam: 1
@@ -142,7 +143,6 @@ MonoBehaviour:
   sightDistance: 40
   roamDistance: 25
   meleeDistance: 3
-  destinationTest: {fileID: 0}
   roaming: 0
   currentTarget: {fileID: 0}
 --- !u!114 &6710008956972161548
@@ -159,8 +159,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerState: 0
   showValues: []
+  aggressiveDecay: 0.6
+  counterDecay: 1
+  defensiveDecay: 1
+  cautiousDecay: 1
+  panicDecay: 1
   counterAvailable: 0
-  counterWindow: 1.5
+  counterWindowParry: 1.5
+  counterWindowDodge: 3
 --- !u!114 &8034274260663390704
 MonoBehaviour:
   m_ObjectHideFlags: 0
