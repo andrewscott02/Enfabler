@@ -8,29 +8,12 @@ public class AIController : CharacterController
 {
     #region Setup
 
-    bool active = false;
-
     protected GameObject player;
+
+    #region Behaviour Tree
     protected NavMeshAgent agent; public NavMeshAgent GetNavMeshAgent() { return agent; }
     public BehaviourTree bt;
 
-    public GameObject destinationTest;
-    protected Vector3 currentDestination; public Vector3 GetDestination() { return currentDestination; }
-    public void SetDestinationPos(Vector3 pos)
-    {
-        currentDestination = pos;
-    }
-    public bool roaming = false;
-    public void MoveToDestination()
-    {
-        agent.SetDestination(currentDestination);
-    }
-    public bool NearDestination(float distanceAllowance)
-    {
-        return Vector3.Distance(transform.position, currentDestination) <= distanceAllowance;
-    }
-
-    public CharacterController currentTarget;
 
     public override void Start()
     {
@@ -52,26 +35,6 @@ public class AIController : CharacterController
 
     #endregion
 
-    protected void NextPatrol()
-    {
-        currentDestination = RandPosInRadius(transform.position, 30);
-        agent.SetDestination(currentDestination);
-    }
-
-    protected Vector3 RandPosInRadius(Vector3 origin, float radius)
-    {
-        float randX = Random.Range(0, 360);
-        float randY = Random.Range(0, 360);
-        float randZ = Random.Range(0, 360);
-        Vector3 direction = new Vector3(randX, randY, randZ);
-        direction.Normalize();
-
-        float distance = Random.Range(0, radius);
-        Vector3 point = origin + (direction * distance);
-
-        return point;
-    }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(currentDestination, 1f);
@@ -80,20 +43,10 @@ public class AIController : CharacterController
         Gizmos.DrawWireSphere(gameObject.transform.position, meleeDistance);
     }
 
-    public float lerpSpeed = 0.01f;
 
+    /*
     public virtual void Update()
     {
-        if (destinationTest != null)
-        {
-            destinationTest.transform.position = currentDestination;
-        }
-        return;
-
-        if (active)
-        {
-            BehaviourTree();
-        }
 
         if (agent.destination == currentDestination)
         {
@@ -122,24 +75,41 @@ public class AIController : CharacterController
             animator.SetFloat("yMovement", 0);
         }
     }
+    */
+
+    public float distanceAllowance = 2f;
+
+    public float lerpSpeed = 0.01f;
 
     public float sightDistance = 40;
     public float roamDistance = 25;
     public float meleeDistance = 3;
 
-    public virtual void BehaviourTree()
-    {
-        currentTarget = GetClosestEnemy(this);
-
-        if (currentTarget != null)
-        {
-            currentDestination = currentTarget.transform.position;
-            agent.SetDestination(currentDestination);
-            AttackTarget(currentTarget);
-        }
-    }
+    #endregion
 
     #region Behaviours
+
+    #region Movement
+
+    public GameObject destinationTest;
+    protected Vector3 currentDestination; public Vector3 GetDestination() { return currentDestination; }
+    public void SetDestinationPos(Vector3 pos)
+    {
+        currentDestination = pos;
+    }
+    public bool roaming = false;
+    public void MoveToDestination()
+    {
+        agent.SetDestination(currentDestination);
+    }
+    public bool NearDestination(float distanceAllowance)
+    {
+        return Vector3.Distance(transform.position, currentDestination) <= distanceAllowance;
+    }
+
+    #endregion
+
+    public CharacterController currentTarget;
 
     public bool AttackTarget(CharacterController targetCheck)
     {
@@ -157,48 +127,6 @@ public class AIController : CharacterController
         }
 
         return false;
-    }
-
-    protected CharacterController GetClosestEnemy(CharacterController characterCheck)
-    {
-        CharacterController closestCharacter = null;
-        float closestDistance = 99999;
-
-        foreach (var item in AIManager.instance.GetEnemyTeam(this))
-        {
-            float itemDistance = Vector3.Distance(characterCheck.gameObject.transform.position, item.gameObject.transform.position);
-
-            //Debug.Log(item.gameObject.name + " is " + itemDistance);
-
-            if (itemDistance < sightDistance && itemDistance < closestDistance)
-            {
-                closestCharacter = item;
-                closestDistance = itemDistance;
-            }
-        }
-
-        return closestCharacter;
-    }
-
-    protected CharacterController GetFurthestEnemy(CharacterController characterCheck)
-    {
-        CharacterController closestCharacter = null;
-        float closestDistance = 0;
-
-        foreach (var item in AIManager.instance.GetEnemyTeam(this))
-        {
-            float itemDistance = Vector3.Distance(characterCheck.gameObject.transform.position, item.gameObject.transform.position);
-
-            Debug.Log(item.gameObject.name + " is " + itemDistance);
-
-            if (itemDistance < sightDistance && itemDistance > closestDistance)
-            {
-                closestCharacter = item;
-                closestDistance = itemDistance;
-            }
-        }
-
-        return closestCharacter;
     }
 
     #endregion

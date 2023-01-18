@@ -19,13 +19,13 @@ public class BasicBehaviourTree : BehaviourTree
             new Sequence(new List<Node>
             {
             new GetClosestEnemy(agent, agent.sightDistance),
-            new MoveToDestination(agent, 1f, 6f)
+            new MoveToDestination(agent, agent.distanceAllowance, 6f)
             }),
             //If there are no targets, move to a random point in the roam radius
             new Sequence(new List<Node>
             {
             new FindPointRadius(agent, agent.roamDistance),
-            new MoveToDestination(agent, 1f, 6f)
+            new MoveToDestination(agent, agent.distanceAllowance, 6f)
             })
         );
 

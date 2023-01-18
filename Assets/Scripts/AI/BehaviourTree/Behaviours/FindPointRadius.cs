@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTrees;
+using UnityEngine.AI;
 
 public class FindPointRadius : Node
 {
@@ -21,14 +22,6 @@ public class FindPointRadius : Node
 
     public override NodeState Evaluate()
     {
-        /*https://docs.unity3d.com/ScriptReference/AI.NavMesh.SamplePosition.html
-        UnityEngine.AI.NavMeshHit point;
-        agent.GetNavMeshAgent().SamplePathPosition(0, radius, out point);
-        agent.SetDestinationPos(point.position);
-
-        Debug.Log("Generated point at: " + point.position);
-        */
-
         if (agent.roaming)
             return NodeState.Running;
 
@@ -43,16 +36,44 @@ public class FindPointRadius : Node
 
     Vector3 GetRandomPoint(float radius)
     {
-        Vector3 origin = agent.transform.position;
-        float randX = Random.Range(-360, 360);
-        float randY = 0;
-        float randZ = Random.Range(-360, 360);
-        Vector3 direction = new Vector3(randX, randY, randZ);
-        direction.Normalize();
+        Vector3 point = new Vector3(0, 0, 0);
 
-        float distance = Random.Range(0, radius);
-        Vector3 point = origin + (direction * distance);
+        if (GetRandomPointOnNavmesh(agent.transform.position, radius, 30, out point) == false)
+        {
+            Debug.Log("Non navmesh");
+            point = GetRandomPointNonNavmesh(radius);
+        }
+        else
+        {
+            Debug.Log("Navmesh");
+        }
 
         return point;
+    }
+
+    Vector3 GetRandomPointNonNavmesh(float radius)
+    {
+        Vector3 origin = agent.transform.position;
+        Vector3 randomPoint = origin + Random.insideUnitSphere * radius;
+        randomPoint.y = agent.transform.position.y;
+
+        return randomPoint;
+    }
+
+    bool GetRandomPointOnNavmesh(Vector3 origin, float radius, int iterations, out Vector3 point)
+    {
+        point = new Vector3(0, 0, 0);
+        for (int i = 0; i < iterations; i++)
+        {
+            Vector3 randomPoint = origin + Random.insideUnitSphere * radius;
+            randomPoint.y = agent.transform.position.y;
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomPoint, out hit, agent.distanceAllowance, NavMesh.AllAreas))
+            {
+                point = hit.position;
+                return true;
+            }
+        }
+        return false;
     }
 }
