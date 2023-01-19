@@ -47,21 +47,11 @@ public class AdaptiveBehaviourTree : BehaviourTree
             */
 
             //Moves to a target close to the player, and attacks the closest enemy to it
-            new Sequence(
-                new GetClosestEnemyToTarget(agent, playerModel.modelCharacter),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f),
-                new GetClosestEnemy(agent, agent.sightDistance),
-                new MeleeAttack(agent, agent.currentTarget)
-                ),
+            BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter),
             //If there are no targets, but the player is an ally, move to a point near the player
-            new Sequence(
-                new FindPointNearTarget(agent, agent.GetPlayer(), agent.followDistance, true),
-                new MoveToDestination(agent, agent.distanceAllowance, Mathf.Infinity)),
+            BaseBehaviours.FollowTarget(agent, agent.GetPlayer(), true),
             //If there are no targets, move to a random point in the roam radius
-            new Sequence(
-                new FindPointRadius(agent, agent.roamDistance),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f)
-                )
+            BaseBehaviours.RoamToRandomPoint(agent)
             );
 
         return root;
