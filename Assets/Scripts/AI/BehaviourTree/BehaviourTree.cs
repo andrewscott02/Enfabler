@@ -75,6 +75,12 @@ namespace BehaviourTrees
         {
             return new Selector(
                 new Sequence(
+                    new GetModelNonTarget(agent, model),
+                    new FlankToDestination(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
+                    new MeleeAttack(agent, agent.currentTarget)
+                    ),
+                new Sequence(
                     new GetModelTarget(agent, model),
                     new FlankToDestination(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
                     new MoveToDestination(agent, agent.distanceAllowance, 6f, false),

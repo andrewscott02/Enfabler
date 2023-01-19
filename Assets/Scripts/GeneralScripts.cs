@@ -44,7 +44,6 @@ public static class HelperFunctions
     {
         //Get the direction from a->b and normalise it
         Vector3 direction = (b - a).normalized;
-        Debug.Log(direction + " || Not normalised: " + (b-a));
         //Increase the magnitude
         direction *= distance;
 

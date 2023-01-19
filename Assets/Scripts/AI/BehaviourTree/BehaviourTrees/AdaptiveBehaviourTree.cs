@@ -38,7 +38,7 @@ public class AdaptiveBehaviourTree : BehaviourTree
             //If player is struggling, rush to player and draw enemies away
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Panic),
-                BaseBehaviours.FlankTarget(agent, playerModel, 6f, true)
+                BaseBehaviours.FlankTarget(agent, playerModel, agent.meleeDistance, true)
                 ),
 
         #endregion
