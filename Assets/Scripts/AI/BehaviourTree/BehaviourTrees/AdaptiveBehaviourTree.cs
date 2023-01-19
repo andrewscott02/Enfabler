@@ -18,24 +18,29 @@ public class AdaptiveBehaviourTree : BehaviourTree
             //If player is aggressive, focus on enemies they are not targetting
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Aggressive),
-                BaseBehaviours.IgnoreModelTargets(agent, playerModel)
+                new Selector(
+                    BaseBehaviours.IgnoreModelTargets(agent, playerModel),
+                    //If player is targetting all available targets, move to closest target and attack
+                    BaseBehaviours.AttackClosestTarget(agent),
+                    BaseBehaviours.MoveToClosestTarget(agent)
+                    )
                 ),
-            //TODO: If player is counterring, flank their target and attack
+            //If player is counterring, move slowly to player and attack enemies around them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Counter),
                 BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter.gameObject)
                 ),
-            //If player is defensive, move slowly to player and attack enemies around them
+            //If player is defensive, rush to player and attack enemies around them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Defensive),
                 BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter.gameObject)
                 ),
-            //If player is cautious, move slowly to player and attack enemies around them
+            //If player is cautious, rush to player and attack enemies around them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Cautious),
                 BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter.gameObject)
                 ),
-            //If player is struggling, rush to player and draw enemies away
+            //If player is struggling, draw enemies away from them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Panic),
                 BaseBehaviours.FlankTarget(agent, playerModel, agent.meleeDistance, true)

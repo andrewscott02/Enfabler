@@ -45,7 +45,7 @@ namespace BehaviourTrees
         {
             return new Sequence(
                 new GetClosestEnemy(agent, agent.sightDistance),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f, false)
+                new MoveToDestination(agent, agent.distanceAllowance, 6f, true)
                 );
         }
 
@@ -53,7 +53,7 @@ namespace BehaviourTrees
         {
             return new Sequence(
                 new FindPointNearTarget(agent, agent.GetPlayer(), agent.followDistance, requireSameTeam),
-                new MoveToDestination(agent, agent.distanceAllowance, Mathf.Infinity, false));
+                new MoveToDestination(agent, agent.distanceAllowance, Mathf.Infinity, true));
         }
 
         public static Selector RushToTarget(AIController agent, GameObject target)
@@ -99,7 +99,7 @@ namespace BehaviourTrees
             return new Selector(
                 new Sequence(
                     new GetModelNonTarget(agent, model),
-                    new MoveToDestination(agent, agent.distanceAllowance, 6f, true),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
                     new GetClosestEnemy(agent, agent.meleeDistance),
                     new MeleeAttack(agent, agent.currentTarget)
                     ),
