@@ -15,6 +15,7 @@ public class CharacterController : MonoBehaviour
     public virtual void Start()
     {
         health = GetComponent<Health>();
+        health.animator = animator;
         combat = GetComponent<CharacterCombat>();
         combat.animator = animator;
 

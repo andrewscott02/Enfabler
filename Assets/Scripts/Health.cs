@@ -5,6 +5,8 @@ using UnityEngine;
 public class Health : MonoBehaviour, IDamageable, IHealable
 {
     [HideInInspector]
+    public Animator animator;
+    [HideInInspector]
     public ConstructPlayerModel modelConstructor;
 
     public HealthSlider healthSlider;
@@ -52,6 +54,15 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
         if (CheckKill())
             Kill();
+        else
+            HitReaction();
+    }
+
+    void HitReaction()
+    {
+        combat.canAttack = false;
+        animator.SetTrigger("HitReact");
+        animator.SetInteger("RandReact", Random.Range(0, animator.GetInteger("RandReactMax") + 1));
     }
 
     public void Heal(int heal)
