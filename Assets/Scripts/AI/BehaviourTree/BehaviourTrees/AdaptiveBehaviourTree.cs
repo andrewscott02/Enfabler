@@ -23,7 +23,7 @@ public class AdaptiveBehaviourTree : BehaviourTree
             //TODO: If player is counterring, flank their target and attack
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Counter),
-                BaseBehaviours.FlankTarget(agent, playerModel) //TODO: Flanking movement is not implemented properly
+                BaseBehaviours.FlankTarget(agent, playerModel, 6f, true) //TODO: Flanking movement is not implemented properly
                 ),
             //If player is defensive, move slowly to player and attack enemies around them
             new Sequence(
@@ -33,7 +33,8 @@ public class AdaptiveBehaviourTree : BehaviourTree
             //If player is cautious, move slowly to player and attack enemies around them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Cautious),
-                BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter.gameObject)
+                //BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter.gameObject)
+                BaseBehaviours.FlankTarget(agent, playerModel, 6f, true)
                 ),
             //If player is struggling, rush to player and attack enemies around them
             new Sequence(

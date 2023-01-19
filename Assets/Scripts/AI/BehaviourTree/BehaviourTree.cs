@@ -71,17 +71,18 @@ namespace BehaviourTrees
                 );
         }
 
-        public static Selector FlankTarget(AIController agent, ConstructPlayerModel model)
+        public static Selector FlankTarget(AIController agent, ConstructPlayerModel model, float flankDistance, bool requireSameTeam)
         {
-            //TODO: Implement Properly
             return new Selector(
                 new Sequence(
                     new GetModelTarget(agent, model),
+                    new FlankToDestination(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
                     new MoveToDestination(agent, agent.distanceAllowance, 6f, true),
                     new MeleeAttack(agent, agent.currentTarget)
                     ),
                 new Sequence(
                     new GetModelTarget(agent, model),
+                    new FlankToDestination(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
                     new MoveToDestination(agent, agent.distanceAllowance, 6f, true)
                     )
                 );

@@ -26,12 +26,9 @@ public class FindPointNearTarget : Node
 
     public override NodeState Evaluate()
     {
-        if (requiresSameTeam)
-        {
-            if (AIManager.instance.OnSameTeam(agent, target) == false) { return NodeState.Failure; }
-        }
-
         if (target == null) { return NodeState.Failure; }
+
+        if (requiresSameTeam && AIManager.instance.OnSameTeam(agent, target) == false) { return NodeState.Failure; }
 
         Vector3 point = target.transform.position + (target.transform.TransformDirection(agent.followVector) * radius);
 

@@ -21,6 +21,8 @@ public interface IHealable
 
 public static class HelperFunctions
 {
+    #region Getting Positions
+
     public static Vector3 GetRandomPoint(Vector3 origin, float radius, float distanceAllowance)
     {
         Vector3 point = new Vector3(0, 0, 0);
@@ -37,6 +39,19 @@ public static class HelperFunctions
 
         return point;
     }
+
+    public static Vector3 GetFlankingPoint(Vector3 a, Vector3 b, float distance)
+    {
+        //Get the direction from a->b and normalise it
+        Vector3 direction = b - a;
+        direction = direction.normalized;
+        //Increase the magnitude
+        direction *= distance;
+
+        return direction;
+    }
+
+    #region NavMesh
 
     public static Vector3 GetRandomPointNonNavmesh(Vector3 origin, float radius)
     {
@@ -62,6 +77,12 @@ public static class HelperFunctions
         }
         return false;
     }
+
+    #endregion
+
+    #endregion
+
+    #region Getting Closest Enemies
 
     public static CharacterController GetClosestEnemy(AIController agent, Vector3 origin, float sightRadius, bool debug)
     {
@@ -149,4 +170,6 @@ public static class HelperFunctions
 
         return closestCharacter;
     }
+
+    #endregion
 }
