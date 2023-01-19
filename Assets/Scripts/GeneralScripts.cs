@@ -43,12 +43,12 @@ public static class HelperFunctions
     public static Vector3 GetFlankingPoint(Vector3 a, Vector3 b, float distance)
     {
         //Get the direction from a->b and normalise it
-        Vector3 direction = b - a;
-        direction = direction.normalized;
+        Vector3 direction = (b - a).normalized;
+        Debug.Log(direction + " || Not normalised: " + (b-a));
         //Increase the magnitude
         direction *= distance;
 
-        return direction;
+        return b + direction;
     }
 
     #region NavMesh
@@ -117,6 +117,8 @@ public static class HelperFunctions
     {
         CharacterController closestCharacter = null;
         float closestDistance = 99999;
+
+        if (enemyList.Count == 1) { return enemyList[0]; }
 
         foreach (var item in enemyList)
         {

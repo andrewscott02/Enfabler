@@ -34,7 +34,7 @@ public class AdaptiveBehaviourTree : BehaviourTree
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Cautious),
                 //BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter.gameObject)
-                BaseBehaviours.FlankTarget(agent, playerModel, 6f, true)
+                BaseBehaviours.FlankTarget(agent, playerModel, 2f, true)
                 ),
             //If player is struggling, rush to player and attack enemies around them
             new Sequence(

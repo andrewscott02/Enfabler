@@ -6,7 +6,7 @@ public class CharacterCombat : MonoBehaviour
 {
     #region Setup
 
-    //[HideInInspector]
+    [HideInInspector]
     public Animator animator;
 
     public ConstructPlayerModel modelConstructor;

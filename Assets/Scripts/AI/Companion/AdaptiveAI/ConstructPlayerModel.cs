@@ -95,6 +95,7 @@ public class ConstructPlayerModel : MonoBehaviour
 
     [Header("Player Targeting")]
     public List<CharacterController> currentTargets;
+    public LayerMask layerMask;
     public float currentTargetCastInterval = 0.6f;
     public float currentTargetCastRadius = 1.5f;
     public float currentTargetCastDistance = 10;
@@ -103,11 +104,10 @@ public class ConstructPlayerModel : MonoBehaviour
     {
         if (modelCharacter != null)
         {
-            RaycastHit hit;
-
-            if (Physics.SphereCast(modelCharacter.transform.position, currentTargetCastRadius, modelCharacter.transform.forward, out hit, currentTargetCastDistance))
+            RaycastHit[] hit = Physics.SphereCastAll(modelCharacter.transform.position, currentTargetCastRadius, modelCharacter.transform.forward, currentTargetCastDistance, layerMask);
+            foreach (RaycastHit item in hit)
             {
-                Gizmos.DrawWireSphere(hit.point, 2f);
+                Gizmos.DrawWireSphere(item.point, 1f);
             }
         }
     }
@@ -116,16 +116,17 @@ public class ConstructPlayerModel : MonoBehaviour
     {
         List<CharacterController> hitCharacters = new List<CharacterController>();
 
-        RaycastHit hit;
-        if (Physics.SphereCast(modelCharacter.transform.position, currentTargetCastRadius, modelCharacter.transform.forward, out hit, currentTargetCastDistance))
+        RaycastHit[] hit = Physics.SphereCastAll(modelCharacter.transform.position, currentTargetCastRadius, modelCharacter.transform.forward, currentTargetCastDistance, layerMask);
+        foreach (RaycastHit item in hit)
         {
-            CharacterController[] allCharacters = GameObject.FindObjectsOfType<CharacterController>();
+            Debug.Log("Ray hit " + item.collider.gameObject.name);
+            CharacterController character = item.collider.transform.gameObject.GetComponent<CharacterController>();
 
-            foreach (var item in allCharacters)
+            if (character != null)
             {
-                if (Vector3.Distance(hit.point, item.transform.position) < 2f && AIManager.instance.OnSameTeam(modelCharacter.GetComponent<CharacterController>(), item) == false)
+                if (AIManager.instance.OnSameTeam(modelCharacter.GetComponent<CharacterController>(), character) == false)
                 {
-                    hitCharacters.Add(item);
+                    hitCharacters.Add(character);
                 }
             }
         }

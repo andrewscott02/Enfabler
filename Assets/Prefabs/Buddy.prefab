@@ -143,7 +143,7 @@ MonoBehaviour:
   lerpSpeed: 0.01
   sightDistance: 40
   roamDistance: 25
-  meleeDistance: 3
+  meleeDistance: 2
   followVector: {x: 0.51, y: 0, z: -0.54}
   followDistance: 4
   walkSpeed: 6
@@ -163,7 +163,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelCharacter: {fileID: 0}
-  currentTargets: []
   playerState: 0
   showValues: []
   aggressiveDecay: 0.6
@@ -171,6 +170,13 @@ MonoBehaviour:
   defensiveDecay: 1
   cautiousDecay: 1
   panicDecay: 1
+  currentTargets: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  currentTargetCastInterval: 0.6
+  currentTargetCastRadius: 1.5
+  currentTargetCastDistance: 10
   counterAvailable: 0
   counterWindowParry: 1.5
   counterWindowDodge: 3

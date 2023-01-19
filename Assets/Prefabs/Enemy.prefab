@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  modelConstructor: {fileID: 0}
   canMove: 1
   canAttack: 1
   ignore: []
@@ -150,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13b0a2e1b4bff14488ac9635b8309af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invisible: 0
   animator: {fileID: 7673251268057846940}
   model: {fileID: 1628624658551123326}
   playerTeam: 0
@@ -158,8 +160,11 @@ MonoBehaviour:
   lerpSpeed: 0.01
   sightDistance: 40
   roamDistance: 25
-  meleeDistance: 3
-  destinationTest: {fileID: 0}
+  meleeDistance: 2
+  followVector: {x: 0, y: 0, z: 0}
+  followDistance: 5
+  walkSpeed: 6
+  sprintSpeed: 10
   roaming: 0
   currentTarget: {fileID: 0}
 --- !u!95 &7673251268057846940 stripped
