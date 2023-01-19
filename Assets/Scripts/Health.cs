@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Health : MonoBehaviour, IDamageable, IHealable
 {
+    [HideInInspector]
+    public ConstructPlayerModel modelConstructor;
+
     public HealthSlider healthSlider;
     CharacterCombat combat;
     public Object bloodFX, parryFX;
@@ -43,6 +46,9 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
         if (healthSlider != null)
             healthSlider.ChangeSliderValue(currentHealth, maxHealth);
+
+        if (modelConstructor != null)
+            modelConstructor.PlayerHit();
 
         if (CheckKill())
             Kill();

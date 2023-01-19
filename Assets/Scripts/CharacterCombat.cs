@@ -8,7 +8,7 @@ public class CharacterCombat : MonoBehaviour
 
     [HideInInspector]
     public Animator animator;
-
+    [HideInInspector]
     public ConstructPlayerModel modelConstructor;
 
     #endregion

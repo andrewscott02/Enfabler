@@ -31,8 +31,6 @@ public class PlayerController : CharacterController
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.animator = animator;
         playerMovement.SetModel(model);
-        combat = GetComponent<CharacterCombat>();
-        combat.animator = animator;
 
         Health allyHealth = GameObject.FindObjectOfType<ConstructPlayerModel>().GetComponent<Health>();
 

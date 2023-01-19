@@ -28,17 +28,17 @@ public class AdaptiveBehaviourTree : BehaviourTree
             //If player is counterring, move slowly to player and attack enemies around them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Counter),
-                BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter.gameObject)
+                BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter)
                 ),
             //If player is defensive, rush to player and attack enemies around them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Defensive),
-                BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter.gameObject)
+                BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter)
                 ),
             //If player is cautious, rush to player and attack enemies around them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Cautious),
-                BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter.gameObject)
+                BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter)
                 ),
             //If player is struggling, draw enemies away from them
             new Sequence(

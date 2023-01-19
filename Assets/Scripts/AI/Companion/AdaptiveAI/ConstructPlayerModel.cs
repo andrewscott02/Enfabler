@@ -7,7 +7,7 @@ public class ConstructPlayerModel : MonoBehaviour
     #region Setup
 
     [Header("Agent Model Info")]
-    public CharacterCombat modelCharacter;
+    public GameObject modelCharacter;
 
     public Descriptor playerState;
 
@@ -24,7 +24,8 @@ public class ConstructPlayerModel : MonoBehaviour
 
         if (modelCharacter != null)
         {
-            modelCharacter.modelConstructor = this;
+            modelCharacter.GetComponent<Health>().modelConstructor = this;
+            modelCharacter.GetComponent<CharacterCombat>().modelConstructor = this;
         }
 
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
@@ -145,7 +146,7 @@ public class ConstructPlayerModel : MonoBehaviour
 
         if (!hit)
         {
-            descriptorValues[Descriptor.Panic] += 5f;
+            descriptorValues[Descriptor.Panic] += 2f;
         }
 
         AdjustDisplay();
@@ -160,7 +161,7 @@ public class ConstructPlayerModel : MonoBehaviour
         }
         else
         {
-            descriptorValues[Descriptor.Panic] += 5f;
+            descriptorValues[Descriptor.Panic] += 2f;
         }
         AdjustDisplay();
     }
@@ -181,14 +182,14 @@ public class ConstructPlayerModel : MonoBehaviour
         }
         else
         {
-            descriptorValues[Descriptor.Panic] += 5f;
+            descriptorValues[Descriptor.Panic] += 2f;
         }
         AdjustDisplay();
     }
 
-    public void PlayerHit(bool attacking, bool blocking, bool dodging)
+    public void PlayerHit()
     {
-        descriptorValues[Descriptor.Aggressive] += 5f;
+        descriptorValues[Descriptor.Panic] += 3f;
         AdjustDisplay();
     }
 
