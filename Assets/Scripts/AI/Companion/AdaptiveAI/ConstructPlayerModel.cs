@@ -6,8 +6,8 @@ public class ConstructPlayerModel : MonoBehaviour
 {
     #region Setup
 
+    [Header("Agent Model Info")]
     public CharacterCombat modelCharacter;
-    public List<CharacterController> currentTargets;
 
     public Descriptor playerState;
 
@@ -27,7 +27,7 @@ public class ConstructPlayerModel : MonoBehaviour
             modelCharacter.modelConstructor = this;
         }
 
-        InvokeRepeating("CurrentTarget", 0, 0.5f);
+        InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
     }
 
     private void Update()
@@ -93,13 +93,19 @@ public class ConstructPlayerModel : MonoBehaviour
 
     #region Player Actions
 
+    [Header("Player Targeting")]
+    public List<CharacterController> currentTargets;
+    public float currentTargetCastInterval = 0.6f;
+    public float currentTargetCastRadius = 1.5f;
+    public float currentTargetCastDistance = 10;
+
     private void OnDrawGizmos()
     {
         if (modelCharacter != null)
         {
             RaycastHit hit;
 
-            if (Physics.SphereCast(modelCharacter.transform.position, 2f, modelCharacter.transform.forward, out hit, 10))
+            if (Physics.SphereCast(modelCharacter.transform.position, currentTargetCastRadius, modelCharacter.transform.forward, out hit, currentTargetCastDistance))
             {
                 Gizmos.DrawWireSphere(hit.point, 2f);
             }
@@ -111,7 +117,7 @@ public class ConstructPlayerModel : MonoBehaviour
         List<CharacterController> hitCharacters = new List<CharacterController>();
 
         RaycastHit hit;
-        if (Physics.SphereCast(modelCharacter.transform.position, 2f, modelCharacter.transform.forward, out hit, 10))
+        if (Physics.SphereCast(modelCharacter.transform.position, currentTargetCastRadius, modelCharacter.transform.forward, out hit, currentTargetCastDistance))
         {
             CharacterController[] allCharacters = GameObject.FindObjectsOfType<CharacterController>();
 
@@ -189,6 +195,7 @@ public class ConstructPlayerModel : MonoBehaviour
 
     #region Counter Attack Considerations
 
+    [Header("Counter Info")]
     public bool counterAvailable;
     public float counterWindowParry = 1.5f;
     public float counterWindowDodge = 3f;

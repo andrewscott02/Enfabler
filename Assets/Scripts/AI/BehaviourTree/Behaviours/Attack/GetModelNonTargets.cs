@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTrees;
 
-public class GetClosestEnemyToTarget : Node
+public class GetModelNonTarget : Node
 {
     public AIController agent;
-    public GameObject target;
+    public ConstructPlayerModel model;
 
     /// <summary>
     /// Commands an agent to roam to a random point within a specified radius
     /// </summary>
     /// <param name="newAgent">The agent this command is given to</param>
     /// <param name="radius">The radius of the roam position, recommend 30</param>
-    public GetClosestEnemyToTarget(AIController agent, GameObject target)
+    public GetModelNonTarget(AIController agent, ConstructPlayerModel model)
     {
         this.agent = agent;
-        this.target = target;
+        this.model = model;
     }
 
     public override NodeState Evaluate()
     {
-        CharacterController enemy = HelperFunctions.GetClosestEnemy(agent, target.transform.position, 99999999, true);
+        CharacterController enemy = HelperFunctions.GetClosestEnemyExcludingList(agent, agent.transform.position, 99999999, true, model.currentTargets);
         if (enemy != null)
         {
             agent.SetDestinationPos(enemy.transform.position);

@@ -56,17 +56,7 @@ namespace BehaviourTrees
                 new MoveToDestination(agent, agent.distanceAllowance, Mathf.Infinity, false));
         }
 
-        public static Sequence MoveToTargetWhileAttacking(AIController agent, CharacterCombat target)
-        {
-            return new Sequence(
-                new GetClosestEnemyToTarget(agent, target),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
-                new GetClosestEnemy(agent, agent.sightDistance),
-                new MeleeAttack(agent, agent.currentTarget)
-                );
-        }
-
-        public static Selector RushToTarget(AIController agent, CharacterCombat target)
+        public static Selector RushToTarget(AIController agent, GameObject target)
         {
             return new Selector(
                 new Sequence(
@@ -81,6 +71,38 @@ namespace BehaviourTrees
                 );
         }
 
+        public static Selector FlankTarget(AIController agent, ConstructPlayerModel model)
+        {
+            //TODO: Implement Properly
+            return new Selector(
+                new Sequence(
+                    new GetModelTarget(agent, model),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, true),
+                    new MeleeAttack(agent, agent.currentTarget)
+                    ),
+                new Sequence(
+                    new GetModelTarget(agent, model),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, true)
+                    )
+                );
+        }
+
+        public static Selector IgnoreModelTargets(AIController agent, ConstructPlayerModel model)
+        {
+            return new Selector(
+                new Sequence(
+                    new GetModelNonTarget(agent, model),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, true),
+                    new GetClosestEnemy(agent, agent.meleeDistance),
+                    new MeleeAttack(agent, agent.currentTarget)
+                    ),
+                new Sequence(
+                    new GetModelNonTarget(agent, model),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, true)
+                    )
+                );
+        }
+
         #endregion
 
         #region Attacking
@@ -90,6 +112,16 @@ namespace BehaviourTrees
             return new Sequence(
                 new GetClosestEnemy(agent, agent.meleeDistance),
                 new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
+                new MeleeAttack(agent, agent.currentTarget)
+                );
+        }
+
+        public static Sequence MoveToTargetWhileAttacking(AIController agent, GameObject target)
+        {
+            return new Sequence(
+                new GetClosestEnemyToTarget(agent, target),
+                new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
+                new GetClosestEnemy(agent, agent.sightDistance),
                 new MeleeAttack(agent, agent.currentTarget)
                 );
         }

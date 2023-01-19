@@ -91,4 +91,62 @@ public static class HelperFunctions
 
         return closestCharacter;
     }
+
+    public static CharacterController GetClosestEnemyFromList(AIController agent, Vector3 origin, float sightRadius, bool debug, List<CharacterController> enemyList)
+    {
+        CharacterController closestCharacter = null;
+        float closestDistance = 99999;
+
+        foreach (var item in enemyList)
+        {
+            if (item.invisible)
+                break;
+
+            float itemDistance = Vector3.Distance(origin, item.gameObject.transform.position);
+
+            //Debug.Log(item.gameObject.name + " is " + itemDistance);
+
+            if (itemDistance < sightRadius && itemDistance < closestDistance)
+            {
+                if (debug && closestCharacter != null)
+                {
+                    //Debug.Log("Origin: " + origin);
+                    //Debug.Log("From " + closestCharacter.name + closestDistance + " to " + item.name + itemDistance);
+                }
+                closestCharacter = item;
+                closestDistance = itemDistance;
+            }
+        }
+
+        return closestCharacter;
+    }
+
+    public static CharacterController GetClosestEnemyExcludingList(AIController agent, Vector3 origin, float sightRadius, bool debug, List<CharacterController> enemyList)
+    {
+        CharacterController closestCharacter = null;
+        float closestDistance = 99999;
+
+        foreach (var item in AIManager.instance.GetEnemyTeam(agent))
+        {
+            if (item.invisible || enemyList.Contains(item))
+                break;
+
+            float itemDistance = Vector3.Distance(origin, item.gameObject.transform.position);
+
+            //Debug.Log(item.gameObject.name + " is " + itemDistance);
+
+            if (itemDistance < sightRadius && itemDistance < closestDistance)
+            {
+                if (debug && closestCharacter != null)
+                {
+                    //Debug.Log("Origin: " + origin);
+                    //Debug.Log("From " + closestCharacter.name + closestDistance + " to " + item.name + itemDistance);
+                }
+                closestCharacter = item;
+                closestDistance = itemDistance;
+            }
+        }
+
+        return closestCharacter;
+    }
 }

@@ -15,45 +15,35 @@ public class AdaptiveBehaviourTree : BehaviourTree
 
         #region Adaptive Behaviours
 
-            //TODO: If player is aggressive, focus on enemies they are not targetting
+            //If player is aggressive, focus on enemies they are not targetting
             new Sequence(
-                new CheckModel(playerModel, Descriptor.Defensive),
-                new Selector(
-                    //Checks if the closest enemy is within melee range and makes an attack if true
-                    BaseBehaviours.AttackClosestTarget(agent),
-                    //Checks if the closest enemy is within sight range and moves towards it if true
-                    BaseBehaviours.MoveToClosestTarget(agent)
-                    )
+                new CheckModel(playerModel, Descriptor.Aggressive),
+                BaseBehaviours.IgnoreModelTargets(agent, playerModel)
                 ),
             //TODO: If player is counterring, flank their target and attack
             new Sequence(
-                new CheckModel(playerModel, Descriptor.Defensive),
-                new Selector(
-                    //Checks if the closest enemy is within melee range and makes an attack if true
-                    BaseBehaviours.AttackClosestTarget(agent),
-                    //Checks if the closest enemy is within sight range and moves towards it if true
-                    BaseBehaviours.MoveToClosestTarget(agent)
-                    )
+                new CheckModel(playerModel, Descriptor.Counter),
+                BaseBehaviours.FlankTarget(agent, playerModel) //TODO: Flanking movement is not implemented properly
                 ),
             //If player is defensive, move slowly to player and attack enemies around them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Defensive),
-                BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter)
+                BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter.gameObject)
                 ),
             //If player is cautious, move slowly to player and attack enemies around them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Cautious),
-                BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter)
+                BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter.gameObject)
                 ),
             //If player is struggling, rush to player and attack enemies around them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Panic),
-                BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter)
+                BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter.gameObject)
                 ),
 
         #endregion
 
-        #region General Behaviours - In case the model is null
+        #region General Behaviours - In case the model is null or has insufficient information
 
             //Checks if the closest enemy is within melee range and makes an attack if true
             BaseBehaviours.AttackClosestTarget(agent),
