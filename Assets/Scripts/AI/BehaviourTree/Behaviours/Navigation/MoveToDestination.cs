@@ -11,16 +11,19 @@ public class MoveToDestination : Node
     float maxTime;
     float elapsedTime;
 
+    public bool sprinting;
+
     /// <summary>
     /// Commands an agent to roam to a random point within a specified radius
     /// </summary>
     /// <param name="newAgent">The agent this command is given to</param>
     /// <param name="radius">The radius of the roam position, recommend 30</param>
-    public MoveToDestination(AIController agent, float distanceAllowance, float maxTime)
+    public MoveToDestination(AIController agent, float distanceAllowance, float maxTime, bool sprinting)
     {
         this.agent = agent;
         this.distanceAllowance = distanceAllowance;
         this.maxTime = maxTime;
+        this.sprinting = sprinting;
     }
 
     public override NodeState Evaluate()
@@ -48,7 +51,7 @@ public class MoveToDestination : Node
             {
                 state = NodeState.Running;
                 //Debug.Log("Moving from " + agent.transform.position + " to " + agent.GetDestination());
-                agent.MoveToDestination();
+                agent.MoveToDestination(sprinting);
             }
 
             return state;

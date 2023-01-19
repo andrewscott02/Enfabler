@@ -81,7 +81,7 @@ public static class HelperFunctions
             {
                 if (debug && closestCharacter != null)
                 {
-                    Debug.Log("Origin: " + origin);
+                    //Debug.Log("Origin: " + origin);
                     //Debug.Log("From " + closestCharacter.name + closestDistance + " to " + item.name + itemDistance);
                 }
                 closestCharacter = item;

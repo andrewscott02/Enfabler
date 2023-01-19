@@ -94,14 +94,20 @@ public class AIController : CharacterController
     #region Behaviours
 
     #region Movement
+
+    public float walkSpeed = 6;
+    public float sprintSpeed = 10;
+
     protected Vector3 currentDestination; public Vector3 GetDestination() { return currentDestination; }
     public void SetDestinationPos(Vector3 pos)
     {
         currentDestination = pos;
     }
     public bool roaming = false;
-    public void MoveToDestination()
+    public void MoveToDestination(bool sprinting)
     {
+        agent.speed = sprinting ? sprintSpeed : walkSpeed;
+
         agent.SetDestination(currentDestination);
     }
     public bool NearDestination(float distanceAllowance)

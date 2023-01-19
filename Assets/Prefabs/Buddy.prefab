@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 9153536926427887807, guid: 22bb1e8efed20934fbd323b6f0290978,
         type: 3}
       propertyPath: maxHealth
-      value: 40
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22bb1e8efed20934fbd323b6f0290978, type: 3}
@@ -146,6 +146,8 @@ MonoBehaviour:
   meleeDistance: 3
   followVector: {x: 0.51, y: 0, z: -0.54}
   followDistance: 4
+  walkSpeed: 6
+  sprintSpeed: 10
   roaming: 0
   currentTarget: {fileID: 0}
 --- !u!114 &6710008956972161548

@@ -37,7 +37,7 @@ namespace BehaviourTrees
         {
             return new Sequence(
                 new FindPointRadius(agent, agent.roamDistance),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f)
+                new MoveToDestination(agent, agent.distanceAllowance, 6f, false)
                 );
         }
 
@@ -45,7 +45,7 @@ namespace BehaviourTrees
         {
             return new Sequence(
                 new GetClosestEnemy(agent, agent.sightDistance),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f)
+                new MoveToDestination(agent, agent.distanceAllowance, 6f, false)
                 );
         }
 
@@ -53,16 +53,31 @@ namespace BehaviourTrees
         {
             return new Sequence(
                 new FindPointNearTarget(agent, agent.GetPlayer(), agent.followDistance, requireSameTeam),
-                new MoveToDestination(agent, agent.distanceAllowance, Mathf.Infinity));
+                new MoveToDestination(agent, agent.distanceAllowance, Mathf.Infinity, false));
         }
 
         public static Sequence MoveToTargetWhileAttacking(AIController agent, CharacterCombat target)
         {
             return new Sequence(
                 new GetClosestEnemyToTarget(agent, target),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f),
+                new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
                 new GetClosestEnemy(agent, agent.sightDistance),
                 new MeleeAttack(agent, agent.currentTarget)
+                );
+        }
+
+        public static Selector RushToTarget(AIController agent, CharacterCombat target)
+        {
+            return new Selector(
+                new Sequence(
+                    new GetClosestEnemyToTarget(agent, target),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, true),
+                    new MeleeAttack(agent, agent.currentTarget)
+                    ),
+                new Sequence(
+                    new GetClosestEnemyToTarget(agent, target),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, true)
+                    )
                 );
         }
 
@@ -74,7 +89,7 @@ namespace BehaviourTrees
         {
             return new Sequence(
                 new GetClosestEnemy(agent, agent.meleeDistance),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f),
+                new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
                 new MeleeAttack(agent, agent.currentTarget)
                 );
         }
