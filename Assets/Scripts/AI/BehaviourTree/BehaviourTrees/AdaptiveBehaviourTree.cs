@@ -12,73 +12,65 @@ public class AdaptiveBehaviourTree : BehaviourTree
         //Debug.Log("Setting up adaptive BT for " + agent.name);
 
         Node root = new Selector(
-            /*
-            //TODO: If player is being aggressive, focus on enemies they are not targetting
-            new Sequence(
-                new CheckAggressive(playerModel),
-                new GetClosestEnemy(agent, agent.meleeDistance),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f),
-                new MeleeAttack(agent, agent.currentTarget)
-                ),
-            //TODO: If player is being defensive, rush to player and attack enemies around them
-            new Sequence(
-                new GetClosestEnemy(agent, agent.meleeDistance),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f),
-                new MeleeAttack(agent, agent.currentTarget)
-                ),
-            //TODO: If player is mobile, move slowly to player and attack enemies around them
-            new Sequence(
-                new GetClosestEnemy(agent, agent.meleeDistance),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f),
-                new MeleeAttack(agent, agent.currentTarget)
-                ),
-            //TODO: If player is countering, flank their target and attack
-            new Sequence(
-            new GetClosestEnemy(agent, agent.meleeDistance),
-            new MoveToDestination(agent, agent.distanceAllowance, 6f),
-            new MeleeAttack(agent, agent.currentTarget)
-            ),
-            //TODO: If player is struggling, rush to player and attack enemies around them
-            new Sequence(
-                new GetClosestEnemy(agent, agent.meleeDistance),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f),
-                new MeleeAttack(agent, agent.currentTarget)
-                ),
-            */
 
-            /*
-            //Moves to a target close to the player, and attacks the closest enemy to it
-            BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter),
-            //If there are no targets, but the player is an ally, move to a point near the player
-            BaseBehaviours.FollowTarget(agent, playerModel.modelCharacter.gameObject, true),
-            //If there are no targets, move to a random point in the roam radius
-            BaseBehaviours.RoamToRandomPoint(agent)
-            */
+        #region Adaptive Behaviours
 
-            //TODO: If player is defensive, rush to player and attack enemies around them
+            //TODO: If player is aggressive, focus on enemies they are not targetting
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Defensive),
-                BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter)
+                new Selector(
+                    //Checks if the closest enemy is within melee range and makes an attack if true
+                    BaseBehaviours.AttackClosestTarget(agent),
+                    //Checks if the closest enemy is within sight range and moves towards it if true
+                    BaseBehaviours.MoveToClosestTarget(agent)
+                    )
                 ),
-            //TODO: If player is cautious, rush to player and attack enemies around them
+            //TODO: If player is counterring, flank their target and attack
+            new Sequence(
+                new CheckModel(playerModel, Descriptor.Defensive),
+                new Selector(
+                    //Checks if the closest enemy is within melee range and makes an attack if true
+                    BaseBehaviours.AttackClosestTarget(agent),
+                    //Checks if the closest enemy is within sight range and moves towards it if true
+                    BaseBehaviours.MoveToClosestTarget(agent)
+                    )
+                ),
+            //If player is defensive, move slowly to player and attack enemies around them
+            new Sequence(
+                new CheckModel(playerModel, Descriptor.Defensive),
+                BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter)
+                ),
+            //If player is cautious, move slowly to player and attack enemies around them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Cautious),
                 BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter)
                 ),
-            //TODO: If player is struggling, rush to player and attack enemies around them
+            //If player is struggling, rush to player and attack enemies around them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Panic),
                 BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter)
                 ),
 
+        #endregion
+
+        #region General Behaviours - In case the model is null
+
             //Checks if the closest enemy is within melee range and makes an attack if true
             BaseBehaviours.AttackClosestTarget(agent),
             //Checks if the closest enemy is within sight range and moves towards it if true
             BaseBehaviours.MoveToClosestTarget(agent),
+
+        #endregion
+
+        #region Idle Behaviours - When there are no enemies
+
             //If there are no targets, but the player is an ally, move to a point near the player
             BaseBehaviours.FollowTarget(agent, agent.GetPlayer(), true),
             //If there are no targets, move to a random point in the roam radius
             BaseBehaviours.RoamToRandomPoint(agent)
+
+        #endregion
+
             );
 
         return root;
