@@ -23,7 +23,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         combat = GetComponent<CharacterCombat>();
     }
 
-    public void Damage(int damage, Vector3 spawnPos, Vector3 spawnRot)
+    public void Damage(CharacterCombat attacker, int damage, Vector3 spawnPos, Vector3 spawnRot)
     {
         if (combat != null)
         {
@@ -35,6 +35,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             if (combat.GetParrying())
             {
                 Instantiate(parryFX, spawnPos, Quaternion.Euler(spawnRot));
+                attacker.Parried();
                 return;
             }
         }

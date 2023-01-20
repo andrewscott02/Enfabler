@@ -21,7 +21,8 @@ public class CharacterCombat : MonoBehaviour
         {
             canAttack = false;
             animator.SetTrigger("LightAttack");
-            animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
+            animator.SetInteger("RandAttack", 1);
+            //animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
         }
     }
 
@@ -141,6 +142,13 @@ public class CharacterCombat : MonoBehaviour
         }
     }
 
+    public void Parried()
+    {
+        canAttack = false;
+        animator.SetTrigger("HitReact");
+        animator.SetInteger("RandReact", Random.Range(0, animator.GetInteger("RandReactMax") + 1));
+    }
+
     void AttackCheck()
     {
         //Debug.Log("AttackCheck " + damage);
@@ -166,7 +174,7 @@ public class CharacterCombat : MonoBehaviour
 
             //If it can be hit, deal damage to target and add it to the hit targets list
             hitTargets.Add(hitHealth);
-            hitHealth.Damage(damage, hit.point, hit.normal);
+            hitHealth.Damage(this, damage, hit.point, hit.normal);
         }
     }
 

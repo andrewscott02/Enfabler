@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 public interface IDamageable
 {
-    void Damage(int damage, Vector3 spawnPos, Vector3 spawnRot);
+    void Damage(CharacterCombat attacker, int damage, Vector3 spawnPos, Vector3 spawnRot);
     bool CheckKill();
     void Kill();
 }
