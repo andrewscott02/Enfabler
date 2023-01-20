@@ -41,6 +41,7 @@ public class AIController : CharacterController
 
         Gizmos.DrawWireSphere(gameObject.transform.position, sightDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, roamDistance);
+        Gizmos.DrawWireSphere(gameObject.transform.position, maxDistanceFromModelCharacter);
         Gizmos.DrawWireSphere(gameObject.transform.position, meleeDistance);
 
         if (currentTarget != null)
@@ -84,6 +85,7 @@ public class AIController : CharacterController
 
     public float sightDistance = 40;
     public float roamDistance = 25;
+    public float maxDistanceFromModelCharacter = 6;
     public float meleeDistance = 3;
 
     public Vector3 followVector;

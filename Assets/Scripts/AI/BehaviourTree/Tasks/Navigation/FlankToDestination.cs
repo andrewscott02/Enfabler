@@ -29,7 +29,9 @@ public class FlankToDestination : Node
 
         if (requiresSameTeam && AIManager.instance.OnSameTeam(agent, flankTarget) == false) { return NodeState.Failure; }
 
-        Vector3 point = HelperFunctions.GetFlankingPoint(flankTarget.transform.position, agent.currentTarget.transform.position, distance);
+        float flankDistance = Mathf.Clamp(distance, 0, agent.maxDistanceFromModelCharacter);
+
+        Vector3 point = HelperFunctions.GetFlankingPoint(flankTarget.transform.position, agent.currentTarget.transform.position, flankDistance);
 
         agent.SetDestinationPos(point);
         //Debug.Log("Generated point near target at: " + point);

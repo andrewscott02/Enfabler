@@ -18,6 +18,14 @@ public class IntervalBehaviourTree : BehaviourTree
 
         Node root = new Selector(
 
+            //If agent is too far away from model character, rush to a distance within range
+            new Sequence(
+                new CheckOutDistance(agent, playerModel),
+                new Selector(
+                    BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter)
+                    )
+                ),
+
         #region State Behaviours
 
             //In state 0, focus on enemies they are not targetting
