@@ -31,7 +31,7 @@ public class CharacterCombat : MonoBehaviour
         {
             if (modelConstructor != null)
             {
-                modelConstructor.PlayerParry(true);
+                modelConstructor.PlayerParry(attackers > 0);
             }
 
             canMove = false;
@@ -46,7 +46,7 @@ public class CharacterCombat : MonoBehaviour
         {
             if (modelConstructor != null)
             {
-                modelConstructor.PlayerDodge(true, true);
+                modelConstructor.PlayerDodge(true, attackers > 0);
             }
 
             canAttack = false;
@@ -72,6 +72,13 @@ public class CharacterCombat : MonoBehaviour
         }
 
         canAttack = true;
+
+        AIController AIController = GetComponent<AIController>();
+
+        if (AIController != null)
+        {
+            AIController.EndAttackOnTarget();
+        }
     }
 
     public void ResetAttack()
@@ -79,6 +86,13 @@ public class CharacterCombat : MonoBehaviour
         //Debug.Log("Reset Attack");
         animator.SetInteger("SwordAttackCount", 0);
         canAttack = true;
+
+        AIController AIController = GetComponent<AIController>();
+
+        if (AIController != null)
+        {
+            AIController.EndAttackOnTarget();
+        }
     }
 
     public void ResetMove()
@@ -208,6 +222,22 @@ public class CharacterCombat : MonoBehaviour
     {
         ResetAttack();
         ResetMove();
+    }
+
+    #endregion
+
+    #region Targetted Logic
+
+    int attackers = 0;
+
+    public void StartBeingAttacked()
+    {
+        attackers++;
+    }
+
+    public void StopBeingAttacked()
+    {
+        attackers--;
     }
 
     #endregion

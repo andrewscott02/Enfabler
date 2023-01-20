@@ -125,23 +125,39 @@ public class AIController : CharacterController
     #endregion
 
     public CharacterController currentTarget;
+    CharacterController lastAttacked;
 
-    public bool AttackTarget(CharacterController targetCheck)
+    public bool AttackTarget()
     {
-        if (targetCheck == null)
+        if (currentTarget == null)
             return false;
 
-        float distance = Vector3.Distance(this.gameObject.transform.position, targetCheck.gameObject.transform.position);
+        float distance = Vector3.Distance(this.gameObject.transform.position, currentTarget.gameObject.transform.position);
         //Debug.Log("Attack called");
         if (distance < meleeDistance)
         {
-            //Debug.Log("Attack made");
-            combat.LightAttack();
+            if (combat.canAttack)
+            {
+                lastAttacked = currentTarget;
+                lastAttacked.GetComponent<CharacterCombat>().StartBeingAttacked();
+
+                //Debug.Log("Attack made");
+                combat.LightAttack();
+            }
 
             return true;
         }
 
         return false;
+    }
+
+    public void EndAttackOnTarget()
+    {
+        if (lastAttacked != null)
+        {
+            lastAttacked.GetComponent<CharacterCombat>().StopBeingAttacked();
+            lastAttacked = null;
+        }
     }
 
     #endregion

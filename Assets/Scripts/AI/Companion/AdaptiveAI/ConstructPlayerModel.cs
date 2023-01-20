@@ -106,10 +106,7 @@ public class ConstructPlayerModel : MonoBehaviour
         if (modelCharacter != null)
         {
             RaycastHit[] hit = Physics.SphereCastAll(modelCharacter.transform.position, currentTargetCastRadius, modelCharacter.transform.forward, currentTargetCastDistance, layerMask);
-            foreach (RaycastHit item in hit)
-            {
-                Gizmos.DrawWireSphere(item.point, 1f);
-            }
+            foreach (RaycastHit item in hit) { Gizmos.DrawWireSphere(item.point, 1f); }
         }
     }
 
@@ -126,9 +123,7 @@ public class ConstructPlayerModel : MonoBehaviour
             if (character != null)
             {
                 if (AIManager.instance.OnSameTeam(modelCharacter.GetComponent<CharacterController>(), character) == false)
-                {
                     hitCharacters.Add(character);
-                }
             }
         }
 
@@ -139,51 +134,31 @@ public class ConstructPlayerModel : MonoBehaviour
     {
         descriptorValues[Descriptor.Aggressive] += 3f;
 
-        if (CheckCounter())
-        {
-            descriptorValues[Descriptor.Counter] += 5f;
-        }
+        if (CheckCounter()) { descriptorValues[Descriptor.Counter] += 5f; }
 
-        if (!hit)
-        {
-            descriptorValues[Descriptor.Panic] += 2f;
-        }
+        if (!hit) { descriptorValues[Descriptor.Panic] += 2f; }
 
         AdjustDisplay();
     }
 
     public void PlayerParry(bool beingAttacked)
     {
-        if (beingAttacked)
-        {
-            descriptorValues[Descriptor.Defensive] += 5f;
-            SetupCounter(counterWindowParry);
-        }
-        else
-        {
-            descriptorValues[Descriptor.Panic] += 2f;
-        }
+        descriptorValues[Descriptor.Defensive] += 5f;
+
+        if (beingAttacked) { SetupCounter(counterWindowParry); }
+        else { descriptorValues[Descriptor.Panic] += 2f; }
+
         AdjustDisplay();
     }
 
     public void PlayerDodge(bool away, bool beingAttacked)
     {
-        if (beingAttacked)
-        {
-            if (away)
-            {
-                descriptorValues[Descriptor.Cautious] += 5f;
-            }
-            else
-            {
-                descriptorValues[Descriptor.Defensive] += 5f;
-            }
-            SetupCounter(counterWindowDodge);
-        }
-        else
-        {
-            descriptorValues[Descriptor.Panic] += 2f;
-        }
+        if (away) { descriptorValues[Descriptor.Cautious] += 5f; }
+        else { descriptorValues[Descriptor.Defensive] += 5f; }
+
+        if (beingAttacked) { SetupCounter(counterWindowDodge); }
+        else { descriptorValues[Descriptor.Panic] += 2f; }
+
         AdjustDisplay();
     }
 

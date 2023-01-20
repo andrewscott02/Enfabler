@@ -53,9 +53,20 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             modelConstructor.PlayerHit();
 
         if (CheckKill())
+        {
             Kill();
+        }
         else
+        {
             HitReaction();
+
+            AIController AIController = GetComponent<AIController>();
+
+            if (AIController != null)
+            {
+                AIController.EndAttackOnTarget();
+            }
+        }
     }
 
     void HitReaction()
