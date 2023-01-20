@@ -32,9 +32,14 @@ public class PlayerController : CharacterController
         playerMovement.animator = animator;
         playerMovement.SetModel(model);
 
-        Health allyHealth = GameObject.FindObjectOfType<ConstructPlayerModel>().GetComponent<Health>();
+        ConstructPlayerModel constructModel = GameObject.FindObjectOfType<ConstructPlayerModel>();
 
-        combat.ignore.Add(allyHealth);
+        if (constructModel != null)
+        {
+            Health allyHealth = GameObject.FindObjectOfType<ConstructPlayerModel>().GetComponent<Health>();
+
+            combat.ignore.Add(allyHealth);
+        }
 
         AIManager.instance.AllocateTeam(this);
     }
