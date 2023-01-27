@@ -236,7 +236,7 @@ public class CharacterCombat : MonoBehaviour
 
     #region Targetted Logic
 
-    int attackers = 0;
+    int attackers = 0; public bool GetTargetted() { return attackers > 0; }
 
     public void StartBeingAttacked()
     {

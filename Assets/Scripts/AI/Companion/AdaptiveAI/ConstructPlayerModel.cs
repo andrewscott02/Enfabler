@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ConstructPlayerModel : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class ConstructPlayerModel : MonoBehaviour
 
     [Header("Agent Model Info")]
     public GameObject modelCharacter;
+    public TextMeshProUGUI stateText;
 
     public Descriptor playerState;
 
@@ -68,6 +70,11 @@ public class ConstructPlayerModel : MonoBehaviour
         if (highestState != Descriptor.Null)
         {
             playerState = highestState;
+        }
+
+        if (stateText != null)
+        {
+            stateText.text = "Player State: " + playerState.ToString();
         }
     }
 

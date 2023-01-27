@@ -250,6 +250,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a5c23a26f5bec748ab7aa25c1af3275, type: 3}
+--- !u!114 &113918923 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1648798129309591856, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8928750309083163466}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &187639979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -685,7 +697,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824119606}
-  m_LocalRotation: {x: 0.025522508, y: 0.0000000015550946, z: -3.970285e-11, w: 0.99967426}
+  m_LocalRotation: {x: 0.025522508, y: 0.0000000016705493, z: -4.2650498e-11, w: 0.99967426}
   m_LocalPosition: {x: 0, y: 2.83, z: -13.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1634,12 +1646,12 @@ PrefabInstance:
     - target: {fileID: 1986375830274735061, guid: 0845de5f78ca8184596686a4fb36c808,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000015550946
+      value: 0.0000000016705493
       objectReference: {fileID: 0}
     - target: {fileID: 1986375830274735061, guid: 0845de5f78ca8184596686a4fb36c808,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -3.970285e-11
+      value: -4.2650498e-11
       objectReference: {fileID: 0}
     - target: {fileID: 2016941794238439747, guid: 0845de5f78ca8184596686a4fb36c808,
         type: 3}
@@ -2553,6 +2565,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7975131175851537121, guid: 002ba52f26b27b442ab75c1c3f5f4278,
+        type: 3}
+      propertyPath: stateText
+      value: 
+      objectReference: {fileID: 113918923}
     - target: {fileID: 7975131175851537121, guid: 002ba52f26b27b442ab75c1c3f5f4278,
         type: 3}
       propertyPath: modelCharacter

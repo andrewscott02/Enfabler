@@ -124,6 +124,8 @@ public class AIController : CharacterController
 
     #endregion
 
+    #region Combat
+
     public CharacterController currentTarget;
     CharacterController lastAttacked;
 
@@ -139,7 +141,7 @@ public class AIController : CharacterController
             if (combat.canAttack)
             {
                 lastAttacked = currentTarget;
-                lastAttacked.GetComponent<CharacterCombat>().StartBeingAttacked();
+                lastAttacked.GetCharacterCombat().StartBeingAttacked();
 
                 //Debug.Log("Attack made");
                 combat.LightAttack();
@@ -155,10 +157,19 @@ public class AIController : CharacterController
     {
         if (lastAttacked != null)
         {
-            lastAttacked.GetComponent<CharacterCombat>().StopBeingAttacked();
+            lastAttacked.GetCharacterCombat().StopBeingAttacked();
             lastAttacked = null;
         }
     }
+
+    public float defendChance = 0f;
+
+    public bool CanDefend()
+    {
+        return (Random.Range(0f, 1f) < defendChance);
+    }
+
+    #endregion
 
     #endregion
 }

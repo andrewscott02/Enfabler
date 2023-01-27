@@ -33,32 +33,43 @@ namespace BehaviourTrees
     {
         #region Movement
 
-        public static Sequence RoamToRandomPoint(AIController agent)
-        {
-            return new Sequence(
-                new FindPointRadius(agent, agent.roamDistance),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f, false)
-                );
-        }
-
-        public static Sequence MoveToClosestTarget(AIController agent)
-        {
-            return new Sequence(
-                new GetClosestEnemy(agent, agent.sightDistance),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f, true)
-                );
-        }
-
-        public static Sequence FollowTarget(AIController agent, GameObject target, bool requireSameTeam)
-        {
-            return new Sequence(
-                new FindPointNearTarget(agent, agent.GetPlayer(), agent.followDistance, requireSameTeam),
-                new MoveToDestination(agent, agent.distanceAllowance, Mathf.Infinity, true));
-        }
-
-        public static Selector RushToTarget(AIController agent, GameObject target)
+        public static Selector RoamToRandomPoint(AIController agent, float distanceAllowance)
         {
             return new Selector(
+                DefensiveAction(agent, distanceAllowance),
+                new Sequence(
+                    new FindPointRadius(agent, agent.roamDistance),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, false)
+                    )
+                );
+        }
+
+        public static Selector MoveToClosestTarget(AIController agent, float distanceAllowance)
+        {
+            return new Selector(
+                DefensiveAction(agent, distanceAllowance),
+                new Sequence(
+                    new GetClosestEnemy(agent, agent.sightDistance),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, true)
+                    )
+                );
+        }
+
+        public static Selector FollowTarget(AIController agent, GameObject target, bool requireSameTeam, float distanceAllowance)
+        {
+            return new Selector(
+                DefensiveAction(agent, distanceAllowance),
+                new Sequence(
+                    new FindPointNearTarget(agent, agent.GetPlayer(), agent.followDistance, requireSameTeam),
+                    new MoveToDestination(agent, agent.distanceAllowance, Mathf.Infinity, true)
+                    )
+                );
+        }
+
+        public static Selector RushToTarget(AIController agent, GameObject target, float distanceAllowance)
+        {
+            return new Selector(
+                DefensiveAction(agent, distanceAllowance),
                 new Sequence(
                     new GetClosestEnemyToTarget(agent, target),
                     new MoveToDestination(agent, agent.distanceAllowance, 6f, true),
@@ -71,19 +82,20 @@ namespace BehaviourTrees
                 );
         }
 
-        public static Selector FlankTarget(AIController agent, ConstructPlayerModel model, float flankDistance, bool requireSameTeam)
+        public static Selector FlankTarget(AIController agent, ConstructPlayerModel model, float flankDistance, bool requireSameTeam, bool sprint, float distanceAllowance)
         {
             return new Selector(
+                DefensiveAction(agent, distanceAllowance),
                 new Sequence(
                     new GetModelNonTarget(agent, model),
                     new FlankToDestination(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
-                    new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, sprint),
                     new MeleeAttack(agent)
                     ),
                 new Sequence(
                     new GetModelTarget(agent, model),
                     new FlankToDestination(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
-                    new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, sprint),
                     new MeleeAttack(agent)
                     ),
                 new Sequence(
@@ -94,9 +106,10 @@ namespace BehaviourTrees
                 );
         }
 
-        public static Selector IgnoreModelTargets(AIController agent, ConstructPlayerModel model)
+        public static Selector IgnoreModelTargets(AIController agent, ConstructPlayerModel model, float distanceAllowance)
         {
             return new Selector(
+                DefensiveAction(agent, distanceAllowance),
                 new Sequence(
                     new GetModelNonTarget(agent, model),
                     new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
@@ -112,24 +125,47 @@ namespace BehaviourTrees
 
         #endregion
 
-        #region Attacking
+        #region Combative
 
-        public static Sequence AttackClosestTarget(AIController agent)
+        public static Selector AttackClosestTarget(AIController agent, float distanceAllowance)
         {
-            return new Sequence(
-                new GetClosestEnemy(agent, agent.meleeDistance),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
-                new MeleeAttack(agent)
+            return new Selector(
+                DefensiveAction(agent, distanceAllowance),
+                new Sequence(
+                    new GetClosestEnemy(agent, agent.meleeDistance),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
+                    new MeleeAttack(agent)
+                    )
                 );
         }
 
-        public static Sequence MoveToTargetWhileAttacking(AIController agent, GameObject target)
+        public static Selector MoveToTargetWhileAttacking(AIController agent, GameObject target, float distanceAllowance)
+        {
+            return new Selector(
+                DefensiveAction(agent, distanceAllowance),
+                new Sequence(
+                    new GetClosestEnemyToTarget(agent, target),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
+                    new GetClosestEnemy(agent, agent.sightDistance),
+                    new MeleeAttack(agent)
+                    )
+                );
+        }
+
+        public static Sequence DefensiveAction(AIController agent, float distanceAllowance)
         {
             return new Sequence(
-                new GetClosestEnemyToTarget(agent, target),
-                new MoveToDestination(agent, agent.distanceAllowance, 6f, false),
-                new GetClosestEnemy(agent, agent.sightDistance),
-                new MeleeAttack(agent)
+                new BeingAttacked(agent),
+                new Selector(
+                    new Sequence(
+                        new CanDefend(agent),
+                        new Dodge(agent, distanceAllowance)
+                        ),
+                    new Sequence(
+                        new CanDefend(agent),
+                        new Parry(agent)
+                        )
+                    )
                 );
         }
 

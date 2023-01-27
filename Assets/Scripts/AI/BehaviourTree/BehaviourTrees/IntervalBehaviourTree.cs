@@ -22,7 +22,7 @@ public class IntervalBehaviourTree : BehaviourTree
             new Sequence(
                 new CheckOutDistance(agent, playerModel),
                 new Selector(
-                    BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter)
+                    BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter, agent.distanceAllowance)
                     )
                 ),
 
@@ -32,26 +32,26 @@ public class IntervalBehaviourTree : BehaviourTree
             new Sequence(
                 new CheckEqual<int>(0, this),
                 new Selector(
-                    BaseBehaviours.IgnoreModelTargets(agent, playerModel),
+                    BaseBehaviours.IgnoreModelTargets(agent, playerModel, agent.distanceAllowance),
                     //If player is targetting all available targets, move to closest target and attack
-                    BaseBehaviours.AttackClosestTarget(agent),
-                    BaseBehaviours.MoveToClosestTarget(agent)
+                    BaseBehaviours.AttackClosestTarget(agent, agent.distanceAllowance),
+                    BaseBehaviours.MoveToClosestTarget(agent, agent.distanceAllowance)
                     )
                 ),
             //In state 1, move slowly to player and attack enemies around them
             new Sequence(
                 new CheckEqual<int>(1, this),
-                BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter)
+                BaseBehaviours.MoveToTargetWhileAttacking(agent, playerModel.modelCharacter, agent.distanceAllowance)
                 ),
             //In state 2, rush to player and attack enemies around them
             new Sequence(
                 new CheckEqual<int>(2, this),
-                BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter)
+                BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter, agent.distanceAllowance)
                 ),
             //In state 3, draw enemies away from them
             new Sequence(
                 new CheckEqual<int>(3, this),
-                BaseBehaviours.FlankTarget(agent, playerModel, agent.meleeDistance, true)
+                BaseBehaviours.FlankTarget(agent, playerModel, agent.meleeDistance, true, true, agent.distanceAllowance)
                 ),
 
         #endregion
@@ -59,18 +59,18 @@ public class IntervalBehaviourTree : BehaviourTree
         #region General Behaviours - In case of failure
 
             //Checks if the closest enemy is within melee range and makes an attack if true
-            BaseBehaviours.AttackClosestTarget(agent),
+            BaseBehaviours.AttackClosestTarget(agent, agent.distanceAllowance),
             //Checks if the closest enemy is within sight range and moves towards it if true
-            BaseBehaviours.MoveToClosestTarget(agent),
+            BaseBehaviours.MoveToClosestTarget(agent, agent.distanceAllowance),
 
         #endregion
 
         #region Idle Behaviours - When there are no enemies
 
             //If there are no targets, but the player is an ally, move to a point near the player
-            BaseBehaviours.FollowTarget(agent, agent.GetPlayer(), true),
+            BaseBehaviours.FollowTarget(agent, agent.GetPlayer(), true, agent.distanceAllowance),
             //If there are no targets, move to a random point in the roam radius
-            BaseBehaviours.RoamToRandomPoint(agent)
+            BaseBehaviours.RoamToRandomPoint(agent, agent.distanceAllowance)
 
         #endregion
 

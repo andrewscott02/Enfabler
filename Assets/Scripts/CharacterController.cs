@@ -6,7 +6,7 @@ public class CharacterController : MonoBehaviour
 {
     public bool invisible = false;
     public Animator animator;
-    protected CharacterCombat combat;
+    protected CharacterCombat combat; public CharacterCombat GetCharacterCombat() { return combat; }
     protected Health health;
     public Transform model;
 

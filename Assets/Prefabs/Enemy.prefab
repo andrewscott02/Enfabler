@@ -160,6 +160,7 @@ MonoBehaviour:
   lerpSpeed: 0.01
   sightDistance: 40
   roamDistance: 25
+  maxDistanceFromModelCharacter: 6
   meleeDistance: 2
   followVector: {x: 0, y: 0, z: 0}
   followDistance: 5
@@ -167,6 +168,7 @@ MonoBehaviour:
   sprintSpeed: 10
   roaming: 0
   currentTarget: {fileID: 0}
+  defendChance: 0.4
 --- !u!95 &7673251268057846940 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5006998096090209180, guid: 22bb1e8efed20934fbd323b6f0290978,
