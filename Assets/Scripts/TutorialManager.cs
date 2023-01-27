@@ -6,6 +6,8 @@ public class TutorialManager : MonoBehaviour
 {
     public GameObject[] strikes;
 
+    public GameObject endTutorial;
+
     private void Update()
     {
         #region Movement and Camera
@@ -63,8 +65,14 @@ public class TutorialManager : MonoBehaviour
 
         if (allDone)
         {
-            Debug.Log("Tutorial complete");
-            //end tutorial
+            endTutorial.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                Debug.Log("Tutorial complete");
+                ExperimentManager.instance.LoadNextLevel();
+                //Load tutorial
+            }
         }
     }
 }
