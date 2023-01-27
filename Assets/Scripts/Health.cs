@@ -15,12 +15,16 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     public int maxHealth = 50;
     int currentHealth = 0;
 
+    AIController AIController;
+
     private void Start()
     {
         currentHealth = maxHealth;
         if (healthSlider != null)
             healthSlider.ChangeSliderValue(currentHealth, maxHealth);
         combat = GetComponent<CharacterCombat>();
+
+        AIController = GetComponent<AIController>();
     }
 
     public void Damage(CharacterCombat attacker, int damage, Vector3 spawnPos, Vector3 spawnRot)
@@ -53,6 +57,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (modelConstructor != null)
             modelConstructor.PlayerHit();
 
+        if (AIController != null)
+        {
+            AIController.EndAttackOnTarget();
+        }
+
         if (CheckKill())
         {
             Kill();
@@ -60,13 +69,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         else
         {
             HitReaction();
-
-            AIController AIController = GetComponent<AIController>();
-
-            if (AIController != null)
-            {
-                AIController.EndAttackOnTarget();
-            }
         }
     }
 
