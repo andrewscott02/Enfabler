@@ -26,13 +26,20 @@ public class PlayerController : CharacterController
     public override void Start()
     {
         base.Start();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.animator = animator;
         playerMovement.SetModel(model);
 
-        Health allyHealth = GameObject.FindObjectOfType<ConstructPlayerModel>().GetComponent<Health>();
+        ConstructPlayerModel constructModel = GameObject.FindObjectOfType<ConstructPlayerModel>();
 
-        combat.ignore.Add(allyHealth);
+        if (constructModel != null)
+        {
+            Health allyHealth = GameObject.FindObjectOfType<ConstructPlayerModel>().GetComponent<Health>();
+
+            combat.ignore.Add(allyHealth);
+        }
 
         AIManager.instance.AllocateTeam(this);
     }

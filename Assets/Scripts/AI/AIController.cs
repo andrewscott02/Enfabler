@@ -8,29 +8,12 @@ public class AIController : CharacterController
 {
     #region Setup
 
-    bool active = false;
+    protected GameObject player; public GameObject GetPlayer() { return player; }
 
-    protected GameObject player;
+    #region Behaviour Tree
     protected NavMeshAgent agent; public NavMeshAgent GetNavMeshAgent() { return agent; }
     public BehaviourTree bt;
 
-    public GameObject destinationTest;
-    protected Vector3 currentDestination; public Vector3 GetDestination() { return currentDestination; }
-    public void SetDestinationPos(Vector3 pos)
-    {
-        currentDestination = pos;
-    }
-    public bool roaming = false;
-    public void MoveToDestination()
-    {
-        agent.SetDestination(currentDestination);
-    }
-    public bool NearDestination(float distanceAllowance)
-    {
-        return Vector3.Distance(transform.position, currentDestination) <= distanceAllowance;
-    }
-
-    public CharacterController currentTarget;
 
     public override void Start()
     {
@@ -52,106 +35,117 @@ public class AIController : CharacterController
 
     #endregion
 
-    protected void NextPatrol()
-    {
-        currentDestination = RandPosInRadius(transform.position, 30);
-        agent.SetDestination(currentDestination);
-    }
-
-    protected Vector3 RandPosInRadius(Vector3 origin, float radius)
-    {
-        float randX = Random.Range(0, 360);
-        float randY = Random.Range(0, 360);
-        float randZ = Random.Range(0, 360);
-        Vector3 direction = new Vector3(randX, randY, randZ);
-        direction.Normalize();
-
-        float distance = Random.Range(0, radius);
-        Vector3 point = origin + (direction * distance);
-
-        return point;
-    }
-
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(currentDestination, 1f);
+        Gizmos.DrawWireSphere(currentDestination, distanceAllowance);
+
         Gizmos.DrawWireSphere(gameObject.transform.position, sightDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, roamDistance);
+        Gizmos.DrawWireSphere(gameObject.transform.position, maxDistanceFromModelCharacter);
         Gizmos.DrawWireSphere(gameObject.transform.position, meleeDistance);
-    }
-
-    public float lerpSpeed = 0.01f;
-
-    public virtual void Update()
-    {
-        if (destinationTest != null)
-        {
-            destinationTest.transform.position = currentDestination;
-        }
-        return;
-
-        if (active)
-        {
-            BehaviourTree();
-        }
-
-        if (agent.destination == currentDestination)
-        {
-            //Debug.Log("Moving");
-            #region Animation
-
-            Vector3 movement = new Vector3(agent.speed, 0, agent.speed) * Time.deltaTime;
-            movement = transform.TransformDirection(movement);
-
-            //Gets the rotation of the model to offset the animations
-            Vector2 realMovement = new Vector2(0, 0);
-            realMovement.x = Vector3.Dot(movement, model.right);
-            realMovement.y = Vector3.Dot(movement, model.forward);
-
-            //Sets the movement animations for the animator
-            //Debug.Log("X:" + rb.velocity.x + "Y:" + rb.velocity.z);
-            animator.SetFloat("xMovement", Mathf.Lerp(animator.GetFloat("xMovement"), realMovement.x, lerpSpeed));
-            animator.SetFloat("yMovement", Mathf.Lerp(animator.GetFloat("yMovement"), realMovement.y, lerpSpeed));
-
-            #endregion
-        }
-        else
-        {
-            //Debug.Log("Not Moving");
-            animator.SetFloat("xMovement", 0);
-            animator.SetFloat("yMovement", 0);
-        }
-    }
-
-    public float sightDistance = 40;
-    public float roamDistance = 25;
-    public float meleeDistance = 3;
-
-    public virtual void BehaviourTree()
-    {
-        currentTarget = GetClosestEnemy(this);
 
         if (currentTarget != null)
         {
-            currentDestination = currentTarget.transform.position;
-            agent.SetDestination(currentDestination);
-            AttackTarget(currentTarget);
+            Gizmos.DrawLine(transform.position, currentTarget.transform.position);
         }
     }
 
+    public virtual void Update()
+    {
+        if (currentTarget != null)
+        {
+            Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
+
+            Quaternion desiredrot = Quaternion.LookRotation(direction);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, desiredrot, Time.deltaTime * agent.angularSpeed);
+        }
+
+        #region Animation
+
+        Vector3 movement = agent.velocity;
+        //movement = transform.TransformDirection(movement);
+
+        //Gets the rotation of the model to offset the animations
+        Vector2 realMovement = new Vector2(0, 0);
+        realMovement.x = Vector3.Dot(movement, model.right);
+        realMovement.y = Vector3.Dot(movement, model.forward);
+
+        //Sets the movement animations for the animator
+        //Debug.Log("X:" + rb.velocity.x + "Y:" + rb.velocity.z);
+        animator.SetFloat("xMovement", Mathf.Lerp(animator.GetFloat("xMovement"), realMovement.x, lerpSpeed));
+        animator.SetFloat("yMovement", Mathf.Lerp(animator.GetFloat("yMovement"), realMovement.y, lerpSpeed));
+
+        #endregion
+    }
+
+    public float distanceAllowance = 1f;
+
+    public float lerpSpeed = 0.01f;
+
+    public float sightDistance = 40;
+    public float roamDistance = 25;
+    public float maxDistanceFromModelCharacter = 6;
+    public float meleeDistance = 3;
+
+    public Vector3 followVector;
+    public float followDistance = 5;
+
+    #endregion
+
     #region Behaviours
 
-    public bool AttackTarget(CharacterController targetCheck)
+    #region Movement
+
+    public float walkSpeed = 6;
+    public float sprintSpeed = 10;
+
+    protected Vector3 currentDestination; public Vector3 GetDestination() { return currentDestination; }
+    public void SetDestinationPos(Vector3 pos)
     {
-        if (targetCheck == null)
+        currentDestination = pos;
+    }
+    public bool roaming = false;
+    public void MoveToDestination(bool sprinting)
+    {
+        agent.speed = sprinting ? sprintSpeed : walkSpeed;
+
+        agent.SetDestination(currentDestination);
+    }
+    public bool NearDestination(float distanceAllowance)
+    {
+        return Vector3.Distance(transform.position, currentDestination) <= distanceAllowance;
+    }
+
+    bool NearDestination()
+    {
+        return Vector3.Distance(transform.position, currentDestination) < distanceAllowance;
+    }
+
+    #endregion
+
+    #region Combat
+
+    public CharacterController currentTarget;
+    CharacterController lastAttacked;
+
+    public bool AttackTarget()
+    {
+        if (currentTarget == null)
             return false;
 
-        float distance = Vector3.Distance(this.gameObject.transform.position, targetCheck.gameObject.transform.position);
-        Debug.Log("Attack called");
+        float distance = Vector3.Distance(this.gameObject.transform.position, currentTarget.gameObject.transform.position);
+        //Debug.Log("Attack called");
         if (distance < meleeDistance)
         {
-            Debug.Log("Attack made");
-            combat.LightAttack();
+            if (combat.canAttack)
+            {
+                lastAttacked = currentTarget;
+                lastAttacked.GetCharacterCombat().StartBeingAttacked();
+
+                //Debug.Log("Attack made");
+                combat.LightAttack();
+            }
 
             return true;
         }
@@ -159,47 +153,23 @@ public class AIController : CharacterController
         return false;
     }
 
-    protected CharacterController GetClosestEnemy(CharacterController characterCheck)
+    public void EndAttackOnTarget()
     {
-        CharacterController closestCharacter = null;
-        float closestDistance = 99999;
-
-        foreach (var item in AIManager.instance.GetEnemyTeam(this))
+        if (lastAttacked != null)
         {
-            float itemDistance = Vector3.Distance(characterCheck.gameObject.transform.position, item.gameObject.transform.position);
-
-            //Debug.Log(item.gameObject.name + " is " + itemDistance);
-
-            if (itemDistance < sightDistance && itemDistance < closestDistance)
-            {
-                closestCharacter = item;
-                closestDistance = itemDistance;
-            }
+            lastAttacked.GetCharacterCombat().StopBeingAttacked();
+            lastAttacked = null;
         }
-
-        return closestCharacter;
     }
 
-    protected CharacterController GetFurthestEnemy(CharacterController characterCheck)
+    public float defendChance = 0f;
+
+    public bool CanDefend()
     {
-        CharacterController closestCharacter = null;
-        float closestDistance = 0;
-
-        foreach (var item in AIManager.instance.GetEnemyTeam(this))
-        {
-            float itemDistance = Vector3.Distance(characterCheck.gameObject.transform.position, item.gameObject.transform.position);
-
-            Debug.Log(item.gameObject.name + " is " + itemDistance);
-
-            if (itemDistance < sightDistance && itemDistance > closestDistance)
-            {
-                closestCharacter = item;
-                closestDistance = itemDistance;
-            }
-        }
-
-        return closestCharacter;
+        return (Random.Range(0f, 1f) < defendChance);
     }
+
+    #endregion
 
     #endregion
 }

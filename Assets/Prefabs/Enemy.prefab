@@ -16,7 +16,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: f332eec373590c449ae27f69ba88c747, type: 2}
+      objectReference: {fileID: 9100000, guid: d5a34d230dd9a9d409d70bdc2a9de354, type: 2}
     - target: {fileID: 7048375887579552703, guid: 22bb1e8efed20934fbd323b6f0290978,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  modelConstructor: {fileID: 0}
   canMove: 1
   canAttack: 1
   ignore: []
@@ -150,17 +151,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13b0a2e1b4bff14488ac9635b8309af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invisible: 0
   animator: {fileID: 7673251268057846940}
   model: {fileID: 1628624658551123326}
   playerTeam: 0
   bt: {fileID: 887968089973568631}
-  destinationTest: {fileID: 0}
-  roaming: 0
-  currentTarget: {fileID: 0}
+  distanceAllowance: 1
   lerpSpeed: 0.01
   sightDistance: 40
   roamDistance: 25
-  meleeDistance: 3
+  maxDistanceFromModelCharacter: 6
+  meleeDistance: 2
+  followVector: {x: 0, y: 0, z: 0}
+  followDistance: 5
+  walkSpeed: 6
+  sprintSpeed: 10
+  roaming: 0
+  currentTarget: {fileID: 0}
+  defendChance: 0.4
 --- !u!95 &7673251268057846940 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5006998096090209180, guid: 22bb1e8efed20934fbd323b6f0290978,

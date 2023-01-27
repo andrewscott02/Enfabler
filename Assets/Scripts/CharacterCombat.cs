@@ -8,6 +8,8 @@ public class CharacterCombat : MonoBehaviour
 
     [HideInInspector]
     public Animator animator;
+    [HideInInspector]
+    public ConstructPlayerModel modelConstructor;
 
     #endregion
 
@@ -19,7 +21,8 @@ public class CharacterCombat : MonoBehaviour
         {
             canAttack = false;
             animator.SetTrigger("LightAttack");
-            animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
+            animator.SetInteger("RandAttack", 1);
+            //animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
         }
     }
 
@@ -27,6 +30,11 @@ public class CharacterCombat : MonoBehaviour
     {
         if (canAttack)
         {
+            if (modelConstructor != null)
+            {
+                modelConstructor.PlayerParry(attackers > 0);
+            }
+
             canMove = false;
             canAttack = false;
             animator.SetTrigger("Parry");
@@ -37,6 +45,11 @@ public class CharacterCombat : MonoBehaviour
     {
         if (canAttack)
         {
+            if (modelConstructor != null)
+            {
+                modelConstructor.PlayerDodge(true, attackers > 0);
+            }
+
             canAttack = false;
             animator.SetTrigger("Dodge");
         }
@@ -51,7 +64,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void NextAttack()
     {
-        Debug.Log("Next Attack");
+        //Debug.Log("Next Attack");
         animator.SetInteger("SwordAttackCount", animator.GetInteger("SwordAttackCount") + 1);
 
         if (animator.GetInteger("SwordAttackCount") > animator.GetInteger("SwordAttackMax"))
@@ -60,13 +73,27 @@ public class CharacterCombat : MonoBehaviour
         }
 
         canAttack = true;
+
+        AIController AIController = GetComponent<AIController>();
+
+        if (AIController != null)
+        {
+            AIController.EndAttackOnTarget();
+        }
     }
 
     public void ResetAttack()
     {
-        Debug.Log("Reset Attack");
+        //Debug.Log("Reset Attack");
         animator.SetInteger("SwordAttackCount", 0);
         canAttack = true;
+
+        AIController AIController = GetComponent<AIController>();
+
+        if (AIController != null)
+        {
+            AIController.EndAttackOnTarget();
+        }
     }
 
     public void ResetMove()
@@ -109,12 +136,22 @@ public class CharacterCombat : MonoBehaviour
 
     public virtual void HitEnemy(bool hit)
     {
-        //Empty, leave for player
+        if (modelConstructor != null)
+        {
+            modelConstructor.PlayerAttack(hit);
+        }
+    }
+
+    public void Parried()
+    {
+        canAttack = false;
+        animator.SetTrigger("HitReact");
+        animator.SetInteger("RandReact", Random.Range(0, animator.GetInteger("RandReactMax") + 1));
     }
 
     void AttackCheck()
     {
-        Debug.Log("AttackCheck " + damage);
+        //Debug.Log("AttackCheck " + damage);
 
         //Raycast between sword base and tip
         RaycastHit hit;
@@ -137,7 +174,7 @@ public class CharacterCombat : MonoBehaviour
 
             //If it can be hit, deal damage to target and add it to the hit targets list
             hitTargets.Add(hitHealth);
-            hitHealth.Damage(damage, hit.point, hit.normal);
+            hitHealth.Damage(this, damage, hit.point, hit.normal);
         }
     }
 
@@ -193,6 +230,22 @@ public class CharacterCombat : MonoBehaviour
     {
         ResetAttack();
         ResetMove();
+    }
+
+    #endregion
+
+    #region Targetted Logic
+
+    int attackers = 0; public bool GetTargetted() { return attackers > 0; }
+
+    public void StartBeingAttacked()
+    {
+        attackers++;
+    }
+
+    public void StopBeingAttacked()
+    {
+        attackers--;
     }
 
     #endregion

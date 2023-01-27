@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Health : MonoBehaviour, IDamageable, IHealable
 {
+    [HideInInspector]
+    public Animator animator;
+    [HideInInspector]
+    public ConstructPlayerModel modelConstructor;
+
     public HealthSlider healthSlider;
     CharacterCombat combat;
     public Object bloodFX, parryFX;
     public int maxHealth = 50;
     int currentHealth = 0;
+
+    AIController AIController;
 
     private void Start()
     {
@@ -16,9 +23,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (healthSlider != null)
             healthSlider.ChangeSliderValue(currentHealth, maxHealth);
         combat = GetComponent<CharacterCombat>();
+
+        AIController = GetComponent<AIController>();
     }
 
-    public void Damage(int damage, Vector3 spawnPos, Vector3 spawnRot)
+    public void Damage(CharacterCombat attacker, int damage, Vector3 spawnPos, Vector3 spawnRot)
     {
         if (combat != null)
         {
@@ -30,6 +39,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             if (combat.GetParrying())
             {
                 Instantiate(parryFX, spawnPos, Quaternion.Euler(spawnRot));
+                attacker.Parried();
                 return;
             }
         }
@@ -44,8 +54,29 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (healthSlider != null)
             healthSlider.ChangeSliderValue(currentHealth, maxHealth);
 
+        if (modelConstructor != null)
+            modelConstructor.PlayerHit();
+
+        if (AIController != null)
+        {
+            AIController.EndAttackOnTarget();
+        }
+
         if (CheckKill())
+        {
             Kill();
+        }
+        else
+        {
+            HitReaction();
+        }
+    }
+
+    void HitReaction()
+    {
+        combat.canAttack = false;
+        animator.SetTrigger("HitReact");
+        animator.SetInteger("RandReact", Random.Range(0, animator.GetInteger("RandReactMax") + 1));
     }
 
     public void Heal(int heal)

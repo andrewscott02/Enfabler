@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
+    public bool invisible = false;
     public Animator animator;
-    protected CharacterCombat combat;
+    protected CharacterCombat combat; public CharacterCombat GetCharacterCombat() { return combat; }
     protected Health health;
     public Transform model;
 
@@ -14,6 +15,7 @@ public class CharacterController : MonoBehaviour
     public virtual void Start()
     {
         health = GetComponent<Health>();
+        health.animator = animator;
         combat = GetComponent<CharacterCombat>();
         combat.animator = animator;
 

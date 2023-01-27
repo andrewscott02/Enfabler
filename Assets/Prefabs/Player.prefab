@@ -252,6 +252,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -840037777384891287, guid: c0a19ca1e1f2d6b4e851dd0dfe577688,
         type: 3}
+    - target: {fileID: 7581198103970860092, guid: 22bb1e8efed20934fbd323b6f0290978,
+        type: 3}
+      propertyPath: m_Speed
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 8487852436018103018, guid: 22bb1e8efed20934fbd323b6f0290978,
         type: 3}
       propertyPath: m_RootOrder
@@ -312,6 +317,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9115629232183793744, guid: 22bb1e8efed20934fbd323b6f0290978,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9153536926427887807, guid: 22bb1e8efed20934fbd323b6f0290978,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8874548750218582264, guid: 22bb1e8efed20934fbd323b6f0290978, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 22bb1e8efed20934fbd323b6f0290978, type: 3}
@@ -362,6 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  modelConstructor: {fileID: 0}
   canMove: 1
   canAttack: 1
   ignore: []
@@ -379,6 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a735095b7652354397b801c10a837e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invisible: 0
   animator: {fileID: 7673251268057846940}
   model: {fileID: 1628624658551123326}
   playerTeam: 1
@@ -398,8 +415,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  walkSpeed: 60
-  runSpeed: 120
+  walkSpeed: 80
+  runSpeed: 150
   dodgeSpeed: 150
   lerpSpeed: 0.2
 --- !u!4 &6542142234118049258 stripped

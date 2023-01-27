@@ -38,6 +38,11 @@ public class AIManager : MonoBehaviour
         }
 
         Destroy(character.gameObject);
+
+        if (playerTeam.Count == 0 || enemyTeam.Count == 0)
+        {
+            NextLevel();
+        }
     }
 
     public List<CharacterController> GetAllyTeam(CharacterController character)
@@ -62,5 +67,17 @@ public class AIManager : MonoBehaviour
         {
             return playerTeam;
         }
+    }
+
+    public bool OnSameTeam(CharacterController a, CharacterController b)
+    {
+        return GetAllyTeam(a).Contains(b);
+    }
+
+    public GameObject nextLevel;
+
+    public void NextLevel()
+    {
+        nextLevel.SetActive(true);
     }
 }

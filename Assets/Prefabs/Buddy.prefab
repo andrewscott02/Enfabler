@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 9153536926427887807, guid: 22bb1e8efed20934fbd323b6f0290978,
         type: 3}
       propertyPath: maxHealth
-      value: 40
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22bb1e8efed20934fbd323b6f0290978, type: 3}
@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  modelConstructor: {fileID: 0}
   canMove: 1
   canAttack: 1
   ignore: []
@@ -133,16 +134,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662c0c5d0a58e7c45bf1f145d176638c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invisible: 0
   animator: {fileID: 7673251268057846940}
   model: {fileID: 1628624658551123326}
   playerTeam: 1
   bt: {fileID: 8034274260663390704}
-  destinationTest: {fileID: 0}
-  roaming: 0
+  distanceAllowance: 1
   lerpSpeed: 0.01
   sightDistance: 40
   roamDistance: 25
-  meleeDistance: 3
+  maxDistanceFromModelCharacter: 8
+  meleeDistance: 2
+  followVector: {x: 0.51, y: 0, z: -0.54}
+  followDistance: 4
+  walkSpeed: 6
+  sprintSpeed: 10
+  roaming: 0
+  currentTarget: {fileID: 0}
+  defendChance: 0.6
 --- !u!114 &6710008956972161548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,10 +164,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317ebcb6720aa8d47af6e5718b5c1aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modelCharacter: {fileID: 0}
+  stateText: {fileID: 0}
   playerState: 0
   showValues: []
+  aggressiveDecay: 0.6
+  counterDecay: 1
+  defensiveDecay: 1
+  cautiousDecay: 1
+  panicDecay: 1
+  currentTargets: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  currentTargetCastInterval: 0.6
+  currentTargetCastRadius: 1.5
+  currentTargetCastDistance: 10
   counterAvailable: 0
-  counterWindow: 1.5
+  counterWindowParry: 1.5
+  counterWindowDodge: 3
 --- !u!114 &8034274260663390704
 MonoBehaviour:
   m_ObjectHideFlags: 0
