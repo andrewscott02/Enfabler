@@ -7,6 +7,8 @@ public class ExperimentManager : MonoBehaviour
 {
     public static ExperimentManager instance;
 
+    bool adaptiveFirst;
+
     private void Start()
     {
         if (instance == null)
@@ -16,6 +18,7 @@ public class ExperimentManager : MonoBehaviour
 
             if (Random.Range(0f, 1f) > 0.5f)
             {
+                adaptiveFirst = true;
                 realScenes[0] = tutorialScene;
                 realScenes[1] = levela;
                 realScenes[2] = leveli;
@@ -23,6 +26,7 @@ public class ExperimentManager : MonoBehaviour
             }
             else
             {
+                adaptiveFirst = false;
                 realScenes[0] = tutorialScene;
                 realScenes[1] = leveli;
                 realScenes[2] = levela;
@@ -44,9 +48,19 @@ public class ExperimentManager : MonoBehaviour
         SceneManager.LoadScene(realScenes[currentScene].ToString(), LoadSceneMode.Single);
         currentScene++;
     }
+
+    public string GetAIMessage()
+    {
+        if (adaptiveFirst)
+        {
+            return "The first companion you played against was companion A, the second was companion I";
+        }
+
+        return "The first companion you played against was companion I, the second was companion A";
+    }
 }
 
 public enum E_Scenes
 {
-    MainMenu, Controls, Adaptive_Experiment, Interval_Experiment
+    MainMenu, Controls, Adaptive_Experiment, Interval_Experiment, EndMenu
 }
