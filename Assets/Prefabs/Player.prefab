@@ -252,6 +252,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -840037777384891287, guid: c0a19ca1e1f2d6b4e851dd0dfe577688,
         type: 3}
+    - target: {fileID: 7581198103970860092, guid: 22bb1e8efed20934fbd323b6f0290978,
+        type: 3}
+      propertyPath: m_Speed
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 8487852436018103018, guid: 22bb1e8efed20934fbd323b6f0290978,
         type: 3}
       propertyPath: m_RootOrder
@@ -410,8 +415,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  walkSpeed: 60
-  runSpeed: 120
+  walkSpeed: 80
+  runSpeed: 150
   dodgeSpeed: 150
   lerpSpeed: 0.2
 --- !u!4 &6542142234118049258 stripped
