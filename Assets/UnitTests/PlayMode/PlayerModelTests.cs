@@ -114,7 +114,7 @@ public class PlayerModelTests
 
         model.PlayerDodge(false);
 
-        Assert.AreEqual(Descriptor.Cautious, model.playerState);
+        Assert.AreEqual(Descriptor.Panic, model.playerState);
     }
 
     #endregion

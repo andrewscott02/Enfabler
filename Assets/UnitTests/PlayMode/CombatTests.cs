@@ -206,7 +206,7 @@ public class CombatTests
         combat.StopBeingAttacked();
         combat.Dodge();
 
-        Assert.AreEqual(Descriptor.Cautious, model.playerState);
+        Assert.AreEqual(Descriptor.Panic, model.playerState);
     }
 
     [UnityTest]
