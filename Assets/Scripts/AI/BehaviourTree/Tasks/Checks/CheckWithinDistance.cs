@@ -10,10 +10,11 @@ public class CheckWithinDistance : Node
     public float distance;
 
     /// <summary>
-    /// Commands an agent to roam to a random point within a specified radius
+    /// Checks that the agent is within a specified distance to its model character
     /// </summary>
-    /// <param name="newAgent">The agent this command is given to</param>
-    /// <param name="radius">The radius of the roam position, recommend 30</param>
+    /// <param name="agent">The agent this command is given to</param>
+    /// <param name="characterModel">The agent model used for decision making</param>
+    /// <param name="distance">The maximum distance the agent can be from its model character</param>
     public CheckWithinDistance(AIController agent, ConstructPlayerModel characterModel, float distance)
     {
         this.agent = agent;

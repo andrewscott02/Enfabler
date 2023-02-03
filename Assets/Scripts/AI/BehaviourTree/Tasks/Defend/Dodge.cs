@@ -9,13 +9,14 @@ public class Dodge : Node
     public float distanceAllowance;
 
     /// <summary>
-    /// Commands an agent to roam to a random point within a specified radius
+    /// Commands an agent to dodge. If the target is near its current destination, this will fail.
     /// </summary>
-    /// <param name="newAgent">The agent this command is given to</param>
-    /// <param name="radius">The radius of the roam position, recommend 30</param>
+    /// <param name="agent">The agent this command is given to</param>
+    /// <param name="distanceAllowance">The distance the agent can be from its destination for this to fail</param>
     public Dodge(AIController agent, float distanceAllowance)
     {
         this.agent = agent;
+        this.distanceAllowance = distanceAllowance;
     }
 
     public override NodeState Evaluate()

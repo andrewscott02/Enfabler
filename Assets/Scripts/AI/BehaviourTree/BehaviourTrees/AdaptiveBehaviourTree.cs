@@ -46,12 +46,12 @@ public class AdaptiveBehaviourTree : BehaviourTree
             //If player is cautious, rush to player and attack enemies around them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Cautious),
-                BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter, agent.distanceAllowance)
+                BaseBehaviours.FlankTarget(agent, playerModel, agent.meleeDistance, true, true, agent.distanceAllowance)
                 ),
             //If player is struggling, draw enemies away from them
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Panic),
-                BaseBehaviours.FlankTarget(agent, playerModel, agent.meleeDistance, true, true, agent.distanceAllowance)
+                BaseBehaviours.InterceptTarget(agent, playerModel, agent.meleeDistance, true, true, agent.distanceAllowance)
                 ),
 
         #endregion

@@ -9,10 +9,10 @@ public class GetModelNonTarget : Node
     public ConstructPlayerModel model;
 
     /// <summary>
-    /// Commands an agent to roam to a random point within a specified radius
+    /// Commands an agent to get the closest enemy its model character is not targetting
     /// </summary>
-    /// <param name="newAgent">The agent this command is given to</param>
-    /// <param name="radius">The radius of the roam position, recommend 30</param>
+    /// <param name="agent">The agent this command is given to</param>
+    /// <param name="model">The agent model used for decision making</param>
     public GetModelNonTarget(AIController agent, ConstructPlayerModel model)
     {
         this.agent = agent;

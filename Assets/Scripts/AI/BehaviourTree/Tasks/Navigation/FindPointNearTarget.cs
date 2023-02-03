@@ -12,10 +12,12 @@ public class FindPointNearTarget : Node
     public bool requiresSameTeam;
 
     /// <summary>
-    /// Commands an agent to roam to a random point within a specified radius
+    /// 
     /// </summary>
-    /// <param name="newAgent">The agent this command is given to</param>
-    /// <param name="radius">The radius of the roam position, recommend 30</param>
+    /// <param name="agent">The agent this command is given to</param>
+    /// <param name="target">The target the agent will stay near</param>
+    /// <param name="radius">The max distance away from the target</param>
+    /// <param name="requiresSameTeam">Whether this requires the agent and intercept target to be on the same team</param>
     public FindPointNearTarget(AIController agent, GameObject target, float radius, bool requiresSameTeam)
     {
         this.agent = agent;

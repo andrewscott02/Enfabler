@@ -9,10 +9,10 @@ public class GetClosestEnemyToTarget : Node
     public GameObject target;
 
     /// <summary>
-    /// Commands an agent to roam to a random point within a specified radius
+    /// Commands an agent to get the closest enemy to a specified target
     /// </summary>
-    /// <param name="newAgent">The agent this command is given to</param>
-    /// <param name="radius">The radius of the roam position, recommend 30</param>
+    /// <param name="agent">The agent this command is given to</param>
+    /// <param name="target">The target of the check</param>
     public GetClosestEnemyToTarget(AIController agent, GameObject target)
     {
         this.agent = agent;

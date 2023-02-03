@@ -14,10 +14,12 @@ public class MoveToDestination : Node
     public bool sprinting;
 
     /// <summary>
-    /// Commands an agent to roam to a random point within a specified radius
+    /// Commands an agent to move to its current destination
     /// </summary>
-    /// <param name="newAgent">The agent this command is given to</param>
-    /// <param name="radius">The radius of the roam position, recommend 30</param>
+    /// <param name="agent">The agent this command is given to</param>
+    /// <param name="distanceAllowance">The maximum distance the destination is allowed to be</param>
+    /// <param name="maxTime">The maximum time that the agent can move before resetting its movement</param>
+    /// <param name="sprinting">Whether the agent sprints to its destination</param>
     public MoveToDestination(AIController agent, float distanceAllowance, float maxTime, bool sprinting)
     {
         this.agent = agent;
