@@ -29,7 +29,7 @@ public class CharacterCombat : MonoBehaviour
         {
             EndParry();
             EndDodge();
-            EndAttack();
+            ForceEndAttack();
 
             canAttack = false;
             animator.SetTrigger("LightAttack");
@@ -44,7 +44,7 @@ public class CharacterCombat : MonoBehaviour
         {
             EndParry();
             EndDodge();
-            EndAttack();
+            ForceEndAttack();
 
             if (modelConstructor != null)
             {
@@ -63,7 +63,7 @@ public class CharacterCombat : MonoBehaviour
         {
             EndParry();
             EndDodge();
-            EndAttack();
+            ForceEndAttack();
 
             if (modelConstructor != null)
             {
@@ -141,6 +141,15 @@ public class CharacterCombat : MonoBehaviour
         damage = currentDamage;
 
         InvokeRepeating("AttackCheck", 0f, 0.004f);
+    }
+
+    public void ForceEndAttack()
+    {
+        //Clear damage and list of enemies hit
+        hitTargets.Clear();
+        damage = 0;
+
+        CancelInvoke("AttackCheck");
     }
 
     public void EndAttack()

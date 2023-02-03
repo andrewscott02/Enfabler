@@ -166,13 +166,14 @@ public class ConstructPlayerModel : MonoBehaviour
 
     public void PlayerDodge(bool beingAttacked)
     {
+        descriptorValues[Descriptor.Cautious] += 3.5f;
+
         if (beingAttacked)
         {
             descriptorValues[Descriptor.Defensive] += 3f;
-            descriptorValues[Descriptor.Cautious] += 3.5f;
             SetupCounter(counterWindowDodge);
         }
-        else { descriptorValues[Descriptor.Cautious] += 6f; }
+        else { descriptorValues[Descriptor.Cautious] += 2.5f; }
 
         AdjustDisplay();
     }

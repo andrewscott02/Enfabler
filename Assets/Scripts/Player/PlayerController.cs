@@ -120,6 +120,11 @@ public class PlayerController : CharacterController
         #endregion
 
         #endregion
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Break(); 
+        }
     }
 
     private void FixedUpdate()
