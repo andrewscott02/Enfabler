@@ -13,7 +13,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     CharacterCombat combat;
     public Object bloodFX, parryFX;
     public int maxHealth = 50;
-    int currentHealth = 0;
+    int currentHealth = 0; public int GetCurrentHealth() { return currentHealth; }
 
     AIController AIController;
 
@@ -38,8 +38,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
             if (combat.GetParrying())
             {
-                Instantiate(parryFX, spawnPos, Quaternion.Euler(spawnRot));
-                attacker.Parried();
+                if (parryFX != null) { Instantiate(parryFX, spawnPos, Quaternion.Euler(spawnRot)); }
+                if (attacker != null) { attacker.Parried(); }
                 return;
             }
         }
@@ -74,9 +74,15 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     void HitReaction()
     {
-        combat.canAttack = false;
-        animator.SetTrigger("HitReact");
-        animator.SetInteger("RandReact", Random.Range(0, animator.GetInteger("RandReactMax") + 1));
+        if (combat != null) { combat.canAttack = false; }
+        else { Debug.LogWarning("No combat script"); }
+
+        if (animator != null)
+        {
+            animator.SetTrigger("HitReact");
+            animator.SetInteger("RandReact", Random.Range(0, animator.GetInteger("RandReactMax") + 1));
+        }
+        else { Debug.LogWarning("No animator"); }
     }
 
     public void Heal(int heal)
