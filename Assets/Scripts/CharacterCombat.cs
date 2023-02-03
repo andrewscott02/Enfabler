@@ -67,7 +67,7 @@ public class CharacterCombat : MonoBehaviour
 
             if (modelConstructor != null)
             {
-                modelConstructor.PlayerDodge(true, attackers > 0);
+                modelConstructor.PlayerDodge(attackers > 0);
             }
 
             canAttack = false;
