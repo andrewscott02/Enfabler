@@ -32,15 +32,6 @@ public class PlayerController : CharacterController
         playerMovement.animator = animator;
         playerMovement.SetModel(model);
 
-        ConstructPlayerModel constructModel = GameObject.FindObjectOfType<ConstructPlayerModel>();
-
-        if (constructModel != null)
-        {
-            Health allyHealth = GameObject.FindObjectOfType<ConstructPlayerModel>().GetComponent<Health>();
-
-            combat.ignore.Add(allyHealth);
-        }
-
         AIManager.instance.AllocateTeam(this);
     }
 
@@ -133,7 +124,8 @@ public class PlayerController : CharacterController
 
     private void FixedUpdate()
     {
-        playerMovement.Move(xInput * 2, yInput * 2);
+        Debug.Log(xInput + "|| " + yInput);
+        playerMovement.Move(xInput, yInput);
 
         playerMovement.animator.SetBool("CanMove", combat.canMove);
     }
