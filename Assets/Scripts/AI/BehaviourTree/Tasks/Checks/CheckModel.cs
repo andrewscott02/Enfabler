@@ -9,10 +9,10 @@ public class CheckModel : Node
     public Descriptor descriptor;
 
     /// <summary>
-    /// Commands an agent to roam to a random point within a specified radius
+    /// Checks the current model descriptor
     /// </summary>
-    /// <param name="newAgent">The agent this command is given to</param>
-    /// <param name="radius">The radius of the roam position, recommend 30</param>
+    /// <param name="characterModel">The agent model used for decision making</param>
+    /// <param name="descriptor">The  model descriptor required</param>
     public CheckModel(ConstructPlayerModel characterModel, Descriptor descriptor)
     {
         this.characterModel = characterModel;

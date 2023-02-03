@@ -51,12 +51,41 @@ public class ExperimentManager : MonoBehaviour
 
     public string GetAIMessage()
     {
+        string code = GenerateReferenceCode();
+
         if (adaptiveFirst)
         {
-            return "The first companion you played against was companion A, the second was companion I";
+            return "Your reference code is " + code + ". Please write this down or remember it as it is needed for the questionnaire, and will also be needed if you wish to withdraw from the experiment. The first companion you played against was companion AM, the second was companion IT.";
         }
 
-        return "The first companion you played against was companion I, the second was companion A";
+        return "Your reference code is " + code + ". Please write this down or remember it as it is needed for the questionnaire, and will also be needed if you wish to withdraw from the experiment. The first companion you played against was companion IT, the second was companion AM.";
+    }
+
+    public string GenerateReferenceCode()
+    {
+        string code = "";
+
+        if (adaptiveFirst)
+        {
+            code += "AM-IT-";
+        }
+        else
+        {
+            code += "IT-AM-";
+        }
+
+        code += (int)Random.Range((int)100, (int)999) + "-";
+        code += Remap(Time.frameCount, new Vector2Int(0, 100000), new Vector2Int(10000, 99999));
+
+        Debug.Log(code);
+
+        return code;
+    }
+
+    int Remap(int In, Vector2Int InMinMax, Vector2Int OutMinMax)
+    {
+        //Remap Function: https://docs.unity3d.com/Packages/com.unity.shadergraph@6.9/manual/Remap-Node.html
+        return OutMinMax.x + (In - InMinMax.x) * (OutMinMax.y - OutMinMax.x) / (InMinMax.y - InMinMax.x);
     }
 }
 

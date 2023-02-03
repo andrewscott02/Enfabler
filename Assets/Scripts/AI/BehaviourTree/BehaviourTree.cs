@@ -106,6 +106,30 @@ namespace BehaviourTrees
                 );
         }
 
+        public static Selector InterceptTarget(AIController agent, ConstructPlayerModel model, float flankDistance, bool requireSameTeam, bool sprint, float distanceAllowance)
+        {
+            return new Selector(
+                DefensiveAction(agent, distanceAllowance),
+                new Sequence(
+                    new GetModelNonTarget(agent, model),
+                    new InterceptTarget(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, sprint),
+                    new MeleeAttack(agent)
+                    ),
+                new Sequence(
+                    new GetModelTarget(agent, model),
+                    new InterceptTarget(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, sprint),
+                    new MeleeAttack(agent)
+                    ),
+                new Sequence(
+                    new GetModelTarget(agent, model),
+                    new InterceptTarget(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
+                    new MoveToDestination(agent, agent.distanceAllowance, 6f, true)
+                    )
+                );
+        }
+
         public static Selector IgnoreModelTargets(AIController agent, ConstructPlayerModel model, float distanceAllowance)
         {
             return new Selector(

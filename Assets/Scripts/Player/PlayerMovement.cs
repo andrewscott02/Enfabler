@@ -10,15 +10,23 @@ public class PlayerMovement : MonoBehaviour
     Transform model; public void SetModel(Transform newModel) { model = newModel; }
 
     bool isSprinting = false;
-    public float walkSpeed;
-    public float runSpeed;
-    public float dodgeSpeed;
+    public float walkSpeed = 160;
+    public float runSpeed = 300;
+    public float dodgeSpeed = 300;
 
     public float lerpSpeed = 0.01f;
+
+    public Vector3 movement;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    public void SetMovement(float xSpeed, float ySpeed)
+    {
+        movement = new Vector3(xSpeed, 0, ySpeed) * Time.deltaTime;
+        movement = transform.TransformDirection(movement);
     }
 
     /// <summary>
@@ -28,10 +36,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="ySpeed"> Determines the vertical movement (Forward and Backward) </param>
     public void Move(float xSpeed, float ySpeed)
     {
-        //Debug.Log("Move: " + xSpeed + " | " + ySpeed);
-        //Movement
-        Vector3 movement = new Vector3(xSpeed, 0, ySpeed) * Time.deltaTime;
-        movement = transform.TransformDirection(movement);
+        SetMovement(xSpeed, ySpeed);
 
         if (GetComponent<CharacterCombat>().GetDodging())
         {

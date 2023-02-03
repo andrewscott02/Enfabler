@@ -18,11 +18,23 @@ public class AIManager : MonoBehaviour
     {
         if (character.playerTeam)
         {
+            foreach (var item in playerTeam)
+            {
+                item.GetCharacterCombat().ignore.Add(character.GetHealth());
+            }
+
             playerTeam.Add(character);
+            character.GetCharacterCombat().SetupAllies(playerTeam);
         }
         else
         {
+            foreach (var item in enemyTeam)
+            {
+                item.GetCharacterCombat().ignore.Add(character.GetHealth());
+            }
+
             enemyTeam.Add(character);
+            character.GetCharacterCombat().SetupAllies(enemyTeam);
         }
     }
 

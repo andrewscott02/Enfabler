@@ -7,7 +7,7 @@ public class IntervalBehaviourTree : BehaviourTree
 {
     public ConstructPlayerModel playerModel;
     public int currentState = 0;
-    int maxState = 3;
+    int maxState = 4;
     public Vector2 switchInterval = new Vector2(3, 8);
 
     protected override Node SetupTree()
@@ -52,6 +52,11 @@ public class IntervalBehaviourTree : BehaviourTree
             new Sequence(
                 new CheckEqual<int>(3, this),
                 BaseBehaviours.FlankTarget(agent, playerModel, agent.meleeDistance, true, true, agent.distanceAllowance)
+                ),
+            //In state 4, intercept between player and their closest target
+            new Sequence(
+                new CheckEqual<int>(4, this),
+                BaseBehaviours.InterceptTarget(agent, playerModel, agent.meleeDistance, true, true, agent.distanceAllowance)
                 ),
 
         #endregion

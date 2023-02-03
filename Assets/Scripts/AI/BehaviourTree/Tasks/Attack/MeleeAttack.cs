@@ -8,10 +8,9 @@ public class MeleeAttack : Node
     public AIController agent;
 
     /// <summary>
-    /// Commands an agent to roam to a random point within a specified radius
+    /// Commands an agent to make a melee attack against its target
     /// </summary>
-    /// <param name="newAgent">The agent this command is given to</param>
-    /// <param name="radius">The radius of the roam position, recommend 30</param>
+    /// <param name="agent">The agent this command is given to</param>
     public MeleeAttack(AIController agent)
     {
         this.agent = agent;

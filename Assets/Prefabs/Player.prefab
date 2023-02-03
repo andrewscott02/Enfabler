@@ -182,7 +182,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7700341593630680933}
-  m_LocalRotation: {x: 0.02552247, y: 0.000000017259337, z: -4.4064447e-10, w: 0.99967426}
+  m_LocalRotation: {x: 0.02552249, y: 0.00000002026334, z: -5.173395e-10, w: 0.99967426}
   m_LocalPosition: {x: 0, y: 2.83, z: -4.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.1040463, y: 1}
+    m_SensorSize: {x: 2.3076923, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -325,7 +325,7 @@ PrefabInstance:
     - target: {fileID: 9153536926427887807, guid: 22bb1e8efed20934fbd323b6f0290978,
         type: 3}
       propertyPath: maxHealth
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8874548750218582264, guid: 22bb1e8efed20934fbd323b6f0290978, type: 3}
@@ -415,9 +415,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  walkSpeed: 80
-  runSpeed: 150
-  dodgeSpeed: 150
+  walkSpeed: 160
+  runSpeed: 300
+  dodgeSpeed: 300
   lerpSpeed: 0.2
 --- !u!4 &6542142234118049258 stripped
 Transform:

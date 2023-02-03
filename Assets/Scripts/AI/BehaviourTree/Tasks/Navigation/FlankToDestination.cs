@@ -11,10 +11,12 @@ public class FlankToDestination : Node
     public bool requiresSameTeam;
 
     /// <summary>
-    /// Commands an agent to roam to a random point within a specified radius
+    /// Commands an agent to flank its current target with another character's position
     /// </summary>
-    /// <param name="newAgent">The agent this command is given to</param>
-    /// <param name="distance">The radius of the roam position, recommend 30</param>
+    /// <param name="agent"The agent this command is given to></param>
+    /// <param name="flankTarget">The target of the flank</param>
+    /// <param name="distance">The distance the agent will try to keep on the other side of the flank target</param>
+    /// <param name="requiresSameTeam">Whether this requires the agent and intercept target to be on the same team</param>
     public FlankToDestination(AIController agent, GameObject flankTarget, float distance, bool requiresSameTeam)
     {
         this.agent = agent;

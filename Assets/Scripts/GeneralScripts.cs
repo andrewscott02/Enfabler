@@ -44,6 +44,7 @@ public static class HelperFunctions
     {
         //Get the direction from a->b and normalise it
         Vector3 direction = (b - a).normalized;
+
         //Increase the magnitude
         direction *= distance;
 

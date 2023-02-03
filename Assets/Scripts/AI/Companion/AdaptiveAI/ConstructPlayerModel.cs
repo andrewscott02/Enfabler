@@ -16,6 +16,8 @@ public class ConstructPlayerModel : MonoBehaviour
     public Dictionary<Descriptor, float> descriptorValues = new Dictionary<Descriptor, float>();
     public List<DescriptorValue> showValues = new List<DescriptorValue>();
 
+    public bool test = false;
+
     private void Start()
     {
         descriptorValues.Add(Descriptor.Aggressive, 0);
@@ -23,6 +25,8 @@ public class ConstructPlayerModel : MonoBehaviour
         descriptorValues.Add(Descriptor.Defensive, 0);
         descriptorValues.Add(Descriptor.Cautious, 0);
         descriptorValues.Add(Descriptor.Panic, 0);
+
+        if (test) { return; }
 
         if (modelCharacter != null)
         {
@@ -71,6 +75,8 @@ public class ConstructPlayerModel : MonoBehaviour
         {
             playerState = highestState;
         }
+
+        if (test) { return; }
 
         if (stateText != null)
         {
@@ -139,11 +145,11 @@ public class ConstructPlayerModel : MonoBehaviour
 
     public void PlayerAttack(bool hit)
     {
-        descriptorValues[Descriptor.Aggressive] += 3f;
+        descriptorValues[Descriptor.Aggressive] += 2.5f;
 
         if (CheckCounter()) { descriptorValues[Descriptor.Counter] += 5f; }
 
-        if (!hit) { descriptorValues[Descriptor.Panic] += 2f; }
+        if (!hit) { descriptorValues[Descriptor.Panic] += 4f; }
 
         AdjustDisplay();
     }
@@ -153,18 +159,20 @@ public class ConstructPlayerModel : MonoBehaviour
         descriptorValues[Descriptor.Defensive] += 5f;
 
         if (beingAttacked) { SetupCounter(counterWindowParry); }
-        else { descriptorValues[Descriptor.Panic] += 2f; }
+        else { descriptorValues[Descriptor.Panic] += 6f; }
 
         AdjustDisplay();
     }
 
-    public void PlayerDodge(bool away, bool beingAttacked)
+    public void PlayerDodge(bool beingAttacked)
     {
-        if (away) { descriptorValues[Descriptor.Cautious] += 5f; }
-        else { descriptorValues[Descriptor.Defensive] += 5f; }
-
-        if (beingAttacked) { SetupCounter(counterWindowDodge); }
-        else { descriptorValues[Descriptor.Panic] += 2f; }
+        if (beingAttacked)
+        {
+            descriptorValues[Descriptor.Defensive] += 3f;
+            descriptorValues[Descriptor.Cautious] += 3.5f;
+            SetupCounter(counterWindowDodge);
+        }
+        else { descriptorValues[Descriptor.Cautious] += 6f; }
 
         AdjustDisplay();
     }

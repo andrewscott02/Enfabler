@@ -8,10 +8,9 @@ public class BeingAttacked : Node
     public AIController agent;
 
     /// <summary>
-    /// Commands an agent to roam to a random point within a specified radius
+    /// Checks if the agent is being attacked by at least 1 enemy
     /// </summary>
-    /// <param name="newAgent">The agent this command is given to</param>
-    /// <param name="radius">The radius of the roam position, recommend 30</param>
+    /// <param name="agent">The agent this command is given to</param>
     public BeingAttacked(AIController agent)
     {
         this.agent = agent;

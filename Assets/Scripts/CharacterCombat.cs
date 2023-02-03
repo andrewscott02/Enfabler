@@ -11,6 +11,14 @@ public class CharacterCombat : MonoBehaviour
     [HideInInspector]
     public ConstructPlayerModel modelConstructor;
 
+    public void SetupAllies(List<CharacterController> allies)
+    {
+        foreach (var item in allies)
+        {
+            ignore.Add(item.GetHealth());
+        }
+    }
+
     #endregion
 
     #region Basic Actions
@@ -19,10 +27,14 @@ public class CharacterCombat : MonoBehaviour
     {
         if (canAttack)
         {
+            EndParry();
+            EndDodge();
+            EndAttack();
+
             canAttack = false;
             animator.SetTrigger("LightAttack");
-            animator.SetInteger("RandAttack", 1);
-            //animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
+            //animator.SetInteger("RandAttack", 1);
+            animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
         }
     }
 
@@ -30,6 +42,10 @@ public class CharacterCombat : MonoBehaviour
     {
         if (canAttack)
         {
+            EndParry();
+            EndDodge();
+            EndAttack();
+
             if (modelConstructor != null)
             {
                 modelConstructor.PlayerParry(attackers > 0);
@@ -45,9 +61,13 @@ public class CharacterCombat : MonoBehaviour
     {
         if (canAttack)
         {
+            EndParry();
+            EndDodge();
+            EndAttack();
+
             if (modelConstructor != null)
             {
-                modelConstructor.PlayerDodge(true, attackers > 0);
+                modelConstructor.PlayerDodge(attackers > 0);
             }
 
             canAttack = false;

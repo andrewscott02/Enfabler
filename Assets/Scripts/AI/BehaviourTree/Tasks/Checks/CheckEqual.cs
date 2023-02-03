@@ -9,10 +9,10 @@ public class CheckEqual<T> : Node
     public IntervalBehaviourTree bt;
 
     /// <summary>
-    /// Commands an agent to roam to a random point within a specified radius
+    /// Checks the current state of the interval behaviour tree
     /// </summary>
-    /// <param name="newAgent">The agent this command is given to</param>
-    /// <param name="radius">The radius of the roam position, recommend 30</param>
+    /// <param name="a">The value required</param>
+    /// <param name="bt">The interval behaviour tree</param>
     public CheckEqual(T a, IntervalBehaviourTree bt)
     {
         this.a = a;
