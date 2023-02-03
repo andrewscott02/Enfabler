@@ -87,7 +87,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     public void Heal(int heal)
     {
-        currentHealth += heal;
+        currentHealth = Mathf.Clamp(currentHealth + heal, 0, maxHealth);
         if (healthSlider != null)
             healthSlider.ChangeSliderValue(currentHealth, maxHealth);
     }
@@ -97,8 +97,12 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         return currentHealth <= 0;
     }
 
+    public bool dying = false;
+
     public void Kill()
     {
-        AIManager.instance.CharacterDied(this.GetComponent<CharacterController>());
+        dying = true;
+        if (AIManager.instance != null)
+            AIManager.instance.CharacterDied(this.GetComponent<CharacterController>());
     }
 }
