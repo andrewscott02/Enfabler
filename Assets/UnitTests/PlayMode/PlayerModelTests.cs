@@ -4,7 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class PlayerModeltests
+public class PlayerModelTests
 {
     #region Attack Tests
 

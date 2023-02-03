@@ -53,7 +53,7 @@ public class CharacterCombat : MonoBehaviour
 
             canMove = false;
             canAttack = false;
-            animator.SetTrigger("Parry");
+            if (animator != null) { animator.SetTrigger("Parry"); }
         }
     }
 
@@ -71,7 +71,7 @@ public class CharacterCombat : MonoBehaviour
             }
 
             canAttack = false;
-            animator.SetTrigger("Dodge");
+            if (animator != null) { animator.SetTrigger("Dodge"); }
         }
     }
 
