@@ -81,7 +81,6 @@ public class HealthTests
 
         yield return null;
 
-        Vector3 nullVector = new Vector3(0, 0, 0);
         health.Heal(15);
 
         Assert.AreEqual(health.maxHealth, health.GetCurrentHealth());
