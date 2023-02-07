@@ -16,7 +16,7 @@ public class ExperimentManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             instance = this;
 
-            if (Random.Range(0f, 1f) > 0.5f)
+            if (RandomBool())
             {
                 adaptiveFirst = true;
                 realScenes[0] = tutorialScene;
@@ -87,6 +87,52 @@ public class ExperimentManager : MonoBehaviour
         //Remap Function: https://docs.unity3d.com/Packages/com.unity.shadergraph@6.9/manual/Remap-Node.html
         return OutMinMax.x + (In - InMinMax.x) * (OutMinMax.y - OutMinMax.x) / (InMinMax.y - InMinMax.x);
     }
+
+    #region Random
+
+    bool RandomBool()
+    {
+        return Random.Range(0, 2) > 0;
+    }
+
+    #region Tests
+
+    void TestRandom(int iterations)
+    {
+        for (int i = 0; i < iterations; i++)
+        {
+            if (RandomBool())
+            {
+                Debug.Log("interval");
+            }
+            else
+            {
+                Debug.Log("adaptive");
+            }
+        }
+    }
+
+    [ContextMenu("Test Random/ 1")]
+    public void TestRandom1()
+    {
+        TestRandom(1);
+    }
+
+    [ContextMenu("Test Random/ 100")]
+    public void TestRandom100()
+    {
+        TestRandom(100);
+    }
+
+    [ContextMenu("Test Random/ 100000")]
+    public void TestRandom100000()
+    {
+        TestRandom(100000);
+    }
+
+    #endregion
+
+    #endregion
 }
 
 public enum E_Scenes

@@ -119,14 +119,15 @@ public static class HelperFunctions
 
             float itemDistance = Vector3.Distance(origin, item.gameObject.transform.position);
 
-            //Debug.Log(item.gameObject.name + " is " + itemDistance);
+            if (debug)
+                Debug.Log(item.gameObject.name + " is " + itemDistance);
 
             if (itemDistance < sightRadius && itemDistance < closestDistance)
             {
                 if (debug && closestCharacter != null)
                 {
-                    //Debug.Log("Origin: " + origin);
-                    //Debug.Log("From " + closestCharacter.name + closestDistance + " to " + item.name + itemDistance);
+                    Debug.Log("Origin: " + origin);
+                    Debug.Log("From " + closestCharacter.name + closestDistance + " to " + item.name + itemDistance);
                 }
                 closestCharacter = item;
                 closestDistance = itemDistance;
@@ -154,8 +155,8 @@ public static class HelperFunctions
 
         foreach (var item in enemyList)
         {
-            if (item.invisible)
-                break;
+            if (item == null) break;
+            if (item.invisible) break;
 
             float itemDistance = Vector3.Distance(origin, item.gameObject.transform.position);
 

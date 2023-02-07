@@ -17,13 +17,13 @@ public class FollowBehaviourTree : BehaviourTree
             new Sequence(
                 new CheckOutDistance(agent, playerModel),
                 new Selector(
-                    BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter, agent.distanceAllowance)
+                    BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter)
                     )
                 ),
             //If there are no targets, but the player is an ally, move to a point near the player
-            BaseBehaviours.FollowTarget(agent, agent.GetPlayer(), true, agent.distanceAllowance),
+            BaseBehaviours.FollowTarget(agent, agent.GetPlayer(), true),
             //If there are no targets, move to a random point in the roam radius
-            BaseBehaviours.RoamToRandomPoint(agent, agent.distanceAllowance)
+            BaseBehaviours.RoamToRandomPoint(agent)
             );
 
         return root;
