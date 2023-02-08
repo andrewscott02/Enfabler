@@ -82,6 +82,9 @@ public class AIController : CharacterController
         {
             timeSinceLastAttack += Time.deltaTime;
         }
+
+        lastParry += Time.deltaTime;
+        lastDodge += Time.deltaTime;
     }
 
     public float distanceAllowance = 1f;
@@ -191,18 +194,32 @@ public class AIController : CharacterController
 
     public float parryChance = 0f;
     public float parryCooldown = 1f;
+    float lastParry;
 
     public bool CanParry()
     {
-        return (Random.Range(0f, 1f) < parryChance) && combat.canParry;
+        if (lastParry > parryCooldown)
+        {
+            lastParry = 0;
+            return (Random.Range(0f, 1f) < parryChance) && combat.canParry;
+        }
+
+        return false;
     }
 
     public float dodgeChance = 0f;
     public float dodgeCooldown = 1f;
+    float lastDodge;
 
     public bool CanDodge()
     {
-        return (Random.Range(0f, 1f) < dodgeChance) && combat.canAttack;
+        if (lastDodge > dodgeCooldown)
+        {
+            lastDodge = 0;
+            return (Random.Range(0f, 1f) < parryChance) && combat.canParry;
+        }
+
+        return false;
     }
 
     #endregion
