@@ -41,6 +41,7 @@ public class CharacterCombat : MonoBehaviour
             Target();
 
             canAttack = false;
+            canDodge = false;
             animator.SetTrigger("LightAttack");
             //animator.SetInteger("RandAttack", 1);
             animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
@@ -63,13 +64,14 @@ public class CharacterCombat : MonoBehaviour
             canMove = false;
             canAttack = false;
             canParry = false;
+            canDodge = false;
             if (animator != null) { animator.SetTrigger("Parry"); }
         }
     }
 
     public virtual void Dodge()
     {
-        if (canAttack)
+        if (canAttack && canDodge)
         {
             EndParry();
             EndDodge();
@@ -81,6 +83,7 @@ public class CharacterCombat : MonoBehaviour
             }
 
             canAttack = false;
+            canDodge = false;
             if (animator != null) { animator.SetTrigger("Dodge"); }
         }
     }
@@ -92,6 +95,7 @@ public class CharacterCombat : MonoBehaviour
     public bool canMove = true;
     public bool canAttack = true;
     public bool canParry = true;
+    public bool canDodge = true;
 
     public void NextAttack()
     {
@@ -253,6 +257,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void ResetParry()
     {
+        canDodge = true;
         ResetAttack();
         ResetMove();
     }
@@ -277,6 +282,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void ResetDodge()
     {
+        canDodge = true;
         ResetAttack();
         ResetMove();
     }
