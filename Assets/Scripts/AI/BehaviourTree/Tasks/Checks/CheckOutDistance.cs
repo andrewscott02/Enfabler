@@ -23,7 +23,7 @@ public class CheckOutDistance : Node
     {
         NodeState state = NodeState.Failure;
 
-        if(characterModel != null)
+        if(characterModel != null && characterModel.modelCharacter != null)
         {
             if (Vector3.Distance(agent.transform.position, characterModel.modelCharacter.transform.position) > agent.maxDistanceFromModelCharacter)
                 state = NodeState.Success;

@@ -113,7 +113,10 @@ public class ConstructPlayerModel : MonoBehaviour
 
     void CurrentTarget()
     {
-        currentTargets = modelCharacter.GetComponent<CharacterCombat>().currentTargets;
+        if (modelCharacter != null)
+            currentTargets = modelCharacter.GetComponent<CharacterCombat>().currentTargets;
+        else
+            currentTargets.Clear();
     }
 
     public void PlayerAttack(bool hit)

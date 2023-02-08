@@ -58,7 +58,9 @@ public class AdaptiveBehaviourTree : BehaviourTree
 
         #region General Behaviours - In case the model is null or has insufficient information
 
-            //Checks if the closest enemy is within melee range and makes an attack if true
+            //Keeps between the player and the closest enemy to them
+            BaseBehaviours.InterceptTarget(agent, playerModel, agent.meleeDistance, true, false),
+            //Checks if the closest enemy is within melee range and attacks it if true
             BaseBehaviours.AttackClosestTarget(agent),
             //Checks if the closest enemy is within sight range and moves towards it if true
             BaseBehaviours.MoveToClosestTarget(agent),
