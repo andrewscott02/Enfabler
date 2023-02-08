@@ -182,11 +182,11 @@ namespace BehaviourTrees
                 new BeingAttacked(agent),
                 new Selector(
                     new Sequence(
-                        new CanDefend(agent),
+                        new CanDodge(agent),
                         new Dodge(agent, distanceAllowance)
                         ),
                     new Sequence(
-                        new CanDefend(agent),
+                        new CanParry(agent),
                         new Parry(agent)
                         )
                     )

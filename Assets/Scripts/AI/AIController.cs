@@ -77,6 +77,11 @@ public class AIController : CharacterController
         animator.SetFloat("yMovement", Mathf.Lerp(animator.GetFloat("yMovement"), realMovement.y, lerpSpeed));
 
         #endregion
+
+        if (currentCooldown > timeSinceLastAttack)
+        {
+            timeSinceLastAttack += Time.deltaTime;
+        }
     }
 
     public float distanceAllowance = 1f;
@@ -129,6 +134,12 @@ public class AIController : CharacterController
     public CharacterController currentTarget;
     CharacterController lastAttacked;
 
+    bool doubleAttack;
+    public float doubleAttackChance;
+    public Vector2 attackCooldown;
+    float currentCooldown;
+    float timeSinceLastAttack;
+
     public bool AttackTarget()
     {
         if (currentTarget == null)
@@ -138,13 +149,28 @@ public class AIController : CharacterController
         //Debug.Log("Attack called");
         if (distance < meleeDistance)
         {
-            if (combat.canAttack)
+            if (combat.canAttack && timeSinceLastAttack >= currentCooldown)
             {
+                if (doubleAttack)
+                    doubleAttack = false;
+                else
+                    doubleAttack = Random.Range(0f, 1f) < doubleAttackChance;
+
                 lastAttacked = currentTarget;
                 lastAttacked.GetCharacterCombat().StartBeingAttacked();
 
                 //Debug.Log("Attack made");
                 combat.LightAttack();
+                timeSinceLastAttack = 0;
+
+                if (doubleAttack)
+                {
+                    currentCooldown = 0;
+                }
+                else
+                {
+                    currentCooldown = Random.Range(attackCooldown.x, attackCooldown.y);
+                }
             }
 
             return true;
@@ -162,11 +188,18 @@ public class AIController : CharacterController
         }
     }
 
-    public float defendChance = 0f;
+    public float parryChance = 0f;
 
-    public bool CanDefend()
+    public bool CanParry()
     {
-        return (Random.Range(0f, 1f) < defendChance);
+        return (Random.Range(0f, 1f) < parryChance) && combat.canParry;
+    }
+
+    public float dodgeChance = 0f;
+
+    public bool CanDodge()
+    {
+        return (Random.Range(0f, 1f) < dodgeChance) && combat.canAttack;
     }
 
     #endregion

@@ -136,6 +136,7 @@ MonoBehaviour:
   modelConstructor: {fileID: 0}
   canMove: 1
   canAttack: 1
+  canParry: 1
   ignore: []
   swordBase: {fileID: 3746045181440719228}
   swordTip: {fileID: 8747610925695230592}
@@ -168,7 +169,10 @@ MonoBehaviour:
   sprintSpeed: 10
   roaming: 0
   currentTarget: {fileID: 0}
-  defendChance: 0.4
+  doubleAttackChance: 0.4
+  attackCooldown: {x: 2, y: 6}
+  parryChance: 0.5
+  dodgeChance: 0.3
 --- !u!95 &7673251268057846940 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5006998096090209180, guid: 22bb1e8efed20934fbd323b6f0290978,

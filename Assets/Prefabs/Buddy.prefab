@@ -119,6 +119,7 @@ MonoBehaviour:
   modelConstructor: {fileID: 0}
   canMove: 1
   canAttack: 1
+  canParry: 1
   ignore: []
   swordBase: {fileID: 3746045181440719228}
   swordTip: {fileID: 8747610925695230592}
@@ -151,7 +152,10 @@ MonoBehaviour:
   sprintSpeed: 10
   roaming: 0
   currentTarget: {fileID: 0}
-  defendChance: 0.6
+  doubleAttackChance: 0.6
+  attackCooldown: {x: 1.5, y: 3}
+  parryChance: 0.8
+  dodgeChance: 0.6
 --- !u!114 &6710008956972161548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +172,7 @@ MonoBehaviour:
   stateText: {fileID: 0}
   playerState: 0
   showValues: []
+  test: 0
   aggressiveDecay: 0.6
   counterDecay: 1
   defensiveDecay: 1

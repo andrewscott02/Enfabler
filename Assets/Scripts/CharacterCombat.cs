@@ -40,7 +40,7 @@ public class CharacterCombat : MonoBehaviour
 
     public virtual void Parry()
     {
-        if (canAttack)
+        if (canParry)
         {
             EndParry();
             EndDodge();
@@ -53,6 +53,7 @@ public class CharacterCombat : MonoBehaviour
 
             canMove = false;
             canAttack = false;
+            canParry = false;
             animator.SetTrigger("Parry");
         }
     }
@@ -81,6 +82,7 @@ public class CharacterCombat : MonoBehaviour
 
     public bool canMove = true;
     public bool canAttack = true;
+    public bool canParry = true;
 
     public void NextAttack()
     {
@@ -224,6 +226,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void ResetParry()
     {
+        canParry = true;
         ResetAttack();
         ResetMove();
     }

@@ -91,8 +91,8 @@ public static class HelperFunctions
 
         foreach (var item in AIManager.instance.GetEnemyTeam(agent))
         {
-            if (item.invisible)
-                break;
+            if (item == null) break;
+            if (item.invisible) break;
 
             float itemDistance = Vector3.Distance(origin, item.gameObject.transform.position);
 
@@ -122,8 +122,8 @@ public static class HelperFunctions
 
         foreach (var item in enemyList)
         {
-            if (item.invisible)
-                break;
+            if (item == null) break;
+            if (item.invisible) break;
 
             float itemDistance = Vector3.Distance(origin, item.gameObject.transform.position);
 
@@ -151,8 +151,8 @@ public static class HelperFunctions
 
         foreach (var item in AIManager.instance.GetEnemyTeam(agent))
         {
-            if (item.invisible || enemyList.Contains(item))
-                break;
+            if (item == null) break;
+            if (item.invisible || enemyList.Contains(item)) break;
 
             float itemDistance = Vector3.Distance(origin, item.gameObject.transform.position);
 
