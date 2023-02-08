@@ -21,7 +21,7 @@ public class GetModelTarget : Node
 
     public override NodeState Evaluate()
     {
-        CharacterController enemy = HelperFunctions.GetClosestEnemyFromList(agent, agent.transform.position, agent.sightDistance, true, model.currentTargets);
+        CharacterController enemy = HelperFunctions.GetClosestEnemyFromList(agent.transform.position, agent.sightDistance, true, model.currentTargets);
         if (enemy != null)
         {
             agent.SetDestinationPos(enemy.transform.position);

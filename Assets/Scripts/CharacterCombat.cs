@@ -36,7 +36,7 @@ public class CharacterCombat : MonoBehaviour
         {
             EndParry();
             EndDodge();
-            EndAttack();
+            ForceEndAttack();
 
             Target();
 
@@ -53,7 +53,7 @@ public class CharacterCombat : MonoBehaviour
         {
             EndParry();
             EndDodge();
-            EndAttack();
+            ForceEndAttack();
 
             if (modelConstructor != null)
             {
@@ -63,7 +63,7 @@ public class CharacterCombat : MonoBehaviour
             canMove = false;
             canAttack = false;
             canParry = false;
-            animator.SetTrigger("Parry");
+            if (animator != null) { animator.SetTrigger("Parry"); }
         }
     }
 
@@ -73,7 +73,7 @@ public class CharacterCombat : MonoBehaviour
         {
             EndParry();
             EndDodge();
-            EndAttack();
+            ForceEndAttack();
 
             if (modelConstructor != null)
             {
@@ -81,7 +81,7 @@ public class CharacterCombat : MonoBehaviour
             }
 
             canAttack = false;
-            animator.SetTrigger("Dodge");
+            if (animator != null) { animator.SetTrigger("Dodge"); }
         }
     }
 
@@ -155,6 +155,15 @@ public class CharacterCombat : MonoBehaviour
         damage = currentDamage;
 
         InvokeRepeating("AttackCheck", 0f, 0.004f);
+    }
+
+    public void ForceEndAttack()
+    {
+        //Clear damage and list of enemies hit
+        hitTargets.Clear();
+        damage = 0;
+
+        CancelInvoke("AttackCheck");
     }
 
     public void EndAttack()

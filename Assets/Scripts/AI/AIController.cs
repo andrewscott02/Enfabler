@@ -39,7 +39,7 @@ public class AIController : CharacterController
     {
         Gizmos.DrawWireSphere(currentDestination, distanceAllowance);
 
-        Gizmos.DrawWireSphere(gameObject.transform.position, sightDistance);
+        Gizmos.DrawWireSphere(gameObject.transform.position, chaseDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, roamDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, maxDistanceFromModelCharacter);
         Gizmos.DrawWireSphere(gameObject.transform.position, meleeDistance);
@@ -88,7 +88,8 @@ public class AIController : CharacterController
 
     public float lerpSpeed = 0.01f;
 
-    public float sightDistance = 40;
+    public float sightDistance = 100;
+    public float chaseDistance = 40;
     public float roamDistance = 25;
     public float maxDistanceFromModelCharacter = 6;
     public float meleeDistance = 3;

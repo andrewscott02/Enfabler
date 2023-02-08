@@ -118,11 +118,11 @@ public class ConstructPlayerModel : MonoBehaviour
 
     public void PlayerAttack(bool hit)
     {
-        descriptorValues[Descriptor.Aggressive] += 2.5f;
+        descriptorValues[Descriptor.Aggressive] += 2f;
 
         if (CheckCounter()) { descriptorValues[Descriptor.Counter] += 5f; }
 
-        if (!hit) { descriptorValues[Descriptor.Panic] += 4f; }
+        if (!hit) { descriptorValues[Descriptor.Panic] += 2.5f; }
 
         AdjustDisplay();
     }
@@ -139,13 +139,18 @@ public class ConstructPlayerModel : MonoBehaviour
 
     public void PlayerDodge(bool beingAttacked)
     {
+
         if (beingAttacked)
         {
-            descriptorValues[Descriptor.Defensive] += 3f;
             descriptorValues[Descriptor.Cautious] += 3.5f;
+            descriptorValues[Descriptor.Defensive] += 3f;
             SetupCounter(counterWindowDodge);
         }
-        else { descriptorValues[Descriptor.Cautious] += 6f; }
+        else 
+        {
+            descriptorValues[Descriptor.Cautious] += 4f;
+            descriptorValues[Descriptor.Panic] += 4.5f;
+        }
 
         AdjustDisplay();
     }
