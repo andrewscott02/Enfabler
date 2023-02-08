@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d6303686d1b212040a3a949281bf30ad, type: 2}
+    - target: {fileID: 5006998096090209180, guid: 22bb1e8efed20934fbd323b6f0290978,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d8639dcea42be184084e4dd6de5ecdba, type: 2}
     - target: {fileID: 7048375887579552703, guid: 22bb1e8efed20934fbd323b6f0290978,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -123,6 +128,13 @@ MonoBehaviour:
   ignore: []
   swordBase: {fileID: 3746045181440719228}
   swordTip: {fileID: 8747610925695230592}
+  currentTargets: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  currentTargetCastInterval: 0.6
+  currentTargetCastRadius: 1.5
+  currentTargetCastDistance: 10
 --- !u!114 &3132395771537694327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,8 +166,10 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   doubleAttackChance: 0.6
   attackCooldown: {x: 1.5, y: 3}
-  parryChance: 0.8
-  dodgeChance: 0.6
+  parryChance: 0.7
+  parryCooldown: 1.2
+  dodgeChance: 0.5
+  dodgeCooldown: 1.2
 --- !u!114 &6710008956972161548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,12 +193,7 @@ MonoBehaviour:
   cautiousDecay: 1
   panicDecay: 1
   currentTargets: []
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 8
   currentTargetCastInterval: 0.6
-  currentTargetCastRadius: 1.5
-  currentTargetCastDistance: 10
   counterAvailable: 0
   counterWindowParry: 1.5
   counterWindowDodge: 3

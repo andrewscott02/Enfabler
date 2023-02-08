@@ -18,7 +18,7 @@ public class Parry : Node
 
     public override NodeState Evaluate()
     {
-        if (agent.GetCharacterCombat().canAttack)
+        if (agent.GetCharacterCombat().canParry)
         {
             agent.GetCharacterCombat().Parry();
             state = NodeState.Success;

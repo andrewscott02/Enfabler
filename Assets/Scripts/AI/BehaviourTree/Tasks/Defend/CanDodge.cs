@@ -6,6 +6,8 @@ using BehaviourTrees;
 public class CanDodge : Node
 {
     public AIController agent;
+    float cooldown;
+    float elapsedTime;
 
     /// <summary>
     /// Checks if an agent is able to take the dodge action
@@ -14,18 +16,26 @@ public class CanDodge : Node
     public CanDodge(AIController agent)
     {
         this.agent = agent;
+        cooldown = agent.dodgeCooldown;
     }
 
     public override NodeState Evaluate()
     {
-        if (agent.CanDodge())
+        if (elapsedTime > cooldown)
         {
-            state = NodeState.Success;
+            elapsedTime = 0;
+
+            if (agent.CanDodge())
+            {
+                state = NodeState.Success;
+            }
+            else
+            {
+                state = NodeState.Failure;
+            }
         }
-        else
-        {
-            state = NodeState.Failure;
-        }
+
+        elapsedTime += Time.deltaTime;
 
         return state;
     }

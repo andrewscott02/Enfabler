@@ -157,7 +157,7 @@ public class AIController : CharacterController
                     doubleAttack = Random.Range(0f, 1f) < doubleAttackChance;
 
                 lastAttacked = currentTarget;
-                lastAttacked.GetCharacterCombat().StartBeingAttacked();
+                //lastAttacked.GetCharacterCombat().StartBeingAttacked();
 
                 //Debug.Log("Attack made");
                 combat.LightAttack();
@@ -183,12 +183,13 @@ public class AIController : CharacterController
     {
         if (lastAttacked != null)
         {
-            lastAttacked.GetCharacterCombat().StopBeingAttacked();
+            //lastAttacked.GetCharacterCombat().StopBeingAttacked();
             lastAttacked = null;
         }
     }
 
     public float parryChance = 0f;
+    public float parryCooldown = 1f;
 
     public bool CanParry()
     {
@@ -196,6 +197,7 @@ public class AIController : CharacterController
     }
 
     public float dodgeChance = 0f;
+    public float dodgeCooldown = 1f;
 
     public bool CanDodge()
     {

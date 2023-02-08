@@ -6,6 +6,8 @@ using BehaviourTrees;
 public class CanParry : Node
 {
     public AIController agent;
+    float cooldown;
+    float elapsedTime;
 
     /// <summary>
     /// Checks if an agent is able to take the parry action
@@ -14,18 +16,26 @@ public class CanParry : Node
     public CanParry(AIController agent)
     {
         this.agent = agent;
+        cooldown = agent.parryCooldown;
     }
 
     public override NodeState Evaluate()
     {
-        if (agent.CanParry())
+        if (elapsedTime > cooldown)
         {
-            state = NodeState.Success;
+            elapsedTime = 0;
+
+            if (agent.CanParry())
+            {
+                state = NodeState.Success;
+            }
+            else
+            {
+                state = NodeState.Failure;
+            }
         }
-        else
-        {
-            state = NodeState.Failure;
-        }
+
+        elapsedTime += Time.deltaTime;
 
         return state;
     }

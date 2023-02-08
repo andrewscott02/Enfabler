@@ -182,7 +182,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7700341593630680933}
-  m_LocalRotation: {x: 0.02552249, y: 0.00000002026334, z: -5.173395e-10, w: 0.99967426}
+  m_LocalRotation: {x: 0.025522482, y: 0.000000018674003, z: -4.7676224e-10, w: 0.99967426}
   m_LocalPosition: {x: 0, y: 2.83, z: -4.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.3076923, y: 1}
+    m_SensorSize: {x: 2.1213872, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -245,7 +245,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 9eb270aa53471a64084bd1a2d96bd4b7, type: 2}
+      objectReference: {fileID: 9100000, guid: d8639dcea42be184084e4dd6de5ecdba, type: 2}
     - target: {fileID: 7048375887579552703, guid: 22bb1e8efed20934fbd323b6f0290978,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -317,11 +317,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 9115629232183793744, guid: 22bb1e8efed20934fbd323b6f0290978,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9153536926427887807, guid: 22bb1e8efed20934fbd323b6f0290978,
         type: 3}
       propertyPath: maxHealth
@@ -380,9 +375,17 @@ MonoBehaviour:
   modelConstructor: {fileID: 0}
   canMove: 1
   canAttack: 1
+  canParry: 1
   ignore: []
   swordBase: {fileID: 3746045181440719228}
   swordTip: {fileID: 8747610925695230592}
+  currentTargets: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  currentTargetCastInterval: 0.6
+  currentTargetCastRadius: 1.5
+  currentTargetCastDistance: 10
 --- !u!114 &2698967641890957235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,6 +422,7 @@ MonoBehaviour:
   runSpeed: 300
   dodgeSpeed: 300
   lerpSpeed: 0.2
+  movement: {x: 0, y: 0, z: 0}
 --- !u!4 &6542142234118049258 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8487852436018103018, guid: 22bb1e8efed20934fbd323b6f0290978,

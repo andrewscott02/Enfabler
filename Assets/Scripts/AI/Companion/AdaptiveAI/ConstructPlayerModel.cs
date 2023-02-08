@@ -109,38 +109,11 @@ public class ConstructPlayerModel : MonoBehaviour
 
     [Header("Player Targeting")]
     public List<CharacterController> currentTargets;
-    public LayerMask layerMask;
     public float currentTargetCastInterval = 0.6f;
-    public float currentTargetCastRadius = 1.5f;
-    public float currentTargetCastDistance = 10;
-
-    private void OnDrawGizmos()
-    {
-        if (modelCharacter != null)
-        {
-            RaycastHit[] hit = Physics.SphereCastAll(modelCharacter.transform.position, currentTargetCastRadius, modelCharacter.transform.forward, currentTargetCastDistance, layerMask);
-            foreach (RaycastHit item in hit) { Gizmos.DrawWireSphere(item.point, 1f); }
-        }
-    }
 
     void CurrentTarget()
     {
-        List<CharacterController> hitCharacters = new List<CharacterController>();
-
-        RaycastHit[] hit = Physics.SphereCastAll(modelCharacter.transform.position, currentTargetCastRadius, modelCharacter.transform.forward, currentTargetCastDistance, layerMask);
-        foreach (RaycastHit item in hit)
-        {
-            Debug.Log("Ray hit " + item.collider.gameObject.name);
-            CharacterController character = item.collider.transform.gameObject.GetComponent<CharacterController>();
-
-            if (character != null)
-            {
-                if (AIManager.instance.OnSameTeam(modelCharacter.GetComponent<CharacterController>(), character) == false)
-                    hitCharacters.Add(character);
-            }
-        }
-
-        currentTargets = hitCharacters;
+        currentTargets = modelCharacter.GetComponent<CharacterCombat>().currentTargets;
     }
 
     public void PlayerAttack(bool hit)

@@ -20,12 +20,12 @@ public class BeingAttacked : Node
     {
         if (agent.GetCharacterCombat().GetTargetted())
         {
-            Debug.Log("Being attacked");
+            //Debug.Log("Being attacked");
             state = NodeState.Success;
         }
         else
         {
-            Debug.Log("Not being attacked");
+            //Debug.Log("Not being attacked");
             state = NodeState.Failure;
         }
 
