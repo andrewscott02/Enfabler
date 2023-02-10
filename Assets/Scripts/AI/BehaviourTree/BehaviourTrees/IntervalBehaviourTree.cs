@@ -20,7 +20,7 @@ public class IntervalBehaviourTree : BehaviourTree
 
             //If agent is too far away from model character, rush to a distance within range
             new Sequence(
-                new CheckOutDistance(agent, playerModel),
+                new CheckOutDistance(agent, playerModel, agent.maxDistanceFromModelCharacter),
                 new Selector(
                     BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter)
                     )

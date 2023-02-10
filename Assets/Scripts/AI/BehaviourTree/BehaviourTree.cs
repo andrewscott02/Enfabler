@@ -38,7 +38,7 @@ namespace BehaviourTrees
             return new Selector(
                 DefensiveAction(agent),
                 new Sequence(
-                    new FindPointRadius(agent),
+                    new FindPointRadius(agent, agent.roamDistance),
                     new MoveToDestination(agent, 6f, false)
                     )
                 );

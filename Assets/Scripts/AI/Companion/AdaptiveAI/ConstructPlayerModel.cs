@@ -110,6 +110,9 @@ public class ConstructPlayerModel : MonoBehaviour
 
         float highestValue = descriptorValues[newState];
 
+        if (newState == Descriptor.Panic) // Makes it so that it will be less likely to explore states if the player is struggling
+            highestValue *= 1.5f;
+
         foreach (var item in descriptorValues)
         {
             if (item.Key != newState)
@@ -171,48 +174,66 @@ public class ConstructPlayerModel : MonoBehaviour
             currentTargets.Clear();
     }
 
+    [Header("Attack Model Additions")]
+    public float attackHitAdd = 1.5f;
+    public float attackCounterAdd = 7.5f;
+    public float attackMissAdd = 3f;
+
     public void PlayerAttack(bool hit)
     {
-        descriptorValues[Descriptor.Aggressive] += 1.5f;
+        descriptorValues[Descriptor.Aggressive] += attackHitAdd;
 
-        if (CheckCounter()) { descriptorValues[Descriptor.Counter] += 7.5f; }
+        if (CheckCounter()) { descriptorValues[Descriptor.Counter] += attackCounterAdd; }
 
-        if (!hit) { descriptorValues[Descriptor.Panic] += 3f; }
+        if (!hit) { descriptorValues[Descriptor.Panic] += attackMissAdd; }
 
         AdjustDisplay();
     }
+
+    [Header("Parry Model Additions")]
+    public float parrySuccessAdd = 5f;
+    public float parryFailAdd = 7f;
 
     public void PlayerParry(bool beingAttacked)
     {
-        descriptorValues[Descriptor.Defensive] += 5f;
+        descriptorValues[Descriptor.Defensive] += parrySuccessAdd;
 
         if (beingAttacked) { SetupCounter(counterWindowParry); }
-        else { descriptorValues[Descriptor.Panic] += 7f; }
+        else { descriptorValues[Descriptor.Panic] += parryFailAdd; }
 
         AdjustDisplay();
     }
 
+    [Header("Dodge Model Additions")]
+
+    public float dodgeSuccessCAdd = 3.5f;
+    public float dodgeFailCAdd = 4f;
+    public float dodgeSuccessDAdd = 3f;
+    public float dodgeFailPAdd = 5f;
     public void PlayerDodge(bool beingAttacked)
     {
 
         if (beingAttacked)
         {
-            descriptorValues[Descriptor.Cautious] += 3.5f;
-            descriptorValues[Descriptor.Defensive] += 3f;
+            descriptorValues[Descriptor.Cautious] += dodgeSuccessCAdd;
+            descriptorValues[Descriptor.Defensive] += dodgeSuccessDAdd;
             SetupCounter(counterWindowDodge);
         }
         else 
         {
-            descriptorValues[Descriptor.Cautious] += 4f;
-            descriptorValues[Descriptor.Panic] += 5f;
+            descriptorValues[Descriptor.Cautious] += dodgeFailCAdd;
+            descriptorValues[Descriptor.Panic] += dodgeFailPAdd;
         }
 
         AdjustDisplay();
     }
 
+    [Header("Hit Model Additions")]
+    public float hitPanicAdd = 3f;
+
     public void PlayerHit()
     {
-        descriptorValues[Descriptor.Panic] += 3f;
+        descriptorValues[Descriptor.Panic] += hitPanicAdd;
         AdjustDisplay();
     }
 

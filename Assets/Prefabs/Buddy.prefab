@@ -190,13 +190,23 @@ MonoBehaviour:
   showValues: []
   test: 0
   switchCooldown: 5
-  aggressiveDecay: 0.5
-  counterDecay: 0.6
-  defensiveDecay: 0.6
-  cautiousDecay: 0.6
-  panicDecay: 0.6
+  aggressiveDecay: 0.6
+  counterDecay: 0.8
+  defensiveDecay: 0.8
+  cautiousDecay: 0.8
+  panicDecay: 0.8
   currentTargets: []
   currentTargetCastInterval: 0.6
+  attackHitAdd: 1.5
+  attackCounterAdd: 6.5
+  attackMissAdd: 3
+  parrySuccessAdd: 5
+  parryFailAdd: 7
+  dodgeSuccessCAdd: 3.5
+  dodgeFailCAdd: 4
+  dodgeSuccessDAdd: 3
+  dodgeFailPAdd: 5
+  hitPanicAdd: 3
   counterAvailable: 0
   counterWindowParry: 1.5
   counterWindowDodge: 3
