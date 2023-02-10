@@ -125,6 +125,7 @@ MonoBehaviour:
   canMove: 1
   canAttack: 1
   canParry: 1
+  canDodge: 1
   ignore: []
   swordBase: {fileID: 3746045181440719228}
   swordTip: {fileID: 8747610925695230592}
@@ -188,11 +189,12 @@ MonoBehaviour:
   playerState: 0
   showValues: []
   test: 0
-  aggressiveDecay: 0.6
-  counterDecay: 1
-  defensiveDecay: 1
-  cautiousDecay: 1
-  panicDecay: 1
+  switchCooldown: 5
+  aggressiveDecay: 0.5
+  counterDecay: 0.6
+  defensiveDecay: 0.6
+  cautiousDecay: 0.6
+  panicDecay: 0.6
   currentTargets: []
   currentTargetCastInterval: 0.6
   counterAvailable: 0

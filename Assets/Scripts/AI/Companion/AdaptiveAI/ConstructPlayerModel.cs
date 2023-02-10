@@ -43,6 +43,8 @@ public class ConstructPlayerModel : MonoBehaviour
         DecayModels();
         AdjustDisplay();
         explore += Time.deltaTime;
+        currentSwitchCooldown += Time.deltaTime;
+        
     }
 
     private void AdjustDisplay()
@@ -83,11 +85,13 @@ public class ConstructPlayerModel : MonoBehaviour
 
         if (stateText != null)
         {
-            stateText.text = "PS: " + playerState.ToString() + "TS: " + trueState.ToString() + " " + explore;
+            stateText.text = "PS: " + playerState.ToString() + "TS: " + trueState.ToString();
         }
     }
 
     float explore = 0;
+    public float switchCooldown = 5;
+    float currentSwitchCooldown = 0;
 
     private Descriptor GetExploreState(Descriptor newState)
     {
@@ -97,27 +101,45 @@ public class ConstructPlayerModel : MonoBehaviour
             return newState;
         }
 
+        if (currentSwitchCooldown < switchCooldown)
+        {
+            return playerState;
+        }
+
         List<Descriptor> possibleStates = new List<Descriptor>();
-        possibleStates.Add(newState);
+
         float highestValue = descriptorValues[newState];
 
         foreach (var item in descriptorValues)
         {
-            float difference = highestValue - item.Value;
-
-            if (difference < explore)
+            if (item.Key != newState)
             {
-                possibleStates.Add(item.Key);
+                float difference = highestValue - item.Value;
+
+                if (difference < explore)
+                {
+                    possibleStates.Add(item.Key);
+                }
             }
         }
 
-        return possibleStates[Random.Range(0, possibleStates.Count)];
+        if (possibleStates.Count > 0)
+        {
+            Descriptor exploreState = possibleStates[Random.Range(0, possibleStates.Count)];
+            Debug.Log("Switched from " + trueState.ToString() + " to " + exploreState.ToString());
+            currentSwitchCooldown = 0;
+
+            return exploreState;
+        }
+
+        return newState;
     }
 
     #endregion
 
     #region Decay Models
 
+    [Header("Decay Values")]
     public float aggressiveDecay = 0.3f;
     public float counterDecay = 0.5f;
     public float defensiveDecay = 0.5f;
@@ -153,7 +175,7 @@ public class ConstructPlayerModel : MonoBehaviour
     {
         descriptorValues[Descriptor.Aggressive] += 1.5f;
 
-        if (CheckCounter()) { descriptorValues[Descriptor.Counter] += 10f; }
+        if (CheckCounter()) { descriptorValues[Descriptor.Counter] += 7.5f; }
 
         if (!hit) { descriptorValues[Descriptor.Panic] += 3f; }
 
