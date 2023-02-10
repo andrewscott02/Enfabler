@@ -11,6 +11,7 @@ public class ConstructPlayerModel : MonoBehaviour
     public GameObject modelCharacter;
     public TextMeshProUGUI stateText;
 
+    Descriptor trueState;
     public Descriptor playerState;
 
     public Dictionary<Descriptor, float> descriptorValues = new Dictionary<Descriptor, float>();
@@ -41,6 +42,7 @@ public class ConstructPlayerModel : MonoBehaviour
     {
         DecayModels();
         AdjustDisplay();
+        explore += Time.deltaTime;
     }
 
     private void AdjustDisplay()
@@ -73,15 +75,43 @@ public class ConstructPlayerModel : MonoBehaviour
 
         if (highestState != Descriptor.Null)
         {
-            playerState = highestState;
+            playerState = GetExploreState(highestState);
+            trueState = highestState;
         }
 
         if (test) { return; }
 
         if (stateText != null)
         {
-            stateText.text = "Player State: " + playerState.ToString();
+            stateText.text = "PS: " + playerState.ToString() + "TS: " + trueState.ToString() + " " + explore;
         }
+    }
+
+    float explore = 0;
+
+    private Descriptor GetExploreState(Descriptor newState)
+    {
+        if (trueState != newState)
+        {
+            explore = 0;
+            return newState;
+        }
+
+        List<Descriptor> possibleStates = new List<Descriptor>();
+        possibleStates.Add(newState);
+        float highestValue = descriptorValues[newState];
+
+        foreach (var item in descriptorValues)
+        {
+            float difference = highestValue - item.Value;
+
+            if (difference < explore)
+            {
+                possibleStates.Add(item.Key);
+            }
+        }
+
+        return possibleStates[Random.Range(0, possibleStates.Count)];
     }
 
     #endregion
