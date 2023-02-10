@@ -39,7 +39,7 @@ public class AIController : CharacterController
     {
         Gizmos.DrawWireSphere(currentDestination, distanceAllowance);
 
-        Gizmos.DrawWireSphere(gameObject.transform.position, sightDistance);
+        Gizmos.DrawWireSphere(gameObject.transform.position, chaseDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, roamDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, maxDistanceFromModelCharacter);
         Gizmos.DrawWireSphere(gameObject.transform.position, meleeDistance);
@@ -77,13 +77,22 @@ public class AIController : CharacterController
         animator.SetFloat("yMovement", Mathf.Lerp(animator.GetFloat("yMovement"), realMovement.y, lerpSpeed));
 
         #endregion
+
+        if (currentCooldown > timeSinceLastAttack)
+        {
+            timeSinceLastAttack += Time.deltaTime;
+        }
+
+        lastParry += Time.deltaTime;
+        lastDodge += Time.deltaTime;
     }
 
     public float distanceAllowance = 1f;
 
     public float lerpSpeed = 0.01f;
 
-    public float sightDistance = 40;
+    public float sightDistance = 100;
+    public float chaseDistance = 40;
     public float roamDistance = 25;
     public float maxDistanceFromModelCharacter = 6;
     public float meleeDistance = 3;
@@ -129,6 +138,12 @@ public class AIController : CharacterController
     public CharacterController currentTarget;
     CharacterController lastAttacked;
 
+    bool doubleAttack;
+    public float doubleAttackChance;
+    public Vector2 attackCooldown;
+    float currentCooldown;
+    float timeSinceLastAttack;
+
     public bool AttackTarget()
     {
         if (currentTarget == null)
@@ -138,13 +153,28 @@ public class AIController : CharacterController
         //Debug.Log("Attack called");
         if (distance < meleeDistance)
         {
-            if (combat.canAttack)
+            if (combat.canAttack && timeSinceLastAttack >= currentCooldown)
             {
+                if (doubleAttack)
+                    doubleAttack = false;
+                else
+                    doubleAttack = Random.Range(0f, 1f) < doubleAttackChance;
+
                 lastAttacked = currentTarget;
-                lastAttacked.GetCharacterCombat().StartBeingAttacked();
+                //lastAttacked.GetCharacterCombat().StartBeingAttacked();
 
                 //Debug.Log("Attack made");
                 combat.LightAttack();
+                timeSinceLastAttack = 0;
+
+                if (doubleAttack)
+                {
+                    currentCooldown = 0;
+                }
+                else
+                {
+                    currentCooldown = Random.Range(attackCooldown.x, attackCooldown.y);
+                }
             }
 
             return true;
@@ -157,16 +187,39 @@ public class AIController : CharacterController
     {
         if (lastAttacked != null)
         {
-            lastAttacked.GetCharacterCombat().StopBeingAttacked();
+            //lastAttacked.GetCharacterCombat().StopBeingAttacked();
             lastAttacked = null;
         }
     }
 
-    public float defendChance = 0f;
+    public float parryChance = 0f;
+    public float parryCooldown = 1f;
+    float lastParry;
 
-    public bool CanDefend()
+    public bool CanParry()
     {
-        return (Random.Range(0f, 1f) < defendChance);
+        if (lastParry > parryCooldown)
+        {
+            lastParry = 0;
+            return (Random.Range(0f, 1f) < parryChance) && combat.canParry;
+        }
+
+        return false;
+    }
+
+    public float dodgeChance = 0f;
+    public float dodgeCooldown = 1f;
+    float lastDodge;
+
+    public bool CanDodge()
+    {
+        if (lastDodge > dodgeCooldown)
+        {
+            lastDodge = 0;
+            return (Random.Range(0f, 1f) < parryChance) && combat.canParry;
+        }
+
+        return false;
     }
 
     #endregion

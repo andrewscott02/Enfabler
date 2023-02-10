@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4493684838503896696}
   - component: {fileID: 3080326797519895490}
   - component: {fileID: 3925696488946353673}
-  - component: {fileID: 1867696074395799419}
+  - component: {fileID: 5984483027415070750}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
---- !u!114 &1867696074395799419
+--- !u!114 &5984483027415070750
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,19 +113,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4379947895641492472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
+  m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 2.83, z: -4.33}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
-  m_AngularDampingMode: 0
-  m_PitchDamping: 0
-  m_YawDamping: 0
-  m_RollDamping: 0
-  m_AngularDamping: 0
+  Damping: {x: 0.1, y: 0.5, z: 0.3}
+  ShoulderOffset: {x: 0, y: 1.91, z: 0}
+  VerticalArmLength: 1.22
+  CameraSide: 1
+  CameraDistance: 4.93
+  CameraCollisionFilter:
+    serializedVersion: 2
+    m_Bits: 0
+  IgnoreTag: 
+  CameraRadius: 0.505
+  DampingIntoCollision: 0
+  DampingFromCollision: 2
 --- !u!1 &6837457561685370946
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,8 +184,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7700341593630680933}
-  m_LocalRotation: {x: 0.02552249, y: 0.00000002026334, z: -5.173395e-10, w: 0.99967426}
-  m_LocalPosition: {x: 0, y: 2.83, z: -4.33}
+  m_LocalRotation: {x: 0.0042535705, y: -0, z: -0, w: 0.99999094}
+  m_LocalPosition: {x: 0, y: 2.31, z: -4.9299994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -220,7 +222,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.3076923, y: 1}
+    m_SensorSize: {x: 1.862013, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -245,7 +247,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 9eb270aa53471a64084bd1a2d96bd4b7, type: 2}
+      objectReference: {fileID: 9100000, guid: d8639dcea42be184084e4dd6de5ecdba, type: 2}
+    - target: {fileID: 6225508128323480960, guid: 22bb1e8efed20934fbd323b6f0290978,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.889
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225508128323480960, guid: 22bb1e8efed20934fbd323b6f0290978,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225508128323480960, guid: 22bb1e8efed20934fbd323b6f0290978,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7048375887579552703, guid: 22bb1e8efed20934fbd323b6f0290978,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -317,11 +334,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 9115629232183793744, guid: 22bb1e8efed20934fbd323b6f0290978,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9153536926427887807, guid: 22bb1e8efed20934fbd323b6f0290978,
         type: 3}
       propertyPath: maxHealth
@@ -380,9 +392,17 @@ MonoBehaviour:
   modelConstructor: {fileID: 0}
   canMove: 1
   canAttack: 1
+  canParry: 1
   ignore: []
   swordBase: {fileID: 3746045181440719228}
   swordTip: {fileID: 8747610925695230592}
+  currentTargets: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  currentTargetCastInterval: 0.6
+  currentTargetCastRadius: 1.5
+  currentTargetCastDistance: 10
 --- !u!114 &2698967641890957235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +419,7 @@ MonoBehaviour:
   animator: {fileID: 7673251268057846940}
   model: {fileID: 1628624658551123326}
   playerTeam: 1
-  rotateInterval: {x: 1, y: -1}
+  rotateInterval: {x: 1.4, y: -1.8}
   rotateDeadZone: 0.1
   followTarget: {fileID: 6837457561685370946}
 --- !u!114 &4987488221700405453
@@ -419,6 +439,7 @@ MonoBehaviour:
   runSpeed: 300
   dodgeSpeed: 300
   lerpSpeed: 0.2
+  movement: {x: 0, y: 0, z: 0}
 --- !u!4 &6542142234118049258 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8487852436018103018, guid: 22bb1e8efed20934fbd323b6f0290978,

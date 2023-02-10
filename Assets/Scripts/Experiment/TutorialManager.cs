@@ -5,7 +5,7 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviour
 {
     public GameObject[] strikes;
-
+    public bool canEnd = true;
     public GameObject endTutorial;
 
     private void Update()
@@ -63,7 +63,7 @@ public class TutorialManager : MonoBehaviour
             }
         }
 
-        if (allDone)
+        if (allDone && canEnd)
         {
             endTutorial.SetActive(true);
 

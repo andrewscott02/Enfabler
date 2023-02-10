@@ -6,7 +6,6 @@ using BehaviourTrees;
 public class MoveToDestination : Node
 {
     public AIController agent;
-    public float distanceAllowance;
 
     float maxTime;
     float elapsedTime;
@@ -20,17 +19,16 @@ public class MoveToDestination : Node
     /// <param name="distanceAllowance">The maximum distance the destination is allowed to be</param>
     /// <param name="maxTime">The maximum time that the agent can move before resetting its movement</param>
     /// <param name="sprinting">Whether the agent sprints to its destination</param>
-    public MoveToDestination(AIController agent, float distanceAllowance, float maxTime, bool sprinting)
+    public MoveToDestination(AIController agent, float maxTime, bool sprinting)
     {
         this.agent = agent;
-        this.distanceAllowance = distanceAllowance;
         this.maxTime = maxTime;
         this.sprinting = sprinting;
     }
 
     public override NodeState Evaluate()
     {
-        if (agent.NearDestination(distanceAllowance))
+        if (agent.NearDestination(agent.distanceAllowance))
         {
             state = NodeState.Success;
             //Debug.Log("Arrived at destination: " + agent.GetDestination());

@@ -120,11 +120,16 @@ public class PlayerController : CharacterController
         #endregion
 
         #endregion
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Break(); 
+        }
     }
 
     private void FixedUpdate()
     {
-        Debug.Log(xInput + "|| " + yInput);
+        //Debug.Log(xInput + "|| " + yInput);
         playerMovement.Move(xInput, yInput);
 
         playerMovement.animator.SetBool("CanMove", combat.canMove);

@@ -11,6 +11,11 @@ public class CharacterCombat : MonoBehaviour
     [HideInInspector]
     public ConstructPlayerModel modelConstructor;
 
+    private void Start()
+    {
+        InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
+    }
+
     public void SetupAllies(List<CharacterController> allies)
     {
         foreach (var item in allies)
@@ -23,15 +28,20 @@ public class CharacterCombat : MonoBehaviour
 
     #region Basic Actions
 
+    CharacterController[] lastAttacked;
+
     public void LightAttack()
     {
         if (canAttack)
         {
             EndParry();
             EndDodge();
-            EndAttack();
+            ForceEndAttack();
+
+            Target();
 
             canAttack = false;
+            canDodge = false;
             animator.SetTrigger("LightAttack");
             //animator.SetInteger("RandAttack", 1);
             animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
@@ -40,11 +50,11 @@ public class CharacterCombat : MonoBehaviour
 
     public virtual void Parry()
     {
-        if (canAttack)
+        if (canParry)
         {
             EndParry();
             EndDodge();
-            EndAttack();
+            ForceEndAttack();
 
             if (modelConstructor != null)
             {
@@ -53,17 +63,19 @@ public class CharacterCombat : MonoBehaviour
 
             canMove = false;
             canAttack = false;
-            animator.SetTrigger("Parry");
+            canParry = false;
+            canDodge = false;
+            if (animator != null) { animator.SetTrigger("Parry"); }
         }
     }
 
     public virtual void Dodge()
     {
-        if (canAttack)
+        if (canAttack && canDodge)
         {
             EndParry();
             EndDodge();
-            EndAttack();
+            ForceEndAttack();
 
             if (modelConstructor != null)
             {
@@ -71,7 +83,8 @@ public class CharacterCombat : MonoBehaviour
             }
 
             canAttack = false;
-            animator.SetTrigger("Dodge");
+            canDodge = false;
+            if (animator != null) { animator.SetTrigger("Dodge"); }
         }
     }
 
@@ -81,6 +94,8 @@ public class CharacterCombat : MonoBehaviour
 
     public bool canMove = true;
     public bool canAttack = true;
+    public bool canParry = true;
+    public bool canDodge = true;
 
     public void NextAttack()
     {
@@ -107,6 +122,7 @@ public class CharacterCombat : MonoBehaviour
         //Debug.Log("Reset Attack");
         animator.SetInteger("SwordAttackCount", 0);
         canAttack = true;
+        canParry = true;
 
         AIController AIController = GetComponent<AIController>();
 
@@ -114,6 +130,8 @@ public class CharacterCombat : MonoBehaviour
         {
             AIController.EndAttackOnTarget();
         }
+
+        Untarget();
     }
 
     public void ResetMove()
@@ -143,6 +161,15 @@ public class CharacterCombat : MonoBehaviour
         InvokeRepeating("AttackCheck", 0f, 0.004f);
     }
 
+    public void ForceEndAttack()
+    {
+        //Clear damage and list of enemies hit
+        hitTargets.Clear();
+        damage = 0;
+
+        CancelInvoke("AttackCheck");
+    }
+
     public void EndAttack()
     {
         HitEnemy(hitTargets.Count > 0);
@@ -150,6 +177,8 @@ public class CharacterCombat : MonoBehaviour
         //Clear damage and list of enemies hit
         hitTargets.Clear();
         damage = 0;
+
+        Untarget();
 
         CancelInvoke("AttackCheck");
     }
@@ -165,6 +194,7 @@ public class CharacterCombat : MonoBehaviour
     public void Parried()
     {
         canAttack = false;
+        canParry = false;
         animator.SetTrigger("HitReact");
         animator.SetInteger("RandReact", Random.Range(0, animator.GetInteger("RandReactMax") + 1));
     }
@@ -202,6 +232,9 @@ public class CharacterCombat : MonoBehaviour
     {
         if (swordBase != null && swordTip != null)
             Gizmos.DrawLine(swordBase.position, swordTip.position);
+
+        RaycastHit[] hit = Physics.SphereCastAll(transform.position, currentTargetCastRadius, transform.forward, currentTargetCastDistance, layerMask);
+        foreach (RaycastHit item in hit) { Gizmos.DrawWireSphere(item.point, 1f); }
     }
 
     #endregion
@@ -224,6 +257,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void ResetParry()
     {
+        canDodge = true;
         ResetAttack();
         ResetMove();
     }
@@ -248,13 +282,68 @@ public class CharacterCombat : MonoBehaviour
 
     public void ResetDodge()
     {
+        canDodge = true;
         ResetAttack();
         ResetMove();
     }
 
     #endregion
 
-    #region Targetted Logic
+    #region Target Logic
+
+    #region Targetting
+
+    [Header("Targeting")]
+    public List<CharacterController> currentTargets;
+    List<CharacterController> lastHit = new List<CharacterController>();
+    public LayerMask layerMask;
+    public float currentTargetCastInterval = 0.6f;
+    public float currentTargetCastRadius = 1.5f;
+    public float currentTargetCastDistance = 10;
+
+    void CurrentTarget()
+    {
+        List<CharacterController> hitCharacters = new List<CharacterController>();
+
+        RaycastHit[] hit = Physics.SphereCastAll(transform.position, currentTargetCastRadius, transform.forward, currentTargetCastDistance, layerMask);
+        foreach (RaycastHit item in hit)
+        {
+            Debug.Log("Ray hit " + item.collider.gameObject.name);
+            CharacterController character = item.collider.transform.gameObject.GetComponent<CharacterController>();
+
+            if (character != null)
+            {
+                if (AIManager.instance.OnSameTeam(GetComponent<CharacterController>(), character) == false)
+                    hitCharacters.Add(character);
+            }
+        }
+
+        currentTargets = hitCharacters;
+    }
+
+    void Target()
+    {
+        lastHit.Clear();
+        foreach (var item in currentTargets)
+        {
+            item.GetCharacterCombat().StartBeingAttacked();
+            lastHit.Add(item);
+        }
+    }
+
+    void Untarget()
+    {
+        foreach (var item in lastHit)
+        {
+            item.GetCharacterCombat().StopBeingAttacked();
+        }
+
+        lastHit.Clear();
+    }
+
+    #endregion
+
+    #region Targetted
 
     int attackers = 0; public bool GetTargetted() { return attackers > 0; }
 
@@ -267,6 +356,8 @@ public class CharacterCombat : MonoBehaviour
     {
         attackers--;
     }
+
+    #endregion
 
     #endregion
 

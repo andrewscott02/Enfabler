@@ -16,31 +16,34 @@ public class ExperimentManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             instance = this;
 
-            if (Random.Range(0f, 1f) > 0.5f)
+            if (RandomBool())
             {
                 adaptiveFirst = true;
                 realScenes[0] = tutorialScene;
-                realScenes[1] = levela;
-                realScenes[2] = leveli;
-                realScenes[3] = endScene;
+                realScenes[1] = soloScene;
+                realScenes[2] = levela;
+                realScenes[3] = leveli;
+                realScenes[4] = endScene;
             }
             else
             {
                 adaptiveFirst = false;
                 realScenes[0] = tutorialScene;
-                realScenes[1] = leveli;
-                realScenes[2] = levela;
-                realScenes[3] = endScene;
+                realScenes[1] = soloScene;
+                realScenes[2] = leveli;
+                realScenes[3] = levela;
+                realScenes[4] = endScene;
             }
         }
         else { Destroy(this.gameObject); }
     }
 
-    public E_Scenes tutorialScene;
-    public E_Scenes levela, leveli;
-    public E_Scenes endScene;
+    E_Scenes tutorialScene = E_Scenes.Controls;
+    E_Scenes soloScene = E_Scenes.SoloCombat;
+    E_Scenes levela = E_Scenes.Adaptive_Experiment, leveli = E_Scenes.Interval_Experiment;
+    E_Scenes endScene = E_Scenes.EndMenu;
 
-    E_Scenes[] realScenes = new E_Scenes[4];
+    E_Scenes[] realScenes = new E_Scenes[5];
     int currentScene = 0;
 
     public void LoadNextLevel()
@@ -87,9 +90,55 @@ public class ExperimentManager : MonoBehaviour
         //Remap Function: https://docs.unity3d.com/Packages/com.unity.shadergraph@6.9/manual/Remap-Node.html
         return OutMinMax.x + (In - InMinMax.x) * (OutMinMax.y - OutMinMax.x) / (InMinMax.y - InMinMax.x);
     }
+
+    #region Random
+
+    bool RandomBool()
+    {
+        return Random.Range(0, 2) > 0;
+    }
+
+    #region Tests
+
+    void TestRandom(int iterations)
+    {
+        for (int i = 0; i < iterations; i++)
+        {
+            if (RandomBool())
+            {
+                Debug.Log("interval");
+            }
+            else
+            {
+                Debug.Log("adaptive");
+            }
+        }
+    }
+
+    [ContextMenu("Test Random/ 1")]
+    public void TestRandom1()
+    {
+        TestRandom(1);
+    }
+
+    [ContextMenu("Test Random/ 100")]
+    public void TestRandom100()
+    {
+        TestRandom(100);
+    }
+
+    [ContextMenu("Test Random/ 100000")]
+    public void TestRandom100000()
+    {
+        TestRandom(100000);
+    }
+
+    #endregion
+
+    #endregion
 }
 
 public enum E_Scenes
 {
-    MainMenu, Controls, Adaptive_Experiment, Interval_Experiment, EndMenu
+    MainMenu, Controls, Adaptive_Experiment, Interval_Experiment, EndMenu, SoloCombat
 }

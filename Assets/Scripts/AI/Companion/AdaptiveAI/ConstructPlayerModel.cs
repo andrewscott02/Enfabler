@@ -139,47 +139,23 @@ public class ConstructPlayerModel : MonoBehaviour
 
     [Header("Player Targeting")]
     public List<CharacterController> currentTargets;
-    public LayerMask layerMask;
     public float currentTargetCastInterval = 0.6f;
-    public float currentTargetCastRadius = 1.5f;
-    public float currentTargetCastDistance = 10;
-
-    private void OnDrawGizmos()
-    {
-        if (modelCharacter != null)
-        {
-            RaycastHit[] hit = Physics.SphereCastAll(modelCharacter.transform.position, currentTargetCastRadius, modelCharacter.transform.forward, currentTargetCastDistance, layerMask);
-            foreach (RaycastHit item in hit) { Gizmos.DrawWireSphere(item.point, 1f); }
-        }
-    }
 
     void CurrentTarget()
     {
-        List<CharacterController> hitCharacters = new List<CharacterController>();
-
-        RaycastHit[] hit = Physics.SphereCastAll(modelCharacter.transform.position, currentTargetCastRadius, modelCharacter.transform.forward, currentTargetCastDistance, layerMask);
-        foreach (RaycastHit item in hit)
-        {
-            Debug.Log("Ray hit " + item.collider.gameObject.name);
-            CharacterController character = item.collider.transform.gameObject.GetComponent<CharacterController>();
-
-            if (character != null)
-            {
-                if (AIManager.instance.OnSameTeam(modelCharacter.GetComponent<CharacterController>(), character) == false)
-                    hitCharacters.Add(character);
-            }
-        }
-
-        currentTargets = hitCharacters;
+        if (modelCharacter != null)
+            currentTargets = modelCharacter.GetComponent<CharacterCombat>().currentTargets;
+        else
+            currentTargets.Clear();
     }
 
     public void PlayerAttack(bool hit)
     {
-        descriptorValues[Descriptor.Aggressive] += 2.5f;
+        descriptorValues[Descriptor.Aggressive] += 1.5f;
 
-        if (CheckCounter()) { descriptorValues[Descriptor.Counter] += 5f; }
+        if (CheckCounter()) { descriptorValues[Descriptor.Counter] += 10f; }
 
-        if (!hit) { descriptorValues[Descriptor.Panic] += 4f; }
+        if (!hit) { descriptorValues[Descriptor.Panic] += 3f; }
 
         AdjustDisplay();
     }
@@ -189,20 +165,25 @@ public class ConstructPlayerModel : MonoBehaviour
         descriptorValues[Descriptor.Defensive] += 5f;
 
         if (beingAttacked) { SetupCounter(counterWindowParry); }
-        else { descriptorValues[Descriptor.Panic] += 6f; }
+        else { descriptorValues[Descriptor.Panic] += 7f; }
 
         AdjustDisplay();
     }
 
     public void PlayerDodge(bool beingAttacked)
     {
+
         if (beingAttacked)
         {
-            descriptorValues[Descriptor.Defensive] += 3f;
             descriptorValues[Descriptor.Cautious] += 3.5f;
+            descriptorValues[Descriptor.Defensive] += 3f;
             SetupCounter(counterWindowDodge);
         }
-        else { descriptorValues[Descriptor.Cautious] += 6f; }
+        else 
+        {
+            descriptorValues[Descriptor.Cautious] += 4f;
+            descriptorValues[Descriptor.Panic] += 5f;
+        }
 
         AdjustDisplay();
     }
