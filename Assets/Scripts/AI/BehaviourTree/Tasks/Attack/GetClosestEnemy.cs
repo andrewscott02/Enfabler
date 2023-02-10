@@ -33,7 +33,7 @@ public class GetClosestEnemy : Node
         }
         else
         {
-            //Debug.Log("Failed to get enemy");
+            Debug.Log("Failed to get enemy");
 
             state = NodeState.Failure;
         }

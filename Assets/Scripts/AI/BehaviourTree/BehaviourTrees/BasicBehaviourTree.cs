@@ -10,10 +10,21 @@ public class BasicBehaviourTree : BehaviourTree
         //Debug.Log("Setting up basic BT for " + agent.name);
 
         Node root = new Selector(
-            //Checks if the closest enemy is within melee range and makes an attack if true
-            BaseBehaviours.AttackClosestTarget(agent),
+
+            new Selector(
+
+                new Sequence(
+                    //If they are unable to make an attack, move to a point a short distance away
+                    new CannotAttack(agent),
+                    BaseBehaviours.MoveToRange(agent, 100f, false)
+                    ),
+
+                    //Checks if the closest enemy is within melee range and makes an attack if true
+                    BaseBehaviours.AttackClosestTarget(agent)
+                ),
+
             //Checks if the closest enemy is within sight range and moves towards it if true
-            BaseBehaviours.MoveToClosestTarget(agent),
+            BaseBehaviours.MoveToClosestTarget(agent, agent.distanceAllowance, false),
             //If there are no targets, but the player is an ally, move to a point near the player
             BaseBehaviours.FollowTarget(agent, agent.GetPlayer(), true),
             //If there are no targets, move to a random point in the roam radius

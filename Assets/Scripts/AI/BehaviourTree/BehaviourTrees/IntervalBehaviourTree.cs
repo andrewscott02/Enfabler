@@ -35,7 +35,7 @@ public class IntervalBehaviourTree : BehaviourTree
                     BaseBehaviours.IgnoreModelTargets(agent, playerModel),
                     //If player is targetting all available targets, move to closest target and attack
                     BaseBehaviours.AttackClosestTarget(agent),
-                    BaseBehaviours.MoveToClosestTarget(agent)
+                    BaseBehaviours.MoveToClosestTarget(agent, agent.distanceAllowance, true)
                     )
                 ),
             //In state 1, move slowly to player and attack enemies around them
@@ -66,7 +66,7 @@ public class IntervalBehaviourTree : BehaviourTree
             //Checks if the closest enemy is within melee range and makes an attack if true
             BaseBehaviours.AttackClosestTarget(agent),
             //Checks if the closest enemy is within sight range and moves towards it if true
-            BaseBehaviours.MoveToClosestTarget(agent),
+            BaseBehaviours.MoveToClosestTarget(agent, agent.distanceAllowance, true),
 
         #endregion
 

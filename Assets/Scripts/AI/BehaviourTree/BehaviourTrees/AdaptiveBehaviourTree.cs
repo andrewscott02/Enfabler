@@ -30,7 +30,7 @@ public class AdaptiveBehaviourTree : BehaviourTree
                     BaseBehaviours.IgnoreModelTargets(agent, playerModel),
                     //If player is targetting all available targets, move to closest target and attack
                     BaseBehaviours.AttackClosestTarget(agent),
-                    BaseBehaviours.MoveToClosestTarget(agent)
+                    BaseBehaviours.MoveToClosestTarget(agent, agent.distanceAllowance, true)
                     )
                 ),
             //If player is counterring, move slowly to player and attack enemies around them
@@ -63,7 +63,7 @@ public class AdaptiveBehaviourTree : BehaviourTree
             //Checks if the closest enemy is within melee range and attacks it if true
             BaseBehaviours.AttackClosestTarget(agent),
             //Checks if the closest enemy is within sight range and moves towards it if true
-            BaseBehaviours.MoveToClosestTarget(agent),
+            BaseBehaviours.MoveToClosestTarget(agent, agent.distanceAllowance, true),
 
         #endregion
 

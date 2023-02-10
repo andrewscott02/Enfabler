@@ -7,6 +7,7 @@ public class MoveToDestination : Node
 {
     public AIController agent;
 
+    float distanceAllowance;
     float maxTime;
     float elapsedTime;
 
@@ -19,16 +20,17 @@ public class MoveToDestination : Node
     /// <param name="distanceAllowance">The maximum distance the destination is allowed to be</param>
     /// <param name="maxTime">The maximum time that the agent can move before resetting its movement</param>
     /// <param name="sprinting">Whether the agent sprints to its destination</param>
-    public MoveToDestination(AIController agent, float maxTime, bool sprinting)
+    public MoveToDestination(AIController agent, float maxTime, bool sprinting, float distanceAllowance)
     {
         this.agent = agent;
         this.maxTime = maxTime;
         this.sprinting = sprinting;
+        this.distanceAllowance = distanceAllowance;
     }
 
     public override NodeState Evaluate()
     {
-        if (agent.NearDestination(agent.distanceAllowance))
+        if (agent.NearDestination(distanceAllowance))
         {
             state = NodeState.Success;
             //Debug.Log("Arrived at destination: " + agent.GetDestination());
@@ -42,7 +44,7 @@ public class MoveToDestination : Node
             if (elapsedTime >= maxTime)
             {
                 state = NodeState.Failure;
-                //Debug.Log("Failed to arrive at destination: " + agent.GetDestination());
+                Debug.Log("Failed to arrive at destination: " + agent.GetDestination());
                 elapsedTime = 0;
                 agent.roaming = false;
                 return state;

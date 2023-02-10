@@ -308,7 +308,7 @@ public class CharacterCombat : MonoBehaviour
         RaycastHit[] hit = Physics.SphereCastAll(transform.position, currentTargetCastRadius, transform.forward, currentTargetCastDistance, layerMask);
         foreach (RaycastHit item in hit)
         {
-            Debug.Log("Ray hit " + item.collider.gameObject.name);
+            //Debug.Log("Ray hit " + item.collider.gameObject.name);
             CharacterController character = item.collider.transform.gameObject.GetComponent<CharacterController>();
 
             if (character != null)

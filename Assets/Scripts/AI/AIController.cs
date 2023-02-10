@@ -144,6 +144,19 @@ public class AIController : CharacterController
     float currentCooldown;
     float timeSinceLastAttack;
 
+    public bool CanAttack()
+    {
+        if (currentTarget == null)
+            return false;
+
+        if (combat.canAttack && timeSinceLastAttack >= currentCooldown)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public bool AttackTarget()
     {
         if (currentTarget == null)
