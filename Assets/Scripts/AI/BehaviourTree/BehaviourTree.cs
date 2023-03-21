@@ -27,7 +27,7 @@ namespace BehaviourTrees
         protected abstract Node SetupTree();
     }
 
-    #region Basic Behaviour Combinations
+    #region Common Behaviour Combinations
 
     public static class BaseBehaviours
     {

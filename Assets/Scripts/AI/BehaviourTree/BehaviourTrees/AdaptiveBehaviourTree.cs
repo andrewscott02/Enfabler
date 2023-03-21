@@ -43,7 +43,7 @@ public class AdaptiveBehaviourTree : BehaviourTree
                 new CheckModel(playerModel, Descriptor.Defensive),
                 BaseBehaviours.RushToTarget(agent, playerModel.modelCharacter)
                 ),
-            //If player is cautious, rush to player and attack enemies around them
+            //If player is cautious, flank their target and draw their enmeies away
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Cautious),
                 BaseBehaviours.FlankTarget(agent, playerModel, agent.meleeDistance, true, true)
