@@ -48,7 +48,7 @@ public class AdaptiveBehaviourTree : BehaviourTree
                 new CheckModel(playerModel, Descriptor.Cautious),
                 BaseBehaviours.FlankTarget(agent, playerModel, agent.meleeDistance, true, true)
                 ),
-            //If player is struggling, draw enemies away from them
+            //If player is panicking, interpose between the player and nearby targets to allow player to get away
             new Sequence(
                 new CheckModel(playerModel, Descriptor.Panic),
                 BaseBehaviours.InterceptTarget(agent, playerModel, agent.meleeDistance, true, true)
