@@ -58,7 +58,7 @@ Games, Artificial Intelligence, Planning, Agent Modelling.
 
 %Introduce the area of investigation
 
-This research aims to investigate the use of AI techniques to create an AI companion in an action game. In recent years, many commercial games focus on player-companion gameplay and dynamics, such as the recent \textit{God of War} sequels, \textit{The Last of Us} and \textit{Bioshock: Infinite}. The companions in these games are among the most appraised in commercial games for how well their characters are presented in these games.
+This research aims to investigate the use of AI techniques to create an AI companion in an action game. In recent years, many commercial games focus on player-companion gameplay and dynamics, such as the recent \textit{God of War} sequels, \textit{The Last of Us} and \textit{Bioshock: Infinite}. The companions in these games are among the most appraised in commercial games for how well their characters are presented and characterised.
 
 %Elaborate of general context
 
@@ -194,7 +194,7 @@ Agent modelling can also be used in Real-Time Strategy (RTS) games. Schadd et al
 
 %\cite{van2005opponent} - This tends to not be used for commercial games however (though this source is from 2005 so it may be out of date)
 
-Plan recognition is another common technique that is used in board games. This is another technique for agents that need to collaborate with other agents, including players, without requiring explicit commands or communication. Agents that use plan recognition observe the actions, similar to agent modelling. However, instead of constructing a model of a player, it identifies the player's goals by comparing the steps required to achieve that goal to the steps that have been taken \cite{GeneratingCollabBehaviourPlanRecognition2016}. Once an entity’s goal has been identified, the plan recognition agent will devise actions that can aid them in achieving their goals. The unfinished steps in the plan can be used as potential behaviours.
+Plan recognition is another common technique that is used in board games that allows an agent to collaborate with other agents, including players, without requiring explicit commands or communication. Agents that use plan recognition observe the actions, similar to agent modelling. However, instead of constructing a model of a player, it identifies the player's goals by comparing the steps required to achieve that goal to the steps that have been taken \cite{GeneratingCollabBehaviourPlanRecognition2016}. Once an entity’s goal has been identified, the plan recognition agent will devise actions that can aid them in achieving their goals. The unfinished steps in the plan can be used as potential behaviours.
 
 Sauma-Chacón and Eger evaluate plan recognition agents that can play with a human player in \textit{Pandemic} \cite{PandemicPlanRecognition2021}. This AI was able to play at a level similar to that seen in full teams of AI and was perceived as more helpful. In addition, they detected a correlation between perceived helpfulness and skill.
 
@@ -211,7 +211,7 @@ Like agent modelling, this technique can also be used in RTS games as agents use
 
 The use of adaptive behaviours in companions can affect various aspects of the gameplay. As shown in table \ref{HTable}, two hypotheses will test these effects. The main aspect this research tests for is creating a sense of collaboration between a player and companion agent during combat and the question this research attempts to answer is \textit{To what extent does the use of adaptive agents help to build player-companion collaboration?}
 
-This question is the focus of the first hypothesis; The Agent Modelling (AM) companion will be seen as more collaborative compared to the Interval Timing (IT) companion. This will be tested in the experiment detailed in section \ref{ExperimentalDesign}. Comparing the rankings for the collaboration of both agent types using a T-test will determine if the behaviours result in a greater sense of collaboration.
+This question is the focus of the first hypothesis; The Agent Modelling (AM) companion will be seen as more collaborative compared to the Interval Timing (IT) companion. This will be tested in a play-testing session, involving a companion that uses an Agent Modelling technique and a companion that uses the same behaviours but chooses between them randomly. Comparing the rankings for the collaboration of both agent types using a T-test will determine if the decision-making technique results in a greater sense of collaboration.
 
 The null hypothesis here is that adaptability has no discernible effect on the players' perceptions of collaboration or that it is rated as less collaborative. This will be determined if there is no significant correlation, or a negative correlation, between the agent type and the rankings for collaboration.
 
@@ -229,32 +229,28 @@ This research presents an adaptive agent for an action game that responds to a p
 
 The AM agent has general path-finding behaviours that keep it close to players or enemy targets and it will try to stay within the player's vision so they notice it. The AI features a behaviour tree to determine its tasks. the tasks mostly involve staying near the player and attacking nearby enemies.
 
-This agent features agent modelling, detailed in \ref{Communication}. When the player performs a combat action, the AM agent will be given information about what kind of action the player took and whether they were successful. It uses this information to construct a model that describes how the player acts. This model is made up of key descriptors that describe the player's actions.
+This agent features agent modelling for its decision-making algorithm. When the player performs a combat action, the AM agent will be given information about what kind of action the player took and whether they were successful. It uses this information to construct a model that describes how the player acts. This model is made up of key descriptors that describe the player's actions.
 
 Every time the player takes aggressive actions, such as attacking, the AM agent will add to an aggressive descriptor. However, if they miss, it will add to a panic descriptor. Each action will add to a specific descriptor and the amount they add will be tweaked in play-testing, see appendix \ref{AppendixQAPlan}. It will then use this player model in the behaviour tree when deciding what it will do.
 
-For example, if the player is aggressive, but is getting hit a lot, the companion AI may use flanking behaviours to attempt to draw enemies away from the player so they can focus on fewer targets. However, if the player is very defensive, and tends to attack only after enemies attack, the adaptive agent may focus on the player's current target and create an opening for them to attack. If the player is getting overwhelmed by enemies, the agent may try to draw enemies away from the player to give them some space to relax or it will intercept itself between the player and their enemies. UML diagrams are in appendix \ref{AppendixUML}.
+For example, if the player is aggressive, but is getting hit a lot, the companion AI may use flanking behaviours to attempt to draw enemies away from the player so they can focus on fewer targets. However, if the player is very defensive, and tends to attack only after enemies attack, the adaptive agent may focus on the player's current target and create an opening for them to attack. If the player is getting overwhelmed by enemies, the agent may try to draw enemies away from the player to give them some space to relax or it will intercept itself between the player and their enemies. The UML diagrams in appendix \ref{AppendixUML} detail these behaviours.
 
-A plan recognition approach would have required the player to think about their strategy more, which would suit a slower or more strategic game. An action game is fast-paced and because the player does not have as much time to think, they won't be able to come up with plans. As a result, this project will feature a player modelling approach because it can work better with a simpler combat system but still enables adaptive behaviour.
+A plan recognition approach would have required the player to think about their strategy more, which would suit a slower or more strategic game. An action game is fast-paced and because the player does not have as much time to think, they won't be able to come up with plans. As a result, this project features a player modelling approach because it can work better with a simpler combat system but still enables adaptive behaviour.
 
 \subsection{System Development Life-cycle}
 \label{DevLifecycle}
 
-The project follows a waterfall methodology. A task board was used to break down features into smaller tasks and track the progress of the development and version control was used to track changes. This task board can be found in appendix \ref{AppendixTrelloBoard}.
+The project follows a waterfall methodology. A task board was used to break down features into smaller tasks and track the progress of the development. Version control was used to track changes. This task board can be found in appendix \ref{AppendixTrelloBoard}.
 
 The initial prototype\footnote{Github Repository (Initial Prototype):
 
-\url{https://github.falmouth.ac.uk/Games-Academy-Student-Work-22-23/Buddy-NPC-Dissertation/commit/493e0063025132e950696b4d174af48a5b190060}} features a basic combat system. The player can move, attack, parry and dodge and these basic mechanics were not changed much in later commits. The agents in this commit use the update loop instead of a behaviour tree and chase their closest enemy and attack when they are in range.
-
-The agent modelling is in a prototype state in this commit and does not affect the agents' actions. The agent modelling script can observe actions performed by a specified character and assign a basic descriptor that defines their dominant play style.
+\url{https://github.falmouth.ac.uk/Games-Academy-Student-Work-22-23/Buddy-NPC-Dissertation/commit/493e0063025132e950696b4d174af48a5b190060}} features a basic combat system. The player can move, attack, parry and dodge and these basic mechanics were functional, but may have been refined in later commits. The agents in this commit use the update loop instead of a behaviour tree and chase their closest enemy and attack when they are in range. The agent modelling is in a prototype state in this commit and does not affect the agents' actions. The agent modelling script can observe actions performed by a specified character and assign a basic descriptor that defines their dominant play style.
 
 Subsequent commits\footnote{Github Repository (First Refactor):
 
 \url{https://github.falmouth.ac.uk/Games-Academy-Student-Work-22-23/Buddy-NPC-Dissertation/commit/ff3c28e4a07d2bb3549c6dbc93962801a3e29a72}} implemented a behaviour tree, which allows for easier modification and extension to the AI. The AI agents were also being designed. Commits after this point are labelled “feat: Basic AI”, “feat: Adaptive AI”, “feat: Interval AI” or “feat: General AI” to show which agent was being developed. Updates to the AM agent were made in "feat: Adaptive AI" commits.
 
-Some of the key mechanics and changes that emerged from the development included flanking and intercepting behaviour. The original plan was to have the AM agent flank when the player is performing counterattacks against their enemies. However, this did not produce much of a difference compared to normal movement, since it would usually move behind the enemy anyway.
-
-However, it did produce behaviour that resulted in it drawing enemies away from the player, which was more suited to if the player was struggling so this behaviour was moved to the panicking model instead of the counter model. Now, when the player is dodging a lot, the AM agent will rush to the player and attempt to draw enemies away from them so they can focus on parrying attacks or countering.
+Some of the key mechanics and changes that emerged from the development included flanking and intercepting behaviour. The original plan was to have the AM agent flank when the player is performing counterattacks against their enemies. However, this did not produce much of a difference compared to normal movement, since it would usually move behind the enemy anyway. However, it did produce behaviour that resulted in it drawing enemies away from the player, which was more suited to if the player was struggling so this behaviour was moved to the panicking model instead of the counter model. Now, when the player is dodging a lot, the AM agent will rush to the player and attempt to draw enemies away from them so they can focus on parrying attacks or countering.
 
 \subsection{Validation and Verification}
 \label{Validation}
@@ -263,33 +259,19 @@ The original quality assurance plan can be found in appendix \ref{AppendixQAPlan
 
 \subsubsection{Unit Testing}
 
-Unit tests were derived for certain calculations to ensure that they were correct. Most commits tagged “chore: Maintainability” implement unit tests. the figures in appendix \ref{AppendixUnitTests} show these tests.
+Unit tests were derived for certain calculations to ensure that they were correct. Most commits labelled “chore: Maintainability” implement unit tests. the figures in appendix \ref{AppendixUnitTests} show these tests. The first set of unit tests contains edit mode tests that assert the flank position helper function. It passes a series of vectors through the function and confirms that they are almost equal (threshold = 0.1) to the expected value. When designing these unit tests, it was discovered that passing in a negative value for the distance would return a position between the targets. From this, the idea for a new behaviour emerged where the agent will position itself between the player and their enemies to help protect them.
 
-The first set of unit tests contains edit mode tests that assert the flank position helper function. It passes a series of vectors through the function and confirms that they are almost equal (threshold = 0.1) to the expected value. When designing these unit tests, it was discovered that passing in a negative value for the distance would return a position between the targets. From this, the idea for a new behaviour emerged where the agent will position itself between the player and their enemies to help protect them.
+Most of the unit tests were for play mode. The first set of play mode unit tests was designed to test the model generator script. These tests assert that taking actions will generate the correct player model and it does so independently of the combat scripts, so it only checks the model script. Expanding on this, unit tests for the combat script were developed. These tests extend these checks by determining that the model is generated correctly from actions within the combat script. These tests found an issue with the attack, dodge and parry actions, which would cause the model to think the player is panicking. These occurred from a function within these actions where they would end the current attack, which causes the model to think that the character made an attack. This issue was then fixed.
 
-Most of the unit tests were for play mode. The first set of play mode unit tests was designed to test the model generator script. These tests assert that taking actions will generate the correct player model and it does so independently of the combat scripts, so it only checks the model script.
-
-Expanding on this, unit tests for the combat script were developed. These tests extend these checks by determining that the model is generated correctly from actions within the combat script. These tests found an issue with the attack, dodge and parry actions, which would cause the model to think the player is panicking. These occurred from a function within these actions where they would end the current attack, which causes the model to think that the character made an attack. This issue was then fixed.
-
-The final unit tests focus on the health scripts. These commits assert that the health is correctly calculated from damage taken and healing received. It also checks that the player should be killed if they receive damage that brings their health below 0. Additionally, the second commit contains a change that prevents healing above max health by clamping the health value.
+The final unit tests focus on the health scripts. These commits assert that the health is correctly calculated from damage taken and healing received. It also checks that the player should be killed if they receive damage that brings their health below 0. From these tests, a fix was made that prevents healing above max health by clamping the health value.
 
 \subsubsection{Integration Testing}
 
-During the development of the artefact, incremental integration testing was used to ensure individual elements were implemented properly.
-
-The initial prototype focused on the player mechanics and the character animations. The AI implemented in this prototype had some of the basic behaviour needed to test the combat mechanics. The AI for both the companion and enemies did not use a behaviour tree in this prototype, instead using the update function to determine actions.
-
-The player model in the initial prototypes also had no influence on the companion's behaviour in this initial prototype, but it was implemented and the player state was displayed on the UI to test how player actions influenced it.
-
-Various scenes within the project are used to test specific mechanics. For example, scenes where the health is set extremely high for all characters to focus on testing AI changes in combat, and a scene with just the player and an enemy is used to refine combat mechanics.
+During the development of the artefact, incremental integration testing was used to ensure individual elements were implemented properly. The initial prototype focused on the player mechanics and the character animations. The AI implemented in this prototype had some of the basic behaviour needed to test the combat mechanics. The AI for both the companion and enemies did not use a behaviour tree in this prototype, instead using the update function to determine actions. The player model in the initial prototypes also had no influence on the companion's behaviour, but it was implemented and the player state was displayed on the UI to test how player actions influenced it. Various scenes within the project are used to test specific mechanics. For example, scenes where the health is set extremely high for all characters to focus on testing AI changes in combat, and a scene with just the player and an enemy is used to refine combat mechanics.
 
 \subsubsection{System Testing}
 
-These behaviours were tested with pilot play-testing with verbal feedback to ensure that the player model is constructed properly and that appropriate actions are taken based on the current player state. From this initial play-testing, players were struggling with the high difficulty as enemies would swarm the player and constantly attack them. This high difficulty was intended to force the player to rely on cooperating with their ally, but players found it too stressful to notice the AI.
-
-The combat difficulty was reduced by making changes to the enemy AI to reduce swarming behaviours. A cooldown was added between attacks and adjustments were made to the enemy AI to move enemies away in a small circle if they cannot attack, similar to the Kung-Fu circle method originally used in \textit{Kingdoms of Amalur: Reckoning} \cite{GAIPKungFuCircle}. This reduced frustration and stress while allowing the player to notice their companion more.
-
-In addition, various quality-of-life changes were made to the camera, UI, inputs and attack animations to make the game more intuitive and accessible.
+These behaviours were tested with pilot play-testing with verbal feedback to ensure that the player model is constructed properly and that appropriate actions are taken based on the current player state. From this initial play-testing, players were struggling with the high difficulty as enemies would swarm the player and constantly attack them. This high difficulty was intended to force the player to rely on cooperating with their ally, but players found it too stressful to notice the AI. The combat difficulty was reduced by making changes to the enemy AI to reduce swarming behaviours. A cooldown was added between attacks and adjustments were made to the enemy AI to move enemies away in a small circle if they cannot attack, similar to the Kung-Fu circle method \cite{GAIPKungFuCircle}. This reduced frustration and stress while allowing the player to notice their companion more. In addition, various quality-of-life changes were made to the camera, UI, inputs and attack animations to make the game more intuitive and accessible.
 
 \section{Research Methods}
 \label{ResearchMethod}
@@ -314,19 +296,17 @@ The research was carried out using positivist philosophies \cite{Zukauskas18}. A
 
 %G-Power video explanation: https://web.microsoftstream.com/video/d1ec1c56-bb97-4592-ae4e-1c973e3fee20?referrer=https:%2F%2Flearningspace.falmouth.ac.uk%2F
 
-The experiment took place on campus at the Games Academy Warehouse.
+The experiment took place on campus at the Games Academy Warehouse. Players were presented with a third-person action game where they played through a tutorial and two combat encounters, each with five opponents for them to defeat. Defeating all of the enemies loads the next level. In both combat encounters, the players are accompanied by a different AI companion. The order in which they play with the AI companions is randomised to avoid observer bias \cite{hrobjartsson2013observer}. Once they have played through the demo, the participants were given a questionnaire form to fill out. The link to the questionnaire is in appendix \ref{AppendixLinks}.
 
-Players will be presented with a third-person action game. The player will play through a tutorial and two combat encounters, each with five opponents for them to defeat. Defeating all of the enemies will load the next level. In both combat encounters, the player will be accompanied by a different AI companion. The order in which they play with the AI companions is randomised to avoid observer bias \cite{hrobjartsson2013observer}. Once they have played through the demo, the participants were given a questionnaire form to fill out. The link to the questionnaire is in appendix \ref{AppendixLinks}.
+The first companion is the AM companion, which uses player actions to calculate the state the player is in, and uses a behaviour tree to determine which actions to take based on this state. AM will determine targets based on the player's actions and choose behaviours that support their intentions better.
 
-The first companion is the AM companion described in section \ref{Artefact}, which uses player actions to calculate the state the player is in, and uses a behaviour tree to determine which actions to take based on this state. AM will determine targets based on the player's actions and choose behaviours that support their intentions better.
-
-The original plan was to test the AM agent against the simple AI already implemented in the initial prototype, see section \ref{DevLifecycle} for more details. However, during development, it was decided that this would not be a fair experiment as the simple AI does not have access to the same behaviours. As such, the IT agent was developed to properly test the AM agent. The IT agent has access to the same behaviours, but instead of using the player state through the player actions, it randomly changes between states every three to eight seconds.
+The original plan was to test the AM agent against the simple AI already implemented in the initial prototype. However, during development, it was decided that this would not be a fair experiment as the simple AI does not have access to the same behaviours. As such, the IT agent was developed to properly test the AM agent. The IT agent has access to the same behaviours, but instead of using the player state through the player actions, it randomly changes between states every three to eight seconds.
 
 Most of the questions in the survey use a Likert scale and will include questions on how likeable, intelligent, collaborative, etc. the player thought they were, using a similar approach used by Z. Ashktorab et al. \cite{SocialPerceptions2020}. There will be some qualitative questions that allow participants to put sentence answers so they can give more specific thoughts. This will also help to determine if any bugs caused one AI to not work as intended.
 
 % TODO Low: Cite likert scale central tendency
 
-The questions will use a seven-point Likert scale. Using a seven-point scale gives more accuracy as it reduces a central tendency bias. This is caused when participants avoid choosing extreme responses to avoid seeming like they have extremist values.
+One of the issues with a Likert scale is a central tendency bias caused when participants avoid choosing extreme responses to avoid seeming like they have extremist values \cite{taherdoost2019best}. To reduce this, the questions will use a 7-point Likert scale. Using a 7-point scale gives more accuracy as it allows for more degrees of agree or disagree for the participant.
 
 \section{Ethical Considerations}
 \label{EthicalConsiderations}
@@ -334,7 +314,7 @@ The questions will use a seven-point Likert scale. Using a seven-point scale giv
 %TODO high - In the final dissertation, expand your ethical considerations. Cite key legislation (e.g., GDPR), international law (e.g., Declaration of Helsinki), and codes of conduct (e.g., Falmouth University Research Integrity Policy and BCS Code of Conduct).
 % TODO high - Refer to the content of your application for ethical approval and any risk assessment (e.g., health and safety) you’ve conducted. Then, enrich your analysis with a more balanced insight into risks and benefits. Consider the potential wider benefits your work could pave the way for.
 
-The data collection involved an experiment that focuses on various AI behaviours, and how different behaviours can build a stronger emotional connection between players and AI companion NPCs. As such, participants were involved. Participants tested the AI and filled out survey forms to give their opinions on the various AI mechanics. Under these criteria, there are no high-risk categories, but since participants are involved, it counted as a medium-risk experiment. The Nuremberg Code, the Falmouth University guidelines and the BCS Code of Conduct have been followed to protect the rights of the participants \cite{germany1949trials, BCSConductCode}.
+The data collection involved an experiment that focuses on various AI behaviours, and how different behaviours can build a stronger emotional connection between players and AI companion NPCs. As such, participants were involved. Participants tested the AI and filled out survey forms to give their opinions on the various AI mechanics. Under these criteria, there are no high-risk categories, but since participants are involved, it counted as a medium-risk experiment. The Nuremberg Code \cite{germany1949trials}, the Falmouth University guidelines and the BCS Code of Conduct \cite{BCSConductCode} have been followed to protect the rights of the participants.
 
 The participants were given information forms that detail the experiment and their participation in it. This information sheet is in appendix \ref{AppendixEthicsForms}. There are no aspects of the experiment that are hidden from the participants, and the form has clear information on what the experiment will entail. The form has information on the purpose of the research, expected duration, procedures, what the participants are being asked to do, their right to decline and withdraw, confidentiality and contact info for the researcher.
 
@@ -402,7 +382,7 @@ After carrying out the play-testing sessions, there were 59 participants. Four o
 
 % Table info https://tex.stackexchange.com/questions/53384/creating-a-table-in-two-column-style-page
 
-\subsection{Hypothesis 1 - The adaptive companion will be perceived as more collaborative than the non-adaptive companion}
+\subsection{Hypothesis 1 - The AM companion will be perceived as more collaborative than the IT companion}
 
 This hypothesis evaluates the players’ perception of collaboration between both agent types. A t-test between the collaboration ratings of both agent types returns a p-value of 0.2889. This high value means that the null hypothesis may be true.
 
@@ -436,7 +416,7 @@ Figure \ref{fig:H2CollabUXScatter} shows a scatter plot that demonstrates the us
 
 \subsection{Post-hoc Test 1 - Players will rate their agent as more collaborative if they thought they were more adaptive}
 
-The first post hoc test was used to evaluate how effective the use of adaptive behaviour is at fostering a sense of collaboration. A correlation test between these ratings returns a p-value less than 0.05 and a correlation of 0.516152. This low p-value indicated the null hypothesis may be false, though there is only a modest correlation between the ratings for adaptivity and collaboration. This could indicate that if the player perceived the agents as adapting to their behaviour, then they also collaborate with the player better as well.
+The first post hoc test was used to evaluate how effective the use of adaptive behaviour is at building a sense of collaboration. A correlation test between these ratings returns a p-value less than 0.05 and a correlation of 0.516152. This low p-value indicated the null hypothesis may be false, though there is only a modest correlation between the ratings for adaptivity and collaboration. This could indicate that if the player perceived the agents as adapting to their behaviour, then they also collaborate with the player better as well.
 
 \begin{figure}[!h]
   \centering
@@ -485,7 +465,7 @@ Future-proofing is another consideration. Even though the IT agent was easier to
 
 Some players felt overshadowed by their companions. Naughty Dog prevented \textit{Ellie} from dealing damage to enemies the player cannot see to address these issues while still making the AI seem active in the fight \cite{GAIP2EllieAI}. Since the agents only had access to melee attacks, this would have not been possible while also keeping the agent within sight of the player. However, maybe an idle state could be added to the player model, where the AI will try to move closer to the player to keep them more engaged in the fight if it notices that they are not participating in the fight.
 
-Additionally, some players commented that they would like to be able to give commands to their companions. This would suggest that they felt the need for better control over the companion's behaviour. While this would give more control, commanding the agents may break the companion's agency as a character \cite{EGXCharacterDeathGuildWars}. This is also a game mechanic that may not suit every game.
+Additionally, some players commented that they would like to be able to give commands to their companions. This would suggest that they felt the need for better control over the companion's behaviour. While this would give more control, commanding the agents may break the companion's agency as a character \cite{EGXCharacterDeathGuildWars}. This is also a mechanic that may not suit every game.
 
 While it seems that adaptive behaviours alone may not be enough to build a sense of collaboration, this research still presents an agent that can adapt to player actions. Combining this with other techniques may yield a more collaborative companion agent, or it could be used for creating enemies in games.
 
@@ -520,9 +500,9 @@ Additionally, there could be more behaviours in each state to increase variety i
 
 The environment and gameplay design may also affect the agent. A more complicated combat environment with obstacles and cover could have provided more considerations for the AI. In addition, including a variety of enemy types would encourage the player to change their strategies, allowing the player modelling companion to change their play style to better reflect the new situation. The testing environment could have included a variety of combat scenarios with different enemy types and compositions, thus requiring the player to change their strategy. A similar method was used by Guckelsberger et al. when testing their CEM AI \cite{CoupledEmpowermentMaximisation}. Though this would be able to evaluate the agents more accurately, this would have been a little out of scope for this experiment to implement.
 
-The difficulty is another consideration for how useful players found the AI. In the initial prototype, the game was designed to be difficult to require the player to use strategy and see value in their companion. However, verbal feedback from the quality assurance indicated that it was too frustrating and players were too busy to notice the companion, so the difficulty was reduced. Enemies were less aggressive and gave the player more breathing room, and the player had larger parry windows and they had a new action-cancelling mechanic. This allowed players to cancel any action with a parry or cancel dodges with attacks to make the controls more forgiving.
+The difficulty is another consideration for how useful players found the AI. In the initial prototype, the game was designed to be difficult to require the player to use strategy and see value in their companion. However, verbal feedback from the quality assurance indicated that it was too frustrating and players were too busy to notice the companion, so the difficulty was reduced. Enemies were less aggressive, giving the player more breathing room. Also, the player had larger parry windows and a new action-cancelling mechanic. This allowed players to cancel any action with a parry or cancel dodges with attacks to make the controls more forgiving.
 
-These changes may have made the game too easy, as the players did not have to think about strategy and button mashing became a viable strategy, which reduces how well the companion can adapt to the player. The easier difficulty also means that the players had more breathing room to notice and let the companion fight on its own, which is where some of them may have thought that it was overshadowing them.
+These changes may have made the game too easy, as the players did not have to think about strategy and button-mashing became a viable strategy, which reduces how well the companion can adapt to the player. The easier difficulty also means that the players had more breathing room to notice and let the companion fight on its own, which is where some of them may have thought that it was overshadowing them.
 
 A better balance in difficulty may have given the player the chance to notice the companion and not get frustrated, while also requiring the need for strategy. Additionally, a game with slower pacing would also make for a better environment for the AM companion since the player gets more of a chance to notice their companion’s actions. Further research could be conducted to determine the effects of difficulty on the player’s perception of their companions.
 
@@ -856,7 +836,7 @@ Figure \ref{fig:AppendixH1CollabBox} displays a box plot that compares the the c
   \centering
   \includegraphics[width=0.8\linewidth]{Images/Graphs/H1CollabBox.pdf}
   
-\caption{Box chart displaying each agents' user ratings for the collaboration}
+\caption{Box plot displaying each agents' user ratings for the collaboration}
 \label{fig:AppendixH1CollabBox}
 \end{figure}
 
