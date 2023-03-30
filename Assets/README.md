@@ -29,3 +29,4 @@ All of the other scenes in the "Assets/Scenes" folder are test scenes that were 
 Quality Assurance Info:
 
 The "Assets/UnitTests" folder contains all of the unit tests used for quality assurance
+Evidence of testing is in the "Assets/Testing" folder
