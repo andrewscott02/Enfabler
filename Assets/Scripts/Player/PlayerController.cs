@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : CharacterController
 {
     #region Setup
 
     #region Variables
+
+    InputManager controls;
+    InputAction moveInput;
 
     float xInput;
     float yInput;
@@ -22,6 +26,20 @@ public class PlayerController : CharacterController
     //public LayerMask layerMask;
 
     #endregion
+
+    private void Awake()
+    {
+        controls = new InputManager();
+    }
+
+    private void OnEnable()
+    {
+        moveInput = controls.Player.Move;
+        moveInput.Enable();
+
+        controls.Player.Move.performed += ctx => Move(ctx.ReadValue<Vector2>());
+        controls.Player.Move.Enable();
+    }
 
     public override void Start()
     {
@@ -121,7 +139,7 @@ public class PlayerController : CharacterController
 
         #endregion
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Backspace))
         {
             Debug.Break(); 
         }
