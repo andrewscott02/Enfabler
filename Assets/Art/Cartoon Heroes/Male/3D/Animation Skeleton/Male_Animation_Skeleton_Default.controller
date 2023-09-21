@@ -1,19 +1,120 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!206 &-2588866215363387700
+BlendTree:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Blend Tree
+  m_Childs:
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 8a646e73f32d5ab46be5ca7d3ebb4f3d, type: 3}
+    m_Threshold: 0
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Run Blend
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 0f5f811a33031524680b227a45dc9848, type: 3}
+    m_Threshold: 0.4
+    m_Position: {x: 0, y: 0.4}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Run Blend
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7826042550395834419, guid: 92e13e67a26415646a752312d3ac0230,
+      type: 3}
+    m_Threshold: 0.8
+    m_Position: {x: 0, y: 0.8}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Run Blend
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -3928687438638128613, guid: 0f5f811a33031524680b227a45dc9848,
+      type: 3}
+    m_Threshold: 1.2
+    m_Position: {x: -0.4, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: RunBlend
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -6949840747639843309, guid: 92e13e67a26415646a752312d3ac0230,
+      type: 3}
+    m_Threshold: 1.6000001
+    m_Position: {x: -0.8, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: RunBlend
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -4428787597018953541, guid: 0f5f811a33031524680b227a45dc9848,
+      type: 3}
+    m_Threshold: 2.0000002
+    m_Position: {x: 0.4, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: RunBlend
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 4626334061585447918, guid: 92e13e67a26415646a752312d3ac0230,
+      type: 3}
+    m_Threshold: 2.4000003
+    m_Position: {x: 0.8, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: RunBlend
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 5945964031070844374, guid: 0f5f811a33031524680b227a45dc9848,
+      type: 3}
+    m_Threshold: 2.8000004
+    m_Position: {x: 0, y: -0.4}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: RunBlend
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -6365588508001452036, guid: 92e13e67a26415646a752312d3ac0230,
+      type: 3}
+    m_Threshold: 3.2000005
+    m_Position: {x: 0, y: -0.8}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: RunBlend
+    m_Mirror: 0
+  m_BlendParameter: RunBlendX
+  m_BlendParameterY: RunBlendY
+  m_MinThreshold: 0
+  m_MaxThreshold: 3.2000005
+  m_UseAutomaticThresholds: 0
+  m_NormalizedBlendValues: 0
+  m_BlendType: 2
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male_Animation_Skeleton_Default
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Run Blend
+  - m_Name: RunBlendX
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
+  - m_Name: RunBlendY
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -29,10 +130,11 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
 --- !u!1102 &1102003536358159248
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Land
   m_Speed: 1
   m_CycleOffset: 0
@@ -54,10 +156,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102075184184080350
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Roll
   m_Speed: 1
   m_CycleOffset: 0
@@ -79,10 +182,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102097913726934338
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Jump Up
   m_Speed: 1
   m_CycleOffset: 0
@@ -104,10 +208,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102142064644649106
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Sword Block Hit
   m_Speed: 1
   m_CycleOffset: 0
@@ -129,10 +234,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102157342845842840
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Sword Get Up
   m_Speed: 1
   m_CycleOffset: 0
@@ -154,10 +260,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102171612686385896
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Sword Damage Heavy
   m_Speed: 1
   m_CycleOffset: 0
@@ -179,10 +286,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102220301679994620
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Attack 3
   m_Speed: 1
   m_CycleOffset: 0
@@ -204,10 +312,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102274922726278086
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Sprint
   m_Speed: 1
   m_CycleOffset: 0
@@ -229,10 +338,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102332064981782274
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Sword Stance
   m_Speed: 1
   m_CycleOffset: 0
@@ -254,10 +364,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102414701294786830
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Idle
   m_Speed: 1
   m_CycleOffset: 0
@@ -279,10 +390,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102421402161273378
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Die
   m_Speed: 1
   m_CycleOffset: 0
@@ -304,10 +416,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102545652085291482
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Attack 2
   m_Speed: 1
   m_CycleOffset: 0
@@ -329,10 +442,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102554951633155134
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Sword Die
   m_Speed: 1
   m_CycleOffset: 0
@@ -354,10 +468,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102635382796221860
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Damage Heavy
   m_Speed: 1
   m_CycleOffset: 0
@@ -379,10 +494,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102635579427550910
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Sword Block
   m_Speed: 1
   m_CycleOffset: 0
@@ -404,10 +520,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102662826810688700
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male_Walk
   m_Speed: 1
   m_CycleOffset: 0
@@ -429,10 +546,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102678307518385000
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Attack 1
   m_Speed: 1
   m_CycleOffset: 0
@@ -454,10 +572,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102723739437390148
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Fall
   m_Speed: 1
   m_CycleOffset: 0
@@ -479,10 +598,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102777843178486112
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Sword Damage Light
   m_Speed: 1
   m_CycleOffset: 0
@@ -504,10 +624,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102791233351445532
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Sword Roll
   m_Speed: 1
   m_CycleOffset: 0
@@ -529,10 +650,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102836371342211284
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male_Sword_Walk
   m_Speed: 1
   m_CycleOffset: 0
@@ -554,10 +676,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102872702011382600
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Damage Light
   m_Speed: 1
   m_CycleOffset: 0
@@ -579,10 +702,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102924031727420378
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Sword Sprint
   m_Speed: 1
   m_CycleOffset: 0
@@ -604,10 +728,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102930749543856260
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Male Get Up
   m_Speed: 1
   m_CycleOffset: 0
@@ -629,10 +754,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1107 &1107632418391388642
 AnimatorStateMachine:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
@@ -697,7 +823,7 @@ AnimatorStateMachine:
     m_Position: {x: 1656, y: 228, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102924031727420378}
-    m_Position: {x: 576, y: 276, z: 0}
+    m_Position: {x: 580, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102332064981782274}
     m_Position: {x: 360, y: 228, z: 0}
@@ -707,6 +833,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 1102662826810688700}
     m_Position: {x: 576, y: 24, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 7178759127724366435}
+    m_Position: {x: 320, y: 360, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -716,4 +845,30 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 408, y: -96, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102332064981782274}
+  m_DefaultState: {fileID: 7178759127724366435}
+--- !u!1102 &7178759127724366435
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Blend Tree
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: -2588866215363387700}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 

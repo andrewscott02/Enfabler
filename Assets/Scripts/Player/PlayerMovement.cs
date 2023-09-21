@@ -23,12 +23,6 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    public void SetMovement(float xSpeed, float ySpeed)
-    {
-        movement = new Vector3(xSpeed, 0, ySpeed) * Time.deltaTime;
-        movement = transform.TransformDirection(movement);
-    }
-
     /// <summary>
     /// Moves the player and adjusts the animation
     /// </summary>
@@ -36,39 +30,8 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="ySpeed"> Determines the vertical movement (Forward and Backward) </param>
     public void Move(float xSpeed, float ySpeed)
     {
-        SetMovement(xSpeed, ySpeed);
-
-        if (GetComponent<CharacterCombat>().GetDodging())
-        {
-            movement *= dodgeSpeed;
-        }
-        else
-        {
-            if (!isSprinting)
-            {
-                movement *= walkSpeed;
-            }
-            else
-            {
-                movement *= runSpeed;
-            }
-        }
-
-        rb.velocity = movement;
-
-        #region Animation
-
-        //Gets the rotation of the model to offset the animations
-        Vector2 realMovement = new Vector2(0, 0);
-        realMovement.x = Vector3.Dot(movement, model.right);
-        realMovement.y = Vector3.Dot(movement, model.forward);
-
-        //Sets the movement animations for the animator
-        //Debug.Log("X:" + rb.velocity.x + "Y:" + rb.velocity.z);
-        animator.SetFloat("xMovement", Mathf.Lerp(animator.GetFloat("xMovement"), realMovement.x, lerpSpeed));
-        animator.SetFloat("yMovement", Mathf.Lerp(animator.GetFloat("yMovement"), realMovement.y, lerpSpeed));
-
-        #endregion
+        animator.SetFloat("RunBlendX", Mathf.Lerp(animator.GetFloat("RunBlendX"), xSpeed, lerpSpeed));
+        animator.SetFloat("RunBlendY", Mathf.Lerp(animator.GetFloat("RunBlendY"), ySpeed, lerpSpeed));
     }
 
     public void ToggleSprint()

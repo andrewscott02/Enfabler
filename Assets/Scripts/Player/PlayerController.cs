@@ -32,7 +32,7 @@ public class PlayerController : CharacterController
         playerMovement.animator = animator;
         playerMovement.SetModel(model);
 
-        AIManager.instance.AllocateTeam(this);
+        //AIManager.instance.AllocateTeam(this);
     }
 
     #endregion
@@ -131,8 +131,6 @@ public class PlayerController : CharacterController
     {
         //Debug.Log(xInput + "|| " + yInput);
         playerMovement.Move(xInput, yInput);
-
-        playerMovement.animator.SetBool("CanMove", combat.canMove);
     }
 
     #endregion
