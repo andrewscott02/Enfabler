@@ -28,10 +28,10 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     /// <param name="xSpeed"> Determines the horizontal movement (Left and Right) </param>
     /// <param name="ySpeed"> Determines the vertical movement (Forward and Backward) </param>
-    public void Move(float xSpeed, float ySpeed)
+    public void Move(Vector2 moveInput)
     {
-        animator.SetFloat("RunBlendX", Mathf.Lerp(animator.GetFloat("RunBlendX"), xSpeed, lerpSpeed));
-        animator.SetFloat("RunBlendY", Mathf.Lerp(animator.GetFloat("RunBlendY"), ySpeed, lerpSpeed));
+        animator.SetFloat("RunBlendX", Mathf.Lerp(animator.GetFloat("RunBlendX"), moveInput.x, lerpSpeed));
+        animator.SetFloat("RunBlendY", Mathf.Lerp(animator.GetFloat("RunBlendY"), moveInput.y, lerpSpeed));
     }
 
     public void ToggleSprint()

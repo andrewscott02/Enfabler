@@ -9,11 +9,7 @@ public class PlayerController : CharacterController
 
     #region Variables
 
-    InputManager controls;
-    InputAction moveInput;
-
-    float xInput;
-    float yInput;
+    Vector2 moveInput;
 
     float xRotateInput;
     float yRotateInput;
@@ -26,20 +22,6 @@ public class PlayerController : CharacterController
     //public LayerMask layerMask;
 
     #endregion
-
-    private void Awake()
-    {
-        controls = new InputManager();
-    }
-
-    private void OnEnable()
-    {
-        moveInput = controls.Player.Move;
-        moveInput.Enable();
-
-        controls.Player.Move.performed += ctx => Move(ctx.ReadValue<Vector2>());
-        controls.Player.Move.Enable();
-    }
 
     public override void Start()
     {
@@ -57,28 +39,31 @@ public class PlayerController : CharacterController
 
     #region Inputs
 
-    // Update is called once per frame
-    void Update()
+    public void MoveInput(InputAction.CallbackContext context)
     {
-        #region Movement
-
         if (combat.canMove)
         {
-            xInput = Input.GetAxisRaw("Horizontal");
-            yInput = Input.GetAxisRaw("Vertical");
-
-            if (Input.GetButtonDown("Walk"))
-            {
-                playerMovement.ToggleSprint();
-            }
+            moveInput.x = context.ReadValue<Vector2>().x;
+            moveInput.y = context.ReadValue<Vector2>().y;
         }
         else
         {
-            xInput = 0;
-            yInput = 0;
+            moveInput.x = 0;
+            moveInput.y = 0;
         }
+    }
 
-        #endregion
+    public void CameraInput(InputAction.CallbackContext context)
+    {
+        xRotateInput = context.ReadValue<Vector2>().x;
+        yRotateInput = context.ReadValue<Vector2>().y;
+
+        Debug.Log(xRotateInput + " || " + yRotateInput);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         #region Actions
 
@@ -101,14 +86,7 @@ public class PlayerController : CharacterController
 
         #region Camera Rotation
 
-        xRotateInput = Input.GetAxisRaw("Mouse X");
-        yRotateInput = Input.GetAxisRaw("Mouse Y");
-
-        //Debug.Log(xRotateInput + " " + yRotateInput);
-
-        transform.rotation *= Quaternion.AngleAxis(xRotateInput * rotateInterval.x, Vector3.up);
-
-        #region Y Rotation
+        followTarget.transform.rotation *= Quaternion.AngleAxis(xRotateInput * rotateInterval.x, Vector3.up);
 
         followTarget.transform.rotation *= Quaternion.AngleAxis(yRotateInput * rotateInterval.y, Vector3.right);
 
@@ -128,27 +106,17 @@ public class PlayerController : CharacterController
 
         followTarget.transform.localEulerAngles = angles;
 
-        if (xRotateInput > rotateDeadZone || xRotateInput > -rotateDeadZone)
-        {
-            transform.rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
 
-            followTarget.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
-        }
+        followTarget.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
 
         #endregion
-
-        #endregion
-
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            Debug.Break(); 
-        }
     }
 
     private void FixedUpdate()
     {
         //Debug.Log(xInput + "|| " + yInput);
-        playerMovement.Move(xInput, yInput);
+        playerMovement.Move(moveInput);
     }
 
     #endregion

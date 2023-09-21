@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 0.1, y: 0.5, z: 0.3}
+  Damping: {x: 0.8, y: 1.5, z: 1}
   ShoulderOffset: {x: 0.21, y: 0, z: 0}
   VerticalArmLength: 0.4
   CameraSide: 1
@@ -714,9 +714,9 @@ MonoBehaviour:
   animator: {fileID: 1697564182}
   model: {fileID: 93989827}
   playerTeam: 1
-  rotateInterval: {x: 0, y: 0}
+  rotateInterval: {x: 1, y: 1}
   rotateDeadZone: 0.1
-  followTarget: {fileID: 0}
+  followTarget: {fileID: 1701092314}
 --- !u!114 &1697564175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -784,7 +784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: c34e1b6d4b36a9548924c2dd8bc7233f,
     type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -795,12 +795,50 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1697564174}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: MoveInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0f22c04d-bd8f-4a23-87eb-1be5fa0bb24a
+    m_ActionName: Player/Move
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1697564174}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: CameraInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ee030df0-94a5-47d0-93f7-d1192dd07993
+    m_ActionName: Player/Camera[/XInputControllerWindows/rightStick]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PlayerController
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 824119608}
+--- !u!1 &1701092314 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6989636455429300264, guid: 8383457b08cdeee42a59a4975fae37de,
+    type: 3}
+  m_PrefabInstance: {fileID: 7460243065436849212}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2047926728
 GameObject:
   m_ObjectHideFlags: 0
