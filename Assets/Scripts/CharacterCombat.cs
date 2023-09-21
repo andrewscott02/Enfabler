@@ -34,6 +34,7 @@ public class CharacterCombat : MonoBehaviour
     {
         if (canAttack)
         {
+            Debug.Log("Attack");
             EndParry();
             EndDodge();
             ForceEndAttack();
@@ -44,12 +45,14 @@ public class CharacterCombat : MonoBehaviour
             canDodge = false;
             animator.SetTrigger("LightAttack");
             //animator.SetInteger("RandAttack", 1);
-            animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
+            //animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
         }
     }
 
-    public virtual void Parry()
+    public virtual void Block()
     {
+        //Todo: Change to block
+        return;
         if (canParry)
         {
             EndParry();
@@ -99,6 +102,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void NextAttack()
     {
+        /*
         //Debug.Log("Next Attack");
         animator.SetInteger("SwordAttackCount", animator.GetInteger("SwordAttackCount") + 1);
 
@@ -106,7 +110,7 @@ public class CharacterCombat : MonoBehaviour
         {
             animator.SetInteger("SwordAttackCount", 0);
         }
-
+        */
         canAttack = true;
 
         AIController AIController = GetComponent<AIController>();
@@ -120,7 +124,7 @@ public class CharacterCombat : MonoBehaviour
     public void ResetAttack()
     {
         //Debug.Log("Reset Attack");
-        animator.SetInteger("SwordAttackCount", 0);
+        //animator.SetInteger("SwordAttackCount", 0);
         canAttack = true;
         canParry = true;
 

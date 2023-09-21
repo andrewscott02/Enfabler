@@ -57,33 +57,21 @@ public class PlayerController : CharacterController
     {
         xRotateInput = context.ReadValue<Vector2>().x;
         yRotateInput = context.ReadValue<Vector2>().y;
+    }
 
-        Debug.Log(xRotateInput + " || " + yRotateInput);
+    public void AttackInput(InputAction.CallbackContext context)
+    {
+        combat.LightAttack();
+    }
+
+    public void BlockInput(InputAction.CallbackContext context)
+    {
+        combat.Block();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        #region Actions
-
-        if (Input.GetButtonDown("Light Attack"))
-        {
-            combat.LightAttack();
-        }
-
-        if (Input.GetButtonDown("Parry"))
-        {
-            combat.Parry();
-        }
-
-        if (Input.GetButtonDown("Dodge"))
-        {
-            combat.Dodge();
-        }
-
-        #endregion
-
         #region Camera Rotation
 
         followTarget.transform.rotation *= Quaternion.AngleAxis(xRotateInput * rotateInterval.x, Vector3.up);

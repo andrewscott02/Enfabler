@@ -20,7 +20,7 @@ public class Parry : Node
     {
         if (agent.GetCharacterCombat().canParry)
         {
-            agent.GetCharacterCombat().Parry();
+            agent.GetCharacterCombat().Block();
             state = NodeState.Success;
         }
         else
