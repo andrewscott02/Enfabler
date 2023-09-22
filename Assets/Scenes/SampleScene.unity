@@ -135,6 +135,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7460243065436849212}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &166616891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9043084692085274803, guid: 8383457b08cdeee42a59a4975fae37de,
+    type: 3}
+  m_PrefabInstance: {fileID: 7460243065436849212}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &500326911
 GameObject:
   m_ObjectHideFlags: 3
@@ -145,8 +151,8 @@ GameObject:
   m_Component:
   - component: {fileID: 500326912}
   - component: {fileID: 500326915}
-  - component: {fileID: 500326916}
-  - component: {fileID: 500326917}
+  - component: {fileID: 500326918}
+  - component: {fileID: 500326919}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -181,7 +187,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &500326916
+--- !u!114 &500326918
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500326911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damping: {x: 0, y: 0, z: 0}
+  ShoulderOffset: {x: 0.5, y: 0, z: 0}
+  VerticalArmLength: 0.34
+  CameraSide: 1
+  CameraDistance: 5.36
+  CameraCollisionFilter:
+    serializedVersion: 2
+    m_Bits: 0
+  IgnoreTag: 
+  CameraRadius: 0.2
+  DampingIntoCollision: 0
+  DampingFromCollision: 2
+--- !u!114 &500326919
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,30 +224,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damping: 0
---- !u!114 &500326917
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500326911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damping: {x: 0.8, y: 1.5, z: 1}
-  ShoulderOffset: {x: 0.21, y: 0, z: 0}
-  VerticalArmLength: 0.4
-  CameraSide: 1
-  CameraDistance: 3.8
-  CameraCollisionFilter:
-    serializedVersion: 2
-    m_Bits: 0
-  IgnoreTag: 
-  CameraRadius: 0.2
-  DampingIntoCollision: 0
-  DampingFromCollision: 2
 --- !u!1 &672741973
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +400,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824119606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.19, y: 1.89, z: -4.3199997}
+  m_LocalPosition: {x: -8.9, y: 1.83, z: -5.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -566,7 +572,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933747454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.19, y: 1.89, z: -4.3199997}
+  m_LocalPosition: {x: -8.9, y: 1.83, z: -5.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -693,11 +699,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  walkSpeed: 160
-  runSpeed: 300
-  dodgeSpeed: 300
+  skeleton: {fileID: 166616891}
+  controller: {fileID: 0}
+  walkSpeed: 400
+  runSpeed: 600
+  dodgeSpeed: 600
   lerpSpeed: 0.1
-  movement: {x: 0, y: 0, z: 0}
 --- !u!114 &1697564174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,7 +721,7 @@ MonoBehaviour:
   animator: {fileID: 1697564182}
   model: {fileID: 93989827}
   playerTeam: 1
-  rotateInterval: {x: 1, y: 1}
+  rotateInterval: {x: 0.8, y: 0.8}
   rotateDeadZone: 0.1
   followTarget: {fileID: 1701092314}
 --- !u!114 &1697564175

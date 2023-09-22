@@ -29,6 +29,7 @@ public class PlayerController : CharacterController
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         playerMovement = GetComponent<PlayerMovement>();
+        playerMovement.controller = this;
         playerMovement.animator = animator;
         playerMovement.SetModel(model);
 
@@ -94,9 +95,9 @@ public class PlayerController : CharacterController
 
         followTarget.transform.localEulerAngles = angles;
 
-        transform.rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
+        //transform.rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
 
-        followTarget.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
+        //followTarget.transform.localEulerAngles = new Vector3(angles.x, 0, angles.z);
 
         #endregion
     }
