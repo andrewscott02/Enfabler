@@ -41,6 +41,7 @@ public class CharacterCombat : MonoBehaviour
 
             Target();
 
+            canMove = false;
             canAttack = false;
             canDodge = false;
             animator.SetTrigger("LightAttack");
@@ -125,6 +126,7 @@ public class CharacterCombat : MonoBehaviour
     {
         //Debug.Log("Reset Attack");
         //animator.SetInteger("SwordAttackCount", 0);
+        canMove = true;
         canAttack = true;
         canParry = true;
 

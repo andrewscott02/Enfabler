@@ -14,12 +14,11 @@ public class PlayerMovement : MonoBehaviour
 
     Transform model; public void SetModel(Transform newModel) { model = newModel; }
 
-    bool isSprinting = false;
-    public float walkSpeed = 4;
-    public float runSpeed = 8;
-    public float dodgeSpeed = 8;
+    public float moveSpeed = 150;
 
     public float lerpSpeed = 0.01f;
+
+    Vector3 movement = Vector3.zero;
 
     private void Start()
     {
@@ -33,8 +32,11 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="ySpeed"> Determines the vertical movement (Forward and Backward) </param>
     public void Move(Vector2 moveInput)
     {
+        if (!controller.GetCharacterCombat().canMove)
+            moveInput = Vector2.zero;
+
         moveInput.Normalize();
-        Vector3 movement = new Vector3(moveInput.x * runSpeed, 0, moveInput.y * runSpeed) * Time.deltaTime;
+        movement = HelperFunctions.LerpVector3(movement, new Vector3(moveInput.x * moveSpeed, 0, moveInput.y * moveSpeed) * Time.deltaTime, lerpSpeed);
 
         if (moveInput != Vector2.zero)
         {
@@ -44,16 +46,13 @@ public class PlayerMovement : MonoBehaviour
             skeleton.transform.rotation = newRot;
 
             movement = Quaternion.AngleAxis(controller.followTarget.transform.rotation.eulerAngles.y, Vector3.up) * movement;
+
+            //TODO:Lerp velocity here
             rb.velocity = transform.TransformDirection(movement);
         }
 
         //Animate movement
-        float magnitude = moveInput.magnitude * runSpeed;
+        float magnitude = moveInput.magnitude * moveSpeed;
         animator.SetFloat("RunBlend", Mathf.Lerp(animator.GetFloat("RunBlend"), magnitude, lerpSpeed));
-    }
-
-    public void ToggleSprint()
-    {
-        isSprinting = !isSprinting;
     }
 }

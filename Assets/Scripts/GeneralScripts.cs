@@ -216,6 +216,15 @@ public static class HelperFunctions
     }
 
     #endregion
+
+    public static Vector3 LerpVector3(Vector3 a, Vector3 b, float p)
+    {
+        float x = Mathf.Lerp(a.x, b.x, p);
+        float y = Mathf.Lerp(a.y, b.y, p);
+        float z = Mathf.Lerp(a.z, b.z, p);
+        return new Vector3(x, y, z);
+    }
+
 }
 
 #region Interfaces
