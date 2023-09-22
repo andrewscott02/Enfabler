@@ -14,7 +14,8 @@ public class PlayerMovement : MonoBehaviour
 
     Transform model; public void SetModel(Transform newModel) { model = newModel; }
 
-    public float moveSpeed = 150;
+    public float animSpeed = 7;
+    public float moveSpeed = 600;
 
     public float lerpSpeed = 0.01f;
 
@@ -35,9 +36,6 @@ public class PlayerMovement : MonoBehaviour
         if (!controller.GetCharacterCombat().canMove)
             moveInput = Vector2.zero;
 
-        moveInput.Normalize();
-        movement = HelperFunctions.LerpVector3(movement, new Vector3(moveInput.x * moveSpeed, 0, moveInput.y * moveSpeed) * Time.deltaTime, lerpSpeed);
-
         if (moveInput != Vector2.zero)
         {
             //Rotate towards direction
@@ -45,14 +43,22 @@ public class PlayerMovement : MonoBehaviour
             Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, controller.followTarget.transform.rotation.eulerAngles.y, 0);
             skeleton.transform.rotation = newRot;
 
+            //Determine velocity
+            movement = new Vector3(moveInput.x * moveSpeed, 0, moveInput.y * moveSpeed) * Time.fixedDeltaTime;
             movement = Quaternion.AngleAxis(controller.followTarget.transform.rotation.eulerAngles.y, Vector3.up) * movement;
-
-            //TODO:Lerp velocity here
-            rb.velocity = transform.TransformDirection(movement);
+            Vector3 lerpVector = HelperFunctions.LerpVector3(rb.velocity, transform.TransformDirection(movement), lerpSpeed);
+            rb.velocity = lerpVector;
         }
 
         //Animate movement
-        float magnitude = moveInput.magnitude * moveSpeed;
+        float magnitude = moveInput.magnitude * animSpeed;
         animator.SetFloat("RunBlend", Mathf.Lerp(animator.GetFloat("RunBlend"), magnitude, lerpSpeed));
+    }
+
+    public FootStepData stepData;
+
+    public void SpawnFootstep(int footTransformIndex)
+    {
+        Instantiate(stepData.footstepObject, stepData.footstepTransforms[footTransformIndex].position, new Quaternion(0, 0, 0, 0));
     }
 }

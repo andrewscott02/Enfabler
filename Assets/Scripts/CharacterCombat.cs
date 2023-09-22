@@ -73,7 +73,7 @@ public class CharacterCombat : MonoBehaviour
         }
     }
 
-    public virtual void Dodge()
+    public virtual void Dodge(Quaternion direction)
     {
         if (canAttack && canDodge)
         {
@@ -86,6 +86,7 @@ public class CharacterCombat : MonoBehaviour
                 modelConstructor.PlayerDodge(attackers > 0);
             }
 
+            canMove = false;
             canAttack = false;
             canDodge = false;
             if (animator != null) { animator.SetTrigger("Dodge"); }

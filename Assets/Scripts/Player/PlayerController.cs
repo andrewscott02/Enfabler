@@ -70,6 +70,14 @@ public class PlayerController : CharacterController
         combat.Block();
     }
 
+    public void DodgeInput(InputAction.CallbackContext context)
+    {
+        Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
+        Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
+
+        combat.Dodge(newRot);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -94,10 +102,6 @@ public class PlayerController : CharacterController
         }
 
         followTarget.transform.localEulerAngles = angles;
-
-        //transform.rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
-
-        //followTarget.transform.localEulerAngles = new Vector3(angles.x, 0, angles.z);
 
         #endregion
     }

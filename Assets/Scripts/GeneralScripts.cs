@@ -224,7 +224,6 @@ public static class HelperFunctions
         float z = Mathf.Lerp(a.z, b.z, p);
         return new Vector3(x, y, z);
     }
-
 }
 
 #region Interfaces
@@ -242,3 +241,11 @@ public interface IHealable
 }
 
 #endregion
+
+[System.Serializable]
+public struct FootStepData
+{
+    public Object footstepObject;
+    public Transform[] footstepTransforms;
+    public float footStepStrenght;
+}
