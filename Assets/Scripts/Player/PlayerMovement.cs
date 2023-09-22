@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     Transform model; public void SetModel(Transform newModel) { model = newModel; }
 
     public float moveSpeed = 7;
-
+    float currentSpeed = 0;
     public float lerpSpeed = 0.01f;
 
     Vector3 movement = Vector3.zero;
@@ -41,8 +42,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Animate movement
-        float magnitude = moveInput.magnitude * moveSpeed;
-        animator.SetFloat("RunBlend", Mathf.Lerp(animator.GetFloat("RunBlend"), magnitude, lerpSpeed * Time.fixedDeltaTime));
+        currentSpeed = moveInput.magnitude * moveSpeed;
+        animator.SetFloat("RunBlend", Mathf.Lerp(animator.GetFloat("RunBlend"), currentSpeed, lerpSpeed * Time.fixedDeltaTime));
     }
 
     public FootStepData stepData;
@@ -50,5 +51,12 @@ public class PlayerMovement : MonoBehaviour
     public void SpawnFootstep(int footTransformIndex)
     {
         Instantiate(stepData.footstepObject, stepData.footstepTransforms[footTransformIndex].position, new Quaternion(0, 0, 0, 0));
+
+        SpawnImpulse(stepData.impulseMultiplier * currentSpeed);
+    }
+
+    public void SpawnImpulse(float impulseStrength)
+    {
+        stepData.impulseSource.GenerateImpulseWithForce(impulseStrength);
     }
 }

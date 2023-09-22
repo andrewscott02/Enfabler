@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Cinemachine;
 
 public static class HelperFunctions
 {
@@ -247,5 +248,6 @@ public struct FootStepData
 {
     public Object footstepObject;
     public Transform[] footstepTransforms;
-    public float footStepStrenght;
+    public CinemachineImpulseSource impulseSource;
+    public float impulseMultiplier;
 }

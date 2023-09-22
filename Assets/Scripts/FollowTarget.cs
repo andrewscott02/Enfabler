@@ -6,6 +6,11 @@ public class FollowTarget : MonoBehaviour
 {
     public Transform follow;
 
+    private void Start()
+    {
+        transform.parent = null;
+    }
+
     private void FixedUpdate()
     {
         transform.position = follow.position;
