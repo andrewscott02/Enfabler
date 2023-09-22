@@ -52,8 +52,6 @@ public class CharacterCombat : MonoBehaviour
             canAttack = false;
             canDodge = false;
             animator.SetTrigger("LightAttack");
-            //animator.SetInteger("RandAttack", 1);
-            //animator.SetInteger("RandAttack", Random.Range(0, animator.GetInteger("RandAttackMax") + 1));
         }
     }
 
@@ -111,16 +109,16 @@ public class CharacterCombat : MonoBehaviour
 
     public void NextAttack()
     {
-        /*
-        //Debug.Log("Next Attack");
-        animator.SetInteger("SwordAttackCount", animator.GetInteger("SwordAttackCount") + 1);
+        animator.SetInteger("MeleeAttackCount", animator.GetInteger("MeleeAttackCount") + 1);
 
-        if (animator.GetInteger("SwordAttackCount") > animator.GetInteger("SwordAttackMax"))
+        if (animator.GetInteger("MeleeAttackCount") > animator.GetInteger("MeleeAttackMax"))
         {
-            animator.SetInteger("SwordAttackCount", 0);
+            animator.SetInteger("MeleeAttackCount", 0);
         }
-        */
+
+        canDodge = true;
         canAttack = true;
+        canParry = true;
 
         AIController AIController = GetComponent<AIController>();
 
@@ -133,7 +131,7 @@ public class CharacterCombat : MonoBehaviour
     public void ResetAttack()
     {
         //Debug.Log("Reset Attack");
-        //animator.SetInteger("SwordAttackCount", 0);
+        animator.SetInteger("MeleeAttackCount", 0);
         canMove = true;
         canDodge = true;
         canAttack = true;

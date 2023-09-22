@@ -335,7 +335,7 @@ ModelImporter:
     second: Male Attack 2
   - first:
       74: 7400004
-    second: Male Attack 3
+    second: Male Attack 3 f
   - first:
       95: 9500000
     second: //RootNode
@@ -393,22 +393,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.48080808
-        functionName: NextAttack
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 3a735095b7652354397b801c10a837e8,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.9863636
-        functionName: ResetAttack
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 3a735095b7652354397b801c10a837e8,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.22532895
         functionName: StartAttack
         data: 
@@ -421,6 +405,22 @@ ModelImporter:
         functionName: EndAttack
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.48080808
+        functionName: NextAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3a735095b7652354397b801c10a837e8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9494931
+        functionName: ResetAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3a735095b7652354397b801c10a837e8,
           type: 3}
         floatParameter: 0
         intParameter: 0
@@ -453,15 +453,47 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.29221502
+        functionName: StartAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.42379397
+        functionName: EndAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.55476695
+        functionName: NextAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3a735095b7652354397b801c10a837e8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9470199
+        functionName: ResetAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3a735095b7652354397b801c10a837e8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Male Attack 3
+      name: Male_Attack 3
       takeName: Take 001
-      internalID: 0
+      internalID: -992069011352121973
       firstFrame: 80
       lastFrame: 110
       wrapMode: 0
@@ -482,7 +514,39 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.41826916
+        functionName: StartAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5498481
+        functionName: EndAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.67374825
+        functionName: NextAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3a735095b7652354397b801c10a837e8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.96188617
+        functionName: ResetAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
