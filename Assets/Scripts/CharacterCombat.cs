@@ -73,9 +73,9 @@ public class CharacterCombat : MonoBehaviour
         }
     }
 
-    public virtual void Dodge(Quaternion direction)
+    public virtual void Dodge()
     {
-        if (canAttack && canDodge)
+        if (canDodge)
         {
             EndParry();
             EndDodge();
@@ -128,6 +128,7 @@ public class CharacterCombat : MonoBehaviour
         //Debug.Log("Reset Attack");
         //animator.SetInteger("SwordAttackCount", 0);
         canMove = true;
+        canDodge = true;
         canAttack = true;
         canParry = true;
 
@@ -285,6 +286,7 @@ public class CharacterCombat : MonoBehaviour
     public void EndDodge()
     {
         dodging = false;
+        ResetMove();
     }
 
     public void ResetDodge()

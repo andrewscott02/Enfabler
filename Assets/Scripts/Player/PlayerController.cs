@@ -42,16 +42,8 @@ public class PlayerController : CharacterController
 
     public void MoveInput(InputAction.CallbackContext context)
     {
-        if (combat.canMove)
-        {
-            moveInput.x = context.ReadValue<Vector2>().x;
-            moveInput.y = context.ReadValue<Vector2>().y;
-        }
-        else
-        {
-            moveInput.x = 0;
-            moveInput.y = 0;
-        }
+        moveInput.x = context.ReadValue<Vector2>().x;
+        moveInput.y = context.ReadValue<Vector2>().y;
     }
 
     public void CameraInput(InputAction.CallbackContext context)
@@ -62,20 +54,41 @@ public class PlayerController : CharacterController
 
     public void AttackInput(InputAction.CallbackContext context)
     {
+        if (moveInput != Vector2.zero && combat.canAttack)
+        {
+            //Rotate towards direction
+            Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
+            Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
+            transform.rotation = newRot;
+        }
+
         combat.LightAttack();
     }
 
     public void BlockInput(InputAction.CallbackContext context)
     {
+        if (moveInput != Vector2.zero)
+        {
+            //Rotate towards direction
+            Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
+            Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
+            transform.rotation = newRot;
+        }
+
         combat.Block();
     }
 
     public void DodgeInput(InputAction.CallbackContext context)
     {
-        Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
-        Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
+        if (moveInput != Vector2.zero && combat.canDodge)
+        {
+            //Rotate towards direction
+            Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
+            Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
+            transform.rotation = newRot;
+        }
 
-        combat.Dodge(newRot);
+        combat.Dodge();
     }
 
     // Update is called once per frame
@@ -108,8 +121,14 @@ public class PlayerController : CharacterController
 
     private void FixedUpdate()
     {
-        //Debug.Log(xInput + "|| " + yInput);
-        playerMovement.Move(moveInput);
+        if (combat.canMove)
+        {
+            playerMovement.Move(moveInput);
+        }
+        else
+        {
+            playerMovement.Move(Vector2.zero);
+        }
     }
 
     #endregion

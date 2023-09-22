@@ -14,8 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     Transform model; public void SetModel(Transform newModel) { model = newModel; }
 
-    public float animSpeed = 7;
-    public float moveSpeed = 600;
+    public float moveSpeed = 7;
 
     public float lerpSpeed = 0.01f;
 
@@ -33,26 +32,17 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="ySpeed"> Determines the vertical movement (Forward and Backward) </param>
     public void Move(Vector2 moveInput)
     {
-        if (!controller.GetCharacterCombat().canMove)
-            moveInput = Vector2.zero;
-
         if (moveInput != Vector2.zero)
         {
             //Rotate towards direction
             Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
             Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, controller.followTarget.transform.rotation.eulerAngles.y, 0);
-            skeleton.transform.rotation = newRot;
-
-            //Determine velocity
-            movement = new Vector3(moveInput.x * moveSpeed, 0, moveInput.y * moveSpeed) * Time.fixedDeltaTime;
-            movement = Quaternion.AngleAxis(controller.followTarget.transform.rotation.eulerAngles.y, Vector3.up) * movement;
-            Vector3 lerpVector = HelperFunctions.LerpVector3(rb.velocity, transform.TransformDirection(movement), lerpSpeed);
-            rb.velocity = lerpVector;
+            transform.rotation = newRot;
         }
 
         //Animate movement
-        float magnitude = moveInput.magnitude * animSpeed;
-        animator.SetFloat("RunBlend", Mathf.Lerp(animator.GetFloat("RunBlend"), magnitude, lerpSpeed));
+        float magnitude = moveInput.magnitude * moveSpeed;
+        animator.SetFloat("RunBlend", Mathf.Lerp(animator.GetFloat("RunBlend"), magnitude, lerpSpeed * Time.fixedDeltaTime));
     }
 
     public FootStepData stepData;
