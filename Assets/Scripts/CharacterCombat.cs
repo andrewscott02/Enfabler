@@ -11,6 +11,8 @@ public class CharacterCombat : MonoBehaviour
     [HideInInspector]
     public ConstructPlayerModel modelConstructor;
 
+    public Weapon weapon { get; private set; }
+
     private void Start()
     {
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
@@ -22,6 +24,11 @@ public class CharacterCombat : MonoBehaviour
         {
             ignore.Add(item.GetHealth());
         }
+    }
+
+    public void SetupWeapon(Weapon weapon)
+    {
+        this.weapon = weapon;
     }
 
     #endregion
@@ -157,11 +164,11 @@ public class CharacterCombat : MonoBehaviour
     public List<Health> ignore;
 
     int damage;
-    public Transform swordBase;
-    public Transform swordTip;
 
     public void StartAttack(int currentDamage)
     {
+        weapon.trail.SetActive(true);
+
         //Clear damage and list of enemies hit
         hitTargets.Clear();
         damage = currentDamage;
@@ -180,6 +187,8 @@ public class CharacterCombat : MonoBehaviour
 
     public void EndAttack()
     {
+        weapon.trail.SetActive(false);
+
         HitEnemy(hitTargets.Count > 0);
 
         //Clear damage and list of enemies hit
@@ -214,7 +223,7 @@ public class CharacterCombat : MonoBehaviour
         //Raycast between sword base and tip
         RaycastHit hit;
 
-        if (Physics.Linecast(swordBase.transform.position, swordTip.transform.position, out hit))
+        if (Physics.Linecast(weapon.weaponBase.transform.position, weapon.weaponTip.transform.position, out hit))
         {
             Health hitHealth = hit.collider.GetComponent<Health>();
 
@@ -234,15 +243,6 @@ public class CharacterCombat : MonoBehaviour
             hitTargets.Add(hitHealth);
             hitHealth.Damage(this, damage, hit.point, hit.normal);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (swordBase != null && swordTip != null)
-            Gizmos.DrawLine(swordBase.position, swordTip.position);
-
-        RaycastHit[] hit = Physics.SphereCastAll(transform.position, currentTargetCastRadius, transform.forward, currentTargetCastDistance, layerMask);
-        foreach (RaycastHit item in hit) { Gizmos.DrawWireSphere(item.point, 1f); }
     }
 
     #endregion

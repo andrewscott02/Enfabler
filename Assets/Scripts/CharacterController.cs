@@ -12,11 +12,16 @@ public class CharacterController : MonoBehaviour
 
     public bool playerTeam = true;
 
+    protected SetWeapon setWeapon;
+
     public virtual void Start()
     {
         health = GetComponent<Health>();
         health.animator = animator;
         combat = GetComponent<CharacterCombat>();
         combat.animator = animator;
+
+        setWeapon = GetComponentInChildren<SetWeapon>();
+        combat.SetupWeapon(setWeapon.CreateWeapon());
     }
 }
