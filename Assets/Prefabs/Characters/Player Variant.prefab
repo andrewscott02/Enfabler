@@ -2911,67 +2911,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invisible: 0
-  animator: {fileID: 2056096880561946219}
   model: {fileID: 64041285362746459}
   playerTeam: 1
   rotateInterval: {x: 0.8, y: 0.8}
   rotateDeadZone: 0.1
   followTarget: {fileID: 2018895535}
---- !u!114 &1697564175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1873655639226321523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  modelConstructor: {fileID: 0}
-  canMove: 1
-  canAttack: 1
-  canParry: 1
-  canDodge: 1
-  hitSphereRadius: 0.45
-  hitFreezeTime: 0.15
-  currentTargets: []
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  currentTargetCastInterval: 0.6
-  currentTargetCastRadius: 1.5
-  currentTargetCastDistance: 10
---- !u!114 &1697564176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1873655639226321523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36400292f3d383241bc978c81a07e24a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  modelConstructor: {fileID: 0}
-  healthSlider: {fileID: 0}
-  bloodFX: {fileID: 0}
-  parryFX: {fileID: 0}
-  maxHealth: 50
-  hitReactData:
-    hitImpulseMultiplier: 0
-    heavyHitReactThreshold: 0
-    hitSlomoScale: 0
-    hitSlomoDuration: 0
-    killImpulseStrength: 0
-    killSlomoScale: 0
-    killSlomoDuration: 0
-  dying: 0
-  impulseSource: {fileID: 0}
 --- !u!114 &1697564183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3114,12 +3058,6 @@ MonoBehaviour:
 --- !u!4 &2056096880068848257 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6989636455429300265, guid: 8383457b08cdeee42a59a4975fae37de,
-    type: 3}
-  m_PrefabInstance: {fileID: 9045643038095903400}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &2056096880561946219 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6989636455364555971, guid: 8383457b08cdeee42a59a4975fae37de,
     type: 3}
   m_PrefabInstance: {fileID: 9045643038095903400}
   m_PrefabAsset: {fileID: 0}

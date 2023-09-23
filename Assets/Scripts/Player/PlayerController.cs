@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : CharacterController
+public class PlayerController : BaseCharacterController
 {
     #region Setup
 

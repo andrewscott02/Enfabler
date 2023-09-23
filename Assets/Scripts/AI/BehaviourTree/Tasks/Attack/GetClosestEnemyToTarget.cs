@@ -21,7 +21,7 @@ public class GetClosestEnemyToTarget : Node
 
     public override NodeState Evaluate()
     {
-        CharacterController enemy = HelperFunctions.GetClosestEnemy(agent, target.transform.position, agent.sightDistance, false);
+        BaseCharacterController enemy = HelperFunctions.GetClosestEnemy(agent, target.transform.position, agent.sightDistance, false);
         if (enemy != null)
         {
             agent.SetDestinationPos(enemy.transform.position);

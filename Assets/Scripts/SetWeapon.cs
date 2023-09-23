@@ -24,7 +24,7 @@ public class SetWeapon : MonoBehaviour
 
         if (currentWeapon >= 0 && currentWeapon < weapons.Length)
         {
-            Debug.Log("Valid weapon, choose model " + currentWeapon);
+            //Debug.Log("Valid weapon, choose model " + currentWeapon);
             GameObject currentWeaponObj = Instantiate(weapons[currentWeapon], new Vector3(-0.0259000007f, 0.000500000024f, 0), new Quaternion(0, 0, 0, 0), handTransform) as GameObject;
 
             currentWeaponObj.transform.localPosition = new Vector3(-0.0259000007f, 0.000500000024f, 0);

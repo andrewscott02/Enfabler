@@ -6,22 +6,22 @@ public class CharacterCombat : MonoBehaviour
 {
     #region Setup
 
-    [HideInInspector]
-    public Animator animator;
+    protected Animator animator;
     [HideInInspector]
     public ConstructPlayerModel modelConstructor;
-    Health health;
+    protected Health health;
 
     public Weapon weapon { get; private set; }
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         health = GetComponent<Health>();
         ignore.Add(health);
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
     }
 
-    public void SetupAllies(List<CharacterController> allies)
+    public void SetupAllies(List<BaseCharacterController> allies)
     {
         foreach (var item in allies)
         {
@@ -38,7 +38,7 @@ public class CharacterCombat : MonoBehaviour
 
     #region Basic Actions
 
-    CharacterController[] lastAttacked;
+    BaseCharacterController[] lastAttacked;
 
     public void LightAttack()
     {
@@ -134,6 +134,8 @@ public class CharacterCombat : MonoBehaviour
     public void ResetAttack()
     {
         Debug.Log("Reset Attack");
+        if (animator == null)
+            Debug.LogWarning("Animator of " + gameObject.name + " is null");
         animator.SetInteger("MeleeAttackCount", 0);
         canMove = true;
         canDodge = true;
@@ -339,8 +341,8 @@ public class CharacterCombat : MonoBehaviour
     #region Targetting
 
     [Header("Targeting")]
-    public List<CharacterController> currentTargets;
-    List<CharacterController> lastHit = new List<CharacterController>();
+    public List<BaseCharacterController> currentTargets;
+    List<BaseCharacterController> lastHit = new List<BaseCharacterController>();
     public LayerMask layerMask;
     public float currentTargetCastInterval = 0.6f;
     public float currentTargetCastRadius = 1.5f;
@@ -348,13 +350,13 @@ public class CharacterCombat : MonoBehaviour
 
     void CurrentTarget()
     {
-        List<CharacterController> hitCharacters = new List<CharacterController>();
+        List<BaseCharacterController> hitCharacters = new List<BaseCharacterController>();
 
         RaycastHit[] hit = Physics.SphereCastAll(transform.position, currentTargetCastRadius, transform.forward, currentTargetCastDistance, layerMask);
         foreach (RaycastHit item in hit)
         {
             //Debug.Log("Ray hit " + item.collider.gameObject.name);
-            CharacterController character = item.collider.transform.gameObject.GetComponent<CharacterController>();
+            BaseCharacterController character = item.collider.transform.gameObject.GetComponent<BaseCharacterController>();
 
             if (character != null)
             {
@@ -362,7 +364,7 @@ public class CharacterCombat : MonoBehaviour
                 {
                     hitCharacters.Add(character);
                 }
-                else if (AIManager.instance.OnSameTeam(GetComponent<CharacterController>(), character) == false)
+                else if (AIManager.instance.OnSameTeam(GetComponent<BaseCharacterController>(), character) == false)
                     hitCharacters.Add(character);
             }
         }

@@ -186,7 +186,7 @@ public class ConstructPlayerModel : MonoBehaviour
     #region Player Actions
 
     [Header("Player Targeting")]
-    public List<CharacterController> currentTargets;
+    public List<BaseCharacterController> currentTargets;
     public float currentTargetCastInterval = 0.6f;
 
     /// <summary>

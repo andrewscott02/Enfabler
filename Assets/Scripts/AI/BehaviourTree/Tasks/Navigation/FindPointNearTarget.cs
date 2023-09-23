@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class FindPointNearTarget : Node
 {
     public AIController agent;
-    public CharacterController target;
+    public BaseCharacterController target;
     public bool requiresSameTeam;
 
     /// <summary>
@@ -19,7 +19,7 @@ public class FindPointNearTarget : Node
     public FindPointNearTarget(AIController agent, GameObject target, bool requiresSameTeam)
     {
         this.agent = agent;
-        this.target = target.GetComponent<CharacterController>();
+        this.target = target.GetComponent<BaseCharacterController>();
         this.requiresSameTeam = requiresSameTeam;
     }
 

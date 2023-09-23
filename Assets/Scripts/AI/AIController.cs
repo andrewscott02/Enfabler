@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using BehaviourTrees;
 
-public class AIController : CharacterController
+public class AIController : BaseCharacterController
 {
     #region Setup
 
@@ -135,8 +135,8 @@ public class AIController : CharacterController
 
     #region Combat
 
-    public CharacterController currentTarget;
-    CharacterController lastAttacked;
+    public BaseCharacterController currentTarget;
+    BaseCharacterController lastAttacked;
 
     bool doubleAttack;
     public float doubleAttackChance;

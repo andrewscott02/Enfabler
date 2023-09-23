@@ -6,15 +6,15 @@ public class AIManager : MonoBehaviour
 {
     public static AIManager instance;
 
-    public List<CharacterController> playerTeam;
-    public List<CharacterController> enemyTeam;
+    public List<BaseCharacterController> playerTeam;
+    public List<BaseCharacterController> enemyTeam;
 
     private void Start()
     {
         instance = this;
     }
 
-    public void AllocateTeam(CharacterController character)
+    public void AllocateTeam(BaseCharacterController character)
     {
         if (character.playerTeam)
         {
@@ -38,7 +38,7 @@ public class AIManager : MonoBehaviour
         }
     }
 
-    public void CharacterDied(CharacterController character)
+    public void CharacterDied(BaseCharacterController character)
     {
         if (playerTeam.Contains(character))
         {
@@ -57,7 +57,7 @@ public class AIManager : MonoBehaviour
         }
     }
 
-    public List<CharacterController> GetAllyTeam(CharacterController character)
+    public List<BaseCharacterController> GetAllyTeam(BaseCharacterController character)
     {
         if (character.playerTeam)
         {
@@ -69,7 +69,7 @@ public class AIManager : MonoBehaviour
         }
     }
 
-    public List<CharacterController> GetEnemyTeam(CharacterController character)
+    public List<BaseCharacterController> GetEnemyTeam(BaseCharacterController character)
     {
         if (character.playerTeam)
         {
@@ -81,7 +81,7 @@ public class AIManager : MonoBehaviour
         }
     }
 
-    public bool OnSameTeam(CharacterController a, CharacterController b)
+    public bool OnSameTeam(BaseCharacterController a, BaseCharacterController b)
     {
         return GetAllyTeam(a).Contains(b);
     }

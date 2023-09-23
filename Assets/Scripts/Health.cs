@@ -18,6 +18,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     public HitReactData hitReactData;
 
+    BaseCharacterController controller;
     AIController AIController;
 
     private void Start()
@@ -27,6 +28,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             healthSlider.ChangeSliderValue(currentHealth, maxHealth);
         combat = GetComponent<CharacterCombat>();
 
+        controller = GetComponent<BaseCharacterController>();
         AIController = GetComponent<AIController>();
         animator = GetComponent<Animator>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
@@ -112,10 +114,19 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         SpawnImpulse(hitReactData.killImpulseStrength);
         Slomo(hitReactData.killSlomoScale, hitReactData.killSlomoDuration);
         if (AIManager.instance != null)
-            AIManager.instance.CharacterDied(this.GetComponent<CharacterController>());
+            AIManager.instance.CharacterDied(this.GetComponent<BaseCharacterController>());
         else
         {
-            Destroy(this.gameObject);
+            if (controller != null)
+            {
+                Debug.Log(gameObject + "has controller");
+                controller.ActivateRagdoll(true);
+            }
+            else
+            {
+                Debug.Log(gameObject + "has no controller");
+                Destroy(this.gameObject);
+            }
         }
     }
 

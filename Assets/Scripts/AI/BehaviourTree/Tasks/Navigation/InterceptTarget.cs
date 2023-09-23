@@ -6,7 +6,7 @@ using BehaviourTrees;
 public class InterceptTarget : Node
 {
     public AIController agent;
-    public CharacterController interceptTarget;
+    public BaseCharacterController interceptTarget;
     public float distance;
     public bool requiresSameTeam;
 
@@ -20,7 +20,7 @@ public class InterceptTarget : Node
     public InterceptTarget(AIController agent, GameObject interceptTarget, float distance, bool requiresSameTeam)
     {
         this.agent = agent;
-        this.interceptTarget = interceptTarget.GetComponent<CharacterController>();
+        this.interceptTarget = interceptTarget.GetComponent<BaseCharacterController>();
         this.distance = distance;
         this.requiresSameTeam = requiresSameTeam;
     }

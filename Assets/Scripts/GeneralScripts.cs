@@ -108,9 +108,9 @@ public static class HelperFunctions
     /// <param name="sightRadius"></param>
     /// <param name="debug"></param>
     /// <returns></returns>
-    public static CharacterController GetClosestEnemy(AIController agent, Vector3 origin, float sightRadius, bool debug)
+    public static BaseCharacterController GetClosestEnemy(AIController agent, Vector3 origin, float sightRadius, bool debug)
     {
-        CharacterController closestCharacter = null;
+        BaseCharacterController closestCharacter = null;
         float closestDistance = 99999;
 
         foreach (var item in AIManager.instance.GetEnemyTeam(agent))
@@ -147,9 +147,9 @@ public static class HelperFunctions
     /// <param name="debug"></param>
     /// <param name="enemyList"></param>
     /// <returns></returns>
-    public static CharacterController GetClosestEnemyFromList(Vector3 origin, float sightRadius, bool debug, List<CharacterController> enemyList)
+    public static BaseCharacterController GetClosestEnemyFromList(Vector3 origin, float sightRadius, bool debug, List<BaseCharacterController> enemyList)
     {
-        CharacterController closestCharacter = null;
+        BaseCharacterController closestCharacter = null;
         float closestDistance = 99999;
 
         if (enemyList.Count == 1) { return enemyList[0]; }
@@ -187,9 +187,9 @@ public static class HelperFunctions
     /// <param name="debug"></param>
     /// <param name="enemyList"></param>
     /// <returns></returns>
-    public static CharacterController GetClosestEnemyExcludingList(AIController agent, Vector3 origin, float sightRadius, bool debug, List<CharacterController> enemyList)
+    public static BaseCharacterController GetClosestEnemyExcludingList(AIController agent, Vector3 origin, float sightRadius, bool debug, List<BaseCharacterController> enemyList)
     {
-        CharacterController closestCharacter = null;
+        BaseCharacterController closestCharacter = null;
         float closestDistance = 99999;
 
         foreach (var item in AIManager.instance.GetEnemyTeam(agent))

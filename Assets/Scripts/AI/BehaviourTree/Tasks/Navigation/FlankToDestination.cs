@@ -6,7 +6,7 @@ using BehaviourTrees;
 public class FlankToDestination : Node
 {
     public AIController agent;
-    public CharacterController flankTarget;
+    public BaseCharacterController flankTarget;
     public float distance;
     public bool requiresSameTeam;
 
@@ -20,7 +20,7 @@ public class FlankToDestination : Node
     public FlankToDestination(AIController agent, GameObject flankTarget, float distance, bool requiresSameTeam)
     {
         this.agent = agent;
-        this.flankTarget = flankTarget.GetComponent<CharacterController>();
+        this.flankTarget = flankTarget.GetComponent<BaseCharacterController>();
         this.distance = distance;
         this.requiresSameTeam = requiresSameTeam;
     }
