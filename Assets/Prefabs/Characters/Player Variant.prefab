@@ -2888,6 +2888,7 @@ MonoBehaviour:
   moveSpeed: 4
   sprintSpeed: 8
   lerpSpeed: 5
+  moveFOVMultiplier: 2
   stepData:
     footstepObject: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
       type: 3}
@@ -2895,7 +2896,8 @@ MonoBehaviour:
     - {fileID: 63881325737981327}
     - {fileID: 63813705119403825}
     impulseSource: {fileID: 2012285248160033769}
-    impulseMultiplier: 0.01
+    impulseWalkMultiplier: 0.006
+    impulseSprintMultiplier: 0.01
 --- !u!114 &1697564174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2933,7 +2935,7 @@ MonoBehaviour:
   canAttack: 1
   canParry: 1
   canDodge: 1
-  hitSphereRadius: 0.35
+  hitSphereRadius: 0.45
   hitFreezeTime: 0.15
   currentTargets: []
   layerMask:
