@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 7460243065040470228}
   - component: {fileID: 6989636455364555971}
   - component: {fileID: 6646982740168043136}
-  - component: {fileID: 3764744027340439592}
+  - component: {fileID: 5396197477572160783}
   - component: {fileID: 732605661954093454}
   - component: {fileID: 7378451652202160449}
   m_Layer: 0
@@ -104,7 +104,7 @@ CapsuleCollider:
   m_Height: 1.69
   m_Direction: 1
   m_Center: {x: 0, y: 0.83, z: 0}
---- !u!54 &3764744027340439592
+--- !u!54 &5396197477572160783
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,14 +112,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7460243065040470235}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 60
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!114 &732605661954093454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,10 +135,19 @@ MonoBehaviour:
   animator: {fileID: 0}
   modelConstructor: {fileID: 0}
   healthSlider: {fileID: 0}
-  bloodFX: {fileID: 0}
-  parryFX: {fileID: 0}
+  bloodFX: {fileID: 5831885752641907103, guid: 5995087a65040474a859f63787d81cde, type: 3}
+  parryFX: {fileID: 5831885752641907103, guid: 7c7d6dcfa9512ae4abd8b0d8b8816ec4, type: 3}
   maxHealth: 50
+  hitReactData:
+    hitImpulseMultiplier: 0.1
+    heavyHitReactThreshold: 5
+    hitSlomoScale: 0.7
+    hitSlomoDuration: 0.25
+    killImpulseStrength: 0.7
+    killSlomoScale: 0.45
+    killSlomoDuration: 0.5
   dying: 0
+  impulseSource: {fileID: 0}
 --- !u!114 &7378451652202160449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2033,10 +2042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handTransform: {fileID: 2590908609328772485}
   weapons:
-  - {fileID: 100000, guid: ffa463f78df756248bd71544ae012994, type: 3}
-  - {fileID: 100000, guid: 33d713fc22667954ba9af3f9422003f2, type: 3}
-  - {fileID: 100000, guid: 1e896d25e837a2c419844a06e967bbc1, type: 3}
-  - {fileID: 100000, guid: daf4cb1cdf7a5164787c39b820a85b93, type: 3}
+  - {fileID: 8460293430998555839, guid: bcbebcfacfa18154e8c51323ede0c050, type: 3}
   currentWeapon: -1
 --- !u!1 &9043100576090782743
 GameObject:

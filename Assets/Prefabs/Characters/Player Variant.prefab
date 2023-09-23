@@ -2467,17 +2467,6 @@ PrefabInstance:
       propertyPath: currentWeapon
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7288625259200014074, guid: 8383457b08cdeee42a59a4975fae37de,
-        type: 3}
-      propertyPath: weapons.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7288625259200014074, guid: 8383457b08cdeee42a59a4975fae37de,
-        type: 3}
-      propertyPath: weapons.Array.data[0]
-      value: 
-      objectReference: {fileID: 8460293430998555839, guid: bcbebcfacfa18154e8c51323ede0c050,
-        type: 3}
     - target: {fileID: 7460243065040470228, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: m_RootOrder
@@ -2934,7 +2923,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1873655639226321523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c09dedd6a579714884be594fe4d9246, type: 3}
+  m_Script: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
@@ -2944,8 +2933,6 @@ MonoBehaviour:
   canParry: 1
   canDodge: 1
   ignore: []
-  swordBase: {fileID: 0}
-  swordTip: {fileID: 0}
   currentTargets: []
   layerMask:
     serializedVersion: 2
@@ -2971,6 +2958,7 @@ MonoBehaviour:
   bloodFX: {fileID: 0}
   parryFX: {fileID: 0}
   maxHealth: 50
+  impulseModifier: 0.1
   dying: 0
 --- !u!114 &1697564183
 MonoBehaviour:

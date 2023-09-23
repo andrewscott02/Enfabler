@@ -130,7 +130,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void ResetAttack()
     {
-        //Debug.Log("Reset Attack");
+        Debug.Log("Reset Attack");
         animator.SetInteger("MeleeAttackCount", 0);
         canMove = true;
         canDodge = true;
@@ -145,11 +145,6 @@ public class CharacterCombat : MonoBehaviour
         }
 
         Untarget();
-    }
-
-    public void ResetMove()
-    {
-        canMove = true;
     }
 
     #endregion
@@ -265,7 +260,6 @@ public class CharacterCombat : MonoBehaviour
     {
         canDodge = true;
         ResetAttack();
-        ResetMove();
     }
 
     #endregion
@@ -284,14 +278,16 @@ public class CharacterCombat : MonoBehaviour
     public void EndDodge()
     {
         dodging = false;
-        ResetMove();
+        canMove = true;
+        canDodge = true;
+        canAttack = true;
+        canParry = true;
     }
 
     public void ResetDodge()
     {
         canDodge = true;
         ResetAttack();
-        ResetMove();
     }
 
     #endregion

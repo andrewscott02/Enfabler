@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Health : MonoBehaviour, IDamageable, IHealable
 {
@@ -15,6 +16,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     public int maxHealth = 50;
     int currentHealth = 0; public int GetCurrentHealth() { return currentHealth; }
 
+    public HitReactData hitReactData;
+
     AIController AIController;
 
     private void Start()
@@ -25,6 +28,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         combat = GetComponent<CharacterCombat>();
 
         AIController = GetComponent<AIController>();
+        animator = GetComponent<Animator>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     public void Damage(CharacterCombat attacker, int damage, Vector3 spawnPos, Vector3 spawnRot)
@@ -68,21 +73,23 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         }
         else
         {
-            HitReaction();
+            HitReaction(damage);
         }
     }
 
-    void HitReaction()
+    void HitReaction(int damage)
     {
         if (combat != null) { combat.canAttack = false; }
         else { Debug.LogWarning("No combat script"); }
 
         if (animator != null)
         {
-            animator.SetTrigger("HitReact");
-            animator.SetInteger("RandReact", Random.Range(0, animator.GetInteger("RandReactMax") + 1));
+            animator.SetTrigger(damage < hitReactData.heavyHitReactThreshold ? "HitReactLight" : "HitReactHeavy");
         }
         else { Debug.LogWarning("No animator"); }
+
+        SpawnImpulse(damage * hitReactData.hitImpulseMultiplier);
+        Slomo(hitReactData.hitSlomoScale, hitReactData.hitSlomoDuration);
     }
 
     public void Heal(int heal)
@@ -102,7 +109,29 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     public void Kill()
     {
         dying = true;
+        SpawnImpulse(hitReactData.killImpulseStrength);
+        Slomo(hitReactData.killSlomoScale, hitReactData.killSlomoDuration);
         if (AIManager.instance != null)
             AIManager.instance.CharacterDied(this.GetComponent<CharacterController>());
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public CinemachineImpulseSource impulseSource;
+
+    public void SpawnImpulse(float impulseStrength)
+    {
+        if (impulseSource == null) return;
+
+        impulseSource.GenerateImpulseWithForce(impulseStrength);
+    }
+
+    public void Slomo(float slomoStrength, float slomoDuration)
+    {
+        if (TimeManager.instance == null) return;
+
+        TimeManager.instance.SetTimeScale(slomoStrength, slomoDuration);
     }
 }

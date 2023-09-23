@@ -251,3 +251,16 @@ public struct FootStepData
     public CinemachineImpulseSource impulseSource;
     public float impulseMultiplier;
 }
+
+[System.Serializable]
+public struct HitReactData
+{
+    public float hitImpulseMultiplier;
+    public int heavyHitReactThreshold;
+    public float hitSlomoScale;
+    public float hitSlomoDuration;
+
+    public float killImpulseStrength;
+    public float killSlomoScale;
+    public float killSlomoDuration;
+}
