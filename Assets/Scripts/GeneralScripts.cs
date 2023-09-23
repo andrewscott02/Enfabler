@@ -249,8 +249,10 @@ public struct FootStepData
     public Object footstepObject;
     public Transform[] footstepTransforms;
     public CinemachineImpulseSource impulseSource;
-    public float impulseMultiplier;
+    public float impulseWalkMultiplier;
+    public float impulseSprintMultiplier;
 }
+
 
 [System.Serializable]
 public struct HitReactData

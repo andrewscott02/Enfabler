@@ -54,6 +54,9 @@ public class PlayerController : CharacterController
 
     public void AttackInput(InputAction.CallbackContext context)
     {
+        if (!context.performed)
+            return;
+
         if (moveInput != Vector2.zero && combat.canAttack)
         {
             //Rotate towards direction
@@ -67,6 +70,9 @@ public class PlayerController : CharacterController
 
     public void BlockInput(InputAction.CallbackContext context)
     {
+        if (!context.performed)
+            return;
+
         if (moveInput != Vector2.zero)
         {
             //Rotate towards direction
@@ -80,6 +86,9 @@ public class PlayerController : CharacterController
 
     public void DodgeInput(InputAction.CallbackContext context)
     {
+        if (!context.performed)
+            return;
+
         if (moveInput != Vector2.zero && combat.canDodge)
         {
             //Rotate towards direction
@@ -89,6 +98,15 @@ public class PlayerController : CharacterController
         }
 
         combat.Dodge();
+    }
+
+    public void SprintInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            playerMovement.Sprint(true);
+
+        if (context.canceled)
+            playerMovement.Sprint(false);
     }
 
     // Update is called once per frame

@@ -15,14 +15,22 @@ public class PlayerMovement : MonoBehaviour
 
     Transform model; public void SetModel(Transform newModel) { model = newModel; }
 
-    public float moveSpeed = 7;
+    bool sprinting = false;
+    public float moveSpeed = 4;
+    public float sprintSpeed = 8;
     float currentSpeed = 0;
     public float lerpSpeed = 0.01f;
 
     Vector3 movement = Vector3.zero;
 
+    CinemachineVirtualCamera vCam;
+    float defaultFOV;
+    public float moveFOVMultiplier = 2;
+
     private void Start()
     {
+        vCam = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+        defaultFOV = vCam.m_Lens.FieldOfView;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -42,8 +50,30 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Animate movement
-        currentSpeed = moveInput.magnitude * moveSpeed;
-        animator.SetFloat("RunBlend", Mathf.Lerp(animator.GetFloat("RunBlend"), currentSpeed, lerpSpeed * Time.fixedDeltaTime));
+        currentSpeed = moveInput.magnitude * (sprinting ? sprintSpeed : moveSpeed);
+        currentSpeed = Mathf.Lerp(animator.GetFloat("RunBlend"), currentSpeed, lerpSpeed * Time.fixedDeltaTime);
+        animator.SetFloat("RunBlend", currentSpeed);
+
+        float newFOV = currentSpeed * moveFOVMultiplier;
+        SetFOV(defaultFOV + newFOV);
+    }
+
+    public void Sprint(bool sprinting)
+    {
+        Debug.Log("Sprinting: " + sprinting);
+        this.sprinting = sprinting;
+    }
+
+    void SetFOV(float desiredFOV)
+    {
+        vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView, desiredFOV, Time.deltaTime);
+        //StartCoroutine(ISetFOV(desiredFOV));
+    }
+
+    IEnumerator ISetFOV(float desiredFOV)
+    {
+        yield return new WaitUntil(() => vCam.m_Lens.FieldOfView <= desiredFOV);
+        //vCam.m_Lens.FieldOfView = sprinting ? defaultFOV - newFOV : defaultFOV;
     }
 
     public FootStepData stepData;
@@ -52,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Instantiate(stepData.footstepObject, stepData.footstepTransforms[footTransformIndex].position, new Quaternion(0, 0, 0, 0));
 
-        SpawnImpulse(stepData.impulseMultiplier * currentSpeed);
+        SpawnImpulse((sprinting ? stepData.impulseSprintMultiplier : stepData.impulseWalkMultiplier) * currentSpeed);
     }
 
     public void SpawnImpulse(float impulseStrength)

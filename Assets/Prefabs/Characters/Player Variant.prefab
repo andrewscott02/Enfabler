@@ -2885,8 +2885,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   skeleton: {fileID: 69781569185968667}
   controller: {fileID: 0}
-  moveSpeed: 8
-  lerpSpeed: 2
+  moveSpeed: 4
+  sprintSpeed: 8
+  lerpSpeed: 5
   stepData:
     footstepObject: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
       type: 3}
@@ -2932,7 +2933,6 @@ MonoBehaviour:
   canAttack: 1
   canParry: 1
   canDodge: 1
-  ignore: []
   hitSphereRadius: 0.35
   hitFreezeTime: 0.15
   currentTargets: []
@@ -3076,6 +3076,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b3ff009c-afd1-461f-b10b-ba51a156eff8
     m_ActionName: Player/Dodge[/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1697564174}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: SprintInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e51af1f8-65c0-411d-908d-4b3ee2f4236f
+    m_ActionName: Player/Sprint[/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PlayerController
   m_DefaultActionMap: Player

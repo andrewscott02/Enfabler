@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "e51af1f8-65c0-411d-908d-4b3ee2f4236f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -99,11 +108,22 @@
                 {
                     "name": "",
                     "id": "3bddfe7f-8c67-457a-a3f7-4a1ab2e6830a",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "Tap",
                     "processors": "",
                     "groups": "PlayerController",
                     "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8fe01152-e98f-44f8-bf58-66c8d273d900",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "PlayerController",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
