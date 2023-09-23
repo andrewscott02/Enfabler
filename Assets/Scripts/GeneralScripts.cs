@@ -244,7 +244,7 @@ public interface IDamageable
 {
     void Damage(CharacterCombat attacker, int damage, Vector3 spawnPos, Vector3 spawnRot);
     bool CheckKill();
-    void Kill();
+    void Kill(Vector3 attacker, int damage);
 }
 
 public interface IHealable
@@ -276,4 +276,11 @@ public struct HitReactData
     public float killImpulseStrength;
     public float killSlomoScale;
     public float killSlomoDuration;
+}
+
+public struct ExplosiveForceData
+{
+    public float explosiveForce;
+    public Vector3 origin;
+
 }

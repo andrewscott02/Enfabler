@@ -71,7 +71,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
         if (CheckKill())
         {
-            Kill();
+            Kill(attacker.gameObject.transform.position, damage);
         }
         else
         {
@@ -108,7 +108,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     public bool dying = false;
 
-    public void Kill()
+    public void Kill(Vector3 attacker, int damage)
     {
         dying = true;
         SpawnImpulse(hitReactData.killImpulseStrength);
@@ -120,7 +120,12 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             if (controller != null)
             {
                 Debug.Log(gameObject + "has controller");
-                controller.ActivateRagdoll(true);
+                ExplosiveForceData forcedata = new ExplosiveForceData()
+                {
+                    explosiveForce = damage,
+                    origin = attacker
+                };
+                controller.ActivateRagdoll(true, forcedata);
             }
             else
             {

@@ -29,6 +29,7 @@ public class BaseCharacterController : MonoBehaviour
     }
 
     Collider mainCollider;
+    Collider chestCollider;
     List<Collider> ragdollColliders = new List<Collider>();
 
     void SetupRagdoll()
@@ -40,6 +41,9 @@ public class BaseCharacterController : MonoBehaviour
         {
             if (item != mainCollider)
             {
+                if (item.CompareTag("Chest"))
+                    chestCollider = item;
+
                 Rigidbody rbItem = item.GetComponent<Rigidbody>();
                 rbItem.useGravity = false;
 
@@ -49,7 +53,7 @@ public class BaseCharacterController : MonoBehaviour
         }
     }
 
-    public void ActivateRagdoll(bool activate)
+    public void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
     {
         foreach (var item in ragdollColliders)
         {
@@ -57,6 +61,12 @@ public class BaseCharacterController : MonoBehaviour
             {
                 Rigidbody rbItem = item.GetComponent<Rigidbody>();
                 rbItem.useGravity = activate;
+
+                if (activate && item == chestCollider)
+                {
+                    Debug.Log("Add explosive force");
+                    rbItem.AddExplosionForce(forceData.explosiveForce * 100f, forceData.origin, 10f, 1.5f, ForceMode.Impulse);
+                }
 
                 item.isTrigger = !activate;
             }
