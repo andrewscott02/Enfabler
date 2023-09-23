@@ -17,6 +17,7 @@ public class CharacterCombat : MonoBehaviour
     private void Start()
     {
         health = GetComponent<Health>();
+        ignore.Add(health);
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
     }
 
@@ -155,8 +156,8 @@ public class CharacterCombat : MonoBehaviour
 
     #region Attack Logic
 
-    List<Health> hitTargets = new List<Health>();
-    public List<Health> ignore;
+    List<IDamageable> hitTargets = new List<IDamageable>();
+    public List<IDamageable> ignore = new List<IDamageable>();
 
     int damage;
 
@@ -224,29 +225,31 @@ public class CharacterCombat : MonoBehaviour
         float distance = Vector3.Distance(weapon.weaponBaseHit.transform.position, weapon.weaponTipHit.transform.position);
         Vector3 dir = weapon.weaponTipHit.transform.position - weapon.weaponBaseHit.transform.position;
 
-        if (Physics.SphereCast(origin, radius: hitSphereRadius, direction: dir, out hit, maxDistance: distance, layerMask))
+        if (Physics.SphereCast(origin, radius: hitSphereRadius, direction: dir, out hit, maxDistance: distance))
         {
-            Health hitHealth = hit.collider.GetComponent<Health>();
+            IDamageable hitDamageable = hit.collider.GetComponent<IDamageable>();
 
             #region Guard Clauses
 
             //Return if collided object has no health component
-            if (hitHealth == null)
+            if (hitDamageable == null)
+            {
+                Debug.LogWarning("No interface");
                 return;
-
-            //Return if hitting self
-            if (hitHealth == health)
-                return;
+            }
 
             //Return if it has already been hit or if it should be ignored
-            if (hitTargets.Contains(hitHealth) || ignore.Contains(hitHealth))
+            if (hitTargets.Contains(hitDamageable) || ignore.Contains(hitDamageable))
+            {
+                Debug.LogWarning("Ignore");
                 return;
+            }
 
             #endregion
 
             //If it can be hit, deal damage to target and add it to the hit targets list
-            hitTargets.Add(hitHealth);
-            hitHealth.Damage(this, damage, hit.point, hit.normal);
+            hitTargets.Add(hitDamageable);
+            hitDamageable.Damage(this, damage, hit.point, hit.normal);
 
             OnAttackHit();
         }
@@ -355,7 +358,11 @@ public class CharacterCombat : MonoBehaviour
 
             if (character != null)
             {
-                if (AIManager.instance.OnSameTeam(GetComponent<CharacterController>(), character) == false)
+                if (AIManager.instance == null)
+                {
+                    hitCharacters.Add(character);
+                }
+                else if (AIManager.instance.OnSameTeam(GetComponent<CharacterController>(), character) == false)
                     hitCharacters.Add(character);
             }
         }
