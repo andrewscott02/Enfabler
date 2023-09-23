@@ -24,12 +24,14 @@ public class PlayerMovement : MonoBehaviour
     Vector3 movement = Vector3.zero;
 
     CinemachineVirtualCamera vCam;
+    Cinemachine3rdPersonFollow vCamFollow;
     float defaultFOV;
     public float moveFOVMultiplier = 2;
 
     private void Start()
     {
         vCam = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+        vCamFollow = vCam.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
         defaultFOV = vCam.m_Lens.FieldOfView;
         rb = GetComponent<Rigidbody>();
     }
@@ -41,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="ySpeed"> Determines the vertical movement (Forward and Backward) </param>
     public void Move(Vector2 moveInput)
     {
+        float xRemap = HelperFunctions.Remap(moveInput.x, -1, 1, 0, 1);
+
         if (moveInput != Vector2.zero)
         {
             //Rotate towards direction
@@ -55,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("RunBlend", currentSpeed);
 
         float newFOV = currentSpeed * moveFOVMultiplier;
-        SetFOV(defaultFOV + newFOV);
+        SetCameraValues(xRemap, defaultFOV + newFOV);
     }
 
     public void Sprint(bool sprinting)
@@ -64,16 +68,10 @@ public class PlayerMovement : MonoBehaviour
         this.sprinting = sprinting;
     }
 
-    void SetFOV(float desiredFOV)
+    void SetCameraValues(float camSide, float desiredFOV)
     {
+        vCamFollow.CameraSide = Mathf.Lerp(vCamFollow.CameraSide, camSide, Time.deltaTime);
         vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView, desiredFOV, Time.deltaTime);
-        //StartCoroutine(ISetFOV(desiredFOV));
-    }
-
-    IEnumerator ISetFOV(float desiredFOV)
-    {
-        yield return new WaitUntil(() => vCam.m_Lens.FieldOfView <= desiredFOV);
-        //vCam.m_Lens.FieldOfView = sprinting ? defaultFOV - newFOV : defaultFOV;
     }
 
     public FootStepData stepData;

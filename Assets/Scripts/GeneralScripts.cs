@@ -218,6 +218,8 @@ public static class HelperFunctions
 
     #endregion
 
+    #region Maths
+
     public static Vector3 LerpVector3(Vector3 a, Vector3 b, float p)
     {
         float x = Mathf.Lerp(a.x, b.x, p);
@@ -225,6 +227,15 @@ public static class HelperFunctions
         float z = Mathf.Lerp(a.z, b.z, p);
         return new Vector3(x, y, z);
     }
+
+    public static float Remap(float inputValue, float fromMin, float fromMax, float toMin, float toMax)
+    {
+        float i = (((inputValue - fromMin) / (fromMax - fromMin)) * (toMax - toMin) + toMin);
+        i = Mathf.Clamp(i, toMin, toMax);
+        return i;
+    }
+
+    #endregion
 }
 
 #region Interfaces
