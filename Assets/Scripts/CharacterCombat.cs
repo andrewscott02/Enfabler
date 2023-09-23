@@ -10,11 +10,13 @@ public class CharacterCombat : MonoBehaviour
     public Animator animator;
     [HideInInspector]
     public ConstructPlayerModel modelConstructor;
+    Health health;
 
     public Weapon weapon { get; private set; }
 
     private void Start()
     {
+        health = GetComponent<Health>();
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
     }
 
@@ -209,6 +211,8 @@ public class CharacterCombat : MonoBehaviour
         animator.SetInteger("RandReact", Random.Range(0, animator.GetInteger("RandReactMax") + 1));
     }
 
+    public float hitSphereRadius = 0.2f;
+
     void AttackCheck()
     {
         //Debug.Log("AttackCheck " + damage);
@@ -216,7 +220,11 @@ public class CharacterCombat : MonoBehaviour
         //Raycast between sword base and tip
         RaycastHit hit;
 
-        if (Physics.Linecast(weapon.weaponBase.transform.position, weapon.weaponTip.transform.position, out hit))
+        Vector3 origin = weapon.weaponBaseHit.transform.position;
+        float distance = Vector3.Distance(weapon.weaponBaseHit.transform.position, weapon.weaponTipHit.transform.position);
+        Vector3 dir = weapon.weaponTipHit.transform.position - weapon.weaponBaseHit.transform.position;
+
+        if (Physics.SphereCast(origin, radius: hitSphereRadius, direction: dir, out hit, maxDistance: distance, layerMask))
         {
             Health hitHealth = hit.collider.GetComponent<Health>();
 
@@ -224,6 +232,10 @@ public class CharacterCombat : MonoBehaviour
 
             //Return if collided object has no health component
             if (hitHealth == null)
+                return;
+
+            //Return if hitting self
+            if (hitHealth == health)
                 return;
 
             //Return if it has already been hit or if it should be ignored

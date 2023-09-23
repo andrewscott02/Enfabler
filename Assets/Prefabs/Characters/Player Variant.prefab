@@ -2933,10 +2933,12 @@ MonoBehaviour:
   canParry: 1
   canDodge: 1
   ignore: []
+  hitSphereRadius: 0.35
+  hitFreezeTime: 0.15
   currentTargets: []
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   currentTargetCastInterval: 0.6
   currentTargetCastRadius: 1.5
   currentTargetCastDistance: 10
@@ -2958,8 +2960,16 @@ MonoBehaviour:
   bloodFX: {fileID: 0}
   parryFX: {fileID: 0}
   maxHealth: 50
-  impulseModifier: 0.1
+  hitReactData:
+    hitImpulseMultiplier: 0
+    heavyHitReactThreshold: 0
+    hitSlomoScale: 0
+    hitSlomoDuration: 0
+    killImpulseStrength: 0
+    killSlomoScale: 0
+    killSlomoDuration: 0
   dying: 0
+  impulseSource: {fileID: 0}
 --- !u!114 &1697564183
 MonoBehaviour:
   m_ObjectHideFlags: 0
