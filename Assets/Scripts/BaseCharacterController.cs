@@ -28,16 +28,21 @@ public class BaseCharacterController : MonoBehaviour
         SetupRagdoll();
     }
 
+    Collider mainCollider;
     List<Collider> ragdollColliders = new List<Collider>();
 
     void SetupRagdoll()
     {
+        mainCollider = GetComponent<Collider>();
         Collider[] colliders = GetComponentsInChildren<Collider>();
 
         foreach (var item in colliders)
         {
-            if (item.gameObject != this.gameObject)
+            if (item != mainCollider)
             {
+                Rigidbody rbItem = item.GetComponent<Rigidbody>();
+                rbItem.useGravity = false;
+
                 item.isTrigger = this;
                 ragdollColliders.Add(item);
             }
@@ -46,21 +51,19 @@ public class BaseCharacterController : MonoBehaviour
 
     public void ActivateRagdoll(bool activate)
     {
-        if (activate)
-        {
-            Debug.Log(gameObject.name + " has activated ragdoll");
-        }
         foreach (var item in ragdollColliders)
         {
-            if (item.gameObject != this.gameObject)
+            if (item != mainCollider)
             {
+                Rigidbody rbItem = item.GetComponent<Rigidbody>();
+                rbItem.useGravity = activate;
+
                 item.isTrigger = !activate;
             }
-            else
-            {
-                item.isTrigger = activate;
-            }
         }
+
+        mainCollider.isTrigger = activate;
+        mainCollider.enabled = !activate;
 
         animator.enabled = !activate;
 
