@@ -235,7 +235,34 @@ public class CharacterCombat : MonoBehaviour
             //If it can be hit, deal damage to target and add it to the hit targets list
             hitTargets.Add(hitHealth);
             hitHealth.Damage(this, damage, hit.point, hit.normal);
+
+            OnAttackHit();
         }
+    }
+
+    void OnAttackHit()
+    {
+        Freeze();
+
+        //TODO: Sound effects
+    }
+
+    public float hitFreezeTime = 0.15f;
+
+    void Freeze()
+    {
+        if (animator == null) return;
+
+        StartCoroutine(IFreeze(hitFreezeTime));
+    }
+
+    IEnumerator IFreeze(float delay)
+    {
+        Debug.Log("Freeze");
+        animator.speed = 0;
+        yield return new WaitForSecondsRealtime(delay);
+        Debug.Log("Unfreeze");
+        animator.speed = 1;
     }
 
     #endregion
