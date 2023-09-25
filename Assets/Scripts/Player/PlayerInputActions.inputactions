@@ -67,7 +67,7 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "StickDeadzone",
-                    "groups": "PlayerController",
+                    "groups": "Gamepad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -78,7 +78,7 @@
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "StickDeadzone,InvertVector2(invertX=false)",
-                    "groups": "PlayerController",
+                    "groups": "Gamepad",
                     "action": "Camera",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -89,7 +89,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "Tap",
                     "processors": "",
-                    "groups": "PlayerController",
+                    "groups": "Gamepad",
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -100,7 +100,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "Hold",
                     "processors": "",
-                    "groups": "PlayerController",
+                    "groups": "Gamepad",
                     "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -111,7 +111,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "Tap",
                     "processors": "",
-                    "groups": "PlayerController",
+                    "groups": "Gamepad",
                     "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -122,7 +122,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "Hold",
                     "processors": "",
-                    "groups": "PlayerController",
+                    "groups": "Gamepad",
                     "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -132,14 +132,20 @@
     ],
     "controlSchemes": [
         {
-            "name": "PlayerController",
-            "bindingGroup": "PlayerController",
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
-                },
+                }
+            ]
+        },
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
                 {
                     "devicePath": "<Keyboard>",
                     "isOptional": false,

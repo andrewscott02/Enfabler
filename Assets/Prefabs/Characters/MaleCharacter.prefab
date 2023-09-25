@@ -141,11 +141,11 @@ MonoBehaviour:
   parryFX: {fileID: 5831885752641907103, guid: 7c7d6dcfa9512ae4abd8b0d8b8816ec4, type: 3}
   maxHealth: 50
   hitReactData:
-    hitImpulseMultiplier: 0.1
+    hitImpulseMultiplier: 0.2
     heavyHitReactThreshold: 5
     hitSlomoScale: 0.7
     hitSlomoDuration: 0.25
-    killImpulseStrength: 0.7
+    killImpulseStrength: 0.85
     killSlomoScale: 0.45
     killSlomoDuration: 0.5
   dying: 0
@@ -229,6 +229,7 @@ MonoBehaviour:
   currentTargetCastInterval: 0.6
   currentTargetCastRadius: 1.5
   currentTargetCastDistance: 10
+  rumbleOnHit: 0
 --- !u!114 &4237897999192378100
 MonoBehaviour:
   m_ObjectHideFlags: 0

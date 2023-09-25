@@ -232,6 +232,11 @@ public class CharacterCombat : MonoBehaviour
         {
             IDamageable hitDamageable = hit.collider.GetComponent<IDamageable>();
 
+            if (hitDamageable == null)
+            {
+                hitDamageable = hit.collider.GetComponentInParent<IDamageable>();
+            }
+
             #region Guard Clauses
 
             //Return if collided object has no health component
@@ -261,7 +266,7 @@ public class CharacterCombat : MonoBehaviour
     void OnAttackHit()
     {
         Freeze();
-        RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
+        RumbleManager.instance.ControllerRumble(0.2f, 0.85f, 0.25f);
 
         //TODO: Sound effects
     }
