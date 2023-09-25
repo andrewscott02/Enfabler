@@ -83,8 +83,14 @@ public class PlayerMovement : MonoBehaviour
         SpawnImpulse((sprinting ? stepData.impulseSprintMultiplier : stepData.impulseWalkMultiplier) * currentSpeed);
     }
 
-    public void SpawnImpulse(float impulseStrength)
+    void SpawnImpulse(float impulseStrength)
     {
         stepData.impulseSource.GenerateImpulseWithForce(impulseStrength);
+    }
+
+    public void DodgeRollLand(float impulseStrength)
+    {
+        SpawnImpulse(impulseStrength);
+        RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
     }
 }

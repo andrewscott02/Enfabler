@@ -81,7 +81,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     void HitReaction(int damage)
     {
-        if (combat != null) { combat.canAttack = false; }
+        if (combat != null) { combat.GotHit(); }
         else { Debug.LogWarning("No combat script"); }
 
         if (animator != null)
@@ -91,6 +91,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         else { Debug.LogWarning("No animator"); }
 
         SpawnImpulse(damage * hitReactData.hitImpulseMultiplier);
+        
         Slomo(hitReactData.hitSlomoScale, hitReactData.hitSlomoDuration);
     }
 

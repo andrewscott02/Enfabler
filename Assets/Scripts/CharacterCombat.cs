@@ -55,6 +55,7 @@ public class CharacterCombat : MonoBehaviour
             canAttack = false;
             canDodge = false;
             animator.SetTrigger("LightAttack");
+            //RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
         }
     }
 
@@ -260,6 +261,7 @@ public class CharacterCombat : MonoBehaviour
     void OnAttackHit()
     {
         Freeze();
+        RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
 
         //TODO: Sound effects
     }
@@ -411,6 +413,15 @@ public class CharacterCombat : MonoBehaviour
     #endregion
 
     #endregion
+
+    public bool rumbleOnHit = false;
+
+    public void GotHit()
+    {
+        canAttack = false;
+        if (rumbleOnHit)
+            RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
+    }
 
     #endregion
 }
