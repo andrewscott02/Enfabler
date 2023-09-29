@@ -4,15 +4,46 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public TrapStats trapStats;
+
+    public void ActivateTrap()
     {
-        
+        switch (trapStats.durationType)
+        {
+            case E_Duration.OnlyOnce:
+                ApplyEffect();
+                break;
+            case E_Duration.OnceDestroy:
+                ApplyEffect();
+                DeactivateTrap();
+                Destroy(this.gameObject);
+                break;
+            case E_Duration.Interval:
+                TrapManager.instance.TrapActivation += ApplyEffect;
+                break;
+            default:
+
+                break;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DeactivateTrap()
     {
-        
+        if (trapStats.durationType == E_Duration.Interval)
+        {
+            TrapManager.instance.TrapActivation -= ApplyEffect;
+        }
+    }
+
+    void ApplyEffect()
+    {
+        if (trapStats.durationType == E_Duration.Interval)
+        {
+            if (TrapManager.instance.trapTime % trapStats.activateInterval != 0)
+                return;
+        }
+
+        //TODO: Apply effects
+        Debug.Log(gameObject.name + " was activated at" + TrapManager.instance.trapTime);
     }
 }

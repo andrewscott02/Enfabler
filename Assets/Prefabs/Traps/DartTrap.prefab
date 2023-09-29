@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7071684484910154997}
   - component: {fileID: 8700094641892761884}
   - component: {fileID: 3264106961468872460}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,10 +105,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1168802244099687388, guid: 0e17bd865830450489f0800dca73f7f6,
+        type: 3}
+      propertyPath: trapStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 4599a36aee2a08b42948ca9985fed943,
+        type: 2}
+    - target: {fileID: 3981728426648025589, guid: 0e17bd865830450489f0800dca73f7f6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4694153437918161264, guid: 0e17bd865830450489f0800dca73f7f6,
         type: 3}
       propertyPath: m_Name
-      value: Trap Variant
+      value: DartTrap
       objectReference: {fileID: 0}
     - target: {fileID: 5495070332922934111, guid: 0e17bd865830450489f0800dca73f7f6,
         type: 3}
@@ -164,6 +175,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6744847145925803597, guid: 0e17bd865830450489f0800dca73f7f6,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e17bd865830450489f0800dca73f7f6, type: 3}

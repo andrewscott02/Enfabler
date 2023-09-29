@@ -6,17 +6,16 @@ using UnityEngine;
 public class TrapStats : ScriptableObject
 {
     public int damage;
-    public float timeDuration;
+
+    public E_TargetType targetType;
+
+    public E_Duration durationType;
+    public float activateInterval;
 }
 
-public enum E_TrapType
+public enum E_TargetType
 {
     Shot, Area
-}
-
-public enum E_Activation
-{
-    Sight, Contact, Constant
 }
 
 public enum E_Duration

@@ -228,7 +228,7 @@ public class CharacterCombat : MonoBehaviour
         float distance = Vector3.Distance(weapon.weaponBaseHit.transform.position, weapon.weaponTipHit.transform.position);
         Vector3 dir = weapon.weaponTipHit.transform.position - weapon.weaponBaseHit.transform.position;
 
-        if (Physics.SphereCast(origin, radius: hitSphereRadius, direction: dir, out hit, maxDistance: distance))
+        if (Physics.SphereCast(origin, radius: hitSphereRadius, direction: dir, out hit, maxDistance: distance, layerMask))
         {
             IDamageable hitDamageable = hit.collider.GetComponent<IDamageable>();
 
