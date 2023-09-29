@@ -15,15 +15,32 @@ public class TrapApplyEffect : MonoBehaviour
 
     public void Activate()
     {
-        hitTargets = new List<IDamageable>();
-        effectCollider.enabled = true;
-        Invoke("Deactivate", 0.1f);
+        switch (trap.trapStats.targetType)
+        {
+            case E_TargetType.Shot:
+                //TODO: line trace to target
+                break;
+            case E_TargetType.Area:
+                hitTargets = new List<IDamageable>();
+                effectCollider.enabled = true;
+                StartCoroutine(IDelayDeactivate(0.1f));
+                break;
+                break;
+            default:
+                break;
+        }
     }
 
     public void Deactivate()
     {
         hitTargets = new List<IDamageable>();
         effectCollider.enabled = false;
+    }
+
+    IEnumerator IDelayDeactivate(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Deactivate();
     }
 
     public LayerMask layerMask;

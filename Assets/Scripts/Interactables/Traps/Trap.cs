@@ -13,8 +13,6 @@ public class Trap : MonoBehaviour, ICanDealDamage
         applyEffect = GetComponentInChildren<TrapApplyEffect>();
         applyCollider = applyEffect.GetComponent<SphereCollider>();
         applyCollider.radius = trapStats.range;
-
-        applyEffect.Deactivate();
     }
 
     public void ActivateTrap()
