@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterCombat : MonoBehaviour
+public class CharacterCombat : MonoBehaviour, ICanDealDamage
 {
     #region Setup
 
@@ -207,12 +207,18 @@ public class CharacterCombat : MonoBehaviour
         }
     }
 
-    public void Parried()
+    public bool HitDodged()
+    {
+        return true;
+    }
+
+    public bool HitParried()
     {
         canAttack = false;
         canParry = false;
         animator.SetTrigger("HitReact");
         animator.SetInteger("RandReact", Random.Range(0, animator.GetInteger("RandReactMax") + 1));
+        return true;
     }
 
     public float hitSphereRadius = 0.2f;
@@ -257,10 +263,15 @@ public class CharacterCombat : MonoBehaviour
 
             //If it can be hit, deal damage to target and add it to the hit targets list
             hitTargets.Add(hitDamageable);
-            hitDamageable.Damage(this, damage, hit.point, hit.normal);
+            DealDamage(hitDamageable, damage, hit.point, hit.normal);
 
             OnAttackHit();
         }
+    }
+
+    public void DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot)
+    {
+        target.Damage(this, damage, spawnPos, spawnRot);
     }
 
     void OnAttackHit()

@@ -15,7 +15,6 @@ public class TrapActivation : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Trigger with " + other.gameObject.name);
             trap.ActivateTrap();
         }
     }
@@ -24,7 +23,6 @@ public class TrapActivation : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Trigger with " + other.gameObject.name);
             trap.DeactivateTrap();
         }
     }

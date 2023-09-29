@@ -34,19 +34,17 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
-    public void Damage(CharacterCombat attacker, int damage, Vector3 spawnPos, Vector3 spawnRot)
+    public void Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot)
     {
+        MonoBehaviour attackerMono = attacker as MonoBehaviour;
+
         if (combat != null)
         {
-            if (combat.GetDodging())
-            {
-                return;
-            }
+            if (combat.GetDodging() && attacker.HitDodged()) return;
 
-            if (combat.GetParrying())
+            if (combat.GetParrying() && attacker.HitParried())
             {
                 if (parryFX != null) { Instantiate(parryFX, spawnPos, Quaternion.Euler(spawnRot)); }
-                if (attacker != null) { attacker.Parried(); }
                 return;
             }
         }
@@ -71,7 +69,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
         if (CheckKill())
         {
-            Kill(attacker.gameObject.transform.position, damage);
+            Vector3 forceOrigin = attacker != null ? attackerMono.gameObject.transform.position : spawnPos;
+            Kill(forceOrigin, damage);
         }
         else
         {
@@ -90,7 +89,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         }
         else { Debug.LogWarning("No animator"); }
 
-        SpawnImpulse(damage * hitReactData.hitImpulseMultiplier);
+        float impulseStrength = Mathf.Clamp(damage * hitReactData.hitImpulseMultiplier, 0, hitReactData.impulseMax);
+        SpawnImpulse(impulseStrength);
         
         Slomo(hitReactData.hitSlomoScale, hitReactData.hitSlomoDuration);
     }

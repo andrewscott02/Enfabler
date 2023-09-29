@@ -8,6 +8,7 @@ public class TrapStats : ScriptableObject
     public int damage;
 
     public E_TargetType targetType;
+    public float range;
 
     public E_Duration durationType;
     public float activateInterval;

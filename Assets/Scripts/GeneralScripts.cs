@@ -240,9 +240,16 @@ public static class HelperFunctions
 
 #region Interfaces
 
+public interface ICanDealDamage
+{
+    void DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot);
+    bool HitDodged();
+    bool HitParried();
+}
+
 public interface IDamageable
 {
-    void Damage(CharacterCombat attacker, int damage, Vector3 spawnPos, Vector3 spawnRot);
+    void Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot);
     bool CheckKill();
     void Kill(Vector3 attacker, int damage);
 }
@@ -276,6 +283,8 @@ public struct HitReactData
     public float killImpulseStrength;
     public float killSlomoScale;
     public float killSlomoDuration;
+
+    public float impulseMax;
 }
 
 public struct ExplosiveForceData
