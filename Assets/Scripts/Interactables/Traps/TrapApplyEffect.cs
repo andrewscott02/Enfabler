@@ -16,6 +16,7 @@ public class TrapApplyEffect : MonoBehaviour
 
     public void Activate()
     {
+        affectTargets = new List<IDamageable>();
         hitTargets = new List<IDamageable>();
         effectCollider.enabled = true;
         StartCoroutine(IDelayDeactivate(0.1f));
@@ -24,6 +25,7 @@ public class TrapApplyEffect : MonoBehaviour
     public void Deactivate()
     {
         DetermineEffect();
+        affectTargets = new List<IDamageable>();
         hitTargets = new List<IDamageable>();
         effectCollider.enabled = false;
     }
@@ -35,7 +37,8 @@ public class TrapApplyEffect : MonoBehaviour
     }
 
     public LayerMask layerMask;
-    public List<IDamageable> hitTargets;
+    List<IDamageable> affectTargets;
+    List<IDamageable> hitTargets;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -57,17 +60,37 @@ public class TrapApplyEffect : MonoBehaviour
                 return;
             }
 
-            //Return if it has already been hit or if it should be ignored
-            if (hitTargets.Contains(hitDamageable))
+            #endregion
+
+            //If it can be hit, deal damage to target and add it to the hit targets list
+            affectTargets.Add(hitDamageable);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (layerMask == (layerMask | (1 << other.gameObject.layer)))
+        {
+            IDamageable hitDamageable = other.GetComponent<IDamageable>();
+
+            if (hitDamageable == null)
             {
-                Debug.LogWarning("Ignore");
+                hitDamageable = other.GetComponentInParent<IDamageable>();
+            }
+
+            #region Guard Clauses
+
+            //Return if collided object has no health component
+            if (hitDamageable == null)
+            {
+                Debug.LogWarning("No interface");
                 return;
             }
 
             #endregion
 
             //If it can be hit, deal damage to target and add it to the hit targets list
-            hitTargets.Add(hitDamageable);
+            affectTargets.Remove(hitDamageable);
         }
     }
 
@@ -77,7 +100,7 @@ public class TrapApplyEffect : MonoBehaviour
         {
             case E_TargetType.Shot:
                 //Affect only 1 player
-                foreach (var item in hitTargets)
+                foreach (var item in affectTargets)
                 {
                     MonoBehaviour targetMono = item as MonoBehaviour;
                     PlayerController player = targetMono.GetComponent<PlayerController>();
@@ -85,8 +108,9 @@ public class TrapApplyEffect : MonoBehaviour
                     {
                         if (Vector3.Distance(transform.position, player.transform.position) <= trap.trapStats.range)
                         {
-                            //TODO: Spawn projectile instead
-                            trap.ApplyEffect(item, targetMono.gameObject.transform.position);
+                            CapsuleCollider playerCol = player.GetComponent<CapsuleCollider>();
+                            Vector3 targetPos = playerCol.bounds.center;
+                            SpawnProjectile(targetPos);
                             return;
                         }
                     }
@@ -94,14 +118,26 @@ public class TrapApplyEffect : MonoBehaviour
                 break;
             case E_TargetType.Area:
                 //Affect all
-                foreach (var item in hitTargets)
+                foreach (var item in affectTargets)
                 {
-                    MonoBehaviour targetMono = item as MonoBehaviour;
-                    trap.ApplyEffect(item, targetMono.gameObject.transform.position);
+                    if (!hitTargets.Contains(item))
+                    {
+                        MonoBehaviour targetMono = item as MonoBehaviour;
+                        trap.ApplyEffect(item, targetMono.gameObject.transform.position);
+
+                        hitTargets.Add(item);
+                    }
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    void SpawnProjectile(Vector3 targetPos)
+    {
+        GameObject projectileObj = Instantiate(trap.trapStats.projectile, transform.position, transform.rotation) as GameObject;
+        ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
+        projectileMove.Fire(targetPos);
     }
 }
