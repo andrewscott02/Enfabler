@@ -6,6 +6,7 @@ public class TrapApplyEffect : MonoBehaviour
 {
     Trap trap;
     Collider effectCollider;
+    PlayerController player;
 
     private void Awake()
     {
@@ -15,24 +16,14 @@ public class TrapApplyEffect : MonoBehaviour
 
     public void Activate()
     {
-        switch (trap.trapStats.targetType)
-        {
-            case E_TargetType.Shot:
-                //TODO: line trace to target
-                break;
-            case E_TargetType.Area:
-                hitTargets = new List<IDamageable>();
-                effectCollider.enabled = true;
-                StartCoroutine(IDelayDeactivate(0.1f));
-                break;
-                break;
-            default:
-                break;
-        }
+        hitTargets = new List<IDamageable>();
+        effectCollider.enabled = true;
+        StartCoroutine(IDelayDeactivate(0.1f));
     }
 
     public void Deactivate()
     {
+        DetermineEffect();
         hitTargets = new List<IDamageable>();
         effectCollider.enabled = false;
     }
@@ -77,7 +68,40 @@ public class TrapApplyEffect : MonoBehaviour
 
             //If it can be hit, deal damage to target and add it to the hit targets list
             hitTargets.Add(hitDamageable);
-            trap.ApplyEffect(hitDamageable, other.gameObject.transform.position);
+        }
+    }
+
+    void DetermineEffect()
+    {
+        switch (trap.trapStats.targetType)
+        {
+            case E_TargetType.Shot:
+                //Affect only 1 player
+                foreach (var item in hitTargets)
+                {
+                    MonoBehaviour targetMono = item as MonoBehaviour;
+                    PlayerController player = targetMono.GetComponent<PlayerController>();
+                    if (player != null)
+                    {
+                        if (Vector3.Distance(transform.position, player.transform.position) <= trap.trapStats.range)
+                        {
+                            //TODO: Spawn projectile instead
+                            trap.ApplyEffect(item, targetMono.gameObject.transform.position);
+                            return;
+                        }
+                    }
+                }
+                break;
+            case E_TargetType.Area:
+                //Affect all
+                foreach (var item in hitTargets)
+                {
+                    MonoBehaviour targetMono = item as MonoBehaviour;
+                    trap.ApplyEffect(item, targetMono.gameObject.transform.position);
+                }
+                break;
+            default:
+                break;
         }
     }
 }
