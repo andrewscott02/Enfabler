@@ -138,6 +138,6 @@ public class TrapApplyEffect : MonoBehaviour
     {
         GameObject projectileObj = Instantiate(trap.trapStats.projectile, transform.position, transform.rotation) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
-        projectileMove.Fire(targetPos);
+        projectileMove.Fire(targetPos, trap);
     }
 }

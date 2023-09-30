@@ -8,10 +8,14 @@ public class ProjectileMovement : MonoBehaviour
     public float mass = 0;
 
     Rigidbody rb;
+    ProjectileHit hit;
 
-    public void Fire(Vector3 target)
+    public void Fire(Vector3 target, Trap trap)
     {
         rb = GetComponent<Rigidbody>();
+        hit = GetComponentInChildren<ProjectileHit>();
+        hit.trap = trap;
+        hit.move = this;
 
         rb.mass = this.mass;
 

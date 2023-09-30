@@ -10,6 +10,7 @@ public class TrapStats : ScriptableObject
     public E_TargetType targetType;
     public Object projectile;
     public float range;
+    public float shotAOE = 0;
 
     public E_Duration durationType;
     public float activateInterval;
