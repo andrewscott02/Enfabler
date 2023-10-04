@@ -103,10 +103,22 @@ public class PlayerController : BaseCharacterController
     public void SprintInput(InputAction.CallbackContext context)
     {
         if (context.performed)
+        {
             playerMovement.Sprint(true);
+            combat.sprinting = true;
+        }
 
         if (context.canceled)
+        {
             playerMovement.Sprint(false);
+            StartCoroutine(IDelayStopSprint(0.5f));
+        }
+    }
+
+    IEnumerator IDelayStopSprint(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        combat.sprinting = false;
     }
 
     // Update is called once per frame

@@ -39,12 +39,13 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     #region Basic Actions
 
     BaseCharacterController[] lastAttacked;
+    public bool sprinting = false;
 
     public void LightAttack()
     {
         if (canAttack)
         {
-            Debug.Log("Attack " + animator.GetInteger("MeleeAttackCount"));
+            Debug.Log("Attack " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard"));
             EndParry();
             EndDodge();
             ForceEndAttack();
@@ -54,7 +55,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             canMove = false;
             canAttack = false;
             canDodge = false;
-            animator.SetTrigger("LightAttack");
+            animator.SetTrigger(sprinting? "SprintAttack" : "LightAttack");
             //RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
         }
     }
