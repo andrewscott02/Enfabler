@@ -44,7 +44,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         if (canAttack)
         {
-            Debug.Log("Attack");
+            Debug.Log("Attack " + animator.GetInteger("MeleeAttackCount"));
             EndParry();
             EndDodge();
             ForceEndAttack();
@@ -111,14 +111,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public bool canParry = true;
     public bool canDodge = true;
 
-    public void NextAttack()
+    public void NextAttack(int attack)
     {
-        animator.SetInteger("MeleeAttackCount", animator.GetInteger("MeleeAttackCount") + 1);
-
-        if (animator.GetInteger("MeleeAttackCount") > animator.GetInteger("MeleeAttackMax"))
-        {
-            animator.SetInteger("MeleeAttackCount", 0);
-        }
+        //Debug.Log("Next attack + " + attack);
+        animator.SetInteger("MeleeAttackCount", attack);
 
         canDodge = true;
         canAttack = true;
