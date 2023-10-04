@@ -18,13 +18,14 @@ public class Parry : Node
 
     public override NodeState Evaluate()
     {
-        if (agent.GetCharacterCombat().canParry)
+        if (agent.GetCharacterCombat().canDodge)
         {
-            agent.GetCharacterCombat().Block();
+            agent.GetCharacterCombat().Block(true);
             state = NodeState.Success;
         }
         else
         {
+            agent.GetCharacterCombat().Block(false);
             state = NodeState.Failure;
         }
 

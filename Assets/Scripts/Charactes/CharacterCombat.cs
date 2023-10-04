@@ -46,12 +46,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         if (canAttack)
         {
             Debug.Log("Attack " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard"));
-            EndParry();
             EndDodge();
             ForceEndAttack();
 
             Target();
 
+            blocking = false;
             canMove = false;
             canAttack = false;
             canDodge = false;
@@ -60,34 +60,32 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         }
     }
 
-    public virtual void Block()
+    public virtual void Block(bool blocking)
     {
         //Todo: Change to block
-        return;
-        if (canParry)
+        if (this.blocking == blocking)
+            return;
+
+        Debug.Log("Block changed");
+        EndDodge();
+        ForceEndAttack();
+        this.blocking = blocking;
+
+        if (modelConstructor != null)
         {
-            EndParry();
-            EndDodge();
-            ForceEndAttack();
-
-            if (modelConstructor != null)
-            {
-                modelConstructor.PlayerParry(attackers > 0);
-            }
-
-            canMove = false;
-            canAttack = false;
-            canParry = false;
-            canDodge = false;
-            if (animator != null) { animator.SetTrigger("Parry"); }
+            modelConstructor.PlayerParry(attackers > 0);
         }
+
+        animator.SetInteger("MeleeAttackCount", 0);
+
+        if (animator != null) { animator.SetBool("Blocking", blocking); }
     }
 
     public virtual void Dodge()
     {
         if (canDodge)
         {
-            EndParry();
+            Block(false);
             EndDodge();
             ForceEndAttack();
 
@@ -109,7 +107,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public bool canMove = true;
     public bool canAttack = true;
-    public bool canParry = true;
     public bool canDodge = true;
 
     public void NextAttack(int attack)
@@ -119,7 +116,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         canDodge = true;
         canAttack = true;
-        canParry = true;
 
         AIController AIController = GetComponent<AIController>();
 
@@ -135,10 +131,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         if (animator == null)
             Debug.LogWarning("Animator of " + gameObject.name + " is null");
         animator.SetInteger("MeleeAttackCount", 0);
+        animator.SetBool("InHitReaction", false);
         canMove = true;
         canDodge = true;
         canAttack = true;
-        canParry = true;
 
         AIController AIController = GetComponent<AIController>();
 
@@ -175,6 +171,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public void ForceEndAttack()
     {
         //Clear damage and list of enemies hit
+        weapon.trail.SetActive(false);
+
         hitTargets.Clear();
         damage = 0;
 
@@ -183,17 +181,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void EndAttack()
     {
-        weapon.trail.SetActive(false);
-
         HitEnemy(hitTargets.Count > 0);
-
-        //Clear damage and list of enemies hit
-        hitTargets.Clear();
-        damage = 0;
-
         Untarget();
-
-        CancelInvoke("AttackCheck");
+        ForceEndAttack();
     }
 
     public virtual void HitEnemy(bool hit)
@@ -212,7 +202,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public bool HitParried()
     {
         canAttack = false;
-        canParry = false;
         animator.SetTrigger("HitReact");
         animator.SetInteger("RandReact", Random.Range(0, animator.GetInteger("RandReactMax") + 1));
         return true;
@@ -301,25 +290,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Parry Logic
 
-    protected bool parrying;
+    protected bool blocking;
 
-    public bool GetParrying() { return parrying; }
-
-    public void StartParry()
-    {
-        parrying = true;
-    }
-
-    public void EndParry()
-    {
-        parrying = false;
-    }
-
-    public void ResetParry()
-    {
-        canDodge = true;
-        ResetAttack();
-    }
+    public bool GetBlocking() { return blocking; }
 
     #endregion
 
@@ -340,7 +313,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         canMove = true;
         canDodge = true;
         canAttack = true;
-        canParry = true;
     }
 
     public void ResetDodge()

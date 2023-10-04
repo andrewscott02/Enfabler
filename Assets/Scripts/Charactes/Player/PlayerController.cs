@@ -70,9 +70,6 @@ public class PlayerController : BaseCharacterController
 
     public void BlockInput(InputAction.CallbackContext context)
     {
-        if (!context.performed)
-            return;
-
         if (moveInput != Vector2.zero)
         {
             //Rotate towards direction
@@ -81,7 +78,15 @@ public class PlayerController : BaseCharacterController
             transform.rotation = newRot;
         }
 
-        combat.Block();
+        if (context.performed)
+        {
+            combat.Block(true);
+        }
+
+        if (context.canceled)
+        {
+            combat.Block(false);
+        }
     }
 
     public void DodgeInput(InputAction.CallbackContext context)

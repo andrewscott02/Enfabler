@@ -6,6 +6,7 @@ using UnityEngine;
 public class TrapStats : ScriptableObject
 {
     public int damage;
+    public bool canBlock = false;
 
     public E_TargetType targetType;
     public Object projectile;

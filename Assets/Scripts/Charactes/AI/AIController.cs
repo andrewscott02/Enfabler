@@ -214,7 +214,7 @@ public class AIController : BaseCharacterController
         if (lastParry > parryCooldown)
         {
             lastParry = 0;
-            return (Random.Range(0f, 1f) < parryChance) && combat.canParry;
+            return (Random.Range(0f, 1f) < parryChance) && combat.canDodge;
         }
 
         return false;
@@ -229,7 +229,7 @@ public class AIController : BaseCharacterController
         if (lastDodge > dodgeCooldown)
         {
             lastDodge = 0;
-            return (Random.Range(0f, 1f) < parryChance) && combat.canParry;
+            return (Random.Range(0f, 1f) < parryChance) && combat.canDodge;
         }
 
         return false;

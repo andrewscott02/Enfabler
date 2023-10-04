@@ -78,6 +78,6 @@ public class Trap : MonoBehaviour, ICanDealDamage
 
     public bool HitParried()
     {
-        return false;
+        return trapStats.canBlock;
     }
 }

@@ -42,9 +42,10 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         {
             if (combat.GetDodging() && attacker.HitDodged()) return;
 
-            if (combat.GetParrying() && attacker.HitParried())
+            if (combat.GetBlocking() && attacker.HitParried())
             {
                 if (parryFX != null) { Instantiate(parryFX, spawnPos, Quaternion.Euler(spawnRot)); }
+                HitReaction(damage);
                 return;
             }
         }
@@ -85,6 +86,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
         if (animator != null)
         {
+            animator.SetBool("InHitReaction", true);
             animator.SetTrigger(damage < hitReactData.heavyHitReactThreshold ? "HitReactLight" : "HitReactHeavy");
         }
         else { Debug.LogWarning("No animator"); }
