@@ -69,6 +69,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         Debug.Log("Block changed");
         EndDodge();
         ForceEndAttack();
+        this.parrying = blocking;
         this.blocking = blocking;
 
         if (modelConstructor != null)
@@ -79,6 +80,11 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         animator.SetInteger("MeleeAttackCount", 0);
 
         if (animator != null) { animator.SetBool("Blocking", blocking); }
+    }
+
+    public void EndParryWindow()
+    {
+        parrying = false;
     }
 
     public virtual void Dodge()
@@ -199,11 +205,15 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         return true;
     }
 
+    public bool HitBlocked()
+    {
+        return true;
+    }
+
     public bool HitParried()
     {
         canAttack = false;
-        animator.SetTrigger("HitReact");
-        animator.SetInteger("RandReact", Random.Range(0, animator.GetInteger("RandReactMax") + 1));
+        animator.SetTrigger("HitReactLight");
         return true;
     }
 
@@ -290,9 +300,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Parry Logic
 
-    protected bool blocking;
-
-    public bool GetBlocking() { return blocking; }
+    public bool blocking { get; protected set; }
+    public bool parrying { get; protected set; }
 
     #endregion
 

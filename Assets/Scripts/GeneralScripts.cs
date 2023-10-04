@@ -244,6 +244,7 @@ public interface ICanDealDamage
 {
     void DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot);
     bool HitDodged();
+    bool HitBlocked();
     bool HitParried();
 }
 
