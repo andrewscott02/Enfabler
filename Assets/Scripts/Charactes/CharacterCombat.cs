@@ -13,12 +13,17 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public Weapon weapon { get; private set; }
 
+    public bool canMove = true;
+    public bool sprinting = false;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
         ignore.Add(health);
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
+        currentArmour = maxArmour;
+        armourRegenCoroutine = StartCoroutine(IResetArmour(armourRegen));
     }
 
     public MonoBehaviour GetScript()
@@ -41,10 +46,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #endregion
 
-    #region Basic Actions
+    #region Attacking
 
     BaseCharacterController[] lastAttacked;
-    public bool sprinting = false;
+    public bool canAttack = true;
+
+    #region Attacking -> Attack Inputs
 
     public void LightAttack()
     {
@@ -60,65 +67,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             canMove = false;
             canAttack = false;
             canDodge = false;
-            animator.SetTrigger(sprinting? "SprintAttack" : "LightAttack");
+            animator.SetTrigger(sprinting ? "SprintAttack" : "LightAttack");
             //RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
         }
     }
-
-    public virtual void Block(bool blocking)
-    {
-        //Todo: Change to block
-        if (this.blocking == blocking)
-            return;
-
-        Debug.Log("Block changed");
-        EndDodge();
-        ForceEndAttack();
-        this.parrying = blocking;
-        this.blocking = blocking;
-
-        if (modelConstructor != null)
-        {
-            modelConstructor.PlayerParry(attackers > 0);
-        }
-
-        animator.SetInteger("MeleeAttackCount", 0);
-
-        if (animator != null) { animator.SetBool("Blocking", blocking); }
-    }
-
-    public void EndParryWindow()
-    {
-        parrying = false;
-    }
-
-    public virtual void Dodge()
-    {
-        if (canDodge)
-        {
-            Block(false);
-            EndDodge();
-            ForceEndAttack();
-
-            if (modelConstructor != null)
-            {
-                modelConstructor.PlayerDodge(attackers > 0);
-            }
-
-            canMove = false;
-            canAttack = false;
-            canDodge = false;
-            if (animator != null) { animator.SetTrigger("Dodge"); }
-        }
-    }
-
-    #endregion
-
-    #region Enabling/ Disabling Attacks and Movement
-
-    public bool canMove = true;
-    public bool canAttack = true;
-    public bool canDodge = true;
 
     public void NextAttack(int attack)
     {
@@ -159,9 +111,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #endregion
 
-    #region Logic
-
-    #region Attack Logic
+    #region Attacking -> Hit Logic
 
     List<IDamageable> hitTargets = new List<IDamageable>();
     public List<IDamageable> ignore = new List<IDamageable>();
@@ -317,41 +267,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #endregion
 
-    #region Parry Logic
-
-    public bool blocking { get; protected set; }
-    public bool parrying { get; protected set; }
-
-    #endregion
-
-    #region Dodge Logic
-
-    protected bool dodging;
-
-    public bool GetDodging() { return dodging; }
-
-    public void StartDodge()
-    {
-        dodging = true;
-    }
-
-    public void EndDodge()
-    {
-        dodging = false;
-        canMove = true;
-        canDodge = true;
-        canAttack = true;
-    }
-
-    public void ResetDodge()
-    {
-        canDodge = true;
-        ResetAttack();
-    }
-
-    #endregion
-
-    #region Target Logic
+    #region Attacking -> Target Logic
 
     #region Targetting
 
@@ -426,6 +342,140 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     #endregion
 
     #endregion
+
+    #endregion
+
+    #region Blocking
+
+    public int maxArmour = 5;
+    public int currentArmour { get; private set; }
+    public float armourCooldown = 6f;
+    public float armourRegen = 3f;
+
+    Coroutine armourRegenCoroutine;
+
+    public virtual void Block(bool blocking)
+    {
+        if (this.blocking == blocking)
+            return;
+
+        Debug.Log("Block changed");
+        EndDodge();
+        ForceEndAttack();
+        this.parrying = blocking;
+        this.blocking = blocking;
+
+        if (modelConstructor != null)
+        {
+            modelConstructor.PlayerParry(attackers > 0);
+        }
+
+        animator.SetInteger("MeleeAttackCount", 0);
+
+        if (animator != null) { animator.SetBool("Blocking", blocking); }
+    }
+
+    public void ConsumeArmour()
+    {
+        if (armourRegenCoroutine != null)
+            StopCoroutine(armourRegenCoroutine);
+
+        currentArmour--;
+        armourRegenCoroutine = StartCoroutine(IResetArmour(armourCooldown));
+        ChangeArmourUI();
+    }
+
+    public void GainArmour(int armour)
+    {
+        currentArmour = Mathf.Clamp(currentArmour + armour, 0, maxArmour);
+        ChangeArmourUI();
+    }
+
+    public bool CanBlock()
+    {
+        return blocking && currentArmour > 0;
+    }
+
+    IEnumerator IResetArmour(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        GainArmour(1);
+        armourRegenCoroutine = StartCoroutine(IResetArmour(armourRegen));
+    }
+
+    void ChangeArmourUI()
+    {
+        //TODO update UI
+    }
+
+    #endregion
+
+    #region Parrying
+
+    public bool blocking { get; protected set; }
+    public bool parrying { get; protected set; }
+
+    public void EndParryWindow()
+    {
+        parrying = false;
+    }
+
+    #endregion
+
+    #region Dodging
+
+    public bool canDodge = true;
+
+    public virtual void Dodge()
+    {
+        if (canDodge)
+        {
+            Block(false);
+            EndDodge();
+            ForceEndAttack();
+
+            if (modelConstructor != null)
+            {
+                modelConstructor.PlayerDodge(attackers > 0);
+            }
+
+            canMove = false;
+            canAttack = false;
+            canDodge = false;
+            if (animator != null) { animator.SetTrigger("Dodge"); }
+        }
+    }
+
+    #region Dodge -> Logic
+
+    protected bool dodging;
+
+    public bool GetDodging() { return dodging; }
+
+    public void StartDodge()
+    {
+        dodging = true;
+    }
+
+    public void EndDodge()
+    {
+        dodging = false;
+        canMove = true;
+        canDodge = true;
+        canAttack = true;
+    }
+
+    public void ResetDodge()
+    {
+        canDodge = true;
+        ResetAttack();
+    }
+
+    #endregion
+
+    #endregion
+
+    #region Taking Damage
 
     public bool rumbleOnHit = false;
 

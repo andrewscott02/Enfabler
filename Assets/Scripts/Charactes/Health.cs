@@ -52,10 +52,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
                 ParryReaction();
                 return E_DamageEvents.Parry;
             }
-            else if (combat.blocking && attacker.HitBlocked())
+            else if (combat.CanBlock() && attacker.HitBlocked())
             {
-                if (hitReactData.parryFX != null) { Instantiate(hitReactData.parryFX, spawnPos, Quaternion.Euler(spawnRot)); }
+                if (hitReactData.blockFX != null) { Instantiate(hitReactData.blockFX, spawnPos, Quaternion.Euler(spawnRot)); }
                 HitReaction(damage);
+                combat.ConsumeArmour();
                 return E_DamageEvents.Block;
             }
         }
