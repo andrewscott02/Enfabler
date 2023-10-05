@@ -45,7 +45,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         if (canAttack)
         {
-            Debug.Log("Attack " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard"));
+            //Debug.Log("Attack " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard"));
             EndDodge();
             ForceEndAttack();
 

@@ -140,6 +140,16 @@ public class PlayerController : BaseCharacterController
         combat.sprinting = false;
     }
 
+    public void InteractInput(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+
+        Debug.Log("Interact");
+        animator.SetTrigger("Interact");
+        //TODO: Proper interact interface and checks
+    }
+
     // Update is called once per frame
     void Update()
     {

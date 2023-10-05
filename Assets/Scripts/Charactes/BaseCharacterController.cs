@@ -64,7 +64,7 @@ public class BaseCharacterController : MonoBehaviour
 
                 if (activate && item == chestCollider)
                 {
-                    Debug.Log("Add explosive force");
+                    //Debug.Log("Add explosive force");
                     rbItem.AddExplosionForce(forceData.explosiveForce * 100f, forceData.origin, 10f, 1.5f, ForceMode.Impulse);
                 }
 

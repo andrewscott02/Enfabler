@@ -137,7 +137,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         {
             if (controller != null)
             {
-                Debug.Log(gameObject + "has controller");
+                //Debug.Log(gameObject + "has controller");
                 ExplosiveForceData forcedata = new ExplosiveForceData()
                 {
                     explosiveForce = damage,
@@ -147,7 +147,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             }
             else
             {
-                Debug.Log(gameObject + "has no controller");
+                //Debug.Log(gameObject + "has no controller");
                 Destroy(this.gameObject);
             }
         }
