@@ -7,8 +7,6 @@ public class RumbleManager : MonoBehaviour
 {
     public static RumbleManager instance;
 
-    float defaultTimeScale = 1;
-
     // Start is called before the first frame update
     void Awake()
     {

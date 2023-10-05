@@ -60,7 +60,7 @@ public class ProjectileHit : MonoBehaviour
         if (alreadyHit) return;
         alreadyHit = true;
 
-        Debug.Log("hitting target for " + trap.trapStats.damage);
+        //Debug.Log("hitting target for " + trap.trapStats.damage);
         E_DamageEvents hitData = E_DamageEvents.Hit;
         MonoBehaviour targetMono = target.GetScript();
 

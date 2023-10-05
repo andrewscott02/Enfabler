@@ -90,7 +90,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void ResetAttack()
     {
-        Debug.Log("Reset Attack");
+        //Debug.Log("Reset Attack");
         if (animator == null)
             Debug.LogWarning("Animator of " + gameObject.name + " is null");
         animator.SetInteger("MeleeAttackCount", 0);
@@ -198,14 +198,14 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             //Return if collided object has no health component
             if (hitDamageable == null)
             {
-                Debug.LogWarning("No interface");
+                //Debug.LogWarning("No interface");
                 return;
             }
 
             //Return if it has already been hit or if it should be ignored
             if (hitTargets.Contains(hitDamageable) || ignore.Contains(hitDamageable) || hitDamageable.IsDead())
             {
-                Debug.LogWarning("Ignore");
+                //Debug.LogWarning("Ignore");
                 return;
             }
 
@@ -269,10 +269,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     IEnumerator IFreeze(float delay)
     {
-        Debug.Log("Freeze");
+        //Debug.Log("Freeze");
         animator.speed = 0;
         yield return new WaitForSecondsRealtime(delay);
-        Debug.Log("Unfreeze");
+        //Debug.Log("Unfreeze");
         animator.speed = 1;
     }
 
@@ -372,7 +372,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         if (this.blocking == blocking)
             return;
 
-        Debug.Log("Block changed");
+        //Debug.Log("Block changed");
         EndDodge();
         ForceEndAttack();
         this.parrying = blocking;
@@ -499,7 +499,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void GotHit()
     {
-        Debug.Log("Got hit, end attack");
+        //Debug.Log("Got hit, end attack");
         canAttack = false;
         if (rumbleOnHit)
             RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
