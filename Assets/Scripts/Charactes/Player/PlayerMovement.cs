@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     Transform model; public void SetModel(Transform newModel) { model = newModel; }
 
-    bool sprinting = false;
+    public bool sprinting { get; private set; } = false;
     public float moveSpeed = 4;
     public float sprintSpeed = 8;
     float currentSpeed = 0;

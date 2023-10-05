@@ -17,6 +17,10 @@ public class PlayerController : BaseCharacterController
     public float rotateDeadZone = 0.1f;
     public GameObject followTarget;
 
+    bool useMoveRotation = false;
+    float xMoveRotateInput;
+    float moveRotateMultiplier = 0.2f;
+
     PlayerMovement playerMovement;
 
     //public LayerMask layerMask;
@@ -44,6 +48,8 @@ public class PlayerController : BaseCharacterController
     {
         moveInput.x = context.ReadValue<Vector2>().x;
         moveInput.y = context.ReadValue<Vector2>().y;
+
+        xMoveRotateInput = context.ReadValue<Vector2>().x * moveRotateMultiplier;
     }
 
     public void CameraInput(InputAction.CallbackContext context)
@@ -111,13 +117,21 @@ public class PlayerController : BaseCharacterController
         {
             playerMovement.Sprint(true);
             combat.sprinting = true;
+            StartCoroutine(IDelayUseMoveCam(1.5f));
         }
 
         if (context.canceled)
         {
             playerMovement.Sprint(false);
             StartCoroutine(IDelayStopSprint(0.5f));
+            useMoveRotation = false;
         }
+    }
+
+    IEnumerator IDelayUseMoveCam(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        useMoveRotation = true;
     }
 
     IEnumerator IDelayStopSprint(float delay)
@@ -131,7 +145,15 @@ public class PlayerController : BaseCharacterController
     {
         #region Camera Rotation
 
-        followTarget.transform.rotation *= Quaternion.AngleAxis(xRotateInput * rotateInterval.x, Vector3.up);
+        float xRotateValue = xRotateInput;
+
+        if (useMoveRotation)
+        {
+            if (xRotateInput < 0.5f && xRotateInput > -0.5f)
+                xRotateValue = xMoveRotateInput;
+        }
+
+        followTarget.transform.rotation *= Quaternion.AngleAxis(xRotateValue * rotateInterval.x, Vector3.up);
 
         followTarget.transform.rotation *= Quaternion.AngleAxis(yRotateInput * rotateInterval.y, Vector3.right);
 
