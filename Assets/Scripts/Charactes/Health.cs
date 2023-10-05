@@ -12,7 +12,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     public HealthSlider healthSlider;
     CharacterCombat combat;
-    public Object bloodFX, deathFX, parryFX;
     public int maxHealth = 50;
     int currentHealth = 0; public int GetCurrentHealth() { return currentHealth; }
 
@@ -49,13 +48,13 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
             if (combat.parrying && attacker.HitParried())
             {
-                if (parryFX != null) { Instantiate(parryFX, spawnPos, Quaternion.Euler(spawnRot)); }
+                if (hitReactData.parryFX != null) { Instantiate(hitReactData.parryFX, spawnPos, Quaternion.Euler(spawnRot)); }
                 ParryReaction();
                 return E_DamageEvents.Parry;
             }
             else if (combat.blocking && attacker.HitBlocked())
             {
-                if (parryFX != null) { Instantiate(parryFX, spawnPos, Quaternion.Euler(spawnRot)); }
+                if (hitReactData.parryFX != null) { Instantiate(hitReactData.parryFX, spawnPos, Quaternion.Euler(spawnRot)); }
                 HitReaction(damage);
                 return E_DamageEvents.Block;
             }
@@ -78,17 +77,20 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         {
             Vector3 forceOrigin = attacker != null ? attackerMono.gameObject.transform.position : spawnPos;
             Kill(forceOrigin, damage);
-            if (deathFX != null)
+            if (hitReactData.deathFX != null)
             {
-                Instantiate(deathFX, spawnPos, Quaternion.Euler(spawnRot));
+                if (hitReactData.deathFXGO != null)
+                    Instantiate(hitReactData.deathFX, hitReactData.deathFXGO.transform);
+                else
+                    Instantiate(hitReactData.deathFX, spawnPos, Quaternion.Euler(spawnRot));
             }
         }
         else
         {
             HitReaction(damage);
-            if (bloodFX != null)
+            if (hitReactData.bloodFX != null)
             {
-                Instantiate(bloodFX, spawnPos, Quaternion.Euler(spawnRot));
+                Instantiate(hitReactData.bloodFX, spawnPos, Quaternion.Euler(spawnRot));
             }
         }
 

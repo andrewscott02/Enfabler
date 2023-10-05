@@ -46,7 +46,6 @@ GameObject:
   - component: {fileID: 732605661954093454}
   - component: {fileID: 7378451652202160449}
   - component: {fileID: 1814884579404440104}
-  - component: {fileID: 4237897999192378100}
   m_Layer: 6
   m_Name: MaleCharacter
   m_TagString: Untagged
@@ -137,11 +136,17 @@ MonoBehaviour:
   animator: {fileID: 0}
   modelConstructor: {fileID: 0}
   healthSlider: {fileID: 0}
-  bloodFX: {fileID: 5831885752641907103, guid: 5995087a65040474a859f63787d81cde, type: 3}
-  deathFX: {fileID: 3332302239724075818, guid: dce9161122bcdb84d869c7e3718f742b, type: 3}
-  parryFX: {fileID: 5831885752641907103, guid: 7c7d6dcfa9512ae4abd8b0d8b8816ec4, type: 3}
   maxHealth: 50
   hitReactData:
+    deathFXGO: {fileID: 9042853641436718217}
+    bloodFX: {fileID: 5831885752641907103, guid: 5995087a65040474a859f63787d81cde,
+      type: 3}
+    deathFX: {fileID: 3332302239724075818, guid: dce9161122bcdb84d869c7e3718f742b,
+      type: 3}
+    blockFX: {fileID: 5831885752641907103, guid: 7c7d6dcfa9512ae4abd8b0d8b8816ec4,
+      type: 3}
+    parryFX: {fileID: 5831885752641907103, guid: 7c7d6dcfa9512ae4abd8b0d8b8816ec4,
+      type: 3}
     hitImpulseMultiplier: 0.2
     heavyHitReactThreshold: 5
     hitSlomoScale: 0.7
@@ -235,39 +240,6 @@ MonoBehaviour:
   currentTargetCastRadius: 1.5
   currentTargetCastDistance: 10
   rumbleOnHit: 0
---- !u!114 &4237897999192378100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7460243065040470235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36400292f3d383241bc978c81a07e24a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  modelConstructor: {fileID: 0}
-  healthSlider: {fileID: 0}
-  bloodFX: {fileID: 0}
-  deathFX: {fileID: 0}
-  parryFX: {fileID: 0}
-  maxHealth: 50
-  hitReactData:
-    hitImpulseMultiplier: 0
-    heavyHitReactThreshold: 0
-    hitSlomoScale: 0
-    hitSlomoDuration: 0
-    killImpulseStrength: 0
-    killSlomoScale: 0
-    killSlomoDuration: 0
-    parryImpulseStrength: 0
-    parrySlomoScale: 0
-    parrySlomoDuration: 0
-    impulseMax: 0
-  dying: 0
-  impulseSource: {fileID: 0}
 --- !u!1 &7696260934844542031
 GameObject:
   m_ObjectHideFlags: 0

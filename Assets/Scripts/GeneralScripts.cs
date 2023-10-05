@@ -285,6 +285,9 @@ public struct FootStepData
 [System.Serializable]
 public struct HitReactData
 {
+    public GameObject deathFXGO;
+    public Object bloodFX, deathFX, blockFX, parryFX;
+
     public float hitImpulseMultiplier;
     public int heavyHitReactThreshold;
     public float hitSlomoScale;
