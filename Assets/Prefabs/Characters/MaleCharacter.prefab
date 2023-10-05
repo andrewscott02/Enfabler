@@ -148,6 +148,9 @@ MonoBehaviour:
     killImpulseStrength: 0.85
     killSlomoScale: 0.45
     killSlomoDuration: 0.5
+    parryImpulseStrength: 0
+    parrySlomoScale: 0.2
+    parrySlomoDuration: 0
     impulseMax: 2
   dying: 0
   impulseSource: {fileID: 0}
@@ -217,9 +220,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelConstructor: {fileID: 0}
+  sprinting: 0
   canMove: 1
   canAttack: 1
-  canParry: 1
   canDodge: 1
   hitSphereRadius: 0.45
   hitFreezeTime: 0.15
@@ -257,6 +260,9 @@ MonoBehaviour:
     killImpulseStrength: 0
     killSlomoScale: 0
     killSlomoDuration: 0
+    parryImpulseStrength: 0
+    parrySlomoScale: 0
+    parrySlomoDuration: 0
     impulseMax: 0
   dying: 0
   impulseSource: {fileID: 0}

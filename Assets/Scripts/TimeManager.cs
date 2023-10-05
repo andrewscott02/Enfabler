@@ -24,13 +24,19 @@ public class TimeManager : MonoBehaviour
     public void SetTimeScale(float timeScale, float durationRealTime)
     {
         if (timeScale < Time.timeScale)
+        {
+            StopAllCoroutines();
+
             StartCoroutine(IResetTimeScale(timeScale, durationRealTime));
+        }
     }
 
     IEnumerator IResetTimeScale(float timeScale, float delay)
     {
         Time.timeScale = timeScale;
+        Debug.Log("Timescale set to " + Time.timeScale);
         yield return new WaitForSecondsRealtime(delay);
         Time.timeScale = defaultTimeScale;
+        Debug.Log("Timescale reset to " + Time.timeScale + " after " + delay);
     }
 }

@@ -38,7 +38,6 @@ public class RumbleManager : MonoBehaviour
     IEnumerator IResetRumble(float delay)
     {
         yield return new WaitForSecondsRealtime(delay);
-        Time.timeScale = defaultTimeScale;
         gamePad.SetMotorSpeeds(0, 0);
     }
 }

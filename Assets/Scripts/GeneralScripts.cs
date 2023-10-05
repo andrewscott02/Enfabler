@@ -285,6 +285,10 @@ public struct HitReactData
     public float killSlomoScale;
     public float killSlomoDuration;
 
+    public float parryImpulseStrength;
+    public float parrySlomoScale;
+    public float parrySlomoDuration;
+
     public float impulseMax;
 }
 

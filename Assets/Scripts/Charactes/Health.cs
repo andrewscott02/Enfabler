@@ -45,6 +45,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             if (combat.parrying && attacker.HitParried())
             {
                 if (parryFX != null) { Instantiate(parryFX, spawnPos, Quaternion.Euler(spawnRot)); }
+                ParryReaction();
                 return;
             }
             else if (combat.blocking && attacker.HitBlocked())
@@ -100,6 +101,12 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         SpawnImpulse(impulseStrength);
         
         Slomo(hitReactData.hitSlomoScale, hitReactData.hitSlomoDuration);
+    }
+
+    void ParryReaction()
+    {
+        SpawnImpulse(hitReactData.parryImpulseStrength);
+        Slomo(hitReactData.parrySlomoScale, hitReactData.parrySlomoDuration);
     }
 
     public void Heal(int heal)
