@@ -118,6 +118,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     int damage;
 
+    #region Start and End Attacks
+
     public void StartAttack(int currentDamage)
     {
         if (weapon != null)
@@ -155,35 +157,18 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void EndAttack()
     {
-        HitEnemy(hitTargets.Count > 0);
+        if (modelConstructor != null)
+        {
+            modelConstructor.PlayerAttack(hitTargets.Count > 0);
+        }
+
         Untarget();
         ForceEndAttack();
     }
 
-    public virtual void HitEnemy(bool hit)
-    {
-        if (modelConstructor != null)
-        {
-            modelConstructor.PlayerAttack(hit);
-        }
-    }
+    #endregion
 
-    public bool HitDodged()
-    {
-        return true;
-    }
-
-    public bool HitBlocked()
-    {
-        return true;
-    }
-
-    public bool HitParried()
-    {
-        canAttack = false;
-        animator.SetTrigger("HitReactLight");
-        return true;
-    }
+    #region Hit Checks
 
     public float hitSphereRadius = 0.2f;
 
@@ -244,8 +229,34 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         Freeze();
         RumbleManager.instance.ControllerRumble(0.2f, 0.85f, 0.25f);
         weapon.bloodTrail.SetActive(true);
+        GainArmour(1);
         //TODO: Sound effects
     }
+
+    #endregion
+
+    #region Hit Responses
+
+    public bool HitDodged()
+    {
+        return true;
+    }
+
+    public bool HitBlocked()
+    {
+        return true;
+    }
+
+    public bool HitParried()
+    {
+        canAttack = false;
+        animator.SetTrigger("HitReactLight");
+        return true;
+    }
+
+    #endregion
+
+    #region Hit Feedback
 
     public float hitFreezeTime = 0.15f;
 
@@ -264,6 +275,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         Debug.Log("Unfreeze");
         animator.speed = 1;
     }
+
+    #endregion
 
     #endregion
 
@@ -418,6 +431,11 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public void EndParryWindow()
     {
         parrying = false;
+    }
+
+    public void ParrySuccess()
+    {
+        GainArmour(1);
     }
 
     #endregion
