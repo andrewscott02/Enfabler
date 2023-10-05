@@ -165,7 +165,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void StartAttack(int currentDamage)
     {
-        weapon.trail.SetActive(true);
+        if (weapon != null)
+        {
+            if (weapon.weaponTrail != null)
+                weapon.weaponTrail.SetActive(true);
+
+        }
 
         //Clear damage and list of enemies hit
         hitTargets.Clear();
@@ -177,7 +182,15 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public void ForceEndAttack()
     {
         //Clear damage and list of enemies hit
-        weapon.trail.SetActive(false);
+        if (weapon != null)
+        {
+            if (weapon.weaponTrail != null)
+                weapon.weaponTrail.SetActive(false);
+
+            if (weapon.bloodTrail != null)
+                weapon.bloodTrail.SetActive(false);
+
+        }
 
         hitTargets.Clear();
         damage = 0;
@@ -221,7 +234,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     void AttackCheck()
     {
-        //Debug.Log("AttackCheck " + damage);
+        if (weapon == null)
+            return;
 
         //Raycast between sword base and tip
         RaycastHit hit;
@@ -274,7 +288,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         Freeze();
         RumbleManager.instance.ControllerRumble(0.2f, 0.85f, 0.25f);
-
+        weapon.bloodTrail.SetActive(true);
         //TODO: Sound effects
     }
 
@@ -412,6 +426,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void GotHit()
     {
+        Debug.Log("Got hit, end attack");
+        ForceEndAttack();
         canAttack = false;
         if (rumbleOnHit)
             RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);

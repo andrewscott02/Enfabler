@@ -12,7 +12,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     public HealthSlider healthSlider;
     CharacterCombat combat;
-    public Object bloodFX, parryFX;
+    public Object bloodFX, deathFX, parryFX;
     public int maxHealth = 50;
     int currentHealth = 0; public int GetCurrentHealth() { return currentHealth; }
 
@@ -56,11 +56,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             }
         }
 
-        if (bloodFX != null)
-        {
-            Instantiate(bloodFX, spawnPos, Quaternion.Euler(spawnRot));
-        }
-
         currentHealth -= damage;
 
         if (healthSlider != null)
@@ -78,10 +73,18 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         {
             Vector3 forceOrigin = attacker != null ? attackerMono.gameObject.transform.position : spawnPos;
             Kill(forceOrigin, damage);
+            if (deathFX != null)
+            {
+                Instantiate(deathFX, spawnPos, Quaternion.Euler(spawnRot));
+            }
         }
         else
         {
             HitReaction(damage);
+            if (bloodFX != null)
+            {
+                Instantiate(bloodFX, spawnPos, Quaternion.Euler(spawnRot));
+            }
         }
     }
 

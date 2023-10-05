@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public GameObject trail;
+    public GameObject weaponTrail, bloodTrail;
     public GameObject weaponBase, weaponTip;
     public GameObject weaponBaseHit, weaponTipHit;
 
@@ -20,7 +20,8 @@ public class Weapon : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
 
-        trail.SetActive(false);
+        weaponTrail.SetActive(false);
+        bloodTrail.SetActive(false);
     }
 
     public void Disarm()
