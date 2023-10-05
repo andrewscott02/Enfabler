@@ -10,11 +10,12 @@ public class ProjectileMovement : MonoBehaviour
     Rigidbody rb;
     ProjectileHit hit;
 
-    public void Fire(Vector3 target, Trap trap)
+    public void Fire(Vector3 target, Trap trap, GameObject caster)
     {
         rb = GetComponent<Rigidbody>();
         hit = GetComponentInChildren<ProjectileHit>();
         hit.trap = trap;
+        hit.caster = caster;
         hit.move = this;
 
         rb.mass = this.mass;

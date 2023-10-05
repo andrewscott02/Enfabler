@@ -21,6 +21,11 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
     }
 
+    public MonoBehaviour GetScript()
+    {
+        return this;
+    }
+
     public void SetupAllies(List<BaseCharacterController> allies)
     {
         foreach (var item in allies)
@@ -263,7 +268,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             }
 
             //Return if it has already been hit or if it should be ignored
-            if (hitTargets.Contains(hitDamageable) || ignore.Contains(hitDamageable))
+            if (hitTargets.Contains(hitDamageable) || ignore.Contains(hitDamageable) || hitDamageable.IsDead())
             {
                 Debug.LogWarning("Ignore");
                 return;
@@ -279,9 +284,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         }
     }
 
-    public void DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot)
+    public E_DamageEvents DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot)
     {
-        target.Damage(this, damage, spawnPos, spawnRot);
+        return target.Damage(this, damage, spawnPos, spawnRot);
     }
 
     void OnAttackHit()

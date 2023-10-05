@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProjectileHit : MonoBehaviour
 {
+    public GameObject caster;
     public Trap trap;
     public ProjectileMovement move;
 
@@ -17,6 +18,7 @@ public class ProjectileHit : MonoBehaviour
             Debug.Log("Projectile hit " + other.gameObject.name);
             IDamageable hitDamageable = other.GetComponent<IDamageable>();
 
+            //Gets hit damageable from parent if it cannot get it from the game object
             if (hitDamageable == null)
             {
                 hitDamageable = other.GetComponentInParent<IDamageable>();
@@ -31,9 +33,17 @@ public class ProjectileHit : MonoBehaviour
                 Destroy(move.gameObject);
             }
 
-            if (hitDamageable == trap.GetComponent<IDamageable>())
+            //Return if hitting caster
+            MonoBehaviour targetMono = hitDamageable.GetScript();
+            if (caster == null) { Debug.LogWarning("no caster"); }
+            if (targetMono == null) { Debug.LogWarning("no target mono"); }
+
+            if (caster != null && targetMono != null)
             {
-                return;
+                if (caster == targetMono.gameObject)
+                {
+                    return;
+                }
             }
 
             #endregion
@@ -51,11 +61,13 @@ public class ProjectileHit : MonoBehaviour
         alreadyHit = true;
 
         Debug.Log("hitting target for " + trap.trapStats.damage);
+        E_DamageEvents hitData = E_DamageEvents.Hit;
+        MonoBehaviour targetMono = target.GetScript();
+
         if (trap.trapStats.shotAOE == 0)
         {
             //only hit target
-            MonoBehaviour targetMono = target as MonoBehaviour;
-            trap.ApplyEffect(target, targetMono.gameObject.transform.position);
+            hitData = trap.ApplyEffect(target, targetMono.gameObject.transform.position);
         }
         else
         {
@@ -63,6 +75,24 @@ public class ProjectileHit : MonoBehaviour
             //Spawn impulse
         }
 
-        Destroy(move.gameObject);
+        bool parrySuccess = false;
+        if (hitData == E_DamageEvents.Parry)
+        {
+            //TODO: Reflect projectile
+            if (targetMono.gameObject != null)
+            {
+                move.Fire(trap.gameObject.transform.position, trap, targetMono.gameObject);
+                caster = targetMono.gameObject;
+                parrySuccess = true;
+                alreadyHit = false;
+            }
+            else
+            {
+                Debug.LogWarning("NoCaster");
+            }
+        }
+
+        if (!parrySuccess)
+            Destroy(move.gameObject);
     }
 }

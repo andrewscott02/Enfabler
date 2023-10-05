@@ -102,7 +102,7 @@ public class TrapApplyEffect : MonoBehaviour
                 //Affect only 1 player
                 foreach (var item in affectTargets)
                 {
-                    MonoBehaviour targetMono = item as MonoBehaviour;
+                    MonoBehaviour targetMono = item.GetScript();
                     PlayerController player = targetMono.GetComponent<PlayerController>();
                     if (player != null)
                     {
@@ -122,7 +122,7 @@ public class TrapApplyEffect : MonoBehaviour
                 {
                     if (!hitTargets.Contains(item))
                     {
-                        MonoBehaviour targetMono = item as MonoBehaviour;
+                        MonoBehaviour targetMono = item.GetScript();
                         trap.ApplyEffect(item, targetMono.gameObject.transform.position);
 
                         hitTargets.Add(item);
@@ -138,6 +138,6 @@ public class TrapApplyEffect : MonoBehaviour
     {
         GameObject projectileObj = Instantiate(trap.trapStats.projectile, transform.position, transform.rotation) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
-        projectileMove.Fire(targetPos, trap);
+        projectileMove.Fire(targetPos, trap, trap.gameObject);
     }
 }

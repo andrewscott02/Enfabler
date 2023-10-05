@@ -40,4 +40,10 @@ public class RumbleManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(delay);
         gamePad.SetMotorSpeeds(0, 0);
     }
+
+    private void OnDisable()
+    {
+        if (gamePad != null)
+            gamePad.SetMotorSpeeds(0, 0);
+    }
 }

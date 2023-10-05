@@ -242,7 +242,8 @@ public static class HelperFunctions
 
 public interface ICanDealDamage
 {
-    void DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot);
+    MonoBehaviour GetScript();
+    E_DamageEvents DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot);
     bool HitDodged();
     bool HitBlocked();
     bool HitParried();
@@ -250,17 +251,25 @@ public interface ICanDealDamage
 
 public interface IDamageable
 {
-    void Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot);
+    MonoBehaviour GetScript();
+    E_DamageEvents Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot);
     bool CheckKill();
     void Kill(Vector3 attacker, int damage);
+    bool IsDead();
 }
 
 public interface IHealable
 {
+    MonoBehaviour GetScript();
     void Heal(int heal);
 }
 
 #endregion
+
+public enum E_DamageEvents
+{
+    Hit, Block, Parry, Dodge
+}
 
 [System.Serializable]
 public struct FootStepData

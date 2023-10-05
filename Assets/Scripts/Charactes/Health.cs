@@ -34,25 +34,30 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
-    public void Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot)
+    public MonoBehaviour GetScript()
     {
-        MonoBehaviour attackerMono = attacker as MonoBehaviour;
+        return this;
+    }
+
+    public E_DamageEvents Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot)
+    {
+        MonoBehaviour attackerMono = attacker.GetScript();
 
         if (combat != null)
         {
-            if (combat.GetDodging() && attacker.HitDodged()) return;
+            if (combat.GetDodging() && attacker.HitDodged()) return E_DamageEvents.Dodge;
 
             if (combat.parrying && attacker.HitParried())
             {
                 if (parryFX != null) { Instantiate(parryFX, spawnPos, Quaternion.Euler(spawnRot)); }
                 ParryReaction();
-                return;
+                return E_DamageEvents.Parry;
             }
             else if (combat.blocking && attacker.HitBlocked())
             {
                 if (parryFX != null) { Instantiate(parryFX, spawnPos, Quaternion.Euler(spawnRot)); }
                 HitReaction(damage);
-                return;
+                return E_DamageEvents.Block;
             }
         }
 
@@ -86,6 +91,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
                 Instantiate(bloodFX, spawnPos, Quaternion.Euler(spawnRot));
             }
         }
+
+        return E_DamageEvents.Hit;
     }
 
     void HitReaction(int damage)
@@ -152,6 +159,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             }
         }
     }
+
+    public bool IsDead() { return dying; }
 
     public CinemachineImpulseSource impulseSource;
 

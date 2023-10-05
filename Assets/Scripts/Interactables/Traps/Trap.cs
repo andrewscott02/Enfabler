@@ -15,6 +15,11 @@ public class Trap : MonoBehaviour, ICanDealDamage
         applyCollider.radius = trapStats.range;
     }
 
+    public MonoBehaviour GetScript()
+    {
+        return this;
+    }
+
     public void ActivateTrap()
     {
         switch (trapStats.durationType)
@@ -55,9 +60,9 @@ public class Trap : MonoBehaviour, ICanDealDamage
         applyEffect.Activate();
     }
 
-    public void ApplyEffect(IDamageable damageable, Vector3 hitPos)
+    public E_DamageEvents ApplyEffect(IDamageable damageable, Vector3 hitPos)
     {
-        DealDamage(damageable, trapStats.damage, hitPos, new Vector3(0, 0, 0));
+        return DealDamage(damageable, trapStats.damage, hitPos, new Vector3(0, 0, 0));
     }
 
     private void OnDrawGizmosSelected()
@@ -66,9 +71,9 @@ public class Trap : MonoBehaviour, ICanDealDamage
             Gizmos.DrawWireSphere(transform.position, trapStats.range);
     }
 
-    public void DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot)
+    public E_DamageEvents DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot)
     {
-        target.Damage(this, damage, spawnPos, spawnRot);
+        return target.Damage(this, damage, spawnPos, spawnRot);
     }
 
     public bool HitDodged()

@@ -111,18 +111,22 @@ public class PlayerController : BaseCharacterController
         combat.Dodge();
     }
 
+    Coroutine sprintCoroutine;
+
     public void SprintInput(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             playerMovement.Sprint(true);
             combat.sprinting = true;
-            StartCoroutine(IDelayUseMoveCam(1.5f));
+            sprintCoroutine = StartCoroutine(IDelayUseMoveCam(1.5f));
         }
 
         if (context.canceled)
         {
             playerMovement.Sprint(false);
+            if (sprintCoroutine != null)
+                StopCoroutine(sprintCoroutine);
             StartCoroutine(IDelayStopSprint(0.5f));
             useMoveRotation = false;
         }
