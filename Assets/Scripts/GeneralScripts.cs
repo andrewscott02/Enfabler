@@ -135,6 +135,12 @@ public static class HelperFunctions
             }
         }
 
+        /*
+        if (closestCharacter != null)
+            Debug.Log("Returning " + closestCharacter.gameObject.name + " as closest enemy within " + sightRadius);
+        else
+            Debug.Log("Closest enemmy is null within " + sightRadius);
+        */
         return closestCharacter;
     }
 

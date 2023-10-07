@@ -73,8 +73,8 @@ public class AIController : BaseCharacterController
 
         //Sets the movement animations for the animator
         //Debug.Log("X:" + rb.velocity.x + "Y:" + rb.velocity.z);
-        animator.SetFloat("xMovement", Mathf.Lerp(animator.GetFloat("xMovement"), realMovement.x, lerpSpeed));
-        animator.SetFloat("yMovement", Mathf.Lerp(animator.GetFloat("yMovement"), realMovement.y, lerpSpeed));
+        //animator.SetFloat("xMovement", Mathf.Lerp(animator.GetFloat("xMovement"), realMovement.x, lerpSpeed));
+        //animator.SetFloat("yMovement", Mathf.Lerp(animator.GetFloat("yMovement"), realMovement.y, lerpSpeed));
 
         #endregion
 

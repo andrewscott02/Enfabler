@@ -24,6 +24,7 @@ public class CannotAttack : Node
             return NodeState.Failure;
         }
 
+        Debug.Log("Cannot attack");
         return NodeState.Success;
     }
 }

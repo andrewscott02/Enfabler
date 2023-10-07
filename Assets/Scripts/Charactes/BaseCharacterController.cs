@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BaseCharacterController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class BaseCharacterController : MonoBehaviour
     public bool playerTeam = true;
 
     protected SetWeapon setWeapon;
+
+    protected NavMeshObstacle navObstacle;
 
     public virtual void Start()
     {
@@ -34,6 +37,9 @@ public class BaseCharacterController : MonoBehaviour
 
     void SetupRagdoll()
     {
+        navObstacle = GetComponentInChildren<NavMeshObstacle>(true);
+        navObstacle.enabled = false;
+
         mainCollider = GetComponent<Collider>();
         Collider[] colliders = GetComponentsInChildren<Collider>();
 
@@ -55,6 +61,8 @@ public class BaseCharacterController : MonoBehaviour
 
     public void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
     {
+        navObstacle.enabled = activate;
+
         foreach (var item in ragdollColliders)
         {
             if (item != mainCollider)

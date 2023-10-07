@@ -30,7 +30,7 @@ public class FindPointOuterRadius : Node
         Vector3 point = agent.currentTarget.transform.position + (direction * radius);
 
         agent.SetDestinationPos(point);
-        Debug.Log("Generated point at: " + point);
+        //Debug.Log("Generated point at: " + point);
 
         agent.roaming = true;
         state = NodeState.Success;

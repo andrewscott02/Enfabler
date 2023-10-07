@@ -37,7 +37,7 @@ public class PlayerController : BaseCharacterController
         playerMovement.animator = animator;
         playerMovement.SetModel(model);
 
-        //AIManager.instance.AllocateTeam(this);
+        AIManager.instance.AllocateTeam(this);
     }
 
     #endregion

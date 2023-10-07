@@ -42,6 +42,21 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.11182109
       objectReference: {fileID: 0}
+    - target: {fileID: 1792020871879511024, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1792020871879511024, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: m_Extents.x
+      value: 0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 1792020871879511024, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: m_Extents.z
+      value: 0.47
+      objectReference: {fileID: 0}
     - target: {fileID: 3950393655183506457, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -130,17 +145,17 @@ PrefabInstance:
     - target: {fileID: 7460243065040470228, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.079921246
+      value: 5.1
       objectReference: {fileID: 0}
     - target: {fileID: 7460243065040470228, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000023841858
+      value: -0.00000047683716
       objectReference: {fileID: 0}
     - target: {fileID: 7460243065040470228, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.381138
+      value: 5.1790314
       objectReference: {fileID: 0}
     - target: {fileID: 7460243065040470228, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
@@ -241,7 +256,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1707875591997944700}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2611801624051426553
+--- !u!114 &1111112100073115154
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,36 +265,63 @@ MonoBehaviour:
   m_GameObject: {fileID: 8087211796610937767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modelConstructor: {fileID: 0}
-  sprinting: 0
-  canMove: 1
-  canAttack: 1
-  canDodge: 1
-  hitSphereRadius: 0.2
-  hitFreezeTime: 0.15
-  currentTargets: []
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  currentTargetCastInterval: 0.6
-  currentTargetCastRadius: 1.5
-  currentTargetCastDistance: 10
-  rumbleOnHit: 0
---- !u!114 &857978768359219890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8087211796610937767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a83764e596df0334cbe943c9704e721b, type: 3}
+  m_Script: {fileID: 11500000, guid: b13b0a2e1b4bff14488ac9635b8309af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   invisible: 0
   model: {fileID: 7699051525656051087}
-  playerTeam: 1
+  playerTeam: 0
+  bt: {fileID: 3204209253451787689}
+  distanceAllowance: 0.5
+  lerpSpeed: 0.01
+  sightDistance: 80
+  chaseDistance: 40
+  roamDistance: 25
+  maxDistanceFromModelCharacter: 6
+  meleeDistance: 2
+  followVector: {x: 0, y: 0, z: 0}
+  followDistance: 7.5
+  walkSpeed: 2
+  sprintSpeed: 5
+  roaming: 0
+  currentTarget: {fileID: 0}
+  doubleAttackChance: 0.4
+  attackCooldown: {x: 2.5, y: 4}
+  parryChance: 0.5
+  parryCooldown: 1.2
+  dodgeChance: 0.4
+  dodgeCooldown: 2
+--- !u!114 &3204209253451787689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087211796610937767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8da8a4ff64d548042b61679ed2f34d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!195 &3994084762757362941
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087211796610937767}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.48
+  m_Speed: 7.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
