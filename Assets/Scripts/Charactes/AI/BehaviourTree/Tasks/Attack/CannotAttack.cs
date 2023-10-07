@@ -20,11 +20,10 @@ public class CannotAttack : Node
     {
         if (agent.CanAttack())
         {
-            Debug.Log("Can attack");
+            //Debug.Log("Can attack");
             return NodeState.Failure;
         }
 
-        Debug.Log("Cannot attack");
         return NodeState.Success;
     }
 }

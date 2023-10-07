@@ -14,7 +14,6 @@ public class AIController : BaseCharacterController
     protected NavMeshAgent agent; public NavMeshAgent GetNavMeshAgent() { return agent; }
     public BehaviourTree bt;
 
-
     public override void Start()
     {
         base.Start();
@@ -220,6 +219,18 @@ public class AIController : BaseCharacterController
         return false;
     }
 
+    public void ActivateBlock(float duration)
+    {
+        combat.Block(true, false);
+        StartCoroutine(IDelayDeactivateBlock(duration));
+    }
+
+    IEnumerator IDelayDeactivateBlock(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        combat.Block(false, false);
+    }
+
     public float dodgeChance = 0f;
     public float dodgeCooldown = 1f;
     float lastDodge;
@@ -236,6 +247,14 @@ public class AIController : BaseCharacterController
     }
 
     #endregion
+
+    public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
+    {
+        agent.SetDestination(gameObject.transform.position);
+        agent.enabled = false;
+        bt.enabled = false;
+        base.ActivateRagdoll(activate, forceData);
+    }
 
     #endregion
 }

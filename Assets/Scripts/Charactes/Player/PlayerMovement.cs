@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Sprint(bool sprinting)
     {
-        Debug.Log("Sprinting: " + sprinting);
+        //Debug.Log("Sprinting: " + sprinting);
         this.sprinting = sprinting;
     }
 

@@ -44,7 +44,7 @@ public class MoveToDestination : Node
             if (elapsedTime >= maxTime)
             {
                 state = NodeState.Failure;
-                Debug.Log("Failed to arrive at destination: " + agent.GetDestination());
+                //Debug.Log("Failed to arrive at destination: " + agent.GetDestination());
                 elapsedTime = 0;
                 agent.roaming = false;
                 return state;

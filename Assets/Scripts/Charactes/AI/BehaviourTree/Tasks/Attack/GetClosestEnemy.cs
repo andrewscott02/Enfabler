@@ -33,8 +33,6 @@ public class GetClosestEnemy : Node
         }
         else
         {
-            Debug.Log("Failed to get enemy within " + sightRadius);
-
             state = NodeState.Failure;
         }
 

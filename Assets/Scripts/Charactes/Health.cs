@@ -144,23 +144,22 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         Slomo(hitReactData.killSlomoScale, hitReactData.killSlomoDuration);
         if (AIManager.instance != null)
             AIManager.instance.CharacterDied(this.GetComponent<BaseCharacterController>());
+
+        if (controller != null)
+        {
+            //Debug.Log(gameObject + "has controller");
+            ExplosiveForceData forcedata = new ExplosiveForceData()
+            {
+                explosiveForce = damage,
+                origin = attacker
+            };
+
+            controller.ActivateRagdoll(true, forcedata);
+        }
         else
         {
-            if (controller != null)
-            {
-                //Debug.Log(gameObject + "has controller");
-                ExplosiveForceData forcedata = new ExplosiveForceData()
-                {
-                    explosiveForce = damage,
-                    origin = attacker
-                };
-                controller.ActivateRagdoll(true, forcedata);
-            }
-            else
-            {
-                //Debug.Log(gameObject + "has no controller");
-                Destroy(this.gameObject);
-            }
+            //Debug.Log(gameObject + "has no controller");
+            Destroy(this.gameObject);
         }
     }
 

@@ -367,7 +367,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     Coroutine armourRegenCoroutine;
 
-    public virtual void Block(bool blocking)
+    public virtual void Block(bool blocking, bool parryAvailable = true)
     {
         if (this.blocking == blocking)
             return;
@@ -375,7 +375,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         //Debug.Log("Block changed");
         EndDodge();
         ForceEndAttack();
-        this.parrying = blocking;
+        this.parrying = blocking && parryAvailable;
         this.blocking = blocking;
 
         if (modelConstructor != null)

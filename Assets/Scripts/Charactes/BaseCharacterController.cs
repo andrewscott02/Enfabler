@@ -59,9 +59,14 @@ public class BaseCharacterController : MonoBehaviour
         }
     }
 
-    public void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
+    public virtual void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
     {
-        navObstacle.enabled = activate;
+        if (navObstacle != null)
+            navObstacle.enabled = activate;
+        else
+        {
+            Debug.LogWarning("no nav obstacle");
+        }
 
         foreach (var item in ragdollColliders)
         {

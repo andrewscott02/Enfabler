@@ -49,7 +49,7 @@ public class AIManager : MonoBehaviour
             enemyTeam.Remove(character);
         }
 
-        Destroy(character.gameObject);
+        //Destroy(character.gameObject);
 
         if (playerTeam.Count == 0 || enemyTeam.Count == 0)
         {
@@ -86,10 +86,10 @@ public class AIManager : MonoBehaviour
         return GetAllyTeam(a).Contains(b);
     }
 
-    public GameObject nextLevel;
+    public GameObject nextLevelUI;
 
     public void NextLevel()
     {
-        nextLevel.SetActive(true);
+        //nextLevelUI.SetActive(true);
     }
 }
