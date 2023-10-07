@@ -2562,7 +2562,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 634613423001025932, guid: 8383457b08cdeee42a59a4975fae37de, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8383457b08cdeee42a59a4975fae37de, type: 3}
 --- !u!4 &63618964530586997 stripped
 Transform:
@@ -2912,13 +2913,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdefcdf092fbc03499fdbdd56ae78436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  skeleton: {fileID: 69781569185968667}
-  controller: {fileID: 0}
-  moveSpeed: 4
-  sprintSpeed: 8
-  lerpSpeed: 5
-  moveFOVMultiplier: 2
   stepData:
     footstepObject: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
       type: 3}
@@ -2928,6 +2922,13 @@ MonoBehaviour:
     impulseSource: {fileID: 2012285248160033769}
     impulseWalkMultiplier: 0.006
     impulseSprintMultiplier: 0.01
+  animator: {fileID: 0}
+  skeleton: {fileID: 69781569185968667}
+  controller: {fileID: 0}
+  moveSpeed: 4
+  sprintSpeed: 8
+  lerpSpeed: 5
+  moveFOVMultiplier: 2
 --- !u!114 &1697564174
 MonoBehaviour:
   m_ObjectHideFlags: 0

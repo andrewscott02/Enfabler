@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : CharacterMovement
 {
     [HideInInspector]
     public Animator animator;
@@ -15,10 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     Transform model; public void SetModel(Transform newModel) { model = newModel; }
 
-    public bool sprinting { get; private set; } = false;
     public float moveSpeed = 4;
     public float sprintSpeed = 8;
-    float currentSpeed = 0;
     public float lerpSpeed = 0.01f;
 
     Vector3 movement = Vector3.zero;
@@ -72,25 +70,5 @@ public class PlayerMovement : MonoBehaviour
     {
         vCamFollow.CameraSide = Mathf.Lerp(vCamFollow.CameraSide, camSide, Time.deltaTime);
         vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView, desiredFOV, Time.deltaTime);
-    }
-
-    public FootStepData stepData;
-
-    public void SpawnFootstep(int footTransformIndex)
-    {
-        Instantiate(stepData.footstepObject, stepData.footstepTransforms[footTransformIndex].position, new Quaternion(0, 0, 0, 0));
-
-        SpawnImpulse((sprinting ? stepData.impulseSprintMultiplier : stepData.impulseWalkMultiplier) * currentSpeed);
-    }
-
-    void SpawnImpulse(float impulseStrength)
-    {
-        stepData.impulseSource.GenerateImpulseWithForce(impulseStrength);
-    }
-
-    public void DodgeRollLand(float impulseStrength)
-    {
-        SpawnImpulse(impulseStrength);
-        RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
     }
 }

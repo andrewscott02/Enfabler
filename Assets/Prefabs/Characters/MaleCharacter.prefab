@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 732605661954093454}
   - component: {fileID: 7378451652202160449}
   - component: {fileID: 1814884579404440104}
+  - component: {fileID: 634613423001025932}
   m_Layer: 6
   m_Name: MaleCharacter
   m_TagString: Untagged
@@ -243,6 +244,27 @@ MonoBehaviour:
   armourRegen: 3
   canDodge: 1
   rumbleOnHit: 0
+--- !u!114 &634613423001025932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460243065040470235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2e16adf80d306449de70b53c9a55f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepData:
+    footstepObject: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+      type: 3}
+    footstepTransforms:
+    - {fileID: 0}
+    - {fileID: 0}
+    impulseSource: {fileID: 7378451652202160449}
+    impulseWalkMultiplier: 0.006
+    impulseSprintMultiplier: 0.01
 --- !u!1 &7696260934844542031
 GameObject:
   m_ObjectHideFlags: 0
