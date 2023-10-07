@@ -51,6 +51,8 @@ public class AIController : BaseCharacterController
 
     public virtual void Update()
     {
+        if (health.dying) { return; }
+
         if (currentTarget != null)
         {
             Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
@@ -250,7 +252,7 @@ public class AIController : BaseCharacterController
 
     public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
     {
-        agent.SetDestination(gameObject.transform.position);
+        SetDestinationPos(gameObject.transform.position);
         agent.enabled = false;
         bt.enabled = false;
         base.ActivateRagdoll(activate, forceData);

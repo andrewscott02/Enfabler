@@ -2744,7 +2744,6 @@ GameObject:
   - component: {fileID: 9037336178641112819}
   - component: {fileID: 9001794190433544087}
   - component: {fileID: 7288625259200014074}
-  - component: {fileID: 1792020871879511024}
   m_Layer: 6
   m_Name: Skeleton
   m_TagString: Untagged
@@ -2827,22 +2826,6 @@ MonoBehaviour:
   weapons:
   - {fileID: 8460293430998555839, guid: bcbebcfacfa18154e8c51323ede0c050, type: 3}
   currentWeapon: -1
---- !u!208 &1792020871879511024
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9043084692085274803}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.53, y: 1, z: 0.53}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.83, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &9043100576090782743
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,8 +15,6 @@ public class BaseCharacterController : MonoBehaviour
 
     protected SetWeapon setWeapon;
 
-    protected NavMeshObstacle navObstacle;
-
     public virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -37,9 +35,6 @@ public class BaseCharacterController : MonoBehaviour
 
     void SetupRagdoll()
     {
-        navObstacle = GetComponentInChildren<NavMeshObstacle>(true);
-        navObstacle.enabled = false;
-
         mainCollider = GetComponent<Collider>();
         Collider[] colliders = GetComponentsInChildren<Collider>();
 
@@ -61,13 +56,6 @@ public class BaseCharacterController : MonoBehaviour
 
     public virtual void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
     {
-        if (navObstacle != null)
-            navObstacle.enabled = activate;
-        else
-        {
-            Debug.LogWarning("no nav obstacle");
-        }
-
         foreach (var item in ragdollColliders)
         {
             if (item != mainCollider)
