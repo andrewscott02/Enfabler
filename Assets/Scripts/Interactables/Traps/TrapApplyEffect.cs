@@ -19,20 +19,21 @@ public class TrapApplyEffect : MonoBehaviour
         affectTargets = new List<IDamageable>();
         hitTargets = new List<IDamageable>();
         effectCollider.enabled = true;
-        StartCoroutine(IDelayDeactivate(0.1f));
+        StartCoroutine(ITriggerInstantEffect(0.1f));
     }
 
     public void Deactivate()
     {
-        DetermineEffect();
+        StopAllCoroutines();
         affectTargets = new List<IDamageable>();
         hitTargets = new List<IDamageable>();
         effectCollider.enabled = false;
     }
 
-    IEnumerator IDelayDeactivate(float delay)
+    IEnumerator ITriggerInstantEffect(float delay)
     {
         yield return new WaitForSeconds(delay);
+        DetermineEffect();
         Deactivate();
     }
 
@@ -139,5 +140,15 @@ public class TrapApplyEffect : MonoBehaviour
         GameObject projectileObj = Instantiate(trap.trapStats.projectile, transform.position, transform.rotation) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
         projectileMove.Fire(targetPos, trap, trap.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        Deactivate();
+    }
+
+    private void OnDisable()
+    {
+        Deactivate();
     }
 }

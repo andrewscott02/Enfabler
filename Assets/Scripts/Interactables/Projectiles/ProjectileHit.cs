@@ -31,6 +31,7 @@ public class ProjectileHit : MonoBehaviour
             {
                 Debug.LogWarning("No interface");
                 Destroy(move.gameObject);
+                return;
             }
 
             //Return if hitting caster

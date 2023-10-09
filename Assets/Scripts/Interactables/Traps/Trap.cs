@@ -90,4 +90,13 @@ public class Trap : MonoBehaviour, ICanDealDamage
     {
         return trapStats.canParry;
     }
+    private void OnDestroy()
+    {
+        DeactivateTrap();
+    }
+
+    private void OnDisable()
+    {
+        DeactivateTrap();
+    }
 }
