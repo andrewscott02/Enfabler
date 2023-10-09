@@ -70,6 +70,7 @@ public class PlayerController : BaseCharacterController
                 transform.rotation = newRot;
             }
 
+            combat.savingChargeInput = true;
             combat.LightAttack();
         }
         else if (context.canceled)

@@ -15,6 +15,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public bool canMove = true;
     public bool sprinting = false;
+    public bool canSaveAttackInput = false;
+    public bool savingAttackInput = false;
+    public bool savingChargeInput = false;
 
     public float chargeDamageScaling = 2f;
     float currentChargeTime = 0;
@@ -80,13 +83,15 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void LightAttack(float attackSpeed = 1f, bool canCharge = true)
     {
+        savingAttackInput = false;
+
         if (canAttack)
         {
             //Debug.Log("Attack " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard"));
             EndDodge();
             ForceEndAttack();
 
-            if (canCharge)
+            if (canCharge && savingChargeInput)
                 StartCharge();
 
             Target();
@@ -94,10 +99,15 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             blocking = false;
             canMove = false;
             canAttack = false;
+            canSaveAttackInput = true;
             canDodge = false;
             animator.speed = (attackSpeed);
             animator.SetTrigger(sprinting ? "SprintAttack" : "LightAttack");
             //RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
+        }
+        else if (canSaveAttackInput)
+        {
+            savingAttackInput = true;
         }
     }
 
@@ -111,6 +121,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public void ReleaseAttack()
     {
         chargingAttack = false;
+        savingChargeInput = false;
         animator.speed = baseAnimationSpeed;
 
         if (chargingAttack)
@@ -173,6 +184,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         if (AIController != null)
         {
             AIController.EndAttackOnTarget();
+        }
+
+        if (savingAttackInput)
+        {
+            LightAttack();
+            savingAttackInput = false;
         }
     }
 
@@ -250,6 +267,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         damage = 0;
 
         CancelInvoke("AttackCheck");
+        canSaveAttackInput = false;
     }
 
     public void EndAttack()
@@ -556,6 +574,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
             canMove = false;
             canAttack = false;
+            canSaveAttackInput = true;
             canDodge = false;
             if (animator != null) { animator.SetTrigger("Dodge"); }
         }
@@ -578,6 +597,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         canMove = true;
         canDodge = true;
         canAttack = true;
+        canSaveAttackInput = false;
     }
 
     public void ResetDodge()
