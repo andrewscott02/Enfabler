@@ -82,12 +82,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         if (canAttack)
         {
-            if (canCharge)
-                StartCharge();
-
             //Debug.Log("Attack " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard"));
             EndDodge();
             ForceEndAttack();
+
+            if (canCharge)
+                StartCharge();
 
             Target();
 
@@ -110,12 +110,14 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void ReleaseAttack()
     {
-        if (!chargingAttack) { return; }
-
         chargingAttack = false;
         animator.speed = baseAnimationSpeed;
 
-        additionalDamage = (int)(currentChargeTime * chargeDamageScaling);
+        if (chargingAttack)
+        {
+            additionalDamage = (int)(currentChargeTime * chargeDamageScaling);
+        }
+
         currentChargeTime = 0;
 
         if (chargeCoroutine != null)
@@ -226,8 +228,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void ForceEndAttack()
     {
-        animator.speed = (baseAnimationSpeed);
+        animator.speed = baseAnimationSpeed;
         unblockable = false;
+        chargingAttack = false;
+        additionalDamage = 0;
 
         //Clear damage and list of enemies hit
         if (weapon != null)
