@@ -13,7 +13,7 @@ public class DummyController : BaseCharacterController
     IEnumerator ISequenceAttacks(float interval)
     {
         yield return new WaitForSeconds(interval);
-        combat.LightAttack();
+        combat.LightAttack(canCharge: false);
         StartCoroutine(ISequenceAttacks(2f));
     }
 }

@@ -60,18 +60,23 @@ public class PlayerController : BaseCharacterController
 
     public void AttackInput(InputAction.CallbackContext context)
     {
-        if (!context.performed)
-            return;
-
-        if (moveInput != Vector2.zero && combat.canAttack)
+        if (context.performed)
         {
-            //Rotate towards direction
-            Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
-            Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
-            transform.rotation = newRot;
-        }
+            if (moveInput != Vector2.zero && combat.canAttack)
+            {
+                //Rotate towards direction
+                Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
+                Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
+                transform.rotation = newRot;
+            }
 
-        combat.LightAttack();
+            combat.LightAttack();
+        }
+        else if (context.canceled)
+        {
+            combat.ReleaseAttack();
+        }
+        
     }
 
     public void BlockInput(InputAction.CallbackContext context)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public GameObject weaponTrail, bloodTrail;
+    public GameObject weaponTrail, bloodTrail, unblockableTrail;
     public GameObject weaponBase, weaponTip;
     public GameObject weaponBaseHit, weaponTipHit;
 
@@ -22,6 +22,7 @@ public class Weapon : MonoBehaviour
 
         weaponTrail.SetActive(false);
         bloodTrail.SetActive(false);
+        unblockableTrail.SetActive(false);
     }
 
     public void Disarm()

@@ -16,6 +16,13 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public bool canMove = true;
     public bool sprinting = false;
 
+    public float chargeDamageScaling = 2f;
+    float currentChargeTime = 0;
+    int additionalDamage;
+    public float chargeUnblockableTime = 0.6f;
+    bool unblockable = false;
+    public float chargeMaxTime = 2;
+
     float baseAnimationSpeed;
 
     private void Start()
@@ -27,6 +34,19 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
         currentArmour = maxArmour;
         armourRegenCoroutine = StartCoroutine(IResetArmour(armourRegen));
+    }
+
+    private void Update()
+    {
+        if (chargingAttack)
+        {
+            currentChargeTime += Time.deltaTime;
+
+            if (currentChargeTime >= chargeUnblockableTime)
+            {
+                SetUnblockable();
+            }
+        }
     }
 
     public MonoBehaviour GetScript()
@@ -56,10 +76,15 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Attacking -> Attack Inputs
 
-    public void LightAttack(float attackSpeed = 1f)
+    bool chargingAttack = false;
+
+    public void LightAttack(float attackSpeed = 1f, bool canCharge = true)
     {
         if (canAttack)
         {
+            if (canCharge)
+                StartCharge();
+
             //Debug.Log("Attack " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard"));
             EndDodge();
             ForceEndAttack();
@@ -74,6 +99,63 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             animator.SetTrigger(sprinting ? "SprintAttack" : "LightAttack");
             //RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
         }
+    }
+
+    void StartCharge()
+    {
+        if (chargeCoroutine != null)
+            StopCoroutine(chargeCoroutine);
+        chargingAttack = true;
+    }
+
+    public void ReleaseAttack()
+    {
+        if (!chargingAttack) { return; }
+
+        chargingAttack = false;
+        animator.speed = baseAnimationSpeed;
+
+        additionalDamage = (int)(currentChargeTime * chargeDamageScaling);
+        currentChargeTime = 0;
+
+        if (chargeCoroutine != null)
+            StopCoroutine(chargeCoroutine);
+    }
+
+    public void CheckCharge()
+    {
+        if (chargingAttack)
+        {
+            if (animator == null) return;
+
+            if (chargeCoroutine != null)
+                StopCoroutine(chargeCoroutine);
+            currentChargeTime = 0;
+
+            chargeCoroutine = StartCoroutine(IReleaseAttack(2));
+        }
+    }
+
+    Coroutine chargeCoroutine;
+
+    IEnumerator IReleaseAttack(float delay)
+    {
+        //Debug.Log("Freeze");
+        animator.speed = 0;
+        yield return new WaitForSecondsRealtime(delay);
+        //Debug.Log("Unfreeze");
+        animator.speed = baseAnimationSpeed;
+
+        ReleaseAttack();
+    }
+
+    void SetUnblockable()
+    {
+        if (unblockable) { return; }
+
+        Debug.Log("StarUnblockable");
+        weapon.unblockableTrail.SetActive(true);
+        unblockable = true;
     }
 
     public void NextAttack(int attack)
@@ -136,7 +218,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         //Clear damage and list of enemies hit
         hitTargets.Clear();
-        damage = currentDamage;
+        damage = currentDamage + additionalDamage;
+        //Debug.Log(damage + " from " + currentDamage + " and " + additionalDamage);
 
         InvokeRepeating("AttackCheck", 0f, 0.004f);
     }
@@ -144,6 +227,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public void ForceEndAttack()
     {
         animator.speed = (baseAnimationSpeed);
+        unblockable = false;
 
         //Clear damage and list of enemies hit
         if (weapon != null)
@@ -154,6 +238,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             if (weapon.bloodTrail != null)
                 weapon.bloodTrail.SetActive(false);
 
+            if (weapon.unblockableTrail != null)
+                weapon.unblockableTrail.SetActive(false);
         }
 
         hitTargets.Clear();
@@ -251,7 +337,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public bool HitBlocked()
     {
-        return true;
+        return !unblockable;
     }
 
     public bool HitParried()
@@ -280,7 +366,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         animator.speed = 0;
         yield return new WaitForSecondsRealtime(delay);
         //Debug.Log("Unfreeze");
-        animator.speed = 1;
+        animator.speed = baseAnimationSpeed;
     }
 
     #endregion

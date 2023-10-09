@@ -179,7 +179,7 @@ public class AIController : BaseCharacterController
                 //lastAttacked.GetCharacterCombat().StartBeingAttacked();
 
                 //Debug.Log("Attack made");
-                combat.LightAttack(meleeAttackSpeed);
+                combat.LightAttack(meleeAttackSpeed, false);
                 timeSinceLastAttack = 0;
 
                 if (doubleAttack)
