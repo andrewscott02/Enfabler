@@ -97,6 +97,7 @@ public class AIController : BaseCharacterController
     public float roamDistance = 25;
     public float maxDistanceFromModelCharacter = 6;
     public float meleeDistance = 3;
+    public float meleeAttackSpeed = 0.75f;
 
     public Vector3 followVector;
     public float followDistance = 5;
@@ -178,7 +179,7 @@ public class AIController : BaseCharacterController
                 //lastAttacked.GetCharacterCombat().StartBeingAttacked();
 
                 //Debug.Log("Attack made");
-                combat.LightAttack();
+                combat.LightAttack(meleeAttackSpeed);
                 timeSinceLastAttack = 0;
 
                 if (doubleAttack)

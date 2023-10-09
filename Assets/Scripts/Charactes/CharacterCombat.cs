@@ -16,9 +16,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public bool canMove = true;
     public bool sprinting = false;
 
+    float baseAnimationSpeed;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
+        baseAnimationSpeed = animator.speed;
         health = GetComponent<Health>();
         ignore.Add(health);
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
@@ -53,7 +56,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Attacking -> Attack Inputs
 
-    public void LightAttack()
+    public void LightAttack(float attackSpeed = 1f)
     {
         if (canAttack)
         {
@@ -67,6 +70,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             canMove = false;
             canAttack = false;
             canDodge = false;
+            animator.speed = (attackSpeed);
             animator.SetTrigger(sprinting ? "SprintAttack" : "LightAttack");
             //RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
         }
@@ -95,6 +99,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             Debug.LogWarning("Animator of " + gameObject.name + " is null");
         animator.SetInteger("MeleeAttackCount", 0);
         animator.SetBool("InHitReaction", false);
+        animator.speed = (baseAnimationSpeed);
         canMove = true;
         canDodge = true;
         canAttack = true;
@@ -138,6 +143,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void ForceEndAttack()
     {
+        animator.speed = (baseAnimationSpeed);
+
         //Clear damage and list of enemies hit
         if (weapon != null)
         {
