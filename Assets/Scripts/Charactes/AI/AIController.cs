@@ -52,16 +52,14 @@ public class AIController : BaseCharacterController
     public virtual void Update()
     {
         if (health.dying) { return; }
-
-        if (currentTarget != null)
+        
+        if (combat.canSaveAttackInput)
         {
             Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
-
             Quaternion desiredrot = Quaternion.LookRotation(direction);
-
             transform.rotation = Quaternion.Slerp(transform.rotation, desiredrot, Time.deltaTime * agent.angularSpeed);
         }
-
+        
         #region Animation
 
         Vector3 movement = agent.velocity;
@@ -73,9 +71,8 @@ public class AIController : BaseCharacterController
         realMovement.y = Vector3.Dot(movement, model.forward);
 
         //Sets the movement animations for the animator
-        //Debug.Log("X:" + rb.velocity.x + "Y:" + rb.velocity.z);
-        //animator.SetFloat("xMovement", Mathf.Lerp(animator.GetFloat("xMovement"), realMovement.x, lerpSpeed));
-        //animator.SetFloat("yMovement", Mathf.Lerp(animator.GetFloat("yMovement"), realMovement.y, lerpSpeed));
+        float currentSpeed = realMovement.magnitude * agent.speed;
+        animator.SetFloat("RunBlend", currentSpeed);
 
         #endregion
 
@@ -111,7 +108,7 @@ public class AIController : BaseCharacterController
     public float walkSpeed = 6;
     public float sprintSpeed = 10;
 
-    protected Vector3 currentDestination; public Vector3 GetDestination() { return currentDestination; }
+    public Vector3 currentDestination { get; protected set; }
     public void SetDestinationPos(Vector3 pos)
     {
         currentDestination = pos;
@@ -120,8 +117,8 @@ public class AIController : BaseCharacterController
     public void MoveToDestination(bool sprinting)
     {
         agent.speed = sprinting ? sprintSpeed : walkSpeed;
-
         agent.SetDestination(currentDestination);
+        //Rotate(currentDestination);
     }
     public bool NearDestination(float distanceAllowance)
     {
@@ -179,7 +176,8 @@ public class AIController : BaseCharacterController
                 //lastAttacked.GetCharacterCombat().StartBeingAttacked();
 
                 //Debug.Log("Attack made");
-                combat.LightAttack(meleeAttackSpeed, false);
+                combat.LightAttack(meleeAttackSpeed, true);
+                StartCoroutine(IReleaseAttack(0f));
                 timeSinceLastAttack = 0;
 
                 if (doubleAttack)
@@ -196,6 +194,12 @@ public class AIController : BaseCharacterController
         }
 
         return false;
+    }
+
+    IEnumerator IReleaseAttack(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        combat.ReleaseAttack();
     }
 
     public void EndAttackOnTarget()

@@ -137,6 +137,11 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.000000076368444
       objectReference: {fileID: 0}
+    - target: {fileID: 6989636455364555971, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7288625259200014074, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: currentWeapon
@@ -290,6 +295,7 @@ MonoBehaviour:
   walkSpeed: 2
   sprintSpeed: 5
   roaming: 0
+  rotationSpeed: 20
   currentTarget: {fileID: 0}
   doubleAttackChance: 0.4
   attackCooldown: {x: 3, y: 6}

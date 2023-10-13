@@ -32,11 +32,10 @@ public class MoveToDestination : Node
     {
         if (agent.NearDestination(distanceAllowance))
         {
-            state = NodeState.Success;
             //Debug.Log("Arrived at destination: " + agent.GetDestination());
             elapsedTime = 0;
             agent.roaming = false;
-            return state;
+            return NodeState.Success;
         }
         else
         {

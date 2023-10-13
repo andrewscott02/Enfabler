@@ -27,10 +27,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public float chargeMaxTime = 2;
 
     float baseAnimationSpeed;
+    bool baseUseRootMotion;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        baseUseRootMotion = animator.applyRootMotion;
         baseAnimationSpeed = animator.speed;
         health = GetComponent<Health>();
         ignore.Add(health);
@@ -246,6 +248,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public void ForceEndAttack()
     {
         animator.speed = baseAnimationSpeed;
+        animator.applyRootMotion = baseUseRootMotion;
         unblockable = false;
         chargingAttack = false;
         additionalDamage = 0;
@@ -576,7 +579,11 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             canAttack = false;
             canSaveAttackInput = true;
             canDodge = false;
-            if (animator != null) { animator.SetTrigger("Dodge"); }
+            if (animator != null)
+            {
+                animator.applyRootMotion = true;
+                animator.SetTrigger("Dodge"); 
+            }
         }
     }
 
@@ -604,6 +611,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         canDodge = true;
         ResetAttack();
+        animator.applyRootMotion = baseUseRootMotion;
     }
 
     #endregion

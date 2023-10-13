@@ -229,6 +229,9 @@ MonoBehaviour:
   modelConstructor: {fileID: 0}
   canMove: 1
   sprinting: 0
+  canSaveAttackInput: 0
+  savingAttackInput: 0
+  savingChargeInput: 0
   chargeDamageScaling: 2
   chargeUnblockableTime: 0.6
   chargeMaxTime: 2
@@ -263,8 +266,8 @@ MonoBehaviour:
     footstepObject: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
       type: 3}
     footstepTransforms:
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 9037149749128838951}
+    - {fileID: 9037073332951877017}
     impulseSource: {fileID: 7378451652202160449}
     impulseWalkMultiplier: 0.006
     impulseSprintMultiplier: 0.01
