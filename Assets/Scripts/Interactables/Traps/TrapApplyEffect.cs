@@ -119,6 +119,8 @@ public class TrapApplyEffect : MonoBehaviour
                 break;
             case E_TargetType.Area:
                 //Affect all
+                if (trap.trapStats.explosionFX != null)
+                    Instantiate(trap.trapStats.explosionFX, transform.position, transform.rotation);
                 foreach (var item in affectTargets)
                 {
                     if (!hitTargets.Contains(item))

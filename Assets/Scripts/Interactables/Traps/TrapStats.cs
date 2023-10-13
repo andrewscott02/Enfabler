@@ -11,6 +11,7 @@ public class TrapStats : ScriptableObject
 
     public E_TargetType targetType;
     public Object projectile;
+    public Object explosionFX;
     public float range;
     public float shotAOE = 0;
 

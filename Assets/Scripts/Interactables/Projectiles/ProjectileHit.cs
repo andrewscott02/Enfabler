@@ -79,7 +79,6 @@ public class ProjectileHit : MonoBehaviour
         bool parrySuccess = false;
         if (hitData == E_DamageEvents.Parry)
         {
-            //TODO: Reflect projectile
             if (targetMono.gameObject != null)
             {
                 move.Fire(trap.gameObject.transform.position, trap, targetMono.gameObject);
@@ -94,6 +93,10 @@ public class ProjectileHit : MonoBehaviour
         }
 
         if (!parrySuccess)
+        {
+            if (trap.trapStats.explosionFX != null)
+                Instantiate(trap.trapStats.explosionFX, transform.position, transform.rotation);
             Destroy(move.gameObject);
+        }
     }
 }

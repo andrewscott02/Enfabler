@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: Mine
   m_EditorClassIdentifier: 
   damage: 10
+  canBlock: 0
+  canParry: 0
   targetType: 1
+  projectile: {fileID: 0}
+  explosionFX: {fileID: 5831885752641907103, guid: aac6de99da32be145bcaa03df9a4b4f6,
+    type: 3}
   range: 1.5
+  shotAOE: 0
   durationType: 2
   activateInterval: 0

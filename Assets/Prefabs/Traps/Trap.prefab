@@ -112,11 +112,13 @@ MonoBehaviour:
   animator: {fileID: 0}
   modelConstructor: {fileID: 0}
   healthSlider: {fileID: 0}
-  bloodFX: {fileID: 0}
-  deathFX: {fileID: 0}
-  parryFX: {fileID: 5831885752641907103, guid: 7c7d6dcfa9512ae4abd8b0d8b8816ec4, type: 3}
   maxHealth: 1
   hitReactData:
+    deathFXGO: {fileID: 0}
+    bloodFX: {fileID: 0}
+    deathFX: {fileID: 0}
+    blockFX: {fileID: 0}
+    parryFX: {fileID: 0}
     hitImpulseMultiplier: 0.2
     heavyHitReactThreshold: 5
     hitSlomoScale: 0.9
