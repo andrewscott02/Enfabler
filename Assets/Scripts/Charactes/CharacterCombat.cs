@@ -82,7 +82,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Attacking -> Attack Inputs
 
-    bool chargingAttack = false;
+    public bool chargingAttack { get; private set; } = false;
 
     public void LightAttack(float attackSpeed = 1f, bool canCharge = true)
     {

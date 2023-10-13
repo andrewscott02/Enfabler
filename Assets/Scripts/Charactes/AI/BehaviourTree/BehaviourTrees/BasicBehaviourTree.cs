@@ -20,7 +20,7 @@ public class BasicBehaviourTree : BehaviourTree
                     ),
 
                     //Checks if the closest enemy is within melee range and makes an attack if true
-                    BaseBehaviours.AttackClosestTarget(agent)
+                    BaseBehaviours.AttackClosestTarget(agent, true)
                 ),
 
             //Checks if the closest enemy is within sight range and moves towards it if true

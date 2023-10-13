@@ -71,7 +71,7 @@ public class AIController : BaseCharacterController
         realMovement.y = Vector3.Dot(movement, model.forward);
 
         //Sets the movement animations for the animator
-        float currentSpeed = realMovement.magnitude * agent.speed;
+        float currentSpeed = realMovement.magnitude * agent.speed * animMultiplier;
         animator.SetFloat("RunBlend", currentSpeed);
 
         #endregion
@@ -107,6 +107,7 @@ public class AIController : BaseCharacterController
 
     public float walkSpeed = 6;
     public float sprintSpeed = 10;
+    public float animMultiplier = 1f;
 
     public Vector3 currentDestination { get; protected set; }
     public void SetDestinationPos(Vector3 pos)
@@ -176,7 +177,7 @@ public class AIController : BaseCharacterController
                 lastAttacked = currentTarget;
                 //lastAttacked.GetCharacterCombat().StartBeingAttacked();
 
-                Debug.Log("Attack made");
+                //Debug.Log("Attack made");
                 combat.savingChargeInput = true;
                 combat.LightAttack(meleeAttackSpeed);
                 StartCoroutine(IReleaseAttack(attackPauseTime));
@@ -201,11 +202,8 @@ public class AIController : BaseCharacterController
 
     IEnumerator IReleaseAttack(float delay)
     {
-        Debug.Log("Start attack");
         yield return new WaitForSeconds(delay);
         combat.ReleaseAttack();
-
-        Debug.Log("Release attack");
     }
 
     public void EndAttackOnTarget()

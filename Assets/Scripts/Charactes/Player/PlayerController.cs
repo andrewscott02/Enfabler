@@ -62,14 +62,14 @@ public class PlayerController : BaseCharacterController
     {
         if (context.performed)
         {
-            if (moveInput != Vector2.zero && combat.canAttack)
+            if (moveInput != Vector2.zero && (combat.canAttack || (combat.canSaveAttackInput && !combat.savingAttackInput)))
             {
+                Debug.Log("Attack input rotation");
                 //Rotate towards direction
                 Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
                 Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
                 transform.rotation = newRot;
             }
-
             combat.savingChargeInput = true;
             combat.LightAttack();
         }
@@ -77,7 +77,6 @@ public class PlayerController : BaseCharacterController
         {
             combat.ReleaseAttack();
         }
-        
     }
 
     public void BlockInput(InputAction.CallbackContext context)
@@ -198,7 +197,7 @@ public class PlayerController : BaseCharacterController
 
     private void FixedUpdate()
     {
-        if (combat.canMove)
+        if (combat.canMove || combat.chargingAttack)
         {
             playerMovement.Move(moveInput);
         }
