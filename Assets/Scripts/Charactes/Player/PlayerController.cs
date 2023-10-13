@@ -64,7 +64,6 @@ public class PlayerController : BaseCharacterController
         {
             if (moveInput != Vector2.zero && (combat.canAttack || (combat.canSaveAttackInput && !combat.savingAttackInput)))
             {
-                Debug.Log("Attack input rotation");
                 //Rotate towards direction
                 Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
                 Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);

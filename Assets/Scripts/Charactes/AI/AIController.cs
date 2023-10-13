@@ -140,6 +140,7 @@ public class AIController : BaseCharacterController
 
     bool doubleAttack;
     public float doubleAttackChance;
+    public float unblockableChance = 0.2f;
     public Vector2 attackCooldown;
     float currentCooldown;
     public float attackPauseTime = 0.8f;
@@ -180,7 +181,10 @@ public class AIController : BaseCharacterController
                 //Debug.Log("Attack made");
                 combat.savingChargeInput = true;
                 combat.LightAttack(meleeAttackSpeed);
-                StartCoroutine(IReleaseAttack(attackPauseTime));
+
+                bool unblockable = Random.Range(0f, 1f) < unblockableChance;
+                float releaseTime = unblockable ? combat.chargeMaxTime : attackPauseTime;
+                StartCoroutine(IReleaseAttack(releaseTime));
 
                 timeSinceLastAttack = 0;
 
