@@ -198,6 +198,7 @@ public class AIController : BaseCharacterController
                 }
             }
 
+            agent.isStopped = true;
             return true;
         }
 
@@ -207,7 +208,11 @@ public class AIController : BaseCharacterController
     IEnumerator IReleaseAttack(float delay)
     {
         yield return new WaitForSeconds(delay);
-        combat.ReleaseAttack();
+        if (!health.dying)
+        {
+            combat.ReleaseAttack();
+            agent.isStopped = false;
+        }
     }
 
     public void EndAttackOnTarget()

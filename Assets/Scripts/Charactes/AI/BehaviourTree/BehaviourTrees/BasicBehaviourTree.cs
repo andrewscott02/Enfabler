@@ -16,7 +16,7 @@ public class BasicBehaviourTree : BehaviourTree
                 new Sequence(
                     //If they are unable to make an attack, move to a point a short distance away
                     new CannotAttack(agent),
-                    BaseBehaviours.MoveToRange(agent, 100f, false)
+                    BaseBehaviours.MoveToRange(agent, 35f, false)
                     ),
 
                     //Checks if the closest enemy is within melee range and makes an attack if true

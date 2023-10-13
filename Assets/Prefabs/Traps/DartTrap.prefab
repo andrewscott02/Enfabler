@@ -200,11 +200,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6744847145925803597, guid: 0e17bd865830450489f0800dca73f7f6,
         type: 3}
-      propertyPath: m_Radius
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6744847145925803597, guid: 0e17bd865830450489f0800dca73f7f6,
-        type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
@@ -213,6 +208,12 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.814
       objectReference: {fileID: 0}
+    - target: {fileID: 8050131898291795232, guid: 0e17bd865830450489f0800dca73f7f6,
+        type: 3}
+      propertyPath: hitReactData.deathFX
+      value: 
+      objectReference: {fileID: 5831885752641907103, guid: aac6de99da32be145bcaa03df9a4b4f6,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e17bd865830450489f0800dca73f7f6, type: 3}
 --- !u!4 &1209132614700887253 stripped
