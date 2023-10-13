@@ -141,6 +141,7 @@ public class AIController : BaseCharacterController
     public float doubleAttackChance;
     public Vector2 attackCooldown;
     float currentCooldown;
+    public float attackPauseTime = 0.8f;
     float timeSinceLastAttack;
 
     public bool CanAttack()
@@ -175,9 +176,11 @@ public class AIController : BaseCharacterController
                 lastAttacked = currentTarget;
                 //lastAttacked.GetCharacterCombat().StartBeingAttacked();
 
-                //Debug.Log("Attack made");
-                combat.LightAttack(meleeAttackSpeed, true);
-                StartCoroutine(IReleaseAttack(0f));
+                Debug.Log("Attack made");
+                combat.savingChargeInput = true;
+                combat.LightAttack(meleeAttackSpeed);
+                StartCoroutine(IReleaseAttack(attackPauseTime));
+
                 timeSinceLastAttack = 0;
 
                 if (doubleAttack)
@@ -198,8 +201,11 @@ public class AIController : BaseCharacterController
 
     IEnumerator IReleaseAttack(float delay)
     {
+        Debug.Log("Start attack");
         yield return new WaitForSeconds(delay);
         combat.ReleaseAttack();
+
+        Debug.Log("Release attack");
     }
 
     public void EndAttackOnTarget()

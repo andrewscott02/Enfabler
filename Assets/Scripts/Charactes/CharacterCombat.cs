@@ -27,6 +27,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public float chargeMaxTime = 2;
 
     float baseAnimationSpeed;
+    float currentAttackSpeed;
     bool baseUseRootMotion;
 
     private void Start()
@@ -103,7 +104,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             canAttack = false;
             canSaveAttackInput = true;
             canDodge = false;
-            animator.speed = (attackSpeed);
+            currentAttackSpeed = attackSpeed;
+            animator.speed = attackSpeed;
             animator.SetTrigger(sprinting ? "SprintAttack" : "LightAttack");
             //RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
         }
@@ -124,7 +126,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         chargingAttack = false;
         savingChargeInput = false;
-        animator.speed = baseAnimationSpeed;
+        animator.speed = currentAttackSpeed;
 
         if (chargingAttack)
         {
@@ -139,28 +141,24 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void CheckCharge()
     {
-        if (chargingAttack)
-        {
-            if (animator == null) return;
+        if (!chargingAttack || animator == null) return;
 
-            if (chargeCoroutine != null)
-                StopCoroutine(chargeCoroutine);
-            currentChargeTime = 0;
+        if (chargeCoroutine != null)
+            StopCoroutine(chargeCoroutine);
+        currentChargeTime = 0;
 
-            chargeCoroutine = StartCoroutine(IReleaseAttack(2));
-        }
+        chargeCoroutine = StartCoroutine(IReleaseAttack(chargeMaxTime));
     }
 
     Coroutine chargeCoroutine;
 
     IEnumerator IReleaseAttack(float delay)
     {
-        //Debug.Log("Freeze");
         animator.speed = 0;
-        yield return new WaitForSecondsRealtime(delay);
-        //Debug.Log("Unfreeze");
-        animator.speed = baseAnimationSpeed;
 
+        yield return new WaitForSecondsRealtime(delay);
+
+        animator.speed = baseAnimationSpeed;
         ReleaseAttack();
     }
 
@@ -168,7 +166,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         if (unblockable) { return; }
 
-        Debug.Log("StarUnblockable");
         weapon.unblockableTrail.SetActive(true);
         unblockable = true;
     }
