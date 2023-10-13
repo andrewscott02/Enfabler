@@ -10,7 +10,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     [HideInInspector]
     public ConstructPlayerModel modelConstructor;
 
-    public HealthSlider healthSlider;
+    public SliderScript healthSlider;
     CharacterCombat combat;
     public int maxHealth = 50;
     int currentHealth = 0; public int GetCurrentHealth() { return currentHealth; }

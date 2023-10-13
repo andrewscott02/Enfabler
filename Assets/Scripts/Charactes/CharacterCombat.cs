@@ -475,6 +475,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Blocking
 
+    public SliderScript armourSlider;
     public int maxArmour = 5;
     public int currentArmour { get; private set; }
     public float armourCooldown = 6f;
@@ -533,7 +534,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     void ChangeArmourUI()
     {
-        //TODO update UI
+        if (armourSlider != null)
+            armourSlider.ChangeSliderValue(currentArmour, maxArmour);
     }
 
     #endregion
