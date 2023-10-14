@@ -27,7 +27,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public float chargeMaxTime = 2;
 
     float baseAnimationSpeed;
-    float currentAttackSpeed;
+    float currentAttackSpeed = 1;
     bool baseUseRootMotion;
 
     private void Start()
@@ -40,6 +40,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
         currentArmour = maxArmour;
         armourRegenCoroutine = StartCoroutine(IResetArmour(armourRegen));
+        ForceEndAttack();
     }
 
     private void Update()
@@ -90,7 +91,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         if (canAttack)
         {
-            //Debug.Log("Attack " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard"));
+            //Debug.Log("Attack " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard") + " " + attackSpeed);
             Block(false);
             EndDodge();
             ForceEndAttack();
@@ -189,6 +190,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         if (savingAttackInput)
         {
+            //Debug.Log("Saved attack input");
             LightAttack();
             savingAttackInput = false;
         }

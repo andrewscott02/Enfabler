@@ -13,6 +13,7 @@ public class PlayerController : BaseCharacterController
 
     float xRotateInput;
     float yRotateInput;
+    public Vector2 yRotateThresholds = new Vector2(340, 40);
     public Vector2 rotateInterval;
     public float rotateDeadZone = 0.1f;
     public GameObject followTarget;
@@ -180,13 +181,13 @@ public class PlayerController : BaseCharacterController
 
         float angle = followTarget.transform.localEulerAngles.x;
 
-        if (angle > 180 && angle < 340)
+        if (angle > 180 && angle < yRotateThresholds.x)
         {
-            angles.x = 340;
+            angles.x = yRotateThresholds.x;
         }
-        else if (angle < 180 && angle > 40)
+        else if (angle < 180 && angle > yRotateThresholds.y)
         {
-            angles.x = 40;
+            angles.x = yRotateThresholds.y;
         }
 
         followTarget.transform.localEulerAngles = angles;
