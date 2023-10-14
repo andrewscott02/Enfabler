@@ -108,6 +108,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             currentAttackSpeed = attackSpeed;
             animator.speed = attackSpeed;
             animator.SetTrigger(sprinting ? "SprintAttack" : "LightAttack");
+            sprinting = false;
             //RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
         }
         else if (canSaveAttackInput)
