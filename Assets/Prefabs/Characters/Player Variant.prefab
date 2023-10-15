@@ -2985,8 +2985,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   skeleton: {fileID: 69781569185968667}
   controller: {fileID: 0}
-  moveSpeed: 4
-  sprintSpeed: 8
+  moveSpeed: 4.5
+  sprintSpeed: 10
   lerpSpeed: 5
   moveFOVMultiplier: 2
 --- !u!114 &1697564174
@@ -3005,7 +3005,7 @@ MonoBehaviour:
   model: {fileID: 64041285362746459}
   playerTeam: 1
   yRotateThresholds: {x: 300, y: 60}
-  rotateInterval: {x: 0.8, y: 0.8}
+  rotateInterval: {x: 3, y: 1.6}
   rotateDeadZone: 0.1
   followTarget: {fileID: 2018895535}
 --- !u!114 &1697564183
