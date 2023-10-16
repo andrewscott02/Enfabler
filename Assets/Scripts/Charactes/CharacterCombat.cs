@@ -331,7 +331,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         firePos = origin + (dir * 10f);
 
-        if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: distance, projectileLayerMask))
+        if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: distance, layerMask))
         {
             //Debug.Log("Hit: " + hit.collider.gameObject);
             firePos = hit.point;
@@ -362,6 +362,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     void MoveToTarget(Vector3 target)
     {
+        if (moveDistanceThreshold.y <= 0) return;
+
         Vector3 targetPos = HelperFunctions.GetFlankingPoint(transform.position, target, -1f);
 
         if (transform.position != targetPos)
@@ -515,7 +517,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public List<BaseCharacterController> currentTargets;
     List<BaseCharacterController> lastHit = new List<BaseCharacterController>();
     public LayerMask layerMask;
-    public LayerMask projectileLayerMask;
     public float currentTargetCastInterval = 0.6f;
     public float currentTargetCastRadius = 1.5f;
     public float currentTargetCastDistance = 10;

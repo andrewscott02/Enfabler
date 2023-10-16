@@ -161,10 +161,11 @@ public class PlayerController : BaseCharacterController
 
     public void InteractInput(InputAction.CallbackContext context)
     {
-        if (!context.performed)
+        if (!context.performed || !combat.canAttack)
             return;
 
         Debug.Log("Interact");
+        combat.ForceEndAttack();
         animator.SetTrigger("Interact");
         //TODO: Proper interact interface and checks
     }
