@@ -58,6 +58,8 @@ public class BaseCharacterController : MonoBehaviour
     {
         foreach (var item in ragdollColliders)
         {
+            item.gameObject.layer = activate ? 2 : 6;
+
             if (item != mainCollider)
             {
                 Rigidbody rbItem = item.GetComponent<Rigidbody>();
