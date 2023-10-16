@@ -962,21 +962,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelConstructor: {fileID: 0}
+  projectile: {fileID: 0}
+  projectileData: {fileID: 0}
   canMove: 1
   sprinting: 0
   canSaveAttackInput: 0
   savingAttackInput: 0
   savingChargeInput: 0
+  savedAttackAnimSpeed: 1
   chargeDamageScaling: 2
   chargeUnblockableTime: 0.5
   chargeMaxTime: 2
   canAttack: 1
-  hitSphereRadius: 0.45
+  targetSphereRadius: 1.5
+  moveDistanceThreshold: {x: 0.5, y: 2}
+  targetSnapSpeed: 0.01
+  targetSnapInterval: 0.001
+  weaponSphereRadius: 0.45
   hitFreezeTime: 0.15
   currentTargets: []
   layerMask:
     serializedVersion: 2
     m_Bits: 192
+  projectileLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   currentTargetCastInterval: 0.6
   currentTargetCastRadius: 1.5
   currentTargetCastDistance: 10

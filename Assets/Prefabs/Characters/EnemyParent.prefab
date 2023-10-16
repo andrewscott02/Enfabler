@@ -62,6 +62,26 @@ PrefabInstance:
       propertyPath: maxArmour
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: targetSnapSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: targetSnapInterval
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: moveDistanceThreshold.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: moveDistanceThreshold.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3950393655183506457, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -298,6 +318,7 @@ MonoBehaviour:
   roaming: 0
   currentTarget: {fileID: 0}
   doubleAttackChance: 0.4
+  unblockableChance: 0.2
   attackCooldown: {x: 3, y: 6}
   attackPauseTime: 0.4
   parryChance: 0.2

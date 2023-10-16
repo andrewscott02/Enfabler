@@ -234,6 +234,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     List<IDamageable> hitTargets = new List<IDamageable>();
     public List<IDamageable> ignore = new List<IDamageable>();
+    public float targetSphereRadius = 3f;
 
     int damage;
 
@@ -252,6 +253,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         hitTargets.Clear();
         damage = currentDamage + additionalDamage;
         //Debug.Log(damage + " from " + currentDamage + " and " + additionalDamage);
+
+        CheckMoveToTarget(transform.position, transform.forward, layerMask, moveDistanceThreshold.y);
 
         InvokeRepeating("AttackCheck", 0f, 0.004f);
     }
@@ -323,17 +326,15 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         RaycastHit hit;
 
         Vector3 origin = weapon.weaponBaseHit.transform.position;
-        float distance = 100f;
+        float distance = 20f;
         Vector3 dir = transform.forward;
 
-        if (Physics.SphereCast(origin, radius: hitSphereRadius, direction: dir, out hit, maxDistance: distance, projectileLayerMask))
+        firePos = origin + (dir * 10f);
+
+        if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: distance, projectileLayerMask))
         {
             //Debug.Log("Hit: " + hit.collider.gameObject);
             firePos = hit.point;
-        }
-        else
-        {
-            firePos = origin + (dir * distance);
         }
 
         GameObject projectileObj = Instantiate(projectile, weapon.transform.position, transform.rotation) as GameObject;
@@ -341,11 +342,62 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         projectileMove.Fire(firePos, projectileData, this.gameObject, projectileDamage);
     }
 
+    public Vector2 moveDistanceThreshold = new Vector2(0.5f, 5f);
+    public float targetSnapSpeed = 0.02f, targetSnapInterval = 0.001f;
+
+    public void CheckMoveToTarget(Vector3 origin, Vector3 dir, LayerMask layerMask, float maxDistance = 5)
+    {
+        RaycastHit hit;
+
+        if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: maxDistance, layerMask))
+        {
+            float distance = Vector3.Distance(origin, hit.point);
+
+            if (distance > moveDistanceThreshold.x)
+            {
+                MoveToTarget(hit.point);
+            }
+        }
+    }
+
+    void MoveToTarget(Vector3 target)
+    {
+        Vector3 targetPos = HelperFunctions.GetFlankingPoint(transform.position, target, -1f);
+
+        if (transform.position != targetPos)
+            ISnap = StartCoroutine(ISnapToTarget(transform.position, targetPos, targetSnapSpeed, targetSnapInterval));
+        else if (ISnap != null)
+            StopCoroutine(ISnap);
+    }
+
+    Coroutine ISnap;
+
+    IEnumerator ISnapToTarget(Vector3 originalPos, Vector3 targetPos, float lerpSpeed, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        transform.position = HelperFunctions.LerpVector3(originalPos, targetPos, lerpSpeed);
+        //Debug.Log("OP:" + originalPos + "CP:" + transform.position + "TP:" + targetPos);
+
+        if (transform.position != targetPos)
+            ISnap = StartCoroutine(ISnapToTarget(originalPos, targetPos, lerpSpeed + lerpSpeed, delay));
+        else if (ISnap != null)
+            StopCoroutine(ISnap);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (firePos != null)
+        {
+            Gizmos.DrawWireSphere(firePos, targetSphereRadius);
+        }
+    }
+
     #endregion
 
     #region Hit Checks
 
-    public float hitSphereRadius = 0.2f;
+    public float weaponSphereRadius = 0.45f;
 
     void AttackCheck()
     {
@@ -359,7 +411,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         float distance = Vector3.Distance(weapon.weaponBaseHit.transform.position, weapon.weaponTipHit.transform.position);
         Vector3 dir = weapon.weaponTipHit.transform.position - weapon.weaponBaseHit.transform.position;
 
-        if (Physics.SphereCast(origin, radius: hitSphereRadius, direction: dir, out hit, maxDistance: distance, layerMask))
+        if (Physics.SphereCast(origin, radius: weaponSphereRadius, direction: dir, out hit, maxDistance: distance, layerMask))
         {
             IDamageable hitDamageable = hit.collider.GetComponent<IDamageable>();
 
@@ -497,8 +549,14 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         lastHit.Clear();
         foreach (var item in currentTargets)
         {
-            item.GetCharacterCombat().StartBeingAttacked();
-            lastHit.Add(item);
+            if (Vector3.Distance(transform.position, item.transform.position) < moveDistanceThreshold.y)
+            {
+                if (item.GetCharacterCombat() != null)
+                {
+                    item.GetCharacterCombat().StartBeingAttacked();
+                }
+                lastHit.Add(item);
+            }
         }
     }
 
@@ -506,7 +564,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         foreach (var item in lastHit)
         {
-            item.GetCharacterCombat().StopBeingAttacked();
+            if (item.GetCharacterCombat() != null)
+            {
+                item.GetCharacterCombat().StopBeingAttacked();
+            }
         }
 
         lastHit.Clear();
