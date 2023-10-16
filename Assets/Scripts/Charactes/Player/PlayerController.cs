@@ -59,23 +59,33 @@ public class PlayerController : BaseCharacterController
         yRotateInput = context.ReadValue<Vector2>().y;
     }
 
-    public void AttackInput(InputAction.CallbackContext context)
+    public void PrimaryAttackInput(InputAction.CallbackContext context)
+    {
+        Attack(context, CharacterCombat.AttackType.PrimaryAttack);
+    }
+
+    public void SecondaryAttackInput(InputAction.CallbackContext context)
+    {
+        Attack(context, CharacterCombat.AttackType.SecondaryAttack);
+    }
+
+    public void Attack(InputAction.CallbackContext context, CharacterCombat.AttackType attackType)
     {
         if (context.performed)
         {
-            if (moveInput != Vector2.zero && (combat.canAttack || (combat.canSaveAttackInput && !combat.savingAttackInput)))
+            if (moveInput != Vector2.zero && (combat.canAttack || (combat.canSaveAttackInput && combat.savingAttackInput == CharacterCombat.AttackType.None)))
             {
                 //Rotate towards direction
                 Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
                 Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
                 transform.rotation = newRot;
             }
-            combat.savingChargeInput = true;
-            combat.LightAttack();
+            combat.savingChargeInput = attackType;
+            combat.Attack(attackType: attackType);
         }
         else if (context.canceled)
         {
-            combat.ReleaseAttack();
+            combat.ReleaseAttack(attackType);
         }
     }
 
@@ -197,7 +207,7 @@ public class PlayerController : BaseCharacterController
 
     private void FixedUpdate()
     {
-        if (combat.canMove || combat.chargingAttack)
+        if (combat.canMove || combat.chargingAttack != CharacterCombat.AttackType.None)
         {
             playerMovement.Move(moveInput);
         }

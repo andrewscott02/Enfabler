@@ -12,12 +12,21 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     protected Health health;
 
     public Weapon weapon { get; private set; }
+    public Object projectile;
+    public TrapStats projectileData;
 
     public bool canMove = true;
     public bool sprinting = false;
+
+    
     public bool canSaveAttackInput = false;
-    public bool savingAttackInput = false;
-    public bool savingChargeInput = false;
+    public AttackType savingAttackInput = AttackType.None;
+    public AttackType savingChargeInput = AttackType.None;
+    public float savedAttackAnimSpeed = 1;
+    public enum AttackType
+    {
+        None, PrimaryAttack, SecondaryAttack
+    }
 
     public float chargeDamageScaling = 2f;
     float currentChargeTime = 0;
@@ -45,7 +54,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     private void Update()
     {
-        if (chargingAttack)
+        if (chargingAttack != AttackType.None)
         {
             currentChargeTime += Time.deltaTime;
 
@@ -83,21 +92,21 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Attacking -> Attack Inputs
 
-    public bool chargingAttack { get; private set; } = false;
+    public AttackType chargingAttack { get; private set; } = AttackType.None;
 
-    public void LightAttack(float attackSpeed = 1f, bool canCharge = true)
+    public void Attack(float attackSpeed = 1f, bool canCharge = true, AttackType attackType = AttackType.PrimaryAttack)
     {
-        savingAttackInput = false;
+        savingAttackInput = AttackType.None;
 
         if (canAttack)
         {
-            //Debug.Log("Attack " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard") + " " + attackSpeed);
+            //Debug.Log(attackType + " " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard") + " " + attackSpeed);
             Block(false);
             EndDodge();
             ForceEndAttack();
 
-            if (canCharge && savingChargeInput)
-                StartCharge();
+            if (canCharge && savingChargeInput == attackType)
+                StartCharge(attackType);
 
             Target();
 
@@ -108,30 +117,31 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             canDodge = false;
             currentAttackSpeed = attackSpeed;
             animator.speed = attackSpeed;
-            animator.SetTrigger(sprinting ? "SprintAttack" : "LightAttack");
+            animator.SetTrigger(sprinting ? "Sprint" + attackType.ToString() : attackType.ToString());
             sprinting = false;
             //RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
         }
         else if (canSaveAttackInput)
         {
-            savingAttackInput = true;
+            savingAttackInput = attackType;
+            savedAttackAnimSpeed = attackSpeed;
         }
     }
 
-    void StartCharge()
+    void StartCharge(AttackType attackType)
     {
         if (chargeCoroutine != null)
             StopCoroutine(chargeCoroutine);
-        chargingAttack = true;
+        chargingAttack = attackType;
     }
 
-    public void ReleaseAttack()
+    public void ReleaseAttack(AttackType attackType)
     {
-        chargingAttack = false;
-        savingChargeInput = false;
+        chargingAttack = AttackType.None;
+        savingChargeInput = AttackType.None;
         animator.speed = currentAttackSpeed;
 
-        if (chargingAttack)
+        if (chargingAttack != AttackType.None)
         {
             additionalDamage = (int)(currentChargeTime * chargeDamageScaling);
         }
@@ -144,7 +154,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void CheckCharge()
     {
-        if (!chargingAttack || animator == null) return;
+        if (chargingAttack == AttackType.None || animator == null) return;
 
         if (chargeCoroutine != null)
             StopCoroutine(chargeCoroutine);
@@ -162,7 +172,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         yield return new WaitForSecondsRealtime(delay);
 
         animator.speed = baseAnimationSpeed;
-        ReleaseAttack();
+        ReleaseAttack(chargingAttack);
     }
 
     void SetUnblockable()
@@ -188,11 +198,11 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             AIController.EndAttackOnTarget();
         }
 
-        if (savingAttackInput)
+        if (savingAttackInput != AttackType.None)
         {
             //Debug.Log("Saved attack input");
-            LightAttack();
-            savingAttackInput = false;
+            Attack(attackSpeed: savedAttackAnimSpeed, attackType: savingAttackInput);
+            savingAttackInput = AttackType.None;
         }
     }
 
@@ -251,7 +261,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         animator.speed = baseAnimationSpeed;
         animator.applyRootMotion = baseUseRootMotion;
         unblockable = false;
-        chargingAttack = false;
+        chargingAttack = AttackType.None;
         additionalDamage = 0;
 
         //Clear damage and list of enemies hit
@@ -283,6 +293,26 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         Untarget();
         ForceEndAttack();
+    }
+
+    public void FireProjectile(int damage)
+    {
+        if (weapon != null)
+        {
+            if (weapon.weaponTrail != null)
+                weapon.weaponTrail.SetActive(false);
+
+            if (weapon.bloodTrail != null)
+                weapon.bloodTrail.SetActive(false);
+
+            if (weapon.unblockableTrail != null)
+                weapon.unblockableTrail.SetActive(false);
+        }
+
+        Debug.Log("Fire projectile for " + damage);
+        GameObject projectileObj = Instantiate(projectile, transform.position, transform.rotation) as GameObject;
+        ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
+        projectileMove.Fire(transform.forward * 100, projectileData, this.gameObject);
     }
 
     #endregion

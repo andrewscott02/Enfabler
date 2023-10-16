@@ -179,8 +179,8 @@ public class AIController : BaseCharacterController
                 //lastAttacked.GetCharacterCombat().StartBeingAttacked();
 
                 //Debug.Log("Attack made");
-                combat.savingChargeInput = true;
-                combat.LightAttack(meleeAttackSpeed);
+                combat.savingChargeInput = CharacterCombat.AttackType.PrimaryAttack;
+                combat.Attack(meleeAttackSpeed);
 
                 bool unblockable = Random.Range(0f, 1f) < unblockableChance;
                 float releaseTime = unblockable ? combat.chargeMaxTime : attackPauseTime;
@@ -210,7 +210,7 @@ public class AIController : BaseCharacterController
         yield return new WaitForSeconds(delay);
         if (!health.dying)
         {
-            combat.ReleaseAttack();
+            combat.ReleaseAttack(CharacterCombat.AttackType.PrimaryAttack);
             agent.isStopped = false;
         }
     }

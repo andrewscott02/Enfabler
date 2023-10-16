@@ -5,7 +5,8 @@ using UnityEngine;
 public class ProjectileHit : MonoBehaviour
 {
     public GameObject caster;
-    public Trap trap;
+    public ICanDealDamage casterDamage;
+    public TrapStats trapStats;
     public ProjectileMovement move;
 
     public LayerMask layerMask;
@@ -65,10 +66,10 @@ public class ProjectileHit : MonoBehaviour
         E_DamageEvents hitData = E_DamageEvents.Hit;
         MonoBehaviour targetMono = target.GetScript();
 
-        if (trap.trapStats.shotAOE == 0)
+        if (trapStats.shotAOE == 0)
         {
             //only hit target
-            hitData = trap.ApplyEffect(target, targetMono.gameObject.transform.position);
+            hitData = casterDamage.DealDamage(target, trapStats.damage, transform.position, transform.rotation.eulerAngles);
         }
         else
         {
@@ -81,7 +82,7 @@ public class ProjectileHit : MonoBehaviour
         {
             if (targetMono.gameObject != null)
             {
-                move.Fire(trap.gameObject.transform.position, trap, targetMono.gameObject);
+                move.Fire(caster.gameObject.transform.position, trapStats, targetMono.gameObject);
                 caster = targetMono.gameObject;
                 parrySuccess = true;
                 alreadyHit = false;
@@ -94,8 +95,8 @@ public class ProjectileHit : MonoBehaviour
 
         if (!parrySuccess)
         {
-            if (trap.trapStats.explosionFX != null)
-                Instantiate(trap.trapStats.explosionFX, transform.position, transform.rotation);
+            if (trapStats.explosionFX != null)
+                Instantiate(trapStats.explosionFX, transform.position, transform.rotation);
             Destroy(move.gameObject);
         }
     }
