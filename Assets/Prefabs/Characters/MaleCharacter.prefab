@@ -975,6 +975,9 @@ MonoBehaviour:
   chargeMaxTime: 2
   canAttack: 1
   targetSphereRadius: 1.5
+  additionalShotAngle:
+  - 5
+  - 10
   moveDistanceThreshold: {x: 0.5, y: 2}
   targetSnapSpeed: 0.01
   targetSnapInterval: 0.001
@@ -984,9 +987,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 192
-  projectileLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   currentTargetCastInterval: 0.6
   currentTargetCastRadius: 1.5
   currentTargetCastDistance: 10

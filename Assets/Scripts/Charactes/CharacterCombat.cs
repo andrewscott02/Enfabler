@@ -299,15 +299,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     }
 
     Vector3 firePos;
+    public float[] additionalShotAngle;
 
     public void FireProjectile(int projectileDamage)
     {
         projectileDamage += additionalDamage;
-        Debug.Log("Fire projectile for " + projectileDamage);
-
-        unblockable = false;
-        chargingAttack = AttackType.None;
-        additionalDamage = 0;
+        //Debug.Log("Fire projectile for " + projectileDamage);
 
         //Clear damage and list of enemies hit
         if (weapon != null)
@@ -326,20 +323,44 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         RaycastHit hit;
 
         Vector3 origin = weapon.weaponBaseHit.transform.position;
-        float distance = 20f;
+        float distance = 10f;
         Vector3 dir = transform.forward;
 
         firePos = origin + (dir * 10f);
-
-        if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: distance, layerMask))
+        if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: 20f, layerMask))
         {
             //Debug.Log("Hit: " + hit.collider.gameObject);
             firePos = hit.point;
+            distance = Vector3.Distance(origin, hit.point);
         }
 
+        SpawnProjectile(firePos, projectileDamage);
+
+        if (unblockable && additionalShotAngle != null)
+        {
+            foreach (var angle in additionalShotAngle)
+            {
+                //Calculate the length of the opposing angle
+                float oppositeLength = Mathf.Tan(angle) * distance;
+                Debug.Log("Opposite length: " + oppositeLength);
+
+                //Spawn additional projectiles
+                SpawnProjectile(firePos + (Vector3.right * oppositeLength), projectileDamage);
+                SpawnProjectile(firePos + (Vector3.left * oppositeLength), projectileDamage);
+            }
+            
+        }
+
+        unblockable = false;
+        chargingAttack = AttackType.None;
+        additionalDamage = 0;
+    }
+
+    void SpawnProjectile(Vector3 targetPos, int projectileDamage)
+    {
         GameObject projectileObj = Instantiate(projectile, weapon.transform.position, transform.rotation) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
-        projectileMove.Fire(firePos, projectileData, this.gameObject, projectileDamage);
+        projectileMove.Fire(targetPos, projectileData, this.gameObject, projectileDamage);
     }
 
     public Vector2 moveDistanceThreshold = new Vector2(0.5f, 5f);
