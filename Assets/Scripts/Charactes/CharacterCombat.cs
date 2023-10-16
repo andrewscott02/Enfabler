@@ -28,7 +28,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         None, PrimaryAttack, SecondaryAttack
     }
 
-    public float chargeDamageScaling = 2f;
+    public float chargePrimaryDamageScaling = 2f;
+    public float chargeSecondaryDamageScaling = 1f;
     float currentChargeTime = 0;
     int additionalDamage;
     public float chargeUnblockableTime = 0.6f;
@@ -137,14 +138,23 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void ReleaseAttack(AttackType attackType)
     {
+        switch (attackType)
+        {
+            case AttackType.PrimaryAttack:
+                additionalDamage = (int)(currentChargeTime * chargePrimaryDamageScaling);
+                Debug.Log("Primary damage scaling " + additionalDamage);
+                break;
+            case AttackType.SecondaryAttack:
+                additionalDamage = (int)(currentChargeTime * chargeSecondaryDamageScaling);
+                Debug.Log("Secondary damage scaling " + additionalDamage);
+                break;
+            default:
+                break;
+        }
+
         chargingAttack = AttackType.None;
         savingChargeInput = AttackType.None;
         animator.speed = currentAttackSpeed;
-
-        if (chargingAttack != AttackType.None)
-        {
-            additionalDamage = (int)(currentChargeTime * chargeDamageScaling);
-        }
 
         currentChargeTime = 0;
 
@@ -300,11 +310,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     Vector3 firePos;
     public float[] additionalShotAngle;
+    public float additionalProjectileDamageMultiplier = 0.5f;
 
     public void FireProjectile(int projectileDamage)
     {
         projectileDamage += additionalDamage;
-        //Debug.Log("Fire projectile for " + projectileDamage);
+        Debug.Log("Fire projectile for " + projectileDamage);
 
         //Clear damage and list of enemies hit
         if (weapon != null)
@@ -342,11 +353,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             {
                 //Calculate the length of the opposing angle
                 float oppositeLength = Mathf.Tan(angle) * distance;
-                Debug.Log("Opposite length: " + oppositeLength);
 
                 //Spawn additional projectiles
-                SpawnProjectile(firePos + (Vector3.right * oppositeLength), projectileDamage);
-                SpawnProjectile(firePos + (Vector3.left * oppositeLength), projectileDamage);
+                SpawnProjectile(firePos + (transform.right * oppositeLength), (int)(projectileDamage * additionalProjectileDamageMultiplier));
+                SpawnProjectile(firePos + (transform.right * -oppositeLength), (int)(projectileDamage * additionalProjectileDamageMultiplier));
             }
             
         }
