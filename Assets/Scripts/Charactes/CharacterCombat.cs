@@ -295,8 +295,18 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         ForceEndAttack();
     }
 
-    public void FireProjectile(int damage)
+    Vector3 firePos;
+
+    public void FireProjectile(int projectileDamage)
     {
+        projectileDamage += additionalDamage;
+        Debug.Log("Fire projectile for " + projectileDamage);
+
+        unblockable = false;
+        chargingAttack = AttackType.None;
+        additionalDamage = 0;
+
+        //Clear damage and list of enemies hit
         if (weapon != null)
         {
             if (weapon.weaponTrail != null)
@@ -309,10 +319,26 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
                 weapon.unblockableTrail.SetActive(false);
         }
 
-        Debug.Log("Fire projectile for " + damage);
-        GameObject projectileObj = Instantiate(projectile, transform.position, transform.rotation) as GameObject;
+        //Raycast to target
+        RaycastHit hit;
+
+        Vector3 origin = weapon.weaponBaseHit.transform.position;
+        float distance = 100f;
+        Vector3 dir = transform.forward;
+
+        if (Physics.SphereCast(origin, radius: hitSphereRadius, direction: dir, out hit, maxDistance: distance, projectileLayerMask))
+        {
+            //Debug.Log("Hit: " + hit.collider.gameObject);
+            firePos = hit.point;
+        }
+        else
+        {
+            firePos = origin + (dir * distance);
+        }
+
+        GameObject projectileObj = Instantiate(projectile, weapon.transform.position, transform.rotation) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
-        projectileMove.Fire(transform.forward * 100, projectileData, this.gameObject);
+        projectileMove.Fire(firePos, projectileData, this.gameObject, projectileDamage);
     }
 
     #endregion
@@ -437,6 +463,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public List<BaseCharacterController> currentTargets;
     List<BaseCharacterController> lastHit = new List<BaseCharacterController>();
     public LayerMask layerMask;
+    public LayerMask projectileLayerMask;
     public float currentTargetCastInterval = 0.6f;
     public float currentTargetCastRadius = 1.5f;
     public float currentTargetCastDistance = 10;

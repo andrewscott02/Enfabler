@@ -10,11 +10,12 @@ public class ProjectileMovement : MonoBehaviour
     Rigidbody rb;
     ProjectileHit hit;
 
-    public void Fire(Vector3 target, TrapStats trap, GameObject caster)
+    public void Fire(Vector3 target, TrapStats trap, GameObject caster, int overrideDamage = 0)
     {
         rb = GetComponent<Rigidbody>();
         hit = GetComponentInChildren<ProjectileHit>();
         hit.trapStats = trap;
+        hit.damage = overrideDamage == 0 ? trap.damage : overrideDamage;
         hit.caster = caster;
         hit.casterDamage = caster.GetComponent<ICanDealDamage>();
         hit.move = this;
@@ -47,6 +48,7 @@ public class ProjectileMovement : MonoBehaviour
             launchAngle = dir / time - Physics.gravity * time / 2;
         }
 
+        //Debug.Log("Determine force " + launchAngle);
         return launchAngle;
     }
 }

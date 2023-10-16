@@ -7,6 +7,7 @@ public class ProjectileHit : MonoBehaviour
     public GameObject caster;
     public ICanDealDamage casterDamage;
     public TrapStats trapStats;
+    public int damage;
     public ProjectileMovement move;
 
     public LayerMask layerMask;
@@ -16,7 +17,7 @@ public class ProjectileHit : MonoBehaviour
     {
         if (layerMask == (layerMask | (1 << other.gameObject.layer)))
         {
-            Debug.Log("Projectile hit " + other.gameObject.name);
+            //Debug.Log("Projectile hit " + other.gameObject.name);
             IDamageable hitDamageable = other.GetComponent<IDamageable>();
 
             //Gets hit damageable from parent if it cannot get it from the game object
@@ -30,7 +31,7 @@ public class ProjectileHit : MonoBehaviour
             //Return if collided object has no health component
             if (hitDamageable == null)
             {
-                Debug.LogWarning("No interface");
+                //Debug.LogWarning("No interface");
                 Destroy(move.gameObject);
                 return;
             }
@@ -69,7 +70,7 @@ public class ProjectileHit : MonoBehaviour
         if (trapStats.shotAOE == 0)
         {
             //only hit target
-            hitData = casterDamage.DealDamage(target, trapStats.damage, transform.position, transform.rotation.eulerAngles);
+            hitData = casterDamage.DealDamage(target, damage, transform.position, transform.rotation.eulerAngles);
         }
         else
         {
