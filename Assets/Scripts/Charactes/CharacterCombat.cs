@@ -13,6 +13,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public Weapon weapon { get; private set; }
     public Object projectile;
+    public float projectileSpeed = 40;
     public TrapStats projectileData;
 
     public bool canMove = true;
@@ -370,7 +371,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         GameObject projectileObj = Instantiate(projectile, weapon.transform.position, transform.rotation) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
-        projectileMove.Fire(targetPos, projectileData, this.gameObject, projectileDamage);
+        projectileMove.Fire(targetPos, projectileData, this.gameObject, projectileDamage, projectileSpeed);
     }
 
     public Vector2 moveDistanceThreshold = new Vector2(0.5f, 5f);

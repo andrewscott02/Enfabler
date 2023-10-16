@@ -10,7 +10,7 @@ public class ProjectileMovement : MonoBehaviour
     Rigidbody rb;
     ProjectileHit hit;
 
-    public void Fire(Vector3 target, TrapStats trap, GameObject caster, int overrideDamage = 0)
+    public void Fire(Vector3 target, TrapStats trap, GameObject caster, int overrideDamage = 0, float overrideSpeed = 0)
     {
         rb = GetComponent<Rigidbody>();
         hit = GetComponentInChildren<ProjectileHit>();
@@ -21,6 +21,7 @@ public class ProjectileMovement : MonoBehaviour
         hit.move = this;
 
         rb.mass = this.mass;
+        projectileSpeed = overrideSpeed == 0 ? projectileSpeed : overrideSpeed;
 
         Vector3 force = DetermineForce(target);
         rb.velocity = force;

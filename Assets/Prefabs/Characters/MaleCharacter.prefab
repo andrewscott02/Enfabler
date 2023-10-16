@@ -970,14 +970,17 @@ MonoBehaviour:
   savingAttackInput: 0
   savingChargeInput: 0
   savedAttackAnimSpeed: 1
-  chargeDamageScaling: 2
+  chargePrimaryDamageScaling: 2
+  chargeSecondaryDamageScaling: 1
   chargeUnblockableTime: 0.5
   chargeMaxTime: 2
   canAttack: 1
   targetSphereRadius: 1.5
   additionalShotAngle:
   - 5
-  - 10
+  - 3.4
+  - 3.5
+  additionalProjectileDamageMultiplier: 0.5
   moveDistanceThreshold: {x: 0.5, y: 2}
   targetSnapSpeed: 0.01
   targetSnapInterval: 0.001
