@@ -21,6 +21,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     
     public bool canSaveAttackInput = false;
+    AttackType lastAttackType = AttackType.None;
     public AttackType savingAttackInput = AttackType.None;
     public AttackType savingChargeInput = AttackType.None;
     public float savedAttackAnimSpeed = 1;
@@ -31,6 +32,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public float chargePrimaryDamageScaling = 2f;
     public float chargeSecondaryDamageScaling = 1f;
+    bool switchAttack = false;
     float currentChargeTime = 0;
     int additionalDamage;
     public float chargeUnblockableTime = 0.6f;
@@ -119,8 +121,19 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             canDodge = false;
             currentAttackSpeed = attackSpeed;
             animator.speed = attackSpeed;
-            animator.SetTrigger(sprinting ? "Sprint" + attackType.ToString() : attackType.ToString());
+
+            if (sprinting)
+            {
+                animator.SetTrigger("Sprint" + attackType.ToString());
+            }
+            else
+            {
+                Debug.Log(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
+                animator.SetTrigger(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
+            }
             sprinting = false;
+
+            lastAttackType = attackType;
             //RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
         }
         else if (canSaveAttackInput)
@@ -143,11 +156,11 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         {
             case AttackType.PrimaryAttack:
                 additionalDamage = (int)(currentChargeTime * chargePrimaryDamageScaling);
-                Debug.Log("Primary damage scaling " + additionalDamage);
+                //Debug.Log("Primary damage scaling " + additionalDamage);
                 break;
             case AttackType.SecondaryAttack:
                 additionalDamage = (int)(currentChargeTime * chargeSecondaryDamageScaling);
-                Debug.Log("Secondary damage scaling " + additionalDamage);
+                //Debug.Log("Secondary damage scaling " + additionalDamage);
                 break;
             default:
                 break;
@@ -212,8 +225,14 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         if (savingAttackInput != AttackType.None)
         {
             //Debug.Log("Saved attack input");
+            switchAttack = (lastAttackType != savingAttackInput && lastAttackType != AttackType.None);
             Attack(attackSpeed: savedAttackAnimSpeed, attackType: savingAttackInput);
             savingAttackInput = AttackType.None;
+        }
+        else
+        {
+            lastAttackType = AttackType.None;
+            switchAttack = false;
         }
     }
 
@@ -225,6 +244,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         animator.SetInteger("MeleeAttackCount", 0);
         animator.SetBool("InHitReaction", false);
         animator.speed = (baseAnimationSpeed);
+        lastAttackType = AttackType.None;
+        switchAttack = false;
         canMove = true;
         canDodge = true;
         canAttack = true;
@@ -316,7 +337,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public void FireProjectile(int projectileDamage)
     {
         projectileDamage += additionalDamage;
-        Debug.Log("Fire projectile for " + projectileDamage);
+        //Debug.Log("Fire projectile for " + projectileDamage);
 
         //Clear damage and list of enemies hit
         if (weapon != null)
