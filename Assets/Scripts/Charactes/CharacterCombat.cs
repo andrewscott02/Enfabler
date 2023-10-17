@@ -100,10 +100,14 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void Attack(float attackSpeed = 1f, bool canCharge = true, AttackType attackType = AttackType.PrimaryAttack)
     {
+        if (attackType == AttackType.None) return;
+
         savingAttackInput = AttackType.None;
 
         if (canAttack)
         {
+            switchAttack = (lastAttackType != attackType && lastAttackType != AttackType.None);
+
             //Debug.Log(attackType + " " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard") + " " + attackSpeed);
             Block(false);
             EndDodge();
@@ -225,14 +229,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         if (savingAttackInput != AttackType.None)
         {
             //Debug.Log("Saved attack input");
-            switchAttack = (lastAttackType != savingAttackInput && lastAttackType != AttackType.None);
             Attack(attackSpeed: savedAttackAnimSpeed, attackType: savingAttackInput);
             savingAttackInput = AttackType.None;
-        }
-        else
-        {
-            lastAttackType = AttackType.None;
-            switchAttack = false;
         }
     }
 
