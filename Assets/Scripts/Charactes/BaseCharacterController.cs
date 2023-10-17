@@ -13,8 +13,6 @@ public class BaseCharacterController : MonoBehaviour
 
     public bool playerTeam = true;
 
-    protected SetWeapon setWeapon;
-
     public virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -22,9 +20,6 @@ public class BaseCharacterController : MonoBehaviour
         health = GetComponent<Health>();
         health.animator = animator;
         combat = GetComponent<CharacterCombat>();
-
-        setWeapon = GetComponentInChildren<SetWeapon>();
-        combat.SetupWeapon(setWeapon.CreateWeapon());
 
         SetupRagdoll();
     }

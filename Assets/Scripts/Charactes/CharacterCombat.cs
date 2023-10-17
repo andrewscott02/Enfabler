@@ -44,6 +44,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     float currentAttackSpeed = 1;
     bool baseUseRootMotion;
 
+    protected SetWeapon setWeapon;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -55,6 +57,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         currentArmour = maxArmour;
         armourRegenCoroutine = StartCoroutine(IResetArmour(armourRegen));
         ForceEndAttack();
+
+        setWeapon = GetComponentInChildren<SetWeapon>();
+        SetupWeapon(0);
     }
 
     private void Update()
@@ -83,9 +88,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         }
     }
 
-    public void SetupWeapon(Weapon weapon)
+    public void SetupWeapon(int weaponIndex)
     {
-        this.weapon = weapon;
+        if (setWeapon.currentWeapon == weaponIndex) return;
+
+        setWeapon.currentWeapon = weaponIndex;
+        this.weapon = setWeapon.CreateWeapon();
     }
 
     #endregion
@@ -108,6 +116,18 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         if (canAttack)
         {
             switchAttack = (lastAttackType != attackType && lastAttackType != AttackType.None);
+
+            switch (attackType)
+            {
+                case AttackType.PrimaryAttack:
+                    SetupWeapon(0);
+                    break;
+                case AttackType.SecondaryAttack:
+                    SetupWeapon(1);
+                    break;
+                default:
+                    break;
+            }
 
             //Debug.Log(attackType + " " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard") + " " + attackSpeed);
             Block(false);
