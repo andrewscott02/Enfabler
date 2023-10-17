@@ -822,6 +822,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         //Debug.Log("Got hit, end attack");
         canAttack = false;
+        animator.speed = baseAnimationSpeed;
         if (rumbleOnHit)
             RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
     }
