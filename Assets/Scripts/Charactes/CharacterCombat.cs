@@ -13,6 +13,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public Weapon weapon { get; private set; }
     public Object projectile;
+    public Object projectileFX;
     public float projectileSpeed = 40;
     public TrapStats projectileData;
 
@@ -388,6 +389,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     void SpawnProjectile(Vector3 targetPos, int projectileDamage)
     {
+        Instantiate(projectileFX, weapon.transform);
+
         GameObject projectileObj = Instantiate(projectile, weapon.transform.position, transform.rotation) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
         projectileMove.Fire(targetPos, projectileData, this.gameObject, projectileDamage, projectileSpeed);
