@@ -122,7 +122,19 @@ public class ProjectileHit : MonoBehaviour
         projectileAttach.transform.rotation = rot;
         projectileAttach.transform.localScale = scale;
 
+        /*
+        RaycastHit hit;
+
+        Vector3 origin = caster.transform.position;
+        float distance = 100f;
+        Vector3 dir = projectileAttach.transform.position - caster.transform.position;
+        if (Physics.Raycast(origin, direction: dir, out hit, maxDistance: 20f, layerMask))
+        {
+            //Debug.Log("Hit: " + hit.collider.gameObject);
+            projectileAttach.transform.position = hit.point;
+        }
+        */
+
         alreadyAttached = true;
-        Debug.Break();
     }
 }
