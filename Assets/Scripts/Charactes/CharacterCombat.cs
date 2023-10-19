@@ -691,6 +691,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         this.parrying = blocking && parryAvailable;
         this.blocking = blocking;
 
+        SetupWeapon(0);
+
         if (modelConstructor != null)
         {
             modelConstructor.PlayerParry(attackers > 0);

@@ -7,7 +7,27 @@ public class CharacterMovement : MonoBehaviour
     public bool sprinting { get; protected set; } = false;
     protected float currentSpeed = 0;
 
+    public float gravityMultiplier = 5f;
+
     public FootStepData stepData;
+
+    protected Rigidbody rb;
+
+    public LayerMask groundLayer;
+    protected bool grounded;
+
+    protected virtual void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void FixedUpdate()
+    {
+        grounded = Physics.Raycast(transform.position + new Vector3(0, 0.2f, 0), Vector3.down, 0.4f, groundLayer);
+
+        if (!grounded)
+            rb.AddForce(Physics.gravity * gravityMultiplier);
+    }
 
     public void SpawnFootstep(int footTransformIndex)
     {
@@ -25,5 +45,11 @@ public class CharacterMovement : MonoBehaviour
     {
         SpawnImpulse(impulseStrength);
         RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position + new Vector3(0, 0.2f, 0), transform.position + new Vector3(0, 0.2f, 0) + (Vector3.down * 0.4f));
     }
 }

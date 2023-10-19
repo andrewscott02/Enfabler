@@ -7,7 +7,6 @@ public class PlayerMovement : CharacterMovement
 {
     [HideInInspector]
     public Animator animator;
-    Rigidbody rb;
     public GameObject skeleton;
 
     [HideInInspector]
@@ -26,12 +25,12 @@ public class PlayerMovement : CharacterMovement
     float defaultFOV;
     public float moveFOVMultiplier = 2;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         vCam = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
         vCamFollow = vCam.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
         defaultFOV = vCam.m_Lens.FieldOfView;
-        rb = GetComponent<Rigidbody>();
     }
 
     /// <summary>

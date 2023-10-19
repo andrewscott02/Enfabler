@@ -155,6 +155,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             };
 
             controller.ActivateRagdoll(true, forcedata);
+            gameObject.name += " -- Dead";
         }
         else
         {
