@@ -123,5 +123,6 @@ public class ProjectileHit : MonoBehaviour
         projectileAttach.transform.localScale = scale;
 
         alreadyAttached = true;
+        Debug.Break();
     }
 }
