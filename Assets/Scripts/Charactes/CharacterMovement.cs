@@ -26,7 +26,7 @@ public class CharacterMovement : MonoBehaviour
         grounded = Physics.Raycast(transform.position + new Vector3(0, 0.2f, 0), Vector3.down, 0.4f, groundLayer);
 
         if (!grounded)
-            rb.AddForce(Physics.gravity * gravityMultiplier);
+            rb.AddForce(Physics.gravity * gravityMultiplier * Time.fixedDeltaTime);
     }
 
     public void SpawnFootstep(int footTransformIndex)
