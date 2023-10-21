@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProjectileMovement : MonoBehaviour
 {
+    public Vector3 lastPos { get; private set; }
     public float projectileSpeed = 1;
     public float mass = 0;
 
@@ -51,5 +52,10 @@ public class ProjectileMovement : MonoBehaviour
 
         //Debug.Log("Determine force " + launchAngle);
         return launchAngle;
+    }
+
+    private void FixedUpdate()
+    {
+        lastPos = transform.position;
     }
 }

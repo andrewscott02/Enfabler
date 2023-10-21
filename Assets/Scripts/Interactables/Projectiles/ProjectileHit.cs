@@ -14,6 +14,7 @@ public class ProjectileHit : MonoBehaviour
     public ProjectileMovement move;
 
     public LayerMask layerMask;
+    public LayerMask attachMask;
     List<IDamageable> hitTargets = new List<IDamageable>();
 
     private void OnTriggerEnter(Collider other)
@@ -109,31 +110,34 @@ public class ProjectileHit : MonoBehaviour
 
     void Attach(Collider other)
     {
-        Debug.Log("Attach to object");
+        //Debug.Log("Attach to object");
         if (alreadyAttached || projectileAttach == null) return;
 
         Vector3 pos = projectileAttach.transform.position;
         Quaternion rot = projectileAttach.transform.rotation;
-        Vector3 scale = projectileAttach.transform.localScale;
 
-        projectileAttach.transform.parent = other.gameObject.transform;
-
-        projectileAttach.transform.position = pos;
-        projectileAttach.transform.rotation = rot;
-        projectileAttach.transform.localScale = scale;
-
-        /*
         RaycastHit hit;
 
-        Vector3 origin = caster.transform.position;
-        float distance = 100f;
-        Vector3 dir = projectileAttach.transform.position - caster.transform.position;
-        if (Physics.Raycast(origin, direction: dir, out hit, maxDistance: 20f, layerMask))
+        Vector3 origin = HelperFunctions.GetFlankingPoint(projectileAttach.transform.position, move.lastPos, move.projectileSpeed * Time.fixedDeltaTime);
+        float distance = move.projectileSpeed * Time.fixedDeltaTime;
+        Vector3 dir = (projectileAttach.transform.position - move.lastPos).normalized;
+        if (Physics.SphereCast(origin, 0.45f, direction: dir, out hit, maxDistance: distance, attachMask))
         {
-            //Debug.Log("Hit: " + hit.collider.gameObject);
+            Debug.Log("Attach Hit: " + hit.collider.gameObject);
+            projectileAttach.transform.parent = hit.collider.gameObject.transform;
+
             projectileAttach.transform.position = hit.point;
+            //projectileAttach.transform.rotation = Quaternion.Euler(dir);
         }
-        */
+        else
+        {
+            Debug.Log("Attach did not hit: " + other.gameObject);
+
+            projectileAttach.transform.parent = other.gameObject.transform;
+
+            projectileAttach.transform.position = pos;
+            projectileAttach.transform.rotation = rot;
+        }
 
         alreadyAttached = true;
     }

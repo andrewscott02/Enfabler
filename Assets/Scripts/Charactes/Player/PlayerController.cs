@@ -20,7 +20,7 @@ public class PlayerController : BaseCharacterController
 
     bool useMoveRotation = false;
     float xMoveRotateInput;
-    float moveRotateMultiplier = 0.2f;
+    public float moveRotateMultiplier = 0.1f;
 
     PlayerMovement playerMovement;
 

@@ -110,11 +110,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38626d88b23a2134897ef5f5ecded1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileAttach: {fileID: 0}
   caster: {fileID: 0}
   trapStats: {fileID: 0}
   damage: 0
   move: {fileID: 0}
   layerMask:
+    serializedVersion: 2
+    m_Bits: 1241
+  attachMask:
     serializedVersion: 2
     m_Bits: 217
 --- !u!1001 &5357407789209447410
