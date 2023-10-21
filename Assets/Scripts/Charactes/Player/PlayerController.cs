@@ -16,7 +16,7 @@ public class PlayerController : BaseCharacterController
     public Vector2 yRotateThresholds = new Vector2(340, 40);
     public Vector2 rotateInterval;
     public float rotateDeadZone = 0.1f;
-    public GameObject followTarget;
+    public FollowTarget followTarget;
 
     bool useMoveRotation = false;
     float xMoveRotateInput;
@@ -219,4 +219,11 @@ public class PlayerController : BaseCharacterController
     }
 
     #endregion
+
+    public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
+    {
+        followTarget.follow.parent = null;
+
+        base.ActivateRagdoll(activate, forceData);
+    }
 }
