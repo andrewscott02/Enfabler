@@ -20,7 +20,7 @@ public class ProjectileHit : MonoBehaviour
     {
         if (layerMask == (layerMask | (1 << other.gameObject.layer)))
         {
-            Debug.Log("Projectile hit " + other.gameObject.name);
+            //Debug.Log("Projectile hit " + other.gameObject.name);
             IDamageable hitDamageable = other.GetComponent<IDamageable>();
 
             //Gets hit damageable from parent if it cannot get it from the game object
@@ -114,7 +114,7 @@ public class ProjectileHit : MonoBehaviour
 
         Vector3 pos = projectileAttach.transform.position;
         Quaternion rot = projectileAttach.transform.rotation;
-        Vector3 scale = projectileAttach.transform.lossyScale;
+        Vector3 scale = projectileAttach.transform.localScale;
 
         projectileAttach.transform.parent = other.gameObject.transform;
 
