@@ -70,7 +70,6 @@ public class TutorialManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
                 Debug.Log("Tutorial complete");
-                ExperimentManager.instance.LoadNextLevel();
                 //Load tutorial
             }
         }

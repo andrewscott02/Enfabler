@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AIManager : MonoBehaviour
 {
@@ -51,7 +52,7 @@ public class AIManager : MonoBehaviour
 
         //Destroy(character.gameObject);
 
-        if (playerTeam.Count == 0 || enemyTeam.Count == 0)
+        if (playerTeam.Count == 0)
         {
             NextLevel();
         }
@@ -90,6 +91,16 @@ public class AIManager : MonoBehaviour
 
     public void NextLevel()
     {
-        //nextLevelUI.SetActive(true);
+        nextLevelUI.SetActive(true);
+        StartCoroutine(IMainMenu(5f));
+    }
+
+    public E_Scenes mainMenu;
+
+    IEnumerator IMainMenu(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        SceneManager.LoadScene(mainMenu.ToString());
     }
 }
