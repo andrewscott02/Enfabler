@@ -22,6 +22,7 @@ public class ArenaManager : MonoBehaviour
     {
         yield return new WaitForSeconds(interval);
         SpawnEnemies();
+        round++;
         StartCoroutine(ISpawnRounds());
     }
 
