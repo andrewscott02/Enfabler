@@ -5,17 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public E_Scenes mainMenu, arena;
+    public E_Scenes arena;
+    public GameObject mainMenu, controls;
 
     private void Start()
     {
         ShowMouse(true);
+        ShowControls(false);
     }
 
     public void StartGame()
     {
         ShowMouse(false);
         SceneManager.LoadScene(arena.ToString());
+    }
+
+    public void ShowControls(bool show)
+    {
+        mainMenu.SetActive(!show);
+        controls.SetActive(show);
     }
 
     public void QuitGame()
