@@ -110,38 +110,10 @@ public static class HelperFunctions
     /// <returns></returns>
     public static BaseCharacterController GetClosestEnemy(AIController agent, Vector3 origin, float sightRadius, bool debug)
     {
-        BaseCharacterController closestCharacter = null;
-        float closestDistance = 99999;
-
-        foreach (var item in AIManager.instance.GetEnemyTeam(agent))
-        {
-            if (item == null) break;
-            if (item.invisible) break;
-
-            float itemDistance = Vector3.Distance(origin, item.gameObject.transform.position);
-
-            if (debug)
-                Debug.Log(item.gameObject.name + " is " + itemDistance);
-
-            if (itemDistance < sightRadius && itemDistance < closestDistance)
-            {
-                if (debug && closestCharacter != null)
-                {
-                    Debug.Log("Origin: " + origin);
-                    Debug.Log("From " + closestCharacter.name + closestDistance + " to " + item.name + itemDistance);
-                }
-                closestCharacter = item;
-                closestDistance = itemDistance;
-            }
-        }
-
-        /*
-        if (closestCharacter != null)
-            Debug.Log("Returning " + closestCharacter.gameObject.name + " as closest enemy within " + sightRadius);
-        else
-            Debug.Log("Closest enemmy is null within " + sightRadius);
-        */
-        return closestCharacter;
+        BaseCharacterController closestTarget = GetClosestEnemyFromList(agent, origin, sightRadius, debug, AIManager.instance.GetEnemyTeam(agent));
+        if (closestTarget != null)
+            agent.ResetRoamTime();
+        return closestTarget;
     }
 
     /// <summary>
@@ -153,12 +125,10 @@ public static class HelperFunctions
     /// <param name="debug"></param>
     /// <param name="enemyList"></param>
     /// <returns></returns>
-    public static BaseCharacterController GetClosestEnemyFromList(Vector3 origin, float sightRadius, bool debug, List<BaseCharacterController> enemyList)
+    public static BaseCharacterController GetClosestEnemyFromList(AIController agent, Vector3 origin, float sightRadius, bool debug, List<BaseCharacterController> enemyList)
     {
         BaseCharacterController closestCharacter = null;
         float closestDistance = 99999;
-
-        if (enemyList.Count == 1) { return enemyList[0]; }
 
         foreach (var item in enemyList)
         {
@@ -167,20 +137,11 @@ public static class HelperFunctions
 
             float itemDistance = Vector3.Distance(origin, item.gameObject.transform.position);
 
-            //Debug.Log(item.gameObject.name + " is " + itemDistance);
-
-            if (itemDistance < sightRadius && itemDistance < closestDistance)
-            {
-                if (debug && closestCharacter != null)
-                {
-                    //Debug.Log("Origin: " + origin);
-                    //Debug.Log("From " + closestCharacter.name + closestDistance + " to " + item.name + itemDistance);
-                }
-                closestCharacter = item;
-                closestDistance = itemDistance;
-            }
+            CheckDistance(agent, true, sightRadius, closestDistance, closestCharacter, itemDistance, item, out closestDistance, out closestCharacter);
         }
 
+        if (closestCharacter != null)
+            agent.ResetRoamTime();
         return closestCharacter;
     }
 
@@ -205,21 +166,41 @@ public static class HelperFunctions
 
             float itemDistance = Vector3.Distance(origin, item.gameObject.transform.position);
 
-            //Debug.Log(item.gameObject.name + " is " + itemDistance);
-
-            if (itemDistance < sightRadius && itemDistance < closestDistance)
-            {
-                if (debug && closestCharacter != null)
-                {
-                    //Debug.Log("Origin: " + origin);
-                    //Debug.Log("From " + closestCharacter.name + closestDistance + " to " + item.name + itemDistance);
-                }
-                closestCharacter = item;
-                closestDistance = itemDistance;
-            }
+            CheckDistance(agent, true, sightRadius, closestDistance, closestCharacter, itemDistance, item, out closestDistance, out closestCharacter);
         }
 
+        if (closestCharacter != null)
+            agent.ResetRoamTime();
+
         return closestCharacter;
+    }
+
+    static void CheckDistance(AIController agent, bool requireSight, float sightRadius, float currentDistance, BaseCharacterController currentCharacter, float itemDistance, BaseCharacterController itemCharacter, out float closestDistance, out BaseCharacterController closestCharacter)
+    {
+        closestCharacter = currentCharacter;
+        closestDistance = currentDistance;
+
+        if ((itemDistance > sightRadius || itemDistance > closestDistance)) return;
+        
+        if (requireSight && !CheckSight(agent, itemCharacter, itemDistance)) return;
+
+        closestDistance = itemDistance;
+        closestCharacter = itemCharacter;
+    }
+
+    static bool CheckSight(AIController agent, BaseCharacterController targetCharacter, float sightDistance)
+    {
+        //Raycast between sword base and tip
+        RaycastHit hit;
+
+        Vector3 origin = agent.transform.position;
+        float distance = sightDistance;
+        Vector3 dir = targetCharacter.transform.position - agent.transform.position;
+
+        //Return if anything is blocking the agent's sight to the target
+        bool canSee = !Physics.Raycast(origin, direction: dir, out hit, maxDistance: distance, agent.sightMask);
+
+        return canSee;
     }
 
     #endregion

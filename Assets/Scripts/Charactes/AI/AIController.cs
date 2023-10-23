@@ -14,6 +14,8 @@ public class AIController : BaseCharacterController
     protected NavMeshAgent agent; public NavMeshAgent GetNavMeshAgent() { return agent; }
     public BehaviourTree bt;
 
+    public float roamTimeElapsed { get; protected set; } = 0;
+
     public override void Start()
     {
         base.Start();
@@ -42,7 +44,10 @@ public class AIController : BaseCharacterController
         Gizmos.DrawWireSphere(gameObject.transform.position, roamDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, maxDistanceFromModelCharacter);
         Gizmos.DrawWireSphere(gameObject.transform.position, meleeDistance);
+    }
 
+    private void OnDrawGizmos()
+    {
         if (currentTarget != null)
         {
             Gizmos.DrawLine(transform.position, currentTarget.transform.position);
@@ -52,7 +57,9 @@ public class AIController : BaseCharacterController
     public virtual void Update()
     {
         if (health.dying) { return; }
-        
+
+        roamTimeElapsed += Time.deltaTime;
+
         if (combat.canSaveAttackInput)
         {
             Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
@@ -89,6 +96,7 @@ public class AIController : BaseCharacterController
 
     public float lerpSpeed = 0.01f;
 
+    public LayerMask sightMask;
     public float sightDistance = 100;
     public float chaseDistance = 40;
     public float roamDistance = 25;
@@ -114,21 +122,19 @@ public class AIController : BaseCharacterController
     {
         currentDestination = pos;
     }
+
     public bool roaming = false;
+
     public void MoveToDestination(bool sprinting)
     {
         agent.speed = sprinting ? sprintSpeed : walkSpeed;
         agent.SetDestination(currentDestination);
         //Rotate(currentDestination);
     }
+
     public bool NearDestination(float distanceAllowance)
     {
         return Vector3.Distance(transform.position, currentDestination) <= distanceAllowance;
-    }
-
-    bool NearDestination()
-    {
-        return Vector3.Distance(transform.position, currentDestination) < distanceAllowance;
     }
 
     #endregion
@@ -267,6 +273,12 @@ public class AIController : BaseCharacterController
     }
 
     #endregion
+
+    public void ResetRoamTime()
+    {
+        Debug.Log("Resetting roam time");
+        roamTimeElapsed = 0;
+    }
 
     public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
     {

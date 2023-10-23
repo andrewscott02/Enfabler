@@ -25,6 +25,7 @@ public class GetClosestEnemy : Node
         if (enemy != null)
         {
             agent.SetDestinationPos(enemy.transform.position);
+            //Debug.Log("Generated point");
             //Debug.Log("Generated point at: " + enemy.transform.position);
 
             agent.currentTarget = enemy;
@@ -33,6 +34,7 @@ public class GetClosestEnemy : Node
         }
         else
         {
+            //Debug.Log("Failed to get enemy nearby");
             state = NodeState.Failure;
         }
 

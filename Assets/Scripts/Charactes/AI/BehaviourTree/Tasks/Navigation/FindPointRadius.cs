@@ -9,6 +9,7 @@ public class FindPointRadius : Node
     public AIController agent;
     int iterations = 30;
     float radius;
+    Vector3 roamCenter;
 
     /// <summary>
     /// Commands an agent to roam to a random point within a specified radius
@@ -18,6 +19,7 @@ public class FindPointRadius : Node
     {
         this.agent = agent;
         this.radius = radius;
+        roamCenter = agent.transform.position;
     }
 
     public override NodeState Evaluate()
@@ -25,7 +27,7 @@ public class FindPointRadius : Node
         if (agent.roaming)
             return NodeState.Running;
 
-        Vector3 point = HelperFunctions.GetRandomPoint(agent.transform.position, radius, agent.distanceAllowance, iterations);
+        Vector3 point = HelperFunctions.GetRandomPoint(agent.roamTimeElapsed > 15f ? roamCenter : agent.transform.position, radius, agent.distanceAllowance, iterations);
         agent.SetDestinationPos(point);
         //Debug.Log("Generated point at: " + point);
 

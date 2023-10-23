@@ -319,9 +319,12 @@ MonoBehaviour:
   bt: {fileID: 3204209253451787689}
   distanceAllowance: 0.5
   lerpSpeed: 0.01
-  sightDistance: 80
+  sightMask:
+    serializedVersion: 2
+    m_Bits: 129
+  sightDistance: 60
   chaseDistance: 40
-  roamDistance: 25
+  roamDistance: 7
   maxDistanceFromModelCharacter: 6
   meleeDistance: 2
   meleeAttackSpeed: 0.5
