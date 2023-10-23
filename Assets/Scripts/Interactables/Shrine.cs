@@ -9,6 +9,7 @@ public class Shrine : MonoBehaviour, IInteractable
     public E_InteractTypes interactType;
     public bool multipleInteractions = false;
     public int healing = 30;
+    public Object interactFX;
 
     bool canBeInteracted = true;
 
@@ -56,6 +57,7 @@ public class Shrine : MonoBehaviour, IInteractable
         player.EnableInteraction(E_InteractTypes.Null);
 
         interactCharacter.GetHealth().Heal(30);
+        Instantiate(interactFX, interactCharacter.transform);
     }
 
     public void ShowInteractMessage(bool show)
