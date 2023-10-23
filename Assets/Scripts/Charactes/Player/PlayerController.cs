@@ -45,6 +45,8 @@ public class PlayerController : BaseCharacterController
 
     #region Inputs
 
+    #region Inputs - Movement and Camera
+
     public void MoveInput(InputAction.CallbackContext context)
     {
         moveInput.x = context.ReadValue<Vector2>().x;
@@ -58,6 +60,43 @@ public class PlayerController : BaseCharacterController
         xRotateInput = context.ReadValue<Vector2>().x;
         yRotateInput = context.ReadValue<Vector2>().y;
     }
+
+    Coroutine sprintCoroutine;
+
+    public void SprintInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            playerMovement.Sprint(true);
+            combat.sprinting = true;
+            sprintCoroutine = StartCoroutine(IDelayUseMoveCam(1.5f));
+        }
+
+        if (context.canceled)
+        {
+            playerMovement.Sprint(false);
+            if (sprintCoroutine != null)
+                StopCoroutine(sprintCoroutine);
+            StartCoroutine(IDelayStopSprint(0.5f));
+            useMoveRotation = false;
+        }
+    }
+
+    IEnumerator IDelayUseMoveCam(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        useMoveRotation = true;
+    }
+
+    IEnumerator IDelayStopSprint(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        combat.sprinting = false;
+    }
+
+    #endregion
+
+    #region Inputs - Attacks
 
     public void PrimaryAttackInput(InputAction.CallbackContext context)
     {
@@ -88,6 +127,10 @@ public class PlayerController : BaseCharacterController
             combat.ReleaseAttack(attackType);
         }
     }
+
+    #endregion
+
+    #region Inputs - Defence
 
     public void BlockInput(InputAction.CallbackContext context)
     {
@@ -126,49 +169,36 @@ public class PlayerController : BaseCharacterController
         combat.Dodge();
     }
 
-    Coroutine sprintCoroutine;
+    #endregion
 
-    public void SprintInput(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            playerMovement.Sprint(true);
-            combat.sprinting = true;
-            sprintCoroutine = StartCoroutine(IDelayUseMoveCam(1.5f));
-        }
-
-        if (context.canceled)
-        {
-            playerMovement.Sprint(false);
-            if (sprintCoroutine != null)
-                StopCoroutine(sprintCoroutine);
-            StartCoroutine(IDelayStopSprint(0.5f));
-            useMoveRotation = false;
-        }
-    }
-
-    IEnumerator IDelayUseMoveCam(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        useMoveRotation = true;
-    }
-
-    IEnumerator IDelayStopSprint(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        combat.sprinting = false;
-    }
+    #region Inputs - Interaction
 
     public void InteractInput(InputAction.CallbackContext context)
     {
         if (!context.performed || !combat.canAttack)
             return;
 
+        if (!enableInteraction) return;
+
         Debug.Log("Interact");
         combat.ForceEndAttack();
-        animator.SetTrigger("Interact");
-        //TODO: Proper interact interface and checks
+        animator.SetTrigger(interactAnim);
+
+        interactable.Interacted(this);
     }
+
+    IInteractable interactable;
+    bool enableInteraction = false;
+    string interactAnim;
+
+    public void EnableInteraction(E_InteractTypes interactType, IInteractable interactable = null)
+    {
+        enableInteraction = interactable != null;
+        this.interactable = interactable;
+        interactAnim = interactType.ToString();
+    }
+
+    #endregion
 
     // Update is called once per frame
     void Update()

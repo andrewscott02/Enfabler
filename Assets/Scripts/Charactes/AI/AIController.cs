@@ -276,7 +276,7 @@ public class AIController : BaseCharacterController
 
     public void ResetRoamTime()
     {
-        Debug.Log("Resetting roam time");
+        //Debug.Log("Resetting roam time");
         roamTimeElapsed = 0;
     }
 

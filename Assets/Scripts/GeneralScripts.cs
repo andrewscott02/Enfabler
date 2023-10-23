@@ -251,11 +251,25 @@ public interface IHealable
     void Heal(int heal);
 }
 
+public interface IInteractable
+{
+    MonoBehaviour GetScript();
+    void Interacted(BaseCharacterController interactCharacter);
+    void ShowInteractMessage(bool show);
+}
+
 #endregion
+
+#region Enums and Structs
 
 public enum E_DamageEvents
 {
     Hit, Block, Parry, Dodge
+}
+
+public enum E_InteractTypes
+{
+    Null, Button, Lever, Pray
 }
 
 [System.Serializable]
@@ -297,3 +311,5 @@ public struct ExplosiveForceData
     public Vector3 origin;
 
 }
+
+#endregion
