@@ -13,6 +13,8 @@ public class AIManager : MonoBehaviour
     private void Start()
     {
         instance = this;
+        enemiesDied += EnemiesDied;
+        playerDied += PlayerDied;
     }
 
     public void AllocateTeam(BaseCharacterController character)
@@ -44,17 +46,18 @@ public class AIManager : MonoBehaviour
         if (playerTeam.Contains(character))
         {
             playerTeam.Remove(character);
+            if (playerTeam.Count == 0)
+            {
+                playerDied();
+            }
         }
         else if (enemyTeam.Contains(character))
         {
             enemyTeam.Remove(character);
-        }
-
-        //Destroy(character.gameObject);
-
-        if (playerTeam.Count == 0)
-        {
-            NextLevel();
+            if (enemyTeam.Count <= 0)
+            {
+                enemiesDied();
+            }
         }
     }
 
@@ -102,5 +105,19 @@ public class AIManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         SceneManager.LoadScene(mainMenu.ToString());
+    }
+
+    public delegate void TeamDiedDelegate();
+    public TeamDiedDelegate playerDied, enemiesDied;
+
+    public void PlayerDied()
+    {
+        NextLevel();
+    }
+
+    public void EnemiesDied()
+    {
+        //Debug.Log("Enemies are dead");
+        //Empty function for delegate
     }
 }

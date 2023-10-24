@@ -657,6 +657,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         lastHit.Clear();
         foreach (var item in currentTargets)
         {
+            if (item == null) break;
+
             if (Vector3.Distance(transform.position, item.transform.position) < distance)
             {
                 if (item.GetCharacterCombat() != null)

@@ -110,12 +110,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (combat != null) { combat.GotHit(); }
         else { Debug.LogWarning("No combat script"); }
 
-        if (animator != null)
+        if (animator != null && damage >= hitReactData.lightHitReactThreshold)
         {
             animator.SetBool("InHitReaction", true);
             animator.SetTrigger(damage < hitReactData.heavyHitReactThreshold ? "HitReactLight" : "HitReactHeavy");
         }
-        else { Debug.LogWarning("No animator"); }
 
         float impulseStrength = Mathf.Clamp(damage * hitReactData.hitImpulseMultiplier, 0, hitReactData.impulseMax);
         SpawnImpulse(impulseStrength);
@@ -151,7 +150,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (AIManager.instance != null)
             AIManager.instance.CharacterDied(this.GetComponent<BaseCharacterController>());
 
-        if (controller != null)
+        if (controller != null && hitReactData.killRagdoll)
         {
             //Debug.Log(gameObject + "has controller");
             ExplosiveForceData forcedata = new ExplosiveForceData()

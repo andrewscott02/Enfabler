@@ -135,7 +135,7 @@ public class AIController : BaseCharacterController
 
     public void MoveToDestination(bool sprinting)
     {
-        Debug.Log(sprinting + " sprinting");
+        //Debug.Log(sprinting + " sprinting");
         agent.speed = sprinting ? sprintSpeed : walkSpeed;
         agent.SetDestination(currentDestination);
         //Rotate(currentDestination);

@@ -8,7 +8,6 @@ public class ArenaManager : MonoBehaviour
     public struct ArenaRound
     {
         public ArenaRoundEnemies[] enemyTypes;
-        public int interval;
     }
 
     [System.Serializable]
@@ -19,7 +18,7 @@ public class ArenaManager : MonoBehaviour
     }
 
     public ArenaRound[] arenaRounds;
-
+    public float interval = 5f;
     public float spawnRadius = 30f;
 
     int round = 0;
@@ -27,15 +26,20 @@ public class ArenaManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(ISpawnRounds());
+        StartCoroutine(ISpawnRounds(interval));
+        AIManager.instance.enemiesDied += StartRoundCoroutine;
     }
 
-    IEnumerator ISpawnRounds()
+    void StartRoundCoroutine()
     {
-        yield return new WaitForSeconds(arenaRounds[round].interval);
+        StartCoroutine(ISpawnRounds(interval));
+    }
+
+    IEnumerator ISpawnRounds(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         SpawnEnemies();
         round = Mathf.Clamp(round + 1, 0, arenaRounds.Length);
-        StartCoroutine(ISpawnRounds());
     }
 
     void SpawnEnemies()

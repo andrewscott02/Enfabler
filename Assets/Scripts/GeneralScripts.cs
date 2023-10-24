@@ -291,6 +291,7 @@ public struct HitReactData
     public Object bloodFX, deathFX, blockFX, parryFX;
 
     public float hitImpulseMultiplier;
+    public int lightHitReactThreshold;
     public int heavyHitReactThreshold;
     public float hitSlomoScale;
     public float hitSlomoDuration;
@@ -298,6 +299,7 @@ public struct HitReactData
     public float killImpulseStrength;
     public float killSlomoScale;
     public float killSlomoDuration;
+    public bool killRagdoll;
 
     public float parryImpulseStrength;
     public float parrySlomoScale;
