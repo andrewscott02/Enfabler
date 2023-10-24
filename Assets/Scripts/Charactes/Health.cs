@@ -38,6 +38,12 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         return this;
     }
 
+    [ContextMenu("Take10Damage")]
+    public void Take10Damage()
+    {
+        Damage(GetComponent<CharacterCombat>(), 10, transform.position, transform.eulerAngles);
+    }
+
     public E_DamageEvents Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot)
     {
         MonoBehaviour attackerMono = attacker.GetScript();

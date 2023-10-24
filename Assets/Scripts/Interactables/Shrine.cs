@@ -2,66 +2,63 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shrine : MonoBehaviour, IInteractable
+public class Shrine : Interactable, IInteractable
 {
-    public static PlayerController player;
+    public SliderScript healingSlider;
+    Light pointLight;
+    public int maxHealing = 30;
+    int healingLeft = 0;
 
-    public E_InteractTypes interactType;
-    public bool multipleInteractions = false;
-    public int healing = 30;
-    public Object interactFX;
-
-    bool canBeInteracted = true;
-
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerController>();
+        base.Start();
+        pointLight = GetComponentInChildren<Light>();
+        healingLeft = maxHealing;
+        SetSliderValues();
     }
 
-    public MonoBehaviour GetScript()
+    void SetSliderValues()
     {
-        return this;
-    }
+        pointLight.intensity = (float)healingLeft / (float)maxHealing;
+        healingSlider.ChangeSliderValue(healingLeft, maxHealing);
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!canBeInteracted) return;
-
-        if (other.gameObject == player.gameObject)
+        if (healingLeft <= 0)
         {
-            ShowInteractMessage(true);
-            player.EnableInteraction(interactType, this);
+            pointLight.enabled = false;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
-        if (!canBeInteracted) return;
+        if (healingLeft <= 0) return;
+        base.OnTriggerEnter(other);
+    }
 
-        if (other.gameObject == player.gameObject)
+    protected override void OnTriggerExit(Collider other)
+    {
+        if (healingLeft <= 0) return;
+        base.OnTriggerExit(other);
+    }
+
+    public override void Interacted(BaseCharacterController interactCharacter)
+    {
+        base.Interacted(interactCharacter);
+
+        if (healingLeft <= 0) return;
+
+        int neededHealing = interactCharacter.GetHealth().maxHealth - interactCharacter.GetHealth().GetCurrentHealth();
+
+        int healthRestore = Mathf.Clamp(neededHealing, 0, healingLeft);
+        healingLeft -= healthRestore;
+        interactCharacter.GetHealth().Heal(healthRestore);
+        SetSliderValues();
+
+        Instantiate(interactFX, interactCharacter.transform);
+
+        if (healingLeft <= 0)
         {
             ShowInteractMessage(false);
             player.EnableInteraction(E_InteractTypes.Null);
         }
-    }
-
-    public void Interacted(BaseCharacterController interactCharacter)
-    {
-        if (!canBeInteracted) return;
-
-        if (!multipleInteractions)
-            canBeInteracted = false;
-
-        ShowInteractMessage(false);
-        player.EnableInteraction(E_InteractTypes.Null);
-
-        interactCharacter.GetHealth().Heal(30);
-        Instantiate(interactFX, interactCharacter.transform);
-    }
-
-    public void ShowInteractMessage(bool show)
-    {
-        GameCanvasManager.instance.ShowInteractMessage(show);
     }
 }
