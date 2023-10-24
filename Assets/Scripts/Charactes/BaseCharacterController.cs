@@ -35,7 +35,7 @@ public class BaseCharacterController : MonoBehaviour
 
         foreach (var item in colliders)
         {
-            if (item != mainCollider)
+            if (item != mainCollider && !item.CompareTag("Weapon"))
             {
                 if (item.CompareTag("Chest"))
                     chestCollider = item;
@@ -53,6 +53,8 @@ public class BaseCharacterController : MonoBehaviour
     {
         foreach (var item in ragdollColliders)
         {
+            if (item == null) break;
+
             item.gameObject.layer = activate ? 2 : 6;
 
             if (item != mainCollider)

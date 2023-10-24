@@ -2832,21 +2832,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arenaRounds:
   - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
+    - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
         type: 3}
       count: 1
+    interval: 5
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
         type: 3}
       count: 2
+    interval: 15
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
         type: 3}
       count: 3
+    interval: 20
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
         type: 3}
       count: 2
+    interval: 20
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
         type: 3}
@@ -2854,6 +2858,7 @@ MonoBehaviour:
     - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
         type: 3}
       count: 1
+    interval: 20
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
         type: 3}
@@ -2861,6 +2866,12 @@ MonoBehaviour:
     - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
         type: 3}
       count: 2
+    interval: 30
+  - enemyTypes:
+    - enemyObject: {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8,
+        type: 3}
+      count: 1
+    interval: 30
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
         type: 3}
@@ -2868,6 +2879,7 @@ MonoBehaviour:
     - enemyObject: {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8,
         type: 3}
       count: 1
+    interval: 30
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
         type: 3}
@@ -2875,6 +2887,7 @@ MonoBehaviour:
     - enemyObject: {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8,
         type: 3}
       count: 1
+    interval: 35
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
         type: 3}
@@ -2885,6 +2898,7 @@ MonoBehaviour:
     - enemyObject: {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8,
         type: 3}
       count: 1
+    interval: 40
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
         type: 3}
@@ -2895,7 +2909,7 @@ MonoBehaviour:
     - enemyObject: {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8,
         type: 3}
       count: 1
-  interval: 15
+    interval: 45
   spawnRadius: 22.35
 --- !u!43 &136125152
 Mesh:
@@ -3513,7 +3527,7 @@ PrefabInstance:
     - target: {fileID: 8124786386895093361, guid: 19ac935f971f4c9448a66c528f6cee0a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8124786386895093361, guid: 19ac935f971f4c9448a66c528f6cee0a,
         type: 3}
@@ -3633,7 +3647,7 @@ Transform:
   - {fileID: 199990909}
   - {fileID: 1175365428}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &448103138
 GameObject:
@@ -4480,7 +4494,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &800969402
 PrefabInstance:
@@ -6060,7 +6074,7 @@ PrefabInstance:
     - target: {fileID: 8124786386895093361, guid: 19ac935f971f4c9448a66c528f6cee0a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8124786386895093361, guid: 19ac935f971f4c9448a66c528f6cee0a,
         type: 3}
@@ -6951,7 +6965,7 @@ PrefabInstance:
     - target: {fileID: 8124786386895093361, guid: 19ac935f971f4c9448a66c528f6cee0a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8124786386895093361, guid: 19ac935f971f4c9448a66c528f6cee0a,
         type: 3}
@@ -7381,7 +7395,7 @@ PrefabInstance:
     - target: {fileID: 1873655639226321532, guid: ca73a26060d92b6499d216633e016d23,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1873655639226321532, guid: ca73a26060d92b6499d216633e016d23,
         type: 3}
@@ -7465,7 +7479,7 @@ PrefabInstance:
     - target: {fileID: 1393193124814969593, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1393193124814969593, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
         type: 3}

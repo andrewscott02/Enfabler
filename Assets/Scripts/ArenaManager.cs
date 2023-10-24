@@ -8,6 +8,7 @@ public class ArenaManager : MonoBehaviour
     public struct ArenaRound
     {
         public ArenaRoundEnemies[] enemyTypes;
+        public int interval;
     }
 
     [System.Serializable]
@@ -18,7 +19,6 @@ public class ArenaManager : MonoBehaviour
     }
 
     public ArenaRound[] arenaRounds;
-    public float interval = 30f;
 
     public float spawnRadius = 30f;
 
@@ -32,7 +32,7 @@ public class ArenaManager : MonoBehaviour
 
     IEnumerator ISpawnRounds()
     {
-        yield return new WaitForSeconds(interval);
+        yield return new WaitForSeconds(arenaRounds[round].interval);
         SpawnEnemies();
         round = Mathf.Clamp(round + 1, 0, arenaRounds.Length);
         StartCoroutine(ISpawnRounds());
