@@ -8,6 +8,7 @@ public class TrapStats : ScriptableObject
     public int damage;
     public bool canBlock = false;
     public bool canParry = false;
+    public bool canReflect = false;
 
     public E_TargetType targetType;
     public Object projectile;

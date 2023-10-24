@@ -137,7 +137,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             if (canCharge && savingChargeInput == attackType)
                 StartCharge(attackType);
 
-            Target();
+            Target(attackType);
 
             blocking = false;
             canMove = false;
@@ -619,12 +619,26 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         currentTargets = hitCharacters;
     }
 
-    void Target()
+    void Target(AttackType attackType)
     {
+        float distance = 0;
+
+        switch (attackType)
+        {
+            case AttackType.PrimaryAttack:
+                distance = moveDistanceThreshold.y;
+                break;
+            case AttackType.SecondaryAttack:
+                distance = 20f;
+                break;
+            default:
+                break;
+        }
+
         lastHit.Clear();
         foreach (var item in currentTargets)
         {
-            if (Vector3.Distance(transform.position, item.transform.position) < moveDistanceThreshold.y)
+            if (Vector3.Distance(transform.position, item.transform.position) < distance)
             {
                 if (item.GetCharacterCombat() != null)
                 {

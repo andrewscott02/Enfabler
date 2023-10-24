@@ -84,15 +84,18 @@ public class ProjectileHit : MonoBehaviour
             //Spawn impulse
         }
 
-        bool parrySuccess = false;
+        bool reflected = false;
         if (hitData == E_DamageEvents.Parry)
         {
             if (targetMono.gameObject != null)
             {
-                move.Fire(caster.gameObject.transform.position, trapStats, targetMono.gameObject);
-                caster = targetMono.gameObject;
-                parrySuccess = true;
-                alreadyHit = false;
+                if (trapStats.canReflect)
+                {
+                    move.Fire(caster.gameObject.transform.position, trapStats, targetMono.gameObject);
+                    caster = targetMono.gameObject;
+                    reflected = true;
+                    alreadyHit = false;
+                }
             }
             else
             {
@@ -100,7 +103,7 @@ public class ProjectileHit : MonoBehaviour
             }
         }
 
-        if (!parrySuccess)
+        if (!reflected)
         {
             if (trapStats.explosionFX != null)
                 Instantiate(trapStats.explosionFX, transform.position, transform.rotation);
