@@ -193,9 +193,10 @@ public static class HelperFunctions
         //Raycast between sword base and tip
         RaycastHit hit;
 
-        Vector3 origin = agent.transform.position;
+        Vector3 origin = agent.mainCollider.bounds.center + new Vector3(0, agent.mainCollider.bounds.extents.y, 0);
+        Vector3 target = targetCharacter.mainCollider.bounds.center;
         float distance = sightDistance;
-        Vector3 dir = targetCharacter.transform.position - agent.transform.position;
+        Vector3 dir = target - origin;
 
         //Return if anything is blocking the agent's sight to the target
         bool canSee = !Physics.Raycast(origin, direction: dir, out hit, maxDistance: distance, agent.sightMask);

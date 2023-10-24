@@ -50,7 +50,9 @@ public class AIController : BaseCharacterController
     {
         if (currentTarget != null)
         {
-            Gizmos.DrawLine(transform.position, currentTarget.transform.position);
+            Vector3 origin = mainCollider.bounds.center + new Vector3(0, mainCollider.bounds.extents.y, 0);
+            Vector3 target = currentTarget.mainCollider.bounds.center;
+            Gizmos.DrawLine(origin, target);
         }
     }
 

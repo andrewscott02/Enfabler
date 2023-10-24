@@ -24,7 +24,7 @@ public class BaseCharacterController : MonoBehaviour
         SetupRagdoll();
     }
 
-    Collider mainCollider;
+    public Collider mainCollider { get; private set; }
     Collider chestCollider;
     List<Collider> ragdollColliders = new List<Collider>();
 
