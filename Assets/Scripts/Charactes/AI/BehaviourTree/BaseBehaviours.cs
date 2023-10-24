@@ -60,7 +60,7 @@ namespace BehaviourTrees
                 new Sequence(
                     new GetClosestEnemyToTarget(agent, target),
                     new MoveToDestination(agent, 6f, true, agent.distanceAllowance),
-                    new MeleeAttack(agent)
+                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
                     ),
                 new Sequence(
                     new GetClosestEnemyToTarget(agent, target),
@@ -77,13 +77,13 @@ namespace BehaviourTrees
                     new GetModelNonTarget(agent, model),
                     new FlankToDestination(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
                     new MoveToDestination(agent, 6f, sprint, agent.distanceAllowance),
-                    new MeleeAttack(agent)
+                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
                     ),
                 new Sequence(
                     new GetModelTarget(agent, model),
                     new FlankToDestination(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
                     new MoveToDestination(agent, 6f, sprint, agent.distanceAllowance),
-                    new MeleeAttack(agent)
+                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
                     ),
                 new Sequence(
                     new GetModelTarget(agent, model),
@@ -101,13 +101,13 @@ namespace BehaviourTrees
                     new GetModelNonTarget(agent, model),
                     new InterceptTarget(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
                     new MoveToDestination(agent, 6f, sprint, agent.distanceAllowance),
-                    new MeleeAttack(agent)
+                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
                     ),
                 new Sequence(
                     new GetModelTarget(agent, model),
                     new InterceptTarget(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
                     new MoveToDestination(agent, 6f, sprint, agent.distanceAllowance),
-                    new MeleeAttack(agent)
+                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
                     ),
                 new Sequence(
                     new GetModelTarget(agent, model),
@@ -125,7 +125,7 @@ namespace BehaviourTrees
                     new GetModelNonTarget(agent, model),
                     new MoveToDestination(agent, 6f, false, agent.distanceAllowance),
                     new GetClosestEnemy(agent, agent.meleeDistance),
-                    new MeleeAttack(agent)
+                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
                     ),
                 new Sequence(
                     new GetModelNonTarget(agent, model),
@@ -138,14 +138,25 @@ namespace BehaviourTrees
 
         #region Combative
 
-        public static Selector AttackClosestTarget(AIController agent, bool sprinting)
+        public static Selector MeleeAttackClosestTarget(AIController agent, bool sprinting)
         {
             return new Selector(
                 DefensiveAction(agent),
                 new Sequence(
                     new GetClosestEnemy(agent, agent.meleeDistance),
                     new MoveToDestination(agent, 6f, sprinting, agent.distanceAllowance),
-                    new MeleeAttack(agent)
+                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
+                    )
+                );
+        }
+
+        public static Selector RangedAttackClosestTarget(AIController agent, bool sprinting)
+        {
+            return new Selector(
+                DefensiveAction(agent),
+                new Sequence(
+                    new GetClosestEnemy(agent, agent.rangedDistance),
+                    new Attack(agent, CharacterCombat.AttackType.SecondaryAttack)
                     )
                 );
         }
@@ -158,7 +169,7 @@ namespace BehaviourTrees
                     new GetClosestEnemyToTarget(agent, target),
                     new MoveToDestination(agent, 6f, false, agent.distanceAllowance),
                     new GetClosestEnemy(agent, agent.meleeDistance),
-                    new MeleeAttack(agent)
+                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
                     )
                 );
         }

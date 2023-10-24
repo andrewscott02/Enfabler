@@ -85,9 +85,14 @@ public class AIController : BaseCharacterController
 
         #endregion
 
-        if (currentCooldown > timeSinceLastAttack)
+        if (currentMeleeCooldown > timeSinceLastMeleeAttack)
         {
-            timeSinceLastAttack += Time.deltaTime;
+            timeSinceLastMeleeAttack += Time.deltaTime;
+        }
+
+        if (currentRangedCooldown > timeSinceLastRangedAttack)
+        {
+            timeSinceLastRangedAttack += Time.deltaTime;
         }
 
         lastParry += Time.deltaTime;
@@ -104,6 +109,7 @@ public class AIController : BaseCharacterController
     public float roamDistance = 25;
     public float maxDistanceFromModelCharacter = 6;
     public float meleeDistance = 3;
+    public float rangedDistance = 15f;
     public float meleeAttackSpeed = 0.75f;
 
     public Vector3 followVector;
@@ -149,15 +155,32 @@ public class AIController : BaseCharacterController
     bool doubleAttack;
     public float doubleAttackChance;
     public float unblockableChance = 0.2f;
-    public Vector2 attackCooldown;
-    float currentCooldown;
+    public Vector2 meleeCooldown, rangedCooldown;
+    float currentMeleeCooldown, currentRangedCooldown;
     public float attackPauseTime = 0.8f;
-    float timeSinceLastAttack;
+    float timeSinceLastMeleeAttack, timeSinceLastRangedAttack;
 
-    public bool CanAttack()
+    public bool CanAttack(CharacterCombat.AttackType attackType)
     {
         if (currentTarget == null)
             return false;
+
+        float currentCooldown = currentMeleeCooldown;
+        float timeSinceLastAttack = timeSinceLastMeleeAttack;
+
+        switch (attackType)
+        {
+            case CharacterCombat.AttackType.PrimaryAttack:
+                currentCooldown = currentMeleeCooldown;
+                timeSinceLastAttack = timeSinceLastMeleeAttack;
+                break;
+            case CharacterCombat.AttackType.SecondaryAttack:
+                currentCooldown = currentRangedCooldown;
+                timeSinceLastAttack = timeSinceLastRangedAttack;
+                break;
+            default:
+                break;
+        }
 
         if (combat.canAttack && timeSinceLastAttack >= currentCooldown)
         {
@@ -167,14 +190,38 @@ public class AIController : BaseCharacterController
         return false;
     }
 
-    public bool AttackTarget()
+    public bool AttackTarget(CharacterCombat.AttackType attackType)
     {
         if (currentTarget == null)
             return false;
 
         float distance = Vector3.Distance(this.gameObject.transform.position, currentTarget.gameObject.transform.position);
-        //Debug.Log("Attack called");
-        if (distance < meleeDistance)
+        Debug.Log("Attack called + " + attackType);
+
+        Vector2 attackCooldown = new Vector2(3, 6);
+        float attackRange = meleeDistance;
+        float currentCooldown = currentMeleeCooldown;
+        float timeSinceLastAttack = timeSinceLastMeleeAttack;
+
+        switch (attackType)
+        {
+            case CharacterCombat.AttackType.PrimaryAttack:
+                attackCooldown = meleeCooldown;
+                attackRange = meleeDistance;
+                currentCooldown = currentMeleeCooldown;
+                timeSinceLastAttack = timeSinceLastMeleeAttack;
+                break;
+            case CharacterCombat.AttackType.SecondaryAttack:
+                attackCooldown = rangedCooldown;
+                attackRange = rangedDistance;
+                currentCooldown = currentRangedCooldown;
+                timeSinceLastAttack = timeSinceLastRangedAttack;
+                break;
+            default:
+                break;
+        }
+
+        if (distance < attackRange)
         {
             if (combat.canAttack && timeSinceLastAttack >= currentCooldown)
             {
@@ -187,8 +234,8 @@ public class AIController : BaseCharacterController
                 //lastAttacked.GetCharacterCombat().StartBeingAttacked();
 
                 //Debug.Log("Attack made");
-                combat.savingChargeInput = CharacterCombat.AttackType.PrimaryAttack;
-                combat.Attack(meleeAttackSpeed);
+                combat.savingChargeInput = attackType;
+                combat.Attack(meleeAttackSpeed, true, attackType);
 
                 bool unblockable = Random.Range(0f, 1f) < unblockableChance;
                 float releaseTime = unblockable ? combat.chargeMaxTime : attackPauseTime;

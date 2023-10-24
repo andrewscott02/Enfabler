@@ -327,6 +327,7 @@ MonoBehaviour:
   roamDistance: 7
   maxDistanceFromModelCharacter: 6
   meleeDistance: 2
+  rangedDistance: 15
   meleeAttackSpeed: 0.5
   followVector: {x: 0, y: 0, z: 0}
   followDistance: 7.5
@@ -337,7 +338,8 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   doubleAttackChance: 0.4
   unblockableChance: 0.2
-  attackCooldown: {x: 3, y: 6}
+  meleeCooldown: {x: 3, y: 6}
+  rangedCooldown: {x: 8, y: 12}
   attackPauseTime: 0.4
   parryChance: 0.5
   parryCooldown: 0.8

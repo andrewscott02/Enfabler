@@ -153,7 +153,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             }
             else
             {
-                Debug.Log(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
+                //Debug.Log(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
                 animator.SetTrigger(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
             }
             sprinting = false;
@@ -257,7 +257,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void ResetAttack()
     {
-        Debug.Log("Reset Attack");
+        //Debug.Log("Reset Attack");
         if (animator == null)
             Debug.LogWarning("Animator of " + gameObject.name + " is null");
         animator.SetInteger("MeleeAttackCount", 0);

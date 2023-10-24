@@ -14,13 +14,21 @@ public class BasicBehaviourTree : BehaviourTree
             new Selector(
 
                 new Sequence(
-                    //If they are unable to make an attack, move to a point a short distance away
-                    new CannotAttack(agent),
-                    BaseBehaviours.MoveToRange(agent, 35f, false)
+                    //If they are able to make a melee attack
+                    new CanAttack(agent, CharacterCombat.AttackType.PrimaryAttack),
+                    //Checks if the closest enemy is within range distance and makes an attack if true
+                    BaseBehaviours.MeleeAttackClosestTarget(agent, true)
                     ),
 
-                    //Checks if the closest enemy is within melee range and makes an attack if true
-                    BaseBehaviours.AttackClosestTarget(agent, true)
+                new Sequence(
+                    //If they are able to make a ranged attack
+                    new CanAttack(agent, CharacterCombat.AttackType.SecondaryAttack),
+                    //Checks if the closest enemy is within range distance and makes an attack if true
+                    BaseBehaviours.RangedAttackClosestTarget(agent, true)
+                    ),
+
+                    //If they are unable to make an attack, move to a point a short distance away
+                    BaseBehaviours.MoveToRange(agent, 35f, false)
                 ),
 
             //Checks if the closest enemy is within sight range and moves towards it if true
