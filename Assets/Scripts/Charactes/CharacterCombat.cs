@@ -107,7 +107,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public AttackType chargingAttack { get; private set; } = AttackType.None;
 
-    public void Attack(float attackSpeed = 1f, bool canCharge = true, AttackType attackType = AttackType.PrimaryAttack)
+    GameObject overrideTarget = null;
+
+    public void Attack(float attackSpeed = 1f, bool canCharge = true, AttackType attackType = AttackType.PrimaryAttack, GameObject target = null)
     {
         if (attackType == AttackType.None) return;
 
@@ -115,6 +117,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         if (canAttack)
         {
+            overrideTarget = target;
+
             switchAttack = (lastAttackType != attackType && lastAttackType != AttackType.None);
 
             switch (attackType)
@@ -378,12 +382,27 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         float distance = 10f;
         Vector3 dir = transform.forward;
 
-        firePos = origin + (dir * 10f);
-        if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: 20f, layerMask))
+        firePos = origin + (dir * 15f);
+
+        if (overrideTarget == null)
         {
-            //Debug.Log("Hit: " + hit.collider.gameObject);
-            firePos = hit.point;
-            distance = Vector3.Distance(origin, hit.point);
+            if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: 20f, layerMask))
+            {
+                //Debug.Log("Hit: " + hit.collider.gameObject);
+                firePos = hit.point;
+                distance = Vector3.Distance(origin, firePos);
+            }
+        }
+        else
+        {
+            Collider col = overrideTarget.GetComponent<Collider>();
+            Vector3 hitPos = overrideTarget.transform.position;
+
+            if (col != null)
+                hitPos = col.bounds.center;
+
+            firePos = hitPos;
+            distance = Vector3.Distance(origin, firePos);
         }
 
         SpawnProjectile(firePos, projectileDamage);

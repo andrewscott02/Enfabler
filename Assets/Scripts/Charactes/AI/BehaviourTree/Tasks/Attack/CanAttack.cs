@@ -22,7 +22,7 @@ public class CanAttack : Node
     {
         if (agent.CanAttack(attackType))
         {
-            Debug.Log("Can attack : " + attackType);
+            //Debug.Log("Can attack : " + attackType);
             return NodeState.Success;
         }
 

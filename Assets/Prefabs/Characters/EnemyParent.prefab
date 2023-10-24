@@ -64,6 +64,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
+      propertyPath: rangedSnap
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
       propertyPath: targetSnapSpeed
       value: 0
       objectReference: {fileID: 0}
@@ -327,7 +332,7 @@ MonoBehaviour:
   roamDistance: 7
   maxDistanceFromModelCharacter: 6
   meleeDistance: 2
-  rangedDistance: 15
+  rangedDistance: 20
   meleeAttackSpeed: 0.5
   followVector: {x: 0, y: 0, z: 0}
   followDistance: 7.5
@@ -339,7 +344,7 @@ MonoBehaviour:
   doubleAttackChance: 0.4
   unblockableChance: 0.2
   meleeCooldown: {x: 3, y: 6}
-  rangedCooldown: {x: 8, y: 12}
+  rangedCooldown: {x: 7, y: 10}
   attackPauseTime: 0.4
   parryChance: 0.5
   parryCooldown: 0.8

@@ -231,7 +231,7 @@ public class AIController : BaseCharacterController
 
                 //Debug.Log("Attack made");
                 combat.savingChargeInput = attackType;
-                combat.Attack(meleeAttackSpeed, true, attackType);
+                combat.Attack(meleeAttackSpeed, true, attackType, currentTarget.gameObject);
 
                 bool unblockable = Random.Range(0f, 1f) < unblockableChance;
                 float releaseTime = unblockable ? combat.chargeMaxTime : attackPauseTime;

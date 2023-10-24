@@ -180,7 +180,7 @@ public class PlayerController : BaseCharacterController
 
         if (!enableInteraction) return;
 
-        Debug.Log("Interact");
+        //Debug.Log("Interact");
         combat.ForceEndAttack();
         animator.SetTrigger(interactAnim);
 
