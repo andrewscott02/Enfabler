@@ -184,9 +184,11 @@ public class AIController : BaseCharacterController
 
         if (combat.canAttack && timeSinceLastAttack >= currentCooldown)
         {
+            //Debug.Log("Can attack for " + attackType);
             return true;
         }
 
+        //Debug.Log("Cannot attack for " + attackType);
         return false;
     }
 
@@ -196,21 +198,15 @@ public class AIController : BaseCharacterController
             return false;
 
         float distance = Vector3.Distance(this.gameObject.transform.position, currentTarget.gameObject.transform.position);
-        Debug.Log("Attack called + " + attackType);
+        //Debug.Log("Attack called + " + attackType);
 
-        Vector2 attackCooldown = new Vector2(3, 6);
+        Vector2 attackCooldown = meleeCooldown;
         float attackRange = meleeDistance;
         float currentCooldown = currentMeleeCooldown;
         float timeSinceLastAttack = timeSinceLastMeleeAttack;
 
         switch (attackType)
         {
-            case CharacterCombat.AttackType.PrimaryAttack:
-                attackCooldown = meleeCooldown;
-                attackRange = meleeDistance;
-                currentCooldown = currentMeleeCooldown;
-                timeSinceLastAttack = timeSinceLastMeleeAttack;
-                break;
             case CharacterCombat.AttackType.SecondaryAttack:
                 attackCooldown = rangedCooldown;
                 attackRange = rangedDistance;
@@ -241,16 +237,7 @@ public class AIController : BaseCharacterController
                 float releaseTime = unblockable ? combat.chargeMaxTime : attackPauseTime;
                 StartCoroutine(IReleaseAttack(releaseTime));
 
-                timeSinceLastAttack = 0;
-
-                if (doubleAttack)
-                {
-                    currentCooldown = 0;
-                }
-                else
-                {
-                    currentCooldown = Random.Range(attackCooldown.x, attackCooldown.y);
-                }
+                AdjustCooldowns(attackType);
             }
 
             agent.isStopped = true;
@@ -258,6 +245,39 @@ public class AIController : BaseCharacterController
         }
 
         return false;
+    }
+
+    void AdjustCooldowns(CharacterCombat.AttackType attackType)
+    {
+        switch (attackType)
+        {
+            case CharacterCombat.AttackType.PrimaryAttack:
+                timeSinceLastMeleeAttack = 0;
+
+                if (doubleAttack)
+                {
+                    currentMeleeCooldown = 0;
+                }
+                else
+                {
+                    currentMeleeCooldown = Random.Range(meleeCooldown.x, meleeCooldown.y);
+                }
+                break;
+            case CharacterCombat.AttackType.SecondaryAttack:
+                timeSinceLastRangedAttack = 0;
+
+                if (doubleAttack)
+                {
+                    currentRangedCooldown = 0;
+                }
+                else
+                {
+                    currentRangedCooldown = Random.Range(rangedCooldown.x, rangedCooldown.y);
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     IEnumerator IReleaseAttack(float delay)

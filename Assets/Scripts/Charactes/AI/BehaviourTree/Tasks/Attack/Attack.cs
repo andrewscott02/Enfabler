@@ -20,7 +20,7 @@ public class Attack : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("Attack state is attempted at:" + attackType);
+        //Debug.Log("Attack state is attempted at:" + attackType);
         bool attackSuccess = agent.AttackTarget(attackType);
         if (attackSuccess)
         {
@@ -28,6 +28,7 @@ public class Attack : Node
             return NodeState.Success;
         }
 
+        Debug.Log("Attack state failed");
         return NodeState.Failure;
     }
 }

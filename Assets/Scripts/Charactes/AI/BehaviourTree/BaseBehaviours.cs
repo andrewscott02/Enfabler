@@ -138,25 +138,14 @@ namespace BehaviourTrees
 
         #region Combative
 
-        public static Selector MeleeAttackClosestTarget(AIController agent, bool sprinting)
+        public static Selector AttackClosestTarget(AIController agent, bool sprinting, float range, CharacterCombat.AttackType attackType = CharacterCombat.AttackType.PrimaryAttack)
         {
             return new Selector(
                 DefensiveAction(agent),
                 new Sequence(
-                    new GetClosestEnemy(agent, agent.meleeDistance),
+                    new GetClosestEnemy(agent, range),
                     new MoveToDestination(agent, 6f, sprinting, agent.distanceAllowance),
-                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
-                    )
-                );
-        }
-
-        public static Selector RangedAttackClosestTarget(AIController agent, bool sprinting)
-        {
-            return new Selector(
-                DefensiveAction(agent),
-                new Sequence(
-                    new GetClosestEnemy(agent, agent.rangedDistance),
-                    new Attack(agent, CharacterCombat.AttackType.SecondaryAttack)
+                    new Attack(agent, attackType)
                     )
                 );
         }
