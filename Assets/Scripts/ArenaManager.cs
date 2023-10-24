@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class ArenaManager : MonoBehaviour
 {
-    public Object enemyPrefab;
-    public int[] enemyCounts;
+    [System.Serializable]
+    public struct ArenaRound
+    {
+        public ArenaRoundEnemies[] enemyTypes;
+    }
+
+    [System.Serializable]
+    public struct ArenaRoundEnemies
+    {
+        public Object enemyObject;
+        public int count;
+    }
+
+    public ArenaRound[] arenaRounds;
     public float interval = 30f;
 
     public float spawnRadius = 30f;
@@ -22,23 +34,24 @@ public class ArenaManager : MonoBehaviour
     {
         yield return new WaitForSeconds(interval);
         SpawnEnemies();
-        round++;
+        round = Mathf.Clamp(round + 1, 0, arenaRounds.Length);
         StartCoroutine(ISpawnRounds());
     }
 
     void SpawnEnemies()
     {
-        int enemiesToSpawn = enemyCounts[Mathf.Clamp(round, 0, enemyCounts.Length)];
-
-        for(int i = 0; i < enemiesToSpawn; i++)
+        foreach (var item in arenaRounds[round].enemyTypes)
         {
-            Vector3 spawnPos;
-            if (!HelperFunctions.GetRandomPointOnNavmesh(transform.position, spawnRadius, 0.5f, 100, out spawnPos))
+            for (int i = 0; i < item.count; i++)
             {
-                spawnPos = transform.position;
-            }
+                Vector3 spawnPos;
+                if (!HelperFunctions.GetRandomPointOnNavmesh(transform.position, spawnRadius, 0.5f, 100, out spawnPos))
+                {
+                    spawnPos = transform.position;
+                }
 
-            Instantiate(enemyPrefab, spawnPos, new Quaternion(0, 0, 0, 0));
+                Instantiate(item.enemyObject, spawnPos, new Quaternion(0, 0, 0, 0));
+            }
         }
     }
 
