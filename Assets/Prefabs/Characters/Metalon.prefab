@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8837602169260676381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8394707066069217295}
+  m_Layer: 0
+  m_Name: WeaponTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8394707066069217295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8837602169260676381}
+  m_LocalRotation: {x: -0.000000029802319, y: -0.00000001862645, z: -0.7986544, w: -0.6017899}
+  m_LocalPosition: {x: -0.309, y: 0.426, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1678694157724225260}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -253.996}
 --- !u!1001 &1676827389330206826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82,10 +113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aaf6ebf2e5e8dd4db915d4684c82a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handTransform: {fileID: 1678482775644771544}
+  handTransform: {fileID: 8394707066069217295}
   weapons:
-  - {fileID: 8460293430998555839, guid: bcbebcfacfa18154e8c51323ede0c050, type: 3}
-  - {fileID: 8460293430998555839, guid: 48613acbfa4e99147b89e2adfc8d1ca7, type: 3}
+  - {fileID: 8460293430998555839, guid: 641c92f6385d51349b9ea693d9ef8da7, type: 3}
+  - {fileID: 8460293430998555839, guid: 641c92f6385d51349b9ea693d9ef8da7, type: 3}
   currentWeapon: -1
 --- !u!4 &1678268173109997662 stripped
 Transform:
@@ -99,9 +130,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1676827389330206826}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1678482775644771544 stripped
+--- !u!4 &1678694157724225260 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4049026081563826, guid: f88c6ad57910d8648807bcf0c131f49d,
+  m_CorrespondingSourceObject: {fileID: 4119669933948550, guid: f88c6ad57910d8648807bcf0c131f49d,
     type: 3}
   m_PrefabInstance: {fileID: 1676827389330206826}
   m_PrefabAsset: {fileID: 0}
