@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 374736940954730057, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
       propertyPath: maxHealth
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 374736940954730057, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
@@ -47,6 +47,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1600513293264907759, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: allies
+      value: 
+      objectReference: {fileID: 4297160914922154321}
     - target: {fileID: 1678298729382148546, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -216,3 +221,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c23e9eb38e33e2d4798cfd6a0d78c974, type: 3}
+--- !u!1 &4297160914922154321 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7535070001232547612, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+    type: 3}
+  m_PrefabInstance: {fileID: 5995248967259760205}
+  m_PrefabAsset: {fileID: 0}

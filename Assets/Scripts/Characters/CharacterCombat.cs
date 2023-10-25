@@ -890,7 +890,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         for (int i = 0; i < count; i++)
         {
             Vector3 spawnPos;
-            if (!HelperFunctions.GetRandomPointOnNavmesh(transform.position, 20f, 0.5f, 100, out spawnPos))
+            if (!HelperFunctions.GetRandomPointOnNavmesh(transform.position, 10f, 0.5f, 100, out spawnPos))
             {
                 spawnPos = transform.position;
             }

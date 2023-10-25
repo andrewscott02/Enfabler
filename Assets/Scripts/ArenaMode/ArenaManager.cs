@@ -9,7 +9,7 @@ public class ArenaManager : MonoBehaviour
 
     ArenaFight arenaFight;
     public float interval = 5f;
-    public float spawnRadius = 30f;
+    public float spawnRadius = 10;
 
     public GameObject nextLevelUI;
 
