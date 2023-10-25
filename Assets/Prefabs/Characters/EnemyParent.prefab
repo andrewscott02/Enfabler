@@ -331,9 +331,6 @@ MonoBehaviour:
   chaseDistance: 30
   roamDistance: 7
   maxDistanceFromModelCharacter: 6
-  meleeDistance: 2
-  rangedDistance: 15
-  meleeAttackSpeed: 0.5
   followVector: {x: 0, y: 0, z: 0}
   followDistance: 7.5
   walkSpeed: 2.5
@@ -341,11 +338,25 @@ MonoBehaviour:
   animMultiplier: 0.4
   roaming: 0
   currentTarget: {fileID: 0}
-  doubleAttackChance: 0.4
-  unblockableChance: 0.2
-  meleeCooldown: {x: 3, y: 6}
-  rangedCooldown: {x: 7, y: 10}
-  attackPauseTime: 0.4
+  attacks:
+  - attackType: 1
+    distance: 2
+    attackSpeed: 0.5
+    doubleAttackChance: 0.4
+    unblockableChance: 0.2
+    cooldown: {x: 3, y: 6}
+    attackPauseTime: 0.4
+    currentCooldown: 0
+    timeSinceLastAttack: 0
+  - attackType: 2
+    distance: 15
+    attackSpeed: 0.5
+    doubleAttackChance: 0.4
+    unblockableChance: 0.2
+    cooldown: {x: 7, y: 10}
+    attackPauseTime: 0.4
+    currentCooldown: 0
+    timeSinceLastAttack: 0
   parryChance: 0.25
   parryCooldown: 0.8
   dodgeChance: 0.25

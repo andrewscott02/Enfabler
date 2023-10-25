@@ -28,11 +28,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public float savedAttackAnimSpeed = 1;
     public enum AttackType
     {
-        None, PrimaryAttack, SecondaryAttack
+        None, PrimaryAttack, SecondaryAttack, SwitchPrimaryAttack, SwitchSecondaryAttack
     }
 
     public float chargePrimaryDamageScaling = 2f;
     public float chargeSecondaryDamageScaling = 1f;
+    public bool canSwitchAttack = false;
     bool switchAttack = false;
     float currentChargeTime = 0;
     int additionalDamage;
@@ -151,14 +152,14 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             currentAttackSpeed = attackSpeed;
             animator.speed = attackSpeed;
 
-            if (sprinting)
+            if (switchAttack && canSwitchAttack)
             {
-                animator.SetTrigger("Sprint" + attackType.ToString());
+                animator.SetTrigger("Switch" + attackType.ToString());
             }
             else
             {
                 //Debug.Log(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
-                animator.SetTrigger(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
+                animator.SetTrigger(sprinting ? "Sprint" + attackType.ToString() : attackType.ToString());
             }
             sprinting = false;
 

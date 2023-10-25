@@ -20,11 +20,11 @@ public class RangedBehaviourTree : BehaviourTree
                     ),
 
                     //Checks if the closest enemy is within melee range and makes an attack if true
-                    BaseBehaviours.AttackClosestTarget(agent, true, agent.rangedDistance, CharacterCombat.AttackType.SecondaryAttack)
+                    BaseBehaviours.AttackClosestTarget(agent, true, agent.GetAttackFromType(CharacterCombat.AttackType.SecondaryAttack), CharacterCombat.AttackType.SecondaryAttack)
                 ),
             
             //Checks if the closest enemy is within melee range and makes an attack if true
-            BaseBehaviours.AttackClosestTarget(agent, true, agent.meleeDistance, CharacterCombat.AttackType.PrimaryAttack),
+            BaseBehaviours.AttackClosestTarget(agent, true, agent.GetAttackFromType(CharacterCombat.AttackType.PrimaryAttack), CharacterCombat.AttackType.PrimaryAttack),
             //Checks if the closest enemy is within sight range and moves towards it if true
             BaseBehaviours.MoveToClosestTarget(agent, agent.distanceAllowance, true),
             //If there are no targets, but the player is an ally, move to a point near the player

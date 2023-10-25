@@ -117,14 +117,14 @@ namespace BehaviourTrees
                 );
         }
 
-        public static Selector IgnoreModelTargets(AIController agent, ConstructPlayerModel model)
+        public static Selector IgnoreModelTargets(AIController agent, ConstructPlayerModel model, float range)
         {
             return new Selector(
                 DefensiveAction(agent),
                 new Sequence(
                     new GetModelNonTarget(agent, model),
                     new MoveToDestination(agent, 6f, false, agent.distanceAllowance),
-                    new GetClosestEnemy(agent, agent.meleeDistance),
+                    new GetClosestEnemy(agent, range),
                     new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
                     ),
                 new Sequence(
@@ -138,26 +138,28 @@ namespace BehaviourTrees
 
         #region Combative
 
-        public static Selector AttackClosestTarget(AIController agent, bool sprinting, float range, CharacterCombat.AttackType attackType = CharacterCombat.AttackType.PrimaryAttack)
+        public static Selector AttackClosestTarget(AIController agent, bool sprinting, AIController.AIAttackData attack, CharacterCombat.AttackType attackType)
         {
             return new Selector(
                 DefensiveAction(agent),
                 new Sequence(
-                    new GetClosestEnemy(agent, range),
+                    new IsValidAttack(attack, attackType),
+                    new GetClosestEnemy(agent, attack.distance),
                     new MoveToDestination(agent, 6f, sprinting, agent.distanceAllowance),
-                    new Attack(agent, attackType)
+                    new Attack(agent, attack.attackType)
                     )
                 );
         }
 
-        public static Selector MoveToTargetWhileAttacking(AIController agent, GameObject target)
+        public static Selector MoveToTargetWhileAttacking(AIController agent, GameObject target, AIController.AIAttackData attack, CharacterCombat.AttackType attackType)
         {
             return new Selector(
                 DefensiveAction(agent),
                 new Sequence(
+                    new IsValidAttack(attack, attackType),
                     new GetClosestEnemyToTarget(agent, target),
                     new MoveToDestination(agent, 6f, false, agent.distanceAllowance),
-                    new GetClosestEnemy(agent, agent.meleeDistance),
+                    new GetClosestEnemy(agent, attack.distance),
                     new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
                     )
                 );

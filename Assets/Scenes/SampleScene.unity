@@ -2830,75 +2830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebdd5b46f077db4a8732371586dad18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arenaRounds:
-  - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
-        type: 3}
-      count: 1
-  - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
-        type: 3}
-      count: 2
-  - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
-        type: 3}
-      count: 3
-  - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
-        type: 3}
-      count: 2
-  - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
-        type: 3}
-      count: 2
-    - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
-        type: 3}
-      count: 1
-  - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
-        type: 3}
-      count: 3
-    - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
-        type: 3}
-      count: 2
-  - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8,
-        type: 3}
-      count: 1
-  - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
-        type: 3}
-      count: 2
-    - enemyObject: {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8,
-        type: 3}
-      count: 1
-  - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
-        type: 3}
-      count: 3
-    - enemyObject: {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8,
-        type: 3}
-      count: 1
-  - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
-        type: 3}
-      count: 2
-    - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
-        type: 3}
-      count: 1
-    - enemyObject: {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8,
-        type: 3}
-      count: 1
-  - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
-        type: 3}
-      count: 3
-    - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
-        type: 3}
-      count: 2
-    - enemyObject: {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8,
-        type: 3}
-      count: 1
+  arenaFight: {fileID: 11400000, guid: 432e2c49d74d31b4c99ea7f275b26afc, type: 2}
   interval: 10
   spawnRadius: 22.35
 --- !u!43 &136125152
@@ -3602,7 +3534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &399506584
 Transform:
   m_ObjectHideFlags: 0

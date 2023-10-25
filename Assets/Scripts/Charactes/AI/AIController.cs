@@ -43,7 +43,6 @@ public class AIController : BaseCharacterController
         Gizmos.DrawWireSphere(gameObject.transform.position, chaseDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, roamDistance);
         Gizmos.DrawWireSphere(gameObject.transform.position, maxDistanceFromModelCharacter);
-        Gizmos.DrawWireSphere(gameObject.transform.position, meleeDistance);
     }
 
     private void OnDrawGizmos()
@@ -85,18 +84,20 @@ public class AIController : BaseCharacterController
 
         #endregion
 
-        if (currentMeleeCooldown > timeSinceLastMeleeAttack)
+        for (int i = 0; i < attacks.Length; i++)
         {
-            timeSinceLastMeleeAttack += Time.deltaTime;
-        }
-
-        if (currentRangedCooldown > timeSinceLastRangedAttack)
-        {
-            timeSinceLastRangedAttack += Time.deltaTime;
+            attacks[i].timeSinceLastAttack += Time.deltaTime;
         }
 
         lastParry += Time.deltaTime;
         lastDodge += Time.deltaTime;
+    }
+    public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
+    {
+        SetDestinationPos(gameObject.transform.position);
+        agent.enabled = false;
+        bt.enabled = false;
+        base.ActivateRagdoll(activate, forceData);
     }
 
     public float distanceAllowance = 1f;
@@ -108,9 +109,6 @@ public class AIController : BaseCharacterController
     public float chaseDistance = 40;
     public float roamDistance = 25;
     public float maxDistanceFromModelCharacter = 6;
-    public float meleeDistance = 3;
-    public float rangedDistance = 15f;
-    public float meleeAttackSpeed = 0.75f;
 
     public Vector3 followVector;
     public float followDistance = 5;
@@ -133,6 +131,12 @@ public class AIController : BaseCharacterController
 
     public bool roaming = false;
 
+    public void ResetRoamTime()
+    {
+        //Debug.Log("Resetting roam time");
+        roamTimeElapsed = 0;
+    }
+
     public void MoveToDestination(bool sprinting)
     {
         //Debug.Log(sprinting + " sprinting");
@@ -154,39 +158,57 @@ public class AIController : BaseCharacterController
     BaseCharacterController lastAttacked;
 
     bool doubleAttack;
-    public float doubleAttackChance;
-    public float unblockableChance = 0.2f;
-    public Vector2 meleeCooldown, rangedCooldown;
-    float currentMeleeCooldown, currentRangedCooldown;
-    public float attackPauseTime = 0.8f;
-    float timeSinceLastMeleeAttack, timeSinceLastRangedAttack;
+
+    public AIAttackData[] attacks;
+
+    [System.Serializable]
+    public struct AIAttackData
+    {
+        public CharacterCombat.AttackType attackType;
+
+        public float distance;
+        public float attackSpeed;
+
+        public float doubleAttackChance;
+        public float unblockableChance;
+        public Vector2 cooldown;
+        public float attackPauseTime;
+
+        [HideInInspector]
+        public float currentCooldown;
+        [HideInInspector]
+        public float timeSinceLastAttack;
+    }
+    
+    public AIAttackData GetAttackFromType(CharacterCombat.AttackType attackType)
+    {
+        for (int i = 0; i < attacks.Length; i++)
+        {
+            if (attacks[i].attackType == attackType)
+            {
+                return attacks[i];
+            }
+        }
+
+        Debug.LogWarning("No attack type matches, returning first item");
+        return attacks[0];
+    }
 
     public bool CanAttack(CharacterCombat.AttackType attackType)
     {
-        if (currentTarget == null)
+        if (currentTarget == null || !combat.canAttack)
             return false;
 
-        float currentCooldown = currentMeleeCooldown;
-        float timeSinceLastAttack = timeSinceLastMeleeAttack;
-
-        switch (attackType)
+        for (int i = 0; i < attacks.Length; i++)
         {
-            case CharacterCombat.AttackType.PrimaryAttack:
-                currentCooldown = currentMeleeCooldown;
-                timeSinceLastAttack = timeSinceLastMeleeAttack;
-                break;
-            case CharacterCombat.AttackType.SecondaryAttack:
-                currentCooldown = currentRangedCooldown;
-                timeSinceLastAttack = timeSinceLastRangedAttack;
-                break;
-            default:
-                break;
-        }
-
-        if (combat.canAttack && timeSinceLastAttack >= currentCooldown)
-        {
-            //Debug.Log("Can attack for " + attackType);
-            return true;
+            if (attacks[i].attackType == attackType)
+            {
+                if (attacks[i].timeSinceLastAttack >= attacks[i].currentCooldown)
+                {
+                    //Debug.Log("Can attack for " + attackType);
+                    return true;
+                }
+            }
         }
 
         //Debug.Log("Cannot attack for " + attackType);
@@ -198,47 +220,42 @@ public class AIController : BaseCharacterController
         if (currentTarget == null)
             return false;
 
+        int attackIndex = -1;
+
+        for (int i = 0; i < attacks.Length; i++)
+        {
+            if (attacks[i].attackType == attackType)
+            {
+                attackIndex = i;
+            }
+        }
+
+        if (attackIndex < 0) return false;
+
         float distance = Vector3.Distance(this.gameObject.transform.position, currentTarget.gameObject.transform.position);
         //Debug.Log("Attack called + " + attackType);
 
-        Vector2 attackCooldown = meleeCooldown;
-        float attackRange = meleeDistance;
-        float currentCooldown = currentMeleeCooldown;
-        float timeSinceLastAttack = timeSinceLastMeleeAttack;
-
-        switch (attackType)
+        if (distance < attacks[attackIndex].distance)
         {
-            case CharacterCombat.AttackType.SecondaryAttack:
-                attackCooldown = rangedCooldown;
-                attackRange = rangedDistance;
-                currentCooldown = currentRangedCooldown;
-                timeSinceLastAttack = timeSinceLastRangedAttack;
-                break;
-            default:
-                break;
-        }
-
-        if (distance < attackRange)
-        {
-            if (combat.canAttack && timeSinceLastAttack >= currentCooldown)
+            if (combat.canAttack && attacks[attackIndex].timeSinceLastAttack >= attacks[attackIndex].currentCooldown)
             {
                 if (doubleAttack)
                     doubleAttack = false;
                 else
-                    doubleAttack = Random.Range(0f, 1f) < doubleAttackChance;
+                    doubleAttack = Random.Range(0f, 1f) < attacks[attackIndex].doubleAttackChance;
 
                 lastAttacked = currentTarget;
                 //lastAttacked.GetCharacterCombat().StartBeingAttacked();
 
                 //Debug.Log("Attack made");
                 combat.savingChargeInput = attackType;
-                combat.Attack(meleeAttackSpeed, true, attackType, currentTarget.gameObject);
+                combat.Attack(attacks[attackIndex].attackSpeed, true, attackType, currentTarget.gameObject);
 
-                bool unblockable = Random.Range(0f, 1f) < unblockableChance;
-                float releaseTime = unblockable ? combat.chargeMaxTime : attackPauseTime;
+                bool unblockable = Random.Range(0f, 1f) < attacks[attackIndex].unblockableChance;
+                float releaseTime = unblockable ? combat.chargeMaxTime : attacks[attackIndex].attackPauseTime;
                 StartCoroutine(IReleaseAttack(releaseTime));
 
-                AdjustCooldowns(attackType);
+                AdjustCooldowns(attackType, attackIndex);
             }
 
             agent.isStopped = true;
@@ -248,36 +265,28 @@ public class AIController : BaseCharacterController
         return false;
     }
 
-    void AdjustCooldowns(CharacterCombat.AttackType attackType)
+    void AdjustCooldowns(CharacterCombat.AttackType attackType, int attackIndex = -1)
     {
-        switch (attackType)
+        if (attackIndex < 0)
         {
-            case CharacterCombat.AttackType.PrimaryAttack:
-                timeSinceLastMeleeAttack = 0;
+            for (int i = 0; i < attacks.Length; i++)
+            {
+                if (attacks[i].attackType == attackType)
+                {
+                    attackIndex = i;
+                }
+            }
+        }
 
-                if (doubleAttack)
-                {
-                    currentMeleeCooldown = 0;
-                }
-                else
-                {
-                    currentMeleeCooldown = Random.Range(meleeCooldown.x, meleeCooldown.y);
-                }
-                break;
-            case CharacterCombat.AttackType.SecondaryAttack:
-                timeSinceLastRangedAttack = 0;
+        attacks[attackIndex].timeSinceLastAttack = 0;
 
-                if (doubleAttack)
-                {
-                    currentRangedCooldown = 0;
-                }
-                else
-                {
-                    currentRangedCooldown = Random.Range(rangedCooldown.x, rangedCooldown.y);
-                }
-                break;
-            default:
-                break;
+        if (doubleAttack)
+        {
+            attacks[attackIndex].currentCooldown = 0;
+        }
+        else
+        {
+            attacks[attackIndex].currentCooldown = Random.Range(attacks[attackIndex].cooldown.x, attacks[attackIndex].cooldown.y);
         }
     }
 
@@ -343,20 +352,6 @@ public class AIController : BaseCharacterController
     }
 
     #endregion
-
-    public void ResetRoamTime()
-    {
-        //Debug.Log("Resetting roam time");
-        roamTimeElapsed = 0;
-    }
-
-    public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
-    {
-        SetDestinationPos(gameObject.transform.position);
-        agent.enabled = false;
-        bt.enabled = false;
-        base.ActivateRagdoll(activate, forceData);
-    }
 
     #endregion
 }

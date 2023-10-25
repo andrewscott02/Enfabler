@@ -14,8 +14,8 @@ public class BasicBehaviourTree : BehaviourTree
             new Sequence(
                 //If they are able to make a ranged attack
                 new CanAttack(agent, CharacterCombat.AttackType.SecondaryAttack),
-                //Checks if the closest enemy is within melee range and makes an attack if true
-                BaseBehaviours.AttackClosestTarget(agent, true, agent.rangedDistance, CharacterCombat.AttackType.SecondaryAttack)
+                //Checks if the closest enemy is within ranged distance and makes an attack if true
+                BaseBehaviours.AttackClosestTarget(agent, true, agent.GetAttackFromType(CharacterCombat.AttackType.SecondaryAttack), CharacterCombat.AttackType.SecondaryAttack)
                 ),
 
             new Selector(
@@ -27,7 +27,7 @@ public class BasicBehaviourTree : BehaviourTree
                     ),
 
                     //Checks if the closest enemy is within melee range and makes an attack if true
-                    BaseBehaviours.AttackClosestTarget(agent, true, agent.meleeDistance, CharacterCombat.AttackType.PrimaryAttack)
+                    BaseBehaviours.AttackClosestTarget(agent, true, agent.GetAttackFromType(CharacterCombat.AttackType.PrimaryAttack), CharacterCombat.AttackType.PrimaryAttack)
                 ),
 
             //Checks if the closest enemy is within sight range and moves towards it if true

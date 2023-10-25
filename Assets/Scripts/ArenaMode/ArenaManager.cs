@@ -4,20 +4,7 @@ using UnityEngine;
 
 public class ArenaManager : MonoBehaviour
 {
-    [System.Serializable]
-    public struct ArenaRound
-    {
-        public ArenaRoundEnemies[] enemyTypes;
-    }
-
-    [System.Serializable]
-    public struct ArenaRoundEnemies
-    {
-        public Object enemyObject;
-        public int count;
-    }
-
-    public ArenaRound[] arenaRounds;
+    public ArenaFight arenaFight;
     public float interval = 5f;
     public float spawnRadius = 30f;
 
@@ -39,12 +26,12 @@ public class ArenaManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         SpawnEnemies();
-        round = Mathf.Clamp(round + 1, 0, arenaRounds.Length);
+        round = Mathf.Clamp(round + 1, 0, arenaFight.arenaRounds.Length - 1);
     }
 
     void SpawnEnemies()
     {
-        foreach (var item in arenaRounds[round].enemyTypes)
+        foreach (var item in arenaFight.arenaRounds[round].enemyTypes)
         {
             for (int i = 0; i < item.count; i++)
             {
