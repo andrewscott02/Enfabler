@@ -16,6 +16,7 @@ public class BaseCharacterController : MonoBehaviour
     public virtual void Start()
     {
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
 
         health = GetComponent<Health>();
         health.animator = animator;
@@ -23,6 +24,8 @@ public class BaseCharacterController : MonoBehaviour
 
         SetupRagdoll();
     }
+
+    public Rigidbody rb { get; protected set; }
 
     public Collider mainCollider { get; private set; }
     Collider chestCollider;

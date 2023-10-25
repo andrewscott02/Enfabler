@@ -162,6 +162,12 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             controller.ActivateRagdoll(true, forcedata);
             gameObject.name += " -- Dead";
         }
+        else if (hitReactData.killAnim)
+        {
+            controller.rb.constraints = RigidbodyConstraints.FreezeAll;
+            controller.enabled = false;
+            animator.SetTrigger("Death");
+        }
         else
         {
             //Debug.Log(gameObject + "has no controller");
