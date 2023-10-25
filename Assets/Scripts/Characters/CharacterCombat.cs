@@ -880,4 +880,24 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     }
 
     #endregion
+
+    #region Spawn Allies
+
+    public Object allies;
+
+    public void SpawnAllies(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            Vector3 spawnPos;
+            if (!HelperFunctions.GetRandomPointOnNavmesh(transform.position, 20f, 0.5f, 100, out spawnPos))
+            {
+                spawnPos = transform.position;
+            }
+
+            Instantiate(allies, spawnPos, new Quaternion(0, 0, 0, 0));
+        }
+    }
+
+    #endregion
 }

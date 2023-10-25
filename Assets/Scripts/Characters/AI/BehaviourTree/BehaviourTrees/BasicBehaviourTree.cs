@@ -25,6 +25,13 @@ public class BasicBehaviourTree : BehaviourTree
                 BaseBehaviours.AttackClosestTarget(agent, true, agent.GetAttackFromType(CharacterCombat.AttackType.SwitchPrimaryAttack), CharacterCombat.AttackType.SwitchPrimaryAttack)
                 ),
 
+            new Sequence(
+                //If they are able to make a switch ranged attack
+                new CanAttack(agent, CharacterCombat.AttackType.SwitchSecondaryAttack),
+                //Checks if the closest enemy is within switch melee distance and makes an attack if true
+                BaseBehaviours.AttackClosestTarget(agent, true, agent.GetAttackFromType(CharacterCombat.AttackType.SwitchSecondaryAttack), CharacterCombat.AttackType.SwitchSecondaryAttack)
+                ),
+
             new Selector(
 
                 new Sequence(

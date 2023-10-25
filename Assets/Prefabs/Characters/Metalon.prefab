@@ -198,7 +198,12 @@ PrefabInstance:
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: attacks.Array.size
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: attacks.Array.data[3].maxUses
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -209,6 +214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attacks.Array.data[2].distance
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: attacks.Array.data[3].distance
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -227,12 +237,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
+      propertyPath: attacks.Array.data[3].attackType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: attacks.Array.data[3].cooldown.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: attacks.Array.data[3].cooldown.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
       propertyPath: attacks.Array.data[2].attackSpeed
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
+      propertyPath: attacks.Array.data[3].attackSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
       propertyPath: attacks.Array.data[2].attackPauseTime
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: attacks.Array.data[3].attackPauseTime
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
@@ -244,6 +279,26 @@ PrefabInstance:
         type: 3}
       propertyPath: attacks.Array.data[2].doubleAttackChance
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: attacks.Array.data[3].healthPercentageUse
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359448397912886822, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.1225
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359448397912886822, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.1225
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359448397912886822, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.1225
       objectReference: {fileID: 0}
     - target: {fileID: 1597140114961427903, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -394,6 +449,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: -0.000000014901159
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302666789154135366, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.1225
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302666789154135366, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.1225
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302666789154135366, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.1225
       objectReference: {fileID: 0}
     - target: {fileID: 5444082673104886268, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}

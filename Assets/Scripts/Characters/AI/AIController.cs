@@ -27,6 +27,15 @@ public class AIController : BaseCharacterController
         currentDestination = transform.position;
 
         ActivateAI();
+
+        for (int i = 0; i < attacks.Length; i++)
+        {
+            attacks[i].usesLeft = attacks[i].maxUses <= 0 ? -1 : attacks[i].maxUses;
+            if (attacks[i].healthPercentageUse <= 0)
+            {
+                attacks[i].healthPercentageUse = 1;
+            }
+        }
     }
 
     public virtual void ActivateAI()
@@ -178,6 +187,11 @@ public class AIController : BaseCharacterController
         public Vector2 cooldown;
         public float attackPauseTime;
 
+        public int maxUses;
+        public float healthPercentageUse;
+
+        [HideInInspector]
+        public int usesLeft;
         [HideInInspector]
         public float currentCooldown;
         [HideInInspector]
@@ -207,7 +221,7 @@ public class AIController : BaseCharacterController
         {
             if (attacks[i].attackType == attackType)
             {
-                if (attacks[i].timeSinceLastAttack >= attacks[i].currentCooldown)
+                if (attacks[i].timeSinceLastAttack >= attacks[i].currentCooldown && attacks[i].usesLeft != 0 && attacks[i].healthPercentageUse >= (float)health.GetCurrentHealth() / (float)health.maxHealth)
                 {
                     //Debug.Log("Can attack for " + attackType);
                     return true;
@@ -241,7 +255,7 @@ public class AIController : BaseCharacterController
 
         if (distance < attacks[attackIndex].distance)
         {
-            if (combat.canAttack && attacks[attackIndex].timeSinceLastAttack >= attacks[attackIndex].currentCooldown)
+            if (combat.canAttack && CanAttack(attackType))
             {
                 if (doubleAttack)
                     doubleAttack = false;
@@ -260,6 +274,7 @@ public class AIController : BaseCharacterController
                 StartCoroutine(IReleaseAttack(releaseTime));
 
                 AdjustCooldowns(attackType, attackIndex);
+                attacks[attackIndex].usesLeft--;
             }
 
             agent.isStopped = true;
