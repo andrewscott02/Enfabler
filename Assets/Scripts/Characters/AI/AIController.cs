@@ -13,6 +13,7 @@ public class AIController : BaseCharacterController
     #region Behaviour Tree
     protected NavMeshAgent agent; public NavMeshAgent GetNavMeshAgent() { return agent; }
     public BehaviourTree bt;
+    CharacterMovement characterMovement; 
 
     public float roamTimeElapsed { get; protected set; } = 0;
 
@@ -21,6 +22,7 @@ public class AIController : BaseCharacterController
         base.Start();
         player = GameObject.FindObjectOfType<PlayerController>().gameObject;
         agent = GetComponent<NavMeshAgent>();
+        characterMovement = GetComponent<CharacterMovement>();
 
         currentDestination = transform.position;
 
@@ -68,7 +70,7 @@ public class AIController : BaseCharacterController
             transform.rotation = Quaternion.Slerp(transform.rotation, desiredrot, Time.deltaTime * agent.angularSpeed);
         }
         
-        #region Animation
+        #region Animation and Movement Speed
 
         Vector3 movement = agent.velocity;
         //movement = transform.TransformDirection(movement);
@@ -81,6 +83,8 @@ public class AIController : BaseCharacterController
         //Sets the movement animations for the animator
         float currentSpeed = realMovement.magnitude * agent.speed * animMultiplier;
         animator.SetFloat("RunBlend", currentSpeed);
+
+        characterMovement.currentSpeed = currentSpeed;
 
         #endregion
 

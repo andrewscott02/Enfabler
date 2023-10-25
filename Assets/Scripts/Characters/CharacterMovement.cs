@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     public bool sprinting { get; protected set; } = false;
-    protected float currentSpeed = 0;
+    public float currentSpeed = 0;
 
     public float gravityMultiplier = 5f;
 
@@ -38,6 +38,7 @@ public class CharacterMovement : MonoBehaviour
 
     void SpawnImpulse(float impulseStrength)
     {
+        Debug.Log(gameObject.name + " Spawn impulse with strength + " + impulseStrength);
         stepData.impulseSource.GenerateImpulseWithForce(impulseStrength);
     }
 
