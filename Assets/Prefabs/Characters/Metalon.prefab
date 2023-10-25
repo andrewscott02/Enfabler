@@ -178,6 +178,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
+      propertyPath: attacks.Array.data[0].distance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
       propertyPath: attacks.Array.data[2].distance
       value: 7
       objectReference: {fileID: 0}
@@ -241,6 +246,11 @@ PrefabInstance:
       propertyPath: hitReactData.deathFXGO
       value: 
       objectReference: {fileID: 1675388588107083930}
+    - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: hitReactData.killRagdoll
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: hitReactData.heavyHitReactThreshold
@@ -324,7 +334,7 @@ PrefabInstance:
     - target: {fileID: 5444082673104886268, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: m_Radius
-      value: 1.69
+      value: 1.36
       objectReference: {fileID: 0}
     - target: {fileID: 6724070844199657075, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -461,7 +471,8 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.000000035390258
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5444082673104886268, guid: 9259463fa317d1c41aec05c50edaee45, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9259463fa317d1c41aec05c50edaee45, type: 3}
 --- !u!4 &7535070001232547603 stripped
 Transform:
@@ -469,3 +480,22 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1777372063883656379}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7535070001232547612 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8087211796610937767, guid: 9259463fa317d1c41aec05c50edaee45,
+    type: 3}
+  m_PrefabInstance: {fileID: 1777372063883656379}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7951818595043748961
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535070001232547612}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 2, z: 2.5}
+  m_Center: {x: 0, y: 1, z: 0}
