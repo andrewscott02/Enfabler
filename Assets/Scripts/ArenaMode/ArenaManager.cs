@@ -24,6 +24,13 @@ public class ArenaManager : MonoBehaviour
         AIManager.instance.enemiesDied += StartRoundCoroutine;
         fightSelector.SetActive(true);
         ShowMouse(true);
+        StartCoroutine(IShowMouse());
+    }
+
+    IEnumerator IShowMouse()
+    {
+        yield return new WaitForSeconds(0.5f);
+        ShowMouse(true);
     }
 
     void ShowMouse(bool visible)
