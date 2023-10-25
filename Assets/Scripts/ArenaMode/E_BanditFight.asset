@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7d22419a33af8643868840660b7224e, type: 3}
-  m_Name: BanditFight
+  m_Name: E_BanditFight
   m_EditorClassIdentifier: 
+  fightName: Extended Bandit Fight (8 rounds)
   arenaRounds:
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
@@ -22,10 +23,6 @@ MonoBehaviour:
         type: 3}
       count: 2
   - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
-        type: 3}
-      count: 3
-  - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
         type: 3}
       count: 2
@@ -37,13 +34,13 @@ MonoBehaviour:
         type: 3}
       count: 1
   - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
+    - enemyObject: {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8,
         type: 3}
-      count: 3
+      count: 1
+  - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
         type: 3}
-      count: 2
-  - enemyTypes:
+      count: 1
     - enemyObject: {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8,
         type: 3}
       count: 1
@@ -57,14 +54,7 @@ MonoBehaviour:
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
         type: 3}
-      count: 3
-    - enemyObject: {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8,
-        type: 3}
       count: 1
-  - enemyTypes:
-    - enemyObject: {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61,
-        type: 3}
-      count: 2
     - enemyObject: {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b,
         type: 3}
       count: 1

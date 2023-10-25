@@ -1,32 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ArenaManager : MonoBehaviour
 {
-    public ArenaFight arenaFight;
+    public static ArenaManager instance;
+
+    ArenaFight arenaFight;
     public float interval = 5f;
     public float spawnRadius = 30f;
 
+    public GameObject nextLevelUI;
+
     int round = 0;
+
+    public GameObject fightSelector;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(ISpawnRounds(interval));
+        instance = this;
         AIManager.instance.enemiesDied += StartRoundCoroutine;
+        fightSelector.SetActive(true);
+        ShowMouse(true);
+    }
+
+    void ShowMouse(bool visible)
+    {
+        Cursor.visible = visible;
+        Cursor.lockState = visible ? CursorLockMode.Confined : CursorLockMode.Locked;
+    }
+
+    public void SelectFight(ArenaFight fight)
+    {
+        fightSelector.SetActive(false);
+        ShowMouse(false);
+        arenaFight = fight;
+        StartCoroutine(ISpawnRounds(interval));
     }
 
     void StartRoundCoroutine()
     {
-        StartCoroutine(ISpawnRounds(interval));
+        if (round >= arenaFight.arenaRounds.Length)
+            ArenaWin();
+        else
+            StartCoroutine(ISpawnRounds(interval));
     }
 
     IEnumerator ISpawnRounds(float delay)
     {
         yield return new WaitForSeconds(delay);
         SpawnEnemies();
-        round = Mathf.Clamp(round + 1, 0, arenaFight.arenaRounds.Length - 1);
+        round++;
     }
 
     void SpawnEnemies()
@@ -50,5 +76,20 @@ public class ArenaManager : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, spawnRadius);
+    }
+
+    public void ArenaWin()
+    {
+        nextLevelUI.SetActive(true);
+        StartCoroutine(IMainMenu(5f));
+    }
+
+    public E_Scenes mainMenu;
+
+    IEnumerator IMainMenu(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        SceneManager.LoadScene(mainMenu.ToString());
     }
 }

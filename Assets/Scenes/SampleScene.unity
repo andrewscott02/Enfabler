@@ -2830,9 +2830,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebdd5b46f077db4a8732371586dad18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arenaFight: {fileID: 11400000, guid: 432e2c49d74d31b4c99ea7f275b26afc, type: 2}
   interval: 10
   spawnRadius: 22.35
+  nextLevelUI: {fileID: 297702685}
+  fightSelector: {fileID: 8928750309083163468}
+  mainMenu: 0
 --- !u!43 &136125152
 Mesh:
   m_ObjectHideFlags: 0
@@ -3260,6 +3262,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43d26958e63fd64419eb8c2f9254f25d, type: 3}
+--- !u!1 &297702685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2820398590276355092, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8928750309083163466}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &338930785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7498,11 +7506,47 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8942170518117846234, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942170518117846234, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942170518117846234, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942170518117846234, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942170518117846234, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942170518117846234, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a5544f4bc6125e42bb17b450d3c82d4, type: 3}
 --- !u!1 &8928750309083163467 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4035640014766034385, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8928750309083163466}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8928750309083163468 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3532229131644243760, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
     type: 3}
   m_PrefabInstance: {fileID: 8928750309083163466}
   m_PrefabAsset: {fileID: 0}
