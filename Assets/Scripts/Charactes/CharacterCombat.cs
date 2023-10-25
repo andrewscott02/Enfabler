@@ -97,6 +97,27 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         this.weapon = setWeapon.CreateWeapon();
     }
 
+    public void ChooseWeapon(AttackType attackType)
+    {
+        switch (attackType)
+        {
+            case AttackType.PrimaryAttack:
+                SetupWeapon(0);
+                break;
+            case AttackType.SwitchPrimaryAttack:
+                SetupWeapon(0);
+                break;
+            case AttackType.SecondaryAttack:
+                SetupWeapon(1);
+                break;
+            case AttackType.SwitchSecondaryAttack:
+                SetupWeapon(1);
+                break;
+            default:
+                break;
+        }
+    }
+
     #endregion
 
     #region Attacking
@@ -122,17 +143,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
             switchAttack = (lastAttackType != attackType && lastAttackType != AttackType.None);
 
-            switch (attackType)
-            {
-                case AttackType.PrimaryAttack:
-                    SetupWeapon(0);
-                    break;
-                case AttackType.SecondaryAttack:
-                    SetupWeapon(1);
-                    break;
-                default:
-                    break;
-            }
+            ChooseWeapon(attackType);
 
             //Debug.Log(attackType + " " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard") + " " + attackSpeed);
             Block(false);
@@ -151,6 +162,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             canDodge = false;
             currentAttackSpeed = attackSpeed;
             animator.speed = attackSpeed;
+            animator.applyRootMotion = true;
 
             if (switchAttack && canSwitchAttack)
             {
@@ -280,6 +292,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         {
             AIController.EndAttackOnTarget();
         }
+
+        animator.applyRootMotion = baseUseRootMotion;
 
         Untarget();
     }

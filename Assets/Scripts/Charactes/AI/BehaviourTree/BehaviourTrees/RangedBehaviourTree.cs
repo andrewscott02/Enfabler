@@ -14,6 +14,13 @@ public class RangedBehaviourTree : BehaviourTree
             new Selector(
 
                 new Sequence(
+                //If they are able to make a switch melee attack
+                new CanAttack(agent, CharacterCombat.AttackType.SwitchSecondaryAttack),
+                //Checks if the closest enemy is within switch melee distance and makes an attack if true
+                BaseBehaviours.AttackClosestTarget(agent, true, agent.GetAttackFromType(CharacterCombat.AttackType.SwitchSecondaryAttack), CharacterCombat.AttackType.SwitchSecondaryAttack)
+                ),
+
+                new Sequence(
                     //If they are unable to make an attack, move to a point a short distance away
                     new CannotAttack(agent, CharacterCombat.AttackType.SecondaryAttack),
                     BaseBehaviours.MoveToRange(agent, 35f, false)
