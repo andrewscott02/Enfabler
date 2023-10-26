@@ -22,7 +22,6 @@ public class GetValidSpell : Node
 
         if (spellData.spell == null)
         {
-            Debug.Log("No Spell data");
             return NodeState.Failure;
         }
 

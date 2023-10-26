@@ -112,6 +112,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
         if (animator != null && damage >= hitReactData.lightHitReactThreshold)
         {
+            combat.ForceEndAttack();
             animator.SetBool("InHitReaction", true);
             animator.SetTrigger(damage < hitReactData.heavyHitReactThreshold ? "HitReactLight" : "HitReactHeavy");
         }
@@ -151,6 +152,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         dying = true;
         SpawnImpulse(hitReactData.killImpulseStrength);
         Slomo(hitReactData.killSlomoScale, hitReactData.killSlomoDuration);
+        if (combat != null)
+            combat.ForceEndAttack();
         if (AIManager.instance != null)
             AIManager.instance.CharacterDied(this.GetComponent<BaseCharacterController>());
 

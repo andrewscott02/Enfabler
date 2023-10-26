@@ -247,7 +247,7 @@ public class AIController : BaseCharacterController
             }
         }
 
-        Debug.LogWarning("No attack type matches, returning first item");
+        //Debug.LogWarning("No attack type matches, returning first item");
         return attacks[0];
     }
 
