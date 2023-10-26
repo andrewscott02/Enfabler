@@ -21,11 +21,12 @@ public class GetValidSpell : Node
         AIController.AISpellData spellData = agent.GetValidSpell();
 
         if (spellData.spell == null)
+        {
+            Debug.Log("No Spell data");
             return NodeState.Failure;
+        }
 
-        if (agent.PrepareSpell(spellData))
-            return NodeState.Success;
-
-        return NodeState.Failure;
+        agent.PrepareSpell(spellData.identifier);
+        return NodeState.Success;
     }
 }

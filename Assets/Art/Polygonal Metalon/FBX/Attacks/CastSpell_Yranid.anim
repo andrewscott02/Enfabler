@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SummonYoung
+  m_Name: CastSpell_Yranid
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -60246,12 +60246,12 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.35351756
-    functionName: SpawnAllies
+    functionName: ActivateSpell
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
       type: 3}
     floatParameter: 0
-    intParameter: 3
+    intParameter: 0
     messageOptions: 0
   - time: 0.7687296
     functionName: NextAttack

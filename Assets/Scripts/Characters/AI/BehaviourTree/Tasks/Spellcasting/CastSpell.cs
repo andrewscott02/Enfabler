@@ -18,8 +18,9 @@ public class CastSpell : Node
 
     public override NodeState Evaluate()
     {
-        agent.CastSpell();
+        if (agent.CastSpell())
+            return NodeState.Success;
 
-        return NodeState.Success;
+        return NodeState.Failure;
     }
 }

@@ -49,6 +49,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     private void Start()
     {
+        controller = GetComponent<BaseCharacterController>();
         animator = GetComponent<Animator>();
         baseUseRootMotion = animator.applyRootMotion;
         baseAnimationSpeed = animator.speed;
@@ -887,8 +888,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void CastSpell(SpellStats prepareSpell)
     {
-        if (currentSpell == null) return;
+        if (prepareSpell == null && !canAttack) return;
 
+        Debug.Log("Casting + " + prepareSpell.spellName);
         Block(false);
         EndDodge();
         ForceEndAttack();
@@ -896,7 +898,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         blocking = false;
         canMove = false;
         canAttack = false;
-        canSaveAttackInput = true;
+        canSaveAttackInput = false;
         canDodge = false;
         animator.speed = baseAnimationSpeed;
         animator.applyRootMotion = baseUseRootMotion;

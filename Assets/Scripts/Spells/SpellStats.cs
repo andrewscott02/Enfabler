@@ -9,6 +9,7 @@ public class SpellStats : ScriptableObject
 
     public virtual void CastSpell(BaseCharacterController caster)
     {
-        Instantiate(spellFX, caster.transform.position, caster.transform.rotation);
+        if (spellFX != null)
+            Instantiate(spellFX, caster.transform.position, caster.transform.rotation);
     }
 }

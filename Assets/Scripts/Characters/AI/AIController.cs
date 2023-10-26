@@ -39,6 +39,7 @@ public class AIController : BaseCharacterController
 
         for (int i = 0; i < spells.Length; i++)
         {
+            spells[i].identifier = i;
             spells[i].usesLeft = spells[i].maxUses <= 0 ? -1 : spells[i].maxUses;
             if (spells[i].healthPercentageUse <= 0)
             {
@@ -219,6 +220,7 @@ public class AIController : BaseCharacterController
     public struct AISpellData
     {
         public SpellStats spell;
+        public int identifier;
 
         public float distance;
         public Vector2 cooldown;
@@ -277,8 +279,7 @@ public class AIController : BaseCharacterController
 
         for (int i = 0; i < spells.Length; i++)
         {
-            Debug.Log("checking " + spells[i].spell);
-            if (CanCastSpell(spells[i]))
+            if (CanCastSpell(i))
             {
                 return spells[i];
                 //TODO: could use priority to find best spell
@@ -289,33 +290,33 @@ public class AIController : BaseCharacterController
         return invalidData;
     }
 
-    public bool CanCastSpell(AISpellData spell)
+    public bool CanCastSpell(int identifier)
     {
-        if (spell.timeSinceLastAttack >= spell.currentCooldown && spell.usesLeft != 0 && spell.healthPercentageUse >= (float)health.GetCurrentHealth() / (float)health.maxHealth)
+        if (spells[identifier].timeSinceLastAttack >= spells[identifier].currentCooldown && spells[identifier].usesLeft != 0 && spells[identifier].healthPercentageUse >= (float)health.GetCurrentHealth() / (float)health.maxHealth)
         {
-            Debug.Log("Can cast + " + spell.spell.spellName);
             return true;
         }
         return false;
     }
 
-    AISpellData currentSpell;
+    int currentSpell;
 
-    public bool PrepareSpell(AISpellData prepareSpell)
+    public void PrepareSpell(int identifier)
     {
-        if (combat.canAttack) return false;
-        Debug.Log("Preparing + " + prepareSpell.spell.spellName);
-        currentSpell = prepareSpell;
-        return true;
+        Debug.Log("Preparing + " + spells[identifier].spell.spellName);
+        currentSpell = identifier;
     }
 
-    public void CastSpell()
+    public bool CastSpell()
     {
-        Debug.Log("Casting + " + currentSpell.spell.spellName);
-        currentSpell.timeSinceLastAttack = 0;
-        currentSpell.currentCooldown = Random.Range(currentSpell.cooldown.x, currentSpell.cooldown.y);
-        currentSpell.usesLeft--;
-        combat.CastSpell(currentSpell.spell);
+        if (!CanCastSpell(currentSpell)) return false;
+
+        spells[currentSpell].timeSinceLastAttack = 0;
+        spells[currentSpell].currentCooldown = Random.Range(spells[currentSpell].cooldown.x, spells[currentSpell].cooldown.y);
+        spells[currentSpell].usesLeft--;
+        combat.CastSpell(spells[currentSpell].spell);
+
+        return true;
     }
 
     public bool AttackTarget(CharacterCombat.AttackType attackType)
