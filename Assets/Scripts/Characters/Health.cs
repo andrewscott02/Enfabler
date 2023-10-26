@@ -115,6 +115,10 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             animator.SetBool("InHitReaction", true);
             animator.SetTrigger(damage < hitReactData.heavyHitReactThreshold ? "HitReactLight" : "HitReactHeavy");
         }
+        else
+        {
+            combat.ResetAttack();
+        }
 
         float impulseStrength = Mathf.Clamp(damage * hitReactData.hitImpulseMultiplier, 0, hitReactData.impulseMax);
         SpawnImpulse(impulseStrength);
