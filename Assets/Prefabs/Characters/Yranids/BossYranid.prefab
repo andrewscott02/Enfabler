@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 374736940954730057, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
       propertyPath: maxHealth
-      value: 60
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 374736940954730057, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
@@ -80,13 +80,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
+      propertyPath: spells.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
       propertyPath: attacks.Array.size
-      value: 4
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[0].spell
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c5c0741f780726449088b7ababddc42,
+        type: 2}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[1].spell
+      value: 
+      objectReference: {fileID: 11400000, guid: 207dc63d623f2ec47a116a3898ed0aeb,
+        type: 2}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[0].maxUses
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[1].maxUses
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
       propertyPath: attacks.Array.data[3].maxUses
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[0].distance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[1].distance
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
@@ -107,6 +144,26 @@ PrefabInstance:
         type: 3}
       propertyPath: attacks.Array.data[3].distance
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[0].cooldown.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[0].cooldown.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[1].cooldown.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[1].cooldown.y
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
@@ -192,6 +249,16 @@ PrefabInstance:
         type: 3}
       propertyPath: attacks.Array.data[1].doubleAttackChance
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[0].healthPercentageUse
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[1].healthPercentageUse
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}

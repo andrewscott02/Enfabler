@@ -10,6 +10,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     [HideInInspector]
     public ConstructPlayerModel modelConstructor;
     protected Health health;
+    protected BaseCharacterController controller;
 
     public Weapon weapon { get; private set; }
     public Object projectile;
@@ -20,7 +21,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public bool canMove = true;
     public bool sprinting = false;
 
-    
     public bool canSaveAttackInput = false;
     AttackType lastAttackType = AttackType.None;
     public AttackType savingAttackInput = AttackType.None;
@@ -881,22 +881,20 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #endregion
 
-    #region Spawn Allies
+    #region CastSpell
 
-    public Object allies;
+    public SpellStats currentSpell;
 
-    public void SpawnAllies(int count)
+    public void PrepareSpell(SpellStats prepareSpell)
     {
-        for (int i = 0; i < count; i++)
-        {
-            Vector3 spawnPos;
-            if (!HelperFunctions.GetRandomPointOnNavmesh(transform.position, 10f, 0.5f, 100, out spawnPos))
-            {
-                spawnPos = transform.position;
-            }
+        currentSpell = prepareSpell;
+    }
 
-            Instantiate(allies, spawnPos, new Quaternion(0, 0, 0, 0));
-        }
+    public void CastSpell()
+    {
+        if (currentSpell == null) return;
+
+        currentSpell.CastSpell(controller);
     }
 
     #endregion

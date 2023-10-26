@@ -197,7 +197,28 @@ public class AIController : BaseCharacterController
         [HideInInspector]
         public float timeSinceLastAttack;
     }
-    
+
+    public AISpellData[] spells;
+
+    [System.Serializable]
+    public struct AISpellData
+    {
+        public SpellStats spell;
+
+        public float distance;
+        public Vector2 cooldown;
+
+        public int maxUses;
+        public float healthPercentageUse;
+
+        [HideInInspector]
+        public int usesLeft;
+        [HideInInspector]
+        public float currentCooldown;
+        [HideInInspector]
+        public float timeSinceLastAttack;
+    }
+
     public AIAttackData GetAttackFromType(CharacterCombat.AttackType attackType)
     {
         for (int i = 0; i < attacks.Length; i++)
@@ -230,6 +251,35 @@ public class AIController : BaseCharacterController
         }
 
         //Debug.Log("Cannot attack for " + attackType);
+        return false;
+    }
+
+    public AISpellData GetValidSpell()
+    {
+        AISpellData invalidData = new AISpellData();
+        if (currentTarget == null || !combat.canAttack || spells.Length <= 0)
+            return invalidData;
+
+        for (int i = 0; i < spells.Length; i++)
+        {
+            if (CanCastSpell(spells[i]))
+            {
+                return spells[i];
+                //TODO: could use priority to find best spell
+            }
+        }
+
+        //Debug.Log("Cannot attack for " + attackType);
+        return invalidData;
+    }
+
+    public bool CanCastSpell(AISpellData spell)
+    {
+        if (spell.timeSinceLastAttack >= spell.currentCooldown && spell.usesLeft != 0 && spell.healthPercentageUse >= (float)health.GetCurrentHealth() / (float)health.maxHealth)
+        {
+            //Debug.Log("Can attack for " + attackType);
+            return true;
+        }
         return false;
     }
 

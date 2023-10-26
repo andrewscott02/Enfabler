@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewSpell", menuName = "Spells/SpellStats", order = 0)]
 public class SpellStats : ScriptableObject
 {
-    public void CastSpell()
-    {
+    public string spellName;
+    public Object spellFX;
 
+    public virtual void CastSpell(BaseCharacterController caster)
+    {
+        Instantiate(spellFX, caster.transform.position, caster.transform.rotation);
     }
 }
