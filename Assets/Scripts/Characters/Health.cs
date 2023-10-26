@@ -153,7 +153,10 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         SpawnImpulse(hitReactData.killImpulseStrength);
         Slomo(hitReactData.killSlomoScale, hitReactData.killSlomoDuration);
         if (combat != null)
+        {
             combat.ForceEndAttack();
+            combat.armourSlider.gameObject.SetActive(false);
+        }
         if (AIManager.instance != null)
             AIManager.instance.CharacterDied(this.GetComponent<BaseCharacterController>());
 
@@ -182,6 +185,9 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             //Debug.Log(gameObject + "has no controller");
             Destroy(this.gameObject, hitReactData.killDestroyTime);
         }
+
+        if (healthSlider != null)
+            healthSlider.gameObject.SetActive(false);
     }
 
     public bool IsDead() { return dying; }

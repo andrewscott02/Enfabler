@@ -888,6 +888,9 @@ MonoBehaviour:
     heavyHitReactThreshold: 5
     hitSlomoScale: 0.7
     hitSlomoDuration: 0.35
+    hitRootShakeIntensity: {x: 0.01, y: 0, z: 0.01}
+    hitRootShakeDuration: 0.5
+    shakeRoot: {fileID: 9043084692085274803}
     killImpulseStrength: 0.85
     killSlomoScale: 0.55
     killSlomoDuration: 0.5
@@ -1008,7 +1011,7 @@ MonoBehaviour:
   armourRegen: 3
   canDodge: 1
   rumbleOnHit: 0
-  allies: {fileID: 0}
+  currentSpell: {fileID: 0}
 --- !u!114 &634613423001025932
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -208,6 +208,25 @@ public static class HelperFunctions
 
     #region Maths
 
+    public static Vector3 GetRandomVector(Vector3 displacement)
+    {
+        float x = Random.Range(-displacement.x, displacement.x);
+        float y = Random.Range(-displacement.y, displacement.y);
+        float z = Random.Range(-displacement.z, displacement.z);
+
+        return new Vector3(x, y, x);
+    }
+
+    public static Quaternion GetRandomQuaternion(Quaternion displacement)
+    {
+        float x = Random.Range(-displacement.x, displacement.x);
+        float y = Random.Range(-displacement.y, displacement.y);
+        float z = Random.Range(-displacement.z, displacement.z);
+        float w = Random.Range(-displacement.w, displacement.w);
+
+        return new Quaternion(x, y, z, w);
+    }
+
     public static Vector3 LerpVector3(Vector3 a, Vector3 b, float p)
     {
         float x = Mathf.Lerp(a.x, b.x, p);
