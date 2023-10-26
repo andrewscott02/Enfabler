@@ -159,19 +159,21 @@ public class Health : MonoBehaviour, IDamageable, IHealable
                 origin = attacker
             };
 
-            controller.ActivateRagdoll(true, forcedata);
+            controller.ActivateRagdoll(true, forcedata, !hitReactData.killAnim);
             gameObject.name += " -- Dead";
         }
-        else if (hitReactData.killAnim)
+
+        if (hitReactData.killAnim)
         {
             controller.rb.constraints = RigidbodyConstraints.FreezeAll;
             controller.enabled = false;
             animator.SetTrigger("Death");
         }
-        else
+
+        if (hitReactData.killDestroyTime >= 0)
         {
             //Debug.Log(gameObject + "has no controller");
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, hitReactData.killDestroyTime);
         }
     }
 

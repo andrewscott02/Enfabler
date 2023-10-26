@@ -301,6 +301,7 @@ public struct HitReactData
     public float killSlomoDuration;
     public bool killRagdoll;
     public bool killAnim;
+    public float killDestroyTime;
 
     public float parryImpulseStrength;
     public float parrySlomoScale;

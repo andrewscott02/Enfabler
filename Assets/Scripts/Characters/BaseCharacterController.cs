@@ -52,7 +52,7 @@ public class BaseCharacterController : MonoBehaviour
         }
     }
 
-    public virtual void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
+    public virtual void ActivateRagdoll(bool activate, ExplosiveForceData forceData, bool disableAnimator = true)
     {
         foreach (var item in ragdollColliders)
         {
@@ -78,7 +78,8 @@ public class BaseCharacterController : MonoBehaviour
         mainCollider.isTrigger = activate;
         mainCollider.enabled = !activate;
 
-        animator.enabled = !activate;
+        if (disableAnimator)
+            animator.enabled = !activate;
 
         if (activate && health.dying)
         {

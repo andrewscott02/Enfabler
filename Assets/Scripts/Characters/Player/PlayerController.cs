@@ -250,10 +250,10 @@ public class PlayerController : BaseCharacterController
 
     #endregion
 
-    public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
+    public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData, bool disableAnimator)
     {
         followTarget.follow.parent = null;
 
-        base.ActivateRagdoll(activate, forceData);
+        base.ActivateRagdoll(activate, forceData, disableAnimator);
     }
 }

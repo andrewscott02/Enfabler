@@ -105,12 +105,12 @@ public class AIController : BaseCharacterController
         lastParry += Time.deltaTime;
         lastDodge += Time.deltaTime;
     }
-    public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData)
+    public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData, bool disableAnimator = true)
     {
         SetDestinationPos(gameObject.transform.position);
         agent.enabled = false;
         bt.enabled = false;
-        base.ActivateRagdoll(activate, forceData);
+        base.ActivateRagdoll(activate, forceData, disableAnimator);
     }
 
     public float distanceAllowance = 1f;

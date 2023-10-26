@@ -893,6 +893,7 @@ MonoBehaviour:
     killSlomoDuration: 0.5
     killRagdoll: 1
     killAnim: 0
+    killDestroyTime: -1
     parryImpulseStrength: 0
     parrySlomoScale: 0.2
     parrySlomoDuration: 0
@@ -1007,7 +1008,7 @@ MonoBehaviour:
   armourRegen: 3
   canDodge: 1
   rumbleOnHit: 0
-  allies: {fileID: 4297160914922154321, guid: 41e27b05400a71846886bcbd653b0e22, type: 3}
+  allies: {fileID: 0}
 --- !u!114 &634613423001025932
 MonoBehaviour:
   m_ObjectHideFlags: 0

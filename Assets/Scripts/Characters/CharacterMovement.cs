@@ -38,7 +38,7 @@ public class CharacterMovement : MonoBehaviour
 
     void SpawnImpulse(float impulseStrength)
     {
-        Debug.Log(gameObject.name + " Spawn impulse with strength + " + impulseStrength);
+        //Debug.Log(gameObject.name + " Spawn impulse with strength + " + impulseStrength);
         stepData.impulseSource.GenerateImpulseWithForce(impulseStrength);
     }
 
