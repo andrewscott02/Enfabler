@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewArenaFight", menuName = "Arena/Fight", order = 0)]
 public class ArenaFight : ScriptableObject
 {
+    [TextArea(3, 10)]
     public string fightName;
     public ArenaRound[] arenaRounds;
 

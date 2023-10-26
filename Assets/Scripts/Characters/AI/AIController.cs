@@ -220,6 +220,7 @@ public class AIController : BaseCharacterController
     public struct AISpellData
     {
         public SpellStats spell;
+        [HideInInspector]
         public int identifier;
 
         public float distance;
@@ -228,11 +229,11 @@ public class AIController : BaseCharacterController
         public int maxUses;
         public float healthPercentageUse;
 
-        //[HideInInspector]
+        [HideInInspector]
         public int usesLeft;
-        //[HideInInspector]
+        [HideInInspector]
         public float currentCooldown;
-        //[HideInInspector]
+        [HideInInspector]
         public float timeSinceLastAttack;
     }
 
