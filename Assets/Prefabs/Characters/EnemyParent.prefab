@@ -356,6 +356,9 @@ MonoBehaviour:
     unblockableChance: 0.2
     cooldown: {x: 3, y: 6}
     attackPauseTime: 0.4
+    maxUses: 0
+    healthPercentageUse: 0
+    usesLeft: 0
     currentCooldown: 0
     timeSinceLastAttack: 0
   - attackType: 2
@@ -365,6 +368,9 @@ MonoBehaviour:
     unblockableChance: 0.2
     cooldown: {x: 7, y: 10}
     attackPauseTime: 0.4
+    maxUses: 0
+    healthPercentageUse: 0
+    usesLeft: 0
     currentCooldown: 0
     timeSinceLastAttack: 0
   parryChance: 0.25

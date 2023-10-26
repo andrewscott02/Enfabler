@@ -2729,7 +2729,8 @@ PrefabInstance:
         type: 3}
       propertyPath: hitReactData.bloodFX
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4983520532681786520, guid: 519711c44e578224f93314968deaddf2,
+        type: 3}
     - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: hitReactData.deathFX
@@ -2740,11 +2741,6 @@ PrefabInstance:
         type: 3}
       propertyPath: hitReactData.killAnim
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
-        type: 3}
-      propertyPath: hitReactData.deathFXGO
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -2759,7 +2755,7 @@ PrefabInstance:
     - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: hitReactData.hitSlomoScale
-      value: 0.85
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -2769,7 +2765,12 @@ PrefabInstance:
     - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: hitReactData.hitSlomoDuration
-      value: 0.3
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: hitReactData.killSlomoDuration
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
