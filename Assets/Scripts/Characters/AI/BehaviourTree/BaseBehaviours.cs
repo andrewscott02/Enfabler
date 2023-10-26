@@ -138,6 +138,14 @@ namespace BehaviourTrees
 
         #region Combative
 
+        public static Sequence CastSpell(AIController agent)
+        {
+            return new Sequence(
+                new GetValidSpell(agent),
+                new CastSpell(agent)
+                );
+        }
+
         public static Selector AttackClosestTarget(AIController agent, bool sprinting, AIController.AIAttackData attack, CharacterCombat.AttackType attackType)
         {
             return new Selector(

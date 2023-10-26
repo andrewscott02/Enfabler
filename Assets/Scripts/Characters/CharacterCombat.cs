@@ -885,12 +885,28 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public SpellStats currentSpell;
 
-    public void PrepareSpell(SpellStats prepareSpell)
+    public void CastSpell(SpellStats prepareSpell)
     {
+        if (currentSpell == null) return;
+
+        Block(false);
+        EndDodge();
+        ForceEndAttack();
+
+        blocking = false;
+        canMove = false;
+        canAttack = false;
+        canSaveAttackInput = true;
+        canDodge = false;
+        animator.speed = baseAnimationSpeed;
+        animator.applyRootMotion = baseUseRootMotion;
+
         currentSpell = prepareSpell;
+
+        animator.SetTrigger("CastSpell");
     }
 
-    public void CastSpell()
+    public void ActivateSpell()
     {
         if (currentSpell == null) return;
 

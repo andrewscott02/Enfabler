@@ -36,6 +36,15 @@ public class AIController : BaseCharacterController
                 attacks[i].healthPercentageUse = 1;
             }
         }
+
+        for (int i = 0; i < spells.Length; i++)
+        {
+            spells[i].usesLeft = spells[i].maxUses <= 0 ? -1 : spells[i].maxUses;
+            if (spells[i].healthPercentageUse <= 0)
+            {
+                spells[i].healthPercentageUse = 1;
+            }
+        }
     }
 
     public virtual void ActivateAI()
@@ -102,9 +111,15 @@ public class AIController : BaseCharacterController
             attacks[i].timeSinceLastAttack += Time.deltaTime;
         }
 
+        for (int i = 0; i < spells.Length; i++)
+        {
+            spells[i].timeSinceLastAttack += Time.deltaTime;
+        }
+
         lastParry += Time.deltaTime;
         lastDodge += Time.deltaTime;
     }
+
     public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData, bool disableAnimator = true)
     {
         SetDestinationPos(gameObject.transform.position);
@@ -211,11 +226,11 @@ public class AIController : BaseCharacterController
         public int maxUses;
         public float healthPercentageUse;
 
-        [HideInInspector]
+        //[HideInInspector]
         public int usesLeft;
-        [HideInInspector]
+        //[HideInInspector]
         public float currentCooldown;
-        [HideInInspector]
+        //[HideInInspector]
         public float timeSinceLastAttack;
     }
 
@@ -262,6 +277,7 @@ public class AIController : BaseCharacterController
 
         for (int i = 0; i < spells.Length; i++)
         {
+            Debug.Log("checking " + spells[i].spell);
             if (CanCastSpell(spells[i]))
             {
                 return spells[i];
@@ -277,10 +293,29 @@ public class AIController : BaseCharacterController
     {
         if (spell.timeSinceLastAttack >= spell.currentCooldown && spell.usesLeft != 0 && spell.healthPercentageUse >= (float)health.GetCurrentHealth() / (float)health.maxHealth)
         {
-            //Debug.Log("Can attack for " + attackType);
+            Debug.Log("Can cast + " + spell.spell.spellName);
             return true;
         }
         return false;
+    }
+
+    AISpellData currentSpell;
+
+    public bool PrepareSpell(AISpellData prepareSpell)
+    {
+        if (combat.canAttack) return false;
+        Debug.Log("Preparing + " + prepareSpell.spell.spellName);
+        currentSpell = prepareSpell;
+        return true;
+    }
+
+    public void CastSpell()
+    {
+        Debug.Log("Casting + " + currentSpell.spell.spellName);
+        currentSpell.timeSinceLastAttack = 0;
+        currentSpell.currentCooldown = Random.Range(currentSpell.cooldown.x, currentSpell.cooldown.y);
+        currentSpell.usesLeft--;
+        combat.CastSpell(currentSpell.spell);
     }
 
     public bool AttackTarget(CharacterCombat.AttackType attackType)

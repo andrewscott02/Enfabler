@@ -11,6 +11,8 @@ public class BasicBehaviourTree : BehaviourTree
 
         Node root = new Selector(
 
+            BaseBehaviours.CastSpell(agent),
+
             new Sequence(
                 //If they are able to make a ranged attack
                 new CanAttack(agent, CharacterCombat.AttackType.SecondaryAttack),
