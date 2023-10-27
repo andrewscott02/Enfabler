@@ -7,9 +7,22 @@ public class SpellStats : ScriptableObject
     public string spellName;
     public Object spellFX;
 
+    public bool attachToWeapon = true;
+
     public virtual void CastSpell(BaseCharacterController caster)
     {
         if (spellFX != null)
-            Instantiate(spellFX, caster.transform.position, caster.transform.rotation);
+        {
+            GameObject fx;
+
+            if (attachToWeapon)
+            {
+                fx = Instantiate(spellFX, caster.GetCharacterCombat().weapon.transform) as GameObject;
+            }
+            else
+            {
+                fx = Instantiate(spellFX, caster.transform.position, caster.transform.rotation) as GameObject;
+            }
+        }
     }
 }

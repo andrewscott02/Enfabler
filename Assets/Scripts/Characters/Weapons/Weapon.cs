@@ -8,6 +8,8 @@ public class Weapon : MonoBehaviour
     public GameObject weaponBase, weaponTip;
     public GameObject weaponBaseHit, weaponTipHit;
 
+    public bool dropOnCharacterDeath = true;
+
     Collider col;
     Rigidbody rb;
 
@@ -27,6 +29,8 @@ public class Weapon : MonoBehaviour
 
     public void Disarm()
     {
+        if (!dropOnCharacterDeath) return;
+
         col.enabled = true;
         rb.isKinematic = false;
         transform.parent = null;
