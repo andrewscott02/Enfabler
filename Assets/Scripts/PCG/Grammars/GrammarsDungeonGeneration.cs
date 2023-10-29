@@ -31,12 +31,20 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
         Debug.Log(dungeonLayout);
 
-        GenerateDungeon(rooms);
+        GenerateDungeonRooms(rooms);
+        PopulateRooms();
     }
 
     [ContextMenu("Cleanup Dungeon")]
     public void CleanupDungeon()
     {
+        PCGRoom[] roomData = GetComponentsInChildren<PCGRoom>();
+
+        foreach (var item in roomData)
+        {
+            item.DeleteRoom();
+        }
+
         List<GameObject> children = new List<GameObject>();
 
         for (int i = 0; i < transform.childCount; i++)
@@ -52,6 +60,8 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         createdRooms = new List<PCGRoom>();
     }
 
+    #region Creating Rooms
+
     List<E_RoomTypes> GenerateAdditionalRooms()
     {
         List<E_RoomTypes> rooms = new List<E_RoomTypes>();
@@ -60,7 +70,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
         for (int i = 0; i < emptyRoomsCount; i++)
         {
-            E_RoomTypes roomType = grammarsRoomData.GetRandomRoom();
+            E_RoomTypes roomType = grammarsRoomData.GetRandomRoomType();
             rooms.Add(roomType);
         }
 
@@ -81,9 +91,27 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
     List<PCGRoom> createdRooms;
 
-    void GenerateDungeon(List<E_RoomTypes> rooms)
+    List<Object> DetermineDungeonRooms(List<E_RoomTypes> rooms)
+    {
+        List<Object> prefabs = new List<Object>();
+
+        foreach (var item in rooms)
+        {
+            Object prefab = grammarsRoomData.GetRandomRoomPrefab(item);
+            if (prefab != null)
+                prefabs.Add(grammarsRoomData.GetRandomRoomPrefab(item));
+        }
+
+        //TODO: Use grammars to change rooms
+
+        return prefabs;
+    }
+
+    void GenerateDungeonRooms(List<E_RoomTypes> rooms)
     {
         createdRooms = new List<PCGRoom>();
+
+        List<Object> prefabs = DetermineDungeonRooms(rooms);
 
         for (int i = 0; i < rooms.Count; i++)
         {
@@ -91,10 +119,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
             {
                 if (data.roomType.ToString() == rooms[i].ToString())
                 {
-                    int randomPrebab = Random.Range(0, data.prefabs.Length - 1);
-                    GameObject go = Instantiate(data.prefabs[randomPrebab], transform) as GameObject;
-
-                    go.name = rooms[i].ToString() + " room (PCG)";
+                    GameObject go = Instantiate(prefabs[i], transform) as GameObject;
 
                     if (data.roomType != E_RoomTypes.Start)
                     {
@@ -108,9 +133,20 @@ public class GrammarsDungeonGeneration : MonoBehaviour
                     }
 
                     PCGRoom goRoom = go.GetComponent<PCGRoom>();
+                    goRoom.Setup(rooms[i], grammarsRoomData);
                     createdRooms.Add(goRoom);
                 }
             };
         }
     }
+
+    void PopulateRooms()
+    {
+        for (int i = 0; i < createdRooms.Count; i++)
+        {
+            createdRooms[i].PopulateRoom();
+        }
+    }
+
+    #endregion
 }

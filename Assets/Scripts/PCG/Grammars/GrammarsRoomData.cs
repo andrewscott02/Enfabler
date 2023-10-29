@@ -9,9 +9,28 @@ public class GrammarsRoomData : ScriptableObject
     public RoomData[] additionalRoomData;
     public Vector2Int roomsCountMinMax;
 
-    public E_RoomTypes GetRandomRoom()
+    public Object[] enemies, traps, objects;
+    public Vector2Int enemiesPerRoom;
+
+    public E_RoomTypes GetRandomRoomType()
     {
         return additionalRoomData[Random.Range(0, additionalRoomData.Length)].roomType;
+    }
+
+    public Object GetRandomRoomPrefab(E_RoomTypes roomType)
+    {
+        for (int i = 0; i < roomPrefabs.Length; i++)
+        {
+            if (roomPrefabs[i].roomType == roomType)
+                return roomPrefabs[i].prefabs[Random.Range(0, roomPrefabs[i].prefabs.Length)];
+        }
+
+        return null;
+    }
+
+    public Object GetRandomEnemy()
+    {
+        return enemies[Random.Range(0, enemies.Length)];
     }
 
     #region Rules
@@ -40,7 +59,7 @@ public class GrammarsRoomData : ScriptableObject
                 if (rooms[i].ToString() == rooms[i - 1].ToString())
                 {
                     changed = true;
-                    rooms[i] = GetRandomRoom();
+                    rooms[i] = GetRandomRoomType();
                 }
             }
         };
