@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90910508796e224586996a019006bdf, type: 3}
+  m_Name: ShortDungeon
+  m_EditorClassIdentifier: 
+  roomPrefabs:
+  - roomType: 0
+    prefab: {fileID: 8401624045710463027, guid: afff5ac5a097cb948a309e7dee2210bf,
+      type: 3}
+  - roomType: 1
+    prefab: {fileID: 3688193081250498996, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+      type: 3}
+  - roomType: 2
+    prefab: {fileID: 8738645923294715640, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+      type: 3}
+  - roomType: 3
+    prefab: {fileID: 3688193081250498996, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+      type: 3}
+  - roomType: 4
+    prefab: {fileID: 3688193081250498996, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+      type: 3}
+  - roomType: 5
+    prefab: {fileID: 3688193081250498996, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+      type: 3}
+  - roomType: 6
+    prefab: {fileID: 3688193081250498996, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+      type: 3}
+  additionalRoomData:
+  - roomType: 3
+    minimumCount: 1
+  - roomType: 4
+    minimumCount: 0
+  - roomType: 5
+    minimumCount: 0
+  roomsCountMinMax: {x: 3, y: 5}

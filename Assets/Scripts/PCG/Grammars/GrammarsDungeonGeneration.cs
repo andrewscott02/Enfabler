@@ -5,36 +5,22 @@ using UnityEngine;
 public class GrammarsDungeonGeneration : MonoBehaviour
 {
     #region Setup
-    
-    [System.Serializable]
-    public enum E_RoomTypes
-    {
-        Start, Boss, End,
-        Encounter, Puzzle, Treasure
-    }
 
-    [System.Serializable]
-    public struct RoomData
-    {
-        public E_RoomTypes roomType;
-        public int minimumCount;
-    }
-
-    public RoomData[] additionalRoomData;
+    public GrammarsRoomData grammarsRoomData;
 
     #endregion
-
-    public Vector2Int emptyRoomsMinMax;
 
     [ContextMenu("Generate Grammars Dungeon")]
     public void GenerateGrammarsDungeon()
     {
-        List<E_RoomTypes> rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Boss, E_RoomTypes.End };
+        CleanupDungeon();
+
+        List<E_RoomTypes> rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Healing, E_RoomTypes.Boss, E_RoomTypes.End };
 
         List<E_RoomTypes> additionalRooms = GenerateAdditionalRooms();
 
-        ReplaceDuplicates(additionalRooms);
-        EnsureMinimums(additionalRooms);
+        grammarsRoomData.ReplaceDuplicates(additionalRooms);
+        grammarsRoomData.EnsureMinimums(additionalRooms);
         
         foreach (var item in additionalRooms)
         {
@@ -44,17 +30,37 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         string dungeonLayout = ConvertToString(rooms);
 
         Debug.Log(dungeonLayout);
+
+        GenerateDungeon(rooms);
+    }
+
+    [ContextMenu("Cleanup Dungeon")]
+    public void CleanupDungeon()
+    {
+        List<GameObject> children = new List<GameObject>();
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            children.Add(transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < children.Count; i++)
+        {
+            DestroyImmediate(children[i]);
+        }
+
+        createdRooms = new List<PCGRoom>();
     }
 
     List<E_RoomTypes> GenerateAdditionalRooms()
     {
         List<E_RoomTypes> rooms = new List<E_RoomTypes>();
 
-        int emptyRoomsCount = Random.Range(emptyRoomsMinMax.x, emptyRoomsMinMax.y);
+        int emptyRoomsCount = Random.Range(grammarsRoomData.roomsCountMinMax.x, grammarsRoomData.roomsCountMinMax.y);
 
         for (int i = 0; i < emptyRoomsCount; i++)
         {
-            E_RoomTypes roomType = additionalRoomData[Random.Range(0, additionalRoomData.Length)].roomType;
+            E_RoomTypes roomType = grammarsRoomData.GetRandomRoom();
             rooms.Add(roomType);
         }
 
@@ -73,58 +79,35 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         return dungeonLayout;
     }
 
-    #region Rules
+    List<PCGRoom> createdRooms;
 
-    List<E_RoomTypes> ReplaceDuplicates(List<E_RoomTypes> rooms)
+    void GenerateDungeon(List<E_RoomTypes> rooms)
     {
-        bool changed = true;
+        createdRooms = new List<PCGRoom>();
 
-        while (changed)
+        for (int i = 0; i < rooms.Count; i++)
         {
-            ReplaceDuplicatesRecursive(rooms, out changed);
-        }
-
-        return rooms;
-    }
-
-    List<E_RoomTypes> ReplaceDuplicatesRecursive(List<E_RoomTypes> rooms, out bool changed)
-    {
-        changed = false;
-
-        for (int i = 0; i  < rooms.Count; i++)
-        {
-            if (i - 1 >= 0)
+            foreach(var data in grammarsRoomData.roomPrefabs)
             {
-                //If this room is the same as the previous room, replace it with a new one
-                if (rooms[i].ToString() == rooms[i - 1].ToString())
+                if (data.roomType.ToString() == rooms[i].ToString())
                 {
-                    changed = true;
-                    rooms[i] = additionalRoomData[Random.Range(0, additionalRoomData.Length)].roomType;
+                    GameObject go = Instantiate(data.prefab, transform) as GameObject;
+
+                    if (data.roomType != E_RoomTypes.Start)
+                    {
+                        go.transform.position = createdRooms[i - 1].exitPoint.position;
+                        go.transform.rotation = createdRooms[i - 1].exitPoint.rotation;
+                    }
+                    else
+                    {
+                        go.transform.position = transform.position;
+                        go.transform.rotation = Quaternion.identity;
+                    }
+
+                    PCGRoom goRoom = go.GetComponent<PCGRoom>();
+                    createdRooms.Add(goRoom);
                 }
-            }
-        };
-
-        return rooms;
-    }
-
-    List<E_RoomTypes> EnsureMinimums(List<E_RoomTypes> rooms)
-    {
-        for (int i = 0; i < additionalRoomData.Length; i++)
-        {
-            int count = 0;
-
-            foreach (var item in rooms)
-            {
-                if (item.ToString() == additionalRoomData[i].roomType.ToString())
-                    count++;
-            }
-
-            if (count < additionalRoomData[i].minimumCount)
-                rooms.Add(additionalRoomData[i].roomType);
+            };
         }
-
-        return rooms;
     }
-
-    #endregion
 }
