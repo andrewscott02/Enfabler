@@ -91,7 +91,10 @@ public class GrammarsDungeonGeneration : MonoBehaviour
             {
                 if (data.roomType.ToString() == rooms[i].ToString())
                 {
-                    GameObject go = Instantiate(data.prefab, transform) as GameObject;
+                    int randomPrebab = Random.Range(0, data.prefabs.Length - 1);
+                    GameObject go = Instantiate(data.prefabs[randomPrebab], transform) as GameObject;
+
+                    go.name = rooms[i].ToString() + " room (PCG)";
 
                     if (data.roomType != E_RoomTypes.Start)
                     {

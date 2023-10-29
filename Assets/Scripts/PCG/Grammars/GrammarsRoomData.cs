@@ -81,7 +81,7 @@ public struct RoomData
 public struct RoomPrefabData
 {
     public E_RoomTypes roomType;
-    public Object prefab;
+    public Object[] prefabs;
 }
 
 [System.Serializable]
