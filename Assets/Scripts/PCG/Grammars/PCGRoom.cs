@@ -22,9 +22,9 @@ public class PCGRoom : MonoBehaviour
     }
 
     public E_RoomTypes roomType { get; private set; }
-    public GrammarsRoomData dungeonData { get; private set; }
+    public GrammarsDungeonData dungeonData { get; private set; }
 
-    public void Setup(E_RoomTypes roomType, GrammarsRoomData dungeonData)
+    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData)
     {
         this.roomType = roomType;
         this.dungeonData = dungeonData;

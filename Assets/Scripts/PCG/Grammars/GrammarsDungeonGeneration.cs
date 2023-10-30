@@ -6,7 +6,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 {
     #region Setup
 
-    public GrammarsRoomData grammarsRoomData;
+    public GrammarsDungeonData grammarsDungeonData;
 
     #endregion
 
@@ -19,8 +19,8 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
         List<E_RoomTypes> additionalRooms = GenerateAdditionalRooms();
 
-        grammarsRoomData.ReplaceDuplicates(additionalRooms);
-        grammarsRoomData.EnsureMinimums(additionalRooms);
+        grammarsDungeonData.ReplaceDuplicates(additionalRooms);
+        grammarsDungeonData.EnsureMinimums(additionalRooms);
         
         foreach (var item in additionalRooms)
         {
@@ -58,6 +58,8 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         }
 
         createdRooms = new List<PCGRoom>();
+
+        grammarsDungeonData.ResetAllDungeonData();
     }
 
     #region Creating Rooms
@@ -66,11 +68,11 @@ public class GrammarsDungeonGeneration : MonoBehaviour
     {
         List<E_RoomTypes> rooms = new List<E_RoomTypes>();
 
-        int emptyRoomsCount = Random.Range(grammarsRoomData.roomsCountMinMax.x, grammarsRoomData.roomsCountMinMax.y);
+        int emptyRoomsCount = Random.Range(grammarsDungeonData.roomsCountMinMax.x, grammarsDungeonData.roomsCountMinMax.y);
 
         for (int i = 0; i < emptyRoomsCount; i++)
         {
-            E_RoomTypes roomType = grammarsRoomData.GetRandomRoomType();
+            E_RoomTypes roomType = grammarsDungeonData.GetRandomRoomType();
             rooms.Add(roomType);
         }
 
@@ -97,9 +99,9 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
         foreach (var item in rooms)
         {
-            Object prefab = grammarsRoomData.GetRandomRoomPrefab(item);
+            Object prefab = grammarsDungeonData.GetRandomRoomPrefab(item);
             if (prefab != null)
-                prefabs.Add(grammarsRoomData.GetRandomRoomPrefab(item));
+                prefabs.Add(grammarsDungeonData.GetRandomRoomPrefab(item));
         }
 
         //TODO: Use grammars to change rooms
@@ -115,7 +117,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
         for (int i = 0; i < rooms.Count; i++)
         {
-            foreach(var data in grammarsRoomData.roomPrefabs)
+            foreach(var data in grammarsDungeonData.roomData)
             {
                 if (data.roomType.ToString() == rooms[i].ToString())
                 {
@@ -133,7 +135,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
                     }
 
                     PCGRoom goRoom = go.GetComponent<PCGRoom>();
-                    goRoom.Setup(rooms[i], grammarsRoomData);
+                    goRoom.Setup(rooms[i], grammarsDungeonData);
                     createdRooms.Add(goRoom);
                 }
             };

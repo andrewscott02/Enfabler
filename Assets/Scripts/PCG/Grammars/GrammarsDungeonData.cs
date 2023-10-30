@@ -2,30 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewGrammarsRoomData", menuName = "PCG/RoomData/GrammarsRoomData", order = 0)]
-public class GrammarsRoomData : ScriptableObject
+[CreateAssetMenu(fileName = "NewGrammarsDungeonData", menuName = "PCG/Grammars/DungeonData", order = 0)]
+public class GrammarsDungeonData : ScriptableObject
 {
-    public RoomPrefabData[] roomPrefabs;
-    public RoomData[] additionalRoomData;
+    public RoomData[] roomData;
+    public E_RoomTypes[] additionalRoomTypes;
     public Vector2Int roomsCountMinMax;
 
     public Object[] enemies, traps, objects;
     public Vector2Int enemiesPerRoom;
 
+    public void ResetAllDungeonData()
+    {
+        foreach(var item in roomData)
+        {
+            foreach (var data in item.prefabData)
+            {
+                data.ResetData();
+            }
+        }
+    }
+
     public E_RoomTypes GetRandomRoomType()
     {
-        return additionalRoomData[Random.Range(0, additionalRoomData.Length)].roomType;
+        return additionalRoomTypes[Random.Range(0, additionalRoomTypes.Length)];
     }
 
     public Object GetRandomRoomPrefab(E_RoomTypes roomType)
     {
-        for (int i = 0; i < roomPrefabs.Length; i++)
+        for (int i = 0; i < roomData.Length; i++)
         {
-            if (roomPrefabs[i].roomType == roomType)
-                return roomPrefabs[i].prefabs[Random.Range(0, roomPrefabs[i].prefabs.Length)];
+            if (roomData[i].roomType == roomType)
+            {
+                return DeterminePrefab(roomData[i].prefabData);
+            }
+
+            //TODO check for maximums
         }
 
         return null;
+    }
+
+    Object DeterminePrefab(RoomPrefabData[] prefabData)
+    {
+        int startIndex = Random.Range(0, prefabData.Length);
+
+        while (true)
+        {
+            if (prefabData[startIndex].CanUse())
+                return prefabData[startIndex].GetRandomPrefab();
+
+            startIndex++;
+        }
     }
 
     public Object GetRandomEnemy()
@@ -69,18 +97,22 @@ public class GrammarsRoomData : ScriptableObject
 
     public List<E_RoomTypes> EnsureMinimums(List<E_RoomTypes> rooms)
     {
-        for (int i = 0; i < additionalRoomData.Length; i++)
+        for (int i = 0; i < roomData.Length; i++)
         {
             int count = 0;
 
             foreach (var item in rooms)
             {
-                if (item.ToString() == additionalRoomData[i].roomType.ToString())
+                if (item == roomData[i].roomType)
                     count++;
             }
 
-            if (count < additionalRoomData[i].minimumCount)
-                rooms.Add(additionalRoomData[i].roomType);
+            int diff = roomData[i].countMinMax.x - count;
+
+            for (int x = 0; x < diff; x++)
+            {
+                rooms.Add(roomData[i].roomType);
+            }
         }
 
         return rooms;
@@ -93,20 +125,19 @@ public class GrammarsRoomData : ScriptableObject
 public struct RoomData
 {
     public E_RoomTypes roomType;
-    public int minimumCount;
-}
-
-[System.Serializable]
-public struct RoomPrefabData
-{
-    public E_RoomTypes roomType;
-    public Object[] prefabs;
+    public RoomPrefabData[] prefabData;
+    public Vector2Int countMinMax;
 }
 
 [System.Serializable]
 public enum E_RoomTypes
 {
     Start, Boss, End,
-    Encounter, Puzzle, Treasure, Healing
+    Encounter, Puzzle, Treasure, Healing, Trap
 }
 
+[System.Serializable]
+public enum E_RoomPrefabTypes
+{
+    Room, WideRoom, Corridor, Stairway, Grandstairway
+}
