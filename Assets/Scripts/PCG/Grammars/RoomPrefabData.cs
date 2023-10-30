@@ -14,6 +14,11 @@ public class RoomPrefabData : ScriptableObject
         timesUsed = 0;
     }
 
+    public void Used()
+    {
+        timesUsed++;
+    }
+
     public Object GetRandomPrefab()
     {
         return roomPrefabs[Random.Range(0, roomPrefabs.Length)];

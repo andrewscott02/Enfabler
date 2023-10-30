@@ -37,23 +37,43 @@ public class PCGRoom : MonoBehaviour
 
     public void PopulateRoom()
     {
-        if (roomType == E_RoomTypes.Encounter)
+        SpawnEnemies();
+        SpawnTraps();
+    }
+
+    void SpawnEnemies()
+    {
+        int enemiesToSpawn = dungeonData.GetEnemyCount(roomType);
+
+        for (int i = 0; i < enemiesToSpawn; i++)
         {
-            int enemiesToSpawn = Random.Range(dungeonData.enemiesPerRoom.x, dungeonData.enemiesPerRoom.y);
+            Debug.Log("Spawning enemy in room - " + name);
 
-            Debug.Log("Spawning " + enemiesToSpawn + " enemies in room - " + name);
+            int spawnerIndex = Random.Range(0, enemySpawnerChildren.Length);
 
-            for (int i = 0; i < enemiesToSpawn; i++)
-            {
-                Debug.Log("Spawning enemy in room - " + name);
+            Vector3 spawnPos = enemySpawnerChildren[spawnerIndex].position;
 
-                int spawnerIndex = Random.Range(0, enemySpawnerChildren.Length);
+            GameObject go = Instantiate(dungeonData.GetRandomEnemy(), spawnPos, new Quaternion(0, 0, 0, 0)) as GameObject;
+            itemsInRoom.Add(go);
+        }
+    }
 
-                Vector3 spawnPos = enemySpawnerChildren[spawnerIndex].position;
+    void SpawnTraps()
+    {
+        int trapsToSpawn = dungeonData.GetTrapCount(roomType);
 
-                GameObject go = Instantiate(dungeonData.GetRandomEnemy(), spawnPos, new Quaternion(0, 0, 0, 0)) as GameObject;
-                itemsInRoom.Add(go);
-            }
+        for (int i = 0; i < trapsToSpawn; i++)
+        {
+            //TODO check valid spawners
+
+            Debug.Log("Spawning trap in room - " + name);
+
+            int spawnerIndex = Random.Range(0, objectSpawnerChildren.Length);
+
+            Vector3 spawnPos = objectSpawnerChildren[spawnerIndex].position;
+
+            GameObject go = Instantiate(dungeonData.GetRandomTrap(), spawnPos, new Quaternion(0, 0, 0, 0)) as GameObject;
+            itemsInRoom.Add(go);
         }
     }
 

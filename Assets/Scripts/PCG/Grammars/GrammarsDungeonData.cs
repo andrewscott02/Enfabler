@@ -50,7 +50,10 @@ public class GrammarsDungeonData : ScriptableObject
         while (true)
         {
             if (prefabData[startIndex].CanUse())
+            {
+                prefabData[startIndex].Used();
                 return prefabData[startIndex].GetRandomPrefab();
+            }
 
             startIndex++;
         }
@@ -59,6 +62,37 @@ public class GrammarsDungeonData : ScriptableObject
     public Object GetRandomEnemy()
     {
         return enemies[Random.Range(0, enemies.Length)];
+    }
+
+    public Object GetRandomTrap()
+    {
+        return traps[Random.Range(0, traps.Length)];
+    }
+
+    public int GetEnemyCount(E_RoomTypes roomType)
+    {
+        foreach (var item in roomData)
+        {
+            if (roomType == item.roomType)
+            {
+                return Random.Range(item.enemiesMinMax.x, item.enemiesMinMax.y + 1);
+            }
+        }
+
+        return 0;
+    }
+
+    public int GetTrapCount(E_RoomTypes roomType)
+    {
+        foreach (var item in roomData)
+        {
+            if (roomType == item.roomType)
+            {
+                return Random.Range(item.trapsMinMax.x, item.trapsMinMax.y + 1);
+            }
+        }
+
+        return 0;
     }
 
     #region Rules
@@ -127,6 +161,8 @@ public struct RoomData
     public E_RoomTypes roomType;
     public RoomPrefabData[] prefabData;
     public Vector2Int countMinMax;
+
+    public Vector2Int enemiesMinMax, trapsMinMax;
 }
 
 [System.Serializable]
