@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.AI.Navigation;
 
 public class GrammarsDungeonGeneration : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class GrammarsDungeonGeneration : MonoBehaviour
     public GrammarsDungeonData grammarsDungeonData;
 
     #endregion
+
+    private void Start()
+    {
+        GenerateGrammarsDungeon();
+    }
 
     [ContextMenu("Generate Grammars Dungeon")]
     public void GenerateGrammarsDungeon()
@@ -33,6 +39,8 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
         GenerateDungeonRooms(rooms);
         PopulateRooms();
+
+        BakeNavmesh();
     }
 
     [ContextMenu("Cleanup Dungeon")]
@@ -68,7 +76,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
     {
         List<E_RoomTypes> rooms = new List<E_RoomTypes>();
 
-        int emptyRoomsCount = Random.Range(grammarsDungeonData.roomsCountMinMax.x, grammarsDungeonData.roomsCountMinMax.y);
+        int emptyRoomsCount = Random.Range(grammarsDungeonData.roomsCountMinMax.x, grammarsDungeonData.roomsCountMinMax.y + 1);
 
         for (int i = 0; i < emptyRoomsCount; i++)
         {
@@ -151,4 +159,11 @@ public class GrammarsDungeonGeneration : MonoBehaviour
     }
 
     #endregion
+
+    public NavMeshSurface navMeshSurface;
+
+    void BakeNavmesh()
+    {
+        navMeshSurface.BuildNavMesh();
+    }
 }

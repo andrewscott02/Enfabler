@@ -9,8 +9,7 @@ public class GrammarsDungeonData : ScriptableObject
     public E_RoomTypes[] additionalRoomTypes;
     public Vector2Int roomsCountMinMax;
 
-    public Object[] enemies, traps, objects;
-    public Vector2Int enemiesPerRoom;
+    public Object[] enemies, traps, objects, bosses;
 
     public void ResetAllDungeonData()
     {
@@ -67,6 +66,11 @@ public class GrammarsDungeonData : ScriptableObject
     public Object GetRandomTrap()
     {
         return traps[Random.Range(0, traps.Length)];
+    }
+
+    public Object GetRandomBoss()
+    {
+        return bosses[Random.Range(0, bosses.Length)];
     }
 
     public int GetEnemyCount(E_RoomTypes roomType)

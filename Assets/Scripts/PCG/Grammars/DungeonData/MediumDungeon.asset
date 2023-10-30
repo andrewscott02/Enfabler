@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90910508796e224586996a019006bdf, type: 3}
+  m_Name: MediumDungeon
+  m_EditorClassIdentifier: 
+  roomData:
+  - roomType: 0
+    prefabData:
+    - {fileID: 11400000, guid: 2f7507b7dfb10c040bbd91d1aa1a0e50, type: 2}
+    countMinMax: {x: 0, y: 1}
+    enemiesMinMax: {x: 0, y: 0}
+    trapsMinMax: {x: 0, y: 0}
+  - roomType: 6
+    prefabData:
+    - {fileID: 11400000, guid: e3c4d38cf5041904891ea7904d440074, type: 2}
+    countMinMax: {x: 0, y: 1}
+    enemiesMinMax: {x: 0, y: 0}
+    trapsMinMax: {x: 0, y: 0}
+  - roomType: 1
+    prefabData:
+    - {fileID: 11400000, guid: 66291703daf42944f8ec3829ed5d7385, type: 2}
+    countMinMax: {x: 0, y: 1}
+    enemiesMinMax: {x: 0, y: 0}
+    trapsMinMax: {x: 0, y: 0}
+  - roomType: 2
+    prefabData:
+    - {fileID: 11400000, guid: c61980e88fe934b4980546143413c376, type: 2}
+    countMinMax: {x: 0, y: 1}
+    enemiesMinMax: {x: 0, y: 0}
+    trapsMinMax: {x: 0, y: 0}
+  - roomType: 3
+    prefabData:
+    - {fileID: 11400000, guid: 09f8624f4109a6d4eaf4ee16040f6758, type: 2}
+    - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
+    - {fileID: 11400000, guid: da65b896621493145aa95aed42ba6271, type: 2}
+    - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
+    countMinMax: {x: 1, y: 99999}
+    enemiesMinMax: {x: 3, y: 5}
+    trapsMinMax: {x: 1, y: 2}
+  - roomType: 4
+    prefabData:
+    - {fileID: 11400000, guid: 09f8624f4109a6d4eaf4ee16040f6758, type: 2}
+    - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
+    - {fileID: 11400000, guid: da65b896621493145aa95aed42ba6271, type: 2}
+    - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
+    countMinMax: {x: 0, y: 99999}
+    enemiesMinMax: {x: 0, y: 2}
+    trapsMinMax: {x: 1, y: 2}
+  - roomType: 5
+    prefabData:
+    - {fileID: 11400000, guid: 09f8624f4109a6d4eaf4ee16040f6758, type: 2}
+    - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
+    - {fileID: 11400000, guid: da65b896621493145aa95aed42ba6271, type: 2}
+    - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
+    countMinMax: {x: 0, y: 99999}
+    enemiesMinMax: {x: 0, y: 2}
+    trapsMinMax: {x: 1, y: 2}
+  - roomType: 7
+    prefabData:
+    - {fileID: 11400000, guid: 09f8624f4109a6d4eaf4ee16040f6758, type: 2}
+    - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
+    - {fileID: 11400000, guid: da65b896621493145aa95aed42ba6271, type: 2}
+    - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
+    countMinMax: {x: 0, y: 99999}
+    enemiesMinMax: {x: 0, y: 0}
+    trapsMinMax: {x: 3, y: 6}
+  additionalRoomTypes: 03000000040000000500000007000000
+  roomsCountMinMax: {x: 4, y: 6}
+  enemies:
+  - {fileID: 8084795209297945531, guid: 4ca0851ef06bb0445bebd70923e86d61, type: 3}
+  - {fileID: 8084795209297945531, guid: c11dc8c61fd4f164c8f1394bd650c3c8, type: 3}
+  - {fileID: 8084795209297945531, guid: 909d54095addef74da85d9b239a5d04b, type: 3}
+  - {fileID: 8084795209297945531, guid: 1f91c7c8410c2a14380b0ede1486646c, type: 3}
+  - {fileID: 7535070001232547612, guid: c23e9eb38e33e2d4798cfd6a0d78c974, type: 3}
+  - {fileID: 7535070001232547612, guid: 281af66685c14bf48944eccc62df6c64, type: 3}
+  - {fileID: 8084795209297945531, guid: ee28444e69279b94ab71836c789ccfe4, type: 3}
+  - {fileID: 8084795209297945531, guid: 810a7923b83ff214e96264c7fbbae99c, type: 3}
+  - {fileID: 8084795209297945531, guid: 6959e721c14252e4b8f781d8b33b70fa, type: 3}
+  - {fileID: 8084795209297945531, guid: 69fd0d1e9c5ecf8499d319808b255c3e, type: 3}
+  traps:
+  - {fileID: 2135024257723741946, guid: ede92da8b23dd084c906df4210e2f72c, type: 3}
+  - {fileID: 2135024257723741946, guid: b4c9eb1361f429e49b1601df9aa11981, type: 3}
+  - {fileID: 2135024257723741946, guid: 1b215dea2f091684ebd9c9980e2d528a, type: 3}
+  objects:
+  - {fileID: 7286702930854383463, guid: dcddb3c2384d2cd4fb38b629b99c6f17, type: 3}
+  - {fileID: 545217335562210824, guid: 43d26958e63fd64419eb8c2f9254f25d, type: 3}
+  bosses:
+  - {fileID: 4297160914922154321, guid: 41e27b05400a71846886bcbd653b0e22, type: 3}

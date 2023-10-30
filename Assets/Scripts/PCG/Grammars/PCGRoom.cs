@@ -39,6 +39,7 @@ public class PCGRoom : MonoBehaviour
     {
         SpawnEnemies();
         SpawnTraps();
+        SpawnBoss();
     }
 
     void SpawnEnemies()
@@ -53,7 +54,9 @@ public class PCGRoom : MonoBehaviour
 
             Vector3 spawnPos = enemySpawnerChildren[spawnerIndex].position;
 
-            GameObject go = Instantiate(dungeonData.GetRandomEnemy(), spawnPos, new Quaternion(0, 0, 0, 0)) as GameObject;
+            GameObject go = Instantiate(dungeonData.GetRandomEnemy(), transform) as GameObject;
+            go.transform.position = spawnPos;
+            go.transform.rotation = Quaternion.identity;
             itemsInRoom.Add(go);
         }
     }
@@ -72,9 +75,27 @@ public class PCGRoom : MonoBehaviour
 
             Vector3 spawnPos = objectSpawnerChildren[spawnerIndex].position;
 
-            GameObject go = Instantiate(dungeonData.GetRandomTrap(), spawnPos, new Quaternion(0, 0, 0, 0)) as GameObject;
+            GameObject go = Instantiate(dungeonData.GetRandomTrap(), transform) as GameObject;
+            go.transform.position = spawnPos;
+            go.transform.rotation = Quaternion.identity;
             itemsInRoom.Add(go);
         }
+    }
+
+    void SpawnBoss()
+    {
+        if (roomType != E_RoomTypes.Boss) return;
+
+        Debug.Log("Spawning enemy in room - " + name);
+
+        int spawnerIndex = Random.Range(0, enemySpawnerChildren.Length);
+
+        Vector3 spawnPos = enemySpawnerChildren[spawnerIndex].position;
+
+        GameObject go = Instantiate(dungeonData.GetRandomBoss(), transform) as GameObject;
+        go.transform.position = spawnPos;
+        go.transform.rotation = Quaternion.identity;
+        itemsInRoom.Add(go);
     }
 
     public void DeleteRoom()
