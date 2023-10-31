@@ -40,6 +40,7 @@ public class PCGRoom : MonoBehaviour
         SpawnDoor();
         SpawnEnemies();
         SpawnTraps();
+        SpawnObjects();
         SpawnBoss();
     }
 
@@ -65,7 +66,7 @@ public class PCGRoom : MonoBehaviour
 
         for (int i = 0; i < enemiesToSpawn; i++)
         {
-            Debug.Log("Spawning enemy in room - " + name);
+            //Debug.Log("Spawning enemy in room - " + name);
 
             int spawnerIndex = Random.Range(0, enemySpawnerChildren.Length);
 
@@ -84,7 +85,7 @@ public class PCGRoom : MonoBehaviour
 
     void EnemyKilled(BaseCharacterController controller)
     {
-        Debug.Log("Enemy killed in room");
+        //Debug.Log("Enemy killed in room");
         enemiesInRoom--;
 
         if (enemiesInRoom <= 0)
@@ -99,18 +100,57 @@ public class PCGRoom : MonoBehaviour
 
         for (int i = 0; i < trapsToSpawn; i++)
         {
-            //TODO check valid spawners
+            //Debug.Log("Spawning trap in room - " + name);
 
-            Debug.Log("Spawning trap in room - " + name);
-
-            int spawnerIndex = Random.Range(0, objectSpawnerChildren.Length);
+            if (!GetValidSpawner(out int spawnerIndex)) return;
 
             Vector3 spawnPos = objectSpawnerChildren[spawnerIndex].position;
 
-            GameObject go = Instantiate(dungeonData.GetRandomTrap(), transform) as GameObject;
+            GameObject go = Instantiate(dungeonData.GetRandomTrap(), objectSpawnerChildren[spawnerIndex]) as GameObject;
             go.transform.position = spawnPos;
             go.transform.rotation = Quaternion.identity;
             itemsInRoom.Add(go);
+        }
+    }
+
+    void SpawnObjects()
+    {
+        int objectsToSpawn = 10;
+
+        for (int i = 0; i < objectsToSpawn; i++)
+        {
+            //Debug.Log("Spawning objects in room - " + name);
+
+            if (!GetValidSpawner(out int spawnerIndex)) return;
+
+            Vector3 spawnPos = objectSpawnerChildren[spawnerIndex].position;
+
+            GameObject go = Instantiate(dungeonData.GetRandomObject(), objectSpawnerChildren[spawnerIndex]) as GameObject;
+            go.transform.position = spawnPos;
+            go.transform.rotation = Quaternion.identity;
+            itemsInRoom.Add(go);
+        }
+    }
+
+    bool GetValidSpawner(out int spawnerIndex)
+    {
+        int startIndex = Random.Range(0, objectSpawnerChildren.Length);
+        spawnerIndex = startIndex;
+
+        while (true)
+        {
+            if (objectSpawnerChildren[spawnerIndex].childCount == 0)
+            {
+                return true;
+            }
+
+            spawnerIndex++;
+
+            if (spawnerIndex >= objectSpawnerChildren.Length)
+                spawnerIndex = 0;
+
+            if (spawnerIndex == startIndex)
+                return false;
         }
     }
 
@@ -118,7 +158,7 @@ public class PCGRoom : MonoBehaviour
     {
         if (roomType != E_RoomTypes.Boss) return;
 
-        Debug.Log("Spawning enemy in room - " + name);
+        //Debug.Log("Spawning enemy in room - " + name);
 
         int spawnerIndex = Random.Range(0, enemySpawnerChildren.Length);
 

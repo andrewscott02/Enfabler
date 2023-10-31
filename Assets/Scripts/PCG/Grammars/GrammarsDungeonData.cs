@@ -45,16 +45,23 @@ public class GrammarsDungeonData : ScriptableObject
     Object DeterminePrefab(RoomPrefabData[] prefabData)
     {
         int startIndex = Random.Range(0, prefabData.Length);
+        int currentIndex = startIndex;
 
         while (true)
         {
-            if (prefabData[startIndex].CanUse())
+            if (prefabData[currentIndex].CanUse())
             {
-                prefabData[startIndex].Used();
-                return prefabData[startIndex].GetRandomPrefab();
+                prefabData[currentIndex].Used();
+                return prefabData[currentIndex].GetRandomPrefab();
             }
 
-            startIndex++;
+            currentIndex++;
+
+            if (currentIndex >= prefabData.Length)
+                currentIndex = 0;
+
+            if (currentIndex == startIndex)
+                return null;
         }
     }
 
@@ -71,6 +78,11 @@ public class GrammarsDungeonData : ScriptableObject
     public Object GetRandomTrap()
     {
         return traps[Random.Range(0, traps.Length)];
+    }
+
+    public Object GetRandomObject()
+    {
+        return objects[Random.Range(0, objects.Length)];
     }
 
     public Object GetRandomBoss()
