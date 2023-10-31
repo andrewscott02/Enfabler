@@ -8,7 +8,24 @@ public class AIController : BaseCharacterController
 {
     #region Setup
 
+    #region Variables
+
     protected GameObject player; public GameObject GetPlayer() { return player; }
+
+    public float distanceAllowance = 1f;
+
+    public float lerpSpeed = 0.01f;
+
+    public LayerMask sightMask;
+    public float sightDistance = 100;
+    public float chaseDistance = 40;
+    public float roamDistance = 25;
+    public float maxDistanceFromModelCharacter = 6;
+
+    public Vector3 followVector;
+    public float followDistance = 5;
+
+    #endregion
 
     #region Behaviour Tree
     protected NavMeshAgent agent; public NavMeshAgent GetNavMeshAgent() { return agent; }
@@ -26,6 +43,8 @@ public class AIController : BaseCharacterController
 
         currentDestination = transform.position;
 
+        if (activeOnStart)
+            Activate();
         ActivateAI();
 
         for (int i = 0; i < attacks.Length; i++)
@@ -57,6 +76,8 @@ public class AIController : BaseCharacterController
 
     #endregion
 
+    #region Gizmos
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(currentDestination, distanceAllowance);
@@ -75,6 +96,8 @@ public class AIController : BaseCharacterController
             Gizmos.DrawLine(origin, target);
         }
     }
+
+    #endregion
 
     public virtual void Update()
     {
@@ -129,22 +152,26 @@ public class AIController : BaseCharacterController
         base.ActivateRagdoll(activate, forceData, disableAnimator);
     }
 
-    public float distanceAllowance = 1f;
-
-    public float lerpSpeed = 0.01f;
-
-    public LayerMask sightMask;
-    public float sightDistance = 100;
-    public float chaseDistance = 40;
-    public float roamDistance = 25;
-    public float maxDistanceFromModelCharacter = 6;
-
-    public Vector3 followVector;
-    public float followDistance = 5;
-
     #endregion
 
     #region Behaviours
+
+    #region Activate
+
+    public bool activeOnStart = true;
+    public bool activeAgent { get; private set; } = false;
+
+    public void Activate()
+    {
+        activeAgent = true;
+    }
+
+    public void Deactivate()
+    {
+        activeAgent = false;
+    }
+
+    #endregion
 
     #region Movement
 

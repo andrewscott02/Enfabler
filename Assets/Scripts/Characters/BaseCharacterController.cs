@@ -40,7 +40,7 @@ public class BaseCharacterController : MonoBehaviour
 
         foreach (var item in colliders)
         {
-            if (item != mainCollider && !item.CompareTag("Weapon"))
+            if (item != mainCollider && !item.CompareTag("Weapon") && !item.CompareTag("IgnoreRagdoll"))
             {
                 if (item.CompareTag("Chest"))
                     chestCollider = item;
