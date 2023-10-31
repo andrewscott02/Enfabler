@@ -888,9 +888,6 @@ MonoBehaviour:
     heavyHitReactThreshold: 5
     hitSlomoScale: 0.7
     hitSlomoDuration: 0.35
-    hitRootShakeIntensity: {x: 0.01, y: 0, z: 0.01}
-    hitRootShakeDuration: 0.5
-    shakeRoot: {fileID: 9043084692085274803}
     killImpulseStrength: 0.85
     killSlomoScale: 0.55
     killSlomoDuration: 0.5
@@ -902,7 +899,6 @@ MonoBehaviour:
     parrySlomoDuration: 0
     impulseMax: 2
   dying: 0
-  impulseSource: {fileID: 0}
 --- !u!114 &7378451652202160449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,12 +1025,14 @@ MonoBehaviour:
   stepData:
     footstepObject: {fileID: 5831885752641907103, guid: 0c64f327b547b814e944a952f00d0e1c,
       type: 3}
+    footstepRange: 40
     footstepTransforms:
     - {fileID: 9037149749128838951}
     - {fileID: 9037073332951877017}
     impulseSource: {fileID: 7378451652202160449}
     impulseWalkMultiplier: 0.006
     impulseSprintMultiplier: 0.01
+    impulseRange: 15
   groundLayer:
     serializedVersion: 2
     m_Bits: 1

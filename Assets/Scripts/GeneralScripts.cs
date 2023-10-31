@@ -296,10 +296,12 @@ public enum E_InteractTypes
 public struct FootStepData
 {
     public Object footstepObject;
+    public float footstepRange;
     public Transform[] footstepTransforms;
     public CinemachineImpulseSource impulseSource;
     public float impulseWalkMultiplier;
     public float impulseSprintMultiplier;
+    public float impulseRange;
 }
 
 

@@ -7,6 +7,7 @@ public class Interactable : MonoBehaviour, IInteractable
     public static PlayerController player;
 
     public E_InteractTypes interactType;
+    public bool lockedInteraction = false;
     public bool forceInteraction = false;
     public bool multipleInteractions = false;
     public Object interactFX;
@@ -24,9 +25,15 @@ public class Interactable : MonoBehaviour, IInteractable
         return this;
     }
 
+    public void UnlockInteraction()
+    {
+        lockedInteraction = false;
+    }
+
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (!canBeInteracted) return;
+        if (lockedInteraction) return;
 
         if (other.gameObject == player.gameObject)
         {
@@ -45,6 +52,7 @@ public class Interactable : MonoBehaviour, IInteractable
     protected virtual void OnTriggerExit(Collider other)
     {
         if (!canBeInteracted) return;
+        if (lockedInteraction) return;
 
         if (other.gameObject == player.gameObject)
         {
@@ -59,6 +67,7 @@ public class Interactable : MonoBehaviour, IInteractable
     public virtual void Interacted(BaseCharacterController interactCharacter)
     {
         if (!canBeInteracted) return;
+        if (lockedInteraction) return;
 
         if (!multipleInteractions)
         {

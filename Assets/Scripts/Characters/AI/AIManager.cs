@@ -19,6 +19,8 @@ public class AIManager : MonoBehaviour
 
     public void AllocateTeam(BaseCharacterController character)
     {
+        character.characterDied += CharacterDied;
+
         if (character.playerTeam)
         {
             foreach (var item in playerTeam)
