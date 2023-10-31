@@ -127,7 +127,9 @@ public class PCGRoom : MonoBehaviour
 
             GameObject go = Instantiate(dungeonData.GetRandomObject(), objectSpawnerChildren[spawnerIndex]) as GameObject;
             go.transform.position = spawnPos;
-            go.transform.rotation = Quaternion.identity;
+            Quaternion spawnRot = Quaternion.identity;
+            spawnRot.y = Random.Range(0, 360);
+            go.transform.rotation = spawnRot;
             itemsInRoom.Add(go);
         }
     }
