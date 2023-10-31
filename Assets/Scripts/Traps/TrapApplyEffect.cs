@@ -139,7 +139,9 @@ public class TrapApplyEffect : MonoBehaviour
 
     void SpawnProjectile(Vector3 targetPos)
     {
-        GameObject projectileObj = Instantiate(trap.trapStats.projectile, transform.position, transform.rotation) as GameObject;
+        Vector3 spawnPos = HelperFunctions.GetFlankingPoint(targetPos, transform.position, 1f);
+
+        GameObject projectileObj = Instantiate(trap.trapStats.projectile, spawnPos, transform.rotation) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
         projectileMove.Fire(targetPos, trap.trapStats, trap.gameObject);
     }

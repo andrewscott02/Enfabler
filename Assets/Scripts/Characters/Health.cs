@@ -157,20 +157,23 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             combat.ForceEndAttack();
             combat.armourSlider.gameObject.SetActive(false);
         }
-        if (AIManager.instance != null)
-            AIManager.instance.CharacterDied(this.GetComponent<BaseCharacterController>());
 
-        if (controller != null && hitReactData.killRagdoll)
+        if (controller != null)
         {
-            //Debug.Log(gameObject + "has controller");
-            ExplosiveForceData forcedata = new ExplosiveForceData()
-            {
-                explosiveForce = damage,
-                origin = attacker
-            };
+            controller.Killed();
 
-            controller.ActivateRagdoll(true, forcedata, !hitReactData.killAnim);
-            gameObject.name += " -- Dead";
+            if (hitReactData.killRagdoll)
+            {
+                //Debug.Log(gameObject + "has controller");
+                ExplosiveForceData forcedata = new ExplosiveForceData()
+                {
+                    explosiveForce = damage,
+                    origin = attacker
+                };
+
+                controller.ActivateRagdoll(true, forcedata, !hitReactData.killAnim);
+                gameObject.name += " -- Dead";
+            }
         }
 
         if (hitReactData.killAnim)
@@ -192,7 +195,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     public bool IsDead() { return dying; }
 
-    public CinemachineImpulseSource impulseSource;
+    CinemachineImpulseSource impulseSource;
 
     public void SpawnImpulse(float impulseStrength)
     {

@@ -31,19 +31,23 @@ public class CharacterMovement : MonoBehaviour
 
     public void SpawnFootstep(int footTransformIndex)
     {
-        Instantiate(stepData.footstepObject, stepData.footstepTransforms[footTransformIndex].position, new Quaternion(0, 0, 0, 0));
+        if (Vector3.Distance(Camera.main.transform.position, this.transform.position) <= stepData.footstepRange) 
+            Instantiate(stepData.footstepObject, stepData.footstepTransforms[footTransformIndex].position, new Quaternion(0, 0, 0, 0));
 
         SpawnImpulse((sprinting ? stepData.impulseSprintMultiplier : stepData.impulseWalkMultiplier) * currentSpeed);
     }
 
     void SpawnImpulse(float impulseStrength)
     {
+        if (Vector3.Distance(Camera.main.transform.position, this.transform.position) > stepData.impulseRange) return;
         //Debug.Log(gameObject.name + " Spawn impulse with strength + " + impulseStrength);
         stepData.impulseSource.GenerateImpulseWithForce(impulseStrength);
     }
 
     public void DodgeRollLand(float impulseStrength)
     {
+        if (Vector3.Distance(Camera.main.transform.position, this.transform.position) > stepData.impulseRange) return;
+
         SpawnImpulse(impulseStrength);
         RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
     }
@@ -52,5 +56,8 @@ public class CharacterMovement : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position + new Vector3(0, 0.2f, 0), transform.position + new Vector3(0, 0.2f, 0) + (Vector3.down * 0.4f));
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, stepData.impulseRange);
     }
 }

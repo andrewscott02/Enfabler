@@ -9,7 +9,7 @@ public class GrammarsDungeonData : ScriptableObject
     public E_RoomTypes[] additionalRoomTypes;
     public Vector2Int roomsCountMinMax;
 
-    public Object[] enemies, traps, objects, bosses;
+    public Object[] doors, enemies, traps, objects, bosses;
 
     public void ResetAllDungeonData()
     {
@@ -58,6 +58,11 @@ public class GrammarsDungeonData : ScriptableObject
         }
     }
 
+    public Object GetRandomDoor()
+    {
+        return doors[Random.Range(0, doors.Length)];
+    }
+
     public Object GetRandomEnemy()
     {
         return enemies[Random.Range(0, enemies.Length)];
@@ -71,6 +76,19 @@ public class GrammarsDungeonData : ScriptableObject
     public Object GetRandomBoss()
     {
         return bosses[Random.Range(0, bosses.Length)];
+    }
+
+    public bool GetDoorLocked(E_RoomTypes roomType)
+    {
+        foreach (var item in roomData)
+        {
+            if (roomType == item.roomType)
+            {
+                return item.lockDoor;
+            }
+        }
+
+        return false;
     }
 
     public int GetEnemyCount(E_RoomTypes roomType)
@@ -166,6 +184,7 @@ public struct RoomData
     public RoomPrefabData[] prefabData;
     public Vector2Int countMinMax;
 
+    public bool lockDoor;
     public Vector2Int enemiesMinMax, trapsMinMax;
 }
 

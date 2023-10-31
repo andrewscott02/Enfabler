@@ -23,6 +23,8 @@ public class BaseCharacterController : MonoBehaviour
         combat = GetComponent<CharacterCombat>();
 
         SetupRagdoll();
+
+        characterDied += Died;
     }
 
     public Rigidbody rb { get; protected set; }
@@ -85,5 +87,19 @@ public class BaseCharacterController : MonoBehaviour
         {
             combat.weapon.Disarm();
         }
+    }
+
+    public delegate void DiedDelegate(BaseCharacterController controller);
+    public DiedDelegate characterDied;
+
+    public void Killed()
+    {
+        characterDied(this);
+    }
+
+    public void Died(BaseCharacterController controller)
+    {
+        //Blank delegate
+        Debug.Log("Enemy Killed Delegate");
     }
 }
