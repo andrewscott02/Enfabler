@@ -47,9 +47,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
     - {fileID: 11400000, guid: da65b896621493145aa95aed42ba6271, type: 2}
     - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
-    countMinMax: {x: 1, y: 99999}
+    countMinMax: {x: 0, y: 99999}
     lockDoor: 1
-    enemiesMinMax: {x: 3, y: 5}
+    enemiesMinMax: {x: 2, y: 4}
     trapsMinMax: {x: 1, y: 2}
   - roomType: 4
     prefabData:
@@ -59,7 +59,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
     countMinMax: {x: 0, y: 99999}
     lockDoor: 0
-    enemiesMinMax: {x: 0, y: 2}
+    enemiesMinMax: {x: -1, y: 2}
     trapsMinMax: {x: 1, y: 2}
   - roomType: 5
     prefabData:
@@ -69,7 +69,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
     countMinMax: {x: 0, y: 99999}
     lockDoor: 0
-    enemiesMinMax: {x: 0, y: 2}
+    enemiesMinMax: {x: -1, y: 2}
     trapsMinMax: {x: 1, y: 2}
   - roomType: 7
     prefabData:

@@ -57,7 +57,7 @@ public class PCGRoom : MonoBehaviour
         door = interactable;
     }
 
-    List<BaseCharacterController> enemiesInRoom = new List<BaseCharacterController>();
+    int enemiesInRoom = 0;
 
     void SpawnEnemies()
     {
@@ -78,16 +78,16 @@ public class PCGRoom : MonoBehaviour
 
             BaseCharacterController enemy = go.GetComponent<BaseCharacterController>();
             enemy.characterDied += EnemyKilled;
-            enemiesInRoom.Add(enemy);
+            enemiesInRoom++;
         }
     }
 
     void EnemyKilled(BaseCharacterController controller)
     {
         Debug.Log("Enemy killed in room");
-        enemiesInRoom.Remove(controller);
+        enemiesInRoom--;
 
-        if (enemiesInRoom.Count <= 0)
+        if (enemiesInRoom <= 0)
         {
             door.UnlockInteraction();
         }
@@ -128,6 +128,10 @@ public class PCGRoom : MonoBehaviour
         go.transform.position = spawnPos;
         go.transform.rotation = Quaternion.identity;
         itemsInRoom.Add(go);
+
+        BaseCharacterController enemy = go.GetComponent<BaseCharacterController>();
+        enemy.characterDied += EnemyKilled;
+        enemiesInRoom++;
     }
 
     public void DeleteRoom()
