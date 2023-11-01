@@ -29,11 +29,14 @@ public class StatueTrap : MonoBehaviour
 
     IEnumerator IDisableStatue(float delay)
     {
+        yield return new WaitForSeconds(delay);
+
         combat.enabled = false;
 
         health.hitReactData.lightHitReactThreshold = 1000;
         health.hitReactData.heavyHitReactThreshold = 1000;
-        health.hitReactData.killDestroyTime = 0.1f;
+        health.hitReactData.killRagdoll = false;
+        health.hitReactData.killDestroyTime = 0f;
 
         Animator animator = GetComponentInChildren<Animator>();
         animator.SetBool("StandingGuard", true);
@@ -50,7 +53,7 @@ public class StatueTrap : MonoBehaviour
         Rigidbody rb = GetComponentInChildren<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
 
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delay * 2);
 
         animator.speed = 0;
     }
