@@ -155,7 +155,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (combat != null)
         {
             combat.ForceEndAttack();
-            combat.armourSlider.gameObject.SetActive(false);
+            if (combat.armourSlider != null)
+                combat.armourSlider.gameObject.SetActive(false);
         }
 
         if (controller != null)

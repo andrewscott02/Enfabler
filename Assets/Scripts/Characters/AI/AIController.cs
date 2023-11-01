@@ -197,6 +197,7 @@ public class AIController : BaseCharacterController
 
     public void MoveToDestination(bool sprinting)
     {
+        if (!agent.enabled) return;
         //Debug.Log(sprinting + " sprinting");
         agent.speed = sprinting ? sprintSpeed : walkSpeed;
         agent.SetDestination(currentDestination);
@@ -351,6 +352,8 @@ public class AIController : BaseCharacterController
 
     public bool AttackTarget(CharacterCombat.AttackType attackType)
     {
+        if (!agent.enabled) return false;
+
         if (currentTarget == null)
             return false;
 

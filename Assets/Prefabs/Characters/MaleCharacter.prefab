@@ -995,9 +995,12 @@ MonoBehaviour:
   weaponSphereRadius: 0.45
   hitFreezeTime: 0.15
   currentTargets: []
-  layerMask:
+  hitLayerMask:
     serializedVersion: 2
-    m_Bits: 3136
+    m_Bits: 3264
+  snapLayerMask:
+    serializedVersion: 2
+    m_Bits: 3072
   currentTargetCastInterval: 0.6
   currentTargetCastRadius: 1.5
   currentTargetCastDistance: 10

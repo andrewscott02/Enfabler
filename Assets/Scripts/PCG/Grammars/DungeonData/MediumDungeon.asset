@@ -23,7 +23,7 @@ MonoBehaviour:
   - roomType: 6
     prefabData:
     - {fileID: 11400000, guid: e3c4d38cf5041904891ea7904d440074, type: 2}
-    countMinMax: {x: 0, y: 1}
+    countMinMax: {x: 0, y: 99999}
     lockDoor: 0
     enemiesMinMax: {x: 0, y: 0}
     trapsMinMax: {x: 0, y: 0}
@@ -77,12 +77,12 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
     - {fileID: 11400000, guid: da65b896621493145aa95aed42ba6271, type: 2}
     - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
-    countMinMax: {x: 0, y: 1}
+    countMinMax: {x: 0, y: 2}
     lockDoor: 0
     enemiesMinMax: {x: 0, y: 0}
     trapsMinMax: {x: 3, y: 6}
   additionalRoomTypes: 03000000040000000500000007000000
-  roomsCountMinMax: {x: 4, y: 6}
+  roomsCountMinMax: {x: 3, y: 5}
   doors:
   - {fileID: 519515805689925335, guid: fbb00f25b6fe39947a5de715bd1ef4db, type: 3}
   enemies:
@@ -100,6 +100,7 @@ MonoBehaviour:
   - {fileID: 2135024257723741946, guid: ede92da8b23dd084c906df4210e2f72c, type: 3}
   - {fileID: 2135024257723741946, guid: b4c9eb1361f429e49b1601df9aa11981, type: 3}
   - {fileID: 2135024257723741946, guid: 1b215dea2f091684ebd9c9980e2d528a, type: 3}
+  - {fileID: 4905393600926264160, guid: c9f9b14d4bd3f474cb22df0c1f757121, type: 3}
   objects:
   - {fileID: 7286702930854383463, guid: dcddb3c2384d2cd4fb38b629b99c6f17, type: 3}
   - {fileID: 545217335562210824, guid: 43d26958e63fd64419eb8c2f9254f25d, type: 3}
