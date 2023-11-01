@@ -21,7 +21,7 @@ public class FindPointOuterRadius : Node
 
     public override NodeState Evaluate()
     {
-        if (agent.roaming)
+        if (!agent.alert)
             return NodeState.Running;
 
         Vector3 direction = Random.insideUnitSphere.normalized;
@@ -32,7 +32,6 @@ public class FindPointOuterRadius : Node
         agent.SetDestinationPos(point);
         //Debug.Log("Generated point at: " + point);
 
-        agent.roaming = true;
         state = NodeState.Success;
         return state;
     }

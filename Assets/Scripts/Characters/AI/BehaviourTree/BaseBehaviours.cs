@@ -8,12 +8,23 @@ namespace BehaviourTrees
     {
         #region Movement
 
+        public static Selector MoveToSpawnPoint(AIController agent)
+        {
+            return new Selector(
+                DefensiveAction(agent),
+                new Sequence(
+                    new FindSpawnPoint(agent),
+                    new MoveToDestination(agent, 6f, false, agent.distanceAllowance)
+                    )
+                );
+        }
+
         public static Selector RoamToRandomPoint(AIController agent)
         {
             return new Selector(
                 DefensiveAction(agent),
                 new Sequence(
-                    new FindPointRadius(agent, agent.roamDistance),
+                    new FindPointRadius(agent),
                     new MoveToDestination(agent, 6f, false, agent.distanceAllowance)
                     )
                 );
@@ -24,7 +35,7 @@ namespace BehaviourTrees
             return new Selector(
                 DefensiveAction(agent),
                 new Sequence(
-                    new GetClosestEnemy(agent, agent.chaseDistance),
+                    new GetClosestEnemy(agent),
                     new MoveToDestination(agent, 6f, sprinting, distance)
                     )
                 );
@@ -35,7 +46,7 @@ namespace BehaviourTrees
             return new Selector(
                 DefensiveAction(agent),
                 new Sequence(
-                    new GetClosestEnemy(agent, agent.chaseDistance),
+                    new GetClosestEnemy(agent),
                     new FindPointOuterRadius(agent, radius),
                     new MoveToDestination(agent, 6f, sprinting, agent.distanceAllowance)
                     )

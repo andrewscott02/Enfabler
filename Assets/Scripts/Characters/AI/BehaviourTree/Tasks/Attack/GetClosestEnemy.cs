@@ -6,22 +6,24 @@ using BehaviourTrees;
 public class GetClosestEnemy : Node
 {
     public AIController agent;
-    public float sightRadius;
+    public float overrideDistance;
 
     /// <summary>
     /// Commands an agent to get the closest enemy
     /// </summary>
     /// <param name="agent">The agent this command is given to</param>
     /// <param name="radius">The maximum distance an enemy can be before it is ignored</param>
-    public GetClosestEnemy(AIController agent, float radius)
+    public GetClosestEnemy(AIController agent, float overrideDistance = -1)
     {
         this.agent = agent;
-        this.sightRadius = radius;
+        this.overrideDistance = overrideDistance;
     }
 
     public override NodeState Evaluate()
     {
-        BaseCharacterController enemy = HelperFunctions.GetClosestEnemy(agent, agent.transform.position, sightRadius, false);
+        float distance = overrideDistance < 0 ? agent.GetSightDistance() : overrideDistance;
+
+        BaseCharacterController enemy = HelperFunctions.GetClosestEnemy(agent, agent.transform.position, distance, false);
         if (enemy != null)
         {
             agent.SetDestinationPos(enemy.transform.position);
@@ -29,7 +31,7 @@ public class GetClosestEnemy : Node
             //Debug.Log("Generated point at: " + enemy.transform.position);
 
             agent.currentTarget = enemy;
-            agent.roaming = false;
+            agent.alert = true;
             state = NodeState.Success;
         }
         else

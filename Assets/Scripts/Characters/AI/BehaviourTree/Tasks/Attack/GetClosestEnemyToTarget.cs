@@ -21,14 +21,14 @@ public class GetClosestEnemyToTarget : Node
 
     public override NodeState Evaluate()
     {
-        BaseCharacterController enemy = HelperFunctions.GetClosestEnemy(agent, target.transform.position, agent.sightDistance, false);
+        BaseCharacterController enemy = HelperFunctions.GetClosestEnemy(agent, target.transform.position, agent.GetSightDistance(), false);
         if (enemy != null)
         {
             agent.SetDestinationPos(enemy.transform.position);
             Debug.Log("Generated point at near target: " + enemy.name);
 
             agent.currentTarget = enemy;
-            agent.roaming = false;
+            agent.alert = true;
             state = NodeState.Success;
         }
         else

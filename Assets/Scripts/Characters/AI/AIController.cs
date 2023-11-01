@@ -17,9 +17,28 @@ public class AIController : BaseCharacterController
     public float lerpSpeed = 0.01f;
 
     public LayerMask sightMask;
-    public float sightDistance = 100;
-    public float chaseDistance = 40;
-    public float roamDistance = 25;
+    public bool alert = false;
+    [SerializeField]
+    float passiveSightDistance = 25;
+    [SerializeField]
+    float alertSightDistance = 40;
+
+    public float GetSightDistance()
+    {
+        Debug.Log("Agent " + name + " is " + alert + " sight distance is " + (alert ? alertSightDistance : passiveSightDistance).ToString());
+        return alert ? alertSightDistance : passiveSightDistance;
+    }
+
+    [SerializeField]
+    public float passiveRoamDistance = 7;
+    [SerializeField]
+    float alertRoamDistance = 10;
+
+    public float GetRoamDistance()
+    {
+        return alert ? alertRoamDistance : passiveRoamDistance;
+    }
+    
     public float maxDistanceFromModelCharacter = 6;
 
     public Vector3 followVector;
@@ -32,7 +51,7 @@ public class AIController : BaseCharacterController
     public BehaviourTree bt;
     CharacterMovement characterMovement; 
 
-    public float roamTimeElapsed { get; protected set; } = 0;
+    public float roamTimeElapsed { get; protected set; } = 100;
 
     public override void Start()
     {
@@ -43,8 +62,6 @@ public class AIController : BaseCharacterController
 
         currentDestination = transform.position;
 
-        if (activeOnStart)
-            Activate();
         ActivateAI();
 
         for (int i = 0; i < attacks.Length; i++)
@@ -82,13 +99,11 @@ public class AIController : BaseCharacterController
     {
         Gizmos.DrawWireSphere(currentDestination, distanceAllowance);
 
-        Gizmos.DrawWireSphere(gameObject.transform.position, chaseDistance);
-        Gizmos.DrawWireSphere(gameObject.transform.position, roamDistance);
-        Gizmos.DrawWireSphere(gameObject.transform.position, maxDistanceFromModelCharacter);
-    }
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(gameObject.transform.position, alertSightDistance);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(gameObject.transform.position, passiveSightDistance);
 
-    private void OnDrawGizmos()
-    {
         if (currentTarget != null)
         {
             Vector3 origin = mainCollider.bounds.center + new Vector3(0, mainCollider.bounds.extents.y, 0);
@@ -156,23 +171,6 @@ public class AIController : BaseCharacterController
 
     #region Behaviours
 
-    #region Activate
-
-    public bool activeOnStart = true;
-    public bool activeAgent { get; private set; } = false;
-
-    public void Activate()
-    {
-        activeAgent = true;
-    }
-
-    public void Deactivate()
-    {
-        activeAgent = false;
-    }
-
-    #endregion
-
     #region Movement
 
     public float walkSpeed = 6;
@@ -184,8 +182,6 @@ public class AIController : BaseCharacterController
     {
         currentDestination = pos;
     }
-
-    public bool roaming = false;
 
     public void ResetRoamTime()
     {

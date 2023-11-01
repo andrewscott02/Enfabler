@@ -23,14 +23,14 @@ public class FindSpawnPoint : Node
 
     public override NodeState Evaluate()
     {
-        if (agent.roaming)
-            return NodeState.Running;
+        agent.alert = agent.roamTimeElapsed <= 15f;
+        float radius = agent.alert ? this.radius : 0f;
+        float distanceAllowance = agent.alert ? agent.distanceAllowance : 0.5f;
 
-        Vector3 point = HelperFunctions.GetRandomPoint(agent.roamTimeElapsed > 15f ? spawnPoint : agent.transform.position, radius, agent.distanceAllowance, iterations);
+        Vector3 point = HelperFunctions.GetRandomPoint(agent.alert ? agent.transform.position : spawnPoint, radius, distanceAllowance, iterations);
         agent.SetDestinationPos(point);
         //Debug.Log("Generated point at: " + point);
 
-        agent.roaming = true;
         state = NodeState.Success;
         return state;
     }

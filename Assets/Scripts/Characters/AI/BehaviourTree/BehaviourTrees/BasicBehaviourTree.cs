@@ -13,13 +13,6 @@ public class BasicBehaviourTree : BehaviourTree
 
             BaseBehaviours.CastSpell(agent),
 
-            //If the AI is inactive return to spawn position
-            new Sequence(
-                new CheckNotActive(agent),
-                new FindSpawnPoint(agent),
-                new MoveToDestination(agent, 30f, false, 0.1f)
-                ),
-
             new Sequence(
                 //If they are able to make a ranged attack
                 new CanAttack(agent, CharacterCombat.AttackType.SecondaryAttack),
@@ -57,13 +50,6 @@ public class BasicBehaviourTree : BehaviourTree
             BaseBehaviours.MoveToClosestTarget(agent, agent.distanceAllowance, true),
             //If there are no targets, but the player is an ally, move to a point near the player
             BaseBehaviours.FollowTarget(agent, agent.GetPlayer(), true),
-
-            //If the AI is inactive on start, deactivate
-            new Sequence(
-                new CheckNotActiveOnStart(agent),
-                new DeactivateAgent(agent)
-                ),
-
             //If there are no targets, move to a random point in the roam radius
             BaseBehaviours.RoamToRandomPoint(agent)
             );

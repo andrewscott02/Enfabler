@@ -28,7 +28,7 @@ public class GetModelNonTarget : Node
             //Debug.Log("Generated point at near target: " + enemy.name);
 
             agent.currentTarget = enemy;
-            agent.roaming = false;
+            agent.alert = true;
             state = NodeState.Success;
         }
         else

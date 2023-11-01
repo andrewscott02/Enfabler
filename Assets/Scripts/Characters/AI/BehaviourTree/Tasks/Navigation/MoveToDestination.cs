@@ -34,7 +34,6 @@ public class MoveToDestination : Node
         {
             //Debug.Log("Arrived at destination: " + agent.GetDestination());
             elapsedTime = 0;
-            agent.roaming = false;
             return NodeState.Success;
         }
         else
@@ -45,7 +44,6 @@ public class MoveToDestination : Node
                 state = NodeState.Failure;
                 //Debug.Log("Failed to arrive at destination: " + agent.GetDestination());
                 elapsedTime = 0;
-                agent.roaming = false;
                 return state;
             }
             else

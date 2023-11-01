@@ -34,7 +34,7 @@ public class FindPointNearTarget : Node
         agent.SetDestinationPos(point);
         //Debug.Log("Generated point near target at: " + point);
 
-        agent.roaming = true;
+        agent.alert = false;
         state = NodeState.Success;
         return state;
     }
