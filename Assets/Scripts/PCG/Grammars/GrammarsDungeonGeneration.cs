@@ -38,9 +38,9 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         Debug.Log(dungeonLayout);
 
         GenerateDungeonRooms(rooms);
-        PopulateRooms();
-
         BakeNavmesh();
+
+        PopulateRooms();
     }
 
     [ContextMenu("Cleanup Dungeon")]

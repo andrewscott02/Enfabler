@@ -7,12 +7,20 @@ public class GrammarsDungeonData : ScriptableObject
 {
     public RoomData[] roomData;
     public E_RoomTypes[] additionalRoomTypes;
+    Dictionary<E_RoomTypes, int> roomDict;
     public Vector2Int roomsCountMinMax;
 
     public Object[] doors, enemies, traps, objects, bosses;
 
     public void ResetAllDungeonData()
     {
+        roomDict = new Dictionary<E_RoomTypes, int>();
+
+        foreach(var item in additionalRoomTypes)
+        {
+            roomDict.Add(item, 0);
+        }
+
         foreach(var item in roomData)
         {
             foreach (var data in item.prefabData)
@@ -24,19 +32,56 @@ public class GrammarsDungeonData : ScriptableObject
 
     public E_RoomTypes GetRandomRoomType()
     {
-        return additionalRoomTypes[Random.Range(0, additionalRoomTypes.Length)];
+        int startIndex = Random.Range(0, additionalRoomTypes.Length);
+        int currentIndex = startIndex;
+
+        while (true)
+        {
+            if (roomDict.ContainsKey(additionalRoomTypes[currentIndex]))
+            {
+                int index = GetRoomDataIndex(additionalRoomTypes[currentIndex]);
+                if (roomDict[additionalRoomTypes[currentIndex]] < roomData[index].countMinMax.y)
+                {
+                    roomDict[additionalRoomTypes[currentIndex]]++;
+                    return additionalRoomTypes[currentIndex];
+                }
+            }
+
+            currentIndex++;
+
+            if (currentIndex >= additionalRoomTypes.Length)
+                currentIndex = 0;
+
+            if (currentIndex == startIndex)
+            {
+                Debug.Log("Couldn't find valid room, returning random");
+                return additionalRoomTypes[currentIndex];
+            }
+        }
     }
 
-    public Object GetRandomRoomPrefab(E_RoomTypes roomType)
+    public int GetRoomDataIndex(E_RoomTypes roomType)
     {
         for (int i = 0; i < roomData.Length; i++)
         {
             if (roomData[i].roomType == roomType)
             {
-                return DeterminePrefab(roomData[i].prefabData);
+                return i;
             }
+        }
 
-            //TODO check for maximums
+        return -1;
+    }
+
+    #region Prefabs
+
+    public Object GetRandomRoomPrefab(E_RoomTypes roomType)
+    {
+        int index = GetRoomDataIndex(roomType);
+
+        if (index >= 0 && index < roomData.Length)
+        {
+            return DeterminePrefab(roomData[index].prefabData);
         }
 
         return null;
@@ -92,12 +137,11 @@ public class GrammarsDungeonData : ScriptableObject
 
     public bool GetDoorLocked(E_RoomTypes roomType)
     {
-        foreach (var item in roomData)
+        int index = GetRoomDataIndex(roomType);
+
+        if (index >= 0 && index < roomData.Length)
         {
-            if (roomType == item.roomType)
-            {
-                return item.lockDoor;
-            }
+            return roomData[index].lockDoor;
         }
 
         return false;
@@ -105,12 +149,11 @@ public class GrammarsDungeonData : ScriptableObject
 
     public int GetEnemyCount(E_RoomTypes roomType)
     {
-        foreach (var item in roomData)
+        int index = GetRoomDataIndex(roomType);
+
+        if (index >= 0 && index < roomData.Length)
         {
-            if (roomType == item.roomType)
-            {
-                return Random.Range(item.enemiesMinMax.x, item.enemiesMinMax.y + 1);
-            }
+            return Random.Range(roomData[index].enemiesMinMax.x, roomData[index].enemiesMinMax.y + 1);
         }
 
         return 0;
@@ -118,16 +161,17 @@ public class GrammarsDungeonData : ScriptableObject
 
     public int GetTrapCount(E_RoomTypes roomType)
     {
-        foreach (var item in roomData)
+        int index = GetRoomDataIndex(roomType);
+
+        if (index >= 0 && index < roomData.Length)
         {
-            if (roomType == item.roomType)
-            {
-                return Random.Range(item.trapsMinMax.x, item.trapsMinMax.y + 1);
-            }
+            return Random.Range(roomData[index].trapsMinMax.x, roomData[index].trapsMinMax.y + 1);
         }
 
         return 0;
     }
+
+    #endregion
 
     #region Rules
 

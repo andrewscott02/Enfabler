@@ -27,7 +27,7 @@ public class AIController : BaseCharacterController
 
     public float GetSightDistance()
     {
-        Debug.Log("Agent " + name + " is " + alert + " sight distance is " + (alert ? alertSightDistance : passiveSightDistance).ToString());
+        //Debug.Log("Agent " + name + " is " + alert + " sight distance is " + (alert ? alertSightDistance : passiveSightDistance).ToString());
         return alert ? alertSightDistance : passiveSightDistance;
     }
 
