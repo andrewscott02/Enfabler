@@ -7,6 +7,7 @@ public class GrammarsDungeonData : ScriptableObject
 {
     public RoomData[] roomData;
     public E_RoomTypes[] additionalRoomTypes;
+    public int additionalHealingRooms = 0;
     Dictionary<E_RoomTypes, int> roomDict;
     public Vector2Int roomsCountMinMax;
 
@@ -29,7 +30,7 @@ public class GrammarsDungeonData : ScriptableObject
             }
         }
     }
-
+    
     public E_RoomTypes GetRandomRoomType()
     {
         int startIndex = Random.Range(0, additionalRoomTypes.Length);

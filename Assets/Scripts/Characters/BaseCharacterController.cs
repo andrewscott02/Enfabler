@@ -100,6 +100,6 @@ public class BaseCharacterController : MonoBehaviour
     public void Died(BaseCharacterController controller)
     {
         //Blank delegate
-        Debug.Log("Enemy Killed Delegate");
+        //Debug.Log("Enemy Killed Delegate");
     }
 }

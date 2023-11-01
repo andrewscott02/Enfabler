@@ -334,7 +334,7 @@ public class AIController : BaseCharacterController
 
     public void PrepareSpell(int identifier)
     {
-        Debug.Log("Preparing + " + spells[identifier].spell.spellName);
+        //Debug.Log("Preparing + " + spells[identifier].spell.spellName);
         currentSpell = identifier;
     }
 

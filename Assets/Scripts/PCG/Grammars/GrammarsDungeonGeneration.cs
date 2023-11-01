@@ -24,6 +24,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         List<E_RoomTypes> rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Healing, E_RoomTypes.Boss, E_RoomTypes.End };
 
         List<E_RoomTypes> additionalRooms = GenerateAdditionalRooms();
+        additionalRooms = GenerateHealingRooms(additionalRooms);
 
         grammarsDungeonData.ReplaceDuplicates(additionalRooms);
         grammarsDungeonData.EnsureMinimums(additionalRooms);
@@ -82,6 +83,22 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         {
             E_RoomTypes roomType = grammarsDungeonData.GetRandomRoomType();
             rooms.Add(roomType);
+        }
+
+        return rooms;
+    }
+
+    List<E_RoomTypes> GenerateHealingRooms(List<E_RoomTypes> rooms)
+    {
+        int healingRoomsCount = grammarsDungeonData.additionalHealingRooms;
+        float fInterval = (float)rooms.Count / (float)(healingRoomsCount + 1);
+        int interval = Mathf.RoundToInt(fInterval);
+
+        for (int i = 0; i < healingRoomsCount; i++)
+        {
+            int insertIndex = ((i + 1) * interval);
+            //Debug.Log("Insert healing room at " + insertIndex + " from interval " + interval);
+            rooms.Insert(insertIndex + i, E_RoomTypes.Healing);
         }
 
         return rooms;

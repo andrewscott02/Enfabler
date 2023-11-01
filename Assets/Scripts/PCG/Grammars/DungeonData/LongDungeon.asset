@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d90910508796e224586996a019006bdf, type: 3}
-  m_Name: MediumDungeon
+  m_Name: LongDungeon
   m_EditorClassIdentifier: 
   roomData:
   - roomType: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
     - {fileID: 11400000, guid: da65b896621493145aa95aed42ba6271, type: 2}
     - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
-    countMinMax: {x: 1, y: 2}
+    countMinMax: {x: 1, y: 3}
     lockDoor: 1
     enemiesMinMax: {x: 2, y: 4}
     trapsMinMax: {x: 1, y: 2}
@@ -57,7 +57,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
     - {fileID: 11400000, guid: da65b896621493145aa95aed42ba6271, type: 2}
     - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
-    countMinMax: {x: 0, y: 1}
+    countMinMax: {x: 0, y: 2}
     lockDoor: 0
     enemiesMinMax: {x: -1, y: 2}
     trapsMinMax: {x: 1, y: 2}
@@ -67,7 +67,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
     - {fileID: 11400000, guid: da65b896621493145aa95aed42ba6271, type: 2}
     - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
-    countMinMax: {x: 0, y: 1}
+    countMinMax: {x: 0, y: 2}
     lockDoor: 0
     enemiesMinMax: {x: -1, y: 2}
     trapsMinMax: {x: 1, y: 2}
@@ -77,13 +77,13 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
     - {fileID: 11400000, guid: da65b896621493145aa95aed42ba6271, type: 2}
     - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
-    countMinMax: {x: 0, y: 2}
+    countMinMax: {x: 0, y: 3}
     lockDoor: 0
     enemiesMinMax: {x: 0, y: 0}
     trapsMinMax: {x: 3, y: 6}
   additionalRoomTypes: 03000000040000000500000007000000
-  additionalHealingRooms: 1
-  roomsCountMinMax: {x: 3, y: 5}
+  additionalHealingRooms: 2
+  roomsCountMinMax: {x: 6, y: 12}
   doors:
   - {fileID: 519515805689925335, guid: fbb00f25b6fe39947a5de715bd1ef4db, type: 3}
   enemies:

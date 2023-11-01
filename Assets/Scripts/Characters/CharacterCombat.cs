@@ -890,7 +890,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         if (prepareSpell == null && !canAttack) return;
 
-        Debug.Log("Casting + " + prepareSpell.spellName);
+        //Debug.Log("Casting + " + prepareSpell.spellName);
         Block(false);
         EndDodge();
         ForceEndAttack();

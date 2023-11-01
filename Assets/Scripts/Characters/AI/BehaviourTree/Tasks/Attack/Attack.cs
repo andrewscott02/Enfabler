@@ -28,7 +28,7 @@ public class Attack : Node
             return NodeState.Success;
         }
 
-        Debug.Log("Attack state failed");
+        //Debug.Log("Attack state failed");
         return NodeState.Failure;
     }
 }
