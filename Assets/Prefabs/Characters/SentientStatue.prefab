@@ -2449,8 +2449,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
+      propertyPath: standGuard
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: dodgeChance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
       propertyPath: parryChance
-      value: 0.65
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -2470,6 +2480,11 @@ PrefabInstance:
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: passiveRoamDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: standGuardAnimSpeed
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
@@ -2549,13 +2564,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
+      propertyPath: hitReactData.killAnim
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: hitReactData.killRagdoll
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: hitReactData.killDestroyTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
       propertyPath: hitReactData.heavyHitReactThreshold
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: hitReactData.lightHitReactThreshold
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4560520445148292859, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}

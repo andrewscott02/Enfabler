@@ -2848,13 +2848,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
-      propertyPath: layerMask.m_Bits
-      value: 1216
+      propertyPath: targetSphereRadius
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
-      propertyPath: targetSphereRadius
-      value: 2
+      propertyPath: hitLayerMask.m_Bits
+      value: 3264
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: snapLayerMask.m_Bits
+      value: 3072
       objectReference: {fileID: 0}
     - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}

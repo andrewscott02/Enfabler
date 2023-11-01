@@ -18,6 +18,8 @@ public class AIController : BaseCharacterController
 
     public LayerMask sightMask;
     public bool alert = false;
+    public bool standGuard = false;
+    public float standGuardAnimSpeed = 1;
     [SerializeField]
     float passiveSightDistance = 25;
     [SerializeField]
@@ -142,6 +144,10 @@ public class AIController : BaseCharacterController
         animator.SetFloat("RunBlend", currentSpeed);
 
         characterMovement.currentSpeed = currentSpeed;
+
+        //Standing guard
+        bool standingGuard = (!alert && currentSpeed == 0 && standGuard);
+        animator.SetBool("StandingGuard", standingGuard);
 
         #endregion
 

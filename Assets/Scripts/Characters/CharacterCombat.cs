@@ -41,7 +41,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     bool unblockable = false;
     public float chargeMaxTime = 2;
 
-    float baseAnimationSpeed;
+    public float baseAnimationSpeed { get; private set; }
     float currentAttackSpeed = 1;
     bool baseUseRootMotion;
 
@@ -325,7 +325,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         damage = currentDamage + additionalDamage;
         //Debug.Log(damage + " from " + currentDamage + " and " + additionalDamage);
 
-        CheckMoveToTarget(transform.position, transform.forward, layerMask, moveDistanceThreshold.y);
+        CheckMoveToTarget(transform.position, transform.forward, snapLayerMask, moveDistanceThreshold.y);
 
         InvokeRepeating("AttackCheck", 0f, 0.004f);
     }
@@ -402,7 +402,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         if (overrideTarget == null)
         {
-            if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: 20f, layerMask))
+            if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: 20f, snapLayerMask))
             {
                 //Debug.Log("Hit: " + hit.collider.gameObject);
                 firePos = hit.point;
@@ -522,7 +522,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         float distance = Vector3.Distance(weapon.weaponBaseHit.transform.position, weapon.weaponTipHit.transform.position);
         Vector3 dir = weapon.weaponTipHit.transform.position - weapon.weaponBaseHit.transform.position;
 
-        if (Physics.SphereCast(origin, radius: weaponSphereRadius, direction: dir, out hit, maxDistance: distance, layerMask))
+        if (Physics.SphereCast(origin, radius: weaponSphereRadius, direction: dir, out hit, maxDistance: distance, hitLayerMask))
         {
             IDamageable hitDamageable = hit.collider.GetComponent<IDamageable>();
 
@@ -625,7 +625,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     [Header("Targeting")]
     public List<BaseCharacterController> currentTargets;
     List<BaseCharacterController> lastHit = new List<BaseCharacterController>();
-    public LayerMask layerMask;
+    public LayerMask hitLayerMask, snapLayerMask;
     public float currentTargetCastInterval = 0.6f;
     public float currentTargetCastRadius = 1.5f;
     public float currentTargetCastDistance = 10;
@@ -634,7 +634,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         List<BaseCharacterController> hitCharacters = new List<BaseCharacterController>();
 
-        RaycastHit[] hit = Physics.SphereCastAll(transform.position, currentTargetCastRadius, transform.forward, currentTargetCastDistance, layerMask);
+        RaycastHit[] hit = Physics.SphereCastAll(transform.position, currentTargetCastRadius, transform.forward, currentTargetCastDistance, snapLayerMask);
         foreach (RaycastHit item in hit)
         {
             //Debug.Log("Ray hit " + item.collider.gameObject.name);
