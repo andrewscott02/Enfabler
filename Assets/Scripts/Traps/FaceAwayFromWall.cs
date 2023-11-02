@@ -20,22 +20,25 @@ public class FaceAwayFromWall : MonoBehaviour
     {
         Vector3 origin = transform.position + new Vector3(0, startHeight, 0);
 
-        if (Physics.Linecast(origin, origin + (Vector3.forward * range), wallMask))
+        if (StartRayCast(origin, Vector3.forward, 180)) return;
+        if (StartRayCast(origin, Vector3.back, 0)) return;
+        if (StartRayCast(origin, Vector3.left, 90)) return;
+        if (StartRayCast(origin, Vector3.right, 270)) return;
+    }
+
+    bool StartRayCast(Vector3 origin, Vector3 direction, float yRot)
+    {
+        RaycastHit hit;
+        Vector3 target = origin + (direction * range);
+        Vector3 dir = target - origin;
+
+        if (Physics.Raycast(origin, dir, out hit, range, wallMask))
         {
-            transform.eulerAngles = new Vector3(0, 180, 0);
-            return;
+            transform.eulerAngles = new Vector3(0, yRot, 0);
+            Debug.Log("Hit for " + direction);
+            return true;
         }
 
-        if (Physics.Linecast(origin, origin + (Vector3.left * range), wallMask))
-        {
-            transform.eulerAngles = new Vector3(0, 90, 0);
-            return;
-        }
-
-        if (Physics.Linecast(origin, origin + (Vector3.right * range), wallMask))
-        {
-            transform.eulerAngles = new Vector3(0, 270, 0);
-            return;
-        }
+        return false;
     }
 }
