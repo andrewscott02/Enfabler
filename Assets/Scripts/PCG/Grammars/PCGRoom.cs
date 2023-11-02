@@ -62,17 +62,15 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnEnemies()
     {
-        int enemiesToSpawn = dungeonData.GetEnemyCount(roomType);
+        List<Object> enemiesToSpawn = dungeonData.GetRandomEnemies(roomType);
 
-        for (int i = 0; i < enemiesToSpawn; i++)
+        foreach (var item in enemiesToSpawn)
         {
-            //Debug.Log("Spawning enemy in room - " + name);
-
             int spawnerIndex = Random.Range(0, enemySpawnerChildren.Length);
 
             Vector3 spawnPos = enemySpawnerChildren[spawnerIndex].position;
 
-            GameObject go = Instantiate(dungeonData.GetRandomEnemy(), transform) as GameObject;
+            GameObject go = Instantiate(item, transform) as GameObject;
             go.transform.position = spawnPos;
             go.transform.rotation = Quaternion.identity;
             itemsInRoom.Add(go);

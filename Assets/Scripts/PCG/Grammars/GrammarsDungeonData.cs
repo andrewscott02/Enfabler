@@ -11,7 +11,8 @@ public class GrammarsDungeonData : ScriptableObject
     Dictionary<E_RoomTypes, int> roomDict;
     public Vector2Int roomsCountMinMax;
 
-    public Object[] doors, enemies, traps, objects, bosses;
+    public EnemyData[] enemies;
+    public Object[] doors, traps, objects, bosses;
 
     public void ResetAllDungeonData()
     {
@@ -29,6 +30,8 @@ public class GrammarsDungeonData : ScriptableObject
                 data.ResetData();
             }
         }
+
+        ResetEnemyData();
     }
     
     public E_RoomTypes GetRandomRoomType()
@@ -116,9 +119,68 @@ public class GrammarsDungeonData : ScriptableObject
         return doors[Random.Range(0, doors.Length)];
     }
 
-    public Object GetRandomEnemy()
+    public List<Object> GetRandomEnemies(E_RoomTypes roomType)
     {
-        return enemies[Random.Range(0, enemies.Length)];
+        List<Object> enemiesToAdd = new List<Object>();
+
+        int index = GetRoomDataIndex(roomType);
+        int budget = roomData[index].enemiesSeverityMax;
+
+        bool budgetLeft = budget > 0;
+
+        int totalEnemies = 0;
+
+        while (budgetLeft)
+        {
+            if (GetRandomEnemy(out int enemyIndex, budget))
+            {
+                enemiesToAdd.Add(enemies[enemyIndex].enemyPrefab);
+                budget -= enemies[enemyIndex].severity;
+                totalEnemies++;
+            }
+            else
+            {
+                budgetLeft = false;
+            }
+
+            if (totalEnemies >= roomData[index].enemiesMax)
+                budgetLeft = false;
+        }
+
+        ResetEnemyData();
+
+        return enemiesToAdd;
+    }
+
+    void ResetEnemyData()
+    {
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i].timesUsed = 0;
+        }
+    }
+
+    bool GetRandomEnemy(out int enemyIndex, int budgetLeft)
+    {
+        int startIndex = Random.Range(0, enemies.Length);
+        enemyIndex = startIndex;
+
+        while (true)
+        {
+            if (enemies[enemyIndex].severity <= budgetLeft && enemies[enemyIndex].timesUsed < enemies[enemyIndex].maxCount)
+            {
+                enemies[enemyIndex].timesUsed++;
+                return true;
+            }
+
+            enemyIndex++;
+
+            if (enemyIndex >= enemies.Length)
+                enemyIndex = 0;
+
+            if (enemyIndex == startIndex)
+                return false;
+        }
     }
 
     public Object GetRandomTrap()
@@ -146,18 +208,6 @@ public class GrammarsDungeonData : ScriptableObject
         }
 
         return false;
-    }
-
-    public int GetEnemyCount(E_RoomTypes roomType)
-    {
-        int index = GetRoomDataIndex(roomType);
-
-        if (index >= 0 && index < roomData.Length)
-        {
-            return Random.Range(roomData[index].enemiesMinMax.x, roomData[index].enemiesMinMax.y + 1);
-        }
-
-        return 0;
     }
 
     public int GetTrapCount(E_RoomTypes roomType)
@@ -242,7 +292,22 @@ public struct RoomData
     public Vector2Int countMinMax;
 
     public bool lockDoor;
-    public Vector2Int enemiesMinMax, trapsMinMax;
+
+    public int enemiesMax;
+    public int enemiesSeverityMax;
+
+    public Vector2Int trapsMinMax;
+}
+
+[System.Serializable]
+public struct EnemyData
+{
+    public Object enemyPrefab;
+    public int severity;
+    public int maxCount;
+
+    [HideInInspector]
+    public int timesUsed;
 }
 
 [System.Serializable]
