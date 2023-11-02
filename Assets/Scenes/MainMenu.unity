@@ -286,7 +286,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1930224112}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: ArenaMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5339,6 +5339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a8bac218b9ccf468336db7b5ee0886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pcgDungeon: 2
   arena: 1
   mainMenu: {fileID: 1158191979}
   controls: {fileID: 2028576142}

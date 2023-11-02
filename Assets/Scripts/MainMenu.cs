@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public E_Scenes arena;
+    public E_Scenes pcgDungeon, arena;
     public GameObject mainMenu, controls;
     public GameObject[] howToPlayPages;
 
@@ -18,6 +18,11 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         ShowMouse(false);
+        SceneManager.LoadScene(pcgDungeon.ToString());
+    }
+
+    public void ArenaMode()
+    {
         SceneManager.LoadScene(arena.ToString());
     }
 
