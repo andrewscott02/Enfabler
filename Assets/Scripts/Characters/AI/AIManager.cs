@@ -92,11 +92,9 @@ public class AIManager : MonoBehaviour
         return GetAllyTeam(a).Contains(b);
     }
 
-    public GameObject nextLevelUI;
-
     public void NextLevel()
     {
-        nextLevelUI.SetActive(true);
+        GameCanvasManager.instance.defeatUI.SetActive(true);
         StartCoroutine(IMainMenu(5f));
     }
 

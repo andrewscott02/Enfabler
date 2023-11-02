@@ -11,8 +11,6 @@ public class ArenaManager : MonoBehaviour
     public float interval = 5f;
     public float spawnRadius = 10;
 
-    public GameObject nextLevelUI;
-
     int round = 0;
 
     public GameObject fightSelector;
@@ -87,7 +85,7 @@ public class ArenaManager : MonoBehaviour
 
     public void ArenaWin()
     {
-        nextLevelUI.SetActive(true);
+        GameCanvasManager.instance.nextLevelUI.SetActive(true);
         StartCoroutine(IMainMenu(5f));
     }
 

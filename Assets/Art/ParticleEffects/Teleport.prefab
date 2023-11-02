@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6519640419798142378}
   - component: {fileID: 932149340260321005}
   m_Layer: 0
-  m_Name: Healing
+  m_Name: Teleport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1363,8 +1363,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.12156863, g: 1, b: 0, a: 1}
-        key1: {r: 0.4575472, g: 1, b: 0.5468924, a: 0}
+        key0: {r: 0, g: 0.8364415, b: 1, a: 1}
+        key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}

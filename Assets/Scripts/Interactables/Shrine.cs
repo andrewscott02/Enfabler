@@ -42,7 +42,18 @@ public class Shrine : Interactable, IInteractable
 
     public override void Interacted(BaseCharacterController interactCharacter)
     {
-        base.Interacted(interactCharacter);
+        if (!canBeInteracted) return;
+        if (lockedInteraction) return;
+
+        if (!multipleInteractions)
+        {
+            canBeInteracted = false;
+            if (!forceInteraction)
+            {
+                ShowInteractMessage(false);
+                player.EnableInteraction(E_InteractTypes.Null);
+            }
+        }
 
         if (healingLeft <= 0) return;
 
@@ -53,7 +64,8 @@ public class Shrine : Interactable, IInteractable
         interactCharacter.GetHealth().Heal(healthRestore);
         SetSliderValues();
 
-        Instantiate(interactFX, interactCharacter.transform);
+        if (interactFX != null)
+            Instantiate(interactFX, interactCharacter.transform);
 
         if (healingLeft <= 0)
         {

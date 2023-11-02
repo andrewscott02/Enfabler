@@ -11,7 +11,7 @@ public class GameCanvasManager : MonoBehaviour
         instance = this;
     }
 
-    public GameObject interactObject;
+    public GameObject interactObject, nextLevelUI, defeatUI;
 
     public void ShowInteractMessage(bool show)
     {

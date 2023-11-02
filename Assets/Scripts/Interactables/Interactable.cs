@@ -12,7 +12,7 @@ public class Interactable : MonoBehaviour, IInteractable
     public bool multipleInteractions = false;
     public Object interactFX;
 
-    bool canBeInteracted = true;
+    protected bool canBeInteracted = true;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -78,6 +78,9 @@ public class Interactable : MonoBehaviour, IInteractable
                 player.EnableInteraction(E_InteractTypes.Null);
             }
         }
+
+        if (interactFX != null)
+            Instantiate(interactFX, transform);
     }
 
     public void ShowInteractMessage(bool show)
