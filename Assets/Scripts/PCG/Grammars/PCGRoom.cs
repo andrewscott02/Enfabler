@@ -100,10 +100,11 @@ public class PCGRoom : MonoBehaviour
         foreach (var item in objectsToSpawn)
         {
             Vector3 spawnPos = objectSpawnerChildren[item.spawnerIndex].position;
+            Quaternion spawnRot = objectSpawnerChildren[item.spawnerIndex].rotation;
 
             GameObject go = Instantiate(item.objectPrefab, objectSpawnerChildren[item.spawnerIndex]) as GameObject;
             go.transform.position = spawnPos;
-            go.transform.rotation = Quaternion.identity;
+            go.transform.rotation = spawnRot;
             itemsInRoom.Add(go);
         }
     }
@@ -115,10 +116,11 @@ public class PCGRoom : MonoBehaviour
         foreach (var item in objectsToSpawn)
         {
             Vector3 spawnPos = objectSpawnerChildren[item.spawnerIndex].position;
+            Quaternion spawnRot = objectSpawnerChildren[item.spawnerIndex].rotation;
 
             GameObject go = Instantiate(item.objectPrefab, objectSpawnerChildren[item.spawnerIndex]) as GameObject;
             go.transform.position = spawnPos;
-            go.transform.rotation = Quaternion.identity;
+            go.transform.rotation = spawnRot;
             itemsInRoom.Add(go);
         }
     }
@@ -193,6 +195,8 @@ public class PCGRoom : MonoBehaviour
             foreach (var item in objectSpawnerChildren)
             {
                 Gizmos.DrawSphere(item.position, 0.5f);
+
+                Gizmos.DrawLine(item.position, item.position + (item.up * 2));
             }
         }
 
