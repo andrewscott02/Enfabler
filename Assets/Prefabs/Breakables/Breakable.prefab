@@ -49,19 +49,33 @@ MonoBehaviour:
   animator: {fileID: 0}
   modelConstructor: {fileID: 0}
   healthSlider: {fileID: 0}
-  bloodFX: {fileID: 5831885752641907103, guid: 5995087a65040474a859f63787d81cde, type: 3}
-  parryFX: {fileID: 5831885752641907103, guid: 7c7d6dcfa9512ae4abd8b0d8b8816ec4, type: 3}
   maxHealth: 1
   hitReactData:
+    deathFXGO: {fileID: 0}
+    bloodFX: {fileID: 5831885752641907103, guid: 7c7d6dcfa9512ae4abd8b0d8b8816ec4,
+      type: 3}
+    deathFX: {fileID: 5831885752641907103, guid: 7c7d6dcfa9512ae4abd8b0d8b8816ec4,
+      type: 3}
+    blockFX: {fileID: 5831885752641907103, guid: 7c7d6dcfa9512ae4abd8b0d8b8816ec4,
+      type: 3}
+    parryFX: {fileID: 5831885752641907103, guid: 7c7d6dcfa9512ae4abd8b0d8b8816ec4,
+      type: 3}
     hitImpulseMultiplier: 0.2
+    lightHitReactThreshold: 0
     heavyHitReactThreshold: 5
     hitSlomoScale: 0.9
     hitSlomoDuration: 0.2
     killImpulseStrength: 0.4
     killSlomoScale: 0.8
     killSlomoDuration: 0.2
+    killRagdoll: 0
+    killAnim: 0
+    killDestroyTime: 0
+    parryImpulseStrength: 0
+    parrySlomoScale: 0
+    parrySlomoDuration: 0
+    impulseMax: 0
   dying: 0
-  impulseSource: {fileID: 0}
 --- !u!54 &5129078096781106124
 Rigidbody:
   m_ObjectHideFlags: 0
