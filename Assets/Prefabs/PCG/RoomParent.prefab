@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4445863343321579089}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ObjectSpawner (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7471558008926047013}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ObjectSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,6 +524,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exitPoint: {fileID: 9164893386979555221}
+  tempSpawnerObjects: {fileID: 8365603084591658663, guid: ec162ece2df892046ba15066ae0a7082,
+    type: 3}
   enemySpawners: {fileID: 5691532340985619734}
   objectSpawners: {fileID: 4879353158944947427}
   resetTransformsGizmo: 0

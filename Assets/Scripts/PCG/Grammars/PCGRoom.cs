@@ -5,6 +5,7 @@ using UnityEngine;
 public class PCGRoom : MonoBehaviour
 {
     public Transform exitPoint;
+    public Object tempSpawnerObjects;
 
     public Transform enemySpawners, objectSpawners;
     Transform[] enemySpawnerChildren, objectSpawnerChildren;
@@ -94,17 +95,13 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnTraps()
     {
-        int trapsToSpawn = dungeonData.GetTrapCount(roomType);
+        List<ObjectSpawnerInstance> objectsToSpawn = dungeonData.GetRandomTraps(this);
 
-        for (int i = 0; i < trapsToSpawn; i++)
+        foreach (var item in objectsToSpawn)
         {
-            //Debug.Log("Spawning trap in room - " + name);
+            Vector3 spawnPos = objectSpawnerChildren[item.spawnerIndex].position;
 
-            if (!GetValidSpawner(out int spawnerIndex)) return;
-
-            Vector3 spawnPos = objectSpawnerChildren[spawnerIndex].position;
-
-            GameObject go = Instantiate(dungeonData.GetRandomTrap(), objectSpawnerChildren[spawnerIndex]) as GameObject;
+            GameObject go = Instantiate(item.objectPrefab, objectSpawnerChildren[item.spawnerIndex]) as GameObject;
             go.transform.position = spawnPos;
             go.transform.rotation = Quaternion.identity;
             itemsInRoom.Add(go);
@@ -113,26 +110,20 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnObjects()
     {
-        int objectsToSpawn = 10;
+        List<ObjectSpawnerInstance> objectsToSpawn = dungeonData.GetRandomObjects(this);
 
-        for (int i = 0; i < objectsToSpawn; i++)
+        foreach (var item in objectsToSpawn)
         {
-            //Debug.Log("Spawning objects in room - " + name);
+            Vector3 spawnPos = objectSpawnerChildren[item.spawnerIndex].position;
 
-            if (!GetValidSpawner(out int spawnerIndex)) return;
-
-            Vector3 spawnPos = objectSpawnerChildren[spawnerIndex].position;
-
-            GameObject go = Instantiate(dungeonData.GetRandomObject(), objectSpawnerChildren[spawnerIndex]) as GameObject;
+            GameObject go = Instantiate(item.objectPrefab, objectSpawnerChildren[item.spawnerIndex]) as GameObject;
             go.transform.position = spawnPos;
-            Quaternion spawnRot = Quaternion.identity;
-            spawnRot.y = Random.Range(0, 360);
-            go.transform.rotation = spawnRot;
+            go.transform.rotation = Quaternion.identity;
             itemsInRoom.Add(go);
         }
     }
 
-    bool GetValidSpawner(out int spawnerIndex)
+    public bool GetValidSpawner(ObjectData objectData, out int spawnerIndex)
     {
         int startIndex = Random.Range(0, objectSpawnerChildren.Length);
         spawnerIndex = startIndex;
@@ -141,7 +132,12 @@ public class PCGRoom : MonoBehaviour
         {
             if (objectSpawnerChildren[spawnerIndex].childCount == 0)
             {
-                return true;
+                if (objectData.validSpawners == (objectData.validSpawners | (1 << objectSpawnerChildren[spawnerIndex].gameObject.layer)))
+                {
+                    //Creates temp game object to fill up the space
+                    Instantiate(tempSpawnerObjects, objectSpawnerChildren[spawnerIndex]);
+                    return true;
+                }
             }
 
             spawnerIndex++;

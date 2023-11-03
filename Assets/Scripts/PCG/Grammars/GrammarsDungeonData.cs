@@ -12,7 +12,8 @@ public class GrammarsDungeonData : ScriptableObject
     public Vector2Int roomsCountMinMax;
 
     public EnemyData[] enemies;
-    public Object[] doors, traps, objects, bosses;
+    public ObjectData[] traps, objects;
+    public Object[] doors, bosses;
 
     public void ResetAllDungeonData()
     {
@@ -79,6 +80,8 @@ public class GrammarsDungeonData : ScriptableObject
 
     #region Prefabs
 
+    #region Room
+
     public Object GetRandomRoomPrefab(E_RoomTypes roomType)
     {
         int index = GetRoomDataIndex(roomType);
@@ -118,6 +121,10 @@ public class GrammarsDungeonData : ScriptableObject
     {
         return doors[Random.Range(0, doors.Length)];
     }
+
+    #endregion
+
+    #region Enemies
 
     public List<Object> GetRandomEnemies(E_RoomTypes roomType)
     {
@@ -183,15 +190,152 @@ public class GrammarsDungeonData : ScriptableObject
         }
     }
 
-    public Object GetRandomTrap()
+    #endregion
+    
+    #region Traps
+
+    public List<ObjectSpawnerInstance> GetRandomTraps(PCGRoom room)
     {
-        return traps[Random.Range(0, traps.Length)];
+        List<ObjectSpawnerInstance> objectsToAdd = new List<ObjectSpawnerInstance>();
+
+        int index = GetRoomDataIndex(room.roomType);
+        int count = Random.Range(roomData[index].trapsMinMax.x, roomData[index].trapsMinMax.y);
+
+        bool generating = true;
+        int currentCount = 0;
+
+        if (count == 0)
+            return objectsToAdd;
+
+        while (generating)
+        {
+            if (GetRandomTrap(room, out int trapIndex, out int spawnerIndex))
+            {
+                ObjectSpawnerInstance instance = new ObjectSpawnerInstance();
+                instance.objectPrefab = traps[trapIndex].objectPrefab;
+                instance.spawnerIndex = spawnerIndex;
+
+                objectsToAdd.Add(instance);
+                currentCount++;
+            }
+            else
+            {
+                generating = false;
+            }
+
+            if (currentCount >= count)
+                generating = false;
+        }
+
+        ResetTrapData();
+
+        return objectsToAdd;
     }
 
-    public Object GetRandomObject()
+    void ResetTrapData()
     {
-        return objects[Random.Range(0, objects.Length)];
+        for (int i = 0; i < traps.Length; i++)
+        {
+            traps[i].timesUsed = 0;
+        }
     }
+
+    bool GetRandomTrap(PCGRoom room, out int trapIndex, out int spawnerIndex)
+    {
+        int startIndex = Random.Range(0, traps.Length);
+        trapIndex = startIndex;
+        spawnerIndex = 0;
+
+        while (true)
+        {
+            if (traps[trapIndex].timesUsed < traps[trapIndex].maxCount)
+            {
+                if (room.GetValidSpawner(traps[trapIndex], out spawnerIndex))
+                {
+                    traps[trapIndex].timesUsed++;
+                    return true;
+                }
+            }
+
+            trapIndex++;
+
+            if (trapIndex >= traps.Length)
+                trapIndex = 0;
+
+            if (trapIndex == startIndex)
+                return false;
+        }
+    }
+
+    #endregion
+
+    #region Objects
+
+    public List<ObjectSpawnerInstance> GetRandomObjects(PCGRoom room)
+    {
+        List<ObjectSpawnerInstance> objectsToAdd = new List<ObjectSpawnerInstance>();
+
+        bool generating = true;
+        int currentCount = 0;
+
+        while (generating)
+        {
+            if (GetRandomObject(room, out int objectIndex, out int spawnerIndex))
+            {
+                ObjectSpawnerInstance instance = new ObjectSpawnerInstance();
+                instance.objectPrefab = objects[objectIndex].objectPrefab;
+                instance.spawnerIndex = spawnerIndex;
+
+                objectsToAdd.Add(instance);
+                currentCount++;
+            }
+            else
+            {
+                generating = false;
+            }
+        }
+
+        ResetObjectData();
+
+        return objectsToAdd;
+    }
+
+    void ResetObjectData()
+    {
+        for (int i = 0; i < objects.Length; i++)
+        {
+            objects[i].timesUsed = 0;
+        }
+    }
+
+    bool GetRandomObject(PCGRoom room, out int objectIndex, out int spawnerIndex)
+    {
+        int startIndex = Random.Range(0, objects.Length);
+        objectIndex = startIndex;
+        spawnerIndex = 0;
+
+        while (true)
+        {
+            if (objects[objectIndex].timesUsed < objects[objectIndex].maxCount)
+            {
+                if (room.GetValidSpawner(objects[objectIndex], out spawnerIndex))
+                {
+                    objects[objectIndex].timesUsed++;
+                    return true;
+                }
+            }
+
+            objectIndex++;
+
+            if (objectIndex >= objects.Length)
+                objectIndex = 0;
+
+            if (objectIndex == startIndex)
+                return false;
+        }
+    }
+
+    #endregion
 
     public Object GetRandomBoss()
     {
@@ -300,6 +444,19 @@ public struct RoomData
 }
 
 [System.Serializable]
+public enum E_RoomTypes
+{
+    Start, Boss, End,
+    Encounter, Puzzle, Treasure, Healing, Trap
+}
+
+[System.Serializable]
+public enum E_RoomPrefabTypes
+{
+    Room, WideRoom, Corridor, Stairway, Grandstairway
+}
+
+[System.Serializable]
 public struct EnemyData
 {
     public Object enemyPrefab;
@@ -311,14 +468,19 @@ public struct EnemyData
 }
 
 [System.Serializable]
-public enum E_RoomTypes
+public struct ObjectData
 {
-    Start, Boss, End,
-    Encounter, Puzzle, Treasure, Healing, Trap
+    public Object objectPrefab;
+    public LayerMask validSpawners;
+    public bool randomRotation;
+    public int maxCount;
+
+    [HideInInspector]
+    public int timesUsed;
 }
 
-[System.Serializable]
-public enum E_RoomPrefabTypes
+public struct ObjectSpawnerInstance
 {
-    Room, WideRoom, Corridor, Stairway, Grandstairway
+    public Object objectPrefab;
+    public int spawnerIndex;
 }
