@@ -13,11 +13,8 @@ public class GrammarsDungeonData : ScriptableObject
     Dictionary<E_RoomTypes, int> roomDict;
     public Vector2Int roomsCountMinMax;
 
-    public EnemyData[] enemies;
-    public ObjectData[] traps, objects;
-    public Object[] doors, bosses;
-
-    public List<E_Themes> possibleThemes = new List<E_Themes>() { E_Themes.Cave, E_Themes.Crypt, E_Themes.Manor };
+    public List<ThemeData> startingThemes;
+    public List<ThemeData> allThemes;
     public int themeChangesMax = 3;
 
     #endregion
@@ -93,7 +90,7 @@ public class GrammarsDungeonData : ScriptableObject
 
     #region Room
 
-    public Object GetRandomRoomPrefab(E_RoomTypes roomType, E_Themes currentTheme, bool change, out E_Themes nextRoomTheme)
+    public Object GetRandomRoomPrefab(E_RoomTypes roomType, ThemeData currentTheme, bool change, out ThemeData nextRoomTheme)
     {
         int index = GetRoomDataIndex(roomType);
         nextRoomTheme = currentTheme;
@@ -114,7 +111,7 @@ public class GrammarsDungeonData : ScriptableObject
         return null;
     }
 
-    Object DeterminePrefab(RoomPrefabData[] prefabData, E_Themes currentTheme, bool change, out E_Themes nextRoomTheme)
+    Object DeterminePrefab(RoomPrefabData[] prefabData, ThemeData currentTheme, bool change, out ThemeData nextRoomTheme)
     {
         nextRoomTheme = currentTheme;
         int startIndex = Random.Range(0, prefabData.Length);
@@ -143,16 +140,16 @@ public class GrammarsDungeonData : ScriptableObject
         }
     }
 
-    public Object GetRandomDoor()
+    public Object GetRandomDoor(ThemeData theme)
     {
-        return doors[Random.Range(0, doors.Length)];
+        return theme.doors[Random.Range(0, theme.doors.Length)];
     }
 
     #endregion
 
     #region Enemies
 
-    public List<Object> GetRandomEnemies(E_RoomTypes roomType)
+    public List<Object> GetRandomEnemies(E_RoomTypes roomType, ThemeData theme)
     {
         List<Object> enemiesToAdd = new List<Object>();
 
@@ -165,10 +162,10 @@ public class GrammarsDungeonData : ScriptableObject
 
         while (budgetLeft)
         {
-            if (GetRandomEnemy(out int enemyIndex, budget))
+            if (GetRandomEnemy(out int enemyIndex, budget, theme))
             {
-                enemiesToAdd.Add(enemies[enemyIndex].enemyPrefab);
-                budget -= enemies[enemyIndex].severity;
+                enemiesToAdd.Add(theme.enemies[enemyIndex].enemyPrefab);
+                budget -= theme.enemies[enemyIndex].severity;
                 totalEnemies++;
             }
             else
@@ -187,28 +184,31 @@ public class GrammarsDungeonData : ScriptableObject
 
     void ResetEnemyData()
     {
-        for (int i = 0; i < enemies.Length; i++)
+        foreach (var item in allThemes)
         {
-            enemies[i].timesUsed = 0;
+            for (int i = 0; i < item.enemies.Length; i++)
+            {
+                item.enemies[i].timesUsed = 0;
+            }
         }
     }
 
-    bool GetRandomEnemy(out int enemyIndex, int budgetLeft)
+    bool GetRandomEnemy(out int enemyIndex, int budgetLeft, ThemeData theme)
     {
-        int startIndex = Random.Range(0, enemies.Length);
+        int startIndex = Random.Range(0, theme.enemies.Length);
         enemyIndex = startIndex;
 
         while (true)
         {
-            if (enemies[enemyIndex].severity <= budgetLeft && enemies[enemyIndex].timesUsed < enemies[enemyIndex].maxCount)
+            if (theme.enemies[enemyIndex].severity <= budgetLeft && theme.enemies[enemyIndex].timesUsed < theme.enemies[enemyIndex].maxCount)
             {
-                enemies[enemyIndex].timesUsed++;
+                theme.enemies[enemyIndex].timesUsed++;
                 return true;
             }
 
             enemyIndex++;
 
-            if (enemyIndex >= enemies.Length)
+            if (enemyIndex >= theme.enemies.Length)
                 enemyIndex = 0;
 
             if (enemyIndex == startIndex)
@@ -220,7 +220,7 @@ public class GrammarsDungeonData : ScriptableObject
     
     #region Traps
 
-    public List<ObjectSpawnerInstance> GetRandomTraps(PCGRoom room)
+    public List<ObjectSpawnerInstance> GetRandomTraps(PCGRoom room, ThemeData theme)
     {
         List<ObjectSpawnerInstance> objectsToAdd = new List<ObjectSpawnerInstance>();
 
@@ -235,10 +235,10 @@ public class GrammarsDungeonData : ScriptableObject
 
         while (generating)
         {
-            if (GetRandomTrap(room, out int trapIndex, out int spawnerIndex))
+            if (GetRandomTrap(room, out int trapIndex, out int spawnerIndex, theme))
             {
                 ObjectSpawnerInstance instance = new ObjectSpawnerInstance();
-                instance.objectPrefab = traps[trapIndex].objectPrefab;
+                instance.objectPrefab = theme.traps[trapIndex].objectPrefab;
                 instance.spawnerIndex = spawnerIndex;
 
                 objectsToAdd.Add(instance);
@@ -260,32 +260,35 @@ public class GrammarsDungeonData : ScriptableObject
 
     void ResetTrapData()
     {
-        for (int i = 0; i < traps.Length; i++)
+        foreach (var item in allThemes)
         {
-            traps[i].timesUsed = 0;
+            for (int i = 0; i < item.traps.Length; i++)
+            {
+                item.traps[i].timesUsed = 0;
+            }
         }
     }
 
-    bool GetRandomTrap(PCGRoom room, out int trapIndex, out int spawnerIndex)
+    bool GetRandomTrap(PCGRoom room, out int trapIndex, out int spawnerIndex, ThemeData theme)
     {
-        int startIndex = Random.Range(0, traps.Length);
+        int startIndex = Random.Range(0, theme.traps.Length);
         trapIndex = startIndex;
         spawnerIndex = 0;
 
         while (true)
         {
-            if (traps[trapIndex].timesUsed < traps[trapIndex].maxCount)
+            if (theme.traps[trapIndex].timesUsed < theme.traps[trapIndex].maxCount)
             {
-                if (room.GetValidSpawner(traps[trapIndex], out spawnerIndex))
+                if (room.GetValidSpawner(theme.traps[trapIndex], out spawnerIndex))
                 {
-                    traps[trapIndex].timesUsed++;
+                    theme.traps[trapIndex].timesUsed++;
                     return true;
                 }
             }
 
             trapIndex++;
 
-            if (trapIndex >= traps.Length)
+            if (trapIndex >= theme.traps.Length)
                 trapIndex = 0;
 
             if (trapIndex == startIndex)
@@ -297,7 +300,7 @@ public class GrammarsDungeonData : ScriptableObject
 
     #region Objects
 
-    public List<ObjectSpawnerInstance> GetRandomObjects(PCGRoom room)
+    public List<ObjectSpawnerInstance> GetRandomObjects(PCGRoom room, ThemeData theme)
     {
         List<ObjectSpawnerInstance> objectsToAdd = new List<ObjectSpawnerInstance>();
 
@@ -306,10 +309,10 @@ public class GrammarsDungeonData : ScriptableObject
 
         while (generating)
         {
-            if (GetRandomObject(room, out int objectIndex, out int spawnerIndex))
+            if (GetRandomObject(room, out int objectIndex, out int spawnerIndex, theme))
             {
                 ObjectSpawnerInstance instance = new ObjectSpawnerInstance();
-                instance.objectPrefab = objects[objectIndex].objectPrefab;
+                instance.objectPrefab = theme.objects[objectIndex].objectPrefab;
                 instance.spawnerIndex = spawnerIndex;
 
                 objectsToAdd.Add(instance);
@@ -328,32 +331,35 @@ public class GrammarsDungeonData : ScriptableObject
 
     void ResetObjectData()
     {
-        for (int i = 0; i < objects.Length; i++)
+        foreach (var item in allThemes)
         {
-            objects[i].timesUsed = 0;
+            for (int i = 0; i < item.objects.Length; i++)
+            {
+                item.objects[i].timesUsed = 0;
+            }
         }
     }
 
-    bool GetRandomObject(PCGRoom room, out int objectIndex, out int spawnerIndex)
+    bool GetRandomObject(PCGRoom room, out int objectIndex, out int spawnerIndex, ThemeData theme)
     {
-        int startIndex = Random.Range(0, objects.Length);
+        int startIndex = Random.Range(0, theme.objects.Length);
         objectIndex = startIndex;
         spawnerIndex = 0;
 
         while (true)
         {
-            if (objects[objectIndex].timesUsed < objects[objectIndex].maxCount)
+            if (theme.objects[objectIndex].timesUsed < theme.objects[objectIndex].maxCount)
             {
-                if (room.GetValidSpawner(objects[objectIndex], out spawnerIndex))
+                if (room.GetValidSpawner(theme.objects[objectIndex], out spawnerIndex))
                 {
-                    objects[objectIndex].timesUsed++;
+                    theme.objects[objectIndex].timesUsed++;
                     return true;
                 }
             }
 
             objectIndex++;
 
-            if (objectIndex >= objects.Length)
+            if (objectIndex >= theme.objects.Length)
                 objectIndex = 0;
 
             if (objectIndex == startIndex)
@@ -363,9 +369,9 @@ public class GrammarsDungeonData : ScriptableObject
 
     #endregion
 
-    public Object GetRandomBoss()
+    public Object GetRandomBoss(ThemeData theme)
     {
-        return bosses[Random.Range(0, bosses.Length)];
+        return theme.bosses[Random.Range(0, theme.bosses.Length)];
     }
 
     public bool GetDoorLocked(E_RoomTypes roomType)
@@ -480,11 +486,6 @@ public enum E_RoomTypes
 public enum E_RoomPrefabTypes
 {
     Room, WideRoom, Corridor, Stairway, Grandstairway
-}
-
-public enum E_Themes
-{
-    Cave, Manor, Crypt
 }
 
 [System.Serializable]

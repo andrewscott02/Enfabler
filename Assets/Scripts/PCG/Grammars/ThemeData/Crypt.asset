@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb80702b7ef81f40bbff8bbb3b314ca, type: 3}
+  m_Name: Crypt
+  m_EditorClassIdentifier: 
+  enemies:
+  - enemyPrefab: {fileID: 8084795209297945531, guid: 6959e721c14252e4b8f781d8b33b70fa,
+      type: 3}
+    severity: 7
+    maxCount: 5
+    timesUsed: 0
+  - enemyPrefab: {fileID: 8084795209297945531, guid: ee28444e69279b94ab71836c789ccfe4,
+      type: 3}
+    severity: 8
+    maxCount: 2
+    timesUsed: 0
+  - enemyPrefab: {fileID: 8084795209297945531, guid: 69fd0d1e9c5ecf8499d319808b255c3e,
+      type: 3}
+    severity: 9
+    maxCount: 2
+    timesUsed: 0
+  - enemyPrefab: {fileID: 8084795209297945531, guid: 810a7923b83ff214e96264c7fbbae99c,
+      type: 3}
+    severity: 10
+    maxCount: 1
+    timesUsed: 0
+  - enemyPrefab: {fileID: 7535070001232547612, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+      type: 3}
+    severity: 7
+    maxCount: 5
+    timesUsed: 0
+  - enemyPrefab: {fileID: 7535070001232547612, guid: 281af66685c14bf48944eccc62df6c64,
+      type: 3}
+    severity: 8
+    maxCount: 2
+    timesUsed: 0
+  traps:
+  - objectPrefab: {fileID: 2135024257723741946, guid: ede92da8b23dd084c906df4210e2f72c,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 3
+    timesUsed: 0
+  - objectPrefab: {fileID: 2135024257723741946, guid: b4c9eb1361f429e49b1601df9aa11981,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 3
+    timesUsed: 0
+  objects:
+  - objectPrefab: {fileID: 7286702930854383463, guid: dcddb3c2384d2cd4fb38b629b99c6f17,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: e3a5a680d477dc2419c3f1bdce72f6cc,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 266c6fa66421acd499ea4c907da15899,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 3423360317770660442, guid: aff0c150feabebb4591475b196ae4d69,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 43d26958e63fd64419eb8c2f9254f25d,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 3423360317770660442, guid: d4d112b87b5d68948805dbf3e1a0d2ba,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  doors:
+  - {fileID: 519515805689925335, guid: fbb00f25b6fe39947a5de715bd1ef4db, type: 3}
+  bosses:
+  - {fileID: 4297160914922154321, guid: 41e27b05400a71846886bcbd653b0e22, type: 3}

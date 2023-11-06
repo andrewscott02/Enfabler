@@ -10,6 +10,8 @@ public class PCGRoom : MonoBehaviour
     public Transform enemySpawners, objectSpawners;
     Transform[] enemySpawnerChildren, objectSpawnerChildren;
 
+    ThemeData theme;
+
     [ContextMenu("Show Debug")]
     public void SetupTransforms()
     {
@@ -25,10 +27,12 @@ public class PCGRoom : MonoBehaviour
     public E_RoomTypes roomType { get; private set; }
     public GrammarsDungeonData dungeonData { get; private set; }
 
-    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, E_Themes theme)
+    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, ThemeData theme)
     {
         this.roomType = roomType;
         this.dungeonData = dungeonData;
+        this.theme = theme;
+
         name += " " + roomType.ToString() + " room (PCG) - " + theme.ToString();
 
         SetupTransforms();
@@ -49,7 +53,7 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnDoor()
     {
-        GameObject go = Instantiate(dungeonData.GetRandomDoor(), exitPoint) as GameObject;
+        GameObject go = Instantiate(dungeonData.GetRandomDoor(theme), exitPoint) as GameObject;
         go.transform.position = exitPoint.transform.position;
         go.transform.rotation = exitPoint.transform.rotation;
         itemsInRoom.Add(go);
@@ -63,7 +67,7 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnEnemies()
     {
-        List<Object> enemiesToSpawn = dungeonData.GetRandomEnemies(roomType);
+        List<Object> enemiesToSpawn = dungeonData.GetRandomEnemies(roomType, theme);
 
         foreach (var item in enemiesToSpawn)
         {
@@ -95,7 +99,7 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnTraps()
     {
-        List<ObjectSpawnerInstance> objectsToSpawn = dungeonData.GetRandomTraps(this);
+        List<ObjectSpawnerInstance> objectsToSpawn = dungeonData.GetRandomTraps(this, theme);
 
         foreach (var item in objectsToSpawn)
         {
@@ -111,7 +115,7 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnObjects()
     {
-        List<ObjectSpawnerInstance> objectsToSpawn = dungeonData.GetRandomObjects(this);
+        List<ObjectSpawnerInstance> objectsToSpawn = dungeonData.GetRandomObjects(this, theme);
 
         foreach (var item in objectsToSpawn)
         {
@@ -162,7 +166,7 @@ public class PCGRoom : MonoBehaviour
 
         Vector3 spawnPos = enemySpawnerChildren[spawnerIndex].position;
 
-        GameObject go = Instantiate(dungeonData.GetRandomBoss(), transform) as GameObject;
+        GameObject go = Instantiate(dungeonData.GetRandomBoss(theme), transform) as GameObject;
         go.transform.position = spawnPos;
         go.transform.rotation = Quaternion.identity;
         itemsInRoom.Add(go);

@@ -21,8 +21,8 @@ public class GrammarsDungeonGeneration : MonoBehaviour
     {
         CleanupDungeon();
 
-        int randTheme = Random.Range(0, grammarsDungeonData.possibleThemes.Count);
-        currentTheme = grammarsDungeonData.possibleThemes[randTheme];
+        int randTheme = Random.Range(0, grammarsDungeonData.startingThemes.Count);
+        currentTheme = grammarsDungeonData.startingThemes[randTheme];
 
         List<E_RoomTypes> rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Healing, E_RoomTypes.Boss, E_RoomTypes.End };
 
@@ -76,7 +76,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
     #region Creating Rooms
 
-    E_Themes currentTheme;
+    ThemeData currentTheme;
 
     List<E_RoomTypes> GenerateAdditionalRooms()
     {
@@ -123,17 +123,17 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
     List<PCGRoom> createdRooms;
 
-    List<Object> DetermineDungeonRooms(List<E_RoomTypes> rooms, out List<E_Themes> themes)
+    List<Object> DetermineDungeonRooms(List<E_RoomTypes> rooms, out List<ThemeData> themes)
     {
         List<Object> prefabs = new List<Object>();
-        themes = new List<E_Themes>();
+        themes = new List<ThemeData>();
 
         List<int> roomChanges = DetermineRoomChanges(rooms);
 
         for(int i = 0; i < rooms.Count; i++)
         {
             bool change = roomChanges.Contains(i);
-            Object prefab = grammarsDungeonData.GetRandomRoomPrefab(rooms[i], currentTheme, change, out E_Themes nextRoom);
+            Object prefab = grammarsDungeonData.GetRandomRoomPrefab(rooms[i], currentTheme, change, out ThemeData nextRoom);
             if (prefab != null)
             {
                 prefabs.Add(prefab);
@@ -184,7 +184,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
     {
         createdRooms = new List<PCGRoom>();
 
-        List<Object> prefabs = DetermineDungeonRooms(rooms, out List<E_Themes> themes);
+        List<Object> prefabs = DetermineDungeonRooms(rooms, out List<ThemeData> themes);
 
         for (int i = 0; i < rooms.Count; i++)
         {

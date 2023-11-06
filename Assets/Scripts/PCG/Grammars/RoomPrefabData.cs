@@ -9,8 +9,8 @@ public class RoomPrefabData : ScriptableObject
     public Vector2Int countMinMax;
     int timesUsed = 0;
 
-    public List<E_Themes> requireThemes = new List<E_Themes>();
-    public List<E_Themes> changeThemes = new List<E_Themes>();
+    public List<ThemeData> requireThemes;
+    public List<ThemeData> changeThemes;
 
     public void ResetData()
     {
@@ -27,7 +27,7 @@ public class RoomPrefabData : ScriptableObject
         return roomPrefabs[Random.Range(0, roomPrefabs.Length)];
     }
 
-    public bool CanUse(E_Themes currentTheme, bool change)
+    public bool CanUse(ThemeData currentTheme, bool change)
     {
         if (!requireThemes.Contains(currentTheme))
             return false;
@@ -46,7 +46,7 @@ public class RoomPrefabData : ScriptableObject
         return (timesUsed < countMinMax.y);
     }
 
-    public E_Themes GetNextRoomTheme(E_Themes currentThemes)
+    public ThemeData GetNextRoomTheme(ThemeData currentThemes)
     {
         int randTheme = Random.Range(0, changeThemes.Count);
 
