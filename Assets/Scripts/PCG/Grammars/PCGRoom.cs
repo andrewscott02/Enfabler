@@ -25,11 +25,11 @@ public class PCGRoom : MonoBehaviour
     public E_RoomTypes roomType { get; private set; }
     public GrammarsDungeonData dungeonData { get; private set; }
 
-    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData)
+    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, E_Themes theme)
     {
         this.roomType = roomType;
         this.dungeonData = dungeonData;
-        name += " " + roomType.ToString() + " room (PCG)";
+        name += " " + roomType.ToString() + " room (PCG) - " + theme.ToString();
 
         SetupTransforms();
     }

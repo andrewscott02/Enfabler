@@ -21,6 +21,9 @@ public class GrammarsDungeonGeneration : MonoBehaviour
     {
         CleanupDungeon();
 
+        int randTheme = Random.Range(0, grammarsDungeonData.possibleThemes.Count);
+        currentTheme = grammarsDungeonData.possibleThemes[randTheme];
+
         List<E_RoomTypes> rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Healing, E_RoomTypes.Boss, E_RoomTypes.End };
 
         List<E_RoomTypes> additionalRooms = GenerateAdditionalRooms();
@@ -73,6 +76,8 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
     #region Creating Rooms
 
+    E_Themes currentTheme;
+
     List<E_RoomTypes> GenerateAdditionalRooms()
     {
         List<E_RoomTypes> rooms = new List<E_RoomTypes>();
@@ -118,15 +123,23 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
     List<PCGRoom> createdRooms;
 
-    List<Object> DetermineDungeonRooms(List<E_RoomTypes> rooms)
+    List<Object> DetermineDungeonRooms(List<E_RoomTypes> rooms, out List<E_Themes> themes)
     {
         List<Object> prefabs = new List<Object>();
+        themes = new List<E_Themes>();
 
-        foreach (var item in rooms)
+        List<int> roomChanges = DetermineRoomChanges(rooms);
+
+        for(int i = 0; i < rooms.Count; i++)
         {
-            Object prefab = grammarsDungeonData.GetRandomRoomPrefab(item);
+            bool change = roomChanges.Contains(i);
+            Object prefab = grammarsDungeonData.GetRandomRoomPrefab(rooms[i], currentTheme, change, out E_Themes nextRoom);
             if (prefab != null)
-                prefabs.Add(grammarsDungeonData.GetRandomRoomPrefab(item));
+            {
+                prefabs.Add(prefab);
+                themes.Add(currentTheme);
+            }
+            currentTheme = nextRoom;
         }
 
         //TODO: Use grammars to change rooms
@@ -134,11 +147,44 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         return prefabs;
     }
 
+    List<int> DetermineRoomChanges(List<E_RoomTypes> rooms)
+    {
+        //Get rooms at aregular interval, but do not add healing rooms
+        int changeRoomsCount = Random.Range(0, grammarsDungeonData.themeChangesMax);
+        List<int> changeRooms = new List<int>();
+
+        float fInterval = (float)rooms.Count / (float)(changeRoomsCount + 1);
+        int interval = Mathf.RoundToInt(fInterval);
+
+        for (int i = 0; i < changeRoomsCount; i++)
+        {
+            int roomIndex = ((i + 1) * interval);
+            if (rooms[roomIndex] == E_RoomTypes.Healing)
+            {
+                changeRooms.Add(roomIndex + 1);
+            }
+            else
+            {
+                changeRooms.Add(roomIndex);
+            }
+        }
+
+        string debug = "change rooms at ";
+        foreach(var item in changeRooms)
+        {
+            debug += item.ToString() + ", ";
+        }
+
+        Debug.Log(debug);
+
+        return changeRooms;
+    }
+
     void GenerateDungeonRooms(List<E_RoomTypes> rooms)
     {
         createdRooms = new List<PCGRoom>();
 
-        List<Object> prefabs = DetermineDungeonRooms(rooms);
+        List<Object> prefabs = DetermineDungeonRooms(rooms, out List<E_Themes> themes);
 
         for (int i = 0; i < rooms.Count; i++)
         {
@@ -160,7 +206,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
                     }
 
                     PCGRoom goRoom = go.GetComponent<PCGRoom>();
-                    goRoom.Setup(rooms[i], grammarsDungeonData);
+                    goRoom.Setup(rooms[i], grammarsDungeonData, themes[i]);
                     createdRooms.Add(goRoom);
                 }
             };

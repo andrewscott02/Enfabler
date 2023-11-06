@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewGrammarsDungeonData", menuName = "PCG/Grammars/DungeonData", order = 0)]
 public class GrammarsDungeonData : ScriptableObject
 {
+    #region Variables
+
     public RoomData[] roomData;
     public E_RoomTypes[] additionalRoomTypes;
     public int additionalHealingRooms = 0;
@@ -14,6 +16,13 @@ public class GrammarsDungeonData : ScriptableObject
     public EnemyData[] enemies;
     public ObjectData[] traps, objects;
     public Object[] doors, bosses;
+
+    public List<E_Themes> possibleThemes = new List<E_Themes>() { E_Themes.Cave, E_Themes.Crypt, E_Themes.Manor };
+    public int themeChangesMax = 3;
+
+    #endregion
+
+    #region Room Generation
 
     public void ResetAllDungeonData()
     {
@@ -78,32 +87,49 @@ public class GrammarsDungeonData : ScriptableObject
         return -1;
     }
 
+    #endregion
+
     #region Prefabs
 
     #region Room
 
-    public Object GetRandomRoomPrefab(E_RoomTypes roomType)
+    public Object GetRandomRoomPrefab(E_RoomTypes roomType, E_Themes currentTheme, bool change, out E_Themes nextRoomTheme)
     {
         int index = GetRoomDataIndex(roomType);
+        nextRoomTheme = currentTheme;
 
         if (index >= 0 && index < roomData.Length)
         {
-            return DeterminePrefab(roomData[index].prefabData);
+            Object prefab = DeterminePrefab(roomData[index].prefabData, currentTheme, change, out nextRoomTheme);
+
+            if (prefab == null)
+            {
+                Debug.Log("Failed to get room to change");
+                prefab = DeterminePrefab(roomData[index].prefabData, currentTheme, false, out nextRoomTheme);
+            }
+
+            return prefab;
         }
 
         return null;
     }
 
-    Object DeterminePrefab(RoomPrefabData[] prefabData)
+    Object DeterminePrefab(RoomPrefabData[] prefabData, E_Themes currentTheme, bool change, out E_Themes nextRoomTheme)
     {
+        nextRoomTheme = currentTheme;
         int startIndex = Random.Range(0, prefabData.Length);
         int currentIndex = startIndex;
 
         while (true)
         {
-            if (prefabData[currentIndex].CanUse())
+            if (prefabData[currentIndex].CanUse(currentTheme, change))
             {
                 prefabData[currentIndex].Used();
+                if (change)
+                {
+                    nextRoomTheme = prefabData[currentIndex].GetNextRoomTheme(currentTheme);
+                    //Debug.Log("Change theme to " + nextRoomTheme);
+                }
                 return prefabData[currentIndex].GetRandomPrefab();
             }
 
@@ -454,6 +480,11 @@ public enum E_RoomTypes
 public enum E_RoomPrefabTypes
 {
     Room, WideRoom, Corridor, Stairway, Grandstairway
+}
+
+public enum E_Themes
+{
+    Cave, Manor, Crypt
 }
 
 [System.Serializable]
