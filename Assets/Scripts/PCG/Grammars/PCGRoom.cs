@@ -201,6 +201,7 @@ public class PCGRoom : MonoBehaviour
                 Gizmos.DrawSphere(item.position, 0.5f);
 
                 Gizmos.DrawLine(item.position, item.position + (item.up * 2));
+                Gizmos.DrawLine(item.position + (item.up * 2), (item.position + (item.up * 2)) + (item.right * 2));
             }
         }
 

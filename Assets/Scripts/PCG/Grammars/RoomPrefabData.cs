@@ -46,11 +46,26 @@ public class RoomPrefabData : ScriptableObject
         return (timesUsed < countMinMax.y);
     }
 
-    public ThemeData GetNextRoomTheme(ThemeData currentThemes)
+    public ThemeData GetNextRoomTheme(ThemeData currentTheme)
     {
-        int randTheme = Random.Range(0, changeThemes.Count);
+        int randThemeStart = Random.Range(0, changeThemes.Count);
+        int randTheme = randThemeStart;
 
-        return changeThemes[randTheme];
+        while (true)
+        {
+            if (changeThemes[randTheme] != currentTheme)
+            {
+                return changeThemes[randTheme];
+            }
+
+            randTheme++;
+
+            if (randTheme >= changeThemes.Count)
+                randTheme = 0;
+
+            if (randTheme == randThemeStart)
+                return changeThemes[randTheme];
+        }
     }
 }
 

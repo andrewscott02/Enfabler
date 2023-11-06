@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb80702b7ef81f40bbff8bbb3b314ca, type: 3}
+  m_Name: Depths
+  m_EditorClassIdentifier: 
+  enemies:
+  - enemyPrefab: {fileID: 7535070001232547612, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+      type: 3}
+    severity: 7
+    maxCount: 5
+    timesUsed: 0
+  - enemyPrefab: {fileID: 7535070001232547612, guid: 281af66685c14bf48944eccc62df6c64,
+      type: 3}
+    severity: 8
+    maxCount: 2
+    timesUsed: 0
+  traps:
+  - objectPrefab: {fileID: 2135024257723741946, guid: 1b215dea2f091684ebd9c9980e2d528a,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 3
+    timesUsed: 0
+  objects:
+  - objectPrefab: {fileID: 545217335562210824, guid: 279338d92e7b7274ebabd8237c476edb,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 1
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: bf9379067b9738a47a871c60193edc39,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 155648
+    randomRotation: 1
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 0ca54323ca1ca504b936f2863fdc9f79,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 1
+    maxCount: 10
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: f661b828cf1c4a64bb5b4294f9e71379,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 1
+    maxCount: 10
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 91cef691e9a57a549b7a0f8499b7ae10,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 155648
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 694c1756825949c49aa430b6959d731e,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  doors:
+  - {fileID: 519515805689925335, guid: fbb00f25b6fe39947a5de715bd1ef4db, type: 3}
+  bosses:
+  - {fileID: 4297160914922154321, guid: 41e27b05400a71846886bcbd653b0e22, type: 3}

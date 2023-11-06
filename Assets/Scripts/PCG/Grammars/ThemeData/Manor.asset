@@ -33,26 +33,6 @@ MonoBehaviour:
     severity: 8
     maxCount: 1
     timesUsed: 0
-  - enemyPrefab: {fileID: 8084795209297945531, guid: 6959e721c14252e4b8f781d8b33b70fa,
-      type: 3}
-    severity: 7
-    maxCount: 5
-    timesUsed: 0
-  - enemyPrefab: {fileID: 8084795209297945531, guid: ee28444e69279b94ab71836c789ccfe4,
-      type: 3}
-    severity: 8
-    maxCount: 2
-    timesUsed: 0
-  - enemyPrefab: {fileID: 8084795209297945531, guid: 69fd0d1e9c5ecf8499d319808b255c3e,
-      type: 3}
-    severity: 9
-    maxCount: 2
-    timesUsed: 0
-  - enemyPrefab: {fileID: 8084795209297945531, guid: 810a7923b83ff214e96264c7fbbae99c,
-      type: 3}
-    severity: 10
-    maxCount: 1
-    timesUsed: 0
   traps:
   - objectPrefab: {fileID: 4905393600926264160, guid: c9f9b14d4bd3f474cb22df0c1f757121,
       type: 3}
@@ -68,14 +48,6 @@ MonoBehaviour:
     validSpawners:
       serializedVersion: 2
       m_Bits: 24576
-    randomRotation: 0
-    maxCount: 5
-    timesUsed: 0
-  - objectPrefab: {fileID: 545217335562210824, guid: c426ee14a9c06054a87856bb918bf662,
-      type: 3}
-    validSpawners:
-      serializedVersion: 2
-      m_Bits: 32768
     randomRotation: 0
     maxCount: 5
     timesUsed: 0
@@ -103,19 +75,19 @@ MonoBehaviour:
     randomRotation: 0
     maxCount: 5
     timesUsed: 0
-  - objectPrefab: {fileID: 2509518439431693169, guid: 0887111faf4d88643967796b21cf1294,
-      type: 3}
-    validSpawners:
-      serializedVersion: 2
-      m_Bits: 131072
-    randomRotation: 0
-    maxCount: 5
-    timesUsed: 0
   - objectPrefab: {fileID: 7163964241559660164, guid: a277ae31bfa83744e8e46aceba6784d4,
       type: 3}
     validSpawners:
       serializedVersion: 2
       m_Bits: 270336
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 2509518439431693169, guid: 0887111faf4d88643967796b21cf1294,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 131072
     randomRotation: 0
     maxCount: 5
     timesUsed: 0
@@ -126,6 +98,54 @@ MonoBehaviour:
       m_Bits: 262144
     randomRotation: 0
     maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: c426ee14a9c06054a87856bb918bf662,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 32768
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 0aa85648c0403a848b8f3c5577d3a688,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 32768
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: d6d73c7fc8f566f4bad09b6ad7442c5c,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 90eed92abb5e72148b4d343cb4e44c5b,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 131072
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 4b4f7632ee41a2343ab996f1d90eae22,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 131072
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 0e7954d035558254480cd767137929a2,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 16384
+    randomRotation: 0
+    maxCount: 1
     timesUsed: 0
   doors:
   - {fileID: 519515805689925335, guid: fbb00f25b6fe39947a5de715bd1ef4db, type: 3}
