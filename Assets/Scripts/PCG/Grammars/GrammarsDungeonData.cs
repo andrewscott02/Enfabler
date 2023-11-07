@@ -15,7 +15,7 @@ public class GrammarsDungeonData : ScriptableObject
 
     public List<ThemeData> startingThemes;
     public List<ThemeData> allThemes;
-    public int themeChangesMax = 3;
+    public Vector2Int themeChanges;
 
     #endregion
 

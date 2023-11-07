@@ -150,7 +150,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
     List<int> DetermineRoomChanges(List<E_RoomTypes> rooms)
     {
         //Get rooms at aregular interval, but do not add healing rooms
-        int changeRoomsCount = Random.Range(0, grammarsDungeonData.themeChangesMax);
+        int changeRoomsCount = Random.Range(grammarsDungeonData.themeChanges.y, grammarsDungeonData.themeChanges.y + 1);
         List<int> changeRooms = new List<int>();
 
         float fInterval = (float)rooms.Count / (float)(changeRoomsCount + 1);
