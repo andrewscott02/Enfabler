@@ -1241,6 +1241,37 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &7623889967490516158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2728933261463631432}
+  m_Layer: 6
+  m_Name: LeftHandTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2728933261463631432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7623889967490516158}
+  m_LocalRotation: {x: 0.00077904743, y: -0.6650232, z: 0.7385027, w: 0.111163475}
+  m_LocalPosition: {x: -0.125, y: 0.024, z: -0.014}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9040216056018589195}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 100.76099, y: 128.211, z: 299.09}
 --- !u!1 &7696260934844542031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,7 +1282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2590908609328772485}
   m_Layer: 6
-  m_Name: HandTransform
+  m_Name: RightHandTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1483,6 +1514,7 @@ Transform:
   - {fileID: 9039928030794441029}
   - {fileID: 9040329163644997155}
   - {fileID: 9040220461348536379}
+  - {fileID: 2728933261463631432}
   m_Father: {fileID: 9037365649682161817}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3934,10 +3966,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aaf6ebf2e5e8dd4db915d4684c82a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handTransform: {fileID: 2590908609328772485}
+  handTransforms:
+  - {fileID: 2590908609328772485}
+  - {fileID: 2728933261463631432}
   weapons:
   - {fileID: 8460293430998555839, guid: bcbebcfacfa18154e8c51323ede0c050, type: 3}
   - {fileID: 8460293430998555839, guid: 48613acbfa4e99147b89e2adfc8d1ca7, type: 3}
+  offhandWeapons: []
   currentWeapon: -1
 --- !u!1 &9043100576090782743
 GameObject:

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d22419a33af8643868840660b7224e, type: 3}
+  m_Name: Mages
+  m_EditorClassIdentifier: 
+  fightName: 'Mages Fight
+
+    (5 Rounds)'
+  arenaRounds:
+  - enemyTypes:
+    - enemyObject: {fileID: 8084795209297945531, guid: 369d1f5a966c1764f925ab0e324cea06,
+        type: 3}
+      count: 1
+  - enemyTypes:
+    - enemyObject: {fileID: 8084795209297945531, guid: 369d1f5a966c1764f925ab0e324cea06,
+        type: 3}
+      count: 2
+  - enemyTypes:
+    - enemyObject: {fileID: 8084795209297945531, guid: 86c0e4708452e4d42b6b079946321949,
+        type: 3}
+      count: 1
+  - enemyTypes:
+    - enemyObject: {fileID: 8084795209297945531, guid: 369d1f5a966c1764f925ab0e324cea06,
+        type: 3}
+      count: 2
+    - enemyObject: {fileID: 8084795209297945531, guid: 86c0e4708452e4d42b6b079946321949,
+        type: 3}
+      count: 1
+  - enemyTypes:
+    - enemyObject: {fileID: 8084795209297945531, guid: e4179fd0c043aed49bb3992e6398017b,
+        type: 3}
+      count: 1

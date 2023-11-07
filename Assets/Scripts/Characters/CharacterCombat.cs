@@ -190,8 +190,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         if (setWeapon.currentWeapon == weaponIndex) return;
 
-        setWeapon.currentWeapon = weaponIndex;
-        this.weapon = setWeapon.CreateWeapon();
+        this.weapon = setWeapon.CreateWeapon(weaponIndex, 0, setWeapon.weapons);
+        setWeapon.CreateWeapon(weaponIndex, 1, setWeapon.offhandWeapons);
     }
 
     public void ChooseWeapon(AttackType attackType)

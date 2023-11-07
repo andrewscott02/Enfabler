@@ -34,6 +34,7 @@ public class Interactable : MonoBehaviour, IInteractable
     {
         if (!canBeInteracted) return;
         if (lockedInteraction) return;
+        if (player == null) return;
 
         if (other.gameObject == player.gameObject)
         {
