@@ -117,6 +117,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             combat.ForceEndAttack();
             animator.SetBool("InHitReaction", true);
             animator.SetTrigger(damage < hitReactData.heavyHitReactThreshold ? "HitReactLight" : "HitReactHeavy");
+            if (damage > hitReactData.heavyHitReactThreshold)
+            {
+                if (hitReactData.hitClip != null)
+                    PlaySoundEffect(hitReactData.hitClip, hitReactData.hitVolume);
+            }
         }
         else
         {
@@ -127,6 +132,13 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         SpawnImpulse(impulseStrength);
         
         Slomo(hitReactData.hitSlomoScale, hitReactData.hitSlomoDuration);
+    }
+
+    void PlaySoundEffect(AudioClip clip, float volume = 1)
+    {
+        if (AudioManager.instance == null) return;
+
+        AudioManager.instance.PlaySoundEffect(clip, volume);
     }
 
     void ParryReaction()
@@ -154,6 +166,9 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         dying = true;
         SpawnImpulse(hitReactData.killImpulseStrength);
         Slomo(hitReactData.killSlomoScale, hitReactData.killSlomoDuration);
+        if (hitReactData.hitClip != null)
+            PlaySoundEffect(hitReactData.hitClip, hitReactData.hitVolume);
+
         if (combat != null)
         {
             combat.ForceEndAttack();

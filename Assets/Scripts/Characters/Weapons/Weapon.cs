@@ -8,6 +8,11 @@ public class Weapon : MonoBehaviour
     public GameObject weaponBase, weaponTip;
     public GameObject weaponBaseHit, weaponTipHit;
 
+    public AudioClip attackClip, chargeClip;
+    public AudioClip hitClip, blockClip;
+
+    public float soundVolume = 2f, chargeVolume = 3;
+
     public bool dropOnCharacterDeath = true;
 
     Collider col;

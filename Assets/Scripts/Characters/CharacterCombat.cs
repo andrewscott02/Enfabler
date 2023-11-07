@@ -12,40 +12,115 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     protected Health health;
     protected BaseCharacterController controller;
 
-    public Weapon weapon { get; private set; }
-    public Object projectile;
-    public Object projectileFX;
-    public float projectileSpeed = 40;
-    public TrapStats projectileData;
-
+    [Header("Movement")]
     public bool canMove = true;
     public bool sprinting = false;
 
-    public bool canSaveAttackInput = false;
-    AttackType lastAttackType = AttackType.None;
-    public AttackType savingAttackInput = AttackType.None;
-    public AttackType savingChargeInput = AttackType.None;
-    public float savedAttackAnimSpeed = 1;
-    public enum AttackType
-    {
-        None, PrimaryAttack, SecondaryAttack, SwitchPrimaryAttack, SwitchSecondaryAttack
-    }
+    #region Armour Data
 
+    [Header("Armour")]
+    public SliderScript armourSlider;
+    public int maxArmour = 5;
+    public int currentArmour { get; private set; }
+    public float armourCooldown = 6f;
+    public float armourRegen = 3f;
+
+    #endregion
+
+    #region Attack Data
+
+    #region Attack Input Data
+
+    [Header("Basic Attack Data")]
+    public bool canAttack = true;
+
+    [Header("Charge Attack Data")]
     public float chargePrimaryDamageScaling = 2f;
     public float chargeSecondaryDamageScaling = 1f;
-    public bool canSwitchAttack = false;
-    bool switchAttack = false;
+    
     float currentChargeTime = 0;
     int additionalDamage;
     public float chargeUnblockableTime = 0.6f;
     bool unblockable = false;
     public float chargeMaxTime = 2;
 
+    [Header("Switch Attack Data")]
+    public bool canSwitchAttack = false;
+    bool switchAttack = false;
+
+    [Header("Save Input Data")]
+    public bool canSaveAttackInput = false;
+    AttackType lastAttackType = AttackType.None;
+    public AttackType savingAttackInput = AttackType.None;
+    public AttackType savingChargeInput = AttackType.None;
+    public float savedAttackAnimSpeed = 1;
+
+    #endregion
+
+    #region Attack Logic Data
+
+    [Header("Target Snap Data")]
+    public LayerMask hitLayerMask, snapLayerMask;
+    public float targetSphereRadius = 3f;
+    public Vector2 moveDistanceThreshold = new Vector2(0.5f, 5f);
+    public float targetSnapSpeed = 0.02f, targetSnapInterval = 0.001f;
+
+    [Header("Attack Hit Detection Data")]
+    public float currentTargetCastInterval = 0.6f;
+    public float currentTargetCastRadius = 1.5f;
+    public float currentTargetCastDistance = 10;
+    [HideInInspector]
+    public List<BaseCharacterController> currentTargets;
+    List<BaseCharacterController> lastHit = new List<BaseCharacterController>();
+
+    [Header("Attack Hit Data")]
+    public float hitFreezeTime = 0.15f;
+    public bool rumbleOnHit = false;
+
+    #endregion
+
+    #region Weapon Data
+
+    [Header("Weapon Data")]
+    public float weaponSphereRadius = 0.45f;
+    public Weapon weapon { get; private set; }
+    protected SetWeapon setWeapon;
+
+    [Header("Ranged Attack Data")]
+    public Object projectile;
+    public Object projectileFX;
+    public float projectileSpeed = 40;
+    public TrapStats projectileData;
+    public float[] additionalShotAngle;
+    public float additionalProjectileDamageMultiplier = 0.5f;
+
+    public int maxArrows = 5;
+    int currentArrows = 0;
+    public float regenArrowDelay = 4f;
+    public float regenArrowInterval = 1f;
+
+    #endregion
+
+    #region Animation Data
+
     public float baseAnimationSpeed { get; private set; }
     float currentAttackSpeed = 1;
     bool baseUseRootMotion;
 
-    protected SetWeapon setWeapon;
+    #endregion
+
+    #region Misc
+
+    public enum AttackType
+    {
+        None, PrimaryAttack, SecondaryAttack, SwitchPrimaryAttack, SwitchSecondaryAttack
+    }
+
+    #endregion
+
+    #endregion
+
+    #region Methods
 
     private void Start()
     {
@@ -122,10 +197,11 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #endregion
 
+    #endregion
+
     #region Attacking
 
     BaseCharacterController[] lastAttacked;
-    public bool canAttack = true;
 
     #region Attacking -> Attack Inputs
 
@@ -259,6 +335,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         if (unblockable) { return; }
 
+        PlaySoundEffect(weapon.chargeClip, weapon.chargeVolume);
+
         weapon.unblockableTrail.SetActive(true);
         unblockable = true;
     }
@@ -318,8 +396,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     List<IDamageable> hitTargets = new List<IDamageable>();
     public List<IDamageable> ignore = new List<IDamageable>();
-    public float targetSphereRadius = 3f;
-
+    
     int damage;
 
     #region Start and End Attacks
@@ -341,6 +418,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         CheckMoveToTarget(transform.position, transform.forward, snapLayerMask, moveDistanceThreshold.y);
 
         InvokeRepeating("AttackCheck", 0f, 0.004f);
+
+        PlaySoundEffect(weapon.attackClip, weapon.soundVolume);
     }
 
     public void ForceEndAttack()
@@ -381,93 +460,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         Untarget();
         ForceEndAttack();
     }
-
-    Vector3 firePos;
-    public float[] additionalShotAngle;
-    public float additionalProjectileDamageMultiplier = 0.5f;
-
-    public void FireProjectile(int projectileDamage)
-    {
-        ConsumeArrow();
-
-        projectileDamage += additionalDamage;
-        //Debug.Log("Fire projectile for " + projectileDamage);
-
-        //Clear damage and list of enemies hit
-        if (weapon != null)
-        {
-            if (weapon.weaponTrail != null)
-                weapon.weaponTrail.SetActive(false);
-
-            if (weapon.bloodTrail != null)
-                weapon.bloodTrail.SetActive(false);
-
-            if (weapon.unblockableTrail != null)
-                weapon.unblockableTrail.SetActive(false);
-        }
-
-        //Raycast to target
-        RaycastHit hit;
-
-        Vector3 origin = weapon.weaponBaseHit.transform.position;
-        float distance = 10f;
-        Vector3 dir = transform.forward;
-
-        firePos = origin + (dir * 15f);
-
-        if (overrideTarget == null)
-        {
-            if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: 20f, snapLayerMask))
-            {
-                //Debug.Log("Hit: " + hit.collider.gameObject);
-                firePos = hit.point;
-                distance = Vector3.Distance(origin, firePos);
-            }
-        }
-        else
-        {
-            Collider col = overrideTarget.GetComponent<Collider>();
-            Vector3 hitPos = overrideTarget.transform.position;
-
-            if (col != null)
-                hitPos = col.bounds.center;
-
-            firePos = hitPos;
-            distance = Vector3.Distance(origin, firePos);
-        }
-
-        SpawnProjectile(firePos, projectileDamage);
-
-        if (unblockable && additionalShotAngle != null)
-        {
-            foreach (var angle in additionalShotAngle)
-            {
-                //Calculate the length of the opposing angle
-                float oppositeLength = Mathf.Tan(angle) * distance;
-
-                //Spawn additional projectiles
-                SpawnProjectile(firePos + (transform.right * oppositeLength), (int)(projectileDamage * additionalProjectileDamageMultiplier));
-                SpawnProjectile(firePos + (transform.right * -oppositeLength), (int)(projectileDamage * additionalProjectileDamageMultiplier));
-            }
-            
-        }
-
-        unblockable = false;
-        chargingAttack = AttackType.None;
-        additionalDamage = 0;
-    }
-
-    void SpawnProjectile(Vector3 targetPos, int projectileDamage)
-    {
-        Instantiate(projectileFX, weapon.transform);
-
-        GameObject projectileObj = Instantiate(projectile, weapon.transform.position, transform.rotation) as GameObject;
-        ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
-        projectileMove.Fire(targetPos, projectileData, this.gameObject, projectileDamage, projectileSpeed);
-    }
-
-    public Vector2 moveDistanceThreshold = new Vector2(0.5f, 5f);
-    public float targetSnapSpeed = 0.02f, targetSnapInterval = 0.001f;
 
     public void CheckMoveToTarget(Vector3 origin, Vector3 dir, LayerMask layerMask, float maxDistance = 5)
     {
@@ -523,8 +515,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Hit Checks
 
-    public float weaponSphereRadius = 0.45f;
-
     void AttackCheck()
     {
         if (weapon == null)
@@ -566,9 +556,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
             //If it can be hit, deal damage to target and add it to the hit targets list
             hitTargets.Add(hitDamageable);
-            DealDamage(hitDamageable, damage, hit.point, hit.normal);
+            E_DamageEvents damageEvents = DealDamage(hitDamageable, damage, hit.point, hit.normal);
 
-            OnAttackHit();
+            OnAttackHit(damageEvents == E_DamageEvents.Hit);
         }
     }
 
@@ -577,11 +567,18 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         return target.Damage(this, damage, spawnPos, spawnRot);
     }
 
-    void OnAttackHit()
+    void OnAttackHit(bool hit)
     {
         Freeze();
         RumbleManager.instance.ControllerRumble(0.2f, 0.85f, 0.25f);
-        weapon.bloodTrail.SetActive(true);
+
+        PlaySoundEffect(hit ? weapon.hitClip : weapon.blockClip, weapon.soundVolume);
+
+        if (hit)
+        {
+            weapon.bloodTrail.SetActive(true);
+        }
+
         GainArmour(1);
         //TODO: Sound effects
     }
@@ -611,8 +608,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Hit Feedback
 
-    public float hitFreezeTime = 0.15f;
-
     void Freeze()
     {
         if (animator == null) return;
@@ -636,14 +631,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     #region Attacking -> Target Logic
 
     #region Targetting
-
-    [Header("Targeting")]
-    public List<BaseCharacterController> currentTargets;
-    List<BaseCharacterController> lastHit = new List<BaseCharacterController>();
-    public LayerMask hitLayerMask, snapLayerMask;
-    public float currentTargetCastInterval = 0.6f;
-    public float currentTargetCastRadius = 1.5f;
-    public float currentTargetCastDistance = 10;
 
     void CurrentTarget()
     {
@@ -734,14 +721,97 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #endregion
 
+    #region Attacking -> Ranged Attacks
+
+    #region Fire Projectile
+
+    Vector3 firePos;
+
+    public void FireProjectile(int projectileDamage)
+    {
+        ConsumeArrow();
+
+        PlaySoundEffect(weapon.attackClip, weapon.soundVolume);
+
+        projectileDamage += additionalDamage;
+        //Debug.Log("Fire projectile for " + projectileDamage);
+
+        //Clear damage and list of enemies hit
+        if (weapon != null)
+        {
+            if (weapon.weaponTrail != null)
+                weapon.weaponTrail.SetActive(false);
+
+            if (weapon.bloodTrail != null)
+                weapon.bloodTrail.SetActive(false);
+
+            if (weapon.unblockableTrail != null)
+                weapon.unblockableTrail.SetActive(false);
+        }
+
+        //Raycast to target
+        RaycastHit hit;
+
+        Vector3 origin = weapon.weaponBaseHit.transform.position;
+        float distance = 10f;
+        Vector3 dir = transform.forward;
+
+        firePos = origin + (dir * 15f);
+
+        if (overrideTarget == null)
+        {
+            if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: 20f, snapLayerMask))
+            {
+                //Debug.Log("Hit: " + hit.collider.gameObject);
+                firePos = hit.point;
+                distance = Vector3.Distance(origin, firePos);
+            }
+        }
+        else
+        {
+            Collider col = overrideTarget.GetComponent<Collider>();
+            Vector3 hitPos = overrideTarget.transform.position;
+
+            if (col != null)
+                hitPos = col.bounds.center;
+
+            firePos = hitPos;
+            distance = Vector3.Distance(origin, firePos);
+        }
+
+        SpawnProjectile(firePos, projectileDamage);
+
+        if (unblockable && additionalShotAngle != null)
+        {
+            foreach (var angle in additionalShotAngle)
+            {
+                //Calculate the length of the opposing angle
+                float oppositeLength = Mathf.Tan(angle) * distance;
+
+                //Spawn additional projectiles
+                SpawnProjectile(firePos + (transform.right * oppositeLength), (int)(projectileDamage * additionalProjectileDamageMultiplier));
+                SpawnProjectile(firePos + (transform.right * -oppositeLength), (int)(projectileDamage * additionalProjectileDamageMultiplier));
+            }
+
+        }
+
+        unblockable = false;
+        chargingAttack = AttackType.None;
+        additionalDamage = 0;
+    }
+
+    void SpawnProjectile(Vector3 targetPos, int projectileDamage)
+    {
+        Instantiate(projectileFX, weapon.transform);
+
+        GameObject projectileObj = Instantiate(projectile, weapon.transform.position, transform.rotation) as GameObject;
+        ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
+        projectileMove.Fire(targetPos, projectileData, this.gameObject, projectileDamage, projectileSpeed);
+    }
+
     #endregion
 
-    #region ArrowCapacity
-
-    public int maxArrows = 5;
-    int currentArrows = 0;
-    public float regenArrowDelay = 4f;
-    public float regenArrowInterval = 1f;
+    #region Arrow Capacity
 
     void SetupArrows()
     {
@@ -778,13 +848,11 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #endregion
 
-    #region Blocking
+    #endregion
 
-    public SliderScript armourSlider;
-    public int maxArmour = 5;
-    public int currentArmour { get; private set; }
-    public float armourCooldown = 6f;
-    public float armourRegen = 3f;
+    #endregion
+
+    #region Blocking
 
     Coroutine armourRegenCoroutine;
 
@@ -925,9 +993,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     #endregion
 
     #region Taking Damage
-
-    public bool rumbleOnHit = false;
-
+    
     public void GotHit()
     {
         //Debug.Log("Got hit, end attack");
@@ -941,6 +1007,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region CastSpell
 
+    [HideInInspector]
     public SpellStats currentSpell;
 
     public void CastSpell(SpellStats prepareSpell)
@@ -970,6 +1037,17 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         if (currentSpell == null) return;
 
         currentSpell.CastSpell(controller);
+    }
+
+    #endregion
+
+    #region Sound Effects
+
+    void PlaySoundEffect(AudioClip clip, float volume)
+    {
+        if (AudioManager.instance == null) return;
+
+        AudioManager.instance.PlaySoundEffect(clip, volume);
     }
 
     #endregion

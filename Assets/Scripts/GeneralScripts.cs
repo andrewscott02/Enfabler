@@ -310,13 +310,18 @@ public struct HitReactData
 {
     public GameObject deathFXGO;
     public Object bloodFX, deathFX, blockFX, parryFX;
+    public float impulseMax;
 
+    [Header("Hit Data")]
     public float hitImpulseMultiplier;
     public int lightHitReactThreshold;
     public int heavyHitReactThreshold;
     public float hitSlomoScale;
     public float hitSlomoDuration;
+    public AudioClip hitClip;
+    public float hitVolume;
 
+    [Header("Kill Data")]
     public float killImpulseStrength;
     public float killSlomoScale;
     public float killSlomoDuration;
@@ -324,11 +329,10 @@ public struct HitReactData
     public bool killAnim;
     public float killDestroyTime;
 
+    [Header("Parry Data")]
     public float parryImpulseStrength;
     public float parrySlomoScale;
     public float parrySlomoDuration;
-
-    public float impulseMax;
 }
 
 public struct ExplosiveForceData

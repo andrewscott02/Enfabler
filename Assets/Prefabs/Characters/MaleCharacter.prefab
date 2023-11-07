@@ -883,11 +883,14 @@ MonoBehaviour:
       type: 3}
     parryFX: {fileID: 4983520532681786520, guid: 519711c44e578224f93314968deaddf2,
       type: 3}
+    impulseMax: 2
     hitImpulseMultiplier: 0.2
     lightHitReactThreshold: 0
     heavyHitReactThreshold: 5
     hitSlomoScale: 0.7
     hitSlomoDuration: 0.35
+    hitClip: {fileID: 8300000, guid: 72c15341815fc7f49b90840740e6a454, type: 3}
+    hitVolume: 2
     killImpulseStrength: 0.85
     killSlomoScale: 0.55
     killSlomoDuration: 0.5
@@ -897,7 +900,6 @@ MonoBehaviour:
     parryImpulseStrength: 0
     parrySlomoScale: 0.2
     parrySlomoDuration: 0
-    impulseMax: 2
   dying: 0
 --- !u!114 &7378451652202160449
 MonoBehaviour:
@@ -965,54 +967,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelConstructor: {fileID: 0}
-  projectile: {fileID: 956619039502478575, guid: 126d43b0d060d2244ac28281593bb133,
-    type: 3}
-  projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
-    type: 3}
-  projectileSpeed: 40
-  projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
   canMove: 1
   sprinting: 0
+  armourSlider: {fileID: 8891034289449565970}
+  maxArmour: 5
+  armourCooldown: 6
+  armourRegen: 3
+  canAttack: 1
+  chargePrimaryDamageScaling: 2
+  chargeSecondaryDamageScaling: 1
+  chargeUnblockableTime: 0.5
+  chargeMaxTime: 2
+  canSwitchAttack: 0
   canSaveAttackInput: 0
   savingAttackInput: 0
   savingChargeInput: 0
   savedAttackAnimSpeed: 1
-  chargePrimaryDamageScaling: 2
-  chargeSecondaryDamageScaling: 1
-  canSwitchAttack: 0
-  chargeUnblockableTime: 0.5
-  chargeMaxTime: 2
-  canAttack: 1
-  targetSphereRadius: 1.5
-  additionalShotAngle:
-  - 5
-  - 3.4
-  - 3.5
-  additionalProjectileDamageMultiplier: 0.5
-  moveDistanceThreshold: {x: 0.5, y: 2}
-  targetSnapSpeed: 0.01
-  targetSnapInterval: 0.001
-  weaponSphereRadius: 0.45
-  hitFreezeTime: 0.15
-  currentTargets: []
   hitLayerMask:
     serializedVersion: 2
     m_Bits: 3264
   snapLayerMask:
     serializedVersion: 2
     m_Bits: 3072
+  targetSphereRadius: 1.5
+  moveDistanceThreshold: {x: 0.5, y: 2}
+  targetSnapSpeed: 0.01
+  targetSnapInterval: 0.001
   currentTargetCastInterval: 0.6
   currentTargetCastRadius: 1.5
   currentTargetCastDistance: 10
+  currentTargets: []
+  hitFreezeTime: 0.15
+  rumbleOnHit: 0
+  weaponSphereRadius: 0.45
+  projectile: {fileID: 956619039502478575, guid: 126d43b0d060d2244ac28281593bb133,
+    type: 3}
+  projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+    type: 3}
+  projectileSpeed: 40
+  projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
+  additionalShotAngle:
+  - 5
+  - 3.4
+  - 3.5
+  additionalProjectileDamageMultiplier: 0.5
   maxArrows: 15
   regenArrowDelay: 2
   regenArrowInterval: 0.5
-  armourSlider: {fileID: 8891034289449565970}
-  maxArmour: 5
-  armourCooldown: 6
-  armourRegen: 3
   canDodge: 1
-  rumbleOnHit: 0
   currentSpell: {fileID: 0}
 --- !u!114 &634613423001025932
 MonoBehaviour:
