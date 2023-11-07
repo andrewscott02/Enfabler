@@ -95,7 +95,25 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public float additionalProjectileDamageMultiplier = 0.5f;
 
     public int maxArrows = 5;
-    int currentArrows = 0;
+    int m_CurrentArrows = 0;
+    int currentArrows
+    {
+        get
+        {
+            return m_CurrentArrows;
+        }
+
+        set
+        {
+            m_CurrentArrows = value;
+
+            if (arrowCapacity != null)
+            {
+                arrowCapacity.SetArrows(m_CurrentArrows);
+            }
+        }
+    }
+    ArrowCapacityUI arrowCapacity;
     public float regenArrowDelay = 4f;
     public float regenArrowInterval = 1f;
 
@@ -137,6 +155,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         setWeapon = GetComponentInChildren<SetWeapon>();
         SetupWeapon(0);
+
+        arrowCapacity = GetComponentInChildren<ArrowCapacityUI>();
         SetupArrows();
     }
 
