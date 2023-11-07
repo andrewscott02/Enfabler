@@ -1,67 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4785671114667792886
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2260661203400212875}
-  - component: {fileID: 1888198939053974076}
-  - component: {fileID: 4746462197278219357}
-  m_Layer: 6
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2260661203400212875
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4785671114667792886}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7535070001232547603}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1888198939053974076
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4785671114667792886}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.81, y: 3, z: 1.48}
-  m_Center: {x: 0, y: 0.54, z: 0}
---- !u!54 &4746462197278219357
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4785671114667792886}
-  serializedVersion: 2
-  m_Mass: 60
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
 --- !u!1 &8837602169260676381
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +44,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4444695180855720, guid: f88c6ad57910d8648807bcf0c131f49d, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4444695180855720, guid: f88c6ad57910d8648807bcf0c131f49d, type: 3}
       propertyPath: m_LocalScale.x
@@ -192,10 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aaf6ebf2e5e8dd4db915d4684c82a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handTransform: {fileID: 8394707066069217295}
+  handTransforms: []
   weapons:
   - {fileID: 8460293430998555839, guid: 9d4f827a293041b4fb34089daf28f3f7, type: 3}
   - {fileID: 8460293430998555839, guid: 9d4f827a293041b4fb34089daf28f3f7, type: 3}
+  offhandWeapons: []
   currentWeapon: -1
 --- !u!4 &1678186052532222718 stripped
 Transform:
@@ -404,6 +343,11 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.000000037252907
       objectReference: {fileID: 0}
+    - target: {fileID: 2681290670774383428, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2898953201730925104, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -413,6 +357,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.y
       value: -0.054734062
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399673433812965549, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399673433812965549, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3994084762757362941, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -558,6 +512,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284609722512219847, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284609722512219847, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8553385311827593151, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
