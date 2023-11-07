@@ -62,6 +62,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         setWeapon = GetComponentInChildren<SetWeapon>();
         SetupWeapon(0);
+        SetupArrows();
     }
 
     private void Update()
@@ -135,6 +136,18 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public void Attack(float attackSpeed = 1f, bool canCharge = true, AttackType attackType = AttackType.PrimaryAttack, GameObject target = null)
     {
         if (attackType == AttackType.None) return;
+
+        switch (attackType)
+        {
+            case AttackType.SecondaryAttack:
+                if (!CanShoot()) return;
+                break;
+            case AttackType.SwitchSecondaryAttack:
+                if (!CanShoot()) return;
+                break;
+            default:
+                break;
+        }
 
         savingAttackInput = AttackType.None;
 
@@ -375,6 +388,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void FireProjectile(int projectileDamage)
     {
+        ConsumeArrow();
+
         projectileDamage += additionalDamage;
         //Debug.Log("Fire projectile for " + projectileDamage);
 
@@ -718,6 +733,48 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     #endregion
 
     #endregion
+
+    #endregion
+
+    #region ArrowCapacity
+
+    public int maxArrows = 5;
+    int currentArrows = 0;
+    public float regenArrowDelay = 4f;
+    public float regenArrowInterval = 1f;
+
+    void SetupArrows()
+    {
+        currentArrows = maxArrows;
+        regenArrowsCoroutine = StartCoroutine(IRegenArrows(regenArrowInterval));
+    }
+
+    bool CanShoot()
+    {
+        return currentArrows > 0;
+    }
+
+    void ConsumeArrow()
+    {
+        currentArrows--;
+        StopCoroutine(regenArrowsCoroutine);
+        regenArrowsCoroutine = StartCoroutine(IRegenArrows(regenArrowDelay));
+    }
+
+    void RegenArrows()
+    {
+        currentArrows = Mathf.Clamp(currentArrows + 1, 0, maxArrows);
+        StopCoroutine(regenArrowsCoroutine);
+        regenArrowsCoroutine = StartCoroutine(IRegenArrows(regenArrowInterval));
+    }
+
+    Coroutine regenArrowsCoroutine;
+
+    IEnumerator IRegenArrows(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        RegenArrows();
+    }
 
     #endregion
 
