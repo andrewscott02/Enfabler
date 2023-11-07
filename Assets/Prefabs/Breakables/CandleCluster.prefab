@@ -106,7 +106,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8565097298578778259}
-  m_Layer: 0
+  - component: {fileID: 7495713030394242260}
+  m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,6 +141,19 @@ Transform:
   m_Father: {fileID: 790261561392419879}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7495713030394242260
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3782100160172231891}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &5514112096869071723
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,6 +259,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle_02_b
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 0251b50cfad7858429a27ea4d41e5433, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0251b50cfad7858429a27ea4d41e5433, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -307,6 +325,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: bad1f1798203c544f98a3797aaaef533, type: 3}
       propertyPath: m_Name
       value: Candle_03_d
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bad1f1798203c544f98a3797aaaef533, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: bad1f1798203c544f98a3797aaaef533, type: 3}
       propertyPath: m_RootOrder
@@ -371,6 +393,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle_02_c
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fdb21088fbc23bc45b28babcbec00970, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fdb21088fbc23bc45b28babcbec00970, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -433,6 +459,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 41b79ccc36b6ca24d8d87254acfc7e90, type: 3}
       propertyPath: m_Name
       value: Candle_01_a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 41b79ccc36b6ca24d8d87254acfc7e90, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 41b79ccc36b6ca24d8d87254acfc7e90, type: 3}
       propertyPath: m_RootOrder
@@ -497,6 +527,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle_02_d
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 40075346ee08ce549918a0f1bf841d66, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 40075346ee08ce549918a0f1bf841d66, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -559,6 +593,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e2f22ee1cac9e941b9b3153c9a854d8, type: 3}
       propertyPath: m_Name
       value: Candle_01_b
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e2f22ee1cac9e941b9b3153c9a854d8, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e2f22ee1cac9e941b9b3153c9a854d8, type: 3}
       propertyPath: m_RootOrder
@@ -623,6 +661,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle_01_c
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9b3192e3ae6f72140a38fea26a480cce, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9b3192e3ae6f72140a38fea26a480cce, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -685,6 +727,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 5cb7960bb9111b849b0f2ee026f127da, type: 3}
       propertyPath: m_Name
       value: Candle_03_b (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5cb7960bb9111b849b0f2ee026f127da, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5cb7960bb9111b849b0f2ee026f127da, type: 3}
       propertyPath: m_RootOrder
@@ -834,6 +880,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle_02_a
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 324da3b8157a35244b342b0c1d0a2d54, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 324da3b8157a35244b342b0c1d0a2d54, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -896,6 +946,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 029e4e207b05e274184f5be5a79b8174, type: 3}
       propertyPath: m_Name
       value: Candle_03_a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 029e4e207b05e274184f5be5a79b8174, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 029e4e207b05e274184f5be5a79b8174, type: 3}
       propertyPath: m_RootOrder
@@ -960,6 +1014,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle_01_c (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9b3192e3ae6f72140a38fea26a480cce, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9b3192e3ae6f72140a38fea26a480cce, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -1022,6 +1080,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 5cb7960bb9111b849b0f2ee026f127da, type: 3}
       propertyPath: m_Name
       value: Candle_03_b
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5cb7960bb9111b849b0f2ee026f127da, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5cb7960bb9111b849b0f2ee026f127da, type: 3}
       propertyPath: m_RootOrder
