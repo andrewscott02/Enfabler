@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WallGenerator : MonoBehaviour
 {
+    public E_ModuleType moduleType;
     public bool changeTheme = false;
     ThemeData theme;
 
@@ -17,20 +18,26 @@ public class WallGenerator : MonoBehaviour
 
     public void SetupRoom(ThemeData theme)
     {
-        if (gameObject.CompareTag("Wall"))
+        switch (moduleType)
         {
-            wallPiece = theme.wallPiece;
-            wallPieceSize = theme.wallPieceSize;
-        }
-        else if (gameObject.CompareTag("Ceiling"))
-        {
-            wallPiece = theme.ceilingPiece;
-            wallPieceSize = theme.ceilingPieceSize;
-        }
-        else if (gameObject.CompareTag("Floor"))
-        {
-            wallPiece = theme.floorPiece;
-            wallPieceSize = theme.floorPieceSize;
+            case E_ModuleType.Wall:
+                wallPiece = theme.wallPiece;
+                wallPieceSize = theme.wallPieceSize;
+                break;
+            case E_ModuleType.Floor:
+                wallPiece = theme.floorPiece;
+                wallPieceSize = theme.floorPieceSize;
+                break;
+            case E_ModuleType.Ceiling:
+                wallPiece = theme.ceilingPiece;
+                wallPieceSize = theme.ceilingPieceSize;
+                break;
+            case E_ModuleType.Pillar:
+                wallPiece = theme.pillarPiece;
+                wallPieceSize = theme.pillarPieceSize;
+                break;
+            default:
+                break;
         }
 
         this.theme = theme;
@@ -75,6 +82,10 @@ public class WallGenerator : MonoBehaviour
         Vector2 scale = new Vector2();
         scale.x = (wallLength.x / wallCount.x) / wallPieceSize.x;
         scale.y = (wallLength.y / wallCount.y) / wallPieceSize.y;
+        if (moduleType == E_ModuleType.Pillar)
+        {
+            scale.y = 1;
+        }
 
         for(int y = 0; y < wallCount.y; y++)
         {
@@ -88,7 +99,6 @@ public class WallGenerator : MonoBehaviour
                 
                 Quaternion rot = transform.rotation;
                 Vector3 size = new Vector3(scale.x, scale.y, 1);
-
                 var mat = Matrix4x4.TRS(pos, rot, size);
                 wallMatrices.Add(mat);
             }
@@ -112,4 +122,9 @@ public class WallGenerator : MonoBehaviour
         //Graphics.DrawMeshInstanced(wallPiece, 0, wallMat0, wallMatrices.ToArray(), wallMatrices.Count);
         //Graphics.DrawMeshInstanced(wallPiece, 1, wallMat1, wallMatrices.ToArray(), wallMatrices.Count);
     }
+}
+
+public enum E_ModuleType
+{
+    Wall, Ceiling, Floor, Pillar
 }

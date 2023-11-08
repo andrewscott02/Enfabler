@@ -12,6 +12,8 @@ public class ThemeData : ScriptableObject
     public Vector3 ceilingPieceSize = new Vector3(4, 2.9f, 1);
     public Object floorPiece;
     public Vector3 floorPieceSize = new Vector3(4, 2.9f, 1);
+    public Object pillarPiece;
+    public Vector3 pillarPieceSize = new Vector3(4, 2.9f, 1);
 
     [Header("Populate Room Data")]
     public EnemyData[] enemies;
