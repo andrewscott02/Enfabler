@@ -4,19 +4,49 @@ using UnityEngine;
 
 public class WallGenerator : MonoBehaviour
 {
-    public ThemeData theme;
+    public bool changeTheme = false;
+    ThemeData theme;
 
+    public GameObject cube;
+
+    Object wallPiece;
     Vector3 wallLength;
-    public Object dividerPiece;
+    Vector3 wallPieceSize = new Vector3(4, 2.9f, 1);
 
-    private void Start()
+    Quaternion originalRot;
+
+    public void SetupRoom(ThemeData theme)
     {
+        if (gameObject.CompareTag("Wall"))
+        {
+            wallPiece = theme.wallPiece;
+            wallPieceSize = theme.wallPieceSize;
+        }
+        else if (gameObject.CompareTag("Ceiling"))
+        {
+            wallPiece = theme.ceilingPiece;
+            wallPieceSize = theme.ceilingPieceSize;
+        }
+        else if (gameObject.CompareTag("Floor"))
+        {
+            wallPiece = theme.floorPiece;
+            wallPieceSize = theme.floorPieceSize;
+        }
+
+        this.theme = theme;
         wallLength = new Vector3();
         wallLength.x = transform.localScale.x;
         wallLength.y = transform.localScale.y;
         transform.localScale = new Vector3(1, 1, 1);
-        //Cleanup();
+
+        originalRot = transform.rotation;
+
+        transform.rotation = Quaternion.identity;
+
+        Cleanup();
         GenerateWalls();
+
+        transform.rotation = originalRot;
     }
 
     List<Matrix4x4> wallMatrices;
@@ -39,12 +69,12 @@ public class WallGenerator : MonoBehaviour
         wallMatrices = new List<Matrix4x4>();
 
         Vector2Int wallCount = new Vector2Int();
-        wallCount.x = Mathf.Max(1, (int)(wallLength.x / theme.wallPieceSize.x));
-        wallCount.y = Mathf.Max(1, (int)(wallLength.y / theme.wallPieceSize.y));
+        wallCount.x = Mathf.Max(1, (int)(wallLength.x / wallPieceSize.x));
+        wallCount.y = Mathf.Max(1, (int)(wallLength.y / wallPieceSize.y));
 
         Vector2 scale = new Vector2();
-        scale.x = (wallLength.x / wallCount.x) / theme.wallPieceSize.x;
-        scale.y = (wallLength.y / wallCount.y) / theme.wallPieceSize.y;
+        scale.x = (wallLength.x / wallCount.x) / wallPieceSize.x;
+        scale.y = (wallLength.y / wallCount.y) / wallPieceSize.y;
 
         for(int y = 0; y < wallCount.y; y++)
         {
@@ -52,12 +82,12 @@ public class WallGenerator : MonoBehaviour
             {
                 Vector3 pos = transform.position + 
                     new Vector3(
-                        -wallLength.x / 2 + theme.wallPieceSize.x * scale.x / 2 + x * scale.x * theme.wallPieceSize.x,
-                        (-wallLength.y / 2 + theme.wallPieceSize.y * scale.y / 2 + y * scale.y * theme.wallPieceSize.y) + ((scale.y * theme.wallPieceSize.y) / 2), 
+                        -wallLength.x / 2 + wallPieceSize.x * scale.x / 2 + x * scale.x * wallPieceSize.x,
+                        (wallPieceSize.y * scale.y) * y, 
                         0);
                 
                 Quaternion rot = transform.rotation;
-                Vector3 size = new Vector3(scale.x, scale.y, scale.y);
+                Vector3 size = new Vector3(scale.x, scale.y, 1);
 
                 var mat = Matrix4x4.TRS(pos, rot, size);
                 wallMatrices.Add(mat);
@@ -73,7 +103,7 @@ public class WallGenerator : MonoBehaviour
 
         foreach (var item in wallMatrices)
         {
-            GameObject wallGO = Instantiate(theme.wallPiece, this.transform) as GameObject;
+            GameObject wallGO = Instantiate(wallPiece, this.transform) as GameObject;
             wallGO.transform.position = item.GetPosition();
             wallGO.transform.rotation = item.rotation;
             wallGO.transform.localScale = item.lossyScale;

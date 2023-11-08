@@ -31,6 +31,37 @@ Transform:
   m_Father: {fileID: 1678694157724225260}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -253.996}
+--- !u!1 &8945656930708960945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3795948990591585957}
+  m_Layer: 0
+  m_Name: WeaponTransform (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3795948990591585957
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8945656930708960945}
+  m_LocalRotation: {x: -0.000000029802319, y: -0.00000001862645, z: -0.7986544, w: -0.6017899}
+  m_LocalPosition: {x: -0.309, y: 0.426, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1678694157724225260}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -253.996}
 --- !u!1001 &1676827389330206826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,7 +161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aaf6ebf2e5e8dd4db915d4684c82a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handTransforms: []
+  handTransforms:
+  - {fileID: 8394707066069217295}
+  - {fileID: 3795948990591585957}
   weapons:
   - {fileID: 8460293430998555839, guid: 9d4f827a293041b4fb34089daf28f3f7, type: 3}
   - {fileID: 8460293430998555839, guid: 9d4f827a293041b4fb34089daf28f3f7, type: 3}

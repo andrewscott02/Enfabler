@@ -27,7 +27,7 @@ public class PCGRoom : MonoBehaviour
     public E_RoomTypes roomType { get; private set; }
     public GrammarsDungeonData dungeonData { get; private set; }
 
-    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, ThemeData theme)
+    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, ThemeData theme, ThemeData nextTheme)
     {
         this.roomType = roomType;
         this.dungeonData = dungeonData;
@@ -36,6 +36,13 @@ public class PCGRoom : MonoBehaviour
         name += " " + roomType.ToString() + " room (PCG) - " + theme.ToString();
 
         SetupTransforms();
+
+        WallGenerator[] wallGenerators = GetComponentsInChildren<WallGenerator>();
+
+        foreach (var item in wallGenerators)
+        {
+            item.SetupRoom(item.changeTheme ? nextTheme : theme);
+        }
     }
 
     List<GameObject> itemsInRoom = new List<GameObject>();

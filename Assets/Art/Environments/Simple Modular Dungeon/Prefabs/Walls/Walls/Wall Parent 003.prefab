@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 7028853877186841686}
   - component: {fileID: 5210631177148146595}
   - component: {fileID: 7836643445391164291}
-  - component: {fileID: 5600769714391325435}
-  - component: {fileID: 2217606068838764822}
   m_Layer: 0
   m_Name: Wall Variation 003
   m_TagString: Untagged
@@ -33,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8472427409972639769}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5210631177148146595
 MeshFilter:
@@ -86,48 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5600769714391325435
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4916355710078300328}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.4282251, y: 2.9810755, z: 4.5157475}
-  m_Center: {x: -0.0091307685, y: 1.4016429, z: -0.31448436}
---- !u!65 &2217606068838764822
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4916355710078300328}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0201454, y: 2.9810755, z: 0}
-  m_Center: {x: 0.002450943, y: 1.4016429, z: -1.5431061}
 --- !u!1 &6685726211250102279
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,5 +114,5 @@ Transform:
   m_Children:
   - {fileID: 7028853877186841686}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

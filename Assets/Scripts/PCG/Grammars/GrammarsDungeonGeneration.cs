@@ -185,6 +185,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         createdRooms = new List<PCGRoom>();
 
         List<Object> prefabs = DetermineDungeonRooms(rooms, out List<ThemeData> themes);
+        themes.Add(themes[themes.Count - 1]);
 
         for (int i = 0; i < rooms.Count; i++)
         {
@@ -206,7 +207,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
                     }
 
                     PCGRoom goRoom = go.GetComponent<PCGRoom>();
-                    goRoom.Setup(rooms[i], grammarsDungeonData, themes[i]);
+                    goRoom.Setup(rooms[i], grammarsDungeonData, themes[i], themes[i + 1]);
                     createdRooms.Add(goRoom);
                 }
             };
