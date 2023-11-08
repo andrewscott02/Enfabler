@@ -24,6 +24,9 @@ MonoBehaviour:
   pillarPiece: {fileID: 2541946485368774830, guid: 1f29c2202421d0c4d97060600cf87edf,
     type: 3}
   pillarPieceSize: {x: 4.75, y: 1.7, z: 1}
+  platformPiece: {fileID: 7026041110820078906, guid: 645dcdbd65cf9024aada1abf1ac7b0da,
+    type: 3}
+  platformPieceSize: {x: 4.8, y: 4.8, z: 1}
   enemies:
   - enemyPrefab: {fileID: 8084795209297945531, guid: 6959e721c14252e4b8f781d8b33b70fa,
       type: 3}
@@ -102,6 +105,14 @@ MonoBehaviour:
       m_Bits: 131072
     randomRotation: 0
     maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 53a3bf658dacbeb4db0765d80834d5cd,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 131072
+    randomRotation: 0
+    maxCount: 3
     timesUsed: 0
   doors:
   - {fileID: 2541946485368774830, guid: 6d96a62ddb5626542b6e0a69ec930837, type: 3}
