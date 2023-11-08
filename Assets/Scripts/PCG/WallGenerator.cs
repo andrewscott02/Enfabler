@@ -36,6 +36,10 @@ public class WallGenerator : MonoBehaviour
                 wallPiece = theme.pillarPiece;
                 wallPieceSize = theme.pillarPieceSize;
                 break;
+            case E_ModuleType.Platform:
+                wallPiece = theme.platformPiece;
+                wallPieceSize = theme.platformPieceSize;
+                break;
             default:
                 break;
         }
@@ -126,5 +130,5 @@ public class WallGenerator : MonoBehaviour
 
 public enum E_ModuleType
 {
-    Wall, Ceiling, Floor, Pillar
+    Wall, Ceiling, Floor, Pillar, Platform
 }
