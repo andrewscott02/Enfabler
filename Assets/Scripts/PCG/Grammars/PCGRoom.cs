@@ -65,7 +65,7 @@ public class PCGRoom : MonoBehaviour
         go.transform.rotation = exitPoint.transform.rotation;
         itemsInRoom.Add(go);
 
-        Door interactable = go.GetComponent<Door>();
+        Door interactable = go.GetComponentInChildren<Door>();
         interactable.lockedInteraction = dungeonData.GetDoorLocked(roomType);
         door = interactable;
     }
@@ -199,7 +199,7 @@ public class PCGRoom : MonoBehaviour
             SetupTransforms();
 
         Gizmos.color = Color.blue - new Color(0, 0, 0, 0.5f);
-        Gizmos.DrawCube(transform.position + new Vector3(0, 2f, 0), new Vector3(2, 3, 1));
+        Gizmos.DrawCube(transform.position + new Vector3(0, 2.3f, 0), new Vector3(4.75f, 4.6f, 1));
 
         if (objectSpawnerChildren != null)
         {
@@ -213,7 +213,7 @@ public class PCGRoom : MonoBehaviour
         }
 
         Gizmos.color = Color.red - new Color(0, 0, 0, 0.5f);
-        Gizmos.DrawCube(exitPoint.position + new Vector3(0, 2f, 0), new Vector3(2, 3, 1));
+        Gizmos.DrawCube(exitPoint.position + new Vector3(0, 2.3f, 0), new Vector3(4.75f, 4.6f, 1));
 
         if (enemySpawnerChildren != null)
         {

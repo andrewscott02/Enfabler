@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallPiece: {fileID: 2541946485368774830, guid: 1f6931383e30f1b4faa838f9e091d8dd,
     type: 3}
-  wallPieceSize: {x: 4, y: 2.9, z: 1}
+  wallPieceSize: {x: 4.75, y: 4.6, z: 1}
   ceilingPiece: {fileID: 7026041110820078906, guid: 6f03a657f9d91a64ea2d669177ab0790,
     type: 3}
   ceilingPieceSize: {x: 4, y: 4, z: 0.0385}
@@ -89,6 +89,14 @@ MonoBehaviour:
     validSpawners:
       serializedVersion: 2
       m_Bits: 262144
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: bc6b00a04d36dcb4785db25a779e3be1,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 131072
     randomRotation: 0
     maxCount: 5
     timesUsed: 0
