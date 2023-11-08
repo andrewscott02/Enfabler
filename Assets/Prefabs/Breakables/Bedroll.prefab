@@ -108,7 +108,6 @@ GameObject:
   - component: {fileID: 8566962822583994006}
   - component: {fileID: 2600284094786368320}
   - component: {fileID: 1253745077841853005}
-  - component: {fileID: 7434931074761596221}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -181,20 +180,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7434931074761596221
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5109558983186807730}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5095255533596206968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -206,6 +191,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bedroll
+      objectReference: {fileID: 0}
+    - target: {fileID: 5129078096781106124, guid: 308b14d8677f64843a0cd7f3e4df5671,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 5495070332922934111, guid: 308b14d8677f64843a0cd7f3e4df5671,
         type: 3}
