@@ -197,8 +197,8 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
                     if (data.roomType != E_RoomTypes.Start)
                     {
-                        go.transform.position = createdRooms[i - 1].exitPoint.position;
-                        go.transform.rotation = createdRooms[i - 1].exitPoint.rotation;
+                        go.transform.position = createdRooms[i - 1].doorPoint.transform.position;
+                        go.transform.rotation = createdRooms[i - 1].doorPoint.transform.rotation;
                     }
                     else
                     {

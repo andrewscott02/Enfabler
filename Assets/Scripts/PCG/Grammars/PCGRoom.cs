@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PCGRoom : MonoBehaviour
 {
-    public Transform exitPoint;
+    public ObjectSpawner doorPoint;
     public Object tempSpawnerObjects;
 
     public Transform enemySpawners, objectSpawners;
     Transform[] enemySpawnerChildren, objectSpawnerChildren;
 
-    ThemeData theme;
+    ThemeData theme, nextTheme;
 
     [ContextMenu("Show Debug")]
     public void SetupTransforms()
@@ -32,6 +32,7 @@ public class PCGRoom : MonoBehaviour
         this.roomType = roomType;
         this.dungeonData = dungeonData;
         this.theme = theme;
+        this.nextTheme = nextTheme;
 
         name += " " + roomType.ToString() + " room (PCG) - " + theme.ToString();
 
@@ -60,9 +61,10 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnDoor()
     {
-        GameObject go = Instantiate(dungeonData.GetRandomDoor(theme), exitPoint) as GameObject;
-        go.transform.position = exitPoint.transform.position;
-        go.transform.rotation = exitPoint.transform.rotation;
+        ThemeData doorTheme = doorPoint.changeTheme ? nextTheme : theme;
+        GameObject go = Instantiate(dungeonData.GetRandomDoor(doorTheme), doorPoint.transform) as GameObject;
+        go.transform.position = doorPoint.transform.position;
+        go.transform.rotation = doorPoint.transform.rotation;
         itemsInRoom.Add(go);
 
         Door interactable = go.GetComponentInChildren<Door>();
@@ -213,7 +215,7 @@ public class PCGRoom : MonoBehaviour
         }
 
         Gizmos.color = Color.red - new Color(0, 0, 0, 0.5f);
-        Gizmos.DrawCube(exitPoint.position + new Vector3(0, 2.3f, 0), new Vector3(4.75f, 4.6f, 1));
+        Gizmos.DrawCube(doorPoint.transform.position + new Vector3(0, 2.3f, 0), new Vector3(4.75f, 4.6f, 1));
 
         if (enemySpawnerChildren != null)
         {
