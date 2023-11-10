@@ -37,8 +37,12 @@ public class TimeManager : MonoBehaviour
         Time.timeScale = timeScale;
         currentTime = Time.timeScale;
         yield return new WaitForSecondsRealtime(delay);
-        Time.timeScale = defaultTimeScale;
 
-        currentTime = Time.timeScale;
+        if (!PauseMenu.instance.paused)
+        {
+            Time.timeScale = defaultTimeScale;
+
+            currentTime = Time.timeScale;
+        }
     }
 }

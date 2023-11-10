@@ -49,6 +49,8 @@ public class PlayerController : BaseCharacterController
 
     public void MoveInput(InputAction.CallbackContext context)
     {
+        if (PauseMenu.instance.paused) return;
+
         moveInput.x = context.ReadValue<Vector2>().x;
         moveInput.y = context.ReadValue<Vector2>().y;
 
@@ -57,6 +59,8 @@ public class PlayerController : BaseCharacterController
 
     public void CameraInput(InputAction.CallbackContext context)
     {
+        if (PauseMenu.instance.paused) return;
+
         xRotateInput = context.ReadValue<Vector2>().x;
         yRotateInput = context.ReadValue<Vector2>().y;
     }
@@ -65,6 +69,8 @@ public class PlayerController : BaseCharacterController
 
     public void SprintInput(InputAction.CallbackContext context)
     {
+        if (PauseMenu.instance.paused) return;
+
         if (context.performed)
         {
             playerMovement.Sprint(true);
@@ -110,6 +116,8 @@ public class PlayerController : BaseCharacterController
 
     public void Attack(InputAction.CallbackContext context, CharacterCombat.AttackType attackType)
     {
+        if (PauseMenu.instance.paused) return;
+
         if (context.performed)
         {
             if (moveInput != Vector2.zero && (combat.canAttack || (combat.canSaveAttackInput && combat.savingAttackInput == CharacterCombat.AttackType.None)))
@@ -134,6 +142,8 @@ public class PlayerController : BaseCharacterController
 
     public void BlockInput(InputAction.CallbackContext context)
     {
+        if (PauseMenu.instance.paused) return;
+
         if (moveInput != Vector2.zero)
         {
             //Rotate towards direction
@@ -155,6 +165,8 @@ public class PlayerController : BaseCharacterController
 
     public void DodgeInput(InputAction.CallbackContext context)
     {
+        if (PauseMenu.instance.paused) return;
+
         if (!context.performed)
             return;
 
@@ -175,6 +187,8 @@ public class PlayerController : BaseCharacterController
 
     public void InteractInput(InputAction.CallbackContext context)
     {
+        if (PauseMenu.instance.paused) return;
+
         if (!context.performed || !combat.canAttack)
             return;
 
@@ -196,6 +210,18 @@ public class PlayerController : BaseCharacterController
         enableInteraction = interactable != null;
         this.interactable = interactable;
         interactAnim = interactType.ToString();
+    }
+
+    #endregion
+
+    #region Inputs - Other
+
+    public void PauseInput(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+
+        PauseMenu.instance.PauseGame();
     }
 
     #endregion
