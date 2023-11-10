@@ -251,7 +251,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         {
             overrideTarget = target;
 
-            switchAttack = (lastAttackType != attackType && lastAttackType != AttackType.None);
+            switchAttack = blocking;
 
             ChooseWeapon(attackType);
 
