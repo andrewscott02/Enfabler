@@ -846,7 +846,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     void ConsumeArrow()
     {
-        currentArrows--;
+        currentArrows = Mathf.Clamp(currentArrows - 1, 0, maxArrows);
         StopCoroutine(regenArrowsCoroutine);
         regenArrowsCoroutine = StartCoroutine(IRegenArrows(regenArrowDelay));
     }

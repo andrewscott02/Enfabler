@@ -283,6 +283,8 @@ public class AIController : BaseCharacterController
 
     public bool CanAttack(CharacterCombat.AttackType attackType)
     {
+        if (health.dying) { return false ; }
+
         if (currentTarget == null || !combat.canAttack)
             return false;
 
@@ -323,6 +325,8 @@ public class AIController : BaseCharacterController
 
     public bool CanCastSpell(int identifier)
     {
+        if (health.dying) { return false; }
+
         if (spells[identifier].timeSinceLastAttack >= spells[identifier].currentCooldown && spells[identifier].usesLeft != 0 && spells[identifier].healthPercentageUse >= (float)health.GetCurrentHealth() / (float)health.maxHealth)
         {
             return true;
@@ -352,6 +356,7 @@ public class AIController : BaseCharacterController
 
     public bool AttackTarget(CharacterCombat.AttackType attackType)
     {
+        if (health.dying) { return false; }
         if (!agent.enabled) return false;
 
         if (currentTarget == null)

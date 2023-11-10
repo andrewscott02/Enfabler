@@ -174,6 +174,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             combat.ForceEndAttack();
             if (combat.armourSlider != null)
                 combat.armourSlider.gameObject.SetActive(false);
+            combat.enabled = false;
         }
 
         if (controller != null)
@@ -192,6 +193,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
                 controller.ActivateRagdoll(true, forcedata, !hitReactData.killAnim);
                 gameObject.name += " -- Dead";
             }
+
+            controller.enabled = false;
         }
 
         if (hitReactData.killAnim)
