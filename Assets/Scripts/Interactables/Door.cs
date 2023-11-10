@@ -10,12 +10,22 @@ public class Door : Interactable, IInteractable
     {
         base.Start();
         animator = GetComponent<Animator>();
+        interactDelegate += InteractedDelegate;
     }
 
     public override void Interacted(BaseCharacterController interactCharacter)
     {
         base.Interacted(interactCharacter);
-
         animator.SetTrigger("OpenDoor");
+        interactDelegate();
+    }
+
+    public delegate void InteractDelegate();
+    public InteractDelegate interactDelegate;
+
+    void InteractedDelegate()
+    {
+        //Blank delegate
+        Debug.Log("Interacted delegate");
     }
 }

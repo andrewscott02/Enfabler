@@ -11,6 +11,7 @@ public class PCGRoom : MonoBehaviour
     Transform[] enemySpawnerChildren, objectSpawnerChildren;
 
     ThemeData theme, nextTheme;
+    int roomNumber;
 
     [ContextMenu("Show Debug")]
     public void SetupTransforms()
@@ -27,12 +28,13 @@ public class PCGRoom : MonoBehaviour
     public E_RoomTypes roomType { get; private set; }
     public GrammarsDungeonData dungeonData { get; private set; }
 
-    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, ThemeData theme, ThemeData nextTheme)
+    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, ThemeData theme, ThemeData nextTheme, int index)
     {
         this.roomType = roomType;
         this.dungeonData = dungeonData;
         this.theme = theme;
         this.nextTheme = nextTheme;
+        roomNumber = index;
 
         name += " " + roomType.ToString() + " room (PCG) - " + theme.ToString();
 
@@ -67,9 +69,16 @@ public class PCGRoom : MonoBehaviour
         go.transform.rotation = doorPoint.transform.rotation;
         itemsInRoom.Add(go);
 
-        Door interactable = go.GetComponentInChildren<Door>();
-        interactable.lockedInteraction = dungeonData.GetDoorLocked(roomType);
-        door = interactable;
+        door = go.GetComponentInChildren<Door>();
+        door.lockedInteraction = dungeonData.GetDoorLocked(roomType);
+        door.interactDelegate += DoorOpened;
+        Debug.Log("Added delegate to room " + roomNumber);
+    }
+
+    public void DoorOpened()
+    {
+        Debug.Log("Door opened - from delegate : Room " + roomNumber);
+        GrammarsDungeonGeneration.instance.PopulateRoom(roomNumber + GrammarsDungeonGeneration.instance.preloadRooms);
     }
 
     int enemiesInRoom = 0;

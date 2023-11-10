@@ -7,12 +7,15 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 {
     #region Setup
 
+    public static GrammarsDungeonGeneration instance;
     public GrammarsDungeonData grammarsDungeonData;
+    public int preloadRooms = 2;
 
     #endregion
 
     private void Start()
     {
+        instance = this;
         GenerateGrammarsDungeon();
     }
 
@@ -191,7 +194,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         {
             foreach(var data in grammarsDungeonData.roomData)
             {
-                if (data.roomType.ToString() == rooms[i].ToString())
+                if (data.roomType == rooms[i])
                 {
                     GameObject go = Instantiate(prefabs[i], transform) as GameObject;
 
@@ -207,7 +210,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
                     }
 
                     PCGRoom goRoom = go.GetComponent<PCGRoom>();
-                    goRoom.Setup(rooms[i], grammarsDungeonData, themes[i], themes[i + 1]);
+                    goRoom.Setup(rooms[i], grammarsDungeonData, themes[i], themes[i + 1], i);
                     createdRooms.Add(goRoom);
                 }
             };
@@ -216,10 +219,22 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
     void PopulateRooms()
     {
+        int generatedRooms = 0;
+
         for (int i = 0; i < createdRooms.Count; i++)
         {
-            createdRooms[i].PopulateRoom();
+            PopulateRoom(i);
+            generatedRooms++;
+            if (generatedRooms >= preloadRooms)
+                return;
         }
+    }
+
+    public void PopulateRoom(int index)
+    {
+        if (index >= createdRooms.Count || index < 0) return;
+
+        createdRooms[index].PopulateRoom();
     }
 
     #endregion
