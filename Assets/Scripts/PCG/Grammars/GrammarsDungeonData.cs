@@ -90,14 +90,15 @@ public class GrammarsDungeonData : ScriptableObject
 
     #region Room
 
-    public Object GetRandomRoomPrefab(E_RoomTypes roomType, ThemeData currentTheme, out ThemeData nextRoomTheme)
+    public Object GetRandomRoomPrefab(E_RoomTypes roomType, ThemeData currentTheme, out ThemeData nextRoomTheme, out bool reversed)
     {
         int index = GetRoomDataIndex(roomType);
         nextRoomTheme = currentTheme;
+        reversed = false;
 
         if (index >= 0 && index < roomData.Length)
         {
-            Object prefab = DeterminePrefab(roomData[index].prefabData, currentTheme, out nextRoomTheme);
+            Object prefab = DeterminePrefab(roomData[index].prefabData, currentTheme, out nextRoomTheme, out reversed);
 
             return prefab;
         }
@@ -105,11 +106,12 @@ public class GrammarsDungeonData : ScriptableObject
         return null;
     }
 
-    Object DeterminePrefab(RoomPrefabData[] prefabData, ThemeData currentTheme, out ThemeData nextRoomTheme)
+    Object DeterminePrefab(RoomPrefabData[] prefabData, ThemeData currentTheme, out ThemeData nextRoomTheme, out bool reversed)
     {
         nextRoomTheme = currentTheme;
         int startIndex = Random.Range(0, prefabData.Length);
         int currentIndex = startIndex;
+        reversed = false;
 
         while (true)
         {
@@ -117,6 +119,7 @@ public class GrammarsDungeonData : ScriptableObject
             {
                 prefabData[currentIndex].Used();
                 nextRoomTheme = prefabData[currentIndex].GetNextRoomTheme(currentTheme);
+                reversed = prefabData[currentIndex].reverseRooms;
                 return prefabData[currentIndex].GetRandomPrefab();
             }
 

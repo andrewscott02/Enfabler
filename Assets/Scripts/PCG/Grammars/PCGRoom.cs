@@ -11,6 +11,7 @@ public class PCGRoom : MonoBehaviour
     Transform[] enemySpawnerChildren, objectSpawnerChildren;
 
     ThemeData theme, nextTheme;
+    bool reversed = false;
     int roomNumber;
 
     [ContextMenu("Show Debug")]
@@ -28,13 +29,14 @@ public class PCGRoom : MonoBehaviour
     public E_RoomTypes roomType { get; private set; }
     public GrammarsDungeonData dungeonData { get; private set; }
 
-    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, ThemeData theme, ThemeData nextTheme, int index)
+    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, ThemeData theme, ThemeData nextTheme, int index, bool reversed)
     {
         this.roomType = roomType;
         this.dungeonData = dungeonData;
         this.theme = theme;
         this.nextTheme = nextTheme;
         roomNumber = index;
+        this.reversed = reversed;
 
         name += " " + roomType.ToString() + " room (PCG) - " + theme.ToString();
 
@@ -44,7 +46,10 @@ public class PCGRoom : MonoBehaviour
 
         foreach (var item in wallGenerators)
         {
-            item.SetupRoom(item.changeTheme ? nextTheme : theme);
+            if (!reversed)
+                item.SetupRoom(item.changeTheme ? nextTheme : theme);
+            else
+                item.SetupRoom(item.changeTheme ? theme : nextTheme);
         }
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewGrammarsRoomData", menuName = "PCG/Grammars/RoomData", order = 1)]
 public class RoomPrefabData : ScriptableObject
 {
+    public bool reverseRooms = false;
     public Object[] roomPrefabs;
     public Vector2Int countMinMax;
     int timesUsed = 0;
