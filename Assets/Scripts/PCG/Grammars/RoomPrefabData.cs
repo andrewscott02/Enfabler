@@ -27,27 +27,18 @@ public class RoomPrefabData : ScriptableObject
         return roomPrefabs[Random.Range(0, roomPrefabs.Length)];
     }
 
-    public bool CanUse(ThemeData currentTheme, bool change)
+    public bool CanUse(ThemeData currentTheme)
     {
         if (!requireThemes.Contains(currentTheme))
             return false;
-
-        if (change)
-        {
-            if (changeThemes.Count <= 0)
-                return false;
-        }
-        else
-        {
-            if (changeThemes.Count > 0)
-                return false;
-        }
 
         return (timesUsed < countMinMax.y);
     }
 
     public ThemeData GetNextRoomTheme(ThemeData currentTheme)
     {
+        if (changeThemes.Count == 0) return currentTheme;
+
         int randThemeStart = Random.Range(0, changeThemes.Count);
         int randTheme = randThemeStart;
 

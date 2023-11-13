@@ -33,6 +33,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
         List<E_RoomTypes> additionalRooms = GenerateAdditionalRooms();
         additionalRooms = GenerateHealingRooms(additionalRooms);
+        additionalRooms = DetermineRoomChanges(additionalRooms);
 
         grammarsDungeonData.ReplaceDuplicates(additionalRooms);
         grammarsDungeonData.EnsureMinimums(additionalRooms);
@@ -115,6 +116,22 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         return rooms;
     }
 
+    List<E_RoomTypes> DetermineRoomChanges(List<E_RoomTypes> rooms)
+    {
+        int changeRoomsCount = Random.Range(grammarsDungeonData.themeChanges.y, grammarsDungeonData.themeChanges.y + 1);
+        float fInterval = (float)rooms.Count / (float)(changeRoomsCount + 1);
+        int interval = Mathf.RoundToInt(fInterval);
+
+        for (int i = 0; i < changeRoomsCount; i++)
+        {
+            int insertIndex = ((i + 1) * interval);
+            //Debug.Log("Insert healing room at " + insertIndex + " from interval " + interval);
+            rooms.Insert(insertIndex + i, E_RoomTypes.ChangeTheme);
+        }
+
+        return rooms;
+    }
+
     string ConvertToString(List<E_RoomTypes> rooms)
     {
         string dungeonLayout = "";
@@ -134,12 +151,9 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         List<Object> prefabs = new List<Object>();
         themes = new List<ThemeData>();
 
-        List<int> roomChanges = DetermineRoomChanges(rooms);
-
         for(int i = 0; i < rooms.Count; i++)
         {
-            bool change = roomChanges.Contains(i);
-            Object prefab = grammarsDungeonData.GetRandomRoomPrefab(rooms[i], currentTheme, change, out ThemeData nextRoom);
+            Object prefab = grammarsDungeonData.GetRandomRoomPrefab(rooms[i], currentTheme, out ThemeData nextRoom);
             if (prefab != null)
             {
                 prefabs.Add(prefab);
@@ -151,39 +165,6 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         //TODO: Use grammars to change rooms
 
         return prefabs;
-    }
-
-    List<int> DetermineRoomChanges(List<E_RoomTypes> rooms)
-    {
-        //Get rooms at aregular interval, but do not add healing rooms
-        int changeRoomsCount = Random.Range(grammarsDungeonData.themeChanges.y, grammarsDungeonData.themeChanges.y + 1);
-        List<int> changeRooms = new List<int>();
-
-        float fInterval = (float)rooms.Count / (float)(changeRoomsCount + 1);
-        int interval = Mathf.RoundToInt(fInterval);
-
-        for (int i = 0; i < changeRoomsCount; i++)
-        {
-            int roomIndex = ((i + 1) * interval);
-            if (rooms[roomIndex] == E_RoomTypes.Healing)
-            {
-                changeRooms.Add(roomIndex + 1);
-            }
-            else
-            {
-                changeRooms.Add(roomIndex);
-            }
-        }
-
-        string debug = "change rooms at ";
-        foreach(var item in changeRooms)
-        {
-            debug += item.ToString() + ", ";
-        }
-
-        Debug.Log(debug);
-
-        return changeRooms;
     }
 
     void GenerateDungeonRooms(List<E_RoomTypes> rooms)

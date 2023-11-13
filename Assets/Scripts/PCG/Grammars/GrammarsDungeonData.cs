@@ -90,20 +90,14 @@ public class GrammarsDungeonData : ScriptableObject
 
     #region Room
 
-    public Object GetRandomRoomPrefab(E_RoomTypes roomType, ThemeData currentTheme, bool change, out ThemeData nextRoomTheme)
+    public Object GetRandomRoomPrefab(E_RoomTypes roomType, ThemeData currentTheme, out ThemeData nextRoomTheme)
     {
         int index = GetRoomDataIndex(roomType);
         nextRoomTheme = currentTheme;
 
         if (index >= 0 && index < roomData.Length)
         {
-            Object prefab = DeterminePrefab(roomData[index].prefabData, currentTheme, change, out nextRoomTheme);
-
-            if (prefab == null)
-            {
-                Debug.Log("Failed to get room to change");
-                prefab = DeterminePrefab(roomData[index].prefabData, currentTheme, false, out nextRoomTheme);
-            }
+            Object prefab = DeterminePrefab(roomData[index].prefabData, currentTheme, out nextRoomTheme);
 
             return prefab;
         }
@@ -111,7 +105,7 @@ public class GrammarsDungeonData : ScriptableObject
         return null;
     }
 
-    Object DeterminePrefab(RoomPrefabData[] prefabData, ThemeData currentTheme, bool change, out ThemeData nextRoomTheme)
+    Object DeterminePrefab(RoomPrefabData[] prefabData, ThemeData currentTheme, out ThemeData nextRoomTheme)
     {
         nextRoomTheme = currentTheme;
         int startIndex = Random.Range(0, prefabData.Length);
@@ -119,14 +113,10 @@ public class GrammarsDungeonData : ScriptableObject
 
         while (true)
         {
-            if (prefabData[currentIndex].CanUse(currentTheme, change))
+            if (prefabData[currentIndex].CanUse(currentTheme))
             {
                 prefabData[currentIndex].Used();
-                if (change)
-                {
-                    nextRoomTheme = prefabData[currentIndex].GetNextRoomTheme(currentTheme);
-                    //Debug.Log("Change theme to " + nextRoomTheme);
-                }
+                nextRoomTheme = prefabData[currentIndex].GetNextRoomTheme(currentTheme);
                 return prefabData[currentIndex].GetRandomPrefab();
             }
 
@@ -479,7 +469,7 @@ public struct RoomData
 public enum E_RoomTypes
 {
     Start, Boss, End,
-    Encounter, Puzzle, Treasure, Healing, Trap
+    Encounter, Puzzle, Treasure, Healing, Trap, ChangeTheme
 }
 
 [System.Serializable]
