@@ -159,6 +159,10 @@ public class GrammarsDungeonGeneration : MonoBehaviour
                 prefabs.Add(prefab);
                 themes.Add(currentTheme);
             }
+            else
+            {
+                Debug.LogWarning("No prefab added for theme " + currentTheme + " to " + nextRoom + " at index " + i);
+            }
             currentTheme = nextRoom;
         }
 
