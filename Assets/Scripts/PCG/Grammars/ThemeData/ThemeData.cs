@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewGrammarsThemeData", menuName = "PCG/Grammars/ThemeData", order = 2)]
 public class ThemeData : ScriptableObject
 {
+    public string regionName;
+
     [Header("Room Generation Data")]
     public Object wallPiece;
     public Vector3 wallPieceSize = new Vector3(4, 2.9f, 1);

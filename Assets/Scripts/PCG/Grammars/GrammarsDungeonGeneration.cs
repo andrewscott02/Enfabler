@@ -17,6 +17,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
     {
         instance = this;
         GenerateGrammarsDungeon();
+        GameCanvasManager.instance.ShowRegionText(firstTheme.regionName);
     }
 
     [ContextMenu("Generate Grammars Dungeon")]
@@ -25,7 +26,8 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         CleanupDungeon();
 
         int randTheme = Random.Range(0, grammarsDungeonData.startingThemes.Count);
-        currentTheme = grammarsDungeonData.startingThemes[randTheme];
+        firstTheme = grammarsDungeonData.startingThemes[randTheme];
+        currentTheme = firstTheme;
 
         List<E_RoomTypes> rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Healing, E_RoomTypes.Boss, E_RoomTypes.End };
 
@@ -79,6 +81,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
     #region Creating Rooms
 
+    ThemeData firstTheme;
     ThemeData currentTheme;
 
     List<E_RoomTypes> GenerateAdditionalRooms()
