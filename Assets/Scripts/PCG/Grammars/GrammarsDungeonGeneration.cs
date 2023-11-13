@@ -44,7 +44,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
         string dungeonLayout = ConvertToString(rooms);
 
-        Debug.Log(dungeonLayout);
+        //Debug.Log(dungeonLayout);
 
         GenerateDungeonRooms(rooms);
         BakeNavmesh();

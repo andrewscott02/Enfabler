@@ -23,7 +23,6 @@ public class GameCanvasManager : MonoBehaviour
 
     public void ShowRegionText(string text)
     {
-        Debug.Log("Show region text- canvas");
         regionText.ShowRegionText(text);
     }
 }

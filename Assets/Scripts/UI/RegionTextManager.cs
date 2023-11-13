@@ -13,7 +13,6 @@ public class RegionTextManager : MonoBehaviour
 
     public void ShowRegionText(string text)
     {
-        Debug.Log("Show region text- region manager");
         regionText.text = text;
 
         //TODO: Fade in

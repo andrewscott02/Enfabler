@@ -53,9 +53,10 @@ public class PCGRoom : MonoBehaviour
     public void PopulateRoom()
     {
         SpawnDoor();
-        SpawnEnemies();
         SpawnTraps();
         SpawnObjects();
+
+        SpawnEnemies();
         SpawnBoss();
     }
 
@@ -72,12 +73,12 @@ public class PCGRoom : MonoBehaviour
         door = go.GetComponentInChildren<Door>();
         door.lockedInteraction = dungeonData.GetDoorLocked(roomType);
         door.interactDelegate += DoorOpened;
-        Debug.Log("Added delegate to room " + roomNumber);
+        //Debug.Log("Added delegate to room " + roomNumber);
     }
 
     public void DoorOpened()
     {
-        Debug.Log("Door opened - from delegate : Room " + roomNumber);
+        //Debug.Log("Door opened - from delegate : Room " + roomNumber);
         GrammarsDungeonGeneration.instance.PopulateRoom(roomNumber + GrammarsDungeonGeneration.instance.preloadRooms);
 
         if (nextTheme != theme)

@@ -35,7 +35,7 @@ public class FaceAwayFromWall : MonoBehaviour
         if (Physics.Raycast(origin, dir, out hit, range, wallMask))
         {
             transform.eulerAngles = new Vector3(0, yRot, 0);
-            Debug.Log("Hit for " + direction);
+            //Debug.Log("Hit for " + direction);
             return true;
         }
 

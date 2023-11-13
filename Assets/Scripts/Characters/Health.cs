@@ -108,7 +108,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     void HitReaction(int damage)
     {
         if (combat == null) { return; }
-        else { Debug.LogWarning("No combat script"); }
 
         combat.GotHit();
 

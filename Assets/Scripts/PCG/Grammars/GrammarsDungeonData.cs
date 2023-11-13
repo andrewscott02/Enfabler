@@ -65,7 +65,7 @@ public class GrammarsDungeonData : ScriptableObject
 
             if (currentIndex == startIndex)
             {
-                Debug.Log("Couldn't find valid room, returning random");
+                //Debug.Log("Couldn't find valid room, returning random");
                 return additionalRoomTypes[currentIndex];
             }
         }
