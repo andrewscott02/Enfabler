@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 7563118}
   - component: {fileID: 7563117}
   m_Layer: 5
-  m_Name: Special Attacks
+  m_Name: Switch Attacks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,7 +733,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.95
+  m_fontSize: 24.35
   m_fontSizeBase: 12.98
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1839,7 +1839,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.95
+  m_fontSize: 24.35
   m_fontSizeBase: 12.98
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3726,17 +3726,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Attack while blocking to perform special attacks. These attacks will move
-    your character while attacking, but cannot be charged.
+  m_text: 'Mix melee and ranged attacks together to perform switch attacks. These
+    attacks will move your character while attacking, but cannot be charged.
 
 
-    Input a ranged attack
-    while blocking to perform a special ranged attack, which fires 2 arrows quickly
-    while leaping backwards.
+    Quickly
+    input a ranged attack after a melee attack to perform a switch ranged attack,
+    which fires 2 arrows quickly while leaping backwards.
 
 
-    Input a melee attack while blocking to perform
-    a switch melee attack that allows you to lunge towards your foe.'
+    Input a melee attack
+    after a ranged attack to perform a switch melee attack that allows you to lunge
+    towards your foe.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3825,7 +3826,7 @@ GameObject:
   - component: {fileID: 1579894750}
   - component: {fileID: 1579894749}
   m_Layer: 5
-  m_Name: Tips - Special Attacks
+  m_Name: Tips - Switch Attacks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3871,7 +3872,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Special Attacks
+  m_text: Switch Attacks
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

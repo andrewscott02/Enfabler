@@ -46,11 +46,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     [Header("Switch Attack Data")]
     public bool canSwitchAttack = false;
+    public float switchInputDelay = 0.25f;
     bool switchAttack = false;
 
     [Header("Save Input Data")]
     public bool canSaveAttackInput = false;
-    AttackType lastAttackType = AttackType.None;
+    public AttackType lastAttackType = AttackType.None;
     public AttackType savingAttackInput = AttackType.None;
     public AttackType savingChargeInput = AttackType.None;
     public float savedAttackAnimSpeed = 1;
@@ -251,7 +252,13 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         {
             overrideTarget = target;
 
-            switchAttack = blocking;
+            switchInput = StartCoroutine(IEndSwitchInput(switchInputDelay));
+            if ((lastAttackType == attackType && lastAttackType != AttackType.None))
+            {
+                Debug.Log("Repeated input");
+                StopCoroutine(switchInput);
+                lastAttackType = AttackType.None;
+            }
 
             ChooseWeapon(attackType);
 
@@ -290,6 +297,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         }
         else if (canSaveAttackInput)
         {
+            switchAttack = GetSwitchInput(attackType);
             savingAttackInput = attackType;
             savedAttackAnimSpeed = attackSpeed;
         }
@@ -408,6 +416,30 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         animator.applyRootMotion = baseUseRootMotion;
 
         Untarget();
+    }
+
+    Coroutine switchInput;
+
+    bool GetSwitchInput(AttackType attackType)
+    {
+        bool switchAttack = (lastAttackType != attackType && lastAttackType != AttackType.None);
+        switchInput = StartCoroutine(IEndSwitchInput(switchInputDelay));
+        if ((lastAttackType == attackType && lastAttackType != AttackType.None))
+        {
+            Debug.Log("Repeated input");
+            StopCoroutine(switchInput);
+            lastAttackType = AttackType.None;
+        }
+
+        return switchAttack;
+    }
+
+    IEnumerator IEndSwitchInput(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        Debug.Log("Time elapsed");
+        lastAttackType = AttackType.None;
     }
 
     #endregion
