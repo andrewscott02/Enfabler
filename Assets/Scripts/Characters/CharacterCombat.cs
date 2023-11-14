@@ -46,7 +46,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     [Header("Switch Attack Data")]
     public bool canSwitchAttack = false;
-    public float switchInputDelay = 0.25f;
+    public float slideInputDelay = 0.2f;
     bool switchAttack = false;
 
     [Header("Save Input Data")]
@@ -248,13 +248,19 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         savingAttackInput = AttackType.None;
 
+        #region Slide Input
+
+        performedSlideInput = GetSlideInput(attackType) && canSlideInput;
+
+        if (slideCoroutine != null)
+            StopCoroutine(slideCoroutine);
+        slideCoroutine = StartCoroutine(ISlideInput(slideInputDelay));
+
+        #endregion
+
         if (canAttack)
         {
             overrideTarget = target;
-
-            if (switchAttack == false)
-                switchAttack = GetSwitchInput(attackType);
-            switchInput = StartCoroutine(IEndSwitchInput(switchInputDelay));
 
             ChooseWeapon(attackType);
 
@@ -293,12 +299,16 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         }
         else if (canSaveAttackInput)
         {
+            /*
             switchAttack = GetSwitchInput(attackType);
             switchInput = StartCoroutine(IEndSwitchInput(switchInputDelay));
-
+            */
             savingAttackInput = attackType;
             savedAttackAnimSpeed = attackSpeed;
         }
+
+        switchAttack = performedSlideInput;
+        performedSlideInput = false;
     }
 
     void StartCharge(AttackType attackType)
@@ -416,27 +426,24 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         Untarget();
     }
 
-    Coroutine switchInput;
+    Coroutine slideCoroutine;
+    bool performedSlideInput = false;
+    bool canSlideInput = false;
 
-    bool GetSwitchInput(AttackType attackType)
+    bool GetSlideInput(AttackType attackType)
     {
-        bool switchAttack = (lastAttackType != attackType && lastAttackType != AttackType.None);
-        if ((lastAttackType == attackType && lastAttackType != AttackType.None))
-        {
-            Debug.Log("Repeated input");
-            StopCoroutine(switchInput);
-            lastAttackType = AttackType.None;
-        }
+        bool slideInput = (lastAttackType != attackType && lastAttackType != AttackType.None);
 
-        return switchAttack;
+        return slideInput;
     }
 
-    IEnumerator IEndSwitchInput(float delay)
+    IEnumerator ISlideInput(float delay)
     {
+        canSlideInput = true;
+
         yield return new WaitForSeconds(delay);
 
-        Debug.Log("Time elapsed");
-        lastAttackType = AttackType.None;
+        canSlideInput = false;
     }
 
     #endregion
