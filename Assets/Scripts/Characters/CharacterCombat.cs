@@ -234,6 +234,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         if (attackType == AttackType.None) return;
 
+        #region Ammo Checks
+
         switch (attackType)
         {
             case AttackType.SecondaryAttack:
@@ -246,9 +248,11 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
                 break;
         }
 
-        savingAttackInput = AttackType.None;
+        #endregion
 
         #region Slide Input
+
+        switchAttack = performedSlideInput || (GetSlideInput(attackType) && canSlideInput);
 
         performedSlideInput = GetSlideInput(attackType) && canSlideInput;
 
@@ -258,9 +262,13 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         #endregion
 
+        savingAttackInput = AttackType.None;
+
         if (canAttack)
         {
             overrideTarget = target;
+
+            //Debug.Log(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
 
             ChooseWeapon(attackType);
 
@@ -283,6 +291,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             animator.speed = attackSpeed;
             animator.applyRootMotion = true;
 
+            //Debug.Log(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
+
             if (switchAttack && canSwitchAttack)
             {
                 animator.SetTrigger("Switch" + attackType.ToString());
@@ -299,16 +309,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         }
         else if (canSaveAttackInput)
         {
-            /*
-            switchAttack = GetSwitchInput(attackType);
-            switchInput = StartCoroutine(IEndSwitchInput(switchInputDelay));
-            */
             savingAttackInput = attackType;
             savedAttackAnimSpeed = attackSpeed;
         }
-
-        switchAttack = performedSlideInput;
-        performedSlideInput = false;
     }
 
     void StartCharge(AttackType attackType)
@@ -402,7 +405,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void ResetAttack()
     {
-        //Debug.Log("Reset Attack");
+        Debug.Log("Reset Attack");
         if (animator == null)
             Debug.LogWarning("Animator of " + gameObject.name + " is null");
         animator.SetInteger("MeleeAttackCount", 0);
@@ -413,6 +416,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         canMove = true;
         canDodge = true;
         canAttack = true;
+        performedSlideInput = false;
 
         AIController AIController = GetComponent<AIController>();
 
@@ -1034,7 +1038,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         canMove = true;
         canDodge = true;
         canAttack = true;
-        //canSaveAttackInput = false;
+        canSaveAttackInput = false;
     }
 
     public void ResetDodge()

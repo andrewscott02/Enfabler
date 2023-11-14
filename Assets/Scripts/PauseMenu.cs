@@ -24,7 +24,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("Pause game input");
+        //Debug.Log("Pause game input");
         ShowMouse(true);
         paused = true;
         pauseMenu.SetActive(true);
