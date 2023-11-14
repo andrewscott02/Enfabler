@@ -252,6 +252,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         {
             overrideTarget = target;
 
+            if (switchAttack == false)
+                switchAttack = GetSwitchInput(attackType);
             switchInput = StartCoroutine(IEndSwitchInput(switchInputDelay));
 
             ChooseWeapon(attackType);
@@ -1025,7 +1027,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         canMove = true;
         canDodge = true;
         canAttack = true;
-        canSaveAttackInput = false;
+        //canSaveAttackInput = false;
     }
 
     public void ResetDodge()
