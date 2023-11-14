@@ -51,7 +51,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     [Header("Save Input Data")]
     public bool canSaveAttackInput = false;
-    public AttackType lastAttackType = AttackType.None;
+    AttackType lastAttackType = AttackType.None;
     public AttackType savingAttackInput = AttackType.None;
     public AttackType savingChargeInput = AttackType.None;
     public float savedAttackAnimSpeed = 1;
@@ -253,12 +253,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             overrideTarget = target;
 
             switchInput = StartCoroutine(IEndSwitchInput(switchInputDelay));
-            if ((lastAttackType == attackType && lastAttackType != AttackType.None))
-            {
-                Debug.Log("Repeated input");
-                StopCoroutine(switchInput);
-                lastAttackType = AttackType.None;
-            }
 
             ChooseWeapon(attackType);
 
@@ -298,6 +292,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         else if (canSaveAttackInput)
         {
             switchAttack = GetSwitchInput(attackType);
+            switchInput = StartCoroutine(IEndSwitchInput(switchInputDelay));
+
             savingAttackInput = attackType;
             savedAttackAnimSpeed = attackSpeed;
         }
@@ -423,7 +419,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     bool GetSwitchInput(AttackType attackType)
     {
         bool switchAttack = (lastAttackType != attackType && lastAttackType != AttackType.None);
-        switchInput = StartCoroutine(IEndSwitchInput(switchInputDelay));
         if ((lastAttackType == attackType && lastAttackType != AttackType.None))
         {
             Debug.Log("Repeated input");
