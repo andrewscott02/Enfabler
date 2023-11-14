@@ -5,9 +5,17 @@ using UnityEngine;
 public class WebbingTrap : MonoBehaviour
 {
     public float duration = 8;
+    public LayerMask groundLayer;
 
     private void Start()
     {
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, maxDistance: 5f, layerMask: groundLayer))
+        {
+            transform.position = hit.point;
+        }
+
         StartCoroutine(IDelayDestroy(duration));
     }
 
