@@ -13,17 +13,23 @@ public class SummonSpell : SpellStats
     }
 
     public SummonData[] summonData;
+    public bool spawnAtCaster = true;
 
-    public override void CastSpell(BaseCharacterController caster)
+    public override void CastSpell(BaseCharacterController caster, GameObject target)
     {
-        base.CastSpell(caster);
+        base.CastSpell(caster, target);
 
         for (int i = 0; i < summonData.Length; i++)
         {
             for(int x = 0; x < summonData[i].count; x++)
             {
                 Vector3 spawnPos;
-                if (!HelperFunctions.GetRandomPointOnNavmesh(caster.transform.position, 10f, 0.5f, 100, out spawnPos))
+
+                Vector3 origin = caster.transform.position;
+                if (!spawnAtCaster)
+                    origin = target == null ? caster.transform.position : target.transform.position;
+
+                if (!HelperFunctions.GetRandomPointOnNavmesh(origin, 10f, 0.5f, 100, out spawnPos))
                 {
                     spawnPos = caster.transform.position;
                 }

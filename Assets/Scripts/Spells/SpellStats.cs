@@ -9,7 +9,7 @@ public class SpellStats : ScriptableObject
 
     public bool attachToWeapon = true;
 
-    public virtual void CastSpell(BaseCharacterController caster)
+    public virtual void CastSpell(BaseCharacterController caster, GameObject target)
     {
         if (spellFX != null)
         {

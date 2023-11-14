@@ -349,7 +349,7 @@ public class AIController : BaseCharacterController
         spells[currentSpell].timeSinceLastAttack = 0;
         spells[currentSpell].currentCooldown = Random.Range(spells[currentSpell].cooldown.x, spells[currentSpell].cooldown.y);
         spells[currentSpell].usesLeft--;
-        combat.CastSpell(spells[currentSpell].spell);
+        combat.CastSpell(spells[currentSpell].spell, currentTarget.gameObject);
 
         return true;
     }

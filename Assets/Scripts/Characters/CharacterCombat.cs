@@ -88,10 +88,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     protected SetWeapon setWeapon;
 
     [Header("Ranged Attack Data")]
-    public Object projectile;
-    public Object projectileFX;
-    public float projectileSpeed = 40;
     public TrapStats projectileData;
+    public Object projectileFX;
     public float[] additionalShotAngle;
     public float additionalProjectileDamageMultiplier = 0.5f;
 
@@ -826,6 +824,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
                 firePos = hit.point;
                 distance = Vector3.Distance(origin, firePos);
             }
+            else if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: 20f, hitLayerMask))
+            {
+                //Debug.Log("Hit: " + hit.collider.gameObject);
+                firePos = hit.point;
+                distance = Vector3.Distance(origin, firePos);
+            }
         }
         else
         {
@@ -864,9 +868,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         Instantiate(projectileFX, weapon.transform);
 
-        GameObject projectileObj = Instantiate(projectile, weapon.transform.position, transform.rotation) as GameObject;
+        GameObject projectileObj = Instantiate(projectileData.projectile, weapon.transform.position, transform.rotation) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
-        projectileMove.Fire(targetPos, projectileData, this.gameObject, projectileDamage, projectileSpeed);
+        projectileMove.Fire(targetPos, projectileData, this.gameObject, projectileDamage);
     }
 
     #endregion
@@ -1070,7 +1074,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     [HideInInspector]
     public SpellStats currentSpell;
 
-    public void CastSpell(SpellStats prepareSpell)
+    public void CastSpell(SpellStats prepareSpell, GameObject overrideTarget)
     {
         if (prepareSpell == null && !canAttack) return;
 
@@ -1090,13 +1094,24 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         currentSpell = prepareSpell;
 
         animator.SetTrigger("CastSpell");
+
+        if (overrideTarget != null)
+        {
+            spellTarget = overrideTarget;
+        }
+        else
+        {
+            //TODO: Get target here
+        }
     }
+
+    GameObject spellTarget;
 
     public void ActivateSpell()
     {
         if (currentSpell == null) return;
 
-        currentSpell.CastSpell(controller);
+        currentSpell.CastSpell(controller, spellTarget);
     }
 
     #endregion
