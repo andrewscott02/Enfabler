@@ -121,6 +121,20 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     #region Animation Data
 
     public float baseAnimationSpeed { get; private set; }
+    public float currentAnimationSpeed { get; private set; }
+
+    public void SetSpeed(float newSpeed)
+    {
+        currentAnimationSpeed = newSpeed;
+        animator.speed = currentAnimationSpeed;
+    }
+
+    public void ResetAnimSpeed()
+    {
+        currentAnimationSpeed = baseAnimationSpeed;
+        animator.speed = currentAnimationSpeed;
+    }
+
     float currentAttackSpeed = 1;
     bool baseUseRootMotion;
 
@@ -145,6 +159,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         animator = GetComponent<Animator>();
         baseUseRootMotion = animator.applyRootMotion;
         baseAnimationSpeed = animator.speed;
+        ResetAnimSpeed();
         health = GetComponent<Health>();
         ignore.Add(health);
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
@@ -286,7 +301,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             canSaveAttackInput = true;
             canDodge = false;
             currentAttackSpeed = attackSpeed;
-            animator.speed = attackSpeed;
+            animator.speed = attackSpeed * currentAnimationSpeed;
             animator.applyRootMotion = true;
 
             //Debug.Log(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
@@ -337,7 +352,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         chargingAttack = AttackType.None;
         savingChargeInput = AttackType.None;
-        animator.speed = currentAttackSpeed;
+        animator.speed = currentAttackSpeed * currentAnimationSpeed;
 
         currentChargeTime = 0;
 
@@ -364,7 +379,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         yield return new WaitForSecondsRealtime(delay);
 
-        animator.speed = baseAnimationSpeed;
+        animator.speed = currentAnimationSpeed;
         ReleaseAttack(chargingAttack);
     }
 
@@ -408,7 +423,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             Debug.LogWarning("Animator of " + gameObject.name + " is null");
         animator.SetInteger("MeleeAttackCount", 0);
         animator.SetBool("InHitReaction", false);
-        animator.speed = (baseAnimationSpeed);
+        animator.speed = currentAnimationSpeed;
         lastAttackType = AttackType.None;
         switchAttack = false;
         canMove = true;
@@ -482,7 +497,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void ForceEndAttack()
     {
-        animator.speed = baseAnimationSpeed;
+        animator.speed = currentAnimationSpeed;
         animator.applyRootMotion = baseUseRootMotion;
         unblockable = false;
         chargingAttack = AttackType.None;
@@ -679,7 +694,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         animator.speed = 0;
         yield return new WaitForSecondsRealtime(delay);
         //Debug.Log("Unfreeze");
-        animator.speed = baseAnimationSpeed;
+        animator.speed = currentAnimationSpeed;
     }
 
     #endregion
@@ -1062,7 +1077,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         //Debug.Log("Got hit, end attack");
         canAttack = false;
-        animator.speed = baseAnimationSpeed;
+        animator.speed = currentAnimationSpeed;
         if (rumbleOnHit)
             RumbleManager.instance.ControllerRumble(0.25f, 1f, 0.25f);
     }
@@ -1088,7 +1103,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         canAttack = false;
         canSaveAttackInput = false;
         canDodge = false;
-        animator.speed = baseAnimationSpeed;
+        animator.speed = currentAnimationSpeed;
         animator.applyRootMotion = baseUseRootMotion;
 
         currentSpell = prepareSpell;
