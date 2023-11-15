@@ -5,6 +5,7 @@ using UnityEngine;
 public class MoveableObject : PuzzleElement
 {
     public E_MovementType movementType;
+    public float moveDelay = 1f;
     public float moveSpeed = 5f;
     public Vector3 endOffset;
 
@@ -19,7 +20,7 @@ public class MoveableObject : PuzzleElement
         startPosition = transform.position;
         endPosition = startPosition + endOffset;
 
-        MoveToPosition(startPosition);
+        StartCoroutine(IMoveToPosition(startPosition, 0.1f));
     }
 
     protected override void Activate()
@@ -29,7 +30,7 @@ public class MoveableObject : PuzzleElement
         switch (movementType)
         {
             case E_MovementType.Toggle:
-                MoveToPosition(endPosition);
+                StartCoroutine(IMoveToPosition(endPosition, moveDelay));
                 break;
         }
     }
@@ -41,13 +42,15 @@ public class MoveableObject : PuzzleElement
         switch (movementType)
         {
             case E_MovementType.Toggle:
-                MoveToPosition(startPosition);
+                StartCoroutine(IMoveToPosition(startPosition, moveDelay));
                 break;
         }
     }
 
-    void MoveToPosition(Vector3 position)
+    IEnumerator IMoveToPosition(Vector3 position, float delay)
     {
+        yield return new WaitForSeconds(delay);
+
         targetPosition = position;
     }
 

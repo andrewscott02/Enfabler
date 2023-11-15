@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PCGRoom : MonoBehaviour
 {
+    public bool lockOverride = false;
+    public bool lockDoor = false;
     public ObjectSpawner doorPoint;
     public Object tempSpawnerObjects;
 
@@ -79,6 +81,12 @@ public class PCGRoom : MonoBehaviour
 
         door = go.GetComponentInChildren<Door>();
         door.lockedInteraction = dungeonData.GetDoorLocked(roomType);
+
+        if (lockOverride)
+        {
+            door.lockedInteraction = lockDoor;
+        }
+
         door.interactDelegate += DoorOpened;
         //Debug.Log("Added delegate to room " + roomNumber);
     }
