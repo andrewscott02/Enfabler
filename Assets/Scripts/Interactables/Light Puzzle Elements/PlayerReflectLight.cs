@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class PlayerReflectLight : MonoBehaviour
 {
-    public LightEmitter lightEmitter;
+    public GameObject lightReceiverGO;
 
     private void Start()
     {
         CharacterCombat combat = GetComponentInParent<CharacterCombat>();
         combat.blockingDelegate += CanReflectLight;
 
-        CanReflectLight(false);
+        lightReceiverGO.SetActive(false);
     }
 
-    public void CanReflectLight(bool canReflect)
+    public void CanReflectLight(bool canReceiveLight)
     {
-        lightEmitter.canEmit = canReflect;
-        if (!canReflect)
-            lightEmitter.StopEmitLight();
+        lightReceiverGO.SetActive(canReceiveLight);
     }
 }

@@ -48,8 +48,12 @@ public class LightEmitter : MonoBehaviour, IEmitLight
 
             IReceiveLight lightReceiver = rayHit.collider.GetComponent<IReceiveLight>();
 
-            if (lastLightReceiver != null && lightReceiver != null && lightReceiver != lastLightReceiver)
+            if (lastLightReceiver != null && lightReceiver != lastLightReceiver)
+            {
                 lastLightReceiver.StopReceiveLight();
+
+                lastLightReceiver = null;
+            }
 
             if (lightReceiver != null)
             {
@@ -60,9 +64,11 @@ public class LightEmitter : MonoBehaviour, IEmitLight
         else
         {
             if (lastLightReceiver != null)
+            {
                 lastLightReceiver.StopReceiveLight();
 
-            lastLightReceiver = null;
+                lastLightReceiver = null;
+            }
         }
 
         Vector3 scale = rayObject.transform.localScale;
