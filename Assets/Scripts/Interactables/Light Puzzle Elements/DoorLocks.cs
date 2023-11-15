@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class DoorLocks : MonoBehaviour
+public class DoorLocks : PuzzleElement
 {
     public TextMeshProUGUI text;
-    public LightReceiver[] lightReceiverUnlockers; //Replace with generic parent once functionality is complete
     public Interactable interactable;
     public bool unlockMainDoor = true;
 
@@ -14,30 +13,30 @@ public class DoorLocks : MonoBehaviour
     int unlocked = 0;
 
     // Start is called before the first frame update
-    protected virtual void Start()
+    protected override void Start()
     {
-        SetupPuzzleDoorUnlock();
+        base.Start();
 
         SetLockUI();
     }
 
-    public void SetupPuzzleDoorUnlock()
+    public override void SetupPuzzleInteractions()
     {
         foreach (var item in lightReceiverUnlockers)
         {
-            item.enableDelegate += item.invertUnlock ? Lock : Unlock;
-            item.disableDelegate += item.invertUnlock ? Unlock : Lock;
+            item.receiver.enableDelegate += item.invertInteraction ? Deactivate : Activate;
+            item.receiver.disableDelegate += item.invertInteraction ? Activate : Deactivate;
 
-            if (item.invertUnlock)
+            if (item.invertInteraction)
             {
-                Unlock();
+                Activate();
             }
         }
 
         locks = lightReceiverUnlockers.Length;
     }
 
-    void Unlock()
+    protected override void Activate()
     {
         Debug.Log("Unlock Interaction");
         unlocked++;
@@ -50,7 +49,7 @@ public class DoorLocks : MonoBehaviour
             LockInteractable();
     }
 
-    void Lock()
+    protected override void Deactivate()
     {
         Debug.Log("Unlock Interaction");
         unlocked--;

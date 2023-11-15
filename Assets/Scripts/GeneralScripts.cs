@@ -242,6 +242,22 @@ public static class HelperFunctions
         return i;
     }
 
+    public static bool AlmostEqualFloat(float a, float b, float threshold)
+    {
+        return Mathf.Abs(a - b) <= threshold;
+    }
+
+    public static bool AlmostEqualVector3(Vector3 a, Vector3 b, float threshold, Vector3 ignoreAxis)
+    {
+        if (a.x == Mathf.NegativeInfinity && b.x == Mathf.NegativeInfinity)
+            return true;
+
+        bool x = AlmostEqualFloat(a.x, b.x, threshold) || ignoreAxis.x == 1;
+        bool y = AlmostEqualFloat(a.y, b.y, threshold) || ignoreAxis.y == 1;
+        bool z = AlmostEqualFloat(a.z, b.z, threshold) || ignoreAxis.z == 1;
+        return x && y && z;
+    }
+
     #endregion
 }
 

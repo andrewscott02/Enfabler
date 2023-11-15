@@ -17,6 +17,8 @@ public class GrammarsDungeonData : ScriptableObject
     public List<ThemeData> allThemes;
     public Vector2Int themeChanges;
 
+    public bool allowDuplicates = false;
+
     #endregion
 
     #region Room Generation
@@ -397,6 +399,8 @@ public class GrammarsDungeonData : ScriptableObject
 
     public List<E_RoomTypes> ReplaceDuplicates(List<E_RoomTypes> rooms)
     {
+        if (allowDuplicates) return rooms;
+
         bool changed = true;
 
         while (changed)

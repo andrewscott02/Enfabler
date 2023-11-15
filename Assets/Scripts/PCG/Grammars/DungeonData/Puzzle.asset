@@ -62,22 +62,6 @@ MonoBehaviour:
     enemiesMax: 0
     enemiesSeverityMax: 0
     trapsMinMax: {x: 0, y: 0}
-  - roomType: 3
-    prefabData:
-    - {fileID: 11400000, guid: 0d2468f8b99cc83438a2fe3d8c03d282, type: 2}
-    countMinMax: {x: 0, y: 3}
-    lockDoor: 1
-    enemiesMax: 0
-    enemiesSeverityMax: 0
-    trapsMinMax: {x: 0, y: 0}
-  - roomType: 5
-    prefabData:
-    - {fileID: 11400000, guid: 0d2468f8b99cc83438a2fe3d8c03d282, type: 2}
-    countMinMax: {x: 0, y: 3}
-    lockDoor: 1
-    enemiesMax: 0
-    enemiesSeverityMax: 0
-    trapsMinMax: {x: 0, y: 0}
   - roomType: 4
     prefabData:
     - {fileID: 11400000, guid: 0d2468f8b99cc83438a2fe3d8c03d282, type: 2}
@@ -86,15 +70,7 @@ MonoBehaviour:
     enemiesMax: 0
     enemiesSeverityMax: 0
     trapsMinMax: {x: 0, y: 0}
-  - roomType: 7
-    prefabData:
-    - {fileID: 11400000, guid: 0d2468f8b99cc83438a2fe3d8c03d282, type: 2}
-    countMinMax: {x: 0, y: 3}
-    lockDoor: 1
-    enemiesMax: 0
-    enemiesSeverityMax: 0
-    trapsMinMax: {x: 0, y: 0}
-  additionalRoomTypes: 03000000040000000500000007000000
+  additionalRoomTypes: 04000000
   additionalHealingRooms: 2
   roomsCountMinMax: {x: 9, y: 12}
   startingThemes:
@@ -107,3 +83,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f6c6f6c675d89f14db8217272c9510ce, type: 2}
   - {fileID: 11400000, guid: 72b9dc47dfcb15249b53ffbdacca8610, type: 2}
   themeChanges: {x: 2, y: 3}
+  allowDuplicates: 1
