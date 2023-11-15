@@ -207,7 +207,7 @@ public class PCGRoom : MonoBehaviour
 
     void SetPuzzleElements()
     {
-        if (roomType != E_RoomTypes.Puzzle) return;
+        //if (roomType != E_RoomTypes.Puzzle) return;
 
         DoorLocks[] doorLocks = GetComponentsInChildren<DoorLocks>();
 

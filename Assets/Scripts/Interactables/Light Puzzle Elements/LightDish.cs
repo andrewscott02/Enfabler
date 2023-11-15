@@ -9,7 +9,7 @@ public class LightDish : MonoBehaviour, IReceiveLight
     void Awake()
     {
         reflectEmitter = GetComponentInParent<LightEmitter>();
-        reflectEmitter.emitting = false;
+        reflectEmitter.StopEmitLight();
     }
 
     public void ReceiveLight(bool harm)

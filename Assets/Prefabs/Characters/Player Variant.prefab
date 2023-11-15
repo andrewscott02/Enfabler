@@ -2799,52 +2799,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.30644223, y: -0.013595223, z: -0.00024223328}
     m_Extent: {x: 0.4478803, y: 0.2521401, z: 0.62714386}
   m_DirtyAABB: 0
---- !u!1 &610140101272700633
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8009172602995649551}
-  - component: {fileID: 3096041584393716032}
-  m_Layer: 10
-  m_Name: Player Reflector Container
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8009172602995649551
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 610140101272700633}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5757735473371870501}
-  m_Father: {fileID: 1873655639226321532}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3096041584393716032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 610140101272700633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d321e674ee98384ca29c3910da02b1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightReceiverGO: {fileID: 2447564141991292963}
 --- !u!1001 &753566803148933282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2919,7 +2873,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 8009172602995649551}
+    m_TransformParent: {fileID: 1873655639226321532}
     m_Modifications:
     - target: {fileID: 3857238865640896489, guid: 61c132f95281ace4fb5b4d08ad0fa69b,
         type: 3}
@@ -2929,7 +2883,7 @@ PrefabInstance:
     - target: {fileID: 6599815492020089583, guid: 61c132f95281ace4fb5b4d08ad0fa69b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6599815492020089583, guid: 61c132f95281ace4fb5b4d08ad0fa69b,
         type: 3}
@@ -2983,18 +2937,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61c132f95281ace4fb5b4d08ad0fa69b, type: 3}
---- !u!1 &2447564141991292963 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3857238865640896489, guid: 61c132f95281ace4fb5b4d08ad0fa69b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1472911073337460682}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5757735473371870501 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6599815492020089583, guid: 61c132f95281ace4fb5b4d08ad0fa69b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1472911073337460682}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9045643038095903400
 PrefabInstance:
   m_ObjectHideFlags: 0

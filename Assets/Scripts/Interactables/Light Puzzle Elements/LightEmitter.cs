@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class LightEmitter : MonoBehaviour, IEmitLight
 {
-    public bool emitting = true;
+    public bool emitOnStart = true;
+    public bool canEmit = true;
+    bool emitting = false;
     public bool canHarm = false;
 
     public LayerMask hitObjects;
@@ -14,6 +16,23 @@ public class LightEmitter : MonoBehaviour, IEmitLight
 
     IReceiveLight lastLightReceiver;
 
+    void Start()
+    {
+        StopEmitLight();
+
+        if (emitOnStart)
+        {
+            StartCoroutine(IDelayEmitStart(1f));
+        }
+    }
+
+    IEnumerator IDelayEmitStart(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        EmitLight();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -22,22 +41,28 @@ public class LightEmitter : MonoBehaviour, IEmitLight
 
         RaycastHit rayHit;
         float distance = maxDistance;
-        IReceiveLight lightReceiver = null;
 
         if (Physics.SphereCast(rayObject.transform.position, rayRadius, transform.forward, out rayHit, maxDistance, hitObjects))
         {
             distance = Vector3.Distance(rayObject.transform.position, rayHit.point);
 
-            lightReceiver = rayHit.collider.GetComponent<IReceiveLight>();
+            IReceiveLight lightReceiver = rayHit.collider.GetComponent<IReceiveLight>();
+
+            if (lastLightReceiver != null && lightReceiver != null && lightReceiver != lastLightReceiver)
+                lastLightReceiver.StopReceiveLight();
+
+            if (lightReceiver != null)
+            {
+                lightReceiver.ReceiveLight(canHarm);
+                lastLightReceiver = lightReceiver;
+            }
         }
-
-        if (lastLightReceiver != null && lightReceiver == null && lightReceiver != lastLightReceiver)
-            lastLightReceiver.StopReceiveLight();
-
-        if (lightReceiver != null)
+        else
         {
-            lightReceiver.ReceiveLight(canHarm);
-            lastLightReceiver = lightReceiver;
+            if (lastLightReceiver != null)
+                lastLightReceiver.StopReceiveLight();
+
+            lastLightReceiver = null;
         }
 
         Vector3 scale = rayObject.transform.localScale;
@@ -53,15 +78,20 @@ public class LightEmitter : MonoBehaviour, IEmitLight
 
     public void EmitLight()
     {
+        if (!canEmit) return;
+        if (emitting) return;
         //Debug.Log(gameObject.name + " is emitting light");
         emitting = true;
     }
 
     public void StopEmitLight()
     {
+        if (!emitting) return;
+
         //Debug.Log(gameObject.name + " has stopped emitting light");
         emitting = false;
         if (lastLightReceiver != null)
             lastLightReceiver.StopReceiveLight();
+        lastLightReceiver = null;
     }
 }
