@@ -18,7 +18,7 @@ public class StickyPlatform : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Collide with " + other.name);
+            Debug.Log("Stopped colliding with " + other.name);
 
             other.transform.parent = null;
         }
