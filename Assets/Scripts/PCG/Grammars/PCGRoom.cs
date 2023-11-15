@@ -63,6 +63,8 @@ public class PCGRoom : MonoBehaviour
 
         SpawnEnemies();
         SpawnBoss();
+
+        SetPuzzleElements();
     }
 
     Door door;
@@ -201,6 +203,21 @@ public class PCGRoom : MonoBehaviour
         BaseCharacterController enemy = go.GetComponent<BaseCharacterController>();
         enemy.characterDied += EnemyKilled;
         enemiesInRoom++;
+    }
+
+    void SetPuzzleElements()
+    {
+        if (roomType != E_RoomTypes.Puzzle) return;
+
+        DoorLocks[] doorLocks = GetComponentsInChildren<DoorLocks>();
+
+        foreach(var item in doorLocks)
+        {
+            if (item.unlockMainDoor)
+            {
+                item.interactable = door;
+            }
+        }
     }
 
     public void DeleteRoom()

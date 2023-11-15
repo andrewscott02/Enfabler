@@ -12,12 +12,26 @@ public class Interactable : MonoBehaviour, IInteractable
     public bool multipleInteractions = false;
     public Object interactFX;
 
+    public LightReceiver lightReceiverUnlocker; //Replace with generic parent once functionality is complete
+    public bool invertUnlock = false;
+
     protected bool canBeInteracted = true;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         player = GameObject.FindObjectOfType<PlayerController>();
+
+        SetupPuzzleDoorUnlock();
+    }
+
+    public void SetupPuzzleDoorUnlock()
+    {
+        if (lightReceiverUnlocker != null)
+        {
+            lightReceiverUnlocker.enableDelegate += invertUnlock ? LockInteraction : UnlockInteraction;
+            lightReceiverUnlocker.disableDelegate += invertUnlock ? UnlockInteraction : LockInteraction;
+        }
     }
 
     public MonoBehaviour GetScript()
@@ -27,7 +41,14 @@ public class Interactable : MonoBehaviour, IInteractable
 
     public void UnlockInteraction()
     {
+        Debug.Log("Unlock Interaction");
         lockedInteraction = false;
+    }
+
+    public void LockInteraction()
+    {
+        Debug.Log("Unlock Interaction");
+        lockedInteraction = true;
     }
 
     protected virtual void OnTriggerEnter(Collider other)

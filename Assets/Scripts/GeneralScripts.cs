@@ -286,7 +286,7 @@ public interface IEmitLight
 
 public interface IReceiveLight
 {
-    public void ReceiveLight();
+    public void ReceiveLight(bool harm);
     public void StopReceiveLight();
 }
 

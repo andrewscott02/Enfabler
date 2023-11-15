@@ -5,6 +5,7 @@ using UnityEngine;
 public class LightEmitter : MonoBehaviour, IEmitLight
 {
     public bool emitting = true;
+    public bool canHarm = false;
 
     public LayerMask hitObjects;
     public GameObject rayObject;
@@ -35,7 +36,7 @@ public class LightEmitter : MonoBehaviour, IEmitLight
 
         if (lightReceiver != null)
         {
-            lightReceiver.ReceiveLight();
+            lightReceiver.ReceiveLight(canHarm);
             lastLightReceiver = lightReceiver;
         }
 

@@ -12,7 +12,7 @@ public class LightDish : MonoBehaviour, IReceiveLight
         reflectEmitter.emitting = false;
     }
 
-    public void ReceiveLight()
+    public void ReceiveLight(bool harm)
     {
         //Debug.Log(gameObject.name + " is receiving light");
         reflectEmitter.EmitLight();

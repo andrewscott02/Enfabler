@@ -4,13 +4,36 @@ using UnityEngine;
 
 public class LightReceiver : MonoBehaviour, IReceiveLight
 {
-    public void ReceiveLight()
+    public bool invertUnlock = false;
+
+    public delegate void Delegate();
+    public Delegate enableDelegate, disableDelegate;
+
+    private void Awake()
     {
-        throw new System.NotImplementedException();
+        enableDelegate += Enable;
+        disableDelegate += Disable;
+    }
+
+    void Enable()
+    {
+        //Empty delegate function
+        //Debug.Log("Enable delegate");
+    }
+
+    void Disable()
+    {
+        //Empty delegate function
+        //Debug.Log("Disable delegate");
+    }
+
+    public void ReceiveLight(bool harm)
+    {
+        enableDelegate();
     }
 
     public void StopReceiveLight()
     {
-        throw new System.NotImplementedException();
+        disableDelegate();
     }
 }

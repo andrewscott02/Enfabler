@@ -420,7 +420,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void ResetAttack()
     {
-        Debug.Log("Reset Attack");
+        //Debug.Log("Reset Attack");
         if (animator == null)
             Debug.LogWarning("Animator of " + gameObject.name + " is null");
         animator.SetInteger("MeleeAttackCount", 0);
