@@ -278,6 +278,18 @@ public interface IInteractable
     void ShowInteractMessage(bool show);
 }
 
+public interface IEmitLight
+{
+    public void EmitLight();
+    public void StopEmitLight();
+}
+
+public interface IReceiveLight
+{
+    public void ReceiveLight();
+    public void StopReceiveLight();
+}
+
 #endregion
 
 #region Enums and Structs

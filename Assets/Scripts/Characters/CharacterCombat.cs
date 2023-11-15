@@ -172,6 +172,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         arrowCapacity = GetComponentInChildren<ArrowCapacityUI>();
         SetupArrows();
+
+        blockingDelegate += Blocking;
     }
 
     private void Update()
@@ -490,7 +492,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         CheckMoveToTarget(transform.position, transform.forward, snapLayerMask, moveDistanceThreshold.y);
 
-        InvokeRepeating("AttackCheck", 0f, 0.004f);
+        InvokeRepeating("AttackCheck", 0f, 0.0002f);
 
         PlaySoundEffect(weapon.attackClip, weapon.soundVolume);
     }
@@ -933,6 +935,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Blocking
 
+    public delegate void BlockDelegate(bool blocking);
+    public BlockDelegate blockingDelegate;
+
     Coroutine armourRegenCoroutine;
 
     public virtual void Block(bool blocking, bool parryAvailable = true)
@@ -956,6 +961,13 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         animator.SetInteger("MeleeAttackCount", 0);
 
         if (animator != null) { animator.SetBool("Blocking", blocking); }
+
+        blockingDelegate(blocking);
+    }
+
+    public void Blocking(bool blocking)
+    {
+        //Empty delegate for blocking
     }
 
     public void ConsumeArmour()
