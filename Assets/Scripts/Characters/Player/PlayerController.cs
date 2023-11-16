@@ -28,9 +28,9 @@ public class PlayerController : BaseCharacterController
 
     #endregion
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         playerMovement = GetComponent<PlayerMovement>();

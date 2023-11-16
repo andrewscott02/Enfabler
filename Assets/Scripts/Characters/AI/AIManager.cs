@@ -10,7 +10,7 @@ public class AIManager : MonoBehaviour
     public List<BaseCharacterController> playerTeam;
     public List<BaseCharacterController> enemyTeam;
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
         enemiesDied += EnemiesDied;

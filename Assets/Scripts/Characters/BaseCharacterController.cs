@@ -13,7 +13,7 @@ public class BaseCharacterController : MonoBehaviour
 
     public bool playerTeam = true;
 
-    public virtual void Start()
+    public virtual void Awake()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -22,9 +22,9 @@ public class BaseCharacterController : MonoBehaviour
         health.animator = animator;
         combat = GetComponent<CharacterCombat>();
 
-        SetupRagdoll();
-
         characterDied += Died;
+
+        SetupRagdoll();
     }
 
     public Rigidbody rb { get; protected set; }
@@ -48,7 +48,7 @@ public class BaseCharacterController : MonoBehaviour
                 Rigidbody rbItem = item.GetComponent<Rigidbody>();
                 rbItem.useGravity = false;
 
-                item.isTrigger = this;
+                item.isTrigger = true;
                 ragdollColliders.Add(item);
             }
         }
@@ -59,10 +59,10 @@ public class BaseCharacterController : MonoBehaviour
     IEnumerator IDelaySetupAnim(float delay)
     {
         animator.enabled = false;
-        yield return new WaitForSeconds(delay);
-        animator.enabled = true;
 
-        ActivateRagdoll(false, new ExplosiveForceData(), false);
+        yield return new WaitForSeconds(delay);
+
+        animator.enabled = true;
     }
 
     public virtual void ActivateRagdoll(bool activate, ExplosiveForceData forceData, bool disableAnimator = true)

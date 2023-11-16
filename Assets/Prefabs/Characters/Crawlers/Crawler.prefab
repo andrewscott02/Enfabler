@@ -409,7 +409,7 @@ PrefabInstance:
     - target: {fileID: 3994084762757362941, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: m_Radius
-      value: 0.91
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: 4560520445148292859, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -439,7 +439,12 @@ PrefabInstance:
     - target: {fileID: 5444082673104886268, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: m_Radius
-      value: 1.36
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444082673104886268, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 6855086010748224455, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -591,8 +596,7 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.000000035390258
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5444082673104886268, guid: 9259463fa317d1c41aec05c50edaee45, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9259463fa317d1c41aec05c50edaee45, type: 3}
 --- !u!4 &7535070001232547603 stripped
 Transform:
@@ -600,22 +604,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1777372063883656379}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7535070001232547612 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8087211796610937767, guid: 9259463fa317d1c41aec05c50edaee45,
-    type: 3}
-  m_PrefabInstance: {fileID: 1777372063883656379}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &7951818595043748961
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7535070001232547612}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 1, z: 1.25}
-  m_Center: {x: 0, y: 0.5, z: 0}

@@ -55,9 +55,9 @@ public class AIController : BaseCharacterController
 
     public float roamTimeElapsed { get; protected set; } = 100;
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         player = GameObject.FindObjectOfType<PlayerController>().gameObject;
         agent = GetComponent<NavMeshAgent>();
         characterMovement = GetComponent<CharacterMovement>();

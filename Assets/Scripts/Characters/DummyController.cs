@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DummyController : BaseCharacterController
 {
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         StartCoroutine(ISequenceAttacks(2f));
     }
 
