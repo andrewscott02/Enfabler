@@ -48,6 +48,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     {
         MonoBehaviour attackerMono = attacker.GetScript();
 
+        Debug.Log(gameObject.name + " was hit");
+
         if (combat != null)
         {
             if (combat.GetDodging() && attacker.HitDodged()) return E_DamageEvents.Dodge;
