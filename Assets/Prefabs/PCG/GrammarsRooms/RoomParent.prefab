@@ -229,12 +229,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053f46c4d84509d4e97b966925172e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockOverride: 0
+  lockDoor: 0
   doorPoint: {fileID: 6885247599024351053}
   tempSpawnerObjects: {fileID: 8365603084591658663, guid: ec162ece2df892046ba15066ae0a7082,
     type: 3}
   enemySpawners: {fileID: 5691532340985619734}
   objectSpawners: {fileID: 4879353158944947427}
-  resetTransformsGizmo: 1
+  resetTransformsGizmo: 0
 --- !u!1 &3688193081782744877
 GameObject:
   m_ObjectHideFlags: 0
