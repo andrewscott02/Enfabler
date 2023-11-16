@@ -20,7 +20,17 @@ public class MoveableObject : PuzzleElement
         startPosition = transform.position;
         endPosition = startPosition + endOffset;
 
-        StartCoroutine(IMoveToPosition(startPosition, 0.1f));
+        switch (movementType)
+        {
+            case E_MovementType.Toggle:
+                moving = true;
+                StartCoroutine(IMoveToPosition(startPosition, moveDelay));
+                break;
+            case E_MovementType.EnableMovement:
+                moving = false;
+                targetPosition = startPosition;
+                break;
+        }
     }
 
     protected override void Activate()
@@ -33,6 +43,9 @@ public class MoveableObject : PuzzleElement
         {
             case E_MovementType.Toggle:
                 StartCoroutine(IMoveToPosition(endPosition, moveDelay));
+                break;
+            case E_MovementType.EnableMovement:
+                EnableMovement(true);
                 break;
         }
     }
@@ -48,6 +61,9 @@ public class MoveableObject : PuzzleElement
             case E_MovementType.Toggle:
                 StartCoroutine(IMoveToPosition(startPosition, moveDelay));
                 break;
+            case E_MovementType.EnableMovement:
+                EnableMovement(false);
+                break;
         }
     }
 
@@ -60,18 +76,36 @@ public class MoveableObject : PuzzleElement
         targetPosition = position;
     }
 
+    bool moving = false;
+
     void EnableMovement(bool enabled)
     {
-
+        moving = enabled;
     }
 
     private void Update()
     {
+        if (!moving) return;
+
         if (!HelperFunctions.AlmostEqualVector3(targetPosition, transform.position, 0.05f, Vector3.zero))
         {
             Vector3 dir = (targetPosition - transform.position).normalized;
 
             transform.position += dir * Time.deltaTime * moveSpeed;
+        }
+        else
+        {
+            if (movementType == E_MovementType.EnableMovement)
+            {
+                if (targetPosition == startPosition)
+                {
+                    targetPosition = endPosition;
+                }
+                else if (targetPosition == endPosition)
+                {
+                    targetPosition = startPosition;
+                }
+            }
         }
     }
 
