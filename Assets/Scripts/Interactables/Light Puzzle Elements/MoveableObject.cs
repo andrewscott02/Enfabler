@@ -28,6 +28,10 @@ public class MoveableObject : PuzzleElement
                 break;
             case E_MovementType.EnableMovement:
                 moving = false;
+                targetPosition = endPosition;
+                break;
+            case E_MovementType.EnableMovementReversable:
+                moving = false;
                 targetPosition = startPosition;
                 break;
         }
@@ -47,6 +51,9 @@ public class MoveableObject : PuzzleElement
             case E_MovementType.EnableMovement:
                 EnableMovement(true);
                 break;
+            case E_MovementType.EnableMovementReversable:
+                EnableMovement(true);
+                break;
         }
     }
 
@@ -62,6 +69,9 @@ public class MoveableObject : PuzzleElement
                 StartCoroutine(IMoveToPosition(startPosition, moveDelay));
                 break;
             case E_MovementType.EnableMovement:
+                EnableMovement(false);
+                break;
+            case E_MovementType.EnableMovementReversable:
                 EnableMovement(false);
                 break;
         }
@@ -95,7 +105,7 @@ public class MoveableObject : PuzzleElement
         }
         else
         {
-            if (movementType == E_MovementType.EnableMovement)
+            if (movementType == E_MovementType.EnableMovementReversable)
             {
                 if (targetPosition == startPosition)
                 {
@@ -118,5 +128,5 @@ public class MoveableObject : PuzzleElement
 
 public enum E_MovementType
 {
-    Toggle, EnableMovement
+    Toggle, EnableMovement, EnableMovementReversable
 }
