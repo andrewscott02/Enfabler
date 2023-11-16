@@ -27,6 +27,8 @@ public class MoveableObject : PuzzleElement
     {
         Debug.Log("Unlock Interaction");
 
+        StopAllCoroutines();
+
         switch (movementType)
         {
             case E_MovementType.Toggle:
@@ -39,6 +41,8 @@ public class MoveableObject : PuzzleElement
     {
         Debug.Log("Unlock Interaction");
 
+        StopAllCoroutines();
+
         switch (movementType)
         {
             case E_MovementType.Toggle:
@@ -49,6 +53,8 @@ public class MoveableObject : PuzzleElement
 
     IEnumerator IMoveToPosition(Vector3 position, float delay)
     {
+        targetPosition = transform.position;
+
         yield return new WaitForSeconds(delay);
 
         targetPosition = position;

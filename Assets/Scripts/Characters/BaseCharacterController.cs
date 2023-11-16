@@ -52,6 +52,8 @@ public class BaseCharacterController : MonoBehaviour
                 ragdollColliders.Add(item);
             }
         }
+
+        animator.enabled = true;
     }
 
     public virtual void ActivateRagdoll(bool activate, ExplosiveForceData forceData, bool disableAnimator = true)
