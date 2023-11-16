@@ -168,8 +168,9 @@ public class AIController : BaseCharacterController
     public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData, bool disableAnimator = true)
     {
         SetDestinationPos(gameObject.transform.position);
-        agent.enabled = false;
-        bt.enabled = false;
+        agent.enabled = !activate;
+        bt.enabled = !activate;
+
         base.ActivateRagdoll(activate, forceData, disableAnimator);
     }
 

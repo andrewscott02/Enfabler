@@ -278,7 +278,7 @@ public class PlayerController : BaseCharacterController
 
     public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData, bool disableAnimator)
     {
-        followTarget.follow.parent = null;
+        followTarget.follow.parent = activate ? null : followTarget.follow.transform;
 
         base.ActivateRagdoll(activate, forceData, disableAnimator);
     }

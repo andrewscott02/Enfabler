@@ -53,7 +53,16 @@ public class BaseCharacterController : MonoBehaviour
             }
         }
 
+        StartCoroutine(IDelaySetupAnim(0.5f));
+    }
+
+    IEnumerator IDelaySetupAnim(float delay)
+    {
+        animator.enabled = false;
+        yield return new WaitForSeconds(delay);
         animator.enabled = true;
+
+        ActivateRagdoll(false, new ExplosiveForceData(), false);
     }
 
     public virtual void ActivateRagdoll(bool activate, ExplosiveForceData forceData, bool disableAnimator = true)
@@ -82,8 +91,7 @@ public class BaseCharacterController : MonoBehaviour
         mainCollider.isTrigger = activate;
         mainCollider.enabled = !activate;
 
-        if (disableAnimator)
-            animator.enabled = !activate;
+        animator.enabled = !disableAnimator || !activate;
 
         if (activate && health.dying)
         {
