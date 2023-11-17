@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WebbingTrap : MonoBehaviour
+public class SlowArea : MonoBehaviour
 {
+    #region Setup
+
+    public E_SlowType slowType;
+    public float slowIntensity = 0.6f;
     public float duration = 8;
     public LayerMask groundLayer;
 
@@ -16,7 +20,8 @@ public class WebbingTrap : MonoBehaviour
             transform.position = hit.point;
         }
 
-        StartCoroutine(IDelayDestroy(duration));
+        if (duration > 0)
+            StartCoroutine(IDelayDestroy(duration));
     }
 
     IEnumerator IDelayDestroy(float delay)
@@ -26,28 +31,35 @@ public class WebbingTrap : MonoBehaviour
         Destroy(transform.parent.gameObject);
     }
 
+    #endregion
+
     #region Collision Events
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        CharacterCombat combatScript = other.GetComponent<CharacterCombat>();
+        SlowCharacter slowScript = other.GetComponent<SlowCharacter>();
 
-        if (combatScript != null)
+        if (slowScript != null)
         {
             Debug.Log(other.gameObject.name);
-            combatScript.SetSpeed(0.5f);
+            slowScript.SetAnimSpeed(slowIntensity, slowType);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        CharacterCombat combatScript = other.GetComponent<CharacterCombat>();
+        SlowCharacter slowScript = other.GetComponent<SlowCharacter>();
 
-        if (combatScript != null)
+        if (slowScript != null)
         {
-            combatScript.ResetAnimSpeed();
+            slowScript.ResetAnimSpeed();
         }
     }
 
     #endregion
+}
+
+public enum E_SlowType
+{
+    Web, Magic
 }

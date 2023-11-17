@@ -54,6 +54,11 @@ MonoBehaviour:
     severity: 8
     maxCount: 1
     timesUsed: 0
+  - enemyPrefab: {fileID: 8084795209297945531, guid: 2438332b8e708584fb5b6bc64c50ffff,
+      type: 3}
+    severity: 8
+    maxCount: 1
+    timesUsed: 0
   traps:
   - objectPrefab: {fileID: 4905393600926264160, guid: c9f9b14d4bd3f474cb22df0c1f757121,
       type: 3}
@@ -61,7 +66,15 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 262144
     randomRotation: 0
-    maxCount: 3
+    maxCount: 2
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: db6389ce041724a47a9f8658e97cec99,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 2
     timesUsed: 0
   objects:
   - objectPrefab: {fileID: 545217335562210824, guid: e3a5a680d477dc2419c3f1bdce72f6cc,

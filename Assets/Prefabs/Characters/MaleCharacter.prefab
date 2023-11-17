@@ -781,6 +781,7 @@ GameObject:
   - component: {fileID: 7378451652202160449}
   - component: {fileID: 1814884579404440104}
   - component: {fileID: 634613423001025932}
+  - component: {fileID: 7905470459028133162}
   m_Layer: 10
   m_Name: MaleCharacter
   m_TagString: Untagged
@@ -1042,6 +1043,19 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
+--- !u!114 &7905470459028133162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460243065040470235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6c2cc38697a104d802b45b594e8085, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowImmunities: 
 --- !u!1 &7504905428158614599
 GameObject:
   m_ObjectHideFlags: 0
