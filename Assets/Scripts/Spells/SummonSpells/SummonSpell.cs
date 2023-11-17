@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewSummonSpell", menuName = "Spells/SummonSpell", order = 0)]
+[CreateAssetMenu(fileName = "NewSummonSpell", menuName = "Spells/Summon", order = 1)]
 public class SummonSpell : SpellStats
 {
     [System.Serializable]
@@ -19,9 +19,14 @@ public class SummonSpell : SpellStats
     {
         base.CastSpell(caster, target);
 
+        SpawnObjects(caster, target);
+    }
+
+    void SpawnObjects(BaseCharacterController caster, GameObject target)
+    {
         for (int i = 0; i < summonData.Length; i++)
         {
-            for(int x = 0; x < summonData[i].count; x++)
+            for (int x = 0; x < summonData[i].count; x++)
             {
                 Vector3 spawnPos;
 
