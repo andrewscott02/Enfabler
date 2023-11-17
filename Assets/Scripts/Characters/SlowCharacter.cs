@@ -15,7 +15,6 @@ public class SlowCharacter : MonoBehaviour
 
     public void SetAnimSpeed(float speed, E_SlowType slowType)
     {
-        if (slowImmunities.Count <= 0) return;
         if (slowImmunities.Contains(slowType)) return;
 
         if (combatScript != null)

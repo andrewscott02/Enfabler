@@ -35,6 +35,17 @@ public class SlowArea : MonoBehaviour
 
     #region Collision Events
 
+    private void OnTriggerEnter(Collider other)
+    {
+        SlowCharacter slowScript = other.GetComponent<SlowCharacter>();
+
+        if (slowScript != null)
+        {
+            Debug.Log(other.gameObject.name);
+            slowScript.SetAnimSpeed(slowIntensity, slowType);
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         SlowCharacter slowScript = other.GetComponent<SlowCharacter>();

@@ -16,8 +16,13 @@ public class ProjectileSpell : SpellStats
 
     void SpawnProjectile(BaseCharacterController caster, Vector3 targetPos, int projectileDamage)
     {
-        GameObject projectileObj = Instantiate(projectileData.projectile, caster.transform.position, caster.transform.rotation) as GameObject;
+        Transform spawnTransform = attachToWeapon ? caster.GetCharacterCombat().weapon.transform : caster.transform;
+
+        GameObject projectileObj = Instantiate(projectileData.projectile, spawnTransform.position, new Quaternion(0, 0, 0, 0)) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
         projectileMove.Fire(targetPos, projectileData, caster.gameObject, projectileDamage);
+
+        Debug.Break();
+        Debug.Log(projectileObj.transform.name + " spawned");
     }
 }
