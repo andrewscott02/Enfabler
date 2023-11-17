@@ -11,6 +11,8 @@ public class RangedBehaviourTree : BehaviourTree
 
         Node root = new Selector(
 
+            BaseBehaviours.CastSpell(agent),
+
             new Selector(
 
                 new Sequence(
