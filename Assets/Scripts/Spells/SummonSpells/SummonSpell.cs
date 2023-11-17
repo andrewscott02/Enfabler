@@ -24,9 +24,9 @@ public class SummonSpell : SpellStats
 
     void SpawnObjects(BaseCharacterController caster, GameObject target)
     {
-        for (int i = 0; i < summonData.Length; i++)
+        foreach (var item in summonData)
         {
-            for (int x = 0; x < summonData[i].count; x++)
+            for (int i = 0; i < item.count; i++)
             {
                 Vector3 spawnPos;
 
@@ -39,7 +39,7 @@ public class SummonSpell : SpellStats
                     spawnPos = caster.transform.position;
                 }
 
-                Instantiate(summonData[i].summon, spawnPos, Quaternion.identity);
+                Instantiate(item.summon, spawnPos, Quaternion.identity);
             }
         }
     }

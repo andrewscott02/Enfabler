@@ -21,8 +21,5 @@ public class ProjectileSpell : SpellStats
         GameObject projectileObj = Instantiate(projectileData.projectile, spawnTransform.position, new Quaternion(0, 0, 0, 0)) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
         projectileMove.Fire(targetPos, projectileData, caster.gameObject, projectileDamage);
-
-        Debug.Break();
-        Debug.Log(projectileObj.transform.name + " spawned");
     }
 }

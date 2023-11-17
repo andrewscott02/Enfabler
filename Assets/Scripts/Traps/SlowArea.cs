@@ -13,6 +13,8 @@ public class SlowArea : MonoBehaviour
 
     private void Start()
     {
+        slowedCharacters = new List<SlowCharacter>();
+
         RaycastHit hit;
 
         if (Physics.Raycast(transform.position, Vector3.down, out hit, maxDistance: 5f, layerMask: groundLayer))
@@ -28,6 +30,11 @@ public class SlowArea : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
+        foreach (var item in slowedCharacters)
+        {
+            item.ResetAnimSpeed();
+        }
+
         Destroy(transform.parent.gameObject);
     }
 
@@ -35,13 +42,15 @@ public class SlowArea : MonoBehaviour
 
     #region Collision Events
 
+    List<SlowCharacter> slowedCharacters;
+
     private void OnTriggerEnter(Collider other)
     {
         SlowCharacter slowScript = other.GetComponent<SlowCharacter>();
 
         if (slowScript != null)
         {
-            Debug.Log(other.gameObject.name);
+            slowedCharacters.Add(slowScript);
             slowScript.SetAnimSpeed(slowIntensity, slowType);
         }
     }
@@ -52,7 +61,6 @@ public class SlowArea : MonoBehaviour
 
         if (slowScript != null)
         {
-            Debug.Log(other.gameObject.name);
             slowScript.SetAnimSpeed(slowIntensity, slowType);
         }
     }
@@ -63,6 +71,7 @@ public class SlowArea : MonoBehaviour
 
         if (slowScript != null)
         {
+            slowedCharacters.Remove(slowScript);
             slowScript.ResetAnimSpeed();
         }
     }
