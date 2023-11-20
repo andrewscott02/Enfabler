@@ -1,0 +1,197 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb80702b7ef81f40bbff8bbb3b314ca, type: 3}
+  m_Name: Citadel
+  m_EditorClassIdentifier: 
+  regionName: The Citadel
+  wallPiece: {fileID: 2541946485368774830, guid: 92ec45725b19874438faa8b988e7c56f,
+    type: 3}
+  wallPieceSize: {x: 3.2, y: 4, z: 0.4}
+  ceilingPiece: {fileID: 7026041110820078906, guid: b59fd87dc6d64694a8878b1415f77d4b,
+    type: 3}
+  ceilingPieceSize: {x: 4, y: 4, z: 0.0385}
+  floorPiece: {fileID: 7026041110820078906, guid: b4997e784cc1ccf4abaf6ea5f2fcea9a,
+    type: 3}
+  floorPieceSize: {x: 4, y: 4, z: 0.0385}
+  pillarPiece: {fileID: 2541946485368774830, guid: 84571306c5b0ae94ab3876d44c8fd0bc,
+    type: 3}
+  pillarPieceSize: {x: 4.75, y: 1.7, z: 1}
+  platformPiece: {fileID: 7026041110820078906, guid: 4396ab5601a09b8499bf7a034de988b6,
+    type: 3}
+  platformPieceSize: {x: 4.8, y: 4.8, z: 1}
+  enemies:
+  - enemyPrefab: {fileID: 8084795209297945531, guid: 512aa6e24f169394eab76f96dee48506,
+      type: 3}
+    severity: 10
+    maxCount: 5
+    timesUsed: 0
+  - enemyPrefab: {fileID: 8084795209297945531, guid: 615ddb8f256c16d409442d534afc0d92,
+      type: 3}
+    severity: 14
+    maxCount: 2
+    timesUsed: 0
+  - enemyPrefab: {fileID: 8084795209297945531, guid: 4e1749a9b950f8549b9f62f3b79f82eb,
+      type: 3}
+    severity: 16
+    maxCount: 1
+    timesUsed: 0
+  - enemyPrefab: {fileID: 8084795209297945531, guid: 369d1f5a966c1764f925ab0e324cea06,
+      type: 3}
+    severity: 12
+    maxCount: 2
+    timesUsed: 0
+  - enemyPrefab: {fileID: 8084795209297945531, guid: 86c0e4708452e4d42b6b079946321949,
+      type: 3}
+    severity: 20
+    maxCount: 1
+    timesUsed: 0
+  - enemyPrefab: {fileID: 8084795209297945531, guid: 2438332b8e708584fb5b6bc64c50ffff,
+      type: 3}
+    severity: 20
+    maxCount: 1
+    timesUsed: 0
+  traps:
+  - objectPrefab: {fileID: 4905393600926264160, guid: c9f9b14d4bd3f474cb22df0c1f757121,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 262144
+    randomRotation: 0
+    maxCount: 2
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: db6389ce041724a47a9f8658e97cec99,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 2
+    timesUsed: 0
+  objects:
+  - objectPrefab: {fileID: 545217335562210824, guid: e3a5a680d477dc2419c3f1bdce72f6cc,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 7163964241559660164, guid: 3c39e0d345cddd04b94cce7a2280d9de,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 270336
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 4f41843f4d618aa4fb3a7e38fd1c14e8,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 131072
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 2509518439431693169, guid: de5c2cc0892af2648935350e01f4b1ea,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 131072
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 7163964241559660164, guid: a277ae31bfa83744e8e46aceba6784d4,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 270336
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 2509518439431693169, guid: 0887111faf4d88643967796b21cf1294,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 131072
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 4905393600926264160, guid: 71be4cd37704db14da82a3ff3fac0835,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 262144
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: c426ee14a9c06054a87856bb918bf662,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 32768
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 0aa85648c0403a848b8f3c5577d3a688,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 32768
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: d6d73c7fc8f566f4bad09b6ad7442c5c,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 24576
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 90eed92abb5e72148b4d343cb4e44c5b,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 131072
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 4b4f7632ee41a2343ab996f1d90eae22,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 131072
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 0e7954d035558254480cd767137929a2,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 16384
+    randomRotation: 0
+    maxCount: 1
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 53a3bf658dacbeb4db0765d80834d5cd,
+      type: 3}
+    validSpawners:
+      serializedVersion: 2
+      m_Bits: 131072
+    randomRotation: 0
+    maxCount: 3
+    timesUsed: 0
+  doors:
+  - {fileID: 2541946485368774830, guid: 6d96a62ddb5626542b6e0a69ec930837, type: 3}
+  bosses:
+  - {fileID: 8084795209297945531, guid: e4179fd0c043aed49bb3992e6398017b, type: 3}
+  - {fileID: 8084795209297945531, guid: 4bbc7917bfec70d42b8355eee82694f6, type: 3}
+  - {fileID: 8084795209297945531, guid: 81579da2315572f4c9979000e404b9e7, type: 3}

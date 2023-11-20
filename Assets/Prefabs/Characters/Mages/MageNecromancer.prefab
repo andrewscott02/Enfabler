@@ -1646,7 +1646,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 25f2cceb2a04952488e0ca7a42f2411a, type: 2}
+  - {fileID: 2100000, guid: 3f00d573b8dfb8549bc4dddc52907748, type: 2}
   - {fileID: 2100000, guid: 355546449968e09468eedf8f222f7052, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -2630,13 +2630,30 @@ PrefabInstance:
         type: 3}
       propertyPath: weapons.Array.data[0]
       value: 
-      objectReference: {fileID: 2428336021445044379, guid: 60d289d1697d88d49ba1105b7655d44a,
+      objectReference: {fileID: 8460293430998555839, guid: 88845a13ede03ef4fae7cd582e85f7de,
         type: 3}
     - target: {fileID: 8256771312447821190, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: weapons.Array.data[1]
       value: 
       objectReference: {fileID: 1801235817504937343, guid: 52a59dfef43ab844badcf2ee73e97486,
+        type: 3}
+    - target: {fileID: 8256771312447821190, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: offhandWeapons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256771312447821190, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: offhandWeapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 8460293430998555839, guid: 88845a13ede03ef4fae7cd582e85f7de,
+        type: 3}
+    - target: {fileID: 8256771312447821190, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: offhandWeapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 8460293430998555839, guid: 88845a13ede03ef4fae7cd582e85f7de,
         type: 3}
     - target: {fileID: 8792795251848750678, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7656056166270713373}
   - component: {fileID: 978537617833714180}
+  - component: {fileID: 4105869923534097709}
   m_Layer: 6
   m_Name: Capsule
   m_TagString: IgnoreRagdoll
@@ -46,6 +47,18 @@ CapsuleCollider:
   m_Height: 2.21
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4105869923534097709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5115935210120436334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f474bb1aa31f10f47985557cf3f545da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8837602169260676381
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7135391807142172476}
   - component: {fileID: 5291790664778787787}
+  - component: {fileID: 3611117402967777760}
   m_Layer: 6
   m_Name: Capsule (1)
   m_TagString: IgnoreRagdoll
@@ -154,6 +168,18 @@ CapsuleCollider:
   m_Height: 2.21
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3611117402967777760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9143222933928291594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f474bb1aa31f10f47985557cf3f545da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1676827389330206826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -397,11 +423,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
-      propertyPath: hitReactData.killDestroyTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
-        type: 3}
       propertyPath: hitReactData.heavyHitReactThreshold
       value: 7
       objectReference: {fileID: 0}
@@ -529,6 +550,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672255493999721660, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: parryKnockback
+      value: 9000
       objectReference: {fileID: 0}
     - target: {fileID: 5010116991888690504, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}

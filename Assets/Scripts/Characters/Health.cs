@@ -33,6 +33,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         impulseSource = GetComponent<CinemachineImpulseSource>();
 
         HitReactionDelegate += HitReaction;
+        killDelegate += Kill;
     }
 
     public MonoBehaviour GetScript()
@@ -90,7 +91,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (CheckKill())
         {
             Vector3 forceOrigin = attacker != null ? attackerMono.gameObject.transform.position : spawnPos;
-            Kill(forceOrigin, damage);
+            killDelegate(forceOrigin, damage);
             if (hitReactData.deathFX != null)
             {
                 if (hitReactData.deathFXGO != null)
@@ -168,6 +169,9 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     }
 
     public bool dying = false;
+
+    public delegate void KillDelegate(Vector3 attacker, int damage);
+    public KillDelegate killDelegate;
 
     public void Kill(Vector3 attacker, int damage)
     {

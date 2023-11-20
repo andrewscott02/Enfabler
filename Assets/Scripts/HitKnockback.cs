@@ -13,17 +13,10 @@ public class HitKnockback : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         GetComponent<Health>().HitReactionDelegate += Hit;
-        GetComponent<CharacterCombat>().hitParry += Parry;
     }
 
     public void Hit(int damage, Vector3 dir)
     {
         rb.AddForce(dir * hitKnockBack * damage, ForceMode.Impulse);
-    }
-
-    public void Parry(Vector3 dir)
-    {
-        Debug.Log("Parry Knockback on " + gameObject.name);
-        rb.AddForce(dir * parryKnockback, ForceMode.Impulse);
     }
 }
