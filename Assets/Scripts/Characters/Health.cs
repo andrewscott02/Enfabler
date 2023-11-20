@@ -31,6 +31,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         AIController = GetComponent<AIController>();
         animator = GetComponent<Animator>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
+
+        HitReactionDelegate += HitReaction;
     }
 
     public MonoBehaviour GetScript()
@@ -47,24 +49,26 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     public E_DamageEvents Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot)
     {
         MonoBehaviour attackerMono = attacker.GetScript();
+        Vector3 dir = transform.position - attackerMono.transform.position;
+        dir.Normalize();
 
-        Debug.Log(gameObject.name + " was hit");
+        //Debug.Log(gameObject.name + " was hit");
 
         if (combat != null)
         {
             if (combat.GetDodging() && attacker.HitDodged()) return E_DamageEvents.Dodge;
 
-            if (combat.parrying && attacker.HitParried())
+            if (combat.parrying && attacker.HitParried(this))
             {
                 if (hitReactData.parryFX != null) { Instantiate(hitReactData.parryFX, spawnPos, Quaternion.Euler(spawnRot)); }
                 ParryReaction();
                 combat.ParrySuccess();
                 return E_DamageEvents.Parry;
             }
-            else if (combat.CanBlock() && attacker.HitBlocked())
+            else if (combat.CanBlock() && attacker.HitBlocked(this))
             {
                 if (hitReactData.blockFX != null) { Instantiate(hitReactData.blockFX, spawnPos, Quaternion.Euler(spawnRot)); }
-                HitReaction(damage);
+                HitReactionDelegate(damage, dir);
                 combat.ConsumeArmour();
                 return E_DamageEvents.Block;
             }
@@ -97,7 +101,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         }
         else
         {
-            HitReaction(damage);
+            HitReactionDelegate(damage, dir);
             if (hitReactData.bloodFX != null)
             {
                 Instantiate(hitReactData.bloodFX, spawnPos, Quaternion.Euler(spawnRot));
@@ -107,7 +111,10 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         return E_DamageEvents.Hit;
     }
 
-    void HitReaction(int damage)
+    public delegate void HitDelegate(int damage, Vector3 dir);
+    public HitDelegate HitReactionDelegate;
+
+    void HitReaction(int damage, Vector3 dir)
     {
         if (combat == null) { return; }
 

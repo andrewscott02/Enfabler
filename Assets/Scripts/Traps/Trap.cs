@@ -81,15 +81,16 @@ public class Trap : MonoBehaviour, ICanDealDamage
         return false;
     }
 
-    public bool HitBlocked()
+    public bool HitBlocked(IDamageable other)
     {
         return trapStats.canBlock;
     }
 
-    public bool HitParried()
+    public bool HitParried(IDamageable other)
     {
         return trapStats.canParry;
     }
+
     private void OnDestroy()
     {
         DeactivateTrap();

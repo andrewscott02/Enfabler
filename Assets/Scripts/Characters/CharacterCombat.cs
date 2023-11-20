@@ -174,6 +174,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         SetupArrows();
 
         blockingDelegate += Blocking;
+        hitParry += HitParry;
     }
 
     private void Update()
@@ -662,21 +663,35 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Hit Responses
 
+    public delegate void HitResponseDelegates(Vector3 dir);
+    public HitResponseDelegates hitBlock, hitParry;
+
     public bool HitDodged()
     {
         return true;
     }
 
-    public bool HitBlocked()
+    public bool HitBlocked(IDamageable other)
     {
         return !unblockable;
     }
 
-    public bool HitParried()
+    public bool HitParried(IDamageable other)
     {
         canAttack = false;
         animator.SetTrigger("HitReactLight");
+
+        Vector3 dir = transform.position - other.GetScript().transform.position;
+        dir.Normalize();
+
+        hitParry(dir);
+
         return true;
+    }
+
+    void HitParry(Vector3 dir)
+    {
+        //Empty delegate
     }
 
     #endregion

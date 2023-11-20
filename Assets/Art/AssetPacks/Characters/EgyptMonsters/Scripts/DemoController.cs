@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class DemoController : MonoBehaviour
 {
@@ -175,7 +176,7 @@ public class DemoController : MonoBehaviour
         {
             if (Input.anyKeyDown)
             {
-                Application.LoadLevel(Application.loadedLevelName);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 yield break;
             }
             else

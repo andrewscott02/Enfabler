@@ -268,8 +268,8 @@ public interface ICanDealDamage
     MonoBehaviour GetScript();
     E_DamageEvents DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot);
     bool HitDodged();
-    bool HitBlocked();
-    bool HitParried();
+    bool HitBlocked(IDamageable other);
+    bool HitParried(IDamageable other);
 }
 
 public interface IDamageable

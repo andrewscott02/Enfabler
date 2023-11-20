@@ -914,12 +914,56 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cb9547a4e4b65a4094e7e065c51f8ef, type: 3}
+--- !u!1 &355922905178725099 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2507777644918525017, guid: 0cb9547a4e4b65a4094e7e065c51f8ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 2755384403521869490}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3419729750592710881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355922905178725099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!4 &593455585912970278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3315061857953434260, guid: 0cb9547a4e4b65a4094e7e065c51f8ef,
     type: 3}
   m_PrefabInstance: {fileID: 2755384403521869490}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &707332556247212416 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3453667944410494770, guid: 0cb9547a4e4b65a4094e7e065c51f8ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 2755384403521869490}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &864093762808485873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707332556247212416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &2922621511320483573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1130,7 +1174,7 @@ PrefabInstance:
     - target: {fileID: 5685052665459586101, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: m_Name
-      value: PortalRoomToDepths
+      value: PortalRoom
       objectReference: {fileID: 0}
     - target: {fileID: 5685052665459586102, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
