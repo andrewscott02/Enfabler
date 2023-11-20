@@ -38,6 +38,8 @@ public class ProjectileHit : MonoBehaviour
                 //Debug.LogWarning("No interface");
                 Attach(other);
                 Destroy(move.gameObject);
+                if (trapStats.explosionFX != null)
+                    Instantiate(trapStats.explosionFX, transform.position, transform.rotation);
                 return;
             }
 

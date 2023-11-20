@@ -63,6 +63,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7535070001232547612, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
+    - target: {fileID: 1600513293264907759, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: projectileData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3adf2b0f9d73efa47b7b9f82af6ee568,
+        type: 2}
     - target: {fileID: 1630958497332680888, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -107,6 +113,12 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
+      propertyPath: spells.Array.data[2].spell
+      value: 
+      objectReference: {fileID: 11400000, guid: 6005f2e729c17c846850495c2ef571d5,
+        type: 2}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
       propertyPath: spells.Array.data[0].maxUses
       value: 1
       objectReference: {fileID: 0}
@@ -114,6 +126,11 @@ PrefabInstance:
         type: 3}
       propertyPath: spells.Array.data[1].maxUses
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[2].maxUses
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
@@ -128,6 +145,11 @@ PrefabInstance:
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
       propertyPath: spells.Array.data[1].distance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[2].distance
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
@@ -169,6 +191,16 @@ PrefabInstance:
         type: 3}
       propertyPath: spells.Array.data[1].cooldown.y
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[2].cooldown.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[2].cooldown.y
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
@@ -248,7 +280,7 @@ PrefabInstance:
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
       propertyPath: attacks.Array.data[1].unblockableChance
-      value: 0.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
@@ -264,6 +296,11 @@ PrefabInstance:
         type: 3}
       propertyPath: spells.Array.data[1].healthPercentageUse
       value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: spells.Array.data[2].healthPercentageUse
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}

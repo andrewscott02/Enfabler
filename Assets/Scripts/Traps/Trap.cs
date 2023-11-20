@@ -6,13 +6,17 @@ public class Trap : MonoBehaviour, ICanDealDamage
 {
     public TrapStats trapStats;
     TrapApplyEffect applyEffect;
-    SphereCollider applyCollider;
+    Collider applyCollider;
 
     private void Awake()
     {
         applyEffect = GetComponentInChildren<TrapApplyEffect>();
-        applyCollider = applyEffect.GetComponent<SphereCollider>();
-        applyCollider.radius = trapStats.range;
+        applyCollider = applyEffect.GetComponent<Collider>();
+
+        SphereCollider sphereCollider = applyCollider as SphereCollider;
+
+        if (sphereCollider != null)
+            sphereCollider.radius = trapStats.range;
     }
 
     public MonoBehaviour GetScript()
