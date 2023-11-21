@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9099827536197112898}
   - component: {fileID: 858604330709651360}
   - component: {fileID: 6664763397127359036}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,6 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afc9254ef6772cc42bea33c4448d5b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowType: 0
+  slowIntensity: 0.6
   duration: 8
   groundLayer:
     serializedVersion: 2
