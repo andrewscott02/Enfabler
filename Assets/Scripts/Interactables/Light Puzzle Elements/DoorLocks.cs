@@ -38,7 +38,7 @@ public class DoorLocks : PuzzleElement
 
     protected override void Activate()
     {
-        Debug.Log("Unlock Interaction");
+        //Debug.Log("Unlock Interaction");
         unlocked++;
 
         SetLockUI();

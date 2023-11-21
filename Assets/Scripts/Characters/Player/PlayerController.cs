@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PlayerController : BaseCharacterController
 {
@@ -69,7 +70,14 @@ public class PlayerController : BaseCharacterController
 
     public void SprintInput(InputAction.CallbackContext context)
     {
-        if (PauseMenu.instance.paused) return;
+        if (!gameObject.activeSelf) return;
+
+        if (PauseMenu.instance.paused)
+        {
+            if (sprintCoroutine != null)
+                StopCoroutine(sprintCoroutine);
+            return;
+        }
 
         if (context.performed)
         {
@@ -210,6 +218,40 @@ public class PlayerController : BaseCharacterController
         enableInteraction = interactable != null;
         this.interactable = interactable;
         interactAnim = interactType.ToString();
+    }
+
+    #endregion
+
+    #region Inputs - Pause Menu
+
+    public void Close(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        if (!PauseMenu.instance.paused) return;
+
+        PauseMenu.instance.Resume();
+    }
+
+    public void NextPage(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        if (!PauseMenu.instance.paused) return;
+
+        PauseMenu.instance.ChangePage(true);
+    }
+
+    public void PreviousPage(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        if (!PauseMenu.instance.paused) return;
+
+        PauseMenu.instance.ChangePage(false);
+    }
+
+    public void OnControlsChange(PlayerInput input)
+    {
+        if (PauseMenu.instance != null)
+            PauseMenu.instance.OnControlsChange(input);
     }
 
     #endregion

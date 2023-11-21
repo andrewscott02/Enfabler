@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class PauseMenu : MonoBehaviour
 
     E_Scenes mainMenu = E_Scenes.MainMenu;
     public GameObject pauseMenu, controls;
+    public GameObject pauseMenuDefaultButton, controlsDefaultButton;
+    GameObject currentPageDefault;
     public GameObject[] howToPlayPages;
 
     float unpausedTimeScale = 1;
@@ -27,8 +31,7 @@ public class PauseMenu : MonoBehaviour
         //Debug.Log("Pause game input");
         ShowMouse(true);
         paused = true;
-        pauseMenu.SetActive(true);
-        controls.SetActive(false);
+        ShowControls(false);
 
         Time.timeScale = 0;
     }
@@ -37,6 +40,7 @@ public class PauseMenu : MonoBehaviour
     {
         ShowMouse(false);
         paused = false;
+        ShowControls(false);
         pauseMenu.SetActive(false);
         controls.SetActive(false);
 
@@ -47,6 +51,10 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(!show);
         controls.SetActive(show);
+
+        currentPageDefault = show ? controlsDefaultButton : pauseMenuDefaultButton;
+        EventSystem.current.SetSelectedGameObject(currentPageDefault);
+
         ShowHowToPlayPage(0);
     }
 
@@ -78,5 +86,12 @@ public class PauseMenu : MonoBehaviour
     {
         int nextPage = currentPage + (next ? 1 : -1);
         ShowHowToPlayPage(nextPage);
+    }
+
+    public void OnControlsChange(PlayerInput input)
+    {
+        if (input.currentControlScheme != "Gamepad") return;
+
+        EventSystem.current.SetSelectedGameObject(currentPageDefault);
     }
 }

@@ -198,7 +198,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
                         if (reversedRooms[i])
                         {
-                            Debug.Log("Reverse room " + i);
+                            //Debug.Log("Reverse room " + i);
 
                             rot.y += 180;
                             go.transform.rotation = rot;

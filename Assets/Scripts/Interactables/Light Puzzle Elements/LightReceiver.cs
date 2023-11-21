@@ -18,13 +18,13 @@ public class LightReceiver : MonoBehaviour, IReceiveLight
     void Enable()
     {
         //Empty delegate function
-        Debug.Log("Enable delegate");
+        //Debug.Log("Enable delegate");
     }
 
     void Disable()
     {
         //Empty delegate function
-        Debug.Log("Disable delegate");
+        //Debug.Log("Disable delegate");
     }
 
     bool receivingLight = false;

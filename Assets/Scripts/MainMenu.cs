@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class MainMenu : MonoBehaviour
 {
+    #region Setup
+
     public E_Scenes pcgDungeon, arena;
     public GameObject mainMenu, controls;
+    public GameObject mainMenuDefaultButton, controlsDefaultButton;
+    GameObject currentPageDefault;
     public GameObject[] howToPlayPages;
 
     private void Start()
@@ -14,6 +20,16 @@ public class MainMenu : MonoBehaviour
         ShowMouse(true);
         ShowControls(false);
     }
+
+    void ShowMouse(bool visible)
+    {
+        Cursor.visible = visible;
+        Cursor.lockState = visible ? CursorLockMode.Confined : CursorLockMode.Locked;
+    }
+
+    #endregion
+
+    #region Buttons
 
     public void StartGame()
     {
@@ -30,18 +46,16 @@ public class MainMenu : MonoBehaviour
     {
         mainMenu.SetActive(!show);
         controls.SetActive(show);
+
+        currentPageDefault = show ? controlsDefaultButton : mainMenuDefaultButton;
+        EventSystem.current.SetSelectedGameObject(currentPageDefault);
+
         ShowHowToPlayPage(0);
     }
 
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    void ShowMouse(bool visible)
-    {
-        Cursor.visible = visible;
-        Cursor.lockState = visible ? CursorLockMode.Confined : CursorLockMode.Locked;
     }
 
     int currentPage = 0;
@@ -61,4 +75,38 @@ public class MainMenu : MonoBehaviour
         int nextPage = currentPage + (next ? 1 : -1);
         ShowHowToPlayPage(nextPage);
     }
+
+    #endregion
+
+    #region Inputs
+
+    public void Close(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        ShowControls(false);
+    }
+
+    public void NextPage(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        ChangePage(true);
+    }
+
+    public void PreviousPage(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        ChangePage(false);
+    }
+
+    public void OnControlsChange(PlayerInput input)
+    {
+        if (input.currentControlScheme != "Gamepad") return;
+
+        EventSystem.current.SetSelectedGameObject(currentPageDefault);
+    }
+
+    #endregion
 }

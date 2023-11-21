@@ -206,7 +206,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public void SetupWeapon(int weaponIndex)
     {
         if (setWeapon.currentWeapon == weaponIndex) return;
-        Debug.Log("changeWeapon " + setWeapon.currentWeapon + " to " + weaponIndex);
+
         this.weapon = setWeapon.CreateWeapon(weaponIndex, 0, setWeapon.weapons);
         setWeapon.CreateWeapon(weaponIndex, 1, setWeapon.offhandWeapons);
     }
