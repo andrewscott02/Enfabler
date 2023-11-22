@@ -219,6 +219,7 @@ public class AIController : BaseCharacterController
 
     bool doubleAttack;
 
+    public bool ignoreAttackQueue = false;
     public AIAttackData[] attacks;
 
     [System.Serializable]
@@ -403,6 +404,12 @@ public class AIController : BaseCharacterController
             }
 
             agent.isStopped = true;
+
+            if (AIManager.instance != null)
+            {
+                AIManager.instance.Dequeue(this, true);
+            }
+
             return true;
         }
 

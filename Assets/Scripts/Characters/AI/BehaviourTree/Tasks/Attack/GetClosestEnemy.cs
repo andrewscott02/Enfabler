@@ -32,11 +32,13 @@ public class GetClosestEnemy : Node
 
             agent.currentTarget = enemy;
             agent.alert = true;
+
             state = NodeState.Success;
         }
         else
         {
             //Debug.Log("Failed to get enemy nearby");
+            AIManager.instance.Dequeue(agent, false);
             state = NodeState.Failure;
         }
 

@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class AIManager : MonoBehaviour
 {
+    #region Setup
+
     public static AIManager instance;
 
     public List<BaseCharacterController> playerTeam;
@@ -16,6 +18,52 @@ public class AIManager : MonoBehaviour
         enemiesDied += EnemiesDied;
         playerDied += PlayerDied;
     }
+
+    #endregion
+
+    #region Character Deaths
+
+    public void CharacterDied(BaseCharacterController character)
+    {
+        if (playerTeam.Contains(character))
+        {
+            playerTeam.Remove(character);
+            if (playerTeam.Count == 0)
+            {
+                playerDied();
+            }
+        }
+        else if (enemyTeam.Contains(character))
+        {
+            AIController agent = character as AIController;
+
+            if (agent != null)
+            {
+                enemyActionsQueue.Remove(agent);
+            }
+
+            enemyTeam.Remove(character);
+            if (enemyTeam.Count <= 0)
+            {
+                enemiesDied();
+            }
+        }
+    }
+
+    public void PlayerDied()
+    {
+        NextLevel();
+    }
+
+    public void EnemiesDied()
+    {
+        //Debug.Log("Enemies are dead");
+        //Empty function for delegate
+    }
+
+    #endregion
+
+    #region Teams
 
     public void AllocateTeam(BaseCharacterController character)
     {
@@ -40,26 +88,6 @@ public class AIManager : MonoBehaviour
 
             enemyTeam.Add(character);
             character.GetCharacterCombat().SetupAllies(enemyTeam);
-        }
-    }
-
-    public void CharacterDied(BaseCharacterController character)
-    {
-        if (playerTeam.Contains(character))
-        {
-            playerTeam.Remove(character);
-            if (playerTeam.Count == 0)
-            {
-                playerDied();
-            }
-        }
-        else if (enemyTeam.Contains(character))
-        {
-            enemyTeam.Remove(character);
-            if (enemyTeam.Count <= 0)
-            {
-                enemiesDied();
-            }
         }
     }
 
@@ -92,6 +120,10 @@ public class AIManager : MonoBehaviour
         return GetAllyTeam(a).Contains(b);
     }
 
+    #endregion
+
+    #region Scene Management
+
     public void NextLevel()
     {
         GameCanvasManager.instance.defeatUI.SetActive(true);
@@ -110,14 +142,51 @@ public class AIManager : MonoBehaviour
     public delegate void TeamDiedDelegate();
     public TeamDiedDelegate playerDied, enemiesDied;
 
-    public void PlayerDied()
+    #endregion
+
+    #region AI Actions Manager
+
+    public List<AIController> enemyActionsQueue;
+    public Vector2 actionsCooldown = new Vector2(2, 5);
+    float lastAction = 5;
+
+    public void Enqueue(AIController agent)
     {
-        NextLevel();
+        if (enemyActionsQueue.Contains(agent)) return;
+
+        Debug.Log("Enqueuing agent");
+        enemyActionsQueue.Add(agent);
     }
 
-    public void EnemiesDied()
+    public void Dequeue(AIController agent, bool attacked)
     {
-        //Debug.Log("Enemies are dead");
-        //Empty function for delegate
+        if (attacked) lastAction = Random.Range(actionsCooldown.x, actionsCooldown.y);
+
+        if (!enemyActionsQueue.Contains(agent)) return;
+
+        enemyActionsQueue.Remove(agent);
     }
+
+    public bool CanAttack(AIController agent)
+    {
+        if (agent.ignoreAttackQueue) return true;
+
+        if (lastAction > 0) return false;
+
+        bool canAttack = false;
+
+        if (enemyActionsQueue.Count > 0)
+            canAttack = enemyActionsQueue[0] == agent;
+
+        //TODO: Enable attack if enemy is close
+
+        return canAttack;
+    }
+
+    private void Update()
+    {
+        lastAction -= Time.deltaTime;
+    }
+
+    #endregion
 }

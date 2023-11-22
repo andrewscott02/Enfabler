@@ -3,26 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTrees;
 
-public class IsValidAttack : Node
+public class EnqueueAttack : Node
 {
-    AIController.AIAttackData attack;
+    AIController agent;
     public CharacterCombat.AttackType attackType;
 
     /// <summary>
     /// Commands an agent to make a melee attack against its target
     /// </summary>
     /// <param name="agent">The agent this command is given to</param>
-    public IsValidAttack(AIController.AIAttackData attack, CharacterCombat.AttackType attackType)
+    public EnqueueAttack(AIController agent, CharacterCombat.AttackType attackType)
     {
-        this.attack = attack;
+        this.agent = agent;
         this.attackType = attackType;
     }
 
     public override NodeState Evaluate()
     {
-        if (attack.attackType == attackType)
+        if (agent.CanAttack(attackType))
         {
-            //Debug.Log("Can attack : " + attackType);
+            AIManager.instance.Enqueue(agent);
 
             return NodeState.Success;
         }

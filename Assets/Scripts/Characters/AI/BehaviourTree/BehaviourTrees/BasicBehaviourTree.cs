@@ -41,9 +41,9 @@ public class BasicBehaviourTree : BehaviourTree
                     new CannotAttack(agent, CharacterCombat.AttackType.PrimaryAttack),
                     BaseBehaviours.MoveToRange(agent, 35f, false)
                     ),
-
-                    //Checks if the closest enemy is within melee range and makes an attack if true
-                    BaseBehaviours.AttackClosestTarget(agent, true, agent.GetAttackFromType(CharacterCombat.AttackType.PrimaryAttack), CharacterCombat.AttackType.PrimaryAttack)
+                
+                //Checks if the closest enemy is within melee range and makes an attack if true
+                BaseBehaviours.AttackClosestTarget(agent, true, agent.GetAttackFromType(CharacterCombat.AttackType.PrimaryAttack), CharacterCombat.AttackType.PrimaryAttack)
                 ),
 
             //Checks if the closest enemy is within sight range and moves towards it if true

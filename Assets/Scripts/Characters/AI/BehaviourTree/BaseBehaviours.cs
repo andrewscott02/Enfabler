@@ -162,10 +162,17 @@ namespace BehaviourTrees
             return new Selector(
                 DefensiveAction(agent),
                 new Sequence(
+                    new IsTurn(agent),
                     new IsValidAttack(attack, attackType),
                     new GetClosestEnemy(agent, attack.distance),
                     new MoveToDestination(agent, 6f, sprinting, agent.distanceAllowance),
                     new Attack(agent, attack.attackType)
+                    ),
+                new Sequence(
+                    new IsValidAttack(attack, attackType),
+                    new GetClosestEnemy(agent, attack.distance),
+                    new EnqueueAttack(agent, attackType),
+                    BaseBehaviours.MoveToRange(agent, 35f, false)
                     )
                 );
         }

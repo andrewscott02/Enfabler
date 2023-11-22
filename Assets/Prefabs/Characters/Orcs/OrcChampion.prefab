@@ -4112,6 +4112,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
+      propertyPath: ignoreAttackQueue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
       propertyPath: attacks.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -4128,12 +4133,12 @@ PrefabInstance:
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: attacks.Array.data[0].cooldown.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: attacks.Array.data[0].cooldown.y
-      value: 3.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -4224,6 +4229,11 @@ PrefabInstance:
         type: 3}
       propertyPath: hitReactData.lightHitReactThreshold
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3633430296530076980, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4560520445148292859, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
