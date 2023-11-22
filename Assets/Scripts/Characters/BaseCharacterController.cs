@@ -53,15 +53,6 @@ public class BaseCharacterController : MonoBehaviour
             }
         }
 
-        StartCoroutine(IDelaySetupAnim(0.5f));
-    }
-
-    IEnumerator IDelaySetupAnim(float delay)
-    {
-        animator.enabled = false;
-
-        yield return new WaitForSeconds(delay);
-
         animator.enabled = true;
     }
 

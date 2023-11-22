@@ -15,6 +15,7 @@ public class ResetPelvisTransform : MonoBehaviour
         scale = transform.localScale;
 
         Invoke("ResetTransform", 1f);
+        Invoke("ResetTransform", 5f);
     }
 
     void ResetTransform()

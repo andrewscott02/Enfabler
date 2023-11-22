@@ -405,9 +405,12 @@ public class AIController : BaseCharacterController
 
             agent.isStopped = true;
 
-            if (AIManager.instance != null)
+            if (!doubleAttack)
             {
-                AIManager.instance.Dequeue(this, true);
+                if (AIManager.instance != null)
+                {
+                    AIManager.instance.Dequeue(this, true);
+                }
             }
 
             return true;

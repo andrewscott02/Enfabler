@@ -63,7 +63,7 @@ public class PCGRoom : MonoBehaviour
         SpawnTraps();
         SpawnObjects();
 
-        SpawnEnemies();
+        Invoke("SpawnEnemies", 0.5f);
         SpawnBoss();
 
         SetPuzzleElements();
