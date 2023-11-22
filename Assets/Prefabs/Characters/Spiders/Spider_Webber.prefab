@@ -7,12 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1600513293264907759, guid: 60852a8de2fda81479e00ddb3729d863,
-        type: 3}
-      propertyPath: projectileData
-      value: 
-      objectReference: {fileID: 11400000, guid: 0bfb920d03d71b74ba61b921080cf6f6,
-        type: 2}
     - target: {fileID: 1711659129308967593, guid: 60852a8de2fda81479e00ddb3729d863,
         type: 3}
       propertyPath: bt
@@ -20,13 +14,39 @@ PrefabInstance:
       objectReference: {fileID: 144736726638300110}
     - target: {fileID: 1711659129308967593, guid: 60852a8de2fda81479e00ddb3729d863,
         type: 3}
+      propertyPath: spells.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: 60852a8de2fda81479e00ddb3729d863,
+        type: 3}
       propertyPath: attacks.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: 60852a8de2fda81479e00ddb3729d863,
         type: 3}
+      propertyPath: spells.Array.data[0].spell
+      value: 
+      objectReference: {fileID: 11400000, guid: a34a2a2056b10e54a9242c0a840bbe91,
+        type: 2}
+    - target: {fileID: 1711659129308967593, guid: 60852a8de2fda81479e00ddb3729d863,
+        type: 3}
+      propertyPath: spells.Array.data[0].distance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: 60852a8de2fda81479e00ddb3729d863,
+        type: 3}
       propertyPath: attacks.Array.data[1].distance
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: 60852a8de2fda81479e00ddb3729d863,
+        type: 3}
+      propertyPath: spells.Array.data[0].cooldown.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: 60852a8de2fda81479e00ddb3729d863,
+        type: 3}
+      propertyPath: spells.Array.data[0].cooldown.y
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: 60852a8de2fda81479e00ddb3729d863,
         type: 3}
