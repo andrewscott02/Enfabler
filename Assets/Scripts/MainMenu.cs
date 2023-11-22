@@ -107,7 +107,10 @@ public class MainMenu : MonoBehaviour
 
     public void OnControlsChange(PlayerInput input)
     {
-        if (input.currentControlScheme != "Gamepad") return;
+        bool usingGamepad = input.currentControlScheme == "Gamepad";
+        ShowMouse(!usingGamepad);
+
+        if (!usingGamepad) return;
 
         EventSystem.current.SetSelectedGameObject(currentPageDefault);
     }

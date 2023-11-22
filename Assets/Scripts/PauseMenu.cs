@@ -28,7 +28,13 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
-        //Debug.Log("Pause game input");
+        StartCoroutine(IDelayPause(0.15f));
+    }
+
+    IEnumerator IDelayPause(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+
         ShowMouse(true);
         paused = true;
         ShowControls(false);
@@ -38,6 +44,13 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        StartCoroutine(IDelayResume(0.15f));
+    }
+
+    IEnumerator IDelayResume(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+
         ShowMouse(false);
         paused = false;
         ShowControls(false);
@@ -90,7 +103,18 @@ public class PauseMenu : MonoBehaviour
 
     public void OnControlsChange(PlayerInput input)
     {
-        if (input.currentControlScheme != "Gamepad") return;
+        bool usingGamepad = input.currentControlScheme == "Gamepad";
+
+        if (paused)
+        {
+            ShowMouse(!usingGamepad);
+        }
+        else
+        {
+            ShowMouse(false);
+        }
+
+        if (!usingGamepad) return;
 
         EventSystem.current.SetSelectedGameObject(currentPageDefault);
     }

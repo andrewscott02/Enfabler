@@ -60,7 +60,13 @@ public class PlayerController : BaseCharacterController
 
     public void CameraInput(InputAction.CallbackContext context)
     {
-        if (PauseMenu.instance.paused) return;
+        if (PauseMenu.instance.paused)
+        {
+            xRotateInput = 0;
+            yRotateInput = 0;
+
+            return;
+        }
 
         xRotateInput = context.ReadValue<Vector2>().x;
         yRotateInput = context.ReadValue<Vector2>().y;
@@ -224,6 +230,14 @@ public class PlayerController : BaseCharacterController
 
     #region Inputs - Pause Menu
 
+    public void PauseInput(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        if (PauseMenu.instance.paused) return;
+
+        PauseMenu.instance.PauseGame();
+    }
+
     public void Close(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
@@ -248,22 +262,14 @@ public class PlayerController : BaseCharacterController
         PauseMenu.instance.ChangePage(false);
     }
 
-    public void OnControlsChange(PlayerInput input)
-    {
-        if (PauseMenu.instance != null)
-            PauseMenu.instance.OnControlsChange(input);
-    }
-
     #endregion
 
     #region Inputs - Other
 
-    public void PauseInput(InputAction.CallbackContext context)
+    public void OnControlsChange(PlayerInput input)
     {
-        if (!context.performed)
-            return;
-
-        PauseMenu.instance.PauseGame();
+        if (PauseMenu.instance != null)
+            PauseMenu.instance.OnControlsChange(input);
     }
 
     #endregion
