@@ -30,12 +30,27 @@ public class SlowArea : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
+        DisableSlow();
+
+        Destroy(transform.parent.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        DisableSlow();
+    }
+
+    private void OnDisable()
+    {
+        DisableSlow();
+    }
+
+    void DisableSlow()
+    {
         foreach (var item in slowedCharacters)
         {
             item.ResetAnimSpeed();
         }
-
-        Destroy(transform.parent.gameObject);
     }
 
     #endregion
