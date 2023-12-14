@@ -14,8 +14,10 @@ public class StatueTrap : MonoBehaviour
     void Start()
     {
         combat = GetComponentInChildren<CharacterCombat>();
-        combat.armourSlider.gameObject.SetActive(false);
-        combat.armourSlider = null;
+
+        Armour armour = GetComponentInChildren<Armour>();
+        armour.armourSlider.gameObject.SetActive(false);
+        armour.armourSlider = null;
 
         health = GetComponentInChildren<Health>();
         health.healthSlider.gameObject.SetActive(false);

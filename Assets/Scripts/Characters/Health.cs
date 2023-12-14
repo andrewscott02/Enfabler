@@ -11,6 +11,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     public ConstructPlayerModel modelConstructor;
 
     public SliderScript healthSlider;
+    public Armour armourScript;
     CharacterCombat combat;
     public int maxHealth = 50;
     int currentHealth = 0; public int GetCurrentHealth() { return currentHealth; }
@@ -34,6 +35,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
         HitReactionDelegate += HitReaction;
         killDelegate += Kill;
+
+        armourScript = GetComponent<Armour>();
     }
 
     public MonoBehaviour GetScript()
@@ -63,14 +66,14 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             {
                 if (hitReactData.parryFX != null) { Instantiate(hitReactData.parryFX, spawnPos, Quaternion.Euler(spawnRot)); }
                 ParryReaction();
-                combat.ParrySuccess();
+                combat.parriedDelegate();
                 return E_DamageEvents.Parry;
             }
             else if (combat.CanBlock() && attacker.HitBlocked(this))
             {
                 if (hitReactData.blockFX != null) { Instantiate(hitReactData.blockFX, spawnPos, Quaternion.Euler(spawnRot)); }
                 HitReactionDelegate(damage, dir);
-                combat.ConsumeArmour();
+                combat.blockedDelegate();
                 return E_DamageEvents.Block;
             }
         }
@@ -184,8 +187,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (combat != null)
         {
             combat.ForceEndAttack();
-            if (combat.armourSlider != null)
-                combat.armourSlider.gameObject.SetActive(false);
             combat.enabled = false;
         }
 

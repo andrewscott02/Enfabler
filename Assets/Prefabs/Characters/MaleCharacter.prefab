@@ -781,6 +781,7 @@ GameObject:
   - component: {fileID: 7378451652202160449}
   - component: {fileID: 1814884579404440104}
   - component: {fileID: 634613423001025932}
+  - component: {fileID: 1888215991265255819}
   - component: {fileID: 7905470459028133162}
   - component: {fileID: 6297360835494842304}
   m_Layer: 10
@@ -1044,6 +1045,24 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
+--- !u!114 &1888215991265255819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460243065040470235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11a21b862e1d714bb4c098014922bd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armourSlider: {fileID: 8891034289449565970}
+  maxArmour: 5
+  armourCooldown: 6
+  armourRegen: 3
+  armourOnParry: 0
+  armourOnHit: 0
 --- !u!114 &7905470459028133162
 MonoBehaviour:
   m_ObjectHideFlags: 0

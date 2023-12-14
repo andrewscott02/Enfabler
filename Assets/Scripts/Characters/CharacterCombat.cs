@@ -16,17 +16,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public bool canMove = true;
     public bool sprinting = false;
 
-    #region Armour Data
-
-    [Header("Armour")]
-    public SliderScript armourSlider;
-    public int maxArmour = 5;
-    public int currentArmour { get; private set; }
-    public float armourCooldown = 6f;
-    public float armourRegen = 3f;
-
-    #endregion
-
     #region Attack Data
 
     #region Attack Input Data
@@ -163,8 +152,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         health = GetComponent<Health>();
         ignore.Add(health);
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
-        currentArmour = maxArmour;
-        armourRegenCoroutine = StartCoroutine(IResetArmour(armourRegen));
         ForceEndAttack();
 
         setWeapon = GetComponentInChildren<SetWeapon>();
@@ -173,7 +160,14 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         arrowCapacity = GetComponentInChildren<ArrowCapacityUI>();
         SetupArrows();
 
+        onAttackHit += OnAttackHit;
+
+        canBlockDelegate += CanBlockDelegateCheck;
+
         blockingDelegate += Blocking;
+        blockedDelegate += BlockedHit;
+        parriedDelegate += ParrySuccess;
+
         hitParry += HitParry;
     }
 
@@ -634,7 +628,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             hitTargets.Add(hitDamageable);
             E_DamageEvents damageEvents = DealDamage(hitDamageable, damage, hit.point, hit.normal);
 
-            OnAttackHit(damageEvents == E_DamageEvents.Hit);
+            onAttackHit(damageEvents == E_DamageEvents.Hit);
         }
     }
 
@@ -642,6 +636,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         return target.Damage(this, damage, spawnPos, spawnRot);
     }
+
+    public delegate void AttackDeletate(bool hit);
+    public AttackDeletate onAttackHit;
 
     void OnAttackHit(bool hit)
     {
@@ -655,7 +652,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             weapon.bloodTrail.SetActive(true);
         }
 
-        GainArmour(1);
         //TODO: Sound effects
     }
 
@@ -953,6 +949,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public delegate void BlockDelegate(bool blocking);
     public BlockDelegate blockingDelegate;
 
+    public delegate void BlockedDelegate();
+    public BlockedDelegate blockedDelegate;
+
     Coroutine armourRegenCoroutine;
 
     public virtual void Block(bool blocking, bool parryAvailable = true)
@@ -982,41 +981,39 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void Blocking(bool blocking)
     {
-        //Empty delegate for blocking
+        //Empty delegate for activating blocking
     }
 
-    public void ConsumeArmour()
+    public void BlockedHit()
     {
-        if (armourRegenCoroutine != null)
-            StopCoroutine(armourRegenCoroutine);
-
-        currentArmour--;
-        armourRegenCoroutine = StartCoroutine(IResetArmour(armourCooldown));
-        ChangeArmourUI();
+        //Empty delegate for blocking hits
     }
 
-    public void GainArmour(int armour)
-    {
-        currentArmour = Mathf.Clamp(currentArmour + armour, 0, maxArmour);
-        ChangeArmourUI();
-    }
+    public delegate bool CanBlockDelegate();
+    public CanBlockDelegate canBlockDelegate;
 
     public bool CanBlock()
     {
-        return blocking && currentArmour > 0;
+        var invocations = canBlockDelegate.GetInvocationList();
+
+        bool canBlock = true;
+
+        for (int i = 0; i < invocations.Length; i++)
+        {
+            bool current = ((CanBlockDelegate)invocations[i]).Invoke();
+
+            Debug.Log("Invocation + " + i + " is " + current);
+
+            if (current == false)
+                canBlock = false;
+        }
+
+        return canBlock;
     }
 
-    IEnumerator IResetArmour(float delay)
+    public bool CanBlockDelegateCheck()
     {
-        yield return new WaitForSeconds(delay);
-        GainArmour(1);
-        armourRegenCoroutine = StartCoroutine(IResetArmour(armourRegen));
-    }
-
-    void ChangeArmourUI()
-    {
-        if (armourSlider != null)
-            armourSlider.ChangeSliderValue(currentArmour, maxArmour);
+        return blocking;
     }
 
     #endregion
@@ -1031,9 +1028,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         parrying = false;
     }
 
+    public delegate void ParryDelegate();
+    public ParryDelegate parriedDelegate;
+
     public void ParrySuccess()
     {
-        GainArmour(1);
+        //Empty delegate
     }
 
     #endregion

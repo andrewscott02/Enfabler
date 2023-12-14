@@ -330,6 +330,11 @@ PrefabInstance:
       propertyPath: moveDistanceThreshold.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1888215991265255819, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: maxArmour
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2952583324966622599, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -604,6 +609,7 @@ MonoBehaviour:
   sprintSpeed: 6
   animMultiplier: 0.4
   currentTarget: {fileID: 0}
+  ignoreAttackQueue: 0
   attacks:
   - attackType: 1
     distance: 2
