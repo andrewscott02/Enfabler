@@ -8,7 +8,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     protected Animator animator;
     [HideInInspector]
-    public ConstructPlayerModel modelConstructor;
     protected Health health;
     protected BaseCharacterController controller;
 
@@ -133,7 +132,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public enum AttackType
     {
-        None, PrimaryAttack, SecondaryAttack, SwitchPrimaryAttack, SwitchSecondaryAttack
+        None, PrimaryAttack, SecondaryAttack, SwitchPrimaryAttack, SwitchSecondaryAttack, LungeAttack
     }
 
     #endregion
@@ -215,6 +214,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             case AttackType.SwitchPrimaryAttack:
                 SetupWeapon(0);
                 break;
+            case AttackType.LungeAttack:
+                SetupWeapon(0);
+                break;
             case AttackType.SecondaryAttack:
                 SetupWeapon(1);
                 break;
@@ -240,7 +242,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     GameObject overrideTarget = null;
 
-    public void Attack(float attackSpeed = 1f, bool canCharge = true, AttackType attackType = AttackType.PrimaryAttack, GameObject target = null)
+    public void Attack(float attackSpeed = 1f, bool canCharge = true, AttackType attackType = AttackType.PrimaryAttack, GameObject target = null, bool enableModifiers = true, bool interupt = false)
     {
         if (attackType == AttackType.None) return;
 
@@ -262,19 +264,22 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         #region Slide Input
 
-        switchAttack = performedSlideInput || (GetSlideInput(attackType) && canSlideInput);
+        if (enableModifiers)
+        {
+            switchAttack = performedSlideInput || (GetSlideInput(attackType) && canSlideInput);
 
-        performedSlideInput = GetSlideInput(attackType) && canSlideInput;
+            performedSlideInput = GetSlideInput(attackType) && canSlideInput;
 
-        if (slideCoroutine != null)
-            StopCoroutine(slideCoroutine);
-        slideCoroutine = StartCoroutine(ISlideInput(slideInputDelay));
+            if (slideCoroutine != null)
+                StopCoroutine(slideCoroutine);
+            slideCoroutine = StartCoroutine(ISlideInput(slideInputDelay));
+        }
 
         #endregion
 
         savingAttackInput = AttackType.None;
 
-        if (canAttack)
+        if (canAttack || interupt)
         {
             overrideTarget = target;
 
@@ -310,7 +315,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             else
             {
                 //Debug.Log(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
-                animator.SetTrigger(sprinting ? "Sprint" + attackType.ToString() : attackType.ToString());
+                animator.SetTrigger(sprinting && enableModifiers ? "Sprint" + attackType.ToString() : attackType.ToString());
             }
             sprinting = false;
 
@@ -522,11 +527,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void EndAttack()
     {
-        if (modelConstructor != null)
-        {
-            modelConstructor.PlayerAttack(hitTargets.Count > 0);
-        }
-
         Untarget();
         ForceEndAttack();
     }
@@ -967,11 +967,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         SetupWeapon(0);
 
-        if (modelConstructor != null)
-        {
-            modelConstructor.PlayerParry(attackers > 0);
-        }
-
         animator.SetInteger("MeleeAttackCount", 0);
 
         if (animator != null) { animator.SetBool("Blocking", blocking); }
@@ -1044,16 +1039,18 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public virtual void Dodge()
     {
+        if (canSlideInput)
+        {
+            Attack(attackType: AttackType.LungeAttack, enableModifiers: false, interupt: true);
+            return;
+        }
+
+
         if (canDodge)
         {
             Block(false);
             EndDodge();
             ForceEndAttack();
-
-            if (modelConstructor != null)
-            {
-                modelConstructor.PlayerDodge(attackers > 0);
-            }
 
             canMove = false;
             canAttack = false;

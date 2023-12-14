@@ -875,6 +875,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   modelConstructor: {fileID: 0}
   healthSlider: {fileID: 7784630083954935898}
+  armourScript: {fileID: 0}
   maxHealth: 50
   hitReactData:
     deathFXGO: {fileID: 9042853641436718217}
@@ -969,20 +970,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modelConstructor: {fileID: 0}
   canMove: 1
   sprinting: 0
-  armourSlider: {fileID: 8891034289449565970}
-  maxArmour: 5
-  armourCooldown: 6
-  armourRegen: 3
   canAttack: 1
   chargePrimaryDamageScaling: 2
   chargeSecondaryDamageScaling: 1
   chargeUnblockableTime: 0.5
   chargeMaxTime: 2
   canSwitchAttack: 0
-  slideInputDelay: 0.15
+  slideInputDelay: 0.2
   canSaveAttackInput: 0
   savingAttackInput: 0
   savingChargeInput: 0

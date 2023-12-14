@@ -33,7 +33,6 @@ public class ConstructPlayerModel : MonoBehaviour
         if (modelCharacter != null)
         {
             modelCharacter.GetComponent<Health>().modelConstructor = this;
-            modelCharacter.GetComponent<CharacterCombat>().modelConstructor = this;
         }
 
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
