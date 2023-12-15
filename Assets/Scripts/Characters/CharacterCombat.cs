@@ -160,6 +160,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         SetupArrows();
 
         onAttackHit += OnAttackHit;
+        hitParry += HitParry;
 
         canBlockDelegate += CanBlockDelegateCheck;
 
@@ -167,7 +168,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         blockedDelegate += BlockedHit;
         parriedDelegate += ParrySuccess;
 
-        hitParry += HitParry;
+        phaseDelegate += Phase;
     }
 
     private void Update()
@@ -1095,8 +1096,30 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #endregion
 
+    #region Phasing
+
+    public delegate void PhaseDelegate(bool activate);
+    public PhaseDelegate phaseDelegate;
+
+    public void StartPhase()
+    {
+        phaseDelegate(true);
+    }
+
+    public void EndPhase()
+    {
+        phaseDelegate(false);
+    }
+
+    void Phase(bool activate)
+    {
+        //Empty delegate function for phasing
+    }
+
+    #endregion
+
     #region Taking Damage
-    
+
     public void GotHit()
     {
         //Debug.Log("Got hit, end attack");
