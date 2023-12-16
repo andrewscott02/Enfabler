@@ -106,6 +106,13 @@ public class ArenaManager : MonoBehaviour
 
     public void OnControlsChange(PlayerInput input)
     {
+        StartCoroutine(IDelayControlsChange(input, 0.1f));
+    }
+
+    IEnumerator IDelayControlsChange(PlayerInput input,  float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
         bool usingGamepad = input.currentControlScheme == "Gamepad";
 
         if (fightSelector.activeSelf)
@@ -117,8 +124,7 @@ public class ArenaManager : MonoBehaviour
             ShowMouse(false);
         }
 
-        if (!usingGamepad) return;
-
-        EventSystem.current.SetSelectedGameObject(fightSelector.transform.GetChild(0).gameObject);
+        if (usingGamepad)
+            EventSystem.current.SetSelectedGameObject(fightSelector.transform.GetChild(0).gameObject);
     }
 }
