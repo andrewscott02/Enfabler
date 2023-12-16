@@ -71,7 +71,7 @@ namespace BehaviourTrees
                 new Sequence(
                     new GetClosestEnemyToTarget(agent, target),
                     new MoveToDestination(agent, 6f, true, agent.distanceAllowance),
-                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
+                    new Attack(agent)
                     ),
                 new Sequence(
                     new GetClosestEnemyToTarget(agent, target),
@@ -88,13 +88,13 @@ namespace BehaviourTrees
                     new GetModelNonTarget(agent, model),
                     new FlankToDestination(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
                     new MoveToDestination(agent, 6f, sprint, agent.distanceAllowance),
-                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
+                    new Attack(agent)
                     ),
                 new Sequence(
                     new GetModelTarget(agent, model),
                     new FlankToDestination(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
                     new MoveToDestination(agent, 6f, sprint, agent.distanceAllowance),
-                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
+                    new Attack(agent)
                     ),
                 new Sequence(
                     new GetModelTarget(agent, model),
@@ -112,13 +112,13 @@ namespace BehaviourTrees
                     new GetModelNonTarget(agent, model),
                     new InterceptTarget(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
                     new MoveToDestination(agent, 6f, sprint, agent.distanceAllowance),
-                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
+                    new Attack(agent)
                     ),
                 new Sequence(
                     new GetModelTarget(agent, model),
                     new InterceptTarget(agent, model.modelCharacter.gameObject, flankDistance, requireSameTeam),
                     new MoveToDestination(agent, 6f, sprint, agent.distanceAllowance),
-                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
+                    new Attack(agent)
                     ),
                 new Sequence(
                     new GetModelTarget(agent, model),
@@ -136,7 +136,7 @@ namespace BehaviourTrees
                     new GetModelNonTarget(agent, model),
                     new MoveToDestination(agent, 6f, false, agent.distanceAllowance),
                     new GetClosestEnemy(agent, range),
-                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
+                    new Attack(agent)
                     ),
                 new Sequence(
                     new GetModelNonTarget(agent, model),
@@ -157,36 +157,36 @@ namespace BehaviourTrees
                 );
         }
 
-        public static Selector AttackClosestTarget(AIController agent, bool sprinting, AIController.AIAttackData attack, CharacterCombat.AttackType attackType)
+        public static Selector AttackClosestTarget(AIController agent, bool sprinting)
         {
             return new Selector(
                 DefensiveAction(agent),
                 new Sequence(
                     new IsTurn(agent),
-                    new IsValidAttack(attack, attackType),
-                    new GetClosestEnemy(agent, attack.distance),
+                    new GetValidAttack(agent),
+                    new GetClosestEnemyWithinAttack(agent),
                     new MoveToDestination(agent, 6f, sprinting, agent.distanceAllowance),
-                    new Attack(agent, attack.attackType)
+                    new Attack(agent)
                     ),
                 new Sequence(
-                    new IsValidAttack(attack, attackType),
-                    new GetClosestEnemy(agent, attack.distance),
-                    new EnqueueAttack(agent, attackType),
+                    new GetValidAttack(agent),
+                    new GetClosestEnemyWithinAttack(agent),
+                    new EnqueueAttack(agent),
                     BaseBehaviours.MoveToRange(agent, 35f, false)
                     )
                 );
         }
 
-        public static Selector MoveToTargetWhileAttacking(AIController agent, GameObject target, AIController.AIAttackData attack, CharacterCombat.AttackType attackType)
+        public static Selector MoveToTargetWhileAttacking(AIController agent, GameObject target)
         {
             return new Selector(
                 DefensiveAction(agent),
                 new Sequence(
-                    new IsValidAttack(attack, attackType),
+                    new GetValidAttack(agent),
                     new GetClosestEnemyToTarget(agent, target),
                     new MoveToDestination(agent, 6f, false, agent.distanceAllowance),
-                    new GetClosestEnemy(agent, attack.distance),
-                    new Attack(agent, CharacterCombat.AttackType.PrimaryAttack)
+                    new GetClosestEnemyWithinAttack(agent),
+                    new Attack(agent)
                     )
                 );
         }

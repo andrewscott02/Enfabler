@@ -269,6 +269,26 @@ public class AIController : BaseCharacterController
         public float timeSinceLastAttack;
     }
 
+    public int preparedAttack = -1;
+
+    public int GetValidAttack()
+    {
+        if (currentTarget == null || !combat.canAttack || attacks.Length <= 0)
+            return -1;
+
+        for (int i = 0; i < attacks.Length; i++)
+        {
+            if (CanAttack(i))
+            {
+                return i;
+                //TODO: could use priority to find best spell
+            }
+        }
+
+        //Debug.Log("Cannot attack for " + attackType);
+        return -1;
+    }
+
     public AIAttackData GetAttackFromType(CharacterCombat.AttackType attackType)
     {
         for (int i = 0; i < attacks.Length; i++)
@@ -283,23 +303,17 @@ public class AIController : BaseCharacterController
         return attacks[0];
     }
 
-    public bool CanAttack(CharacterCombat.AttackType attackType)
+    public bool CanAttack(int attackIndex)
     {
         if (health.dying) { return false ; }
 
         if (currentTarget == null || !combat.canAttack)
             return false;
 
-        for (int i = 0; i < attacks.Length; i++)
+        if (attacks[attackIndex].timeSinceLastAttack >= attacks[attackIndex].currentCooldown && attacks[attackIndex].usesLeft != 0 && attacks[attackIndex].healthPercentageUse >= (float)health.GetCurrentHealth() / (float)health.maxHealth)
         {
-            if (attacks[i].attackType == attackType)
-            {
-                if (attacks[i].timeSinceLastAttack >= attacks[i].currentCooldown && attacks[i].usesLeft != 0 && attacks[i].healthPercentageUse >= (float)health.GetCurrentHealth() / (float)health.maxHealth)
-                {
-                    //Debug.Log("Can attack for " + attackType);
-                    return true;
-                }
-            }
+            //Debug.Log("Can attack for " + attackType);
+            return true;
         }
 
         //Debug.Log("Cannot attack for " + attackType);
@@ -328,6 +342,7 @@ public class AIController : BaseCharacterController
     public bool CanCastSpell(int identifier)
     {
         if (health.dying) { return false; }
+        if (identifier < 0 || identifier >= spells.Length) return false;
 
         if (spells[identifier].timeSinceLastAttack >= spells[identifier].currentCooldown && spells[identifier].usesLeft != 0 && spells[identifier].healthPercentageUse >= (float)health.GetCurrentHealth() / (float)health.maxHealth)
         {
@@ -356,23 +371,13 @@ public class AIController : BaseCharacterController
         return true;
     }
 
-    public bool AttackTarget(CharacterCombat.AttackType attackType)
+    public bool AttackTarget(int attackIndex)
     {
         if (health.dying) { return false; }
         if (!agent.enabled) return false;
 
         if (currentTarget == null)
             return false;
-
-        int attackIndex = -1;
-
-        for (int i = 0; i < attacks.Length; i++)
-        {
-            if (attacks[i].attackType == attackType)
-            {
-                attackIndex = i;
-            }
-        }
 
         if (attackIndex < 0) return false;
 
@@ -381,7 +386,7 @@ public class AIController : BaseCharacterController
 
         if (distance < attacks[attackIndex].distance)
         {
-            if (combat.canAttack && CanAttack(attackType))
+            if (combat.canAttack && CanAttack(attackIndex))
             {
                 if (doubleAttack)
                     doubleAttack = false;
@@ -392,14 +397,14 @@ public class AIController : BaseCharacterController
                 //lastAttacked.GetCharacterCombat().StartBeingAttacked();
 
                 //Debug.Log("Attack made");
-                combat.savingChargeInput = attackType;
-                combat.Attack(attacks[attackIndex].attackSpeed, true, attackType, currentTarget.gameObject);
+                combat.savingChargeInput = attacks[attackIndex].attackType;
+                combat.Attack(attacks[attackIndex].attackSpeed, true, attacks[attackIndex].attackType, currentTarget.gameObject);
 
                 bool unblockable = Random.Range(0f, 1f) < attacks[attackIndex].unblockableChance;
                 float releaseTime = unblockable ? combat.chargeMaxTime : attacks[attackIndex].attackPauseTime;
                 StartCoroutine(IReleaseAttack(releaseTime));
 
-                AdjustCooldowns(attackType, attackIndex);
+                AdjustCooldowns(attackIndex);
                 attacks[attackIndex].usesLeft--;
             }
 
@@ -419,19 +424,8 @@ public class AIController : BaseCharacterController
         return false;
     }
 
-    void AdjustCooldowns(CharacterCombat.AttackType attackType, int attackIndex = -1)
+    void AdjustCooldowns(int attackIndex)
     {
-        if (attackIndex < 0)
-        {
-            for (int i = 0; i < attacks.Length; i++)
-            {
-                if (attacks[i].attackType == attackType)
-                {
-                    attackIndex = i;
-                }
-            }
-        }
-
         attacks[attackIndex].timeSinceLastAttack = 0;
 
         if (doubleAttack)

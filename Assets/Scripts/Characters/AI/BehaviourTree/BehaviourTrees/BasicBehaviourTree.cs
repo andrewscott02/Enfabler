@@ -13,38 +13,7 @@ public class BasicBehaviourTree : BehaviourTree
 
             BaseBehaviours.CastSpell(agent),
 
-            new Sequence(
-                //If they are able to make a ranged attack
-                new CanAttack(agent, CharacterCombat.AttackType.SecondaryAttack),
-                //Checks if the closest enemy is within ranged distance and makes an attack if true
-                BaseBehaviours.AttackClosestTarget(agent, true, agent.GetAttackFromType(CharacterCombat.AttackType.SecondaryAttack), CharacterCombat.AttackType.SecondaryAttack)
-                ),
-
-            new Sequence(
-                //If they are able to make a switch melee attack
-                new CanAttack(agent, CharacterCombat.AttackType.SwitchPrimaryAttack),
-                //Checks if the closest enemy is within switch melee distance and makes an attack if true
-                BaseBehaviours.AttackClosestTarget(agent, true, agent.GetAttackFromType(CharacterCombat.AttackType.SwitchPrimaryAttack), CharacterCombat.AttackType.SwitchPrimaryAttack)
-                ),
-
-            new Sequence(
-                //If they are able to make a switch ranged attack
-                new CanAttack(agent, CharacterCombat.AttackType.SwitchSecondaryAttack),
-                //Checks if the closest enemy is within switch melee distance and makes an attack if true
-                BaseBehaviours.AttackClosestTarget(agent, true, agent.GetAttackFromType(CharacterCombat.AttackType.SwitchSecondaryAttack), CharacterCombat.AttackType.SwitchSecondaryAttack)
-                ),
-
-            new Selector(
-
-                new Sequence(
-                    //If they are unable to make an attack, move to a point a short distance away
-                    new CannotAttack(agent, CharacterCombat.AttackType.PrimaryAttack),
-                    BaseBehaviours.MoveToRange(agent, 35f, false)
-                    ),
-                
-                //Checks if the closest enemy is within melee range and makes an attack if true
-                BaseBehaviours.AttackClosestTarget(agent, true, agent.GetAttackFromType(CharacterCombat.AttackType.PrimaryAttack), CharacterCombat.AttackType.PrimaryAttack)
-                ),
+            BaseBehaviours.AttackClosestTarget(agent, true),
 
             //Checks if the closest enemy is within sight range and moves towards it if true
             BaseBehaviours.MoveToClosestTarget(agent, agent.distanceAllowance, true),

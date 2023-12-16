@@ -3,29 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTrees;
 
-public class CannotAttack : Node
+public class GetValidAttack : Node
 {
-    public AIController agent;
-    public CharacterCombat.AttackType attackType;
+    AIController agent;
 
     /// <summary>
     /// Commands an agent to make a melee attack against its target
     /// </summary>
     /// <param name="agent">The agent this command is given to</param>
-    public CannotAttack(AIController agent, CharacterCombat.AttackType attackType)
+    public GetValidAttack(AIController agent)
     {
         this.agent = agent;
-        this.attackType = attackType;
     }
 
     public override NodeState Evaluate()
     {
-        if (agent.CanAttack(agent.preparedAttack))
+       int attackIndex = agent.GetValidAttack();
+
+        if (attackIndex < 0)
         {
-            //Debug.Log("Can attack");
+            Debug.Log("Valid attack not found: " + attackIndex);
             return NodeState.Failure;
         }
 
+        Debug.Log("Valid attack found: " + attackIndex);
+        agent.preparedAttack = attackIndex;
         return NodeState.Success;
     }
 }

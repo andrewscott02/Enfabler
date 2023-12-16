@@ -20,7 +20,7 @@ public class CanAttack : Node
 
     public override NodeState Evaluate()
     {
-        if (agent.CanAttack(attackType))
+        if (agent.CanAttack(agent.preparedAttack))
         {
             //Debug.Log("Can attack : " + attackType);
             return NodeState.Success;
