@@ -24,6 +24,7 @@ public class Phase : MonoBehaviour
 
     void ActivatePhase(bool activate)
     {
+        Debug.Log("Phasing: " + activate);
         gameObject.layer = activate ? phaseLayer : defaultLayer;
 
         StartParticles(activate);

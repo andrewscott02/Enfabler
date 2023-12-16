@@ -998,7 +998,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         {
             bool current = ((CanBlockDelegate)invocations[i]).Invoke();
 
-            Debug.Log("Invocation + " + i + " is " + current);
+            //Debug.Log("Invocation + " + i + " is " + current);
 
             if (current == false)
                 canBlock = false;

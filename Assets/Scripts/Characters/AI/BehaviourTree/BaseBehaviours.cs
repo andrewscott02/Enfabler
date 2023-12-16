@@ -177,6 +177,24 @@ namespace BehaviourTrees
                 );
         }
 
+        public static Selector AttackClosestTargetNoMoving(AIController agent)
+        {
+            return new Selector(
+                DefensiveAction(agent),
+                new Sequence(
+                    new IsTurn(agent),
+                    new GetValidAttack(agent),
+                    new GetClosestEnemyWithinAttack(agent),
+                    new Attack(agent)
+                    ),
+                new Sequence(
+                    new GetValidAttack(agent),
+                    new GetClosestEnemyWithinAttack(agent),
+                    new EnqueueAttack(agent)
+                    )
+                );
+        }
+
         public static Selector MoveToTargetWhileAttacking(AIController agent, GameObject target)
         {
             return new Selector(

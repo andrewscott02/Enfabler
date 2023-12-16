@@ -13,10 +13,10 @@ public class RangedBehaviourTree : BehaviourTree
 
             BaseBehaviours.CastSpell(agent),
 
-            BaseBehaviours.AttackClosestTarget(agent, true),
+            BaseBehaviours.AttackClosestTargetNoMoving(agent),
 
-            //Checks if the closest enemy is within sight range and moves towards it if true
-            BaseBehaviours.MoveToClosestTarget(agent, agent.distanceAllowance, true),
+            //Checks if the closest enemy is within sight range and moves at a range away from it
+            BaseBehaviours.MoveToRange(agent, 35f, false),
             //If there are no targets, but the player is an ally, move to a point near the player
             BaseBehaviours.FollowTarget(agent, agent.GetPlayer(), true),
             //If there are no targets, move to a random point in the roam radius

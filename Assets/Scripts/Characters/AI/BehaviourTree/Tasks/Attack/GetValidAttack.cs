@@ -22,11 +22,11 @@ public class GetValidAttack : Node
 
         if (attackIndex < 0)
         {
-            Debug.Log("Valid attack not found: " + attackIndex);
+            //Debug.Log("Valid attack not found: " + attackIndex);
             return NodeState.Failure;
         }
 
-        Debug.Log("Valid attack found: " + attackIndex);
+        //Debug.Log("Valid attack found: " + attackIndex);
         agent.preparedAttack = attackIndex;
         return NodeState.Success;
     }

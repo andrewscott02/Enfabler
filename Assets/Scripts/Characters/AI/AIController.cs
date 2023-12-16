@@ -276,7 +276,7 @@ public class AIController : BaseCharacterController
         if (currentTarget == null || !combat.canAttack || attacks.Length <= 0)
             return -1;
 
-        for (int i = 0; i < attacks.Length; i++)
+        for (int i = attacks.Length - 1; i >= 0; i--)
         {
             if (CanAttack(i))
             {
