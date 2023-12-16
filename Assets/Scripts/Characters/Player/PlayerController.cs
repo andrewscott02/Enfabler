@@ -38,6 +38,8 @@ public class PlayerController : BaseCharacterController
         playerMovement.controller = this;
         playerMovement.animator = animator;
         playerMovement.SetModel(model);
+        playerInput = GetComponent<PlayerInput>();
+        CheckInput();
 
         AIManager.instance.AllocateTeam(this);
     }
@@ -45,6 +47,8 @@ public class PlayerController : BaseCharacterController
     #endregion
 
     #region Inputs
+
+    PlayerInput playerInput;
 
     #region Inputs - Movement and Camera
 
@@ -266,10 +270,19 @@ public class PlayerController : BaseCharacterController
 
     #region Inputs - Other
 
+    public static bool usingGamepad = false;
+
+    void CheckInput()
+    {
+        usingGamepad = playerInput.currentControlScheme == "Gamepad";
+    }
+
     public void OnControlsChange(PlayerInput input)
     {
+        usingGamepad = input.currentControlScheme == "Gamepad";
+
         if (PauseMenu.instance != null)
-            PauseMenu.instance.OnControlsChange(input);
+            PauseMenu.instance.onControlsChange(input);
     }
 
     #endregion

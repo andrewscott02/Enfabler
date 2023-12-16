@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class ArenaManager : MonoBehaviour
 {
@@ -21,16 +22,19 @@ public class ArenaManager : MonoBehaviour
     {
         instance = this;
         AIManager.instance.enemiesDied += StartRoundCoroutine;
+        PauseMenu.instance.onControlsChange += OnControlsChange;
         fightSelector.SetActive(true);
-        ShowMouse(true);
         StartCoroutine(IShowMouse());
     }
 
     IEnumerator IShowMouse()
     {
         yield return new WaitForSeconds(0.15f);
-        ShowMouse(true);
-        EventSystem.current.SetSelectedGameObject(fightSelector.transform.GetChild(0).gameObject);
+
+        bool usingGamepad = PlayerController.usingGamepad;
+        ShowMouse(!usingGamepad);
+        if (usingGamepad)
+            EventSystem.current.SetSelectedGameObject(fightSelector.transform.GetChild(0).gameObject);
     }
 
     void ShowMouse(bool visible)
@@ -98,5 +102,23 @@ public class ArenaManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         SceneManager.LoadScene(mainMenu.ToString());
+    }
+
+    public void OnControlsChange(PlayerInput input)
+    {
+        bool usingGamepad = input.currentControlScheme == "Gamepad";
+
+        if (fightSelector.activeSelf)
+        {
+            ShowMouse(!usingGamepad);
+        }
+        else
+        {
+            ShowMouse(false);
+        }
+
+        if (!usingGamepad) return;
+
+        EventSystem.current.SetSelectedGameObject(fightSelector.transform.GetChild(0).gameObject);
     }
 }

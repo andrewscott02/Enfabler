@@ -23,6 +23,8 @@ public class PauseMenu : MonoBehaviour
         instance = this;
         unpausedTimeScale = Time.timeScale;
 
+        onControlsChange += OnControlsChange;
+
         Resume();
     }
 
@@ -100,6 +102,9 @@ public class PauseMenu : MonoBehaviour
         int nextPage = currentPage + (next ? 1 : -1);
         ShowHowToPlayPage(nextPage);
     }
+
+    public delegate void ControlsDelegate(PlayerInput input);
+    public ControlsDelegate onControlsChange;
 
     public void OnControlsChange(PlayerInput input)
     {
