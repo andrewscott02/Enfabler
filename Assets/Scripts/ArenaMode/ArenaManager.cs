@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class ArenaManager : MonoBehaviour
 {
@@ -27,8 +28,9 @@ public class ArenaManager : MonoBehaviour
 
     IEnumerator IShowMouse()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.15f);
         ShowMouse(true);
+        EventSystem.current.SetSelectedGameObject(fightSelector.transform.GetChild(0).gameObject);
     }
 
     void ShowMouse(bool visible)
