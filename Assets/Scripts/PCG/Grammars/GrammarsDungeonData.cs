@@ -476,7 +476,7 @@ public struct RoomData
 public enum E_RoomTypes
 {
     Start, Boss, End,
-    Encounter, Puzzle, Treasure, Healing, Trap, ChangeTheme
+    Encounter, Puzzle, Treasure, Healing, Trap, ChangeTheme, Arena
 }
 
 [System.Serializable]
