@@ -144,12 +144,12 @@ public class GrammarsDungeonData : ScriptableObject
 
     #region Enemies
 
-    public List<Object> GetRandomEnemies(E_RoomTypes roomType, ThemeData theme)
+    public List<Object> GetRandomEnemies(E_RoomTypes roomType, ThemeData theme, int round)
     {
         List<Object> enemiesToAdd = new List<Object>();
 
         int index = GetRoomDataIndex(roomType);
-        int budget = roomData[index].enemiesSeverityMax;
+        int budget = roomData[index].enemySpawnInfo[round].enemiesSeverityMax;
 
         bool budgetLeft = budget > 0;
 
@@ -168,7 +168,7 @@ public class GrammarsDungeonData : ScriptableObject
                 budgetLeft = false;
             }
 
-            if (totalEnemies >= roomData[index].enemiesMax)
+            if (totalEnemies >= roomData[index].enemySpawnInfo[round].enemiesMax)
                 budgetLeft = false;
         }
 
@@ -466,10 +466,16 @@ public struct RoomData
 
     public bool lockDoor;
 
-    public int enemiesMax;
-    public int enemiesSeverityMax;
+    public RoundData[] enemySpawnInfo;
 
     public Vector2Int trapsMinMax;
+}
+
+[System.Serializable]
+public struct RoundData
+{
+    public int enemiesMax;
+    public int enemiesSeverityMax;
 }
 
 [System.Serializable]

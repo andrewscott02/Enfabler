@@ -80,12 +80,7 @@ public class PCGRoom : MonoBehaviour
         itemsInRoom.Add(go);
 
         door = go.GetComponentInChildren<Door>();
-        door.lockedInteraction = dungeonData.GetDoorLocked(roomType);
-
-        if (lockOverride)
-        {
-            door.lockedInteraction = lockDoor;
-        }
+        door.lockedInteraction = lockOverride ? lockDoor : dungeonData.GetDoorLocked(roomType);
 
         door.interactDelegate += DoorOpened;
         //Debug.Log("Added delegate to room " + roomNumber);
@@ -104,7 +99,13 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnEnemies()
     {
-        List<Object> enemiesToSpawn = dungeonData.GetRandomEnemies(roomType, theme);
+        int roomIndex = dungeonData.GetRoomDataIndex(roomType);
+        int roundsMax = dungeonData.roomData[roomIndex].enemySpawnInfo.Length;
+
+        if (currentRound >= roundsMax)
+            return;
+
+        List<Object> enemiesToSpawn = dungeonData.GetRandomEnemies(roomType, theme, currentRound);
 
         foreach (var item in enemiesToSpawn)
         {
@@ -127,12 +128,25 @@ public class PCGRoom : MonoBehaviour
             enemy.characterDied += EnemyKilled;
             enemiesInRoom++;
         }
+
+        nextRoundThreshold = Mathf.RoundToInt((float)enemiesInRoom * 0.25f);
+        if (nextRoundThreshold <= 0) nextRoundThreshold = 1;
     }
+
+    int currentRound = 0;
+    int nextRoundThreshold;
 
     void EnemyKilled(BaseCharacterController controller)
     {
         //Debug.Log("Enemy killed in room");
         enemiesInRoom--;
+
+        if (enemiesInRoom <= nextRoundThreshold)
+        {
+            currentRound++;
+
+            SpawnEnemies();
+        }
 
         if (enemiesInRoom <= 0)
         {
