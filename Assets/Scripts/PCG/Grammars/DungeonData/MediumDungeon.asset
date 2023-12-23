@@ -73,6 +73,14 @@ MonoBehaviour:
     enemiesMax: 10
     enemiesSeverityMax: 40
     trapsMinMax: {x: 1, y: 2}
+  - roomType: 9
+    prefabData:
+    - {fileID: 11400000, guid: 98b37e6c6955ef7418a3f5ebbb6c6b70, type: 2}
+    countMinMax: {x: 0, y: 1}
+    lockDoor: 1
+    enemiesMax: 15
+    enemiesSeverityMax: 70
+    trapsMinMax: {x: 2, y: 4}
   - roomType: 4
     prefabData:
     - {fileID: 11400000, guid: 0d2468f8b99cc83438a2fe3d8c03d282, type: 2}
@@ -103,7 +111,7 @@ MonoBehaviour:
     enemiesMax: 0
     enemiesSeverityMax: 0
     trapsMinMax: {x: 3, y: 6}
-  additionalRoomTypes: 03000000040000000500000007000000
+  additionalRoomTypes: 0300000004000000050000000700000009000000
   additionalHealingRooms: 2
   roomsCountMinMax: {x: 9, y: 12}
   startingThemes:

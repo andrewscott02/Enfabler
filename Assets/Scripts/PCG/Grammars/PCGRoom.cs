@@ -111,6 +111,7 @@ public class PCGRoom : MonoBehaviour
             int spawnerIndex = Random.Range(0, enemySpawnerChildren.Length);
 
             Vector3 spawnPos = enemySpawnerChildren[spawnerIndex].position;
+            spawnPos.y += 2f;
 
             if (HelperFunctions.GetRandomPoint(spawnPos, 7.5f, 1f, 100, out Vector3 point))
             {
