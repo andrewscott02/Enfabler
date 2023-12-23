@@ -15,19 +15,19 @@ public static class HelperFunctions
     /// <param name="radius"></param>
     /// <param name="distanceAllowance"></param>
     /// <returns></returns>
-    public static Vector3 GetRandomPoint(Vector3 origin, float radius, float distanceAllowance, int iterations)
+    public static bool GetRandomPoint(Vector3 origin, float radius, float distanceAllowance, int iterations, out Vector3 generatedPoint)
     {
-        Vector3 point;
+        bool success = GetRandomPointOnNavmesh(origin, radius, distanceAllowance, iterations, out generatedPoint);
 
-        if (GetRandomPointOnNavmesh(origin, radius, distanceAllowance, iterations, out point) == false)
+        if (success == false)
         {
             ///This is rarely used, but if the function cannot
             ///get a point on navmesh with the number of iterations,
             ///then generate a point ignoring navmesh as a backup
-            point = GetRandomPointNonNavmesh(origin, radius);
+            generatedPoint = GetRandomPointNonNavmesh(origin, radius);
         }
 
-        return point;
+        return success;
     }
 
     /// <summary>

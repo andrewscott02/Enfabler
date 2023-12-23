@@ -112,6 +112,11 @@ public class PCGRoom : MonoBehaviour
 
             Vector3 spawnPos = enemySpawnerChildren[spawnerIndex].position;
 
+            if (HelperFunctions.GetRandomPoint(spawnPos, 7.5f, 1f, 100, out Vector3 point))
+            {
+                spawnPos = point;
+            }
+
             GameObject go = Instantiate(item, transform) as GameObject;
             go.transform.position = spawnPos;
             go.transform.rotation = Quaternion.identity;

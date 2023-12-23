@@ -24,7 +24,7 @@ public class FindPointRadius : Node
     {
         agent.alert = agent.roamTimeElapsed <= 15f;
 
-        Vector3 point = HelperFunctions.GetRandomPoint(agent.alert ? agent.transform.position : roamCenter, agent.GetRoamDistance(), agent.distanceAllowance, iterations);
+        HelperFunctions.GetRandomPoint(agent.alert ? agent.transform.position : roamCenter, agent.GetRoamDistance(), agent.distanceAllowance, iterations, out Vector3 point);
         agent.SetDestinationPos(point);
         //Debug.Log("Generated point at: " + point);
 

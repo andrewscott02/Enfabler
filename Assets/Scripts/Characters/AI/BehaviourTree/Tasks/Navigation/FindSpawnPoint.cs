@@ -27,7 +27,7 @@ public class FindSpawnPoint : Node
         float radius = agent.alert ? this.radius : 0f;
         float distanceAllowance = agent.alert ? agent.distanceAllowance : 0.5f;
 
-        Vector3 point = HelperFunctions.GetRandomPoint(agent.alert ? agent.transform.position : spawnPoint, radius, distanceAllowance, iterations);
+        HelperFunctions.GetRandomPoint(agent.alert ? agent.transform.position : spawnPoint, radius, distanceAllowance, iterations, out Vector3 point);
         agent.SetDestinationPos(point);
         //Debug.Log("Generated point at: " + point);
 
