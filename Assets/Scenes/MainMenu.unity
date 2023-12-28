@@ -379,7 +379,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.35
+  m_fontSize: 23.8
   m_fontSizeBase: 12.98
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -980,7 +980,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.35
+  m_fontSize: 23.8
   m_fontSizeBase: 12.98
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2476,6 +2476,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 718939483}
     m_Modifications:
+    - target: {fileID: 2062136424566670993, guid: 14c9a0fbd5988ac49a1d09aee826a939,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2062136424616926068, guid: 14c9a0fbd5988ac49a1d09aee826a939,
         type: 3}
       propertyPath: m_Name
@@ -2591,6 +2596,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2062136425082378039, guid: 14c9a0fbd5988ac49a1d09aee826a939,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 461.9219
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062136425082378039, guid: 14c9a0fbd5988ac49a1d09aee826a939,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 39.960938
+      objectReference: {fileID: 0}
     - target: {fileID: 2062136425113401531, guid: 14c9a0fbd5988ac49a1d09aee826a939,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2606,6 +2621,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1930224112}
+    - target: {fileID: 2062136425981540759, guid: 14c9a0fbd5988ac49a1d09aee826a939,
+        type: 3}
+      propertyPath: m_text
+      value: 'Left Stick - Movement
+
+        Right Stick - Camera Control
+
+        Square/X
+        - Melee Attack (Hold to Charge)
+
+        Triangle/Y - Ranged Attack (Hold
+        to Charge)
+
+        X/A - Dodge
+
+        L1/LB - Sprint
+
+        L2/LT -
+        Block/Parry'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14c9a0fbd5988ac49a1d09aee826a939, type: 3}
 --- !u!1001 &3375882732278466680
