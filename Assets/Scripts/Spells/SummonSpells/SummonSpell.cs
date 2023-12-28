@@ -14,6 +14,7 @@ public class SummonSpell : SpellStats
 
     public SummonData[] summonData;
     public bool spawnAtCaster = true;
+    public bool attachToTarget = false;
 
     public override void CastSpell(BaseCharacterController caster, GameObject target)
     {
@@ -39,7 +40,13 @@ public class SummonSpell : SpellStats
                     spawnPos = caster.transform.position;
                 }
 
-                Instantiate(item.summon, spawnPos, Quaternion.identity);
+                GameObject go = Instantiate(item.summon, spawnPos, Quaternion.identity) as GameObject;
+
+                if (attachToTarget)
+                {
+                    go.transform.parent = spawnAtCaster ? caster.transform : target.transform;
+                    go.transform.localPosition = Vector3.zero;
+                }
             }
         }
     }

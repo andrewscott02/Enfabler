@@ -18,8 +18,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 2f7507b7dfb10c040bbd91d1aa1a0e50, type: 2}
     countMinMax: {x: 0, y: 1}
     lockDoor: 0
-    enemiesMax: 0
-    enemiesSeverityMax: 0
+    enemySpawnInfo: []
     trapsMinMax: {x: 0, y: 0}
   - roomType: 8
     prefabData:
@@ -35,32 +34,30 @@ MonoBehaviour:
     - {fileID: 11400000, guid: cebf278ea26218042aa9a2874725882f, type: 2}
     countMinMax: {x: 0, y: 3}
     lockDoor: 0
-    enemiesMax: 4
-    enemiesSeverityMax: 18
+    enemySpawnInfo:
+    - enemiesMax: 4
+      enemiesSeverityMax: 18
     trapsMinMax: {x: 1, y: 2}
   - roomType: 6
     prefabData:
     - {fileID: 11400000, guid: e3c4d38cf5041904891ea7904d440074, type: 2}
     countMinMax: {x: 0, y: 99999}
     lockDoor: 0
-    enemiesMax: 0
-    enemiesSeverityMax: 0
+    enemySpawnInfo: []
     trapsMinMax: {x: 0, y: 0}
   - roomType: 1
     prefabData:
     - {fileID: 11400000, guid: 66291703daf42944f8ec3829ed5d7385, type: 2}
     countMinMax: {x: 0, y: 1}
     lockDoor: 1
-    enemiesMax: 0
-    enemiesSeverityMax: 0
+    enemySpawnInfo: []
     trapsMinMax: {x: 0, y: 0}
   - roomType: 2
     prefabData:
     - {fileID: 11400000, guid: c61980e88fe934b4980546143413c376, type: 2}
     countMinMax: {x: 0, y: 1}
     lockDoor: 1
-    enemiesMax: 0
-    enemiesSeverityMax: 0
+    enemySpawnInfo: []
     trapsMinMax: {x: 0, y: 0}
   - roomType: 3
     prefabData:
@@ -70,24 +67,29 @@ MonoBehaviour:
     - {fileID: 11400000, guid: cf7d8e8e063ad4f42a8de9bc385d5b74, type: 2}
     countMinMax: {x: 1, y: 4}
     lockDoor: 1
-    enemiesMax: 10
-    enemiesSeverityMax: 40
+    enemySpawnInfo:
+    - enemiesMax: 10
+      enemiesSeverityMax: 40
     trapsMinMax: {x: 1, y: 2}
   - roomType: 9
     prefabData:
     - {fileID: 11400000, guid: 98b37e6c6955ef7418a3f5ebbb6c6b70, type: 2}
     countMinMax: {x: 0, y: 1}
     lockDoor: 1
-    enemiesMax: 15
-    enemiesSeverityMax: 70
+    enemySpawnInfo:
+    - enemiesMax: 8
+      enemiesSeverityMax: 30
+    - enemiesMax: 10
+      enemiesSeverityMax: 40
+    - enemiesMax: 15
+      enemiesSeverityMax: 70
     trapsMinMax: {x: 2, y: 4}
   - roomType: 4
     prefabData:
     - {fileID: 11400000, guid: 0d2468f8b99cc83438a2fe3d8c03d282, type: 2}
     countMinMax: {x: 0, y: 3}
     lockDoor: 1
-    enemiesMax: 0
-    enemiesSeverityMax: 0
+    enemySpawnInfo: []
     trapsMinMax: {x: 0, y: 0}
   - roomType: 5
     prefabData:
@@ -97,8 +99,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: cf7d8e8e063ad4f42a8de9bc385d5b74, type: 2}
     countMinMax: {x: 0, y: 3}
     lockDoor: 0
-    enemiesMax: 4
-    enemiesSeverityMax: 18
+    enemySpawnInfo:
+    - enemiesMax: 4
+      enemiesSeverityMax: 18
     trapsMinMax: {x: 1, y: 2}
   - roomType: 7
     prefabData:
@@ -108,8 +111,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: cf7d8e8e063ad4f42a8de9bc385d5b74, type: 2}
     countMinMax: {x: 0, y: 3}
     lockDoor: 0
-    enemiesMax: 0
-    enemiesSeverityMax: 0
+    enemySpawnInfo: []
     trapsMinMax: {x: 3, y: 6}
   additionalRoomTypes: 0300000004000000050000000700000009000000
   additionalHealingRooms: 2
