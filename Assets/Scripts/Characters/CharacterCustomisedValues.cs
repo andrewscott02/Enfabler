@@ -18,17 +18,19 @@ public class CharacterCustomisedValues : MonoBehaviour
         SetValues();
     }
 
-    public bool male;
-    public int[] pieces;
-
     void SetValues()
     {
         //TODO : Get values from player customise settings instance
-        animator.avatar = male ? maleAvatar : femaleAvatar;
+        animator.avatar = CharacterCreationManager.male ? maleAvatar : femaleAvatar;
 
         for (int i = 0; i < setCharacter.itemGroups.Length; i++)
         {
-            int piece = pieces[i];
+            int piece = CharacterCreationManager.pieces[i];
+
+            if (!CharacterCreationManager.male)
+            {
+                piece += CharacterCreationManager.femalePieceOffset[i];
+            }
 
             setCharacter.AddItem(setCharacter.itemGroups[i], piece);
         }

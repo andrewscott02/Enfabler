@@ -12,7 +12,10 @@ public class CharacterCreationManager : MonoBehaviour
         2, 2, 1, 3
     };
 
-    public int[] femalePieceOffset;
+    public static int[] femalePieceOffset = new int[4]
+    {
+        4, 4, 3, 4
+    };
 
     public Color selectedColour, notSelectedColour;
     public Button maleButton, femaleButton;
@@ -92,6 +95,6 @@ public class CharacterCreationManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
-
+        SceneManager.LoadScene(E_Scenes.MainMenu.ToString());
     }
 }

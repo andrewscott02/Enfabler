@@ -10,5 +10,5 @@ public class ExperimentManager : MonoBehaviour
 
 public enum E_Scenes
 {
-    MainMenu, ArenaScene, PCGGrammars
+    MainMenu, ArenaScene, PCGGrammars, CharacterCreation
 }

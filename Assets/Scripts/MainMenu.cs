@@ -9,7 +9,6 @@ public class MainMenu : MonoBehaviour
 {
     #region Setup
 
-    public E_Scenes pcgDungeon, arena;
     public GameObject mainMenu, controls;
     public GameObject mainMenuDefaultButton, controlsDefaultButton;
     GameObject currentPageDefault;
@@ -34,12 +33,17 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         ShowMouse(false);
-        SceneManager.LoadScene(pcgDungeon.ToString());
+        SceneManager.LoadScene(E_Scenes.PCGGrammars.ToString());
     }
 
     public void ArenaMode()
     {
-        SceneManager.LoadScene(arena.ToString());
+        SceneManager.LoadScene(E_Scenes.ArenaScene.ToString());
+    }
+
+    public void CharacterCreation()
+    {
+        SceneManager.LoadScene(E_Scenes.CharacterCreation.ToString());
     }
 
     public void ShowControls(bool show)
