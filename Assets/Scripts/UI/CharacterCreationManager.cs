@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using CartoonHeroes;
 
 public class CharacterCreationManager : MonoBehaviour
 {
     public static bool male = true;
     public static int[] pieces = new int[4]
     {
-        2, 2, 1, 3
+        2, 2, 0, 3
     };
 
     public static int[] femalePieceOffset = new int[4]
@@ -17,6 +18,9 @@ public class CharacterCreationManager : MonoBehaviour
         4, 4, 3, 4
     };
 
+    public SetCharacter setCharacter;
+    Animator animator;
+    public Avatar maleAvatar, femaleAvatar;
     public Color selectedColour, notSelectedColour;
     public Button maleButton, femaleButton;
     public GameObject legButtonObj, torsoButtonObj, faceButtonObj, hairButtonObj;
@@ -25,6 +29,9 @@ public class CharacterCreationManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = setCharacter.GetComponent<Animator>();
+        oldPieces = new List<GameObject>();
+
         SetupButtonObjects();
         SetValues();
     }
@@ -61,7 +68,46 @@ public class CharacterCreationManager : MonoBehaviour
         {
             hairButtons[i].image.color = (i == pieces[3]) ? selectedColour : notSelectedColour;
         }
+
+        UpdatePreview();
     }
+
+    List<GameObject> oldPieces;
+
+    void UpdatePreview()
+    {
+        for (int i = 0; i < oldPieces.Count; i++)
+        {
+            Destroy(oldPieces[i].gameObject);
+        }
+
+        oldPieces.Clear();
+
+        animator.avatar = male ? maleAvatar : femaleAvatar;
+
+        for (int i = 0; i < setCharacter.itemGroups.Length; i++)
+        {
+            int piece = pieces[i];
+
+            if (!male)
+            {
+                piece += femalePieceOffset[i];
+            }
+
+            Debug.Log("changing piece " + setCharacter.itemGroups[i].name);
+
+            oldPieces.Add(setCharacter.AddItem(setCharacter.itemGroups[i], piece));
+
+            Debug.Log("Successfully changed piece " + setCharacter.itemGroups[i].name);
+        }
+
+        Vector3 rot = setCharacter.gameObject.transform.rotation.eulerAngles;
+        rot.y += 180f;
+
+        setCharacter.gameObject.transform.rotation = Quaternion.Euler(rot);
+    }
+
+    #region Buttons
 
     public void SetGender(bool setMale)
     {
@@ -92,6 +138,8 @@ public class CharacterCreationManager : MonoBehaviour
         pieces[3] = piece;
         SetValues();
     }
+
+    #endregion
 
     public void LoadMainMenu()
     {
