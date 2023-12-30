@@ -221,7 +221,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     BaseCharacterController[] lastAttacked;
 
-    AttackTypes currentAttack;
+    AttackTypes currentAttack = new AttackTypes() { attackType = E_AttackType.None};
     int currentAttackIndex = 0;
 
     #region Attacking -> Attack Inputs
@@ -322,6 +322,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         currentAttack = attackData;
         currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
+        animator.SetInteger("MeleeAttackCount", currentAttack.variations[currentAttackIndex].currentAttackAnimModifier);
         animator.SetTrigger(attackData.attackType.ToString());
     }
 
@@ -332,9 +333,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         chargingAttack = attackType;
     }
 
-    public void ReleaseAttack(E_AttackType attackType)
+    public void ReleaseAttack()
     {
-        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
+        if (currentAttack.attackType == E_AttackType.None) return;
+
         additionalDamage = (int)(currentChargeTime * currentAttack.variations[currentAttackIndex].chargeDamageScaling);
 
         chargingAttack = E_AttackType.None;
@@ -367,7 +369,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         yield return new WaitForSecondsRealtime(delay);
 
         animator.speed = currentAnimationSpeed;
-        ReleaseAttack(chargingAttack);
+        ReleaseAttack();
     }
 
     void SetUnblockable()
@@ -383,9 +385,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public void NextAttack()
     {
         //Debug.Log("Next attack + " + attack);
-        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
         currentAttackIndex = currentAttack.variations[currentAttackIndex].nextAttackIndex;
-        animator.SetInteger("MeleeAttackCount", currentAttackIndex);
 
         canDodge = true;
         canAttack = true;
@@ -411,7 +411,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         if (animator == null)
             Debug.LogWarning("Animator of " + gameObject.name + " is null");
         currentAttackIndex = 0;
-        animator.SetInteger("MeleeAttackCount", 0);
+        
         animator.SetBool("InHitReaction", false);
         animator.speed = currentAnimationSpeed;
         lastAttackType = E_AttackType.None;
@@ -480,7 +480,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         //Clear damage and list of enemies hit
         hitTargets.Clear();
-        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
         damage = currentAttack.variations[currentAttackIndex].damage + additionalDamage;
         //Debug.Log(damage + " from " + currentDamage + " and " + additionalDamage);
 
@@ -809,7 +808,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void FireProjectile()
     {
-        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
         if (currentAttack.variations[currentAttackIndex].projectileData == null)
             return;
 
@@ -817,7 +815,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         PlaySoundEffect(weapon.attackClip, weapon.soundVolume);
 
-        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
         int projectileDamage = currentAttack.variations[currentAttackIndex].damage;
         projectileDamage += additionalDamage;
         //Debug.Log("Fire projectile for " + projectileDamage);
@@ -873,7 +870,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         SpawnProjectile(firePos, projectileDamage);
 
-        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
         if (unblockable && currentAttack.variations[currentAttackIndex].additionalShotAngle != null)
         {
             foreach (var angle in currentAttack.variations[currentAttackIndex].additionalShotAngle)
@@ -895,7 +891,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     void SpawnProjectile(Vector3 targetPos, int projectileDamage)
     {
-        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
         Instantiate(currentAttack.variations[currentAttackIndex].projectileFX, weapon.transform);
 
         GameObject projectileObj = Instantiate(currentAttack.variations[currentAttackIndex].projectileData.projectile, weapon.transform.position, transform.rotation) as GameObject;
@@ -1097,7 +1092,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         //Debug.Log("Next attack + " + attack);
         currentAttackIndex = 0;
-        animator.SetInteger("MeleeAttackCount", currentAttackIndex);
 
         canDodge = true;
         canAttack = true;

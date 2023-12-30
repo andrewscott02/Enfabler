@@ -444,7 +444,7 @@ public class AIController : BaseCharacterController
         yield return new WaitForSeconds(delay);
         if (!health.dying)
         {
-            combat.ReleaseAttack(E_AttackType.PrimaryAttack);
+            combat.ReleaseAttack();
             agent.isStopped = false;
         }
     }

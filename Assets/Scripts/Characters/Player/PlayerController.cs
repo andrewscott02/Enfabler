@@ -151,7 +151,7 @@ public class PlayerController : BaseCharacterController
         }
         else if (context.canceled)
         {
-            combat.ReleaseAttack(attackType);
+            combat.ReleaseAttack();
         }
     }
 
