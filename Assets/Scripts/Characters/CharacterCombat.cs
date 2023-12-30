@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enfabler.Attacking;
 
 public class CharacterCombat : MonoBehaviour, ICanDealDamage
 {
@@ -10,6 +11,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     [HideInInspector]
     protected Health health;
     protected BaseCharacterController controller;
+    protected Attacks attacks;
 
     [Header("Movement")]
     public bool canMove = true;
@@ -22,10 +24,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     [Header("Basic Attack Data")]
     public bool canAttack = true;
 
-    [Header("Charge Attack Data")]
-    public float chargePrimaryDamageScaling = 2f;
-    public float chargeSecondaryDamageScaling = 1f;
-    
     float currentChargeTime = 0;
     int additionalDamage;
     public float chargeUnblockableTime = 0.6f;
@@ -39,9 +37,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     [Header("Save Input Data")]
     public bool canSaveAttackInput = false;
-    AttackType lastAttackType = AttackType.None;
-    public AttackType savingAttackInput = AttackType.None;
-    public AttackType savingChargeInput = AttackType.None;
+    E_AttackType lastAttackType = E_AttackType.None;
+    public E_AttackType savingAttackInput = E_AttackType.None;
+    public E_AttackType savingChargeInput = E_AttackType.None;
     public float savedAttackAnimSpeed = 1;
 
     #endregion
@@ -74,12 +72,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public float weaponSphereRadius = 0.45f;
     public Weapon weapon { get; private set; }
     protected SetWeapon setWeapon;
-
-    [Header("Ranged Attack Data")]
-    public TrapStats projectileData;
-    public Object projectileFX;
-    public float[] additionalShotAngle;
-    public float additionalProjectileDamageMultiplier = 0.5f;
 
     public int maxArrows = 5;
     int m_CurrentArrows = 0;
@@ -128,15 +120,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #endregion
 
-    #region Misc
-
-    public enum AttackType
-    {
-        None, PrimaryAttack, SecondaryAttack, SwitchPrimaryAttack, SwitchSecondaryAttack, LungeAttack
-    }
-
-    #endregion
-
     #endregion
 
     #region Methods
@@ -152,6 +135,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         ignore.Add(health);
         InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
         ForceEndAttack();
+        attacks = GetComponent<Attacks>();
 
         setWeapon = GetComponentInChildren<SetWeapon>();
         SetupWeapon(0);
@@ -173,7 +157,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     private void Update()
     {
-        if (chargingAttack != AttackType.None)
+        if (chargingAttack != E_AttackType.None)
         {
             currentChargeTime += Time.deltaTime;
 
@@ -205,23 +189,23 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         setWeapon.CreateWeapon(weaponIndex, 1, setWeapon.offhandWeapons);
     }
 
-    public void ChooseWeapon(AttackType attackType)
+    public void ChooseWeapon(E_AttackType attackType)
     {
         switch (attackType)
         {
-            case AttackType.PrimaryAttack:
+            case E_AttackType.PrimaryAttack:
                 SetupWeapon(0);
                 break;
-            case AttackType.SwitchPrimaryAttack:
+            case E_AttackType.SwitchPrimaryAttack:
                 SetupWeapon(0);
                 break;
-            case AttackType.LungeAttack:
+            case E_AttackType.LungeAttack:
                 SetupWeapon(0);
                 break;
-            case AttackType.SecondaryAttack:
+            case E_AttackType.SecondaryAttack:
                 SetupWeapon(1);
                 break;
-            case AttackType.SwitchSecondaryAttack:
+            case E_AttackType.SwitchSecondaryAttack:
                 SetupWeapon(1);
                 break;
             default:
@@ -237,24 +221,27 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     BaseCharacterController[] lastAttacked;
 
+    AttackTypes currentAttack;
+    int currentAttackIndex = 0;
+
     #region Attacking -> Attack Inputs
 
-    public AttackType chargingAttack { get; private set; } = AttackType.None;
+    public E_AttackType chargingAttack { get; private set; } = E_AttackType.None;
 
     GameObject overrideTarget = null;
 
-    public void Attack(float attackSpeed = 1f, bool canCharge = true, AttackType attackType = AttackType.PrimaryAttack, GameObject target = null, bool enableModifiers = true, bool interupt = false)
+    public void Attack(float attackSpeed = 1f, bool canCharge = true, E_AttackType attackType = E_AttackType.PrimaryAttack, GameObject target = null, bool enableModifiers = true, bool interupt = false)
     {
-        if (attackType == AttackType.None) return;
+        if (attackType == E_AttackType.None) return;
 
         #region Ammo Checks
 
         switch (attackType)
         {
-            case AttackType.SecondaryAttack:
+            case E_AttackType.SecondaryAttack:
                 if (!CanShoot()) return;
                 break;
-            case AttackType.SwitchSecondaryAttack:
+            case E_AttackType.SwitchSecondaryAttack:
                 if (!CanShoot()) return;
                 break;
             default:
@@ -278,7 +265,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         #endregion
 
-        savingAttackInput = AttackType.None;
+        savingAttackInput = E_AttackType.None;
 
         if (canAttack || interupt)
         {
@@ -311,12 +298,13 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
             if (switchAttack && canSwitchAttack)
             {
-                animator.SetTrigger("Switch" + attackType.ToString());
+                E_AttackType attack = (E_AttackType)System.Enum.Parse(typeof(E_AttackType), "Switch" + attackType.ToString());
+                InitiateAttack(attacks.GetAttackData(attack));
             }
             else
             {
-                //Debug.Log(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
-                animator.SetTrigger(sprinting && enableModifiers ? "Sprint" + attackType.ToString() : attackType.ToString());
+                E_AttackType attack = (E_AttackType)System.Enum.Parse(typeof(E_AttackType), sprinting && enableModifiers ? "Sprint" + attackType.ToString() : attackType.ToString());
+                InitiateAttack(attacks.GetAttackData(attack));
             }
             sprinting = false;
 
@@ -330,31 +318,27 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         }
     }
 
-    void StartCharge(AttackType attackType)
+    public void InitiateAttack(AttackTypes attackData)
+    {
+        currentAttack = attackData;
+        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
+        animator.SetTrigger(attackData.attackType.ToString());
+    }
+
+    void StartCharge(E_AttackType attackType)
     {
         if (chargeCoroutine != null)
             StopCoroutine(chargeCoroutine);
         chargingAttack = attackType;
     }
 
-    public void ReleaseAttack(AttackType attackType)
+    public void ReleaseAttack(E_AttackType attackType)
     {
-        switch (attackType)
-        {
-            case AttackType.PrimaryAttack:
-                additionalDamage = (int)(currentChargeTime * chargePrimaryDamageScaling);
-                //Debug.Log("Primary damage scaling " + additionalDamage);
-                break;
-            case AttackType.SecondaryAttack:
-                additionalDamage = (int)(currentChargeTime * chargeSecondaryDamageScaling);
-                //Debug.Log("Secondary damage scaling " + additionalDamage);
-                break;
-            default:
-                break;
-        }
+        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
+        additionalDamage = (int)(currentChargeTime * currentAttack.variations[currentAttackIndex].chargeDamageScaling);
 
-        chargingAttack = AttackType.None;
-        savingChargeInput = AttackType.None;
+        chargingAttack = E_AttackType.None;
+        savingChargeInput = E_AttackType.None;
         animator.speed = currentAttackSpeed * currentAnimationSpeed;
 
         currentChargeTime = 0;
@@ -365,7 +349,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void CheckCharge()
     {
-        if (chargingAttack == AttackType.None || animator == null) return;
+        if (chargingAttack == E_AttackType.None || animator == null) return;
 
         if (chargeCoroutine != null)
             StopCoroutine(chargeCoroutine);
@@ -396,10 +380,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         unblockable = true;
     }
 
-    public void NextAttack(int attack)
+    public void NextAttack()
     {
         //Debug.Log("Next attack + " + attack);
-        animator.SetInteger("MeleeAttackCount", attack);
+        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
+        currentAttackIndex = currentAttack.variations[currentAttackIndex].nextAttackIndex;
+        animator.SetInteger("MeleeAttackCount", currentAttackIndex);
 
         canDodge = true;
         canAttack = true;
@@ -411,11 +397,11 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             AIController.EndAttackOnTarget();
         }
 
-        if (savingAttackInput != AttackType.None)
+        if (savingAttackInput != E_AttackType.None)
         {
             //Debug.Log("Saved attack input");
             Attack(attackSpeed: savedAttackAnimSpeed, attackType: savingAttackInput);
-            savingAttackInput = AttackType.None;
+            savingAttackInput = E_AttackType.None;
         }
     }
 
@@ -424,10 +410,11 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         //Debug.Log("Reset Attack");
         if (animator == null)
             Debug.LogWarning("Animator of " + gameObject.name + " is null");
+        currentAttackIndex = 0;
         animator.SetInteger("MeleeAttackCount", 0);
         animator.SetBool("InHitReaction", false);
         animator.speed = currentAnimationSpeed;
-        lastAttackType = AttackType.None;
+        lastAttackType = E_AttackType.None;
         switchAttack = false;
         canMove = true;
         canDodge = true;
@@ -450,9 +437,14 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     bool performedSlideInput = false;
     bool canSlideInput = false;
 
-    bool GetSlideInput(AttackType attackType)
+    bool GetSlideInput(E_AttackType attackType)
     {
-        bool slideInput = (lastAttackType != attackType && lastAttackType != AttackType.None);
+        bool validAttacks = attacks.GetAttackData(lastAttackType).rangedInput! | attacks.GetAttackData(attackType).rangedInput;
+
+        if (!validAttacks)
+            return false;
+
+        bool slideInput = (lastAttackType != attackType && lastAttackType != E_AttackType.None);
 
         return slideInput;
     }
@@ -477,7 +469,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Start and End Attacks
 
-    public void StartAttack(int currentDamage)
+    public void StartAttack()
     {
         if (weapon != null)
         {
@@ -488,7 +480,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         //Clear damage and list of enemies hit
         hitTargets.Clear();
-        damage = currentDamage + additionalDamage;
+        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
+        damage = currentAttack.variations[currentAttackIndex].damage + additionalDamage;
         //Debug.Log(damage + " from " + currentDamage + " and " + additionalDamage);
 
         CheckMoveToTarget(transform.position, transform.forward, snapLayerMask, moveDistanceThreshold.y);
@@ -503,7 +496,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         animator.speed = currentAnimationSpeed;
         animator.applyRootMotion = baseUseRootMotion;
         unblockable = false;
-        chargingAttack = AttackType.None;
+        chargingAttack = E_AttackType.None;
         additionalDamage = 0;
 
         //Clear damage and list of enemies hit
@@ -743,16 +736,16 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         currentTargets = hitCharacters;
     }
 
-    void Target(AttackType attackType)
+    void Target(E_AttackType attackType)
     {
         float distance = 0;
 
         switch (attackType)
         {
-            case AttackType.PrimaryAttack:
+            case E_AttackType.PrimaryAttack:
                 distance = moveDistanceThreshold.y;
                 break;
-            case AttackType.SecondaryAttack:
+            case E_AttackType.SecondaryAttack:
                 distance = 20f;
                 break;
             default:
@@ -814,12 +807,18 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     Vector3 firePos;
 
-    public void FireProjectile(int projectileDamage)
+    public void FireProjectile()
     {
+        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
+        if (currentAttack.variations[currentAttackIndex].projectileData == null)
+            return;
+
         ConsumeArrow();
 
         PlaySoundEffect(weapon.attackClip, weapon.soundVolume);
 
+        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
+        int projectileDamage = currentAttack.variations[currentAttackIndex].damage;
         projectileDamage += additionalDamage;
         //Debug.Log("Fire projectile for " + projectileDamage);
 
@@ -874,32 +873,34 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         SpawnProjectile(firePos, projectileDamage);
 
-        if (unblockable && additionalShotAngle != null)
+        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
+        if (unblockable && currentAttack.variations[currentAttackIndex].additionalShotAngle != null)
         {
-            foreach (var angle in additionalShotAngle)
+            foreach (var angle in currentAttack.variations[currentAttackIndex].additionalShotAngle)
             {
                 //Calculate the length of the opposing angle
                 float oppositeLength = Mathf.Tan(angle) * distance;
 
                 //Spawn additional projectiles
-                SpawnProjectile(firePos + (transform.right * oppositeLength), (int)(projectileDamage * additionalProjectileDamageMultiplier));
-                SpawnProjectile(firePos + (transform.right * -oppositeLength), (int)(projectileDamage * additionalProjectileDamageMultiplier));
+                SpawnProjectile(firePos + (transform.right * oppositeLength), (int)(projectileDamage * currentAttack.variations[currentAttackIndex].additionalProjectileDamageMultiplier));
+                SpawnProjectile(firePos + (transform.right * -oppositeLength), (int)(projectileDamage * currentAttack.variations[currentAttackIndex].additionalProjectileDamageMultiplier));
             }
 
         }
 
         unblockable = false;
-        chargingAttack = AttackType.None;
+        chargingAttack = E_AttackType.None;
         additionalDamage = 0;
     }
 
     void SpawnProjectile(Vector3 targetPos, int projectileDamage)
     {
-        Instantiate(projectileFX, weapon.transform);
+        currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
+        Instantiate(currentAttack.variations[currentAttackIndex].projectileFX, weapon.transform);
 
-        GameObject projectileObj = Instantiate(projectileData.projectile, weapon.transform.position, transform.rotation) as GameObject;
+        GameObject projectileObj = Instantiate(currentAttack.variations[currentAttackIndex].projectileData.projectile, weapon.transform.position, transform.rotation) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
-        projectileMove.Fire(targetPos, projectileData, this.gameObject, projectileDamage);
+        projectileMove.Fire(targetPos, currentAttack.variations[currentAttackIndex].projectileData, this.gameObject, projectileDamage);
     }
 
     #endregion
@@ -1042,7 +1043,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         if (canSlideInput)
         {
-            Attack(attackType: AttackType.LungeAttack, enableModifiers: false, interupt: true);
+            Attack(attackType: E_AttackType.LungeAttack, enableModifiers: false, interupt: true);
             return;
         }
 
@@ -1090,6 +1091,31 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         canDodge = true;
         ResetAttack();
         animator.applyRootMotion = baseUseRootMotion;
+    }
+
+    public void EnableDodgeAttack()
+    {
+        //Debug.Log("Next attack + " + attack);
+        currentAttackIndex = 0;
+        animator.SetInteger("MeleeAttackCount", currentAttackIndex);
+
+        canDodge = true;
+        canAttack = true;
+
+        AIController AIController = GetComponent<AIController>();
+
+        if (AIController != null)
+        {
+            AIController.EndAttackOnTarget();
+        }
+
+        if (savingAttackInput != E_AttackType.None)
+        {
+            //Debug.Log("Saved attack input");
+            E_AttackType attackType = (E_AttackType)System.Enum.Parse(typeof(E_AttackType), "Dodge" + savingAttackInput.ToString());
+            Attack(attackSpeed: savedAttackAnimSpeed, attackType: attackType, enableModifiers: false);
+            savingAttackInput = E_AttackType.None;
+        }
     }
 
     #endregion

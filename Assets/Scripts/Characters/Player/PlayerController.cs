@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using Enfabler.Attacking;
 
 public class PlayerController : BaseCharacterController
 {
@@ -124,21 +125,21 @@ public class PlayerController : BaseCharacterController
 
     public void PrimaryAttackInput(InputAction.CallbackContext context)
     {
-        Attack(context, CharacterCombat.AttackType.PrimaryAttack);
+        Attack(context, E_AttackType.PrimaryAttack);
     }
 
     public void SecondaryAttackInput(InputAction.CallbackContext context)
     {
-        Attack(context, CharacterCombat.AttackType.SecondaryAttack);
+        Attack(context, E_AttackType.SecondaryAttack);
     }
 
-    public void Attack(InputAction.CallbackContext context, CharacterCombat.AttackType attackType)
+    public void Attack(InputAction.CallbackContext context, E_AttackType attackType)
     {
         if (PauseMenu.instance.paused) return;
 
         if (context.performed)
         {
-            if (moveInput != Vector2.zero && (combat.canAttack || (combat.canSaveAttackInput && combat.savingAttackInput == CharacterCombat.AttackType.None)))
+            if (moveInput != Vector2.zero && (combat.canAttack || (combat.canSaveAttackInput && combat.savingAttackInput == E_AttackType.None)))
             {
                 //Rotate towards direction
                 Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
@@ -325,7 +326,7 @@ public class PlayerController : BaseCharacterController
 
     private void FixedUpdate()
     {
-        if (combat.canMove || combat.chargingAttack != CharacterCombat.AttackType.None)
+        if (combat.canMove || combat.chargingAttack != E_AttackType.None)
         {
             playerMovement.Move(moveInput);
         }

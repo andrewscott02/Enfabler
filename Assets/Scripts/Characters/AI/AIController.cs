@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using BehaviourTrees;
+using Enfabler.Attacking;
 
 public class AIController : BaseCharacterController
 {
@@ -225,7 +226,7 @@ public class AIController : BaseCharacterController
     [System.Serializable]
     public struct AIAttackData
     {
-        public CharacterCombat.AttackType attackType;
+        public E_AttackType attackType;
 
         public float distance;
         public float attackSpeed;
@@ -289,7 +290,7 @@ public class AIController : BaseCharacterController
         return -1;
     }
 
-    public AIAttackData GetAttackFromType(CharacterCombat.AttackType attackType)
+    public AIAttackData GetAttackFromType(E_AttackType attackType)
     {
         for (int i = 0; i < attacks.Length; i++)
         {
@@ -443,7 +444,7 @@ public class AIController : BaseCharacterController
         yield return new WaitForSeconds(delay);
         if (!health.dying)
         {
-            combat.ReleaseAttack(CharacterCombat.AttackType.PrimaryAttack);
+            combat.ReleaseAttack(E_AttackType.PrimaryAttack);
             agent.isStopped = false;
         }
     }

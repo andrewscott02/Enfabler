@@ -785,6 +785,7 @@ GameObject:
   - component: {fileID: 7905470459028133162}
   - component: {fileID: 6297360835494842304}
   - component: {fileID: 6149854980361935303}
+  - component: {fileID: 2154055603770706480}
   m_Layer: 10
   m_Name: Character
   m_TagString: Untagged
@@ -974,8 +975,6 @@ MonoBehaviour:
   canMove: 1
   sprinting: 0
   canAttack: 1
-  chargePrimaryDamageScaling: 2
-  chargeSecondaryDamageScaling: 1
   chargeUnblockableTime: 0.5
   chargeMaxTime: 2
   canSwitchAttack: 0
@@ -1001,14 +1000,6 @@ MonoBehaviour:
   hitFreezeTime: 0.15
   rumbleOnHit: 0
   weaponSphereRadius: 0.45
-  projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
-  projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
-    type: 3}
-  additionalShotAngle:
-  - 5
-  - 3.4
-  - 3.5
-  additionalProjectileDamageMultiplier: 0.5
   maxArrows: 15
   regenArrowDelay: 2
   regenArrowInterval: 0.5
@@ -1105,6 +1096,162 @@ MonoBehaviour:
     type: 3}
   flashEffect: {fileID: 5831885752641907103, guid: 67e6becbede651847b041f8dad67e417,
     type: 3}
+--- !u!114 &2154055603770706480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460243065040470235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994a48aafd0590f4596271d84dc5a1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attacks:
+  - attackType: 1
+    rangedInput: 0
+    variations:
+    - animation: PrimaryAttack
+      damage: 4
+      chargeDamageScaling: 2
+      nextAttackIndex: 1
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: PrimaryAttack
+      damage: 4
+      chargeDamageScaling: 2
+      nextAttackIndex: 2
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: PrimaryAttack
+      damage: 6
+      chargeDamageScaling: 2
+      nextAttackIndex: 0
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+  - attackType: 8
+    rangedInput: 0
+    variations:
+    - animation: DodgePrimaryAttack
+      damage: 4
+      chargeDamageScaling: 2
+      nextAttackIndex: 1
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+  - attackType: 6
+    rangedInput: 0
+    variations:
+    - animation: SprintPrimaryAttack
+      damage: 4
+      chargeDamageScaling: 1
+      nextAttackIndex: 0
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+  - attackType: 3
+    rangedInput: 0
+    variations:
+    - animation: SwitchPrimaryAttack
+      damage: 5
+      chargeDamageScaling: 1
+      nextAttackIndex: 0
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+  - attackType: 5
+    rangedInput: 0
+    variations:
+    - animation: LungeAttack
+      damage: 1
+      chargeDamageScaling: 1
+      nextAttackIndex: 0
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+  - attackType: 2
+    rangedInput: 1
+    variations:
+    - animation: SecondaryAttack
+      damage: 3
+      chargeDamageScaling: 1
+      nextAttackIndex: 1
+      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
+      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      additionalShotAngle:
+      - 3.3
+      - 3.4
+      - 3.5
+      additionalProjectileDamageMultiplier: 0.5
+    - animation: SecondaryAttack
+      damage: 3
+      chargeDamageScaling: 1
+      nextAttackIndex: 0
+      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
+      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      additionalShotAngle:
+      - 5
+      - 3.4
+      - 3.5
+      additionalProjectileDamageMultiplier: 3
+  - attackType: 9
+    rangedInput: 1
+    variations:
+    - animation: SprintSecondaryAttack
+      damage: 3
+      chargeDamageScaling: 1
+      nextAttackIndex: 0
+      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
+      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      additionalShotAngle:
+      - 3.3
+      - 3.4
+      - 3.5
+      additionalProjectileDamageMultiplier: 0.5
+  - attackType: 7
+    rangedInput: 1
+    variations:
+    - animation: SprintSecondaryAttack
+      damage: 3
+      chargeDamageScaling: 1
+      nextAttackIndex: 0
+      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
+      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      additionalShotAngle:
+      - 3.3
+      - 3.4
+      - 3.5
+      additionalProjectileDamageMultiplier: 0.5
+  - attackType: 4
+    rangedInput: 1
+    variations:
+    - animation: SwitchSecondaryAttack
+      damage: 2
+      chargeDamageScaling: 1
+      nextAttackIndex: 0
+      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
+      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      additionalShotAngle:
+      - 3.3
+      - 3.4
+      - 3.5
+      additionalProjectileDamageMultiplier: 0.5
 --- !u!1 &7504905428158614599
 GameObject:
   m_ObjectHideFlags: 0
