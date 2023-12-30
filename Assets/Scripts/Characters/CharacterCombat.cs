@@ -335,7 +335,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void ReleaseAttack()
     {
-        if (currentAttack.attackType == E_AttackType.None) return;
+        if (currentAttack.attackType == E_AttackType.None || currentAttackIndex >= currentAttack.variations.Length) return;
 
         additionalDamage = (int)(currentChargeTime * currentAttack.variations[currentAttackIndex].chargeDamageScaling);
 
@@ -385,7 +385,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public void NextAttack()
     {
         //Debug.Log("Next attack + " + attack);
-        currentAttackIndex = currentAttack.variations[currentAttackIndex].nextAttackIndex;
+        if (currentAttack.attackType == E_AttackType.None || currentAttackIndex >= currentAttack.variations.Length)
+            currentAttackIndex = 0;
+        else 
+            currentAttackIndex = currentAttack.variations[currentAttackIndex].nextAttackIndex;
 
         canDodge = true;
         canAttack = true;
