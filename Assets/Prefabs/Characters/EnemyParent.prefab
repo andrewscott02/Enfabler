@@ -335,6 +335,21 @@ PrefabInstance:
       propertyPath: maxArmour
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[1].nextAttackIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[1].currentAttackAnimModifier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2952583324966622599, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -636,6 +651,7 @@ MonoBehaviour:
     currentCooldown: 0
     timeSinceLastAttack: 0
   spells: []
+  preparedAttack: -1
   parryChance: 0.25
   parryCooldown: 0.8
   dodgeChance: 0.25
