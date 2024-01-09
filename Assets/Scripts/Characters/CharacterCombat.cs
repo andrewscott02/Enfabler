@@ -897,6 +897,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         Instantiate(currentAttack.variations[currentAttackIndex].projectileFX, weapon.transform);
 
         GameObject projectileObj = Instantiate(currentAttack.variations[currentAttackIndex].projectileData.projectile, weapon.transform.position, transform.rotation) as GameObject;
+
+        ProjectileHit projectileHit = projectileObj.GetComponentInChildren<ProjectileHit>();
+        projectileHit.attackType = currentAttack.attackType;
+
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
         projectileMove.Fire(targetPos, currentAttack.variations[currentAttackIndex].projectileData, this.gameObject, projectileDamage);
     }

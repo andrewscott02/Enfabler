@@ -16,10 +16,12 @@ public class Hit_ProgressTutorial : ProgressTutorial
 
     public void OnHit(int damage, Vector3 dir, E_AttackType attackType = E_AttackType.None)
     {
+        Debug.Log(attackType);
+
         if (stage >= specifiedAttacks.Length)
             return;
 
-        if (attackType == E_AttackType.None || attackType == specifiedAttacks[stage])
+        if (specifiedAttacks[stage] == E_AttackType.None || attackType == specifiedAttacks[stage])
             ProgressTutorialStage();
     }
 }

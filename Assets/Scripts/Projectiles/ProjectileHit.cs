@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enfabler.Attacking;
 
 public class ProjectileHit : MonoBehaviour
 {
+    public E_AttackType attackType = E_AttackType.None;
+
     public GameObject projectileAttach;
     bool alreadyAttached = false;
 
@@ -78,7 +81,7 @@ public class ProjectileHit : MonoBehaviour
         if (trapStats.shotAOE == 0)
         {
             //only hit target
-            hitData = casterDamage.DealDamage(target, damage, transform.position, transform.rotation.eulerAngles);
+            hitData = casterDamage.DealDamage(target, damage, transform.position, transform.rotation.eulerAngles, attackType);
         }
         else
         {

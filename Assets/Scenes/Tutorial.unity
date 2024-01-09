@@ -1739,6 +1739,70 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d9a2c0f638159f4bac49271089a6286, type: 3}
+--- !u!1 &304901436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 304901437}
+  - component: {fileID: 304901439}
+  - component: {fileID: 304901438}
+  m_Layer: 0
+  m_Name: Tutorial Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &304901437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304901436}
+  m_LocalRotation: {x: -0, y: -0.9465119, z: -0, w: 0.32266897}
+  m_LocalPosition: {x: 9.98, y: 1.0799994, z: -4.87}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1896629326}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 32.54, z: 0}
+--- !u!114 &304901438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304901436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f3bff357cc68e408d235839f73fb48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialMessages:
+  - 'Perform special attacks with a slide input, quickly press the melee attack after
+    a ranged attack to leap at your enemy.
+
+
+    Use a leap attack against the dummy.'
+--- !u!65 &304901439
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304901436}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 5, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &309480124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4580847645174538, guid: 1d9a2c0f638159f4bac49271089a6286,
@@ -3333,13 +3397,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579626580}
   m_LocalRotation: {x: -0, y: -0.97799844, z: -0, w: 0.20861226}
-  m_LocalPosition: {x: 39.8, y: -3.94, z: -14.03}
+  m_LocalPosition: {x: 39.8, y: -4.03, z: -14.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 605104822}
   - {fileID: 814138273}
   - {fileID: 1713171014}
+  - {fileID: 1247060425}
   m_Father: {fileID: 2018478065}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -155.918, z: 0}
@@ -7925,6 +7990,70 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1321764011}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1247060424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1247060425}
+  - component: {fileID: 1247060427}
+  - component: {fileID: 1247060426}
+  m_Layer: 0
+  m_Name: Tutorial Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1247060425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247060424}
+  m_LocalRotation: {x: -0, y: 0.28016087, z: -0, w: 0.95995307}
+  m_LocalPosition: {x: 2.04, y: 1.0799994, z: -0.62}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 579626581}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 32.54, z: 0}
+--- !u!114 &1247060426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247060424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f3bff357cc68e408d235839f73fb48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialMessages:
+  - 'Defence tutorial in progress.
+
+
+    Head over to the next arena to learn about
+    special attacks.'
+--- !u!65 &1247060427
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247060424}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 5, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1252414332
 GameObject:
   m_ObjectHideFlags: 0
@@ -9832,6 +9961,70 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43d26958e63fd64419eb8c2f9254f25d, type: 3}
+--- !u!1 &1523384917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1975926780334088167, guid: ab691f773227a3049b2ffa696549ecdc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1453426765}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1523384920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523384917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5069ea6217b84564ab8032e888a7d20e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialMessages:
+  - 'Great, notice that you will still make a ranged attack before making the leap
+    attack.
+
+
+    Try it again.'
+  - 'Now try the opposite, make a ranged attack after a melee attack to leap away
+    while shooting at your target.
+
+
+    Shoot the target with this special attack.'
+  - 'Notice this attack uses 2 arrows? Both of these attacks are useful for changing
+    you position, but both of them require you to have arrows to perform.
+
+
+    Try
+    it a few more times.'
+  - 'Notice this attack uses 2 arrows? Both of these attacks are useful for changing
+    you position, but both of them require you to have arrows to perform.
+
+
+    Try
+    it a few more times.'
+  - 'Alright, it''s time for the last attack. Dodging while attacking will perform
+    a special lunge attack.
+
+
+    Use a lunge attack on the target.'
+  - 'This lunge attack allows you to move past your enemies, which is useful when
+    surrounded. However, it deals very little damage and you can still be hit when
+    using it.
+
+
+    Try it a few more times.'
+  - 'This lunge attack allows you to move past your enemies, which is useful when
+    surrounded. However, it deals very little damage and you can still be hit when
+    using it.
+
+
+    Try it a few more times.'
+  - 'Perfect, you have learned all about combat, now it''s time for a test.
+
+
+    Approach
+    the next arena to test out your combat skills against an enemy.'
+  specifiedAttacks: 0300000003000000040000000400000004000000050000000500000005000000
 --- !u!1001 &1537505886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11933,7 +12126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896629325}
   m_LocalRotation: {x: -0, y: 0.16481414, z: -0, w: 0.98632467}
-  m_LocalPosition: {x: 16.65, y: -3.94, z: 11.77}
+  m_LocalPosition: {x: 16.65, y: -4.03, z: 11.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11941,6 +12134,7 @@ Transform:
   - {fileID: 581706805}
   - {fileID: 1377341906}
   - {fileID: 89401340}
+  - {fileID: 304901437}
   m_Father: {fileID: 2018478065}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 18.973, z: 0}
@@ -13672,11 +13866,6 @@ MonoBehaviour:
 
 
     Make a few more attacks.'
-  - 'Nice shooting, you can also charge ranged attacks. Charged ranged attacks shoot
-    multiple arrows at the target.
-
-
-    Make a few more attacks.'
   - 'Keep note of the arrows in your quiver, you won''t be able to shoot if you don''t
     have arrows. Arrows recharge after a few seconds.
 
@@ -13700,7 +13889,7 @@ MonoBehaviour:
 
     Head over
     to the next training arena to practice your defence.'
-  specifiedAttacks: 020000000200000002000000020000000200000002000000020000000200000002000000
+  specifiedAttacks: 0200000002000000020000000200000002000000020000000200000002000000
 --- !u!1001 &2099051992
 PrefabInstance:
   m_ObjectHideFlags: 0
