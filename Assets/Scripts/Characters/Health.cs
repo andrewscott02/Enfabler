@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Enfabler.Attacking;
 
 public class Health : MonoBehaviour, IDamageable, IHealable
 {
@@ -50,7 +51,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         Damage(GetComponent<CharacterCombat>(), 10, transform.position, transform.eulerAngles);
     }
 
-    public E_DamageEvents Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot)
+    public E_DamageEvents Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot, E_AttackType attackType = E_AttackType.None)
     {
         MonoBehaviour attackerMono = attacker.GetScript();
         Vector3 dir = transform.position - attackerMono.transform.position;
@@ -105,7 +106,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         }
         else
         {
-            HitReactionDelegate(damage, dir);
+            HitReactionDelegate(damage, dir, attackType);
             if (hitReactData.bloodFX != null)
             {
                 Instantiate(hitReactData.bloodFX, spawnPos, Quaternion.Euler(spawnRot));
@@ -115,10 +116,10 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         return E_DamageEvents.Hit;
     }
 
-    public delegate void HitDelegate(int damage, Vector3 dir);
+    public delegate void HitDelegate(int damage, Vector3 dir, E_AttackType attackType = E_AttackType.None);
     public HitDelegate HitReactionDelegate;
 
-    void HitReaction(int damage, Vector3 dir)
+    void HitReaction(int damage, Vector3 dir, E_AttackType attackType = E_AttackType.None)
     {
         if (combat == null) { return; }
 

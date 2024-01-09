@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enfabler.Attacking;
 
 public class HitKnockback : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class HitKnockback : MonoBehaviour
         GetComponent<Health>().HitReactionDelegate += Hit;
     }
 
-    public void Hit(int damage, Vector3 dir)
+    public void Hit(int damage, Vector3 dir, E_AttackType attackType = E_AttackType.None)
     {
         rb.AddForce(dir * hitKnockBack * damage, ForceMode.Impulse);
     }

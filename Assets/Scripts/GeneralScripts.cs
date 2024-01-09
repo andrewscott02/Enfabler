@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Cinemachine;
+using Enfabler.Attacking;
 
 public static class HelperFunctions
 {
@@ -266,7 +267,7 @@ public static class HelperFunctions
 public interface ICanDealDamage
 {
     MonoBehaviour GetScript();
-    E_DamageEvents DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot);
+    E_DamageEvents DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot, E_AttackType attackType = E_AttackType.None);
     bool HitDodged();
     bool HitBlocked(IDamageable other);
     bool HitParried(IDamageable other);
@@ -275,7 +276,7 @@ public interface ICanDealDamage
 public interface IDamageable
 {
     MonoBehaviour GetScript();
-    E_DamageEvents Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot);
+    E_DamageEvents Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot, E_AttackType attackType = E_AttackType.None);
     bool CheckKill();
     void Kill(Vector3 attacker, int damage);
     bool IsDead();

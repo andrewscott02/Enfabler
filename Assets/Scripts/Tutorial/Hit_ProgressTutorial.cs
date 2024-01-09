@@ -3,27 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Enfabler.Attacking;
 
-public class BreakableHit : MonoBehaviour
+public class Hit_ProgressTutorial : ProgressTutorial
 {
-    Rigidbody rb;
-    Health health;
-
-    public float forceMultiplier = 1f;
+    public E_AttackType[] specifiedAttacks;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
-        if (rb == null)
-            rb = GetComponentInChildren<Rigidbody>();
-
-        health = GetComponent<Health>();
+        Health health = GetComponent<Health>();
         health.HitReactionDelegate += OnHit;
     }
 
     public void OnHit(int damage, Vector3 dir, E_AttackType attackType = E_AttackType.None)
     {
-        rb.AddForce(dir * damage * forceMultiplier);
+        if (stage >= specifiedAttacks.Length)
+            return;
+
+        if (attackType == E_AttackType.None || attackType == specifiedAttacks[stage])
+            ProgressTutorialStage();
     }
 }

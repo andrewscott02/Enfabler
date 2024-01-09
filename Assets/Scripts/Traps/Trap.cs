@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enfabler.Attacking;
 
 public class Trap : MonoBehaviour, ICanDealDamage
 {
@@ -75,7 +76,7 @@ public class Trap : MonoBehaviour, ICanDealDamage
             Gizmos.DrawWireSphere(transform.position, trapStats.range);
     }
 
-    public E_DamageEvents DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot)
+    public E_DamageEvents DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot, E_AttackType attackType = E_AttackType.None)
     {
         return target.Damage(this, damage, spawnPos, spawnRot);
     }

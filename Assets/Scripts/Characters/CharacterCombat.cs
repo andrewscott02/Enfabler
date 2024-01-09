@@ -622,15 +622,15 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
             //If it can be hit, deal damage to target and add it to the hit targets list
             hitTargets.Add(hitDamageable);
-            E_DamageEvents damageEvents = DealDamage(hitDamageable, damage, hit.point, hit.normal);
+            E_DamageEvents damageEvents = DealDamage(hitDamageable, damage, hit.point, hit.normal, currentAttack.attackType);
 
             onAttackHit(damageEvents == E_DamageEvents.Hit);
         }
     }
 
-    public E_DamageEvents DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot)
+    public E_DamageEvents DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot, E_AttackType attackType = E_AttackType.None)
     {
-        return target.Damage(this, damage, spawnPos, spawnRot);
+        return target.Damage(this, damage, spawnPos, spawnRot, attackType);
     }
 
     public delegate void AttackDeletate(bool hit);

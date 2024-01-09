@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Enfabler.Attacking;
 
 public class RotateOnHit : MonoBehaviour, IDamageable
 {
@@ -19,7 +20,7 @@ public class RotateOnHit : MonoBehaviour, IDamageable
         return this;
     }
 
-    public E_DamageEvents Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot)
+    public E_DamageEvents Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot, E_AttackType attackType = E_AttackType.None)
     {
         Instantiate(hitReactData.blockFX, spawnPos, Quaternion.Euler(spawnRot));
         if (hitReactData.hitClip != null)
