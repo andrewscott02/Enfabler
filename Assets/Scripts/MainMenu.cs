@@ -30,7 +30,13 @@ public class MainMenu : MonoBehaviour
 
     #region Buttons
 
-    public void StartGame()
+    public void Tutorial()
+    {
+        ShowMouse(false);
+        SceneManager.LoadScene(E_Scenes.Tutorial.ToString());
+    }
+
+    public void DungeonCrawl()
     {
         ShowMouse(false);
         SceneManager.LoadScene(E_Scenes.PCGGrammars.ToString());
