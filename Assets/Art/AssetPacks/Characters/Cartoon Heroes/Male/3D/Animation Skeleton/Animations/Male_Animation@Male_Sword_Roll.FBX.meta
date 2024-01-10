@@ -431,6 +431,75 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Male_Sword_Roll_Fast
+      takeName: Take 001
+      internalID: -7007864415451744485
+      firstFrame: 3
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.017191358
+        functionName: StartDodge
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.44343132
+        functionName: DodgeRollLand
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: ca2e16adf80d306449de70b53c9a55f9,
+          type: 3}
+        floatParameter: 0.25
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.61453986
+        functionName: EnableDodgeAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.94298613
+        functionName: EndDodge
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.98580265
+        functionName: ResetDodge
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: eab9af59e00a6e146a188dd3ca290cb9,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

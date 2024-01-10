@@ -128,6 +128,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         controller = GetComponent<BaseCharacterController>();
         animator = GetComponent<Animator>();
+        animator.SetBool("UseFastRoll", fastdodge);
         baseUseRootMotion = animator.applyRootMotion;
         baseAnimationSpeed = animator.speed;
         ResetAnimSpeed();
@@ -1043,6 +1044,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     #region Dodging
 
     public bool canDodge = true;
+    public bool fastdodge = false;
 
     public delegate void DodgeDelegate();
     public DodgeDelegate dodgeDelegate;

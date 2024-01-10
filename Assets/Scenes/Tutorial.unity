@@ -1847,8 +1847,8 @@ GameObject:
   - component: {fileID: 304901437}
   - component: {fileID: 304901439}
   - component: {fileID: 304901438}
-  m_Layer: 0
-  m_Name: Tutorial Trigger
+  m_Layer: 2
+  m_Name: Tutorial Trigger - Special Attacks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3602,7 +3602,7 @@ Transform:
   - {fileID: 1247060425}
   - {fileID: 6862262353447767808}
   m_Father: {fileID: 2018478065}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -158.499, z: 0}
 --- !u!1 &581706804
 GameObject:
@@ -5217,7 +5217,7 @@ Transform:
   - {fileID: 298574928}
   - {fileID: 1650043184}
   m_Father: {fileID: 2018478065}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -11.007, z: 0}
 --- !u!1 &759630642
 GameObject:
@@ -8805,8 +8805,8 @@ GameObject:
   - component: {fileID: 1247060425}
   - component: {fileID: 1247060427}
   - component: {fileID: 1247060426}
-  m_Layer: 0
-  m_Name: Tutorial Trigger
+  m_Layer: 2
+  m_Name: Tutorial Trigger - Defending
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11834,8 +11834,8 @@ GameObject:
   - component: {fileID: 1682835905}
   - component: {fileID: 1682835907}
   - component: {fileID: 1682835906}
-  m_Layer: 0
-  m_Name: Tutorial Trigger
+  m_Layer: 2
+  m_Name: Tutorial Trigger - Bridge 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11848,13 +11848,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682835904}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.17, z: -3.69}
+  m_LocalRotation: {x: -0, y: -0.41835907, z: -0, w: 0.90828174}
+  m_LocalPosition: {x: -2.1856918, y: 1.2199993, z: -6.90831}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2122131479}
-  m_RootOrder: 2
+  m_Father: {fileID: 2018478065}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1682835906
 MonoBehaviour:
@@ -13415,7 +13415,7 @@ Transform:
   - {fileID: 89401340}
   - {fileID: 304901437}
   m_Father: {fileID: 2018478065}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 18.973, z: 0}
 --- !u!1001 &1901895287
 PrefabInstance:
@@ -14378,6 +14378,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1682835905}
   - {fileID: 749423263}
   - {fileID: 579626581}
   - {fileID: 1896629326}
@@ -15552,7 +15553,6 @@ Transform:
   m_Children:
   - {fileID: 1446147366}
   - {fileID: 278916415}
-  - {fileID: 1682835905}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: -49.462, z: 0}
