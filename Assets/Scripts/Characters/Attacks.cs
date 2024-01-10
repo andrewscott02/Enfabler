@@ -43,6 +43,7 @@ namespace Enfabler.Attacking
     public struct AttackTypes
     {
         public E_AttackType attackType;
+        public int weaponIndex;
         public bool rangedInput;
         public AttackData[] variations;
     }

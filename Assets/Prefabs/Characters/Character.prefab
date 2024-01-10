@@ -978,7 +978,7 @@ MonoBehaviour:
   chargeUnblockableTime: 0.5
   chargeMaxTime: 2
   canSwitchAttack: 0
-  slideInputDelay: 0.3
+  slideInputDelay: 0.25
   canSaveAttackInput: 0
   savingAttackInput: 0
   savingChargeInput: 0
@@ -1003,7 +1003,9 @@ MonoBehaviour:
   maxArrows: 15
   regenArrowDelay: 2
   regenArrowInterval: 0.5
+  parryWindowDuration: 0.3
   canDodge: 1
+  fastdodge: 0
   currentSpell: {fileID: 0}
 --- !u!114 &634613423001025932
 MonoBehaviour:
@@ -1110,6 +1112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attacks:
   - attackType: 1
+    weaponIndex: 0
     rangedInput: 0
     variations:
     - animation: PrimaryAttack
@@ -1140,6 +1143,7 @@ MonoBehaviour:
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
   - attackType: 8
+    weaponIndex: 0
     rangedInput: 0
     variations:
     - animation: DodgePrimaryAttack
@@ -1152,6 +1156,7 @@ MonoBehaviour:
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
   - attackType: 6
+    weaponIndex: 0
     rangedInput: 0
     variations:
     - animation: SprintPrimaryAttack
@@ -1164,6 +1169,7 @@ MonoBehaviour:
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
   - attackType: 3
+    weaponIndex: 0
     rangedInput: 0
     variations:
     - animation: SwitchPrimaryAttack
@@ -1176,6 +1182,7 @@ MonoBehaviour:
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
   - attackType: 5
+    weaponIndex: 0
     rangedInput: 0
     variations:
     - animation: LungeAttack
@@ -1188,6 +1195,7 @@ MonoBehaviour:
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
   - attackType: 2
+    weaponIndex: 1
     rangedInput: 1
     variations:
     - animation: SecondaryAttack
@@ -1217,6 +1225,7 @@ MonoBehaviour:
       - 3.5
       additionalProjectileDamageMultiplier: 3
   - attackType: 9
+    weaponIndex: 1
     rangedInput: 1
     variations:
     - animation: SprintSecondaryAttack
@@ -1233,6 +1242,7 @@ MonoBehaviour:
       - 3.5
       additionalProjectileDamageMultiplier: 0.5
   - attackType: 7
+    weaponIndex: 1
     rangedInput: 1
     variations:
     - animation: SprintSecondaryAttack
@@ -1249,6 +1259,7 @@ MonoBehaviour:
       - 3.5
       additionalProjectileDamageMultiplier: 0.5
   - attackType: 4
+    weaponIndex: 1
     rangedInput: 1
     variations:
     - animation: SwitchSecondaryAttack

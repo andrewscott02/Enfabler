@@ -191,30 +191,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         setWeapon.CreateWeapon(weaponIndex, 1, setWeapon.offhandWeapons);
     }
 
-    public void ChooseWeapon(E_AttackType attackType)
-    {
-        switch (attackType)
-        {
-            case E_AttackType.PrimaryAttack:
-                SetupWeapon(0);
-                break;
-            case E_AttackType.SwitchPrimaryAttack:
-                SetupWeapon(0);
-                break;
-            case E_AttackType.LungeAttack:
-                SetupWeapon(0);
-                break;
-            case E_AttackType.SecondaryAttack:
-                SetupWeapon(1);
-                break;
-            case E_AttackType.SwitchSecondaryAttack:
-                SetupWeapon(1);
-                break;
-            default:
-                break;
-        }
-    }
-
     #endregion
 
     #endregion
@@ -275,8 +251,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
             //Debug.Log(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
 
-            ChooseWeapon(attackType);
-
             //Debug.Log(attackType + " " + animator.GetInteger("MeleeAttackCount") + (sprinting?" Sprint":" Standard") + " " + attackSpeed);
             Block(false);
             EndDodge();
@@ -324,6 +298,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         currentAttack = attackData;
         currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
+        SetupWeapon(currentAttack.weaponIndex);
         animator.SetInteger("MeleeAttackCount", currentAttack.variations[currentAttackIndex].currentAttackAnimModifier);
         animator.SetTrigger(attackData.attackType.ToString());
     }
@@ -970,10 +945,16 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         //Debug.Log("Block changed");
         EndDodge();
         ForceEndAttack();
-        this.parrying = blocking && parryAvailable;
-        this.blocking = blocking;
-
         SetupWeapon(0);
+        if (blocking && parryAvailable)
+        {
+            StartParryWindow();
+        }
+        else
+        {
+            EndParryWindow();
+        }
+        this.blocking = blocking;
 
         animator.SetInteger("MeleeAttackCount", 0);
 
@@ -1023,12 +1004,33 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Parrying
 
+    public float parryWindowDuration = 0.2f;
     public bool blocking { get; protected set; }
     public bool parrying { get; protected set; }
+
+    public void StartParryWindow()
+    {
+        parrying = true;
+        weapon.ParryEffect(true);
+
+        if (endParryCoroutine != null)
+            StopCoroutine(endParryCoroutine);
+        endParryCoroutine = StartCoroutine(IDelayEndParryWindow());
+    }
+
+    Coroutine endParryCoroutine;
+
+    IEnumerator IDelayEndParryWindow()
+    {
+        yield return new WaitForSeconds(parryWindowDuration);
+
+        EndParryWindow();
+    }
 
     public void EndParryWindow()
     {
         parrying = false;
+        weapon.ParryEffect(false);
     }
 
     public delegate void ParryDelegate();

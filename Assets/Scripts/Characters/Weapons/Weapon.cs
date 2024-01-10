@@ -15,6 +15,9 @@ public class Weapon : MonoBehaviour
 
     public bool dropOnCharacterDeath = true;
 
+    public Dictionary<MeshRenderer, Material> meshMatDict;
+    public Material parryMat;
+
     Collider col;
     Rigidbody rb;
 
@@ -30,6 +33,8 @@ public class Weapon : MonoBehaviour
         weaponTrail.SetActive(false);
         bloodTrail.SetActive(false);
         unblockableTrail.SetActive(false);
+
+        SetupMaterialDictionary();
     }
 
     public void Disarm()
@@ -39,5 +44,28 @@ public class Weapon : MonoBehaviour
         col.enabled = true;
         rb.isKinematic = false;
         transform.parent = null;
+    }
+
+    public void ParryEffect(bool parrying)
+    {
+        SetupMaterialDictionary();
+
+        foreach (var item in meshMatDict)
+        {
+            item.Key.material = parrying ? parryMat : item.Value;
+        }
+    }
+
+    void SetupMaterialDictionary()
+    {
+        if (meshMatDict != null)
+            return;
+
+        meshMatDict = new Dictionary<MeshRenderer, Material>();
+
+        foreach (var item in GetComponentsInChildren<MeshRenderer>())
+        {
+            meshMatDict.Add(item, item.material);
+        }
     }
 }
