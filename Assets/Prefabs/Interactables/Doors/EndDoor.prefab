@@ -73,6 +73,8 @@ MonoBehaviour:
   forceInteraction: 0
   multipleInteractions: 0
   interactFX: {fileID: 0}
+  lightReceiverUnlocker: {fileID: 0}
+  invertUnlock: 0
 --- !u!135 &5188753298262746977
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -196,7 +198,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
