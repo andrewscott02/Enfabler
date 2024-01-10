@@ -27,6 +27,9 @@ public class Armour : MonoBehaviour
         combat.blockingDelegate += Block;
         combat.blockedDelegate += ConsumeArmour;
 
+        combat.canDodgeDelegate += CanBlock;
+        combat.dodgeDelegate += ConsumeArmour;
+
         combat.parriedDelegate += ParrySuccess;
         combat.onAttackHit += Hit;
 
@@ -84,9 +87,9 @@ public class Armour : MonoBehaviour
         GainArmour(armourOnParry);
     }
 
-    public void Hit(bool hit)
+    public void Hit(E_DamageEvents damageEvent)
     {
-        if (hit)
+        if (damageEvent == E_DamageEvents.Hit)
             GainArmour(armourOnHit);
     }
 

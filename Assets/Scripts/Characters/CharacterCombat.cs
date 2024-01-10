@@ -147,11 +147,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         hitParry += HitParry;
 
         canBlockDelegate += CanBlockDelegateCheck;
-
         blockingDelegate += Blocking;
         blockedDelegate += BlockedHit;
         parriedDelegate += ParrySuccess;
 
+        canDodgeDelegate += CanDodgeDelegateCheck;
+        dodgeDelegate += OnDodgeStart;
         phaseDelegate += Phase;
     }
 
@@ -622,9 +623,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
             //If it can be hit, deal damage to target and add it to the hit targets list
             hitTargets.Add(hitDamageable);
-            E_DamageEvents damageEvents = DealDamage(hitDamageable, damage, hit.point, hit.normal, currentAttack.attackType);
+            E_DamageEvents damageEvent = DealDamage(hitDamageable, damage, hit.point, hit.normal, currentAttack.attackType);
 
-            onAttackHit(damageEvents == E_DamageEvents.Hit);
+            onAttackHit(damageEvent);
         }
     }
 
@@ -633,13 +634,15 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         return target.Damage(this, damage, spawnPos, spawnRot, attackType);
     }
 
-    public delegate void AttackDeletate(bool hit);
+    public delegate void AttackDeletate(E_DamageEvents damageEvents);
     public AttackDeletate onAttackHit;
 
-    void OnAttackHit(bool hit)
+    void OnAttackHit(E_DamageEvents damageEvent)
     {
         Freeze();
         RumbleManager.instance.ControllerRumble(0.2f, 0.85f, 0.25f);
+
+        bool hit = damageEvent == E_DamageEvents.Hit;
 
         PlaySoundEffect(hit ? weapon.hitClip : weapon.blockClip, weapon.soundVolume);
 
@@ -1001,7 +1004,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         {
             bool current = ((CanBlockDelegate)invocations[i]).Invoke();
 
-            //Debug.Log("Invocation + " + i + " is " + current);
+            Debug.Log("Invocation + " + i + " is " + current);
 
             if (current == false)
                 canBlock = false;
@@ -1041,10 +1044,49 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public bool canDodge = true;
 
+    public delegate void DodgeDelegate();
+    public DodgeDelegate dodgeDelegate;
+
+    public void OnDodgeStart()
+    {
+        //Empty delegate
+    }
+
+    public delegate bool CanDodgeDelegate();
+    public CanDodgeDelegate canDodgeDelegate;
+
+    public bool CanDodge()
+    {
+        var invocations = canDodgeDelegate.GetInvocationList();
+
+        bool canDodgeCheck = true;
+
+        for (int i = 0; i < invocations.Length; i++)
+        {
+            bool current = ((CanDodgeDelegate)invocations[i]).Invoke();
+
+            Debug.Log("Invocation + " + i + " is " + current);
+
+            if (current == false)
+                canDodgeCheck = false;
+        }
+
+        return canDodgeCheck;
+    }
+
+    public bool CanDodgeDelegateCheck()
+    {
+        return canDodge || canSlideInput;
+    }
+
     public virtual void Dodge()
     {
+        if (!CanDodge())
+            return;
+
         if (canSlideInput)
         {
+            dodgeDelegate();
             Attack(attackType: E_AttackType.LungeAttack, enableModifiers: false, interupt: true);
             return;
         }
@@ -1052,6 +1094,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         if (canDodge)
         {
+            dodgeDelegate();
             Block(false);
             EndDodge();
             ForceEndAttack();
@@ -1130,11 +1173,13 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void StartPhase()
     {
+        dodging = true;
         phaseDelegate(true);
     }
 
     public void EndPhase()
     {
+        dodging = false;
         phaseDelegate(false);
     }
 
