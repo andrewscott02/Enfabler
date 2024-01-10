@@ -2929,6 +2929,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 201142871}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &358179401 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7290420457427826618, guid: 28b042b4124525e4bbd14fee677cfca4,
+    type: 3}
+  m_PrefabInstance: {fileID: 794758211}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &360490789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4580847645174538, guid: 1d9a2c0f638159f4bac49271089a6286,
@@ -4633,7 +4639,7 @@ Transform:
   - {fileID: 814138273}
   - {fileID: 1713171014}
   - {fileID: 1247060425}
-  - {fileID: 6862262353447767808}
+  - {fileID: 1971610039}
   m_Father: {fileID: 2018478065}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -158.499, z: 0}
@@ -7052,6 +7058,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3052723316937089769, guid: 28b042b4124525e4bbd14fee677cfca4,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052723316937089769, guid: 28b042b4124525e4bbd14fee677cfca4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
         type: 3}
       propertyPath: m_RootOrder
@@ -7112,6 +7128,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: SparringPartner
       objectReference: {fileID: 0}
+    - target: {fileID: 7290420457427826618, guid: 28b042b4124525e4bbd14fee677cfca4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7290420457427826618, guid: 28b042b4124525e4bbd14fee677cfca4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7290420457427826618, guid: 28b042b4124525e4bbd14fee677cfca4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7290420457427826618, guid: 28b042b4124525e4bbd14fee677cfca4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972707918035104854, guid: 28b042b4124525e4bbd14fee677cfca4,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972707918035104854, guid: 28b042b4124525e4bbd14fee677cfca4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7975247890480178250, guid: 28b042b4124525e4bbd14fee677cfca4,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -7124,99 +7170,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28b042b4124525e4bbd14fee677cfca4, type: 3}
---- !u!4 &794758212 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
-    type: 3}
-  m_PrefabInstance: {fileID: 794758211}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &794758213 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7288439276714715049, guid: 28b042b4124525e4bbd14fee677cfca4,
-    type: 3}
-  m_PrefabInstance: {fileID: 794758211}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &794758214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 794758213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e21da027ea603b24698f1bb05f0cb6fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialMessages:
-  - 'Great, notice that the blue circle around your character decreased. This bar
-    represents your armour and is required to block. If you attempt to block without
-    armour, you will still take damage.
-
-
-    Try blocking a few more hits.'
-  - 'Great, notice that the blue circle around your character decreased. This bar
-    represents your armour and is required to block. If you attempt to block without
-    armour, you will still take damage.
-
-
-    Try blocking a few more hits.'
-  - 'Great, notice that the blue circle around your character decreased. This bar
-    represents your armour and is required to block. If you attempt to block without
-    armour, you will still take damage.
-
-
-    Try blocking a few more hits.'
-  - 'Alright, now for something a bit more challenging. Blocking just before the
-    enemy attacks will parry it.
-
-
-    Try parrying the next attack.'
-  - 'Perfect, parrying an attack will stagger the enemy, allowing for an opportunity
-    to counter. It will also recover some armour.
-
-
-    Try parrying a few more attacks.'
-  - 'Perfect, parrying an attack will stagger the enemy, allowing for an opportunity
-    to counter. It will also recover some armour.
-
-
-    Try parrying a few more attacks.'
-  - 'Last thing, pressing the X button will perform a dodge.
-
-
-    Try dodging the
-    next hit.'
-  - 'Great. Dodging is a great way to reposition and avoid hits, but takes a bit
-    of time and will consume some armour.
-
-
-    Try dodging a few more times.'
-  - 'You''ve finished learning about defending yourself. You should practice your
-    advanced combat abilities.
-
-
-    Head over to the next training arena to practice
-    your special attacks.'
-  damageEvents: 010000000100000001000000010000000200000002000000020000000300000003000000
---- !u!114 &794758215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 794758213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f96018fcb3ff2854cb0274ab299384dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialMessages:
-  - 'Alright, you''ve finished the combat tutorial, head over to the ship to prepare
-    for your journey.
-
-
-    Next stage of the tutorial is in progress.'
 --- !u!1001 &795366452
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7582,7 +7535,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824119606}
   m_LocalRotation: {x: 0, y: 0.14788383, z: 0, w: 0.9890048}
-  m_LocalPosition: {x: -58.40161, y: 30.267216, z: -148.57065}
+  m_LocalPosition: {x: -58.401608, y: 30.267221, z: -148.57063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9282,7 +9235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933747454}
   m_LocalRotation: {x: -0, y: 0.14788383, z: -0, w: 0.9890048}
-  m_LocalPosition: {x: -58.40161, y: 30.267216, z: -148.57065}
+  m_LocalPosition: {x: -58.401608, y: 30.267221, z: -148.57063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14529,7 +14482,7 @@ Transform:
   - {fileID: 1938660808}
   - {fileID: 1247292605}
   - {fileID: 1103719165}
-  - {fileID: 794758212}
+  - {fileID: 358179401}
   m_Father: {fileID: 2018478065}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 110.88, z: 0}
@@ -18885,6 +18838,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 675765698}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1971610039 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6106375352789726637, guid: 3231aefade7aee44d81a46c87599654e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7973998627654257896}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1977539749
 GameObject:
   m_ObjectHideFlags: 0
@@ -21402,175 +21361,95 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5038384153154079097}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6862262353447767807
+--- !u!1001 &7973998627654257896
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 579626581}
     m_Modifications:
-    - target: {fileID: 614490202859919100, guid: 28b042b4124525e4bbd14fee677cfca4,
-        type: 3}
-      propertyPath: maxHealth
-      value: 999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050073298839433973, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 2003962671125553406, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3050073298839433973, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 2003962671125553406, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 6106375352789726626, guid: 3231aefade7aee44d81a46c87599654e,
+        type: 3}
+      propertyPath: m_Name
+      value: SparringPartner - Defence
+      objectReference: {fileID: 0}
+    - target: {fileID: 6106375352789726637, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 6106375352789726637, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.61
+      value: 2.97
       objectReference: {fileID: 0}
-    - target: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 6106375352789726637, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2374444
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 6106375352789726637, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.72
+      value: -8.35
       objectReference: {fileID: 0}
-    - target: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 6106375352789726637, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.20861226
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 6106375352789726637, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 6106375352789726637, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.97799844
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 6106375352789726637, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 6106375352789726637, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 6106375352789726637, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 6106375352789726637, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7288439276714715049, guid: 28b042b4124525e4bbd14fee677cfca4,
-        type: 3}
-      propertyPath: m_Name
-      value: SparringPartner
-      objectReference: {fileID: 0}
-    - target: {fileID: 7975247890480178250, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 6860756141697119809, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7975247890480178250, guid: 28b042b4124525e4bbd14fee677cfca4,
+    - target: {fileID: 6860756141697119809, guid: 3231aefade7aee44d81a46c87599654e,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 28b042b4124525e4bbd14fee677cfca4, type: 3}
---- !u!4 &6862262353447767808 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7288439276714715046, guid: 28b042b4124525e4bbd14fee677cfca4,
-    type: 3}
-  m_PrefabInstance: {fileID: 6862262353447767807}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6862262353447767809 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7288439276714715049, guid: 28b042b4124525e4bbd14fee677cfca4,
-    type: 3}
-  m_PrefabInstance: {fileID: 6862262353447767807}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6862262353447767810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6862262353447767809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e21da027ea603b24698f1bb05f0cb6fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialMessages:
-  - 'Great, notice that the blue circle around your character decreased. This bar
-    represents your armour and is required to block. If you attempt to block without
-    armour, you will still take damage.
-
-
-    Try blocking a few more hits.'
-  - 'Great, notice that the blue circle around your character decreased. This bar
-    represents your armour and is required to block. If you attempt to block without
-    armour, you will still take damage.
-
-
-    Try blocking a few more hits.'
-  - 'Great, notice that the blue circle around your character decreased. This bar
-    represents your armour and is required to block. If you attempt to block without
-    armour, you will still take damage.
-
-
-    Try blocking a few more hits.'
-  - 'Alright, now for something a bit more challenging. Blocking just before the
-    enemy attacks will parry it.
-
-
-    Try parrying the next attack.'
-  - 'Perfect, parrying an attack will stagger the enemy, allowing for an opportunity
-    to counter. It will also recover some armour.
-
-
-    Try parrying a few more attacks.'
-  - 'Perfect, parrying an attack will stagger the enemy, allowing for an opportunity
-    to counter. It will also recover some armour.
-
-
-    Try parrying a few more attacks.'
-  - 'Last thing, pressing the X button will perform a dodge.
-
-
-    Try dodging the
-    next hit.'
-  - 'Great. Dodging is a great way to reposition and avoid hits, but takes a bit
-    of time and will consume some armour.
-
-
-    Try dodging a few more times.'
-  - 'You''ve finished learning about defending yourself. You should practice your
-    advanced combat abilities.
-
-
-    Head over to the next training arena to practice
-    your special attacks.'
-  damageEvents: 010000000100000001000000010000000200000002000000020000000300000003000000
+  m_SourcePrefab: {fileID: 100100000, guid: 3231aefade7aee44d81a46c87599654e, type: 3}
 --- !u!1001 &8928750309083163466
 PrefabInstance:
   m_ObjectHideFlags: 0
