@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Enfabler.Attacking;
 
-public class Hit_ProgressTutorial : ProgressTutorial
+public class Hit_ProgressQuest : ProgressQuest
 {
     public E_AttackType[] specifiedAttacks;
 
@@ -22,6 +22,6 @@ public class Hit_ProgressTutorial : ProgressTutorial
             return;
 
         if (specifiedAttacks[stage] == E_AttackType.None || attackType == specifiedAttacks[stage])
-            ProgressTutorialStage();
+            ProgressQuestStage();
     }
 }

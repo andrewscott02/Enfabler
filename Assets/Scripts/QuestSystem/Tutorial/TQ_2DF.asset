@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb91689faed565143ae0bedc1da4e411, type: 3}
+  m_Name: TQ_2DF
+  m_EditorClassIdentifier: 
+  questName: Tutorial - Defending
+  questNumber: 0
+  questDescription: Learn how to defend yourself
+  state: 0
+  currentProgress: -1
+  maxProgress: 7
+  parentQuest: {fileID: 11400000, guid: cfa6758df40d3f14299536bf0bef2da1, type: 2}
+  subQuests:
+  - {fileID: 11400000, guid: ab7793ae5ba3bef41b69ed3b09a20e66, type: 2}
+  - {fileID: 11400000, guid: b80d3746b3c0c9c489bd58a3b51825f7, type: 2}
+  - {fileID: 11400000, guid: e896afd4c768f1d4695bd4aa2a141ec9, type: 2}
+  - {fileID: 11400000, guid: c1103fd87a7c03f48bcd2afdb406f8db, type: 2}
+  - {fileID: 11400000, guid: b5311a1bb55dadc478171052fc5f6a80, type: 2}
+  - {fileID: 11400000, guid: a1e655bfef7fb3844a4386c6c26862e0, type: 2}
+  - {fileID: 11400000, guid: faecd10430b672e42afbe11f94adfce0, type: 2}
+  linear: 1

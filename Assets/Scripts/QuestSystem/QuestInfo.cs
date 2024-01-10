@@ -24,13 +24,15 @@ namespace Enfabler.Quests
             if (trackingQuest == null)
                 SetTrackingQuest(baseQuest);
 
+            baseQuest.ForceRestartQuest();
+
             UpdateQuestInfo();
         }
 
         public Quest baseQuest;
         Quest trackingQuest;
 
-        public TextMeshProUGUI title, number, description;
+        public TextMeshProUGUI title, number, description, progressCount;
 
         public void SetTrackingQuest(Quest quest)
         {
@@ -46,8 +48,9 @@ namespace Enfabler.Quests
                 if (sub != null)
                 {
                     title.text = sub.questName;
-                    number.text = sub.currentProgress.ToString();
+                    number.text = sub.questNumber.ToString();
                     description.text = sub.questDescription;
+                    progressCount.text = sub.currentProgress.ToString() + "/" + sub.maxProgress.ToString();
                 }
                 else
                 {

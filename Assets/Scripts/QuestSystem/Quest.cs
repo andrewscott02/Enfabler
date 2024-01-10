@@ -13,7 +13,6 @@ namespace Enfabler.Quests
 
         [Header("Basic Info")]
         public string questName;
-        public bool mainQuest;
         public int questNumber;
         [TextArea(3, 10)]
         public string questDescription;
@@ -100,11 +99,12 @@ namespace Enfabler.Quests
             QuestProgress(true);
         }
 
-        public void QuestProgress(bool updateMarkers)
+        public bool QuestProgress(bool updateMarkers)
         {
             if (state != E_QuestStates.InProgress)
-                return;
+                return false;
 
+            bool finished = false;
             currentProgress++;
 
             if (currentProgress >= maxProgress)
@@ -116,6 +116,8 @@ namespace Enfabler.Quests
 
                 state = E_QuestStates.Completed;
                 GiveRewards();
+
+                finished = true;
             }
             else
             {
@@ -123,6 +125,8 @@ namespace Enfabler.Quests
             }
 
             UpdateQuestInfo(updateMarkers);
+
+            return finished;
         }
 
         void EnableNextObjective()

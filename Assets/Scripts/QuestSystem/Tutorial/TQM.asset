@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb91689faed565143ae0bedc1da4e411, type: 3}
+  m_Name: TQM
+  m_EditorClassIdentifier: 
+  questName: Tutorial
+  questNumber: 0
+  questDescription: Learn the basics of how to play
+  state: 1
+  currentProgress: 2
+  maxProgress: 5
+  parentQuest: {fileID: 0}
+  subQuests:
+  - {fileID: 11400000, guid: 8e706fd98590db0428c44c363be5b3d3, type: 2}
+  - {fileID: 11400000, guid: 3a25ee218da46264a8e4bdab73399593, type: 2}
+  - {fileID: 11400000, guid: abdb6842c4b8f5147858c7b8151c7631, type: 2}
+  - {fileID: 11400000, guid: 1cb3e7d93b3c1924091181c02dfca774, type: 2}
+  - {fileID: 11400000, guid: 5b31dd0313c4da147a8a38546d296173, type: 2}
+  linear: 1

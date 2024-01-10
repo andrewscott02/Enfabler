@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Enfabler.Attacking;
 
-public class HitOther_ProgressTutorial : ProgressTutorial
+public class HitOther_ProgressQuest : ProgressQuest
 {
     public E_DamageEvents[] damageEvents;
 
@@ -22,6 +22,6 @@ public class HitOther_ProgressTutorial : ProgressTutorial
             return;
 
         if (damageEvent == damageEvents[stage])
-            ProgressTutorialStage();
+            ProgressQuestStage();
     }
 }

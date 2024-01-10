@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Death_ProgressTutorial : ProgressTutorial
+public class Death_ProgressQuest : ProgressQuest
 {
     // Start is called before the first frame update
     void Start()
@@ -13,6 +13,6 @@ public class Death_ProgressTutorial : ProgressTutorial
 
     public void OnKill(Vector3 attacker, int damage)
     {
-        ProgressTutorialStage();
+        ProgressQuestStage();
     }
 }

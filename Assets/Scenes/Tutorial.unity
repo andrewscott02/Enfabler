@@ -2326,12 +2326,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f3bff357cc68e408d235839f73fb48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessages:
-  - 'Perform special attacks with a slide input, quickly press the melee attack after
-    a ranged attack to leap at your enemy.
-
-
-    Use a leap attack against the dummy.'
+  quests:
+  - {fileID: 11400000, guid: cc40f2c2befc24147a1ce0762a36ded5, type: 2}
 --- !u!65 &304901439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7170,6 +7166,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28b042b4124525e4bbd14fee677cfca4, type: 3}
+--- !u!1 &794758212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7290420457427826613, guid: 28b042b4124525e4bbd14fee677cfca4,
+    type: 3}
+  m_PrefabInstance: {fileID: 794758211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &794758213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794758212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96018fcb3ff2854cb0274ab299384dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quests:
+  - {fileID: 11400000, guid: c0b7d341625d366419580356a185322a, type: 2}
 --- !u!1001 &795366452
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10807,8 +10823,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f3bff357cc68e408d235839f73fb48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessages:
-  - It's time for a combat test, defeat the enemy to progress
+  quests:
+  - {fileID: 11400000, guid: 73766f6559b04324a9558c6331bc72c4, type: 2}
 --- !u!65 &1103719167
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11677,12 +11693,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f3bff357cc68e408d235839f73fb48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessages:
-  - 'Now it''s time to learn how to protect yourself. Hold L1 to block incoming attacks.
-
-
-    Try
-    it against the enemy.'
+  quests:
+  - {fileID: 11400000, guid: ab7793ae5ba3bef41b69ed3b09a20e66, type: 2}
 --- !u!65 &1247060427
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14775,49 +14787,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5069ea6217b84564ab8032e888a7d20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessages:
-  - 'Great, notice that you will still make a ranged attack before making the leap
-    attack. This attack is useful for quickly closing the distance.
-
-
-    Try it
-    again.'
-  - 'Now try the opposite, make a ranged attack after a melee attack to leap away
-    while shooting at your target.
-
-
-    Shoot the target with this special attack.'
-  - 'Notice this attack uses 2 arrows. This attack is useful for making space between
-    you and your enemies.
-
-
-    Try it a few more times.'
-  - 'Notice this attack uses 2 arrows. This attack is useful for making space between
-    you and your enemies.
-
-
-    Try it a few more times.'
-  - 'Alright, it''s time for the last attack. Dodging while attacking will perform
-    a special lunge attack.
-
-
-    Use a lunge attack on the target.'
-  - 'This lunge attack allows you to move past your enemies, which is useful when
-    surrounded. Like dodging, it also consumes armour.
-
-
-    Try it a few more times.'
-  - 'This lunge attack allows you to move past your enemies, which is useful when
-    surrounded. Like dodging, it also consumes armour.
-
-
-    Try it a few more times.'
-  - 'Perfect, you have learned all about combat, now it''s time for a test.
-
-
-    Approach
-    the next arena to test out your combat skills against an enemy.'
-  specifiedAttacks: 0300000003000000040000000400000004000000050000000500000005000000
+  quests:
+  - {fileID: 11400000, guid: ca0e18e282539454c9eeaa41f72d0ccc, type: 2}
+  - {fileID: 11400000, guid: 49045496e784e8548a5b8e7a43edf84c, type: 2}
+  - {fileID: 11400000, guid: eaf1789be620ef147a9ed5ebffcf0e28, type: 2}
+  - {fileID: 11400000, guid: 156c0cfd02939454baef0944712f7cbc, type: 2}
+  - {fileID: 11400000, guid: 27ab6d60f31aa5a48bd33b361e42755d, type: 2}
+  - {fileID: 11400000, guid: b45fec03ea7f7de43b2249ca949e1736, type: 2}
+  specifiedAttacks: 030000000300000004000000040000000500000005000000
 --- !u!1001 &1537505886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15895,12 +15872,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f3bff357cc68e408d235839f73fb48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessages:
-  - 'Test out your combat skills.
-
-
-    Approach the dummy and use make a melee attack
-    with square.'
+  quests:
+  - {fileID: 11400000, guid: 8e706fd98590db0428c44c363be5b3d3, type: 2}
 --- !u!65 &1682835907
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20119,52 +20092,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5069ea6217b84564ab8032e888a7d20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessages:
-  - 'Nice shooting, you can also charge ranged attacks. Charged ranged attacks shoot
-    multiple arrows at the target.
-
-
-    Make a few more attacks.'
-  - 'Nice shooting, you can also charge ranged attacks. Charged ranged attacks shoot
-    multiple arrows at the target.
-
-
-    Make a few more attacks.'
-  - 'Nice shooting, you can also charge ranged attacks. Charged ranged attacks shoot
-    multiple arrows at the target.
-
-
-    Make a few more attacks.'
-  - 'Nice shooting, you can also charge ranged attacks. Charged ranged attacks shoot
-    multiple arrows at the target.
-
-
-    Make a few more attacks.'
-  - 'Keep note of the arrows in your quiver, you won''t be able to shoot if you don''t
-    have arrows. Arrows recharge after a few seconds.
-
-
-    Wait for your arrows
-    to recharge, then make some more ranged attacks.'
-  - 'Keep note of the arrows in your quiver, you won''t be able to shoot if you don''t
-    have arrows. Arrows recharge after a few seconds.
-
-
-    Wait for your arrows
-    to recharge, then make some more ranged attacks.'
-  - 'Keep note of the arrows in your quiver, you won''t be able to shoot if you don''t
-    have arrows. Arrows recharge after a few seconds.
-
-
-    Wait for your arrows
-    to recharge, then make some more ranged attacks.'
-  - 'You''ve finished learning about basic attacks. You should test your skills on
-    something that can hit back.
-
-
-    Head over to the next training arena to practice
-    your defence.'
-  specifiedAttacks: 0200000002000000020000000200000002000000020000000200000002000000
+  quests:
+  - {fileID: 11400000, guid: beb28c8041684e34b883ff4c19b93ec1, type: 2}
+  - {fileID: 11400000, guid: 16939bbf9f8769c488f6fd33da83f15f, type: 2}
+  - {fileID: 11400000, guid: 5fde0de74230fc64097b02f825e5af2b, type: 2}
+  specifiedAttacks: 020000000200000002000000
 --- !u!1001 &2099051992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20843,33 +20775,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5069ea6217b84564ab8032e888a7d20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessages:
-  - 'Great, you can charge attacks by holding down the input. This makes them unblockable.
-
-
-    Make
-    a few more attacks.'
-  - 'Great, you can charge attacks by holding down the input. This makes them unblockable.
-
-
-    Make
-    a few more attacks.'
-  - 'Great, you can charge attacks by holding down the input. This makes them unblockable.
-
-
-    Make
-    a few more attacks.'
-  - 'Great, you can charge attacks by holding down the input. This makes them unblockable.
-
-
-    Make
-    a few more attacks.'
-  - 'It''s time to test out your ranged skills. Head over to the next dummy and shoot
-    it.
-
-
-    Make a ranged attack with triangle.'
-  specifiedAttacks: 0100000001000000010000000100000001000000
+  quests:
+  - {fileID: 11400000, guid: c4346dc6e6ffa064d91789fb593243b8, type: 2}
+  - {fileID: 11400000, guid: be67615be48261e4594129d3c33f8563, type: 2}
+  specifiedAttacks: 0100000001000000
 --- !u!4 &1873655637616601125 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2018895537, guid: ca73a26060d92b6499d216633e016d23,
@@ -21207,6 +21116,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3231aefade7aee44d81a46c87599654e, type: 3}
+--- !u!1 &7973998627654257897 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6106375352789726626, guid: 3231aefade7aee44d81a46c87599654e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7973998627654257896}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7973998627654257898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7973998627654257897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21da027ea603b24698f1bb05f0cb6fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quests:
+  - {fileID: 11400000, guid: b80d3746b3c0c9c489bd58a3b51825f7, type: 2}
+  - {fileID: 11400000, guid: e896afd4c768f1d4695bd4aa2a141ec9, type: 2}
+  - {fileID: 11400000, guid: c1103fd87a7c03f48bcd2afdb406f8db, type: 2}
+  - {fileID: 11400000, guid: b5311a1bb55dadc478171052fc5f6a80, type: 2}
+  - {fileID: 11400000, guid: a1e655bfef7fb3844a4386c6c26862e0, type: 2}
+  - {fileID: 11400000, guid: faecd10430b672e42afbe11f94adfce0, type: 2}
+  damageEvents: 010000000100000002000000020000000300000003000000
 --- !u!1001 &8928750309083163466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21214,10 +21149,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1665966500, guid: 8a5544f4bc6125e42bb17b450d3c82d4, type: 3}
-      propertyPath: m_Name
-      value: Quest Name - Text
-      objectReference: {fileID: 0}
     - target: {fileID: 1393193124814969593, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
         type: 3}
       propertyPath: m_Pivot.x

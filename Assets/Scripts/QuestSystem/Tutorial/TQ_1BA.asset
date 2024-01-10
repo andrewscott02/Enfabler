@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb91689faed565143ae0bedc1da4e411, type: 3}
+  m_Name: TQ_1BA
+  m_EditorClassIdentifier: 
+  questName: Tutorial - Basic Attacks
+  questNumber: 0
+  questDescription: Learn how to use basic attacks
+  state: 0
+  currentProgress: -1
+  maxProgress: 5
+  parentQuest: {fileID: 11400000, guid: cfa6758df40d3f14299536bf0bef2da1, type: 2}
+  subQuests:
+  - {fileID: 11400000, guid: c4346dc6e6ffa064d91789fb593243b8, type: 2}
+  - {fileID: 11400000, guid: be67615be48261e4594129d3c33f8563, type: 2}
+  - {fileID: 11400000, guid: beb28c8041684e34b883ff4c19b93ec1, type: 2}
+  - {fileID: 11400000, guid: 16939bbf9f8769c488f6fd33da83f15f, type: 2}
+  - {fileID: 11400000, guid: 5fde0de74230fc64097b02f825e5af2b, type: 2}
+  linear: 1
