@@ -8,6 +8,8 @@ public class Interactable : MonoBehaviour, IInteractable
 
     public E_InteractTypes interactType;
     public bool lockedInteraction = false;
+    public bool interactOnUnlock = false;
+
     public bool forceInteraction = false;
     public bool multipleInteractions = false;
     public Object interactFX;
@@ -23,6 +25,8 @@ public class Interactable : MonoBehaviour, IInteractable
         player = GameObject.FindObjectOfType<PlayerController>();
 
         SetupPuzzleDoorUnlock();
+
+        onInteractDelegate += OnInteract;
     }
 
     public void SetupPuzzleDoorUnlock()
@@ -43,6 +47,9 @@ public class Interactable : MonoBehaviour, IInteractable
     {
         Debug.Log("Unlock Interaction");
         lockedInteraction = false;
+
+        if (interactOnUnlock)
+            Interacted(null);
     }
 
     public void LockInteraction()
@@ -86,6 +93,9 @@ public class Interactable : MonoBehaviour, IInteractable
         }
     }
 
+    public delegate void OnInteractedDelegate(BaseCharacterController interactCharacter);
+    public OnInteractedDelegate onInteractDelegate;
+
     public virtual void Interacted(BaseCharacterController interactCharacter)
     {
         if (!canBeInteracted) return;
@@ -103,6 +113,13 @@ public class Interactable : MonoBehaviour, IInteractable
 
         if (interactFX != null)
             Instantiate(interactFX, transform);
+
+        onInteractDelegate(interactCharacter);
+    }
+
+    public void OnInteract(BaseCharacterController interactCharacter)
+    {
+        //Empty delegate
     }
 
     public void ShowInteractMessage(bool show)
