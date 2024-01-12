@@ -8,6 +8,7 @@ namespace Enfabler.Quests
     public class QuestInfo : MonoBehaviour
     {
         public static QuestInfo instance;
+        public GameObject questInfoGO;
 
         // Start is called before the first frame update
         void Start()
@@ -22,7 +23,12 @@ namespace Enfabler.Quests
             //DontDestroyOnLoad(this.gameObject);
 
             if (trackingQuest == null)
-                SetTrackingQuest(baseQuest);
+            {
+                if (baseQuest != null)
+                    SetTrackingQuest(baseQuest);
+                else
+                    SetTrackingQuest(null);
+            }
 
             baseQuest.ForceRestartQuest();
 
@@ -36,8 +42,16 @@ namespace Enfabler.Quests
 
         public void SetTrackingQuest(Quest quest)
         {
-            trackingQuest = quest.GetParent();
-            UpdateQuestInfo();
+            if (quest != null)
+            {
+                trackingQuest = quest.GetParent();
+                UpdateQuestInfo();
+                questInfoGO.SetActive(true);
+            }
+            else
+            {
+                questInfoGO.SetActive(false);
+            }
         }
 
         public void UpdateQuestInfo()
