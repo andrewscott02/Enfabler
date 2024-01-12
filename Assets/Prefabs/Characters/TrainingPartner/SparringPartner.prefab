@@ -8257,13 +8257,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
-      propertyPath: parryChance
-      value: 0.65
+      propertyPath: alertRoamDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: alertSightDistance
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: attacks.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: passiveRoamDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: passiveSightDistance
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -8309,11 +8324,6 @@ PrefabInstance:
         type: 3}
       propertyPath: attacks.Array.data[2].attackPauseTime
       value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
-        type: 3}
-      propertyPath: attacks.Array.data[0].unblockableChance
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
