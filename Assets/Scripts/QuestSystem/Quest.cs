@@ -194,7 +194,23 @@ namespace Enfabler.Quests
             {
                 //Debug.Log("updating quest markers");
                 CheckQuestMarkers();
+
+                if (updateQuestDelegate == null)
+                {
+                    updateQuestDelegate += UpdateQuestInfoDelegate;
+                }
+
+                updateQuestDelegate(state, currentProgress);
             }
+        }
+
+        public delegate void UpdateQuestDelegate(E_QuestStates questState, int progress);
+        public UpdateQuestDelegate updateQuestDelegate;
+
+        void UpdateQuestInfoDelegate(E_QuestStates questState, int progress)
+        {
+            //Empty delegate function
+            //Debug.Log("Quest updated - Delegate Called");
         }
 
         void CheckQuestMarkers()
