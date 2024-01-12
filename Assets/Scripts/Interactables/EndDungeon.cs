@@ -11,7 +11,7 @@ public class EndDungeon : Interactable, IInteractable
     {
         base.Interacted(interactCharacter);
 
-        GameCanvasManager.instance.nextLevelUI.SetActive(true);
+        TextPopupManager.instance.ShowMessageText("You are victorious!");
         StartCoroutine(IMainMenu(5f));
     }
 

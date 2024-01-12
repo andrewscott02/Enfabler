@@ -4,16 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class RegionTextManager : MonoBehaviour
+public class TextPopup : MonoBehaviour
 {
-    public TextMeshProUGUI regionText;
-    public Image regionDisplay;
+    public TextMeshProUGUI textMesh;
+    public Image messageDisplay;
     public float duration;
     public float fadeSpeed = 1.4f;
 
-    public void ShowRegionText(string text)
+    public void ShowText(string text)
     {
-        regionText.text = text;
+        textMesh.text = text;
 
         //TODO: Fade in
         active = true;
@@ -57,13 +57,13 @@ public class RegionTextManager : MonoBehaviour
 
         if (changed)
         {
-            Color displayColour = regionDisplay.color;
+            Color displayColour = messageDisplay.color;
             displayColour.a = HelperFunctions.Remap(progress, 0, 1, 0, 0.4f);
-            regionDisplay.color = displayColour;
+            messageDisplay.color = displayColour;
 
-            Color textColour = regionText.color;
+            Color textColour = textMesh.color;
             textColour.a = progress;
-            regionText.color = textColour;
+            textMesh.color = textColour;
         }
     }
 }

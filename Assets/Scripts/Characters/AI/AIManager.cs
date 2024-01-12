@@ -126,7 +126,7 @@ public class AIManager : MonoBehaviour
 
     public void NextLevel()
     {
-        GameCanvasManager.instance.defeatUI.SetActive(true);
+        TextPopupManager.instance.ShowMessageText("A hero has fallen...");
         StartCoroutine(IMainMenu(5f));
     }
 

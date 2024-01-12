@@ -9,20 +9,17 @@ public class GameCanvasManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        regionText = GetComponentInChildren<RegionTextManager>();
     }
 
-    public GameObject interactObject, nextLevelUI, defeatUI;
+    public GameObject interactObject;
 
     public void ShowInteractMessage(bool show)
     {
         interactObject.SetActive(show);
     }
 
-    RegionTextManager regionText;
-
     public void ShowRegionText(string text)
     {
-        regionText.ShowRegionText(text);
+        TextPopupManager.instance.ShowRegionText(text);
     }
 }

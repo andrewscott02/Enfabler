@@ -91,7 +91,7 @@ public class ArenaManager : MonoBehaviour
 
     public void ArenaWin()
     {
-        GameCanvasManager.instance.nextLevelUI.SetActive(true);
+        TextPopupManager.instance.ShowMessageText("You are victorious!");
         StartCoroutine(IMainMenu(5f));
     }
 
