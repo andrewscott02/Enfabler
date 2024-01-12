@@ -69,6 +69,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     #region Weapon Data
 
     [Header("Weapon Data")]
+    public bool useGenerousHitDetection = false;
     public float weaponSphereRadius = 0.45f;
     public Weapon weapon { get; private set; }
     protected SetWeapon setWeapon;
@@ -167,6 +168,19 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             {
                 SetUnblockable();
             }
+        }
+
+        if (attackCheck)
+        {
+            AttackCheck();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (attackCheck)
+        {
+            AttackCheck();
         }
     }
 
@@ -449,6 +463,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Start and End Attacks
 
+    bool attackCheck = false;
+
     public void StartAttack()
     {
         if (weapon != null)
@@ -465,7 +481,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         CheckMoveToTarget(transform.position, transform.forward, snapLayerMask, moveDistanceThreshold.y);
 
-        InvokeRepeating("AttackCheck", 0f, 0.0002f);
+        //InvokeRepeating("AttackCheck", 0f, 0.0001f);
+        attackCheck = true;
 
         PlaySoundEffect(weapon.attackClip, weapon.soundVolume);
     }
@@ -494,7 +511,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         hitTargets.Clear();
         damage = 0;
 
-        CancelInvoke("AttackCheck");
+        //CancelInvoke("AttackCheck");
+        attackCheck = false;
         canSaveAttackInput = false;
     }
 
@@ -563,12 +581,18 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         if (weapon == null)
             return;
 
+        AttackTrace(useGenerousHitDetection ? weapon.weaponBaseHit.transform.position : weapon.weaponBase.transform.position, !useGenerousHitDetection ? weapon.weaponBaseHit.transform.position : weapon.weaponBase.transform.position);
+        AttackTrace(!useGenerousHitDetection ? weapon.weaponBaseHit.transform.position : weapon.weaponBase.transform.position, useGenerousHitDetection ? weapon.weaponBaseHit.transform.position : weapon.weaponBase.transform.position);
+    }
+
+    void AttackTrace(Vector3 start, Vector3 end)
+    {
         //Raycast between sword base and tip
         RaycastHit hit;
 
-        Vector3 origin = weapon.weaponBaseHit.transform.position;
-        float distance = Vector3.Distance(weapon.weaponBaseHit.transform.position, weapon.weaponTipHit.transform.position);
-        Vector3 dir = weapon.weaponTipHit.transform.position - weapon.weaponBaseHit.transform.position;
+        Vector3 origin = useGenerousHitDetection ? start : end;
+        float distance = Vector3.Distance(start, end);
+        Vector3 dir = end - start;
 
         if (Physics.SphereCast(origin, radius: weaponSphereRadius, direction: dir, out hit, maxDistance: distance, hitLayerMask))
         {
