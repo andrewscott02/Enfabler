@@ -16,10 +16,20 @@ public class QuestMarkerManager : MonoBehaviour
         questMarkers = new List<GameObject>();
     }
 
-    public GameObject AddQuestMarker(GameObject attachGO, Vector3 offset)
+    public GameObject AddQuestMarker(GameObject attachGO, Vector3 offset, bool attachAsParent)
     {
-        GameObject marker = Instantiate(questMarkerPrefab, attachGO.transform) as GameObject;
-        marker.transform.position += offset;
+        GameObject marker;
+        if (attachAsParent)
+        {
+            marker = Instantiate(questMarkerPrefab, attachGO.transform) as GameObject;
+            marker.transform.position += offset;
+        }
+        else
+        {
+
+            marker = Instantiate(questMarkerPrefab, attachGO.transform.position + offset, attachGO.transform.rotation) as GameObject;
+        }
+
         questMarkers.Add(marker);
 
         return marker;

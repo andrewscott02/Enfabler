@@ -31,6 +31,7 @@ public class ProgressQuest : MonoBehaviour
 
     #region Quest Markers
 
+    public bool attachAsParent = true;
     public Vector3 markerOffset;
 
     public void CheckUpdate(E_QuestStates questState, int progress)
@@ -55,7 +56,7 @@ public class ProgressQuest : MonoBehaviour
         if (inProgress)
         {
             if (marker == null)
-                marker = QuestMarkerManager.instance.AddQuestMarker(this.gameObject, markerOffset);
+                marker = QuestMarkerManager.instance.AddQuestMarker(this.gameObject, markerOffset, attachAsParent);
         }
         else
         {

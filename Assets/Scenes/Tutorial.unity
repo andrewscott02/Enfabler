@@ -690,7 +690,7 @@ Transform:
   m_GameObject: {fileID: 23368849}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.44, y: 1.2600002, z: 8.11}
-  m_LocalScale: {x: 1, y: 1, z: 3.0613003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1111110172}
@@ -710,6 +710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 87ccbe157148d1b4db61e6648c569e9f, type: 2}
+  attachAsParent: 1
   markerOffset: {x: -1.48, y: 1.41, z: -1.7}
 --- !u!65 &23368852
 BoxCollider:
@@ -722,7 +723,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 18.89, y: 5, z: 1}
+  m_Size: {x: 18.89, y: 5, z: 3.0613}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &27360362
 GameObject:
@@ -12630,6 +12631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 2cf7a4d8a6a7f4c4ebae0d1a6b2ee416, type: 2}
+  attachAsParent: 1
   markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &551247590
 BoxCollider:
@@ -18343,6 +18345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: c0b7d341625d366419580356a185322a, type: 2}
+  attachAsParent: 1
   markerOffset: {x: 0, y: 2.5, z: 0}
 --- !u!114 &794758229
 MonoBehaviour:
@@ -19916,6 +19919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 997f3afb14039974c8667e0d600c5847, type: 2}
+  attachAsParent: 1
   markerOffset: {x: 0, y: 2, z: 2.65}
 --- !u!1001 &860047282
 PrefabInstance:
@@ -23251,6 +23255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 6882e0e0597dfd4498450ce2fdc86a44, type: 2}
+  attachAsParent: 1
   markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &979548841
 BoxCollider:
@@ -24535,7 +24540,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: bbd3e98ce1f9ca14db5f5506ad42ad39, type: 2}
-  markerOffset: {x: 0, y: 0, z: 0}
+  attachAsParent: 1
+  markerOffset: {x: 0, y: 2.5, z: 0}
 --- !u!114 &1032043322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25976,7 +25982,7 @@ Transform:
   m_GameObject: {fileID: 1103719164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.23, y: 1.0799994, z: 1.27}
-  m_LocalScale: {x: 1, y: 1, z: 3.0613}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1486986088}
@@ -25996,6 +26002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: cc40f2c2befc24147a1ce0762a36ded5, type: 2}
+  attachAsParent: 1
   markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &1103719167
 BoxCollider:
@@ -26008,7 +26015,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 1}
+  m_Size: {x: 5, y: 5, z: 3.0613}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1110505645
 PrefabInstance:
@@ -29134,6 +29141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: ab7793ae5ba3bef41b69ed3b09a20e66, type: 2}
+  attachAsParent: 1
   markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &1247060427
 BoxCollider:
@@ -32679,7 +32687,7 @@ Transform:
   m_GameObject: {fileID: 1373956599}
   m_LocalRotation: {x: -0, y: 0.7266508, z: -0, w: 0.687007}
   m_LocalPosition: {x: -0.43, y: 1.2600002, z: -3.07}
-  m_LocalScale: {x: 1, y: 1, z: 3.0613003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1111110172}
@@ -32699,6 +32707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: e583b0fe780a0094da087577148627f9, type: 2}
+  attachAsParent: 1
   markerOffset: {x: 0, y: 0, z: 5.9}
 --- !u!65 &1373956602
 BoxCollider:
@@ -32711,7 +32720,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 18.89, y: 5, z: 1}
+  m_Size: {x: 18.89, y: 5, z: 3.0613}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1378302278
 PrefabInstance:
@@ -37784,6 +37793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 2cf7a4d8a6a7f4c4ebae0d1a6b2ee416, type: 2}
+  attachAsParent: 1
   markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &1536152329
 BoxCollider:
@@ -40477,6 +40487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 8e706fd98590db0428c44c363be5b3d3, type: 2}
+  attachAsParent: 1
   markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &1682835907
 BoxCollider:
@@ -44811,7 +44822,7 @@ Transform:
   m_GameObject: {fileID: 1890702149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.23, y: 1.0799994, z: 1.27}
-  m_LocalScale: {x: 1, y: 1, z: 3.0613}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1653553004}
@@ -44831,6 +44842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 73766f6559b04324a9558c6331bc72c4, type: 2}
+  attachAsParent: 1
   markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &1890702152
 BoxCollider:
@@ -44843,7 +44855,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 1}
+  m_Size: {x: 5, y: 5, z: 3.0613}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1893830525
 PrefabInstance:
@@ -49001,6 +49013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 997f3afb14039974c8667e0d600c5847, type: 2}
+  attachAsParent: 1
   markerOffset: {x: 0, y: 2, z: 0}
 --- !u!1 &2090107723
 GameObject:
@@ -50668,6 +50681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 9e0fbf12989671f4c99097d67eac8ba6, type: 2}
+  attachAsParent: 1
   markerOffset: {x: 0, y: 2, z: 0}
 --- !u!4 &1873655637616601125 stripped
 Transform:
@@ -51071,6 +51085,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b5311a1bb55dadc478171052fc5f6a80, type: 2}
   - {fileID: 11400000, guid: a1e655bfef7fb3844a4386c6c26862e0, type: 2}
   - {fileID: 11400000, guid: faecd10430b672e42afbe11f94adfce0, type: 2}
+  attachAsParent: 1
   markerOffset: {x: 0, y: 2.5, z: 0}
   damageEvents: 010000000100000002000000020000000300000003000000
 --- !u!1001 &8928750309083163466

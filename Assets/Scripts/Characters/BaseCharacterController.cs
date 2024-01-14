@@ -47,7 +47,7 @@ public class BaseCharacterController : MonoBehaviour
 
                 Rigidbody rbItem = item.GetComponent<Rigidbody>();
                 rbItem.useGravity = false;
-                rbItem.detectCollisions = false;
+                //rbItem.detectCollisions = false;
                 rbItem.isKinematic = true;
 
                 item.isTrigger = true;
@@ -70,7 +70,7 @@ public class BaseCharacterController : MonoBehaviour
             {
                 Rigidbody rbItem = item.GetComponent<Rigidbody>();
                 rbItem.useGravity = activate;
-                rbItem.detectCollisions = activate;
+                //rbItem.detectCollisions = activate;
                 rbItem.isKinematic = !activate;
 
                 if (activate && item == chestCollider)
