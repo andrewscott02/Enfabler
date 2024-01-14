@@ -22,16 +22,13 @@ namespace Enfabler.Quests
             instance = this;
             //DontDestroyOnLoad(this.gameObject);
 
-            if (trackingQuest == null)
-            {
-                if (baseQuest != null)
-                    SetTrackingQuest(baseQuest);
-                else
-                    SetTrackingQuest(null);
-            }
-
             if (baseQuest != null)
+            {
                 baseQuest.ForceRestartQuest();
+
+                if (trackingQuest == null)
+                    SetTrackingQuest(baseQuest);
+            }
 
             UpdateQuestInfo();
         }
