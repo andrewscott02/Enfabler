@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ReceiveLight_ProgressQuest : ProgressQuest
 {
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         LightReceiver lightReceiver = GetComponent<LightReceiver>();
         lightReceiver.enableDelegate += OnReceiveLight;
     }

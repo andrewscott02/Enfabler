@@ -5,8 +5,9 @@ using UnityEngine;
 public class Death_ProgressQuest : ProgressQuest
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         Health health = GetComponent<Health>();
         health.killDelegate += OnKill;
     }

@@ -710,6 +710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 87ccbe157148d1b4db61e6648c569e9f, type: 2}
+  markerOffset: {x: -1.48, y: 1.41, z: -1.7}
 --- !u!65 &23368852
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12629,6 +12630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 2cf7a4d8a6a7f4c4ebae0d1a6b2ee416, type: 2}
+  markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &551247590
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18341,6 +18343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: c0b7d341625d366419580356a185322a, type: 2}
+  markerOffset: {x: 0, y: 2.5, z: 0}
 --- !u!114 &794758229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19135,7 +19138,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824119606}
   m_LocalRotation: {x: 0, y: 0.14788383, z: 0, w: 0.9890048}
-  m_LocalPosition: {x: -58.401608, y: 30.267221, z: -148.57063}
+  m_LocalPosition: {x: -58.40161, y: 30.267216, z: -148.57065}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19913,6 +19916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 997f3afb14039974c8667e0d600c5847, type: 2}
+  markerOffset: {x: 0, y: 2, z: 2.65}
 --- !u!1001 &860047282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22257,7 +22261,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933747454}
   m_LocalRotation: {x: -0, y: 0.14788383, z: -0, w: 0.9890048}
-  m_LocalPosition: {x: -58.401608, y: 30.267221, z: -148.57063}
+  m_LocalPosition: {x: -58.40161, y: 30.267216, z: -148.57065}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22350,12 +22354,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4580847645174538, guid: 1d9a2c0f638159f4bac49271089a6286,
     type: 3}
   m_PrefabInstance: {fileID: 935387436}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &936045517 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1975926780334088167, guid: ab691f773227a3049b2ffa696549ecdc,
-    type: 3}
-  m_PrefabInstance: {fileID: 2097801374}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &938076593 stripped
 Transform:
@@ -23253,6 +23251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 6882e0e0597dfd4498450ce2fdc86a44, type: 2}
+  markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &979548841
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24262,12 +24261,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1013583128}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1014647701 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1975926780334088167, guid: ab691f773227a3049b2ffa696549ecdc,
-    type: 3}
-  m_PrefabInstance: {fileID: 280860730682264185}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1021489466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24542,6 +24535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: bbd3e98ce1f9ca14db5f5506ad42ad39, type: 2}
+  markerOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &1032043322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26002,6 +25996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: cc40f2c2befc24147a1ce0762a36ded5, type: 2}
+  markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &1103719167
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29139,6 +29134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: ab7793ae5ba3bef41b69ed3b09a20e66, type: 2}
+  markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &1247060427
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32703,6 +32699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: e583b0fe780a0094da087577148627f9, type: 2}
+  markerOffset: {x: 0, y: 0, z: 5.9}
 --- !u!65 &1373956602
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35110,6 +35107,82 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: ca0e18e282539454c9eeaa41f72d0ccc,
+        type: 2}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 49045496e784e8548a5b8e7a43edf84c,
+        type: 2}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: eaf1789be620ef147a9ed5ebffcf0e28,
+        type: 2}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 156c0cfd02939454baef0944712f7cbc,
+        type: 2}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 27ab6d60f31aa5a48bd33b361e42755d,
+        type: 2}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: b45fec03ea7f7de43b2249ca949e1736,
+        type: 2}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.data[3]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.data[4]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.data[5]
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab691f773227a3049b2ffa696549ecdc, type: 3}
 --- !u!4 &1453426766 stripped
@@ -37436,32 +37509,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1523144653}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1523384917 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1975926780334088167, guid: ab691f773227a3049b2ffa696549ecdc,
-    type: 3}
-  m_PrefabInstance: {fileID: 1453426765}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1523384920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1523384917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5069ea6217b84564ab8032e888a7d20e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quests:
-  - {fileID: 11400000, guid: ca0e18e282539454c9eeaa41f72d0ccc, type: 2}
-  - {fileID: 11400000, guid: 49045496e784e8548a5b8e7a43edf84c, type: 2}
-  - {fileID: 11400000, guid: eaf1789be620ef147a9ed5ebffcf0e28, type: 2}
-  - {fileID: 11400000, guid: 156c0cfd02939454baef0944712f7cbc, type: 2}
-  - {fileID: 11400000, guid: 27ab6d60f31aa5a48bd33b361e42755d, type: 2}
-  - {fileID: 11400000, guid: b45fec03ea7f7de43b2249ca949e1736, type: 2}
-  specifiedAttacks: 030000000300000004000000040000000500000005000000
 --- !u!1001 &1523854415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37737,6 +37784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 2cf7a4d8a6a7f4c4ebae0d1a6b2ee416, type: 2}
+  markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &1536152329
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40429,6 +40477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 8e706fd98590db0428c44c363be5b3d3, type: 2}
+  markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &1682835907
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -44782,6 +44831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 73766f6559b04324a9558c6331bc72c4, type: 2}
+  markerOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &1890702152
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48951,6 +49001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 997f3afb14039974c8667e0d600c5847, type: 2}
+  markerOffset: {x: 0, y: 2, z: 0}
 --- !u!1 &2090107723
 GameObject:
   m_ObjectHideFlags: 0
@@ -49211,6 +49262,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: beb28c8041684e34b883ff4c19b93ec1,
+        type: 2}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 16939bbf9f8769c488f6fd33da83f15f,
+        type: 2}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5fde0de74230fc64097b02f825e5af2b,
+        type: 2}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab691f773227a3049b2ffa696549ecdc, type: 3}
 --- !u!4 &2097801375 stripped
@@ -49219,23 +49313,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2097801374}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2097801378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 936045517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5069ea6217b84564ab8032e888a7d20e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quests:
-  - {fileID: 11400000, guid: beb28c8041684e34b883ff4c19b93ec1, type: 2}
-  - {fileID: 11400000, guid: 16939bbf9f8769c488f6fd33da83f15f, type: 2}
-  - {fileID: 11400000, guid: 5fde0de74230fc64097b02f825e5af2b, type: 2}
-  specifiedAttacks: 020000000200000002000000
 --- !u!1001 &2099051992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50447,6 +50524,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: c4346dc6e6ffa064d91789fb593243b8,
+        type: 2}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: quests.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: be67615be48261e4594129d3c33f8563,
+        type: 2}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687422184932485086, guid: ab691f773227a3049b2ffa696549ecdc,
+        type: 3}
+      propertyPath: specifiedAttacks.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab691f773227a3049b2ffa696549ecdc, type: 3}
 --- !u!4 &280860730682264186 stripped
@@ -50455,22 +50564,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 280860730682264185}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &280860730682264189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1014647701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5069ea6217b84564ab8032e888a7d20e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quests:
-  - {fileID: 11400000, guid: c4346dc6e6ffa064d91789fb593243b8, type: 2}
-  - {fileID: 11400000, guid: be67615be48261e4594129d3c33f8563, type: 2}
-  specifiedAttacks: 0100000001000000
 --- !u!1001 &1077929215530473973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50575,6 +50668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: 9e0fbf12989671f4c99097d67eac8ba6, type: 2}
+  markerOffset: {x: 0, y: 2, z: 0}
 --- !u!4 &1873655637616601125 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2018895537, guid: ca73a26060d92b6499d216633e016d23,
@@ -50977,6 +51071,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b5311a1bb55dadc478171052fc5f6a80, type: 2}
   - {fileID: 11400000, guid: a1e655bfef7fb3844a4386c6c26862e0, type: 2}
   - {fileID: 11400000, guid: faecd10430b672e42afbe11f94adfce0, type: 2}
+  markerOffset: {x: 0, y: 2.5, z: 0}
   damageEvents: 010000000100000002000000020000000300000003000000
 --- !u!1001 &8928750309083163466
 PrefabInstance:
@@ -50985,6 +51080,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 39644505735359669, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+        type: 3}
+      propertyPath: questMarkerPrefab
+      value: 
+      objectReference: {fileID: 2896172351065830533, guid: 1483b89a0a3172f4c9e9bd017863e86f,
+        type: 3}
     - target: {fileID: 1393193124814969593, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
         type: 3}
       propertyPath: m_Pivot.x

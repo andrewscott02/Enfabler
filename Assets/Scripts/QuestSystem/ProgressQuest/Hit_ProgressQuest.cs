@@ -8,8 +8,9 @@ public class Hit_ProgressQuest : ProgressQuest
     public E_AttackType[] specifiedAttacks;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         Health health = GetComponent<Health>();
         health.HitReactionDelegate += OnHit;
     }

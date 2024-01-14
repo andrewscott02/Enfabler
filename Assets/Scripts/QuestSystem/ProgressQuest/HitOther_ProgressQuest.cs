@@ -8,8 +8,9 @@ public class HitOther_ProgressQuest : ProgressQuest
     public E_DamageEvents[] damageEvents;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         CharacterCombat combat = GetComponent<CharacterCombat>();
         combat.onAttackHit += OnHit;
     }
