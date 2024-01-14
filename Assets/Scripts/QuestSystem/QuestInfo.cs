@@ -30,7 +30,8 @@ namespace Enfabler.Quests
                     SetTrackingQuest(null);
             }
 
-            baseQuest.ForceRestartQuest();
+            if (baseQuest != null)
+                baseQuest.ForceRestartQuest();
 
             UpdateQuestInfo();
         }
