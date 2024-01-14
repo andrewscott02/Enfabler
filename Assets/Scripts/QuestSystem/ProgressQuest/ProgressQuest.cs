@@ -31,6 +31,7 @@ public class ProgressQuest : MonoBehaviour
 
     #region Quest Markers
 
+    public GameObject overrideParentQuestMarker;
     public bool attachAsParent = true;
     public Vector3 markerOffset;
 
@@ -56,7 +57,7 @@ public class ProgressQuest : MonoBehaviour
         if (inProgress)
         {
             if (marker == null)
-                marker = QuestMarkerManager.instance.AddQuestMarker(this.gameObject, markerOffset, attachAsParent);
+                marker = QuestMarkerManager.instance.AddQuestMarker(overrideParentQuestMarker == null ? this.gameObject : overrideParentQuestMarker, markerOffset, attachAsParent);
         }
         else
         {
@@ -67,7 +68,8 @@ public class ProgressQuest : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position + markerOffset, 0.5f);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(overrideParentQuestMarker == null ? transform.position + markerOffset : overrideParentQuestMarker.transform.position + markerOffset, 0.5f);
     }
 
     #endregion
