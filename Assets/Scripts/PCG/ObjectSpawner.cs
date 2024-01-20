@@ -6,10 +6,14 @@ public class ObjectSpawner : MonoBehaviour
 {
     public E_ObjectSpawnTypes objectType;
     public bool changeTheme = false;
+    public float spawnChance = 1;
 
     public List<GameObject> SpawnObject(ThemeData theme, GrammarsDungeonData dungeonData, bool trap = false)
     {
         List<GameObject> itemsInRoom = new List<GameObject>();
+
+        if (Random.Range(0f, 1f) > spawnChance)
+            return itemsInRoom;
 
         if (dungeonData.GetRandomObject(this, out int objectIndex, theme, trap))
         {
