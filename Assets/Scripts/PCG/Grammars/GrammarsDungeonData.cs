@@ -212,10 +212,10 @@ public class GrammarsDungeonData : ScriptableObject
     }
 
     #endregion
-    
+
     #region Traps
 
-    public List<ObjectSpawnerInstance> GetRandomTraps(PCGRoom room, ThemeData theme)
+    public List<ObjectSpawnerInstance> GetRandomTraps(PCGRoom room, ThemeData theme, ThemeData nextTheme)
     {
         List<ObjectSpawnerInstance> objectsToAdd = new List<ObjectSpawnerInstance>();
 
@@ -230,7 +230,7 @@ public class GrammarsDungeonData : ScriptableObject
 
         while (generating)
         {
-            if (GetRandomTrap(room, out int trapIndex, out int spawnerIndex, theme))
+            if (GetRandomTrap(room, out int trapIndex, out int spawnerIndex, theme, nextTheme))
             {
                 ObjectSpawnerInstance instance = new ObjectSpawnerInstance();
                 instance.objectPrefab = theme.traps[trapIndex].objectPrefab;
@@ -264,7 +264,7 @@ public class GrammarsDungeonData : ScriptableObject
         }
     }
 
-    bool GetRandomTrap(PCGRoom room, out int trapIndex, out int spawnerIndex, ThemeData theme)
+    bool GetRandomTrap(PCGRoom room, out int trapIndex, out int spawnerIndex, ThemeData theme, ThemeData nextTheme)
     {
         int startIndex = Random.Range(0, theme.traps.Length);
         trapIndex = startIndex;
@@ -295,36 +295,49 @@ public class GrammarsDungeonData : ScriptableObject
 
     #region Objects
 
-    public List<ObjectSpawnerInstance> GetRandomObjects(PCGRoom room, ThemeData theme)
+    public bool GetRandomObject(ObjectSpawner spawner, out int objectIndex, ThemeData theme, bool trap)
     {
-        List<ObjectSpawnerInstance> objectsToAdd = new List<ObjectSpawnerInstance>();
+        int startIndex = Random.Range(0, trap ? theme.traps.Length : theme.objects.Length);
+        objectIndex = startIndex;
 
-        bool generating = true;
-        int currentCount = 0;
-
-        while (generating)
+        while (true)
         {
-            if (GetRandomObject(room, out int objectIndex, out int spawnerIndex, theme))
+            if (CanUseObject(trap ? theme.traps[objectIndex] : theme.objects[objectIndex], spawner))
             {
-                ObjectSpawnerInstance instance = new ObjectSpawnerInstance();
-                instance.objectPrefab = theme.objects[objectIndex].objectPrefab;
-                instance.spawnerIndex = spawnerIndex;
-
-                objectsToAdd.Add(instance);
-                currentCount++;
+                if (trap)
+                    theme.traps[objectIndex].timesUsed++;
+                else
+                    theme.objects[objectIndex].timesUsed++;
+                return true;
             }
-            else
+
+            objectIndex++;
+
+            if (trap ? objectIndex >= theme.traps.Length : objectIndex >= theme.objects.Length)
+                objectIndex = 0;
+
+            if (objectIndex == startIndex)
+                return false;
+        }
+    }
+
+    bool CanUseObject(ObjectData data, ObjectSpawner spawner)
+    {
+        if (data.timesUsed >= data.maxCount)
+            return false;
+
+        foreach (var item in data.validSpawnerTypes)
+        {
+            if (spawner.objectType == item)
             {
-                generating = false;
+                return true;
             }
         }
 
-        ResetObjectData();
-
-        return objectsToAdd;
+        return false;
     }
 
-    void ResetObjectData()
+    public void ResetObjectData()
     {
         foreach (var item in allThemes)
         {
@@ -332,33 +345,6 @@ public class GrammarsDungeonData : ScriptableObject
             {
                 item.objects[i].timesUsed = 0;
             }
-        }
-    }
-
-    bool GetRandomObject(PCGRoom room, out int objectIndex, out int spawnerIndex, ThemeData theme)
-    {
-        int startIndex = Random.Range(0, theme.objects.Length);
-        objectIndex = startIndex;
-        spawnerIndex = 0;
-
-        while (true)
-        {
-            if (theme.objects[objectIndex].timesUsed < theme.objects[objectIndex].maxCount)
-            {
-                if (room.GetValidSpawner(theme.objects[objectIndex], out spawnerIndex))
-                {
-                    theme.objects[objectIndex].timesUsed++;
-                    return true;
-                }
-            }
-
-            objectIndex++;
-
-            if (objectIndex >= theme.objects.Length)
-                objectIndex = 0;
-
-            if (objectIndex == startIndex)
-                return false;
         }
     }
 
@@ -507,6 +493,7 @@ public struct ObjectData
 {
     public Object objectPrefab;
     public LayerMask validSpawners;
+    public E_ObjectSpawnTypes[] validSpawnerTypes;
     public bool randomRotation;
     public int maxCount;
 

@@ -10,7 +10,8 @@ public class PCGRoom : MonoBehaviour
     public Object tempSpawnerObjects;
 
     public Transform enemySpawners, objectSpawners;
-    Transform[] enemySpawnerChildren, objectSpawnerChildren;
+    public Transform[] enemySpawnerChildren { get; private set; }
+    public ObjectSpawner[] objectSpawnerChildren { get; private set; }
 
     ThemeData theme, nextTheme;
     bool reversed = false;
@@ -23,9 +24,7 @@ public class PCGRoom : MonoBehaviour
         for (int i = 0; i < enemySpawners.childCount; i++)
             enemySpawnerChildren[i] = enemySpawners.GetChild(i);
 
-        objectSpawnerChildren = new Transform[objectSpawners.childCount];
-        for (int i = 0; i < objectSpawners.childCount; i++)
-            objectSpawnerChildren[i] = objectSpawners.GetChild(i);
+        objectSpawnerChildren = objectSpawners.GetComponentsInChildren<ObjectSpawner>();
     }
 
     public E_RoomTypes roomType { get; private set; }
@@ -156,14 +155,14 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnTraps()
     {
-        List<ObjectSpawnerInstance> objectsToSpawn = dungeonData.GetRandomTraps(this, theme);
+        List<ObjectSpawnerInstance> objectsToSpawn = dungeonData.GetRandomTraps(this, theme, nextTheme);
 
         foreach (var item in objectsToSpawn)
         {
-            Vector3 spawnPos = objectSpawnerChildren[item.spawnerIndex].position;
-            Quaternion spawnRot = objectSpawnerChildren[item.spawnerIndex].rotation;
+            Vector3 spawnPos = objectSpawnerChildren[item.spawnerIndex].transform.position;
+            Quaternion spawnRot = objectSpawnerChildren[item.spawnerIndex].transform.rotation;
 
-            GameObject go = Instantiate(item.objectPrefab, objectSpawnerChildren[item.spawnerIndex]) as GameObject;
+            GameObject go = Instantiate(item.objectPrefab, objectSpawnerChildren[item.spawnerIndex].transform) as GameObject;
             go.transform.position = spawnPos;
             go.transform.rotation = spawnRot;
             itemsInRoom.Add(go);
@@ -172,18 +171,15 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnObjects()
     {
-        List<ObjectSpawnerInstance> objectsToSpawn = dungeonData.GetRandomObjects(this, theme);
-
-        foreach (var item in objectsToSpawn)
+        foreach (var item in objectSpawnerChildren)
         {
-            Vector3 spawnPos = objectSpawnerChildren[item.spawnerIndex].position;
-            Quaternion spawnRot = objectSpawnerChildren[item.spawnerIndex].rotation;
+            List<GameObject> generatedItems = item.SpawnObject(item.changeTheme ? nextTheme : theme, dungeonData);
 
-            GameObject go = Instantiate(item.objectPrefab, objectSpawnerChildren[item.spawnerIndex]) as GameObject;
-            go.transform.position = spawnPos;
-            go.transform.rotation = spawnRot;
-            itemsInRoom.Add(go);
+            foreach (var generatedItem in generatedItems)
+                itemsInRoom.Add(generatedItem);
         }
+
+        dungeonData.ResetObjectData();
     }
 
     public bool GetValidSpawner(ObjectData objectData, out int spawnerIndex)
@@ -193,13 +189,16 @@ public class PCGRoom : MonoBehaviour
 
         while (true)
         {
-            if (objectSpawnerChildren[spawnerIndex].childCount == 0)
+            if (objectSpawnerChildren[spawnerIndex].transform.childCount == 0)
             {
-                if (objectData.validSpawners == (objectData.validSpawners | (1 << objectSpawnerChildren[spawnerIndex].gameObject.layer)))
+                foreach (var item in objectData.validSpawnerTypes)
                 {
-                    //Creates temp game object to fill up the space
-                    Instantiate(tempSpawnerObjects, objectSpawnerChildren[spawnerIndex]);
-                    return true;
+                    if (item == objectSpawnerChildren[spawnerIndex].objectType)
+                    {
+                        //Creates temp game object to fill up the space
+                        Instantiate(tempSpawnerObjects, objectSpawnerChildren[spawnerIndex].transform);
+                        return true;
+                    }
                 }
             }
 
@@ -265,17 +264,6 @@ public class PCGRoom : MonoBehaviour
 
         Gizmos.color = Color.blue - new Color(0, 0, 0, 0.5f);
         Gizmos.DrawCube(transform.position + new Vector3(0, 2.3f, 0), new Vector3(4.75f, 4.6f, 1));
-
-        if (objectSpawnerChildren != null)
-        {
-            foreach (var item in objectSpawnerChildren)
-            {
-                Gizmos.DrawSphere(item.position, 0.5f);
-
-                Gizmos.DrawLine(item.position, item.position + (item.up * 2));
-                Gizmos.DrawLine(item.position + (item.up * 2), (item.position + (item.up * 2)) + (item.right * 2));
-            }
-        }
 
         Gizmos.color = Color.red - new Color(0, 0, 0, 0.5f);
         Gizmos.DrawCube(doorPoint.transform.position + new Vector3(0, 2.3f, 0), new Vector3(4.75f, 4.6f, 1));
