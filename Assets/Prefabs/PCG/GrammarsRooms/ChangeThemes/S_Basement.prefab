@@ -77,6 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectType: 5
   changeTheme: 1
+  spawnChance: 1
+  linkedSpawner: {fileID: 0}
 --- !u!1 &1724023690016920581
 GameObject:
   m_ObjectHideFlags: 0
@@ -13322,6 +13324,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectType: 5
   changeTheme: 1
+  spawnChance: 1
+  linkedSpawner: {fileID: 0}
 --- !u!1001 &408541699063193947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13522,10 +13526,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 144361703440423027, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+        type: 3}
+      propertyPath: changeTheme
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 650108470651232092, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+        type: 3}
+      propertyPath: changeTheme
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 706265066142345613, guid: 883ec977d9a0cdd46a333f80c69d46dc,
         type: 3}
       propertyPath: m_Layer
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 957007148786667353, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1410610752048985762, guid: 883ec977d9a0cdd46a333f80c69d46dc,
         type: 3}
@@ -13551,6 +13570,16 @@ PrefabInstance:
         type: 3}
       propertyPath: changeTheme
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648329803530902211, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+        type: 3}
+      propertyPath: changeTheme
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2317861433798518318, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2640046596269522625, guid: 883ec977d9a0cdd46a333f80c69d46dc,
         type: 3}
@@ -13586,6 +13615,11 @@ PrefabInstance:
         type: 3}
       propertyPath: changeTheme
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465114834897078769, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3598608274943553731, guid: 883ec977d9a0cdd46a333f80c69d46dc,
         type: 3}
@@ -14492,6 +14526,16 @@ PrefabInstance:
       propertyPath: changeTheme
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3898552240032866021, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+        type: 3}
+      propertyPath: changeTheme
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995608021911484878, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4136333253335850168, guid: 883ec977d9a0cdd46a333f80c69d46dc,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -14522,6 +14566,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4646052428144193389, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738346955164157834, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217964755027376507, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+        type: 3}
+      propertyPath: changeTheme
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5278637113177638024, guid: 883ec977d9a0cdd46a333f80c69d46dc,
         type: 3}
       propertyPath: changeTheme
@@ -14548,6 +14607,11 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7090785356956474394, guid: 883ec977d9a0cdd46a333f80c69d46dc,
+        type: 3}
+      propertyPath: changeTheme
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450702737658070621, guid: 883ec977d9a0cdd46a333f80c69d46dc,
         type: 3}
       propertyPath: changeTheme
       value: 1
