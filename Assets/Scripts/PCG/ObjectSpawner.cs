@@ -51,7 +51,14 @@ public class ObjectSpawner : MonoBehaviour
             }
         }
 
+        //If spawned object links, call spawn specified object on linked spawner if it is not already the same
+
         return itemsInRoom;
+    }
+
+    public void SpawnSpecifiedObject(int objectIndex)
+    {
+        //delete children in spawner and spawn specified object
     }
 
     private void OnDrawGizmos()
