@@ -57,9 +57,7 @@ MonoBehaviour:
   traps:
   - objectPrefab: {fileID: 4905393600926264160, guid: c9f9b14d4bd3f474cb22df0c1f757121,
       type: 3}
-    validSpawners:
-      serializedVersion: 2
-      m_Bits: 262144
+    canLink: 1
     validSpawnerTypes: 06000000
     randomRotation: 0
     maxCount: 3
@@ -67,90 +65,77 @@ MonoBehaviour:
   objects:
   - objectPrefab: {fileID: 545217335562210824, guid: 0a2dedbfd36f5e848a2bc0a6364470ed,
       type: 3}
-    validSpawners:
-      serializedVersion: 2
-      m_Bits: 49152
+    canLink: 0
     validSpawnerTypes: 0200000001000000
     randomRotation: 1
     maxCount: 3
     timesUsed: 0
   - objectPrefab: {fileID: 545217335562210824, guid: f902fc603a02ef5448a5e469647675c4,
       type: 3}
-    validSpawners:
-      serializedVersion: 2
-      m_Bits: 32768
+    canLink: 0
     validSpawnerTypes: 02000000
     randomRotation: 0
     maxCount: 1
     timesUsed: 0
   - objectPrefab: {fileID: 545217335562210824, guid: f5e513888f194404bb21edc3ec988721,
       type: 3}
-    validSpawners:
-      serializedVersion: 2
-      m_Bits: 286720
+    canLink: 0
     validSpawnerTypes: 000000000100000006000000
     randomRotation: 0
     maxCount: 15
     timesUsed: 0
   - objectPrefab: {fileID: 2810333962422823758, guid: 7a28cbf6df4b6a6468800e5485d69668,
       type: 3}
-    validSpawners:
-      serializedVersion: 2
-      m_Bits: 286720
+    canLink: 0
     validSpawnerTypes: 000000000100000006000000
     randomRotation: 0
     maxCount: 15
     timesUsed: 0
   - objectPrefab: {fileID: 4905393600926264160, guid: 71be4cd37704db14da82a3ff3fac0835,
       type: 3}
-    validSpawners:
-      serializedVersion: 2
-      m_Bits: 262144
+    canLink: 1
     validSpawnerTypes: 06000000
+    randomRotation: 0
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 4b4f7632ee41a2343ab996f1d90eae22,
+      type: 3}
+    canLink: 1
+    validSpawnerTypes: 05000000
     randomRotation: 0
     maxCount: 5
     timesUsed: 0
   - objectPrefab: {fileID: 545217335562210824, guid: bc6b00a04d36dcb4785db25a779e3be1,
       type: 3}
-    validSpawners:
-      serializedVersion: 2
-      m_Bits: 131072
+    canLink: 1
     validSpawnerTypes: 05000000
     randomRotation: 0
     maxCount: 5
     timesUsed: 0
   - objectPrefab: {fileID: 545217335562210824, guid: 53a3bf658dacbeb4db0765d80834d5cd,
       type: 3}
-    validSpawners:
-      serializedVersion: 2
-      m_Bits: 131072
+    canLink: 0
     validSpawnerTypes: 04000000
     randomRotation: 0
     maxCount: 3
     timesUsed: 0
   - objectPrefab: {fileID: 1975926780334088167, guid: ab691f773227a3049b2ffa696549ecdc,
       type: 3}
-    validSpawners:
-      serializedVersion: 2
-      m_Bits: 0
+    canLink: 0
     validSpawnerTypes: 0100000002000000
     randomRotation: 0
     maxCount: 2
     timesUsed: 0
   - objectPrefab: {fileID: 545217335562210824, guid: f5e513888f194404bb21edc3ec988721,
       type: 3}
-    validSpawners:
-      serializedVersion: 2
-      m_Bits: 0
+    canLink: 0
     validSpawnerTypes: 08000000
     randomRotation: 0
     maxCount: 6
     timesUsed: 0
   - objectPrefab: {fileID: 2810333962422823758, guid: 7a28cbf6df4b6a6468800e5485d69668,
       type: 3}
-    validSpawners:
-      serializedVersion: 2
-      m_Bits: 0
+    canLink: 0
     validSpawnerTypes: 0800000009000000
     randomRotation: 0
     maxCount: 6

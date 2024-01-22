@@ -492,7 +492,7 @@ public struct EnemyData
 public struct ObjectData
 {
     public Object objectPrefab;
-    public LayerMask validSpawners;
+    public bool canLink;
     public E_ObjectSpawnTypes[] validSpawnerTypes;
     public bool randomRotation;
     public int maxCount;

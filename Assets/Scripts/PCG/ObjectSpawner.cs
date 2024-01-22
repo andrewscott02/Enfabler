@@ -8,26 +8,46 @@ public class ObjectSpawner : MonoBehaviour
     public bool changeTheme = false;
     public float spawnChance = 1;
 
+    public ObjectSpawner linkedSpawner;
+    public int spawnedObjectIndex { get; private set; } = -1;
+
     public List<GameObject> SpawnObject(ThemeData theme, GrammarsDungeonData dungeonData, bool trap = false)
     {
         List<GameObject> itemsInRoom = new List<GameObject>();
 
+        if (transform.childCount > 0)
+            return itemsInRoom;
+
         if (Random.Range(0f, 1f) > spawnChance)
             return itemsInRoom;
 
-        if (dungeonData.GetRandomObject(this, out int objectIndex, theme, trap))
+        int objectIndex = -1;
+
+        if (linkedSpawner != null)
         {
-            GameObject go = Instantiate(theme.objects[objectIndex].objectPrefab, transform) as GameObject;
-            itemsInRoom.Add(go);
-
-            foreach (var item in go.GetComponentsInChildren<ObjectSpawner>())
+            if (linkedSpawner.spawnedObjectIndex >= 0)
             {
-                List<GameObject> rItemsInRoom = item.SpawnObject(theme, dungeonData, trap);
+                if (theme.objects[linkedSpawner.spawnedObjectIndex].canLink)
+                    objectIndex = linkedSpawner.spawnedObjectIndex;
+            }
+        }
 
-                foreach (var rItem in rItemsInRoom)
-                {
-                    itemsInRoom.Add(rItem);
-                }
+        if (objectIndex < 0)
+        {
+            if (!dungeonData.GetRandomObject(this, out objectIndex, theme, trap))
+                return itemsInRoom;
+        }
+
+        GameObject go = Instantiate(theme.objects[objectIndex].objectPrefab, transform) as GameObject;
+        itemsInRoom.Add(go);
+
+        foreach (var item in go.GetComponentsInChildren<ObjectSpawner>())
+        {
+            List<GameObject> rItemsInRoom = item.SpawnObject(theme, dungeonData, trap);
+
+            foreach (var rItem in rItemsInRoom)
+            {
+                itemsInRoom.Add(rItem);
             }
         }
 
