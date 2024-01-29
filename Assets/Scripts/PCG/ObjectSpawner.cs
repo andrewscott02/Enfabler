@@ -63,7 +63,7 @@ public class ObjectSpawner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue - new Color(0, 0, 0, 0.5f);
+        Gizmos.color = (changeTheme ? Color.red : Color.blue) - new Color(0, 0, 0, 0.5f);
 
         Gizmos.DrawSphere(transform.position, 0.5f);
 
