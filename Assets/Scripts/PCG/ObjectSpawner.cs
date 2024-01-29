@@ -5,6 +5,10 @@ using UnityEngine;
 public class ObjectSpawner : MonoBehaviour
 {
     public E_ObjectSpawnTypes objectType;
+
+    public Vector3 boundingBoxOffset = new Vector3(0, 0, 0);
+    public Vector3 boundingBoxSize = new Vector3(0, 0, 0);
+
     public bool changeTheme = false;
     public float spawnChance = 1;
 
@@ -69,6 +73,10 @@ public class ObjectSpawner : MonoBehaviour
 
         Gizmos.DrawLine(transform.position, transform.position + (transform.up * 2));
         Gizmos.DrawLine(transform.position + (transform.up * 2), (transform.position + (transform.up * 2)) + (transform.right * 2));
+
+        Gizmos.color -= new Color(0, 0, 0, 0.35f);
+
+        Gizmos.DrawCube(transform.position + boundingBoxOffset, boundingBoxSize);
     }
 }
 
