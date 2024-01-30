@@ -173,7 +173,7 @@ public class PCGRoom : MonoBehaviour
     {
         foreach (var item in objectSpawnerChildren)
         {
-            List<GameObject> generatedItems = item.SpawnObject(item.changeTheme ? nextTheme : theme, dungeonData);
+            List<GameObject> generatedItems = item.SpawnObject(item.changeTheme ^ reversed ? nextTheme : theme, dungeonData);
 
             foreach (var generatedItem in generatedItems)
                 itemsInRoom.Add(generatedItem);

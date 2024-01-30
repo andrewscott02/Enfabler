@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90910508796e224586996a019006bdf, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  roomData:
+  - roomType: 0
+    prefabData:
+    - {fileID: 11400000, guid: 2f7507b7dfb10c040bbd91d1aa1a0e50, type: 2}
+    countMinMax: {x: 0, y: 1}
+    lockDoor: 0
+    enemySpawnInfo: []
+    trapsMinMax: {x: 0, y: 0}
+  - roomType: 8
+    prefabData:
+    - {fileID: 11400000, guid: da65b896621493145aa95aed42ba6271, type: 2}
+    - {fileID: 11400000, guid: bfc775535e9fdcc44864298bdc9a4219, type: 2}
+    - {fileID: 11400000, guid: 76273f3b57d342a4782b3066d72b9507, type: 2}
+    - {fileID: 11400000, guid: 331b8483b18e6aa4aa5716b125ec1298, type: 2}
+    - {fileID: 11400000, guid: 6a7ea831c90a5984aba5585d5627888f, type: 2}
+    - {fileID: 11400000, guid: ad9f18e91bc41c84499506d16f69ece9, type: 2}
+    - {fileID: 11400000, guid: fe391a5b360cbdb45b2b81d14d1e07ba, type: 2}
+    - {fileID: 11400000, guid: c58819e59fd99d941b3559091b3265c4, type: 2}
+    - {fileID: 11400000, guid: bfd71299a52c034409df53d61b9c8cc1, type: 2}
+    - {fileID: 11400000, guid: cebf278ea26218042aa9a2874725882f, type: 2}
+    countMinMax: {x: 0, y: 3}
+    lockDoor: 0
+    enemySpawnInfo:
+    - enemiesMax: 4
+      enemiesSeverityMax: 18
+    trapsMinMax: {x: 1, y: 2}
+  - roomType: 6
+    prefabData:
+    - {fileID: 11400000, guid: e3c4d38cf5041904891ea7904d440074, type: 2}
+    countMinMax: {x: 0, y: 99999}
+    lockDoor: 0
+    enemySpawnInfo: []
+    trapsMinMax: {x: 0, y: 0}
+  - roomType: 1
+    prefabData:
+    - {fileID: 11400000, guid: 66291703daf42944f8ec3829ed5d7385, type: 2}
+    countMinMax: {x: 0, y: 1}
+    lockDoor: 1
+    enemySpawnInfo: []
+    trapsMinMax: {x: 0, y: 0}
+  - roomType: 2
+    prefabData:
+    - {fileID: 11400000, guid: c61980e88fe934b4980546143413c376, type: 2}
+    countMinMax: {x: 0, y: 1}
+    lockDoor: 1
+    enemySpawnInfo: []
+    trapsMinMax: {x: 0, y: 0}
+  - roomType: 3
+    prefabData:
+    - {fileID: 11400000, guid: 09f8624f4109a6d4eaf4ee16040f6758, type: 2}
+    - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
+    - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
+    - {fileID: 11400000, guid: cf7d8e8e063ad4f42a8de9bc385d5b74, type: 2}
+    countMinMax: {x: 1, y: 4}
+    lockDoor: 1
+    enemySpawnInfo:
+    - enemiesMax: 10
+      enemiesSeverityMax: 40
+    trapsMinMax: {x: 1, y: 2}
+  - roomType: 9
+    prefabData:
+    - {fileID: 11400000, guid: 98b37e6c6955ef7418a3f5ebbb6c6b70, type: 2}
+    countMinMax: {x: 0, y: 1}
+    lockDoor: 1
+    enemySpawnInfo:
+    - enemiesMax: 3
+      enemiesSeverityMax: 15
+    - enemiesMax: 8
+      enemiesSeverityMax: 30
+    - enemiesMax: 10
+      enemiesSeverityMax: 40
+    - enemiesMax: 15
+      enemiesSeverityMax: 70
+    trapsMinMax: {x: 2, y: 4}
+  - roomType: 4
+    prefabData:
+    - {fileID: 11400000, guid: 0d2468f8b99cc83438a2fe3d8c03d282, type: 2}
+    countMinMax: {x: 0, y: 3}
+    lockDoor: 1
+    enemySpawnInfo: []
+    trapsMinMax: {x: 0, y: 0}
+  - roomType: 5
+    prefabData:
+    - {fileID: 11400000, guid: 09f8624f4109a6d4eaf4ee16040f6758, type: 2}
+    - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
+    - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
+    - {fileID: 11400000, guid: cf7d8e8e063ad4f42a8de9bc385d5b74, type: 2}
+    countMinMax: {x: 0, y: 3}
+    lockDoor: 0
+    enemySpawnInfo:
+    - enemiesMax: 4
+      enemiesSeverityMax: 18
+    trapsMinMax: {x: 1, y: 2}
+  - roomType: 7
+    prefabData:
+    - {fileID: 11400000, guid: 09f8624f4109a6d4eaf4ee16040f6758, type: 2}
+    - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
+    - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
+    - {fileID: 11400000, guid: cf7d8e8e063ad4f42a8de9bc385d5b74, type: 2}
+    countMinMax: {x: 0, y: 3}
+    lockDoor: 0
+    enemySpawnInfo: []
+    trapsMinMax: {x: 3, y: 6}
+  additionalRoomTypes: 0300000004000000050000000700000009000000
+  additionalHealingRooms: 2
+  roomsCountMinMax: {x: 9, y: 12}
+  startingThemes:
+  - {fileID: 11400000, guid: ec8b9c12d45e8dc41870e9cb5561728b, type: 2}
+  - {fileID: 11400000, guid: d1dacfae26c0ff448b2b331c53ccf36b, type: 2}
+  allThemes:
+  - {fileID: 11400000, guid: ec8b9c12d45e8dc41870e9cb5561728b, type: 2}
+  - {fileID: 11400000, guid: f6c6f6c675d89f14db8217272c9510ce, type: 2}
+  - {fileID: 11400000, guid: d1dacfae26c0ff448b2b331c53ccf36b, type: 2}
+  - {fileID: 11400000, guid: 72b9dc47dfcb15249b53ffbdacca8610, type: 2}
+  - {fileID: 11400000, guid: 25191121aee93394993c83562ae6b62e, type: 2}
+  themeChanges: {x: 2, y: 3}
+  allowDuplicates: 0
