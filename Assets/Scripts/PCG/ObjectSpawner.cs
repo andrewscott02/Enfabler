@@ -73,7 +73,7 @@ public class ObjectSpawner : MonoBehaviour
     {
         Vector3 spawnPos = transform.position;
 
-        if (spawnObject.randomPosition)
+        if (spawnObject.randomPositiont > 0)
         {
             spawnPos += boundingBoxData.offset;
 
@@ -82,6 +82,8 @@ public class ObjectSpawner : MonoBehaviour
             spawnPos.z += Random.Range(-boundingBoxData.size.z / 2, boundingBoxData.size.z / 2);
 
             spawnPos = RotatePointAroundPivot(spawnPos, transform.position, transform.eulerAngles);
+
+            spawnPos = HelperFunctions.LerpVector3(transform.position, spawnPos, spawnObject.randomPositiont);
         }
 
         return spawnPos;
