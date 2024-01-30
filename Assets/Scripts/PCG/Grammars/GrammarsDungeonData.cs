@@ -494,6 +494,7 @@ public struct ObjectData
     public Object objectPrefab;
     public bool canLink;
     public E_ObjectSpawnTypes[] validSpawnerTypes;
+    public bool randomPosition;
     public bool randomRotation;
     public int maxCount;
 
