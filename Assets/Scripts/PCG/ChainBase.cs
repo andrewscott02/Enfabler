@@ -9,6 +9,11 @@ public class ChainBase : ChainExtender
 
     protected void Start()
     {
+        Invoke("StartSpawningChains", 0.5f);
+    }
+
+    void StartSpawningChains()
+    {
         int maxChains = 3;
 
         RaycastHit hit;

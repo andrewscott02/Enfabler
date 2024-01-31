@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3707411281408180290}
   - component: {fileID: 1275856430202311084}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5844612291314188587}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1275856430202311084
 MonoBehaviour:
@@ -60,6 +60,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4843217723311797395, guid: a93507e803e39e24fb58355c6fee18be,
+        type: 3}
+      propertyPath: end
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843217723311797395, guid: a93507e803e39e24fb58355c6fee18be,
+        type: 3}
+      propertyPath: chainEndPrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7286702930854383463, guid: a93507e803e39e24fb58355c6fee18be,
         type: 3}
       propertyPath: m_Name

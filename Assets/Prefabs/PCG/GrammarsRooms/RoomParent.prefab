@@ -1,5 +1,92 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &90391958188553916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6267393363914855712}
+  - component: {fileID: 8869973004122666042}
+  m_Layer: 13
+  m_Name: ObjectSpawner (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6267393363914855712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90391958188553916}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.625, y: -1.625, z: 1.375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2579661826162578447}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8869973004122666042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90391958188553916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d0a5013bc51b264f9ab03ea04e5aa6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectType: 7
+  boundingBoxData:
+    offset: {x: 0, y: 0, z: 0}
+    size: {x: 0, y: 0, z: 0}
+  changeTheme: 0
+  spawnChance: 1
+  linkedSpawner: {fileID: 0}
+  testTheme: {fileID: 0}
+  testDungeonData: {fileID: 0}
+--- !u!1 &170867033371542939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2579661826162578447}
+  m_Layer: 0
+  m_Name: CeilingPieces
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2579661826162578447
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170867033371542939}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5.875, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4139166036428730059}
+  - {fileID: 8583133977726603967}
+  - {fileID: 6267393363914855712}
+  m_Father: {fileID: 4879353158944947427}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &359344258555353481
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +231,7 @@ Transform:
   - {fileID: 2317861433798518318}
   - {fileID: 3995608021911484878}
   - {fileID: 4738346955164157834}
+  - {fileID: 2579661826162578447}
   m_Father: {fileID: 3688193081250498999}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -631,6 +719,59 @@ Transform:
   m_Father: {fileID: 5691532340985619734}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4356922824607030763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4139166036428730059}
+  - component: {fileID: 8718486923398074971}
+  m_Layer: 13
+  m_Name: ObjectSpawner (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4139166036428730059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4356922824607030763}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2579661826162578447}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8718486923398074971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4356922824607030763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d0a5013bc51b264f9ab03ea04e5aa6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectType: 7
+  boundingBoxData:
+    offset: {x: 0, y: 0, z: 0}
+    size: {x: 0, y: 0, z: 0}
+  changeTheme: 0
+  spawnChance: 1
+  linkedSpawner: {fileID: 0}
+  testTheme: {fileID: 0}
+  testDungeonData: {fileID: 0}
 --- !u!1 &5429157660760881813
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +876,59 @@ MonoBehaviour:
   changeTheme: 0
   spawnChance: 1
   linkedSpawner: {fileID: 9131868865824275193}
+  testTheme: {fileID: 0}
+  testDungeonData: {fileID: 0}
+--- !u!1 &6431892025066023302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8583133977726603967}
+  - component: {fileID: 6172664132871323705}
+  m_Layer: 13
+  m_Name: ObjectSpawner (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8583133977726603967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431892025066023302}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.625, y: -1.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2579661826162578447}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6172664132871323705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431892025066023302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d0a5013bc51b264f9ab03ea04e5aa6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectType: 7
+  boundingBoxData:
+    offset: {x: 0, y: 0, z: 0}
+    size: {x: 0, y: 0, z: 0}
+  changeTheme: 0
+  spawnChance: 1
+  linkedSpawner: {fileID: 0}
   testTheme: {fileID: 0}
   testDungeonData: {fileID: 0}
 --- !u!1 &7523785282187482455

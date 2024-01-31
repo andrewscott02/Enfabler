@@ -42,7 +42,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 8160657778688574654}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.04
   m_Height: 0.16
   m_Direction: 1
@@ -57,7 +57,7 @@ PrefabInstance:
     - target: {fileID: 4694153437918161264, guid: 308b14d8677f64843a0cd7f3e4df5671,
         type: 3}
       propertyPath: m_Name
-      value: Bottle 2
+      value: Potion_Red
       objectReference: {fileID: 0}
     - target: {fileID: 5495070332922934111, guid: 308b14d8677f64843a0cd7f3e4df5671,
         type: 3}
@@ -209,7 +209,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Potion_Red
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8072500089590831082, guid: 44e723b3d5b0e8c478e3b502b94369d5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 44e723b3d5b0e8c478e3b502b94369d5, type: 3}
 --- !u!4 &2280116678566500073 stripped
 Transform:

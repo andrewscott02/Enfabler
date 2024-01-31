@@ -13,7 +13,7 @@ public class ChainExtender : MonoBehaviour
 
     public void SpawnChain(int chainsToSpawn)
     {
-        if (end)
+        if (end || chainsToSpawn <= 0)
         {
             SpawnEndObject();
             return;
@@ -22,10 +22,10 @@ public class ChainExtender : MonoBehaviour
         Object spawnObj = chainsToSpawn > 1 ? chainPrefab : chainEndPrefab;
 
         GameObject chainGO = Instantiate(spawnObj, chainSpawnTransform) as GameObject;
-        endJoint.connectedBody = chainGO.GetComponent<Rigidbody>();
-
         ChainExtender extender = chainGO.GetComponentInChildren<ChainExtender>();
-        extender.startJoint.connectedBody = GetComponent<Rigidbody>();
+
+        endJoint.connectedBody = extender.GetComponent<Rigidbody>();
+        extender.startJoint.connectedBody = endJoint.GetComponent<Rigidbody>();
 
         chainsToSpawn -= 1;
         chainGO.GetComponentInChildren<ChainExtender>().SpawnChain(chainsToSpawn);
