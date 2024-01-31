@@ -129,7 +129,7 @@ public class ObjectSpawner : MonoBehaviour
 [System.Serializable]
 public enum E_ObjectSpawnTypes
 {
-    Corner, Side, Center, SetPiece, WallDecor, WallLight, BesideDoor, Ceiling, Prop, PropSmall
+    Corner, Side, Center, SetPiece, WallDecor, WallLight, BesideDoor, CeilingLight, CeilingDecor, Prop, PropSmall
 }
 
 [System.Serializable]
