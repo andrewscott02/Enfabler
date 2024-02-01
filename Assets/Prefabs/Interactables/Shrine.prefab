@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 525553737089526976}
   - component: {fileID: 8865380158375169186}
   - component: {fileID: 5273121771369482250}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShrineModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1103,7 +1103,7 @@ GameObject:
   - component: {fileID: 1774124850845484289}
   - component: {fileID: 4667000817260626393}
   - component: {fileID: 6386093081563012429}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6947,10 +6947,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactType: 1
+  lockedInteraction: 0
+  interactOnUnlock: 0
   forceInteraction: 0
   multipleInteractions: 1
   interactFX: {fileID: 5831885752641907103, guid: 1dfa52077cde3084dbba1b821756e82b,
     type: 3}
+  lightReceiverUnlocker: {fileID: 0}
+  invertUnlock: 0
   healingSlider: {fileID: 6741810526256561963}
   maxHealing: 30
 --- !u!135 &8256198164239981294

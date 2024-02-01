@@ -144,3 +144,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4062389823356015620}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4607607115700115980 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 545217335562210824, guid: 694c1756825949c49aa430b6959d731e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4062389823356015620}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2841201869477771116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607607115700115980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09738715621cc224f8eeee4fd1c65d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  waterPuddlePrefab: {fileID: 545217335562210824, guid: c274fd0b61cc1fc4d9763b14821574c2,
+    type: 3}
+  maxScaleModifier: {x: 2, y: 1, z: 2}
