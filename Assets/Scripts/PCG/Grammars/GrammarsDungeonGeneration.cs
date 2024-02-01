@@ -247,14 +247,13 @@ public class GrammarsDungeonGeneration : MonoBehaviour
     {
         if (index >= createdRooms.Count || index < 0) return;
 
-        for (int i = 0; i < index; i++)
+        for (int i = 0; i < createdRooms.Count; i++)
         {
             Debug.Log("Culling room " + i);
-            //createdRooms[i].gameObject.SetActive(false);
-
-            //Disable room
-            //Close door
+            createdRooms[i].CullRoom(i < index);
         }
+
+        //createdRooms[index - 1].CloseDoor();
     }
 
     #endregion

@@ -20,6 +20,13 @@ public class Door : Interactable, IInteractable
         interactDelegate();
     }
 
+    public void CloseDoor()
+    {
+        canBeInteracted = true;
+        if (animator != null)
+            animator.SetTrigger("CloseDoor");
+    }
+
     public delegate void InteractDelegate();
     public InteractDelegate interactDelegate;
 

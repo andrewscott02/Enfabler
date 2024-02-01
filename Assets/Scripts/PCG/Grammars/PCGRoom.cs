@@ -56,16 +56,29 @@ public class PCGRoom : MonoBehaviour
 
     List<GameObject> itemsInRoom = new List<GameObject>();
 
+    bool generated = false;
+
     public void PopulateRoom()
     {
+        if (generated)
+            return;
+
         SpawnDoor();
         SpawnTraps();
         SpawnObjects();
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (!transform.GetChild(i).gameObject.CompareTag("EndDoor"))
+                cullObjects.Add(transform.GetChild(i).gameObject);
+        }
 
         Invoke("SpawnEnemies", 0.5f);
         SpawnBoss();
 
         SetPuzzleElements();
+
+        generated = true;
     }
 
     Door door;
@@ -85,11 +98,19 @@ public class PCGRoom : MonoBehaviour
         //Debug.Log("Added delegate to room " + roomNumber);
     }
 
+    bool doorOpenedLogic = false;
+
     public void DoorOpened()
     {
+        GrammarsDungeonGeneration.instance.CullRooms(roomNumber);
+
+        if (doorOpenedLogic)
+            return;
+
+        doorOpenedLogic = true;
+
         //Debug.Log("Door opened - from delegate : Room " + roomNumber);
         GrammarsDungeonGeneration.instance.PopulateRoom(roomNumber + GrammarsDungeonGeneration.instance.preloadRooms);
-        GrammarsDungeonGeneration.instance.CullRooms(roomNumber);
 
         if (nextTheme != theme)
             GameCanvasManager.instance.ShowRegionText(nextTheme.regionName);
@@ -246,6 +267,25 @@ public class PCGRoom : MonoBehaviour
                 item.interactable = door;
             }
         }
+    }
+
+    public List<GameObject> cullObjects = new List<GameObject>();
+
+    public void CullRoom(bool cull)
+    {
+        foreach (var item in cullObjects)
+        {
+            item.SetActive(!cull);
+        }
+
+        if (cull)
+            CloseDoor();
+    }
+
+    public void CloseDoor()
+    {
+        if (door != null)
+            door.CloseDoor();
     }
 
     public void DeleteRoom()
