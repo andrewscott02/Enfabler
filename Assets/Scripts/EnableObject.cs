@@ -8,13 +8,12 @@ public class EnableObject : MonoBehaviour
 
     private void Start()
     {
-        Invoke("Disable", 0.6f);
+        Invoke("CheckDisable", 0.6f);
     }
 
-    private void OnDisable()
+    private void CheckDisable()
     {
-        if (!show)
-        enableObject.SetActive(false);
+        enableObject.SetActive(show);
     }
 
     bool show = false;

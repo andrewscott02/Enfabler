@@ -126,6 +126,8 @@ public class ObjectSpawner : MonoBehaviour
         Gizmos.DrawCube(boundingBoxData.offset, boundingBoxData.size);
     }
 
+    #region Test Spawning
+
     public ThemeData testTheme;
     public GrammarsDungeonData testDungeonData;
 
@@ -137,6 +139,8 @@ public class ObjectSpawner : MonoBehaviour
         SpawnObject(testTheme, testDungeonData, false);
         testDungeonData.ResetObjectData();
     }
+
+    #endregion
 }
 
 [System.Serializable]

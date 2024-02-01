@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8160657778688574654}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7781096683296116144}
-  m_Father: {fileID: 7528051831255946568}
+  m_Father: {fileID: 1192371869424685665}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &8789856975309145324
@@ -130,11 +130,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3798590564164695158, guid: 308b14d8677f64843a0cd7f3e4df5671,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4694153437918161264, guid: 308b14d8677f64843a0cd7f3e4df5671,
         type: 3}
       propertyPath: m_Name
       value: Bottle
       objectReference: {fileID: 0}
+    - target: {fileID: 4906973493309853960, guid: 308b14d8677f64843a0cd7f3e4df5671,
+        type: 3}
+      propertyPath: enableObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906973493309853960, guid: 308b14d8677f64843a0cd7f3e4df5671,
+        type: 3}
+      propertyPath: enableObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 8160657778688574654}
     - target: {fileID: 5495070332922934111, guid: 308b14d8677f64843a0cd7f3e4df5671,
         type: 3}
       propertyPath: m_RootOrder
@@ -190,6 +205,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5755043764316701663, guid: 308b14d8677f64843a0cd7f3e4df5671,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8050131898291795232, guid: 308b14d8677f64843a0cd7f3e4df5671,
         type: 3}
       propertyPath: maxHealth
@@ -197,9 +217,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 308b14d8677f64843a0cd7f3e4df5671, type: 3}
---- !u!4 &7528051831255946568 stripped
+--- !u!4 &1192371869424685665 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5495070332922934111, guid: 308b14d8677f64843a0cd7f3e4df5671,
+  m_CorrespondingSourceObject: {fileID: 3798590564164695158, guid: 308b14d8677f64843a0cd7f3e4df5671,
     type: 3}
   m_PrefabInstance: {fileID: 2610797076897195543}
   m_PrefabAsset: {fileID: 0}
