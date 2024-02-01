@@ -243,6 +243,20 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         createdRooms[index].PopulateRoom();
     }
 
+    public void CullRooms(int index)
+    {
+        if (index >= createdRooms.Count || index < 0) return;
+
+        for (int i = 0; i < index; i++)
+        {
+            Debug.Log("Culling room " + i);
+            //createdRooms[i].gameObject.SetActive(false);
+
+            //Disable room
+            //Close door
+        }
+    }
+
     #endregion
 
     public NavMeshSurface navMeshSurface;

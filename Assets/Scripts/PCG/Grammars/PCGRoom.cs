@@ -89,6 +89,7 @@ public class PCGRoom : MonoBehaviour
     {
         //Debug.Log("Door opened - from delegate : Room " + roomNumber);
         GrammarsDungeonGeneration.instance.PopulateRoom(roomNumber + GrammarsDungeonGeneration.instance.preloadRooms);
+        GrammarsDungeonGeneration.instance.CullRooms(roomNumber);
 
         if (nextTheme != theme)
             GameCanvasManager.instance.ShowRegionText(nextTheme.regionName);
