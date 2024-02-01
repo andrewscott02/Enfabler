@@ -149,7 +149,7 @@ MonoBehaviour:
   - objectPrefab: {fileID: 545217335562210824, guid: f5e513888f194404bb21edc3ec988721,
       type: 3}
     canLink: 0
-    validSpawnerTypes: 08000000
+    validSpawnerTypes: 09000000
     randomPositiont: 0.2
     randomRotation: 1
     randomRotationAxes: {x: 0, y: 180, z: 0}
@@ -158,11 +158,29 @@ MonoBehaviour:
   - objectPrefab: {fileID: 2810333962422823758, guid: 7a28cbf6df4b6a6468800e5485d69668,
       type: 3}
     canLink: 0
-    validSpawnerTypes: 0800000009000000
+    validSpawnerTypes: 0a00000009000000
     randomPositiont: 1
     randomRotation: 0
     randomRotationAxes: {x: 0, y: 180, z: 0}
     maxCount: 6
+    timesUsed: 0
+  - objectPrefab: {fileID: -3902061430246940915, guid: 650eb1e8fb9589d48936f34ae222c6e4,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0700000008000000
+    randomPositiont: 0.3
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 6
+    timesUsed: 0
+  - objectPrefab: {fileID: -3902061430246940915, guid: dd759356ac31772449e10405b47a2d89,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0700000008000000
+    randomPositiont: 0.1
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 4
     timesUsed: 0
   doors:
   - {fileID: 2541946485368774830, guid: 429deaa47ff4f0b4baa36e88d7c8cb18, type: 3}
