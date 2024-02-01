@@ -496,6 +496,7 @@ public struct ObjectData
     public E_ObjectSpawnTypes[] validSpawnerTypes;
     public float randomPositiont;
     public bool randomRotation;
+    public Vector3 randomRotationAxes;
     public int maxCount;
 
     [HideInInspector]

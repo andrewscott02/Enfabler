@@ -47,6 +47,7 @@ public class ObjectSpawner : MonoBehaviour
 
         GameObject go = Instantiate(theme.objects[objectIndex].objectPrefab, transform) as GameObject;
         go.transform.position = GetSpawnPosition(theme.objects[objectIndex]);
+        go.transform.localRotation = Quaternion.Euler(GetSpawnRotation(theme.objects[objectIndex]));
         itemsInRoom.Add(go);
 
         foreach (var item in go.GetComponentsInChildren<ObjectSpawner>())
@@ -87,6 +88,18 @@ public class ObjectSpawner : MonoBehaviour
         }
 
         return spawnPos;
+    }
+
+    Vector3 GetSpawnRotation(ObjectData spawnObject)
+    {
+        Vector3 spawnRot = new Vector3();
+
+        spawnRot.x += Random.Range(-spawnObject.randomRotationAxes.x, spawnObject.randomRotationAxes.x);
+        spawnRot.y += Random.Range(-spawnObject.randomRotationAxes.y, spawnObject.randomRotationAxes.y);
+        spawnRot.z += Random.Range(-spawnObject.randomRotationAxes.z, spawnObject.randomRotationAxes.z);
+        //spawnRot.w += Random.Range(-spawnObject.randomRotationAxes.w, spawnObject.randomRotationAxes.w);
+
+        return spawnRot;
     }
 
     Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Vector3 angles)
