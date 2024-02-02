@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Rendering;
 
 public class PCGRoom : MonoBehaviour
 {
     public bool lockOverride = false;
     public bool lockDoor = false;
     public ObjectSpawner doorPoint;
+    public Volume localVolume, localVolumeNext;
     public Object tempSpawnerObjects;
 
     public Transform enemySpawners, objectSpawners;
@@ -53,6 +55,16 @@ public class PCGRoom : MonoBehaviour
             else
                 item.SetupRoom(item.changeTheme ? theme : nextTheme);
         }
+
+        SetupVolumes();
+    }
+
+    void SetupVolumes()
+    {
+        localVolume.profile = reversed ? nextTheme.volumeProfile : theme.volumeProfile;
+
+        if (localVolumeNext != null)
+            localVolumeNext.profile = reversed ? theme.volumeProfile : nextTheme.volumeProfile;
     }
 
     List<GameObject> itemsInRoom = new List<GameObject>();
@@ -70,7 +82,7 @@ public class PCGRoom : MonoBehaviour
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (!transform.GetChild(i).gameObject.CompareTag("EndDoor"))
+            if (!transform.GetChild(i).gameObject.CompareTag("EndDoor") && transform.GetChild(i).gameObject.activeSelf)
                 cullObjects.Add(transform.GetChild(i).gameObject);
         }
 

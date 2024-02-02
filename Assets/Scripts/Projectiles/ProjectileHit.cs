@@ -22,7 +22,7 @@ public class ProjectileHit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (layerMask == (layerMask | (1 << other.gameObject.layer)))
+        if (layerMask == (layerMask | (1 << other.gameObject.layer)) && other.CompareTag("IgnoreProjectiles") == false)
         {
             //Debug.Log("Projectile hit " + other.gameObject.name);
             IDamageable hitDamageable = other.GetComponent<IDamageable>();

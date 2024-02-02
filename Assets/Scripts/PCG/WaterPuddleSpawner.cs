@@ -9,9 +9,12 @@ public class WaterPuddleSpawner : MonoBehaviour
 
     public Vector3 maxScaleModifier;
 
+    public float spawnChance = 0.5f;
+
     void Start()
     {
-        Invoke("SpawnPuddle", 0.5f);
+        if (Random.Range(0f, 1f) <= spawnChance)
+            Invoke("SpawnPuddle", 0.5f);
     }
 
     void SpawnPuddle()

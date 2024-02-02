@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [CreateAssetMenu(fileName = "NewGrammarsThemeData", menuName = "PCG/Grammars/ThemeData", order = 2)]
 public class ThemeData : ScriptableObject
 {
     public string regionName;
+    public VolumeProfile volumeProfile;
 
     [Header("Room Generation Data")]
     public Object wallPiece;
