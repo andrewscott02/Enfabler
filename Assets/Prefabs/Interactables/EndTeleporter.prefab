@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6426787679196778765}
   - component: {fileID: 4469515835487812016}
+  - component: {fileID: 6595588570458251492}
   m_Layer: 2
   m_Name: Point Light
   m_TagString: Untagged
@@ -192,6 +193,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &6595588570458251492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7121526502906216897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &7614264446454739501
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +275,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b52dd9283b2b7a14d80222dab0ce620d, type: 2}
+  - {fileID: 2100000, guid: f8b513cc201dff744860f1e7e331bf5c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -353,8 +374,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactType: 1
   lockedInteraction: 0
+  interactOnUnlock: 0
   forceInteraction: 0
   multipleInteractions: 0
   interactFX: {fileID: 5831885752641907103, guid: 6b45a2f251717ca47bab67bbdd4a94b6,
     type: 3}
+  lightReceiverUnlocker: {fileID: 0}
+  invertUnlock: 0
   mainMenu: 0
