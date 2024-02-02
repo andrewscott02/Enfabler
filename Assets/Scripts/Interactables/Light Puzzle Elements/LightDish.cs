@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LightDish : MonoBehaviour, IReceiveLight
 {
+    public GameObject effects;
+
     LightEmitter reflectEmitter;
 
     void Awake()
@@ -16,11 +18,15 @@ public class LightDish : MonoBehaviour, IReceiveLight
     {
         //Debug.Log(gameObject.name + " is receiving light");
         reflectEmitter.EmitLight();
+        if (effects != null)
+            effects.SetActive(true);
     }
 
     public void StopReceiveLight()
     {
         //Debug.Log(gameObject.name + " has stopped receiving light");
         reflectEmitter.StopEmitLight();
+        if (effects != null)
+            effects.SetActive(false);
     }
 }

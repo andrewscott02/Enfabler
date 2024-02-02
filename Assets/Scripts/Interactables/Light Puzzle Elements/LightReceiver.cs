@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LightReceiver : MonoBehaviour, IReceiveLight
 {
+    public GameObject effects;
+
     public bool invertUnlock = false;
 
     public delegate void Delegate();
@@ -17,14 +19,14 @@ public class LightReceiver : MonoBehaviour, IReceiveLight
 
     void Enable()
     {
-        //Empty delegate function
         //Debug.Log("Enable delegate");
+        effects.SetActive(true);
     }
 
     void Disable()
     {
-        //Empty delegate function
         //Debug.Log("Disable delegate");
+        effects.SetActive(false);
     }
 
     bool receivingLight = false;
