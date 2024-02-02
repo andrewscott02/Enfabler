@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PCGRoom : MonoBehaviour
 {
@@ -193,9 +194,10 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnObjects()
     {
-        foreach (var item in objectSpawnerChildren)
+        System.Random r = new System.Random();
+        foreach (int i in Enumerable.Range(0, objectSpawnerChildren.Length).OrderBy(x => r.Next()))
         {
-            List<GameObject> generatedItems = item.SpawnObject(item.changeTheme ^ reversed ? nextTheme : theme, dungeonData);
+            List<GameObject> generatedItems = objectSpawnerChildren[i].SpawnObject(objectSpawnerChildren[i].changeTheme ^ reversed ? nextTheme : theme, dungeonData);
 
             foreach (var generatedItem in generatedItems)
                 itemsInRoom.Add(generatedItem);
