@@ -1121,7 +1121,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             return;
         }
 
-
         if (canDodge)
         {
             dodgeDelegate();

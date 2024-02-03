@@ -5070,6 +5070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4395202749699676985}
   - component: {fileID: 4125448634556957786}
+  - component: {fileID: 7736725718138071332}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -5103,8 +5104,8 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.6492809, b: 0.2688679, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.27058828, g: 1, b: 0.34253308, a: 1}
+  m_Intensity: 8
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5154,6 +5155,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &7736725718138071332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8507191762679257471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &8741498779023224794
 GameObject:
   m_ObjectHideFlags: 0
@@ -10088,6 +10109,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f45156cac69c4b84dbe1229ffc41f054, type: 3}
+--- !u!1 &7447301362789200000 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8507191762679257471, guid: f45156cac69c4b84dbe1229ffc41f054,
+    type: 3}
+  m_PrefabInstance: {fileID: 1249112227872860671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5587991220217788818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7447301362789200000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1001 &5095255533596206968
 PrefabInstance:
   m_ObjectHideFlags: 0

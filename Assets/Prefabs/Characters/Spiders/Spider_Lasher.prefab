@@ -83,7 +83,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8837602169260676381}
   m_LocalRotation: {x: 0.44975808, y: -0.5456351, z: 0.449758, w: -0.5456352}
-  m_LocalPosition: {x: -0.083027, y: 0.24099275, z: -0.22818965}
+  m_LocalPosition: {x: -0.083, y: 0.37, z: 0.091}
   m_LocalScale: {x: 0.8359281, y: 0.83592814, z: 0.83592826}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -114,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8945656930708960945}
   m_LocalRotation: {x: 0.44975808, y: -0.5456351, z: 0.449758, w: -0.5456352}
-  m_LocalPosition: {x: -0.083027, y: 0.24099275, z: -0.22818965}
+  m_LocalPosition: {x: -0.083, y: 0.37, z: 0.091}
   m_LocalScale: {x: 0.8359281, y: 0.83592814, z: 0.83592826}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -299,6 +299,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 76f0e520c2c40614cb8ba9be2590b91b,
         type: 2}
+    - target: {fileID: 1052808933374464340, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: weaponSphereRadius
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1111112100073115154, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: model

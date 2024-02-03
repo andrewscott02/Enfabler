@@ -19,9 +19,20 @@ public class WaterPuddleSpawner : MonoBehaviour
 
     void SpawnPuddle()
     {
+        CheckRaycast(transform.position);
+    }
+
+    void CheckRaycast(Vector2 startPos)
+    {
         RaycastHit hit;
-        if (Physics.Linecast(start: transform.position, end: transform.position + (Vector3.down * 15f), hitInfo: out hit, layerMask))
+        if (Physics.Linecast(start: startPos, end: transform.position + (Vector3.down * 15f), hitInfo: out hit, layerMask))
         {
+            if (hit.collider.isTrigger)
+            {
+                CheckRaycast(startPos);
+                return;
+            }
+
             GameObject waterGO = Instantiate(waterPuddlePrefab, hit.point, Quaternion.Euler(hit.normal)) as GameObject;
 
             Vector3 scale = new Vector3();
