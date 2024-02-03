@@ -97,7 +97,7 @@ public class BaseCharacterController : MonoBehaviour
     public delegate void DiedDelegate(BaseCharacterController controller);
     public DiedDelegate characterDied;
 
-    public void Killed()
+    public virtual void Killed()
     {
         characterDied(this);
     }

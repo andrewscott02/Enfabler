@@ -175,6 +175,14 @@ public class AIController : BaseCharacterController
         base.ActivateRagdoll(activate, forceData, disableAnimator);
     }
 
+    public override void Killed()
+    {
+        SetDestinationPos(gameObject.transform.position);
+        agent.enabled = false;
+        bt.enabled = false;
+        base.Killed();
+    }
+
     #endregion
 
     #region Behaviours

@@ -608,14 +608,16 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             //Return if collided object has no health component
             if (hitDamageable == null)
             {
-                //Debug.LogWarning("No interface");
+                Debug.LogWarning("No interface");
+                //AttackTrace(hit.point, end);
                 return;
             }
 
             //Return if it has already been hit or if it should be ignored
             if (hitTargets.Contains(hitDamageable) || ignore.Contains(hitDamageable) || hitDamageable.IsDead())
             {
-                //Debug.LogWarning("Ignore");
+                Debug.LogWarning("Ignore " + hitDamageable.GetScript().gameObject.name);
+                //AttackTrace(hit.point, end);
                 return;
             }
 
