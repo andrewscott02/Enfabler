@@ -204,17 +204,21 @@ public class AIManager : MonoBehaviour
     public void AddEnemy(AIController enemy)
     {
         if (!enemiesInCombat.Contains(enemy))
+        {
             enemiesInCombat.Add(enemy);
 
-        CheckCombatCamera();
+            CheckCombatCamera();
+        }
     }
 
     public void RemoveEnemy(AIController enemy)
     {
         if (enemiesInCombat.Contains(enemy))
+        {
             enemiesInCombat.Remove(enemy);
 
-        CheckCombatCamera();
+            CheckCombatCamera();
+        }
     }
 
     void CheckCombatCamera()

@@ -257,5 +257,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     {
         Debug.Log("kill cam slomo");
         Slomo(0.2f, 2f);
+        CameraManager.instance.SetCombatCam(false, true);
     }
 }
