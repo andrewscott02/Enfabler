@@ -6,16 +6,10 @@ using Cinemachine;
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager instance;
-    public CinemachineVirtualCamera exploreCam, combatCam;
-    CinemachineBrain cmBrain;
-
-    public float killCamBlend = 0.15f;
 
     void Start()
     {
         instance = this;
-
-        cmBrain = Camera.main.GetComponent<CinemachineBrain>();
     }
 
     bool active = false;
@@ -36,19 +30,18 @@ public class CameraManager : MonoBehaviour
     public void SetCombatCam(bool active, bool killCam = false)
     {
         Debug.Log("Combat camera is active: " + active);
-        combatCam.Priority = active ? 11 : 9;
+        PlayerCamContainer.instance.combatCam.Priority = active ? 11 : 9;
 
         if (killCam)
         {
-            cmBrain.m_CustomBlends.m_CustomBlends[0].m_Blend.m_Time = killCamBlend;
+            PlayerCamContainer.instance.killCam.Priority = 12;
             StartCoroutine(IResetBlend(2f));
         }
     }
 
     IEnumerator IResetBlend(float delay)
     {
-        yield return new WaitForSeconds(delay);
-
-        cmBrain.m_CustomBlends.m_CustomBlends[0].m_Blend.m_Time = cmBrain.m_DefaultBlend.m_Time;
+        yield return new WaitForSecondsRealtime(delay);
+        PlayerCamContainer.instance.killCam.Priority = 8;
     }
 }

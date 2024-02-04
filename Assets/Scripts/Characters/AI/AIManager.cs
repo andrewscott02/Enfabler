@@ -207,6 +207,10 @@ public class AIManager : MonoBehaviour
         {
             enemiesInCombat.Add(enemy);
 
+            if (camChangeCoroutine != null)
+                StopCoroutine(camChangeCoroutine);
+
+            camChangeCoroutine = null;
             CheckCombatCamera();
         }
     }
@@ -217,8 +221,17 @@ public class AIManager : MonoBehaviour
         {
             enemiesInCombat.Remove(enemy);
 
-            CheckCombatCamera();
+            if (camChangeCoroutine == null)
+                camChangeCoroutine = StartCoroutine(ICheckCombatCamera(1f));
         }
+    }
+
+    Coroutine camChangeCoroutine;
+
+    IEnumerator ICheckCombatCamera(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        CheckCombatCamera();
     }
 
     void CheckCombatCamera()
