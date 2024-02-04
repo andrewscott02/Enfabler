@@ -153,7 +153,7 @@ public class AIManager : MonoBehaviour
 
     public void Enqueue(AIController agent)
     {
-        AddEnemy(agent);
+        //AddEnemy(agent);
         if (enemyActionsQueue.Contains(agent)) return;
 
         Debug.Log("Enqueuing agent");
@@ -195,6 +195,11 @@ public class AIManager : MonoBehaviour
     #region Combat Mode
 
     List<AIController> enemiesInCombat = new List<AIController>();
+
+    public int GetEnemiesInCombat()
+    {
+        return enemiesInCombat.Count;
+    }
 
     public void AddEnemy(AIController enemy)
     {

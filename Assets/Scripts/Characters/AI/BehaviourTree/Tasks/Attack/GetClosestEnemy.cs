@@ -34,11 +34,14 @@ public class GetClosestEnemy : Node
             agent.alert = true;
 
             state = NodeState.Success;
+
+            AIManager.instance.AddEnemy(agent);
         }
         else
         {
             //Debug.Log("Failed to get enemy nearby");
             AIManager.instance.Dequeue(agent, false);
+            AIManager.instance.RemoveEnemy(agent);
             state = NodeState.Failure;
         }
 

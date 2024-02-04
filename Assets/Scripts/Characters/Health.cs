@@ -181,7 +181,13 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     {
         dying = true;
         SpawnImpulse(hitReactData.killImpulseStrength);
-        Slomo(hitReactData.killSlomoScale, hitReactData.killSlomoDuration);
+
+        //Debug.Log("Enemies left " + AIManager.instance.GetEnemiesInCombat());
+        if (AIManager.instance.GetEnemiesInCombat() == 1)
+            KillCamSlowMo();
+        else
+            Slomo(hitReactData.killSlomoScale, hitReactData.killSlomoDuration);
+
         if (hitReactData.hitClip != null)
             PlaySoundEffect(hitReactData.hitClip, hitReactData.hitVolume);
 
@@ -243,6 +249,13 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     {
         if (TimeManager.instance == null) return;
 
+        Debug.Log("Set slow motion to " + slomoStrength.ToString());
         TimeManager.instance.SetTimeScale(slomoStrength, slomoDuration);
+    }
+
+    public void KillCamSlowMo()
+    {
+        Debug.Log("kill cam slomo");
+        Slomo(0.2f, 2f);
     }
 }
