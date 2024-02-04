@@ -153,6 +153,7 @@ public class AIManager : MonoBehaviour
 
     public void Enqueue(AIController agent)
     {
+        AddEnemy(agent);
         if (enemyActionsQueue.Contains(agent)) return;
 
         Debug.Log("Enqueuing agent");
@@ -197,14 +198,23 @@ public class AIManager : MonoBehaviour
 
     public void AddEnemy(AIController enemy)
     {
-        if (enemiesInCombat.Contains(enemy))
+        if (!enemiesInCombat.Contains(enemy))
             enemiesInCombat.Add(enemy);
+
+        CheckCombatCamera();
     }
 
     public void RemoveEnemy(AIController enemy)
     {
         if (enemiesInCombat.Contains(enemy))
             enemiesInCombat.Remove(enemy);
+
+        CheckCombatCamera();
+    }
+
+    void CheckCombatCamera()
+    {
+        CameraManager.instance.SetCombatCam(enemiesInCombat.Count > 0);
     }
 
     #endregion

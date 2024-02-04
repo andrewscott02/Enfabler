@@ -15,6 +15,7 @@ public class CameraManager : MonoBehaviour
 
     public void SetCombatCam(bool active)
     {
+        Debug.Log("Combat camera is active: " + active);
         combatCam.Priority = active ? 11 : 9;
     }
 }
