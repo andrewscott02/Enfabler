@@ -40,6 +40,7 @@ public class AIManager : MonoBehaviour
             if (agent != null)
             {
                 enemyActionsQueue.Remove(agent);
+                RemoveEnemy(agent);
             }
 
             enemyTeam.Remove(character);
@@ -186,6 +187,24 @@ public class AIManager : MonoBehaviour
     private void Update()
     {
         lastAction -= Time.deltaTime;
+    }
+
+    #endregion
+
+    #region Combat Mode
+
+    List<AIController> enemiesInCombat = new List<AIController>();
+
+    public void AddEnemy(AIController enemy)
+    {
+        if (enemiesInCombat.Contains(enemy))
+            enemiesInCombat.Add(enemy);
+    }
+
+    public void RemoveEnemy(AIController enemy)
+    {
+        if (enemiesInCombat.Contains(enemy))
+            enemiesInCombat.Remove(enemy);
     }
 
     #endregion
