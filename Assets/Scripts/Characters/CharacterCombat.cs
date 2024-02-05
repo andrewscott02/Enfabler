@@ -479,7 +479,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         damage = currentAttack.variations[currentAttackIndex].damage + additionalDamage;
         //Debug.Log(damage + " from " + currentDamage + " and " + additionalDamage);
 
-        CheckMoveToTarget(transform.position, transform.forward, snapLayerMask, moveDistanceThreshold.y);
+        CheckMoveToTarget(transform.position + (transform.forward * targetSphereRadius), transform.forward, snapLayerMask, moveDistanceThreshold.y);
 
         //InvokeRepeating("AttackCheck", 0f, 0.0001f);
         attackCheck = true;
@@ -526,15 +526,57 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         RaycastHit hit;
 
+        Debug.Log("Combat - Checking move to target");
+
         if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: maxDistance, layerMask))
         {
+            Debug.Log("Combat - Hit Object " + hit.collider.gameObject.name);
             float distance = Vector3.Distance(origin, hit.point);
+
+            RotateTowardsTarget(hit.point);
 
             if (distance > moveDistanceThreshold.x)
             {
+                Debug.Log("Combat - Moving to target");
                 MoveToTarget(hit.point);
             }
         }
+        else
+        {
+            Collider[] cols = Physics.OverlapSphere(origin, targetSphereRadius, layerMask);
+            if (cols.Length > 0)
+            {
+                foreach (var item in cols)
+                {
+                    if (item.gameObject != gameObject)
+                    {
+                        Debug.Log("Combat - Hit Object " + item.gameObject.name);
+                        float distance = Vector3.Distance(origin, item.gameObject.transform.position);
+
+                        RotateTowardsTarget(item.gameObject.transform.position);
+
+                        if (distance > moveDistanceThreshold.x)
+                        {
+                            Debug.Log("Combat - Moving to target");
+                            MoveToTarget(item.gameObject.transform.position);
+                        }
+
+                        return;
+                    }
+                }
+            }
+
+            MoveToTarget(transform.position - (dir * moveDistanceThreshold.x));
+        }
+    }
+
+    public void RotateTowardsTarget(Vector3 target)
+    {
+        Debug.Log("Combat - Rotating");
+        //Rotate towards direction
+        Vector3 desiredRot = new Vector3(target.x, transform.position.y, target.z);
+        Quaternion newRot = Quaternion.LookRotation(desiredRot - transform.position, Vector3.up);
+        transform.rotation = newRot;
     }
 
     void MoveToTarget(Vector3 target)
@@ -581,8 +623,51 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         if (weapon == null)
             return;
 
-        AttackTrace(useGenerousHitDetection ? weapon.weaponBaseHit.transform.position : weapon.weaponBase.transform.position, !useGenerousHitDetection ? weapon.weaponBaseHit.transform.position : weapon.weaponBase.transform.position);
-        AttackTrace(!useGenerousHitDetection ? weapon.weaponBaseHit.transform.position : weapon.weaponBase.transform.position, useGenerousHitDetection ? weapon.weaponBaseHit.transform.position : weapon.weaponBase.transform.position);
+        AttackOverlap(useGenerousHitDetection ? weapon.weaponBaseHit.transform.position : weapon.weaponBase.transform.position);
+        AttackTrace(useGenerousHitDetection ? weapon.weaponBaseHit.transform.position : weapon.weaponBase.transform.position, useGenerousHitDetection ? weapon.weaponTipHit.transform.position : weapon.weaponTip.transform.position);
+    }
+
+    void AttackOverlap(Vector3 origin)
+    {
+        Collider[] cols = Physics.OverlapSphere(origin, weaponSphereRadius, hitLayerMask);
+        foreach (var item in cols)
+        {
+            if (item.gameObject != gameObject)
+            {
+                IDamageable hitDamageable = item.GetComponent<IDamageable>();
+
+                if (hitDamageable == null)
+                {
+                    hitDamageable = item.GetComponentInParent<IDamageable>();
+                }
+
+                #region Guard Clauses
+
+                //Return if collided object has no health component
+                if (hitDamageable == null)
+                {
+                    Debug.LogWarning("No interface");
+                    //AttackTrace(hit.point, end);
+                    return;
+                }
+
+                //Return if it has already been hit or if it should be ignored
+                if (hitTargets.Contains(hitDamageable) || ignore.Contains(hitDamageable) || hitDamageable.IsDead())
+                {
+                    Debug.LogWarning("Ignore " + hitDamageable.GetScript().gameObject.name);
+                    //AttackTrace(hit.point, end);
+                    return;
+                }
+
+                #endregion
+
+                //If it can be hit, deal damage to target and add it to the hit targets list
+                hitTargets.Add(hitDamageable);
+                E_DamageEvents damageEvent = DealDamage(hitDamageable, damage, item.transform.position, Vector3.zero, currentAttack.attackType);
+
+                onAttackHit(damageEvent);
+            }
+        }
     }
 
     void AttackTrace(Vector3 start, Vector3 end)

@@ -93,6 +93,18 @@ public class BaseCharacterController : MonoBehaviour
             combat.weapon.Disarm();
         }
     }
+    
+    public virtual void ChangeTags(bool activate)
+    {
+        foreach (var item in ragdollColliders)
+        {
+            if (item == null) break;
+
+            item.gameObject.layer = activate ? 2 : 6;
+        }
+
+        mainCollider.gameObject.layer = activate ? 2 : 10;
+    }
 
     public delegate void DiedDelegate(BaseCharacterController controller);
     public DiedDelegate characterDied;

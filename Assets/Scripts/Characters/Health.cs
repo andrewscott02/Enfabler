@@ -218,6 +218,10 @@ public class Health : MonoBehaviour, IDamageable, IHealable
                 controller.ActivateRagdoll(true, forcedata, !hitReactData.killAnim);
                 gameObject.name += " -- Dead";
             }
+            else
+            {
+                controller.ChangeTags(true);
+            }
 
             controller.enabled = false;
         }
