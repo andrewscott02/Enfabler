@@ -211,7 +211,7 @@ public class AIManager : MonoBehaviour
                 StopCoroutine(camChangeCoroutine);
 
             camChangeCoroutine = null;
-            CheckCombatCamera();
+            CheckCombatMode();
         }
     }
 
@@ -231,12 +231,17 @@ public class AIManager : MonoBehaviour
     IEnumerator ICheckCombatCamera(float delay)
     {
         yield return new WaitForSeconds(delay);
-        CheckCombatCamera();
+        CheckCombatMode();
     }
 
-    void CheckCombatCamera()
+    void CheckCombatMode()
     {
-        CameraManager.instance.SetCombatCam(enemiesInCombat.Count > 0);
+        bool inCombat = enemiesInCombat.Count > 0;
+        CameraManager.instance.SetCombatCam(inCombat);
+        if (inCombat)
+            AudioManager.instance.CombatMusicFade();
+        else
+            AudioManager.instance.ExploreMusicFade(false);
     }
 
     #endregion

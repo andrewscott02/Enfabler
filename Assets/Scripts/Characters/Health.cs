@@ -184,12 +184,17 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
         //Debug.Log("Enemies left " + AIManager.instance.GetEnemiesInCombat());
         if (AIManager.instance.GetEnemiesInCombat() == 1)
+        {
+            if (hitReactData.hitClip != null)
+                PlaySoundEffect(hitReactData.hitClip, hitReactData.hitVolume * 2);
             KillCamSlowMo();
+        }
         else
+        {
+            if (hitReactData.hitClip != null)
+                PlaySoundEffect(hitReactData.hitClip, hitReactData.hitVolume);
             Slomo(hitReactData.killSlomoScale, hitReactData.killSlomoDuration);
-
-        if (hitReactData.hitClip != null)
-            PlaySoundEffect(hitReactData.hitClip, hitReactData.hitVolume);
+        }
 
         if (combat != null)
         {
@@ -258,5 +263,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         Debug.Log("kill cam slomo");
         Slomo(0.2f, 2f);
         CameraManager.instance.SetCombatCam(false, true);
+        AudioManager.instance.ExploreMusicFade();
     }
 }
