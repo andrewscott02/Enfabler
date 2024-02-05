@@ -12,6 +12,8 @@ public class MoveableObject : PuzzleElement
     Vector3 startPosition, endPosition;
     Vector3 targetPosition;
 
+    Rigidbody rb;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -34,6 +36,11 @@ public class MoveableObject : PuzzleElement
                 moving = false;
                 targetPosition = startPosition;
                 break;
+            case E_MovementType.EnableMovementEndless:
+                moving = false;
+                targetPosition = endOffset;
+                rb = GetComponent<Rigidbody>();
+                break;
         }
     }
 
@@ -54,6 +61,9 @@ public class MoveableObject : PuzzleElement
             case E_MovementType.EnableMovementReversable:
                 EnableMovement(true);
                 break;
+            case E_MovementType.EnableMovementEndless:
+                EnableMovement(true);
+                break;
         }
     }
 
@@ -72,6 +82,9 @@ public class MoveableObject : PuzzleElement
                 EnableMovement(false);
                 break;
             case E_MovementType.EnableMovementReversable:
+                EnableMovement(false);
+                break;
+            case E_MovementType.EnableMovementEndless:
                 EnableMovement(false);
                 break;
         }
@@ -97,6 +110,12 @@ public class MoveableObject : PuzzleElement
     {
         if (!moving) return;
 
+        if (movementType == E_MovementType.EnableMovementEndless)
+        {
+            MoveInDirection();
+            return;
+        }
+
         if (!HelperFunctions.AlmostEqualVector3(targetPosition, transform.position, 0.05f, Vector3.zero))
         {
             Vector3 dir = (targetPosition - transform.position).normalized;
@@ -119,6 +138,15 @@ public class MoveableObject : PuzzleElement
         }
     }
 
+    void MoveInDirection()
+    {
+        Vector3 dir = transform.rotation * targetPosition;
+        //transform.position += dir * Time.deltaTime * moveSpeed;
+        //rb.velocity = dir * moveSpeed;
+        //rb.velocity = transform.forward * moveSpeed;
+        rb.AddForce(transform.forward * moveSpeed * Time.deltaTime);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, 0.2f);
@@ -128,5 +156,5 @@ public class MoveableObject : PuzzleElement
 
 public enum E_MovementType
 {
-    Toggle, EnableMovement, EnableMovementReversable
+    Toggle, EnableMovement, EnableMovementReversable, EnableMovementEndless
 }

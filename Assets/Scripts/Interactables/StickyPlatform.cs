@@ -10,7 +10,7 @@ public class StickyPlatform : MonoBehaviour
         {
             //Debug.Log("Collide with " + other.name);
 
-            other.transform.parent = transform;
+            other.transform.SetParent(transform, true);
         }
     }
 
@@ -20,7 +20,7 @@ public class StickyPlatform : MonoBehaviour
         {
             //Debug.Log("Stay with " + other.name);
             if (other.transform.parent == this.transform) return;
-            other.transform.parent = transform;
+            other.transform.SetParent(transform, true);
         }
     }
 
@@ -30,7 +30,7 @@ public class StickyPlatform : MonoBehaviour
         {
             //Debug.Log("Stopped colliding with " + other.name);
 
-            other.transform.parent = null;
+            other.transform.SetParent(null, true);
         }
     }
 }
