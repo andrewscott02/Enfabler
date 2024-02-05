@@ -4902,6 +4902,7 @@ Transform:
   m_Children:
   - {fileID: 5181615476231115801}
   - {fileID: 5144136469113744875}
+  - {fileID: 1128827952919106843}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14613,3 +14614,98 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1001 &6794655202307893918
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5900016653262143365}
+    m_Modifications:
+    - target: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: m_Name
+      value: Flash
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900016653262143365, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900016653262143365, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900016653262143365, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900016653262143365, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900016653262143365, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900016653262143365, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900016653262143365, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900016653262143365, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900016653262143365, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900016653262143365, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900016653262143365, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519640419798142378, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519640419798142378, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519640419798142378, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519640419798142378, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1a0d165a48f50af41a481504169452c5, type: 3}
+--- !u!4 &1128827952919106843 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5900016653262143365, guid: 1a0d165a48f50af41a481504169452c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6794655202307893918}
+  m_PrefabAsset: {fileID: 0}

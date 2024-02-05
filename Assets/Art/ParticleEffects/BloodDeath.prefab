@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5079500101820330212, guid: 5995087a65040474a859f63787d81cde,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5831885752641907103, guid: 5995087a65040474a859f63787d81cde,
         type: 3}
       propertyPath: m_Name
@@ -80,7 +85,7 @@ PrefabInstance:
     - target: {fileID: 6519640419798142378, guid: 5995087a65040474a859f63787d81cde,
         type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5995087a65040474a859f63787d81cde, type: 3}
