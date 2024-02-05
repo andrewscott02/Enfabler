@@ -26,7 +26,7 @@ public class StatueTrap : MonoBehaviour
         float chance = Random.Range(0f, 1f);
 
         if (chance > hostileChance)
-            StartCoroutine(IDisableStatue(0.5f));
+            StartCoroutine(IDisableStatue(0.1f));
     }
 
     IEnumerator IDisableStatue(float delay)
@@ -45,6 +45,7 @@ public class StatueTrap : MonoBehaviour
 
         AIController ai = GetComponentInChildren<AIController>();
         ai.enabled = false;
+        ai.bt.enabled = false;
 
         CharacterMovement movement = GetComponentInChildren<CharacterMovement>();
         movement.enabled = false;

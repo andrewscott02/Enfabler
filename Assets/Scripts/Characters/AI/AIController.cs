@@ -329,6 +329,11 @@ public class AIController : BaseCharacterController
         return false;
     }
 
+    public void EnqueueAttack()
+    {
+        AIManager.instance.Enqueue(this);
+    }
+
     public AISpellData GetValidSpell()
     {
         AISpellData invalidData = new AISpellData();

@@ -20,7 +20,7 @@ public class EnqueueAttack : Node
     {
         if (agent.CanAttack(agent.preparedAttack))
         {
-            AIManager.instance.Enqueue(agent);
+            agent.EnqueueAttack();
 
             return NodeState.Success;
         }
