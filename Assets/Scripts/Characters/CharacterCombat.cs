@@ -16,6 +16,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     [Header("Movement")]
     public bool canMove = true;
     public bool sprinting = false;
+    public bool cameraZoom = false;
 
     #region Attack Data
 
@@ -1150,6 +1151,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public void ParrySuccess()
     {
         //Empty delegate
+        if (cameraZoom)
+            CameraManager.instance.CombatZoom();
     }
 
     #endregion
@@ -1289,6 +1292,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         dodging = true;
         phaseDelegate(true);
+
+        if (cameraZoom)
+            CameraManager.instance.CombatZoom();
     }
 
     public void EndPhase()

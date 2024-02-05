@@ -112,6 +112,7 @@ public class BaseCharacterController : MonoBehaviour
     public virtual void Killed()
     {
         characterDied(this);
+        CameraManager.instance.CombatZoom();
     }
 
     public void Died(BaseCharacterController controller)

@@ -30,7 +30,7 @@ public class CameraManager : MonoBehaviour
     public void SetCombatCam(bool active, bool killCam = false)
     {
         Debug.Log("Combat camera is active: " + active);
-        PlayerCamContainer.instance.combatCam.Priority = active ? 11 : 9;
+        PlayerCamContainer.instance.exploreCam.Priority = active ? 8 : 11;
 
         if (killCam)
         {
@@ -43,5 +43,19 @@ public class CameraManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(delay);
         PlayerCamContainer.instance.killCam.Priority = 8;
+    }
+
+    [ContextMenu("Combat Zoom")]
+    public void CombatZoom()
+    {
+        PlayerCamContainer.instance.combatZoomCam.Priority = 10;
+        StartCoroutine(IResetCombatCam(0.2f));
+    }
+
+    IEnumerator IResetCombatCam(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+
+        PlayerCamContainer.instance.combatZoomCam.Priority = 7;
     }
 }

@@ -898,7 +898,7 @@ MonoBehaviour:
     hitClip: {fileID: 8300000, guid: 72c15341815fc7f49b90840740e6a454, type: 3}
     hitVolume: 4
     killImpulseStrength: 0.85
-    killSlomoScale: 0.55
+    killSlomoScale: 0.4
     killSlomoDuration: 0.5
     killRagdoll: 1
     killAnim: 0
@@ -974,6 +974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canMove: 1
   sprinting: 0
+  cameraZoom: 0
   canAttack: 1
   chargeUnblockableTime: 0.5
   chargeMaxTime: 2
@@ -999,8 +1000,8 @@ MonoBehaviour:
   currentTargets: []
   hitFreezeTime: 0.1
   rumbleOnHit: 0
-  useGenerousHitDetection: 0
-  weaponSphereRadius: 0.125
+  useGenerousHitDetection: 1
+  weaponSphereRadius: 0.25
   maxArrows: 15
   regenArrowDelay: 2
   regenArrowInterval: 0.5

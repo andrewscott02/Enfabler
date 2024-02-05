@@ -6,7 +6,7 @@ using Cinemachine;
 public class PlayerCamContainer : MonoBehaviour
 {
     public static PlayerCamContainer instance;
-    public CinemachineVirtualCamera exploreCam, combatCam, killCam;
+    public CinemachineVirtualCamera exploreCam, combatCam, combatZoomCam, killCam;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,9 @@ public class PlayerCamContainer : MonoBehaviour
 
         combatCam.LookAt = player.gameObject.transform;
         combatCam.Follow = player.followTarget.transform;
+
+        combatZoomCam.LookAt = player.gameObject.transform;
+        combatZoomCam.Follow = player.followTarget.transform;
 
         killCam.LookAt = player.gameObject.transform;
         killCam.Follow = player.followTarget.transform;
