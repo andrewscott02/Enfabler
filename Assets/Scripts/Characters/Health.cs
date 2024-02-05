@@ -173,6 +173,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     }
 
     public bool dying = false;
+    public bool canPlayEndCombatSound = false;
 
     public delegate void KillDelegate(Vector3 attacker, int damage);
     public KillDelegate killDelegate;
@@ -183,7 +184,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         SpawnImpulse(hitReactData.killImpulseStrength);
 
         //Debug.Log("Enemies left " + AIManager.instance.GetEnemiesInCombat());
-        if (AIManager.instance.GetEnemiesInCombat() == 1)
+        if (AIManager.instance.GetEnemiesInCombat() == 1 && canPlayEndCombatSound)
         {
             if (hitReactData.hitClip != null)
                 PlaySoundEffect(hitReactData.hitClip, hitReactData.hitVolume * 2);
