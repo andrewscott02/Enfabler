@@ -297,6 +297,11 @@ public class GrammarsDungeonData : ScriptableObject
 
     public bool GetRandomObject(ObjectSpawner spawner, out int objectIndex, ThemeData theme, bool trap)
     {
+        if (TryGetRandomObject(spawner, out objectIndex, theme, trap))
+        {
+            return true;
+        }
+
         int startIndex = Random.Range(0, trap ? theme.traps.Length : theme.objects.Length);
         objectIndex = startIndex;
 
@@ -319,6 +324,27 @@ public class GrammarsDungeonData : ScriptableObject
             if (objectIndex == startIndex)
                 return false;
         }
+    }
+
+    public bool TryGetRandomObject(ObjectSpawner spawner, out int objectIndex, ThemeData theme, bool trap)
+    {
+        objectIndex = 0;
+
+        for (int i = 0; i <= 50; i ++)
+        {
+            objectIndex = Random.Range(0, trap ? theme.traps.Length : theme.objects.Length);
+
+            if (CanUseObject(trap ? theme.traps[objectIndex] : theme.objects[objectIndex], spawner))
+            {
+                if (trap)
+                    theme.traps[objectIndex].timesUsed++;
+                else
+                    theme.objects[objectIndex].timesUsed++;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     bool CanUseObject(ObjectData data, ObjectSpawner spawner)
