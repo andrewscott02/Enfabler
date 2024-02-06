@@ -46,7 +46,8 @@ public class PlayerMovement : CharacterMovement
         {
             //Rotate towards direction
             Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
-            Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, controller.followTarget.transform.rotation.eulerAngles.y, 0);
+            //Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, controller.followTarget.transform.rotation.eulerAngles.y, 0);
+            Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
             transform.rotation = newRot;
         }
 
