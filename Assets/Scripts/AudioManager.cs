@@ -31,17 +31,9 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (instance != null)
-        {
-            AudioManager.instance.startMusicClip = startMusicClip;
-            AudioManager.instance.combatMusicClip = combatMusicClip;
-            AudioManager.instance.PlayMusic(startMusicClip);
-            Destroy(this.gameObject);
-        }
+        instance = this;
 
         volumeMultiplier = volumeMultiplier;
-        instance = this;
-        DontDestroyOnLoad(this.gameObject);
         PlayMusic(startMusicClip, fadeTime: 0);
     }
 
