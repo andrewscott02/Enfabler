@@ -635,38 +635,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         {
             if (item.gameObject != gameObject)
             {
-                IDamageable hitDamageable = item.GetComponent<IDamageable>();
-
-                if (hitDamageable == null)
-                {
-                    hitDamageable = item.GetComponentInParent<IDamageable>();
-                }
-
-                #region Guard Clauses
-
-                //Return if collided object has no health component
-                if (hitDamageable == null)
-                {
-                    Debug.LogWarning("No interface");
-                    //AttackTrace(hit.point, end);
-                    return;
-                }
-
-                //Return if it has already been hit or if it should be ignored
-                if (hitTargets.Contains(hitDamageable) || ignore.Contains(hitDamageable) || hitDamageable.IsDead())
-                {
-                    Debug.LogWarning("Ignore " + hitDamageable.GetScript().gameObject.name);
-                    //AttackTrace(hit.point, end);
-                    return;
-                }
-
-                #endregion
-
-                //If it can be hit, deal damage to target and add it to the hit targets list
-                hitTargets.Add(hitDamageable);
-                E_DamageEvents damageEvent = DealDamage(hitDamageable, damage, item.transform.position, Vector3.zero, currentAttack.attackType);
-
-                onAttackHit(damageEvent);
+                CallDamage(item, item.transform.position, Vector3.zero);
             }
         }
     }
@@ -682,39 +651,44 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         if (Physics.SphereCast(origin, radius: weaponSphereRadius, direction: dir, out hit, maxDistance: distance, hitLayerMask))
         {
-            IDamageable hitDamageable = hit.collider.GetComponent<IDamageable>();
-
-            if (hitDamageable == null)
-            {
-                hitDamageable = hit.collider.GetComponentInParent<IDamageable>();
-            }
-
-            #region Guard Clauses
-
-            //Return if collided object has no health component
-            if (hitDamageable == null)
-            {
-                Debug.LogWarning("No interface");
-                //AttackTrace(hit.point, end);
-                return;
-            }
-
-            //Return if it has already been hit or if it should be ignored
-            if (hitTargets.Contains(hitDamageable) || ignore.Contains(hitDamageable) || hitDamageable.IsDead())
-            {
-                Debug.LogWarning("Ignore " + hitDamageable.GetScript().gameObject.name);
-                //AttackTrace(hit.point, end);
-                return;
-            }
-
-            #endregion
-
-            //If it can be hit, deal damage to target and add it to the hit targets list
-            hitTargets.Add(hitDamageable);
-            E_DamageEvents damageEvent = DealDamage(hitDamageable, damage, hit.point, hit.normal, currentAttack.attackType);
-
-            onAttackHit(damageEvent);
+            CallDamage(hit.collider, hit.point, hit.normal);
         }
+    }
+
+    void CallDamage(Collider collider, Vector3 hitPos, Vector3 hitNormal)
+    {
+        IDamageable hitDamageable = collider.GetComponent<IDamageable>();
+
+        if (hitDamageable == null)
+        {
+            hitDamageable = collider.GetComponentInParent<IDamageable>();
+        }
+
+        #region Guard Clauses
+
+        //Return if collided object has no health component
+        if (hitDamageable == null)
+        {
+            Debug.LogWarning("No interface");
+            //AttackTrace(hit.point, end);
+            return;
+        }
+
+        //Return if it has already been hit or if it should be ignored
+        if (hitTargets.Contains(hitDamageable) || ignore.Contains(hitDamageable) || hitDamageable.IsDead())
+        {
+            Debug.LogWarning("Ignore " + hitDamageable.GetScript().gameObject.name);
+            //AttackTrace(hit.point, end);
+            return;
+        }
+
+        #endregion
+
+        //If it can be hit, deal damage to target and add it to the hit targets list
+        hitTargets.Add(hitDamageable);
+        E_DamageEvents damageEvent = DealDamage(hitDamageable, damage, hitPos, hitNormal, currentAttack.attackType);
+
+        onAttackHit(damageEvent);
     }
 
     public E_DamageEvents DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot, E_AttackType attackType = E_AttackType.None)
