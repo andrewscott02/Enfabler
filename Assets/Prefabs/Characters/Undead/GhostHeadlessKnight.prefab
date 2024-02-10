@@ -673,6 +673,7 @@ GameObject:
   - component: {fileID: 5186125022130582053}
   - component: {fileID: 6938044528477125880}
   - component: {fileID: 2123850751780670830}
+  - component: {fileID: 5311268766956680528}
   m_Layer: 6
   m_Name: Head
   m_TagString: IgnoreRagdoll
@@ -757,6 +758,21 @@ MonoBehaviour:
   yOffset: 1.62
   teleportRadius: 10
   teleportAreaMoves: 0
+--- !u!114 &5311268766956680528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2190643859744649575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b17b8c57b41ef442be1cd9335809b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockX: 1
+  lockY: 0
+  lockZ: 1
 --- !u!1 &2334992963803234329
 GameObject:
   m_ObjectHideFlags: 0
