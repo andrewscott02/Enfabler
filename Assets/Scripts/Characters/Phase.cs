@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Phase : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class Phase : MonoBehaviour
     public Object flashEffect;
     ParticleSystem phaseParticle;
 
+    NavMeshObstacle navMeshObstacle;
+    NavMeshAgent navMeshAgent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +24,9 @@ public class Phase : MonoBehaviour
 
         CharacterCombat combat = GetComponent<CharacterCombat>();
         combat.phaseDelegate += ActivatePhase;
+
+        navMeshObstacle = GetComponent<NavMeshObstacle>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void ActivatePhase(bool activate)
@@ -28,6 +35,12 @@ public class Phase : MonoBehaviour
         gameObject.layer = activate ? phaseLayer : defaultLayer;
 
         StartParticles(activate);
+
+        if (navMeshObstacle != null)
+            navMeshObstacle.enabled = !activate;
+
+        if (navMeshAgent != null)
+            navMeshAgent.enabled = !activate;
     }
 
     void StartParticles(bool activate)
