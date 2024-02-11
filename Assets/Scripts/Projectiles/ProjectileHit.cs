@@ -22,6 +22,16 @@ public class ProjectileHit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        CheckProjectileHit(other);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        CheckProjectileHit(collision.collider);
+    }
+
+    void CheckProjectileHit(Collider other)
+    {
         if (layerMask == (layerMask | (1 << other.gameObject.layer)) && other.CompareTag("IgnoreProjectiles") == false)
         {
             //Debug.Log("Projectile hit " + other.gameObject.name);

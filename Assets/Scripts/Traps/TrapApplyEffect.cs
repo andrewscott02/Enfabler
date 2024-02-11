@@ -25,26 +25,29 @@ public class TrapApplyEffect : MonoBehaviour
     {
         if (layerMask == (layerMask | (1 << other.gameObject.layer)))
         {
-            IDamageable hitDamageable = other.GetComponent<IDamageable>();
-
-            if (hitDamageable == null)
+            if (!trap.trapStats.onlyHitPlayer || other.gameObject.CompareTag("Player"))
             {
-                hitDamageable = other.GetComponentInParent<IDamageable>();
+                IDamageable hitDamageable = other.GetComponent<IDamageable>();
+
+                if (hitDamageable == null)
+                {
+                    hitDamageable = other.GetComponentInParent<IDamageable>();
+                }
+
+                #region Guard Clauses
+
+                //Return if collided object has no health component
+                if (hitDamageable == null)
+                {
+                    Debug.LogWarning("No interface");
+                    return;
+                }
+
+                #endregion
+
+                //If it can be hit, deal damage to target and add it to the hit targets list
+                affectTargets.Add(hitDamageable);
             }
-
-            #region Guard Clauses
-
-            //Return if collided object has no health component
-            if (hitDamageable == null)
-            {
-                Debug.LogWarning("No interface");
-                return;
-            }
-
-            #endregion
-
-            //If it can be hit, deal damage to target and add it to the hit targets list
-            affectTargets.Add(hitDamageable);
         }
     }
 
@@ -52,26 +55,29 @@ public class TrapApplyEffect : MonoBehaviour
     {
         if (layerMask == (layerMask | (1 << other.gameObject.layer)))
         {
-            IDamageable hitDamageable = other.GetComponent<IDamageable>();
-
-            if (hitDamageable == null)
+            if (!trap.trapStats.onlyHitPlayer || other.gameObject.CompareTag("Player"))
             {
-                hitDamageable = other.GetComponentInParent<IDamageable>();
+                IDamageable hitDamageable = other.GetComponent<IDamageable>();
+
+                if (hitDamageable == null)
+                {
+                    hitDamageable = other.GetComponentInParent<IDamageable>();
+                }
+
+                #region Guard Clauses
+
+                //Return if collided object has no health component
+                if (hitDamageable == null)
+                {
+                    Debug.LogWarning("No interface");
+                    return;
+                }
+
+                #endregion
+
+                //If it can be hit, deal damage to target and add it to the hit targets list
+                affectTargets.Remove(hitDamageable);
             }
-
-            #region Guard Clauses
-
-            //Return if collided object has no health component
-            if (hitDamageable == null)
-            {
-                Debug.LogWarning("No interface");
-                return;
-            }
-
-            #endregion
-
-            //If it can be hit, deal damage to target and add it to the hit targets list
-            affectTargets.Remove(hitDamageable);
         }
     }
 
@@ -84,16 +90,12 @@ public class TrapApplyEffect : MonoBehaviour
                 foreach (var item in affectTargets)
                 {
                     MonoBehaviour targetMono = item.GetScript();
-                    PlayerController player = targetMono.GetComponent<PlayerController>();
-                    if (player != null)
+                    if (Vector3.Distance(transform.position, targetMono.transform.position) <= trap.trapStats.range)
                     {
-                        if (Vector3.Distance(transform.position, player.transform.position) <= trap.trapStats.range)
-                        {
-                            CapsuleCollider playerCol = player.GetComponent<CapsuleCollider>();
-                            Vector3 targetPos = playerCol.bounds.center;
-                            SpawnProjectile(targetPos);
-                            return;
-                        }
+                        CapsuleCollider targetCol = targetMono.GetComponent<CapsuleCollider>();
+                        SpawnProjectile(targetCol.bounds.center);
+                        //CheckSight(targetMono.gameObject);
+                        return;
                     }
                 }
                 break;
@@ -119,9 +121,32 @@ public class TrapApplyEffect : MonoBehaviour
         hitTargets.Clear();
     }
 
+    public LayerMask sightLayerMask;
+
+    void CheckSight(GameObject target)
+    {
+        //Raycast between sword base and tip
+        RaycastHit hit;
+
+        Vector3 origin = transform.position;
+        CapsuleCollider targetCol = target.GetComponent<CapsuleCollider>();
+        float distance = Vector3.Distance(transform.position, targetCol.bounds.center);
+        Vector3 dir = targetCol.bounds.center - transform.position;
+
+        if (Physics.SphereCast(origin, radius: 0.4f, direction: dir, out hit, maxDistance: distance, sightLayerMask))
+        {
+            if (hit.collider.gameObject == target.gameObject)
+                SpawnProjectile(targetCol.bounds.center);
+        }
+        else
+        {
+            SpawnProjectile(targetCol.bounds.center);
+        }
+    }
+
     void SpawnProjectile(Vector3 targetPos)
     {
-        Vector3 spawnPos = HelperFunctions.GetFlankingPoint(targetPos, transform.position, 1f);
+        Vector3 spawnPos = transform.position;
 
         GameObject projectileObj = Instantiate(trap.trapStats.projectile, spawnPos, transform.rotation) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
