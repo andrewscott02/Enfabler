@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23d80de47cecb574bac69ddcfc636647, type: 3}
-  m_Name: Mine
+  m_Name: BearTrap
   m_EditorClassIdentifier: 
   damage: 10
+  onlyHitPlayer: 1
   canBlock: 0
   canParry: 0
+  canReflect: 0
   targetType: 1
   projectile: {fileID: 0}
-  explosionFX: {fileID: 5831885752641907103, guid: aac6de99da32be145bcaa03df9a4b4f6,
-    type: 3}
+  explosionFX: {fileID: 0}
   range: 1.5
   shotAOE: 0
   durationType: 2
