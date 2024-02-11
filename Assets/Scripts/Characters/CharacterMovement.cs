@@ -16,12 +16,15 @@ public class CharacterMovement : MonoBehaviour
     public LayerMask groundLayer;
     protected bool grounded;
 
+    public float rotateSpeed = 1000;
+    public Quaternion targetRotation;
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         grounded = Physics.Raycast(transform.position + new Vector3(0, 0.2f, 0), Vector3.down, 0.4f, groundLayer);
 

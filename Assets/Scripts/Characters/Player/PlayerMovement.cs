@@ -48,7 +48,7 @@ public class PlayerMovement : CharacterMovement
             Vector3 moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
             //Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, controller.followTarget.transform.rotation.eulerAngles.y, 0);
             Quaternion newRot = Quaternion.LookRotation(moveInput3D, Vector3.up) * Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
-            transform.rotation = newRot;
+            targetRotation = newRot;
         }
 
         //Animate movement
@@ -58,6 +58,14 @@ public class PlayerMovement : CharacterMovement
 
         float newFOV = currentSpeed * moveFOVMultiplier;
         SetCameraValues(xRemap, defaultFOV + newFOV);
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.fixedDeltaTime);
+        transform.rotation = targetRotation;
     }
 
     public void Sprint(bool sprinting)

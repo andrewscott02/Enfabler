@@ -123,11 +123,12 @@ public class AIController : BaseCharacterController
 
         roamTimeElapsed += Time.deltaTime;
 
-        if (combat.canSaveAttackInput)
+        if (combat.canSaveAttackInput || characterMovement.currentSpeed > 5)
         {
             Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
             Quaternion desiredrot = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, desiredrot, Time.deltaTime * agent.angularSpeed);
+            //characterMovement.targetRotation = desiredrot;
         }
         
         #region Animation and Movement Speed

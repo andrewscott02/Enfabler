@@ -13,6 +13,9 @@ public class ProjectileMovement : MonoBehaviour
 
     public void Fire(Vector3 target, TrapStats trap, GameObject caster, int overrideDamage = 0, float overrideSpeed = 0)
     {
+        Vector3 dir = target - caster.transform.position;
+        transform.rotation = Quaternion.LookRotation(dir.normalized, transform.up);
+
         rb = GetComponent<Rigidbody>();
         hit = GetComponentInChildren<ProjectileHit>();
         hit.trapStats = trap;

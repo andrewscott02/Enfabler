@@ -11,6 +11,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     [HideInInspector]
     protected Health health;
     protected BaseCharacterController controller;
+    protected CharacterMovement characterMovement;
     protected Attacks attacks;
 
     [Header("Movement")]
@@ -129,6 +130,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     private void Start()
     {
         controller = GetComponent<BaseCharacterController>();
+        characterMovement = GetComponent<CharacterMovement>();
         animator = GetComponent<Animator>();
         animator.SetBool("UseFastRoll", fastdodge);
         baseUseRootMotion = animator.applyRootMotion;
@@ -577,7 +579,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         //Rotate towards direction
         Vector3 desiredRot = new Vector3(target.x, transform.position.y, target.z);
         Quaternion newRot = Quaternion.LookRotation(desiredRot - transform.position, Vector3.up);
-        transform.rotation = newRot;
+        characterMovement.targetRotation = newRot;
     }
 
     void MoveToTarget(Vector3 target)
