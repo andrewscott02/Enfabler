@@ -9,6 +9,8 @@ public class Trap : MonoBehaviour, ICanDealDamage
     TrapApplyEffect applyEffect;
     Collider applyCollider;
 
+    float cooldownT = 0;
+
     private void Awake()
     {
         applyEffect = GetComponentInChildren<TrapApplyEffect>();
@@ -38,7 +40,7 @@ public class Trap : MonoBehaviour, ICanDealDamage
                 Destroy(this.gameObject, 0.15f);
                 break;
             case E_Duration.Interval:
-                TrapManager.instance.TrapActivation += EffectTrigger;
+                active = true;
                 break;
             default:
 
@@ -50,17 +52,26 @@ public class Trap : MonoBehaviour, ICanDealDamage
     {
         if (trapStats.durationType == E_Duration.Interval)
         {
-            TrapManager.instance.TrapActivation -= EffectTrigger;
+            active = false;
+        }
+    }
+
+    bool active = false;
+
+    private void Update()
+    {
+        cooldownT += Time.deltaTime;
+
+        if (cooldownT >= trapStats.activateInterval && active)
+        {
+            cooldownT = 0;
+            applyEffect.Activate();
         }
     }
 
     void EffectTrigger()
     {
-        if (trapStats.durationType == E_Duration.Interval)
-        {
-            if (TrapManager.instance.trapTime % trapStats.activateInterval != 0)
-                return;
-        }
+        Debug.Log("Trap effect trigger");
 
         applyEffect.Activate();
     }
