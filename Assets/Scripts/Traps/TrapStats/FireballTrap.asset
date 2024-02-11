@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FireballTrap
   m_EditorClassIdentifier: 
   damage: 10
+  onlyHitPlayer: 1
   canBlock: 1
   canParry: 1
   canReflect: 0
@@ -21,7 +22,7 @@ MonoBehaviour:
     type: 3}
   explosionFX: {fileID: 5831885752641907103, guid: aac6de99da32be145bcaa03df9a4b4f6,
     type: 3}
-  range: 20
+  range: 10
   shotAOE: 0
   durationType: 1
   activateInterval: 3

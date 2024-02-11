@@ -889,7 +889,7 @@ MonoBehaviour:
       type: 3}
     parryFX: {fileID: 4983520532681786520, guid: 519711c44e578224f93314968deaddf2,
       type: 3}
-    impulseMax: 2
+    impulseMax: 1.5
     hitImpulseMultiplier: 0.2
     lightHitReactThreshold: 2
     heavyHitReactThreshold: 5
@@ -907,6 +907,7 @@ MonoBehaviour:
     parrySlomoScale: 0.2
     parrySlomoDuration: 0
   dying: 0
+  canPlayEndCombatSound: 0
 --- !u!114 &7378451652202160449
 MonoBehaviour:
   m_ObjectHideFlags: 0

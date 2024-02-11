@@ -21,7 +21,6 @@ public class TrapActivation : MonoBehaviour
             if (!trap.trapStats.onlyHitPlayer || other.gameObject.CompareTag("Player"))
             {
                 colliding++;
-                CheckTrapActivation();
             }
 
             CheckTrapActivation();
@@ -35,7 +34,6 @@ public class TrapActivation : MonoBehaviour
             if (!trap.trapStats.onlyHitPlayer || other.gameObject.CompareTag("Player"))
             {
                 colliding--;
-                CheckTrapActivation();
             }
 
             CheckTrapActivation();

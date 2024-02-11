@@ -46,7 +46,8 @@ public class TrapApplyEffect : MonoBehaviour
                 #endregion
 
                 //If it can be hit, deal damage to target and add it to the hit targets list
-                affectTargets.Add(hitDamageable);
+                if (!affectTargets.Contains(hitDamageable))
+                    affectTargets.Add(hitDamageable);
             }
         }
     }
@@ -92,6 +93,7 @@ public class TrapApplyEffect : MonoBehaviour
                     MonoBehaviour targetMono = item.GetScript();
                     if (Vector3.Distance(transform.position, targetMono.transform.position) <= trap.trapStats.range)
                     {
+                        Debug.Log("Spawning projectile at " + item.GetScript().gameObject);
                         CapsuleCollider targetCol = targetMono.GetComponent<CapsuleCollider>();
                         SpawnProjectile(targetCol.bounds.center);
                         //CheckSight(targetMono.gameObject);
