@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Enfabler.Attacking;
 
 public class StatueTrap : MonoBehaviour
 {
@@ -9,24 +10,30 @@ public class StatueTrap : MonoBehaviour
 
     CharacterCombat combat;
     Health health;
+    Armour armour;
 
     // Start is called before the first frame update
     void Start()
     {
         combat = GetComponentInChildren<CharacterCombat>();
 
-        Armour armour = GetComponentInChildren<Armour>();
+        armour = GetComponentInChildren<Armour>();
         armour.armourSlider.gameObject.SetActive(false);
-        armour.armourSlider = null;
+        //armour.armourSlider = null;
 
         health = GetComponentInChildren<Health>();
         health.healthSlider.gameObject.SetActive(false);
-        health.healthSlider = null;
+        //health.healthSlider = null;
 
         float chance = Random.Range(0f, 1f);
 
         if (chance > hostileChance)
             StartCoroutine(IDisableStatue(0.1f));
+        else
+        {
+            combat.onAttackHit += OnHit;
+            health.HitReactionDelegate += OnDamaged;
+        }
     }
 
     IEnumerator IDisableStatue(float delay)
@@ -61,5 +68,19 @@ public class StatueTrap : MonoBehaviour
         animator.speed = 0;
     }
 
+    void OnHit(E_DamageEvents damageEvent)
+    {
+        EnableUI();
+    }
 
+    void OnDamaged(int damage, Vector3 dir, E_AttackType attackType = E_AttackType.None)
+    {
+        EnableUI();
+    }
+
+    void EnableUI()
+    {
+        armour.armourSlider.gameObject.SetActive(true);
+        health.healthSlider.gameObject.SetActive(true);
+    }
 }
