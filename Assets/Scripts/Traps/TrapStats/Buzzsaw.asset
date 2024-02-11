@@ -10,19 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23d80de47cecb574bac69ddcfc636647, type: 3}
-  m_Name: WebProjectile
+  m_Name: Buzzsaw
   m_EditorClassIdentifier: 
-  damage: 3
-  onlyHitPlayer: 1
-  canBlock: 1
-  canParry: 1
+  damage: 1
+  onlyHitPlayer: 0
+  canBlock: 0
+  canParry: 0
   canReflect: 0
-  targetType: 0
-  projectile: {fileID: 956619039502478575, guid: fe5b4e5dc85c0f64f85836e3bbe2b179,
-    type: 3}
-  explosionFX: {fileID: 4738881306226775840, guid: 370a699518cd7c146b16b281be9d6975,
-    type: 3}
-  range: 10
+  targetType: 1
+  projectile: {fileID: 0}
+  explosionFX: {fileID: 0}
+  range: 5
   shotAOE: 0
-  durationType: 1
-  activateInterval: 3
+  durationType: 0
+  activateInterval: 0

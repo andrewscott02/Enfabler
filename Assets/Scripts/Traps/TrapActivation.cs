@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TrapActivation : MonoBehaviour
 {
+    public LayerMask layerMask;
     Trap trap;
 
     private void Awake()
@@ -11,19 +12,41 @@ public class TrapActivation : MonoBehaviour
         trap = GetComponentInParent<Trap>();
     }
 
+    int colliding = 0;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (layerMask == (layerMask | (1 << other.gameObject.layer)))
         {
-            trap.ActivateTrap();
+            if (!trap.trapStats.onlyHitPlayer || other.gameObject.CompareTag("Player"))
+            {
+                colliding++;
+                CheckTrapActivation();
+            }
+
+            CheckTrapActivation();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (layerMask == (layerMask | (1 << other.gameObject.layer)))
         {
-            trap.DeactivateTrap();
+            if (!trap.trapStats.onlyHitPlayer || other.gameObject.CompareTag("Player"))
+            {
+                colliding--;
+                CheckTrapActivation();
+            }
+
+            CheckTrapActivation();
         }
+    }
+
+    void CheckTrapActivation()
+    {
+        if (colliding > 0)
+            trap.ActivateTrap();
+        else
+            trap.DeactivateTrap();
     }
 }

@@ -5,41 +5,21 @@ using UnityEngine;
 public class TrapApplyEffect : MonoBehaviour
 {
     Trap trap;
-    Collider effectCollider;
     PlayerController player;
 
     private void Awake()
     {
         trap = GetComponentInParent<Trap>();
-        effectCollider = GetComponent<Collider>();
     }
 
     public void Activate()
     {
-        affectTargets = new List<IDamageable>();
-        hitTargets = new List<IDamageable>();
-        effectCollider.enabled = true;
-        StartCoroutine(ITriggerInstantEffect(0.1f));
-    }
-
-    public void Deactivate()
-    {
-        StopAllCoroutines();
-        affectTargets = new List<IDamageable>();
-        hitTargets = new List<IDamageable>();
-        effectCollider.enabled = false;
-    }
-
-    IEnumerator ITriggerInstantEffect(float delay)
-    {
-        yield return new WaitForSeconds(delay);
         DetermineEffect();
-        Deactivate();
     }
 
     public LayerMask layerMask;
-    List<IDamageable> affectTargets;
-    List<IDamageable> hitTargets;
+    List<IDamageable> affectTargets = new List<IDamageable>();
+    List<IDamageable> hitTargets = new List<IDamageable>();
 
     private void OnTriggerEnter(Collider other)
     {
@@ -135,6 +115,8 @@ public class TrapApplyEffect : MonoBehaviour
             default:
                 break;
         }
+
+        hitTargets.Clear();
     }
 
     void SpawnProjectile(Vector3 targetPos)
@@ -144,15 +126,5 @@ public class TrapApplyEffect : MonoBehaviour
         GameObject projectileObj = Instantiate(trap.trapStats.projectile, spawnPos, transform.rotation) as GameObject;
         ProjectileMovement projectileMove = projectileObj.GetComponent<ProjectileMovement>();
         projectileMove.Fire(targetPos, trap.trapStats, trap.gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        Deactivate();
-    }
-
-    private void OnDisable()
-    {
-        Deactivate();
     }
 }

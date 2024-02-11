@@ -42,7 +42,7 @@ SphereCollider:
   m_GameObject: {fileID: 2060910684999080768}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -112,6 +112,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   modelConstructor: {fileID: 0}
   healthSlider: {fileID: 0}
+  armourScript: {fileID: 0}
   maxHealth: 1
   hitReactData:
     deathFXGO: {fileID: 0}
@@ -119,19 +120,25 @@ MonoBehaviour:
     deathFX: {fileID: 0}
     blockFX: {fileID: 0}
     parryFX: {fileID: 0}
+    impulseMax: 0
     hitImpulseMultiplier: 0.2
+    lightHitReactThreshold: 0
     heavyHitReactThreshold: 5
     hitSlomoScale: 0.9
     hitSlomoDuration: 0.2
+    hitClip: {fileID: 0}
+    hitVolume: 0
     killImpulseStrength: 0.4
     killSlomoScale: 0.8
     killSlomoDuration: 0.2
+    killRagdoll: 0
+    killAnim: 0
+    killDestroyTime: 0
     parryImpulseStrength: 0
     parrySlomoScale: 0
     parrySlomoDuration: 0
-    impulseMax: 0
   dying: 0
-  impulseSource: {fileID: 0}
+  canPlayEndCombatSound: 0
 --- !u!114 &3528908459405917211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,3 +263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49bc4db4b80e944599e325027ed7bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1152
