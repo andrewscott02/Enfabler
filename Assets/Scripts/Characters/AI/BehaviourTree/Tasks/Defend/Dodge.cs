@@ -23,7 +23,7 @@ public class Dodge : Node
     {
         if (agent.NearDestination(distanceAllowance) == false && agent.GetCharacterCombat().canAttack)
         {
-            agent.GetCharacterCombat().Dodge();
+            agent.Dodge();
             state = NodeState.Success;
         }
         else

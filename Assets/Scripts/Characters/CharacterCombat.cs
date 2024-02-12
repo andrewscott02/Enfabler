@@ -157,7 +157,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         parriedDelegate += ParrySuccess;
 
         canDodgeDelegate += CanDodgeDelegateCheck;
-        dodgeDelegate += OnDodgeStart;
+        dodgeStartDelegate += OnDodgeStart;
+        dodgeEndDelegate += OnDodgeEnd;
         phaseDelegate += Phase;
     }
 
@@ -529,18 +530,18 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         RaycastHit hit;
 
-        Debug.Log("Combat - Checking move to target");
+        //Debug.Log("Combat - Checking move to target");
 
         if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: maxDistance, layerMask))
         {
-            Debug.Log("Combat - Hit Object " + hit.collider.gameObject.name);
+            //Debug.Log("Combat - Hit Object " + hit.collider.gameObject.name);
             float distance = Vector3.Distance(origin, hit.point);
 
             RotateTowardsTarget(hit.point);
 
             if (distance > moveDistanceThreshold.x)
             {
-                Debug.Log("Combat - Moving to target");
+                //Debug.Log("Combat - Moving to target");
                 MoveToTarget(hit.point);
             }
         }
@@ -553,14 +554,14 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
                 {
                     if (item.gameObject != gameObject)
                     {
-                        Debug.Log("Combat - Hit Object " + item.gameObject.name);
+                        //Debug.Log("Combat - Hit Object " + item.gameObject.name);
                         float distance = Vector3.Distance(origin, item.gameObject.transform.position);
 
                         RotateTowardsTarget(item.gameObject.transform.position);
 
                         if (distance > moveDistanceThreshold.x)
                         {
-                            Debug.Log("Combat - Moving to target");
+                            //Debug.Log("Combat - Moving to target");
                             MoveToTarget(item.gameObject.transform.position);
                         }
 
@@ -575,7 +576,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void RotateTowardsTarget(Vector3 target)
     {
-        Debug.Log("Combat - Rotating");
+        //Debug.Log("Combat - Rotating");
         //Rotate towards direction
         Vector3 desiredRot = new Vector3(target.x, transform.position.y, target.z);
         Quaternion newRot = Quaternion.LookRotation(desiredRot - transform.position, Vector3.up);
@@ -671,7 +672,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         //Return if collided object has no health component
         if (hitDamageable == null)
         {
-            Debug.LogWarning("No interface");
+            //Debug.LogWarning("No interface");
             //AttackTrace(hit.point, end);
             return;
         }
@@ -679,7 +680,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         //Return if it has already been hit or if it should be ignored
         if (hitTargets.Contains(hitDamageable) || ignore.Contains(hitDamageable) || hitDamageable.IsDead())
         {
-            Debug.LogWarning("Ignore " + hitDamageable.GetScript().gameObject.name);
+            //Debug.LogWarning("Ignore " + hitDamageable.GetScript().gameObject.name);
             //AttackTrace(hit.point, end);
             return;
         }
@@ -1074,7 +1075,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         {
             bool current = ((CanBlockDelegate)invocations[i]).Invoke();
 
-            Debug.Log("Invocation + " + i + " is " + current);
+            //Debug.Log("Invocation + " + i + " is " + current);
 
             if (current == false)
                 canBlock = false;
@@ -1139,9 +1140,14 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public bool fastdodge = false;
 
     public delegate void DodgeDelegate();
-    public DodgeDelegate dodgeDelegate;
+    public DodgeDelegate dodgeStartDelegate, dodgeEndDelegate;
 
     public void OnDodgeStart()
+    {
+        //Empty delegate
+    }
+
+    public void OnDodgeEnd()
     {
         //Empty delegate
     }
@@ -1159,7 +1165,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         {
             bool current = ((CanDodgeDelegate)invocations[i]).Invoke();
 
-            Debug.Log("Invocation + " + i + " is " + current);
+            //Debug.Log("Invocation + " + i + " is " + current);
 
             if (current == false)
                 canDodgeCheck = false;
@@ -1180,18 +1186,18 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         if (canSlideInput)
         {
-            dodgeDelegate();
+            dodgeStartDelegate();
             Attack(attackType: E_AttackType.LungeAttack, enableModifiers: false, interupt: true);
             return;
         }
 
         if (canDodge)
         {
-            dodgeDelegate();
+            dodgeStartDelegate();
             Block(false);
-            EndDodge();
             ForceEndAttack();
 
+            dodging = false;
             canMove = false;
             canAttack = false;
             canSaveAttackInput = true;
@@ -1222,6 +1228,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         canDodge = true;
         canAttack = true;
         canSaveAttackInput = false;
+
+        dodgeEndDelegate();
     }
 
     public void ResetDodge()

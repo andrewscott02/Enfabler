@@ -11,7 +11,7 @@ public class DestroyDelay : MonoBehaviour
     {
         if (delay >= 0)
         {
-            Debug.Log("Setting trap duration to " + delay + " seconds");
+            //Debug.Log("Setting trap duration to " + delay + " seconds");
             Destroy(this.gameObject, delay);
         }
     }

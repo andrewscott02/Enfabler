@@ -156,7 +156,7 @@ public class AIManager : MonoBehaviour
         //AddEnemy(agent);
         if (enemyActionsQueue.Contains(agent)) return;
 
-        Debug.Log("Enqueuing agent");
+        //Debug.Log("Enqueuing agent");
         enemyActionsQueue.Add(agent);
     }
 

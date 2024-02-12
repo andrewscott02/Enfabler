@@ -29,7 +29,7 @@ public class CameraManager : MonoBehaviour
 
     public void SetCombatCam(bool active, bool killCam = false)
     {
-        Debug.Log("Combat camera is active: " + active);
+        //Debug.Log("Combat camera is active: " + active);
         PlayerCamContainer.instance.exploreCam.Priority = active ? 8 : 11;
 
         if (killCam)

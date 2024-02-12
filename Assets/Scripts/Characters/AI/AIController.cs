@@ -87,6 +87,7 @@ public class AIController : BaseCharacterController
         }
 
         health.HitReactionDelegate += OnHit;
+        combat.dodgeEndDelegate += OnEndDodge;
     }
 
     public virtual void ActivateAI()
@@ -125,7 +126,7 @@ public class AIController : BaseCharacterController
 
         roamTimeElapsed += Time.deltaTime;
 
-        if (combat.canSaveAttackInput || characterMovement.currentSpeed > 5)
+        if (CanRotate())
         {
             Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
             Quaternion desiredrot = Quaternion.LookRotation(direction);
@@ -191,6 +192,13 @@ public class AIController : BaseCharacterController
         agent.enabled = false;
         bt.enabled = false;
         base.Killed();
+    }
+
+    bool dodgeLock = false;
+
+    public bool CanRotate()
+    {
+        return (combat.canSaveAttackInput || characterMovement.currentSpeed > 5) && !dodgeLock;
     }
 
     #endregion
@@ -527,6 +535,25 @@ public class AIController : BaseCharacterController
         }
 
         return false;
+    }
+
+    public void Dodge()
+    {
+        recentHitsTaken = 0;
+        dodgeLock = true;
+
+        Vector3 direction = (transform.position - player.transform.position).normalized;
+        Quaternion desiredrot = Quaternion.LookRotation(direction, transform.up);
+        transform.rotation = desiredrot;
+        characterMovement.targetRotation = desiredrot;
+        Debug.Log("Rotating " + gameObject.name + " towards direction " + direction + " with a rotation of " + desiredrot.eulerAngles + " || " + transform.rotation.eulerAngles);
+
+        combat.Dodge();
+    }
+
+    void OnEndDodge()
+    {
+        dodgeLock = false;
     }
 
     #endregion

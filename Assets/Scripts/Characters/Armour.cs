@@ -28,7 +28,7 @@ public class Armour : MonoBehaviour
         combat.blockedDelegate += ConsumeArmour;
 
         combat.canDodgeDelegate += CanBlock;
-        combat.dodgeDelegate += ConsumeArmour;
+        combat.dodgeStartDelegate += ConsumeArmour;
 
         combat.parriedDelegate += ParrySuccess;
         combat.onAttackHit += Hit;

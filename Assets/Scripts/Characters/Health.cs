@@ -259,13 +259,13 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     {
         if (TimeManager.instance == null) return;
 
-        Debug.Log("Set slow motion to " + slomoStrength.ToString());
+        //Debug.Log("Set slow motion to " + slomoStrength.ToString());
         TimeManager.instance.SetTimeScale(slomoStrength, slomoDuration);
     }
 
     public void KillCamSlowMo()
     {
-        Debug.Log("kill cam slomo");
+        //Debug.Log("kill cam slomo");
         Slomo(0.2f, 2f);
         CameraManager.instance.SetCombatCam(false, true);
         AudioManager.instance.ExploreMusicFade();
