@@ -85,6 +85,8 @@ public class AIController : BaseCharacterController
                 spells[i].healthPercentageUse = 1;
             }
         }
+
+        health.HitReactionDelegate += OnHit;
     }
 
     public virtual void ActivateAI()
@@ -163,8 +165,15 @@ public class AIController : BaseCharacterController
             spells[i].timeSinceLastAttack += Time.deltaTime;
         }
 
-        lastParry += Time.deltaTime;
         lastDodge += Time.deltaTime;
+
+        hitCooldownT += Time.deltaTime;
+
+        if (hitCooldownT >= hitTakenCooldown)
+        {
+            hitCooldownT = 0;
+            recentHitsTaken = Mathf.Clamp(recentHitsTaken - 1, 0, forceHitResponse + 3);
+        }
     }
 
     public override void ActivateRagdoll(bool activate, ExplosiveForceData forceData, bool disableAnimator = true)
@@ -222,7 +231,7 @@ public class AIController : BaseCharacterController
 
     #endregion
 
-    #region Combat
+    #region Attacking
 
     public BaseCharacterController currentTarget;
     BaseCharacterController lastAttacked;
@@ -472,19 +481,18 @@ public class AIController : BaseCharacterController
         }
     }
 
-    public float parryChance = 0f;
-    public float parryCooldown = 1f;
-    float lastParry;
+    #endregion
 
-    public bool CanParry()
+    #region Defensive
+
+    #region Blocking
+
+    public float blockChance = 0.6f;
+    public float blockDuration = 2f;
+
+    public bool CanBlock()
     {
-        if (lastParry > parryCooldown)
-        {
-            lastParry = 0;
-            return (Random.Range(0f, 1f) < parryChance) && combat.canDodge;
-        }
-
-        return false;
+        return (Random.Range(0f, 1f) < blockChance) && combat.canDodge;
     }
 
     public void ActivateBlock(float duration)
@@ -499,19 +507,44 @@ public class AIController : BaseCharacterController
         combat.Block(false, false);
     }
 
-    public float dodgeChance = 0f;
+    #endregion
+
+    #region Dodging
+
+    public float dodgeChance = 0.2f;
     public float dodgeCooldown = 1f;
     float lastDodge;
 
     public bool CanDodge()
     {
-        if (lastDodge > dodgeCooldown)
+        if (dodgeChance > 0)
         {
-            lastDodge = 0;
-            return (Random.Range(0f, 1f) < parryChance) && combat.canDodge;
+            if (lastDodge > dodgeCooldown)
+            {
+                lastDodge = 0;
+                return (Random.Range(0f, 1f) < dodgeChance || health.armourScript.currentArmour == 1) && combat.canDodge;
+            }
         }
 
         return false;
+    }
+
+    #endregion
+
+    public int hitResponse = 2, forceHitResponse = 4;
+    int recentHitsTaken = 0;
+    public float hitTakenCooldown = 0.8f;
+    float hitCooldownT = 0;
+
+    void OnHit(int damage, Vector3 dir, E_AttackType attackType = E_AttackType.None)
+    {
+        hitCooldownT = 0;
+        recentHitsTaken = Mathf.Clamp(recentHitsTaken + 1, 0, forceHitResponse + 3);
+    }
+
+    public bool CanDefend()
+    {
+        return recentHitsTaken > hitResponse && combat.GetTargetted() || recentHitsTaken > forceHitResponse;
     }
 
     #endregion

@@ -353,7 +353,7 @@ PrefabInstance:
     - target: {fileID: 1888215991265255819, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: maxArmour
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
@@ -672,10 +672,12 @@ MonoBehaviour:
     timeSinceLastAttack: 0
   spells: []
   preparedAttack: -1
-  parryChance: 0.25
-  parryCooldown: 0.8
+  blockChance: 0.8
+  blockDuration: 2
   dodgeChance: 0.25
   dodgeCooldown: 1.6
+  hitResponse: 1
+  forceHitResponse: 2
 --- !u!114 &3204209253451787689
 MonoBehaviour:
   m_ObjectHideFlags: 0

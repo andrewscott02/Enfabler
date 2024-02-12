@@ -18,7 +18,7 @@ public class BeingAttacked : Node
 
     public override NodeState Evaluate()
     {
-        if (agent.GetCharacterCombat().GetTargetted())
+        if (agent.CanDefend())
         {
             //Debug.Log("Being attacked");
             state = NodeState.Success;
