@@ -64,6 +64,17 @@ namespace BehaviourTrees
                 );
         }
 
+        public static Selector FollowPing(AIController agent, GameObject target)
+        {
+            return new Selector(
+                DefensiveAction(agent),
+                new Sequence(
+                    new FindPointNearPing(agent, target),
+                    new MoveToDestination(agent, Mathf.Infinity, true, agent.distanceAllowance)
+                    )
+                );
+        }
+
         public static Selector RushToTarget(AIController agent, GameObject target)
         {
             return new Selector(

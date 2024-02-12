@@ -19,8 +19,12 @@ public class AIController : BaseCharacterController
 
     public LayerMask sightMask;
     public bool alert = false;
+    public bool pinged = false;
+    public float pingResetTime = 2f;
+
     public bool standGuard = false;
     public float standGuardAnimSpeed = 1;
+
     [SerializeField]
     float passiveSightDistance = 25;
     [SerializeField]
@@ -572,6 +576,32 @@ public class AIController : BaseCharacterController
     public bool CanDefend()
     {
         return recentHitsTaken > hitResponse && combat.GetTargetted() || recentHitsTaken > forceHitResponse;
+    }
+
+    #endregion
+
+    #region Ping
+
+    public void Ping()
+    {
+        pinged = true;
+
+        if (pingCoroutine != null)
+        {
+            StopCoroutine(pingCoroutine);
+            pingCoroutine = null;
+        }
+
+        pingCoroutine = StartCoroutine(IResetPing(pingResetTime));
+    }
+
+    Coroutine pingCoroutine;
+
+    IEnumerator IResetPing(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        pinged = false;
     }
 
     #endregion

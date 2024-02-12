@@ -195,6 +195,8 @@ public class AIManager : MonoBehaviour
     #region Combat Mode
 
     List<AIController> enemiesInCombat = new List<AIController>();
+    public LayerMask enemyLayer;
+    public float pingDistance = 20f;
 
     public int GetEnemiesInCombat()
     {
@@ -212,6 +214,19 @@ public class AIManager : MonoBehaviour
 
             camChangeCoroutine = null;
             CheckCombatMode();
+        }
+
+        //Ping nearby enemies
+        Collider[] cols = Physics.OverlapSphere(enemy.transform.position, pingDistance);
+        Debug.Log("Pinging nearby enemies");
+
+        foreach (var item in cols)
+        {
+            AIController controller = item.GetComponent<AIController>();
+
+            if (controller != null)
+                controller.Ping();
+            //Tell enemy where player is
         }
     }
 

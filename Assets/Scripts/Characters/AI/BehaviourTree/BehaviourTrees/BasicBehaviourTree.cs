@@ -17,8 +17,8 @@ public class BasicBehaviourTree : BehaviourTree
 
             //Checks if the closest enemy is within sight range and moves towards it if true
             BaseBehaviours.MoveToClosestTarget(agent, agent.distanceAllowance, true),
-            //If there are no targets, but the player is an ally, move to a point near the player
-            BaseBehaviours.FollowTarget(agent, agent.GetPlayer(), true),
+            //When pinged and out of combat, move towards player position
+            BaseBehaviours.FollowPing(agent, agent.GetPlayer()),
             //If there are no targets, move to a random point in the roam radius
             BaseBehaviours.RoamToRandomPoint(agent)
             );
