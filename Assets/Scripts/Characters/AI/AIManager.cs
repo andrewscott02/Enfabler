@@ -218,7 +218,6 @@ public class AIManager : MonoBehaviour
 
         //Ping nearby enemies
         Collider[] cols = Physics.OverlapSphere(enemy.transform.position, pingDistance);
-        Debug.Log("Pinging nearby enemies");
 
         foreach (var item in cols)
         {

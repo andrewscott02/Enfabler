@@ -28,7 +28,7 @@ public class FindPointNearPing : Node
         Vector3 point = target.transform.position + (target.transform.TransformDirection(agent.followVector) * agent.followDistance);
 
         agent.SetDestinationPos(point);
-        Debug.Log(agent.gameObject + " is following generated point near ping at: " + point);
+        //Debug.Log(agent.gameObject + " is following generated point near ping at: " + point);
 
         agent.alert = false;
         state = NodeState.Success;

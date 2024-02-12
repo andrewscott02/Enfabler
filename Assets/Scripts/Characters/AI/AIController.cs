@@ -202,7 +202,7 @@ public class AIController : BaseCharacterController
 
     public bool CanRotate()
     {
-        return (combat.canSaveAttackInput || characterMovement.currentSpeed > 5) && !dodgeLock;
+        return (combat.canSaveAttackInput || characterMovement.currentSpeed > 5) && !dodgeLock && currentTarget != null;
     }
 
     #endregion
