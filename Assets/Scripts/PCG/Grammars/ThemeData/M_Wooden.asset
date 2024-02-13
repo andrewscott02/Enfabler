@@ -26,7 +26,7 @@ MonoBehaviour:
   pillarPiece: {fileID: 2541946485368774830, guid: 4652ac8cccc6a3b4998bf3a57adccdb9,
     type: 3}
   pillarPieceSize: {x: 4.75, y: 1, z: 1}
-  platformPiece: {fileID: 2541946485368774830, guid: 531188ef0ec6f9d419cc8f54daf2f858,
+  platformPiece: {fileID: 7026041110820078906, guid: dac5b9027386fee4295a414b42b66317,
     type: 3}
   platformPieceSize: {x: 3, y: 3, z: 1}
   enemies: []
@@ -86,167 +86,86 @@ MonoBehaviour:
     maxCount: 3
     timesUsed: 0
   objects:
-  - objectPrefab: {fileID: 545217335562210824, guid: 92a569424bd3d21498c504f83480b5fa,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 0000000006000000
-    randomPositiont: 0
-    randomRotation: 0
-    randomRotationAxes: {x: 0, y: 180, z: 0}
-    maxCount: 5
-    timesUsed: 0
-  - objectPrefab: {fileID: 545217335562210824, guid: c426ee14a9c06054a87856bb918bf662,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 02000000
-    randomPositiont: 0.05
-    randomRotation: 0
-    randomRotationAxes: {x: 0, y: 10, z: 0}
-    maxCount: 5
-    timesUsed: 0
-  - objectPrefab: {fileID: 545217335562210824, guid: 0aa85648c0403a848b8f3c5577d3a688,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 02000000
-    randomPositiont: 0.05
-    randomRotation: 0
-    randomRotationAxes: {x: 0, y: 10, z: 0}
-    maxCount: 5
-    timesUsed: 0
-  - objectPrefab: {fileID: 545217335562210824, guid: d6d73c7fc8f566f4bad09b6ad7442c5c,
+  - objectPrefab: {fileID: 7286702930854383463, guid: dcddb3c2384d2cd4fb38b629b99c6f17,
       type: 3}
     canLink: 0
     validSpawnerTypes: 0000000001000000
-    randomPositiont: 0
-    randomRotation: 0
-    randomRotationAxes: {x: 0, y: 10, z: 0}
+    randomPositiont: 1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
     maxCount: 5
     timesUsed: 0
-  - objectPrefab: {fileID: 545217335562210824, guid: ef63b11a86142c24f948e8fb72fcf414,
+  - objectPrefab: {fileID: 7286702930854383463, guid: 4efb337ac5aafb34cad1dae6dadff707,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0000000001000000
+    randomPositiont: 1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 43d26958e63fd64419eb8c2f9254f25d,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0000000001000000
+    randomPositiont: 1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: ed56069ba19794344b438815b1cd75c2,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0000000001000000
+    randomPositiont: 1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: e8d8b8e7ec35d634a842160b5f42b1cf,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0000000001000000
+    randomPositiont: 0.5
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 3423360317770660442, guid: aff0c150feabebb4591475b196ae4d69,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0000000001000000
+    randomPositiont: 0.1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 3423360317770660442, guid: d4d112b87b5d68948805dbf3e1a0d2ba,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0000000001000000
+    randomPositiont: 0.1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 624ae1827776689489a0b237a7a3667b,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0000000001000000
+    randomPositiont: 0.25
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 2
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: bc6b00a04d36dcb4785db25a779e3be1,
       type: 3}
     canLink: 1
     validSpawnerTypes: 05000000
-    randomPositiont: 0
+    randomPositiont: 0.05
     randomRotation: 0
     randomRotationAxes: {x: 0, y: 0, z: 0}
     maxCount: 5
-    timesUsed: 0
-  - objectPrefab: {fileID: 545217335562210824, guid: c5cf7ad5a6841fa4e93225e6636355aa,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 01000000
-    randomPositiont: 0.05
-    randomRotation: 0
-    randomRotationAxes: {x: 0, y: 0, z: 0}
-    maxCount: 2
-    timesUsed: 0
-  - objectPrefab: {fileID: 6180408330212935005, guid: bb16f3ae45511964d985b1360cb0a8ce,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 01000000
-    randomPositiont: 0.05
-    randomRotation: 0
-    randomRotationAxes: {x: 0, y: 0, z: 0}
-    maxCount: 2
-    timesUsed: 0
-  - objectPrefab: {fileID: 545217335562210824, guid: 38b3e140f2426894b95fe790447b4925,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 04000000
-    randomPositiont: 0.05
-    randomRotation: 0
-    randomRotationAxes: {x: 0, y: 0, z: 0}
-    maxCount: 3
-    timesUsed: 0
-  - objectPrefab: {fileID: 545217335562210824, guid: 99494e054ab5b464baba555b0243fe10,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 04000000
-    randomPositiont: 0.05
-    randomRotation: 0
-    randomRotationAxes: {x: 0, y: 0, z: 0}
-    maxCount: 3
-    timesUsed: 0
-  - objectPrefab: {fileID: 545217335562210824, guid: f01c8d14295330c4287e6439e46db2b4,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 04000000
-    randomPositiont: 0.05
-    randomRotation: 0
-    randomRotationAxes: {x: 0, y: 0, z: 0}
-    maxCount: 3
-    timesUsed: 0
-  - objectPrefab: {fileID: 545217335562210824, guid: f5e513888f194404bb21edc3ec988721,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 09000000
-    randomPositiont: 0.2
-    randomRotation: 1
-    randomRotationAxes: {x: 0, y: 0, z: 0}
-    maxCount: 4
-    timesUsed: 0
-  - objectPrefab: {fileID: 2810333962422823758, guid: 7a28cbf6df4b6a6468800e5485d69668,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 0a00000009000000
-    randomPositiont: 1
-    randomRotation: 1
-    randomRotationAxes: {x: 0, y: 180, z: 0}
-    maxCount: 6
-    timesUsed: 0
-  - objectPrefab: {fileID: 7286702930854383463, guid: 1f29066c7e0a17b409c5a5c7729b2e08,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 09000000
-    randomPositiont: 1
-    randomRotation: 1
-    randomRotationAxes: {x: 0, y: 180, z: 0}
-    maxCount: 4
-    timesUsed: 0
-  - objectPrefab: {fileID: 7286702930854383463, guid: 1d883046dcd09e941afa49f3f3332eac,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 0a00000009000000
-    randomPositiont: 1
-    randomRotation: 1
-    randomRotationAxes: {x: 0, y: 180, z: 0}
-    maxCount: 4
-    timesUsed: 0
-  - objectPrefab: {fileID: 7286702930854383463, guid: 8e9fd5e18e0e22b4cac81c1420be293f,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 0a00000009000000
-    randomPositiont: 1
-    randomRotation: 1
-    randomRotationAxes: {x: 0, y: 180, z: 0}
-    maxCount: 4
-    timesUsed: 0
-  - objectPrefab: {fileID: 7286702930854383463, guid: 024e6e5ac0d5e6843a29315d98a61b5b,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 0a00000009000000
-    randomPositiont: 1
-    randomRotation: 1
-    randomRotationAxes: {x: 0, y: 180, z: 0}
-    maxCount: 4
-    timesUsed: 0
-  - objectPrefab: {fileID: 7286702930854383463, guid: 547011c4b15932b4094caa5e4e449c1a,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 09000000
-    randomPositiont: 1
-    randomRotation: 1
-    randomRotationAxes: {x: 0, y: 180, z: 0}
-    maxCount: 4
-    timesUsed: 0
-  - objectPrefab: {fileID: 7286702930854383463, guid: b071dbef1e8e62e488d468b1e1c3eaca,
-      type: 3}
-    canLink: 0
-    validSpawnerTypes: 0a00000009000000
-    randomPositiont: 1
-    randomRotation: 1
-    randomRotationAxes: {x: 0, y: 180, z: 0}
-    maxCount: 4
     timesUsed: 0
   doors:
   - {fileID: 2541946485368774830, guid: ebf1cf88c30e0454bb794e412f77cb0b, type: 3}
