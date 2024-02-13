@@ -1,0 +1,255 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb80702b7ef81f40bbff8bbb3b314ca, type: 3}
+  m_Name: M_Wooden
+  m_EditorClassIdentifier: 
+  regionName: Wooden
+  volumeProfile: {fileID: 11400000, guid: e42945aa6f9288b4ea8a8cfb9834f81e, type: 2}
+  wallPiece: {fileID: 2541946485368774830, guid: 531188ef0ec6f9d419cc8f54daf2f858,
+    type: 3}
+  wallPieceSize: {x: 3, y: 3, z: 1}
+  ceilingPiece: {fileID: 7026041110820078906, guid: dd5186d0431a7bc49806221fcb2980fc,
+    type: 3}
+  ceilingPieceSize: {x: 3, y: 3, z: 0.0385}
+  floorPiece: {fileID: 7026041110820078906, guid: dac5b9027386fee4295a414b42b66317,
+    type: 3}
+  floorPieceSize: {x: 3, y: 3, z: 0.0385}
+  pillarPiece: {fileID: 2541946485368774830, guid: 4652ac8cccc6a3b4998bf3a57adccdb9,
+    type: 3}
+  pillarPieceSize: {x: 4.75, y: 1, z: 1}
+  platformPiece: {fileID: 2541946485368774830, guid: 531188ef0ec6f9d419cc8f54daf2f858,
+    type: 3}
+  platformPieceSize: {x: 3, y: 3, z: 1}
+  enemies: []
+  traps:
+  - objectPrefab: {fileID: 3507937455523080791, guid: 30af975e77439c14f83661b655276a08,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 04000000
+    randomPositiont: 0.1
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 0, z: 0}
+    maxCount: 3
+    timesUsed: 0
+  - objectPrefab: {fileID: 8739206611761022127, guid: 11bb9c3b8d33a0d41ab5e8d74d14fda7,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 02000000
+    randomPositiont: 0.1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 3
+    timesUsed: 0
+  - objectPrefab: {fileID: 8879655906581524785, guid: 70d2c2a433ea7e54baeaf432eb29591f,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 02000000
+    randomPositiont: 0.1
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 0, z: 0}
+    maxCount: 3
+    timesUsed: 0
+  - objectPrefab: {fileID: 8167338258617500847, guid: 07e32aab4c2fa4945ab6b9bfb7c5c2ef,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 04000000
+    randomPositiont: 0.1
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 0, z: 0}
+    maxCount: 3
+    timesUsed: 0
+  - objectPrefab: {fileID: 7267327320770852565, guid: de951047ad9aeaa42aeb9d9b347ee140,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 04000000
+    randomPositiont: 0.1
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 0, z: 0}
+    maxCount: 3
+    timesUsed: 0
+  - objectPrefab: {fileID: 8739206611761022127, guid: 47002bbaacf871048a00309c614be0a9,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 02000000
+    randomPositiont: 0.1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 3
+    timesUsed: 0
+  objects:
+  - objectPrefab: {fileID: 545217335562210824, guid: 92a569424bd3d21498c504f83480b5fa,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0000000006000000
+    randomPositiont: 0
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: c426ee14a9c06054a87856bb918bf662,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 02000000
+    randomPositiont: 0.05
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 10, z: 0}
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 0aa85648c0403a848b8f3c5577d3a688,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 02000000
+    randomPositiont: 0.05
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 10, z: 0}
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: d6d73c7fc8f566f4bad09b6ad7442c5c,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0000000001000000
+    randomPositiont: 0
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 10, z: 0}
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: ef63b11a86142c24f948e8fb72fcf414,
+      type: 3}
+    canLink: 1
+    validSpawnerTypes: 05000000
+    randomPositiont: 0
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 0, z: 0}
+    maxCount: 5
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: c5cf7ad5a6841fa4e93225e6636355aa,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 01000000
+    randomPositiont: 0.05
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 0, z: 0}
+    maxCount: 2
+    timesUsed: 0
+  - objectPrefab: {fileID: 6180408330212935005, guid: bb16f3ae45511964d985b1360cb0a8ce,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 01000000
+    randomPositiont: 0.05
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 0, z: 0}
+    maxCount: 2
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 38b3e140f2426894b95fe790447b4925,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 04000000
+    randomPositiont: 0.05
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 0, z: 0}
+    maxCount: 3
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: 99494e054ab5b464baba555b0243fe10,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 04000000
+    randomPositiont: 0.05
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 0, z: 0}
+    maxCount: 3
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: f01c8d14295330c4287e6439e46db2b4,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 04000000
+    randomPositiont: 0.05
+    randomRotation: 0
+    randomRotationAxes: {x: 0, y: 0, z: 0}
+    maxCount: 3
+    timesUsed: 0
+  - objectPrefab: {fileID: 545217335562210824, guid: f5e513888f194404bb21edc3ec988721,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 09000000
+    randomPositiont: 0.2
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 0, z: 0}
+    maxCount: 4
+    timesUsed: 0
+  - objectPrefab: {fileID: 2810333962422823758, guid: 7a28cbf6df4b6a6468800e5485d69668,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0a00000009000000
+    randomPositiont: 1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 6
+    timesUsed: 0
+  - objectPrefab: {fileID: 7286702930854383463, guid: 1f29066c7e0a17b409c5a5c7729b2e08,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 09000000
+    randomPositiont: 1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 4
+    timesUsed: 0
+  - objectPrefab: {fileID: 7286702930854383463, guid: 1d883046dcd09e941afa49f3f3332eac,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0a00000009000000
+    randomPositiont: 1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 4
+    timesUsed: 0
+  - objectPrefab: {fileID: 7286702930854383463, guid: 8e9fd5e18e0e22b4cac81c1420be293f,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0a00000009000000
+    randomPositiont: 1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 4
+    timesUsed: 0
+  - objectPrefab: {fileID: 7286702930854383463, guid: 024e6e5ac0d5e6843a29315d98a61b5b,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0a00000009000000
+    randomPositiont: 1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 4
+    timesUsed: 0
+  - objectPrefab: {fileID: 7286702930854383463, guid: 547011c4b15932b4094caa5e4e449c1a,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 09000000
+    randomPositiont: 1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 4
+    timesUsed: 0
+  - objectPrefab: {fileID: 7286702930854383463, guid: b071dbef1e8e62e488d468b1e1c3eaca,
+      type: 3}
+    canLink: 0
+    validSpawnerTypes: 0a00000009000000
+    randomPositiont: 1
+    randomRotation: 1
+    randomRotationAxes: {x: 0, y: 180, z: 0}
+    maxCount: 4
+    timesUsed: 0
+  doors:
+  - {fileID: 2541946485368774830, guid: ebf1cf88c30e0454bb794e412f77cb0b, type: 3}
+  bosses:
+  - {fileID: 8083443207247596085, guid: 6bef14fb807b2e0418ad9a403d9921fe, type: 3}
+  - {fileID: 8084795209297945531, guid: 9fbd281892da1e24d8e2e9e4380c19a0, type: 3}

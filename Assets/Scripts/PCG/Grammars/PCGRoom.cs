@@ -37,8 +37,10 @@ public class PCGRoom : MonoBehaviour
     {
         this.roomType = roomType;
         this.dungeonData = dungeonData;
+
         this.theme = theme;
         this.nextTheme = nextTheme;
+
         roomNumber = index;
         this.reversed = reversed;
 

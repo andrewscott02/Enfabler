@@ -6,6 +6,7 @@ public class WallGenerator : MonoBehaviour
 {
     public E_ModuleType moduleType;
     public bool changeTheme = false;
+    public ThemeData overrideThemeData;
     ThemeData theme;
 
     public GameObject cube;
@@ -18,6 +19,9 @@ public class WallGenerator : MonoBehaviour
 
     public void SetupRoom(ThemeData theme)
     {
+        if (overrideThemeData != null)
+            theme = overrideThemeData;
+
         switch (moduleType)
         {
             case E_ModuleType.Wall:
@@ -45,6 +49,7 @@ public class WallGenerator : MonoBehaviour
         }
 
         this.theme = theme;
+
         wallLength = new Vector3();
         wallLength.x = transform.localScale.x;
         wallLength.y = transform.localScale.y;
