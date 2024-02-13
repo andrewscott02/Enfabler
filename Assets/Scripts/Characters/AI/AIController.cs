@@ -18,9 +18,27 @@ public class AIController : BaseCharacterController
     public float lerpSpeed = 0.01f;
 
     public LayerMask sightMask;
-    public bool alert = false;
+    private bool m_Alert = false;
+    public bool alert
+    {
+        get
+        {
+            return m_Alert;
+        }
+
+        set
+        {
+            m_Alert = value;
+            if (value == true)
+                Ping();
+            else
+                StopPing();
+        }
+    }
+
     public bool pinged = false;
-    public float pingResetTime = 2f;
+    public float pingInterval = 3f;
+    public float pingResetTime = 3f;
 
     public bool standGuard = false;
     public float standGuardAnimSpeed = 1;
@@ -584,18 +602,44 @@ public class AIController : BaseCharacterController
 
     public void Ping()
     {
-        pinged = true;
+        if (pingCoroutine != null)
+            return;
 
+        AIManager.instance.Ping(this);
+        pingCoroutine = StartCoroutine(IPingOthers());
+    }
+
+    public void StopPing()
+    {
         if (pingCoroutine != null)
         {
             StopCoroutine(pingCoroutine);
             pingCoroutine = null;
         }
-
-        pingCoroutine = StartCoroutine(IResetPing(pingResetTime));
     }
 
     Coroutine pingCoroutine;
+
+    IEnumerator IPingOthers()
+    {
+        yield return new WaitForSeconds(pingInterval);
+        AIManager.instance.Ping(this);
+    }
+
+    public void Pinged()
+    {
+        pinged = true;
+
+        if (pingedCoroutine != null)
+        {
+            StopCoroutine(pingedCoroutine);
+            pingedCoroutine = null;
+        }
+
+        pingedCoroutine = StartCoroutine(IResetPing(pingResetTime));
+    }
+
+    Coroutine pingedCoroutine;
 
     IEnumerator IResetPing(float delay)
     {

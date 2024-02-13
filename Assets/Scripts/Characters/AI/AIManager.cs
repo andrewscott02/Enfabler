@@ -214,8 +214,13 @@ public class AIManager : MonoBehaviour
 
             camChangeCoroutine = null;
             CheckCombatMode();
-        }
 
+            //Ping(enemy);
+        }
+    }
+
+    public void Ping(AIController enemy)
+    {
         //Ping nearby enemies
         Collider[] cols = Physics.OverlapSphere(enemy.transform.position, pingDistance);
 
@@ -224,7 +229,7 @@ public class AIManager : MonoBehaviour
             AIController controller = item.GetComponent<AIController>();
 
             if (controller != null)
-                controller.Ping();
+                controller.Pinged();
             //Tell enemy where player is
         }
     }
