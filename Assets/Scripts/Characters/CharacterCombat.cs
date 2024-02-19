@@ -1133,6 +1133,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void ParrySuccess()
     {
+        currentArrows = Mathf.Clamp(currentArrows + 1, 0, maxArrows);
+
         //Empty delegate
         if (cameraZoom)
             CameraManager.instance.CombatZoom();
