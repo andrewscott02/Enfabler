@@ -489,7 +489,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         damage = currentAttack.variations[currentAttackIndex].damage + additionalDamage;
         //Debug.Log(damage + " from " + currentDamage + " and " + additionalDamage);
 
-        CheckMoveToTarget(transform.position + (transform.forward * targetSphereRadius), transform.forward, snapLayerMask, moveDistanceThreshold.y);
+        if (currentAttack.variations[currentAttackIndex].snapToTarget)
+            CheckMoveToTarget(transform.position + (transform.forward * targetSphereRadius), transform.forward, snapLayerMask, moveDistanceThreshold.y);
 
         //InvokeRepeating("AttackCheck", 0f, 0.0001f);
         attackCheck = true;
@@ -536,7 +537,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         RaycastHit hit;
 
-        //Debug.Log("Combat - Checking move to target");
+        Debug.Log("Combat - Checking move to target");
 
         if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: maxDistance, layerMask))
         {

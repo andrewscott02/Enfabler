@@ -57,6 +57,7 @@ namespace Enfabler.Attacking
 
         public int currentAttackAnimModifier;
         public int nextAttackIndex;
+        public bool snapToTarget;
 
         public TrapStats projectileData;
         public Object projectileFX;
