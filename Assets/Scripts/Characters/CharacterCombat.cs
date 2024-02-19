@@ -1130,6 +1130,23 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         //Empty delegate
         if (cameraZoom)
             CameraManager.instance.CombatZoom();
+
+        if (riposteCoroutine != null)
+        {
+            StopCoroutine(riposteCoroutine);
+            riposteCoroutine = null;
+        }
+
+        riposteCoroutine = StartCoroutine(IEnableRiposte(1f));
+    }
+
+    Coroutine riposteCoroutine;
+
+    IEnumerator IEnableRiposte(float delay)
+    {
+        currentAttackIndex = 3;
+        yield return new WaitForSeconds(delay);
+        currentAttackIndex = 0;
     }
 
     #endregion

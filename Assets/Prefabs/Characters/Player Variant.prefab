@@ -6946,6 +6946,61 @@ PrefabInstance:
       propertyPath: armourCooldown
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[3].damage
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[4].damage
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[3].animation
+      value: PrimaryAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[4].animation
+      value: PrimaryAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[3].nextAttackIndex
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[4].nextAttackIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[3].chargeDamageScaling
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[4].chargeDamageScaling
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[3].currentAttackAnimModifier
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[4].currentAttackAnimModifier
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2728933261463631432, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: m_RootOrder
@@ -9409,6 +9464,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   rotateSpeed: 750
+  targetRotation: {x: 0, y: 0, z: 0, w: 0}
   animator: {fileID: 0}
   skeleton: {fileID: 69781569185968667}
   controller: {fileID: 0}
