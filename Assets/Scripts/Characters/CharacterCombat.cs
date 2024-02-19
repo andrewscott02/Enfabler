@@ -42,7 +42,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     E_AttackType lastAttackType = E_AttackType.None;
     public E_AttackType savingAttackInput = E_AttackType.None;
     public E_AttackType savingChargeInput = E_AttackType.None;
-    public float savedAttackAnimSpeed = 1;
 
     #endregion
 
@@ -226,7 +225,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     GameObject overrideTarget = null;
 
-    public void Attack(float attackSpeed = 1f, bool canCharge = true, E_AttackType attackType = E_AttackType.PrimaryAttack, GameObject target = null, bool enableModifiers = true, bool interupt = false)
+    public void Attack(bool canCharge = true, E_AttackType attackType = E_AttackType.PrimaryAttack, GameObject target = null, bool enableModifiers = true, bool interupt = false)
     {
         if (attackType == E_AttackType.None) return;
 
@@ -284,8 +283,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             canAttack = false;
             canSaveAttackInput = true;
             canDodge = false;
-            currentAttackSpeed = attackSpeed;
-            animator.speed = attackSpeed * currentAnimationSpeed;
             animator.applyRootMotion = true;
 
             if (riposteCoroutine != null)
@@ -314,7 +311,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         else if (canSaveAttackInput)
         {
             savingAttackInput = attackType;
-            savedAttackAnimSpeed = attackSpeed;
         }
     }
 
@@ -323,6 +319,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         currentAttack = attackData;
         currentAttackIndex = attacks.GetVariation(currentAttack.attackType, currentAttackIndex);
         SetupWeapon(currentAttack.weaponIndex);
+
+        currentAttackSpeed = currentAttack.variations[currentAttackIndex].attackSpeed;
+        animator.speed = currentAttackSpeed * currentAnimationSpeed;
+
         animator.SetInteger("MeleeAttackCount", currentAttack.variations[currentAttackIndex].currentAttackAnimModifier);
         animator.SetTrigger(attackData.attackType.ToString());
     }
@@ -404,7 +404,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         if (savingAttackInput != E_AttackType.None)
         {
             //Debug.Log("Saved attack input");
-            Attack(attackSpeed: savedAttackAnimSpeed, attackType: savingAttackInput);
+            Attack(attackType: savingAttackInput);
             savingAttackInput = E_AttackType.None;
         }
     }
@@ -1283,7 +1283,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         {
             //Debug.Log("Saved attack input");
             E_AttackType attackType = (E_AttackType)System.Enum.Parse(typeof(E_AttackType), "Dodge" + savingAttackInput.ToString());
-            Attack(attackSpeed: savedAttackAnimSpeed, attackType: attackType, enableModifiers: false);
+            Attack(attackType: attackType, enableModifiers: false);
             savingAttackInput = E_AttackType.None;
         }
     }

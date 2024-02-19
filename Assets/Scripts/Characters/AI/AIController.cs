@@ -277,7 +277,6 @@ public class AIController : BaseCharacterController
         public E_AttackType attackType;
 
         public float distance;
-        public float attackSpeed;
 
         public float doubleAttackChance;
         public float unblockableChance;
@@ -452,7 +451,7 @@ public class AIController : BaseCharacterController
 
                 //Debug.Log("Attack made");
                 combat.savingChargeInput = attacks[attackIndex].attackType;
-                combat.Attack(attacks[attackIndex].attackSpeed, true, attacks[attackIndex].attackType, currentTarget.gameObject);
+                combat.Attack(true, attacks[attackIndex].attackType, currentTarget.gameObject);
 
                 bool unblockable = Random.Range(0f, 1f) < attacks[attackIndex].unblockableChance;
                 float releaseTime = unblockable ? combat.chargeMaxTime : attacks[attackIndex].attackPauseTime;

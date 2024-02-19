@@ -1123,9 +1123,9 @@ MonoBehaviour:
     - animation: PrimaryAttack
       damage: 4
       chargeDamageScaling: 2
+      attackSpeed: 1
       currentAttackAnimModifier: 0
       nextAttackIndex: 1
-      snapToTarget: 1
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
@@ -1133,9 +1133,9 @@ MonoBehaviour:
     - animation: PrimaryAttack
       damage: 4
       chargeDamageScaling: 2
+      attackSpeed: 1
       currentAttackAnimModifier: 1
       nextAttackIndex: 2
-      snapToTarget: 1
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
@@ -1143,9 +1143,9 @@ MonoBehaviour:
     - animation: PrimaryAttack
       damage: 6
       chargeDamageScaling: 2
+      attackSpeed: 1
       currentAttackAnimModifier: 2
       nextAttackIndex: 0
-      snapToTarget: 1
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
@@ -1157,9 +1157,9 @@ MonoBehaviour:
     - animation: DodgePrimaryAttack
       damage: 4
       chargeDamageScaling: 2
+      attackSpeed: 1
       currentAttackAnimModifier: 0
       nextAttackIndex: 1
-      snapToTarget: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
@@ -1171,9 +1171,9 @@ MonoBehaviour:
     - animation: SprintPrimaryAttack
       damage: 4
       chargeDamageScaling: 1
+      attackSpeed: 1
       currentAttackAnimModifier: 0
       nextAttackIndex: 0
-      snapToTarget: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
@@ -1185,9 +1185,9 @@ MonoBehaviour:
     - animation: SwitchPrimaryAttack
       damage: 5
       chargeDamageScaling: 1
+      attackSpeed: 1
       currentAttackAnimModifier: 0
       nextAttackIndex: 1
-      snapToTarget: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
@@ -1199,9 +1199,9 @@ MonoBehaviour:
     - animation: LungeAttack
       damage: 2
       chargeDamageScaling: 1
+      attackSpeed: 1
       currentAttackAnimModifier: 0
       nextAttackIndex: 0
-      snapToTarget: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
@@ -1213,9 +1213,9 @@ MonoBehaviour:
     - animation: SecondaryAttack
       damage: 3
       chargeDamageScaling: 1
+      attackSpeed: 1
       currentAttackAnimModifier: 0
       nextAttackIndex: 1
-      snapToTarget: 0
       projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
       projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
         type: 3}
@@ -1227,9 +1227,9 @@ MonoBehaviour:
     - animation: SecondaryAttack
       damage: 3
       chargeDamageScaling: 1
+      attackSpeed: 1
       currentAttackAnimModifier: 0
       nextAttackIndex: 0
-      snapToTarget: 0
       projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
       projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
         type: 3}
@@ -1245,9 +1245,9 @@ MonoBehaviour:
     - animation: SprintSecondaryAttack
       damage: 3
       chargeDamageScaling: 1
+      attackSpeed: 1
       currentAttackAnimModifier: 0
-      nextAttackIndex: 0
-      snapToTarget: 0
+      nextAttackIndex: 1
       projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
       projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
         type: 3}
@@ -1263,9 +1263,9 @@ MonoBehaviour:
     - animation: SprintSecondaryAttack
       damage: 3
       chargeDamageScaling: 1
+      attackSpeed: 1
       currentAttackAnimModifier: 0
       nextAttackIndex: 0
-      snapToTarget: 0
       projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
       projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
         type: 3}
@@ -1281,9 +1281,9 @@ MonoBehaviour:
     - animation: SwitchSecondaryAttack
       damage: 2
       chargeDamageScaling: 1
+      attackSpeed: 1
       currentAttackAnimModifier: 0
       nextAttackIndex: 0
-      snapToTarget: 0
       projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
       projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
         type: 3}
