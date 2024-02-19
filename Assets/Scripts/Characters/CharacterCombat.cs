@@ -489,8 +489,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         damage = currentAttack.variations[currentAttackIndex].damage + additionalDamage;
         //Debug.Log(damage + " from " + currentDamage + " and " + additionalDamage);
 
-        if (currentAttack.variations[currentAttackIndex].snapToTarget)
-            CheckMoveToTarget(transform.position + (transform.forward * targetSphereRadius), transform.forward, snapLayerMask, moveDistanceThreshold.y);
+        CheckMoveToTarget(transform.position + (transform.forward * targetSphereRadius), transform.forward, snapLayerMask, moveDistanceThreshold.y);
 
         //InvokeRepeating("AttackCheck", 0f, 0.0001f);
         attackCheck = true;
