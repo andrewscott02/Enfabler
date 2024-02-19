@@ -288,6 +288,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             animator.speed = attackSpeed * currentAnimationSpeed;
             animator.applyRootMotion = true;
 
+            if (riposteCoroutine != null)
+            {
+                StopCoroutine(riposteCoroutine);
+                riposteCoroutine = null;
+            }
+
             //Debug.Log(switchAttack ? "Switch" + attackType.ToString() : attackType.ToString());
 
             if (switchAttack && canSwitchAttack)
