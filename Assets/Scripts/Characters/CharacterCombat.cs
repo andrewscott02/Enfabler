@@ -352,7 +352,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void CheckCharge()
     {
-        if (chargingAttack == E_AttackType.None || animator == null) return;
+        if (chargingAttack == E_AttackType.None || animator == null || currentAttack.variations[currentAttackIndex].canCharge == false) return;
 
         if (chargeCoroutine != null)
             StopCoroutine(chargeCoroutine);
@@ -375,12 +375,21 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     void SetUnblockable()
     {
-        if (unblockable) { return; }
+        if (unblockable || currentAttack.variations[currentAttackIndex].canCharge == false) { return; }
 
-        PlaySoundEffect(weapon.chargeClip, weapon.chargeVolume);
+        if (currentAttack.variations[currentAttackIndex].overideChargeAttack)
+        {
+            EndAttack();
+            currentAttackIndex = currentAttack.variations[currentAttackIndex].chargedAttackIndex;
+            InitiateAttack(currentAttack);
+        }
+        else
+        {
+            PlaySoundEffect(weapon.chargeClip, weapon.chargeVolume);
 
-        weapon.unblockableTrail.SetActive(true);
-        unblockable = true;
+            weapon.unblockableTrail.SetActive(true);
+            unblockable = true;
+        }
     }
 
     public void NextAttack()
@@ -493,6 +502,13 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             if (weapon.weaponTrail != null)
                 weapon.weaponTrail.SetActive(true);
 
+            if (currentAttack.variations[currentAttackIndex].autoUnblockable)
+            {
+                PlaySoundEffect(weapon.chargeClip, weapon.chargeVolume);
+
+                weapon.unblockableTrail.SetActive(true);
+                unblockable = true;
+            }
         }
 
         //Clear damage and list of enemies hit

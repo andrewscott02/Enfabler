@@ -984,7 +984,6 @@ MonoBehaviour:
   canSaveAttackInput: 0
   savingAttackInput: 0
   savingChargeInput: 0
-  savedAttackAnimSpeed: 1
   hitLayerMask:
     serializedVersion: 2
     m_Bits: 1051840
@@ -1122,30 +1121,45 @@ MonoBehaviour:
     variations:
     - animation: PrimaryAttack
       damage: 4
-      chargeDamageScaling: 2
       attackSpeed: 1
       currentAttackAnimModifier: 0
+      canCharge: 1
+      chargeDamageScaling: 2
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
       nextAttackIndex: 1
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
     - animation: PrimaryAttack
       damage: 4
-      chargeDamageScaling: 2
       attackSpeed: 1
       currentAttackAnimModifier: 1
+      canCharge: 1
+      chargeDamageScaling: 2
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
       nextAttackIndex: 2
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
     - animation: PrimaryAttack
       damage: 6
-      chargeDamageScaling: 2
       attackSpeed: 1
       currentAttackAnimModifier: 2
+      canCharge: 1
+      chargeDamageScaling: 2
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
       nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
@@ -1156,10 +1170,15 @@ MonoBehaviour:
     variations:
     - animation: DodgePrimaryAttack
       damage: 4
-      chargeDamageScaling: 2
       attackSpeed: 1
       currentAttackAnimModifier: 0
+      canCharge: 0
+      chargeDamageScaling: 2
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
       nextAttackIndex: 1
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
@@ -1170,10 +1189,15 @@ MonoBehaviour:
     variations:
     - animation: SprintPrimaryAttack
       damage: 4
-      chargeDamageScaling: 1
       attackSpeed: 1
       currentAttackAnimModifier: 0
+      canCharge: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
       nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
@@ -1184,10 +1208,15 @@ MonoBehaviour:
     variations:
     - animation: SwitchPrimaryAttack
       damage: 5
-      chargeDamageScaling: 1
       attackSpeed: 1
       currentAttackAnimModifier: 0
+      canCharge: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
       nextAttackIndex: 1
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
@@ -1198,10 +1227,15 @@ MonoBehaviour:
     variations:
     - animation: LungeAttack
       damage: 2
-      chargeDamageScaling: 1
       attackSpeed: 1
       currentAttackAnimModifier: 0
+      canCharge: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
       nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
@@ -1212,10 +1246,15 @@ MonoBehaviour:
     variations:
     - animation: SecondaryAttack
       damage: 3
-      chargeDamageScaling: 1
       attackSpeed: 1
       currentAttackAnimModifier: 0
+      canCharge: 1
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
       nextAttackIndex: 1
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
       projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
         type: 3}
@@ -1226,10 +1265,15 @@ MonoBehaviour:
       additionalProjectileDamageMultiplier: 0.5
     - animation: SecondaryAttack
       damage: 3
-      chargeDamageScaling: 1
       attackSpeed: 1
       currentAttackAnimModifier: 0
+      canCharge: 1
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
       nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
       projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
         type: 3}
@@ -1244,10 +1288,15 @@ MonoBehaviour:
     variations:
     - animation: SprintSecondaryAttack
       damage: 3
-      chargeDamageScaling: 1
       attackSpeed: 1
       currentAttackAnimModifier: 0
+      canCharge: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
       nextAttackIndex: 1
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
       projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
         type: 3}
@@ -1262,10 +1311,15 @@ MonoBehaviour:
     variations:
     - animation: SprintSecondaryAttack
       damage: 3
-      chargeDamageScaling: 1
       attackSpeed: 1
       currentAttackAnimModifier: 0
+      canCharge: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
       nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
       projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
         type: 3}
@@ -1280,10 +1334,15 @@ MonoBehaviour:
     variations:
     - animation: SwitchSecondaryAttack
       damage: 2
-      chargeDamageScaling: 1
       attackSpeed: 1
       currentAttackAnimModifier: 0
+      canCharge: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
       nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
       projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
         type: 3}

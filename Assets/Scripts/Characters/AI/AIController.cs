@@ -439,6 +439,8 @@ public class AIController : BaseCharacterController
 
         if (distance < attacks[attackIndex].distance)
         {
+            bool unblockable = false;
+
             if (combat.canAttack && CanAttack(attackIndex))
             {
                 if (doubleAttack)
@@ -453,7 +455,7 @@ public class AIController : BaseCharacterController
                 combat.savingChargeInput = attacks[attackIndex].attackType;
                 combat.Attack(true, attacks[attackIndex].attackType, currentTarget.gameObject);
 
-                bool unblockable = Random.Range(0f, 1f) < attacks[attackIndex].unblockableChance;
+                unblockable = Random.Range(0f, 1f) < attacks[attackIndex].unblockableChance;
                 float releaseTime = unblockable ? combat.chargeMaxTime : attacks[attackIndex].attackPauseTime;
                 StartCoroutine(IReleaseAttack(releaseTime));
 
@@ -463,7 +465,7 @@ public class AIController : BaseCharacterController
 
             agent.isStopped = true;
 
-            if (!doubleAttack)
+            if (!doubleAttack || unblockable)
             {
                 if (AIManager.instance != null)
                 {

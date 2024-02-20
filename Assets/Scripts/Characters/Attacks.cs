@@ -53,9 +53,14 @@ namespace Enfabler.Attacking
     {
         public string animation;
         public int damage;
-        public float chargeDamageScaling;
         public float attackSpeed;
         public int currentAttackAnimModifier;
+
+        public bool canCharge;
+        public bool autoUnblockable;
+        public float chargeDamageScaling;
+        public bool overideChargeAttack;
+        public int chargedAttackIndex;
 
         public int nextAttackIndex;
         public bool overrideNextAttackOnHit;

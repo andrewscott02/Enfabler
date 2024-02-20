@@ -357,7 +357,12 @@ PrefabInstance:
     - target: {fileID: 745110330847902028, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: attacks.Array.data[0].variations.Array.size
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 745110330847902028, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[1].damage
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 745110330847902028, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -378,6 +383,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attacks.Array.data[7].variations.Array.data[0].damage
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 745110330847902028, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[1].canCharge
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 745110330847902028, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
@@ -421,6 +431,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 745110330847902028, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[1].autoUnblockable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 745110330847902028, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
       propertyPath: attacks.Array.data[1].variations.Array.data[0].nextAttackIndex
       value: 0
       objectReference: {fileID: 0}
@@ -432,6 +447,26 @@ PrefabInstance:
     - target: {fileID: 745110330847902028, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
       propertyPath: attacks.Array.data[5].variations.Array.data[0].nextAttackIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 745110330847902028, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[0].chargedAttackIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 745110330847902028, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[1].chargedAttackIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 745110330847902028, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[1].overideChargeAttack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 745110330847902028, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[1].currentAttackAnimModifier
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1052808933374464340, guid: 9259463fa317d1c41aec05c50edaee45,
