@@ -55,9 +55,11 @@ namespace Enfabler.Attacking
         public int damage;
         public float chargeDamageScaling;
         public float attackSpeed;
-
         public int currentAttackAnimModifier;
+
         public int nextAttackIndex;
+        public bool overrideNextAttackOnHit;
+        public int nextAttackHitIndex;
 
         public TrapStats projectileData;
         public Object projectileFX;

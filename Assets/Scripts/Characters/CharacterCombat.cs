@@ -388,8 +388,19 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         //Debug.Log("Next attack + " + attack);
         if (currentAttack.attackType == E_AttackType.None || currentAttackIndex >= currentAttack.variations.Length)
             currentAttackIndex = 0;
-        else 
-            currentAttackIndex = currentAttack.variations[currentAttackIndex].nextAttackIndex;
+        else
+        {
+            if (lastAttackEvent == E_DamageEvents.Hit && currentAttack.variations[currentAttackIndex].overrideNextAttackOnHit)
+            {
+                currentAttackIndex = currentAttack.variations[currentAttackIndex].nextAttackHitIndex;
+            }
+            else
+            {
+                currentAttackIndex = currentAttack.variations[currentAttackIndex].nextAttackIndex;
+            }
+        }
+
+        lastAttackEvent = E_DamageEvents.Dodge;
 
         canDodge = true;
         canAttack = true;
@@ -708,11 +719,14 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     public delegate void AttackDeletate(E_DamageEvents damageEvents);
     public AttackDeletate onAttackHit;
 
+    E_DamageEvents lastAttackEvent = E_DamageEvents.Dodge;
+
     void OnAttackHit(E_DamageEvents damageEvent)
     {
         Freeze();
         RumbleManager.instance.ControllerRumble(0.2f, 0.85f, 0.25f);
 
+        lastAttackEvent = damageEvent;
         bool hit = damageEvent == E_DamageEvents.Hit;
 
         PlaySoundEffect(hit ? weapon.hitClip : weapon.blockClip, weapon.soundVolume);
@@ -721,8 +735,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         {
             weapon.bloodTrail.SetActive(true);
         }
-
-        //TODO: Sound effects
     }
 
     #endregion
