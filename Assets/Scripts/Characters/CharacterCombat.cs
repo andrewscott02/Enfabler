@@ -1156,10 +1156,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         weapon.ParryEffect(false);
     }
 
-    public delegate void ParryDelegate();
+    public delegate void ParryDelegate(ICanDealDamage attacker);
     public ParryDelegate parriedDelegate;
 
-    public void ParrySuccess()
+    public void ParrySuccess(ICanDealDamage attacker)
     {
         currentArrows = Mathf.Clamp(currentArrows + 1, 0, maxArrows);
 
@@ -1174,6 +1174,18 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         }
 
         riposteCoroutine = StartCoroutine(IEnableRiposte(1f));
+
+        animator.SetBool("InHitReaction", true);
+        animator.SetTrigger("ParryReact");
+
+        Vector3 attackerPos = attacker.GetScript().gameObject.transform.position;
+
+        Vector3 desiredRot = new Vector3(attackerPos.x, transform.position.y, attackerPos.z);
+        Quaternion newRot = Quaternion.LookRotation(desiredRot - transform.position, Vector3.up);
+        transform.rotation = newRot;
+        RotateTowardsTarget(attackerPos);
+
+        MoveToTarget(transform.position + ((attackerPos - transform.position).normalized * moveDistanceThreshold.y));
     }
 
     Coroutine riposteCoroutine;

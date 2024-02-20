@@ -82,7 +82,7 @@ public class Armour : MonoBehaviour
 
     public int armourOnParry = 1, armourOnHit = 1;
 
-    public void ParrySuccess()
+    public void ParrySuccess(ICanDealDamage attacker)
     {
         GainArmour(armourOnParry);
     }
