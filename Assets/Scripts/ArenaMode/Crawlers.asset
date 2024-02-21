@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fightName: 'Crawlers Fight
 
-    (5 Rounds)'
+    (6 Rounds)'
   arenaRounds:
   - enemyTypes:
     - enemyObject: {fileID: 7535070001232547612, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
-      count: 1
+      count: 2
   - enemyTypes:
     - enemyObject: {fileID: 7535070001232547612, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
-      count: 2
+      count: 3
   - enemyTypes:
     - enemyObject: {fileID: 7715362995113500740, guid: 281af66685c14bf48944eccc62df6c64,
         type: 3}
@@ -31,7 +31,14 @@ MonoBehaviour:
   - enemyTypes:
     - enemyObject: {fileID: 7535070001232547612, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
+      count: 2
+    - enemyObject: {fileID: 7715362995113500740, guid: 281af66685c14bf48944eccc62df6c64,
+        type: 3}
       count: 1
+  - enemyTypes:
+    - enemyObject: {fileID: 7535070001232547612, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      count: 3
     - enemyObject: {fileID: 7715362995113500740, guid: 281af66685c14bf48944eccc62df6c64,
         type: 3}
       count: 2

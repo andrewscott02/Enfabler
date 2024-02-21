@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
     public bool paused = false;
 
     E_Scenes mainMenu = E_Scenes.MainMenu;
-    public GameObject pauseMenu, controls;
+    public GameObject pauseMenu, controls, questUI;
     public GameObject pauseMenuDefaultButton, controlsDefaultButton;
     GameObject currentPageDefault;
     public GameObject[] howToPlayPages;
@@ -41,6 +41,8 @@ public class PauseMenu : MonoBehaviour
         paused = true;
         ShowControls(false);
 
+        ShowQuestUI(false);
+
         Time.timeScale = 0;
     }
 
@@ -59,6 +61,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         controls.SetActive(false);
 
+        ShowQuestUI(true);
+
         Time.timeScale = unpausedTimeScale;
     }
 
@@ -71,6 +75,11 @@ public class PauseMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(currentPageDefault);
 
         ShowHowToPlayPage(0);
+    }
+
+    public void ShowQuestUI(bool show)
+    {
+        questUI.SetActive(show);
     }
 
     public void MainMenu()

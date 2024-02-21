@@ -14,27 +14,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fightName: 'Ghosts Fight
 
-    (5 Rounds)'
+    (6 Rounds)'
   arenaRounds:
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 6959e721c14252e4b8f781d8b33b70fa,
+        type: 3}
+      count: 2
+  - enemyTypes:
+    - enemyObject: {fileID: 8084795209297945531, guid: 6959e721c14252e4b8f781d8b33b70fa,
+        type: 3}
+      count: 2
+    - enemyObject: {fileID: 8084795209297945531, guid: ee28444e69279b94ab71836c789ccfe4,
         type: 3}
       count: 1
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 69fd0d1e9c5ecf8499d319808b255c3e,
         type: 3}
       count: 2
-  - enemyTypes:
+    - enemyObject: {fileID: 8084795209297945531, guid: 6959e721c14252e4b8f781d8b33b70fa,
+        type: 3}
+      count: 1
     - enemyObject: {fileID: 8084795209297945531, guid: ee28444e69279b94ab71836c789ccfe4,
         type: 3}
       count: 2
   - enemyTypes:
     - enemyObject: {fileID: 8084795209297945531, guid: 6959e721c14252e4b8f781d8b33b70fa,
         type: 3}
-      count: 1
-    - enemyObject: {fileID: 8084795209297945531, guid: 69fd0d1e9c5ecf8499d319808b255c3e,
+      count: 2
+    - enemyObject: {fileID: 8084795209297945531, guid: ee28444e69279b94ab71836c789ccfe4,
+        type: 3}
+      count: 2
+    - enemyObject: {fileID: 8084795209297945531, guid: 810a7923b83ff214e96264c7fbbae99c,
         type: 3}
       count: 1
+  - enemyTypes:
+    - enemyObject: {fileID: 8084795209297945531, guid: ee28444e69279b94ab71836c789ccfe4,
+        type: 3}
+      count: 1
+    - enemyObject: {fileID: 8084795209297945531, guid: 6fca1a141a0144e49b61f7777471c8c1,
+        type: 3}
+      count: 2
     - enemyObject: {fileID: 8084795209297945531, guid: 810a7923b83ff214e96264c7fbbae99c,
         type: 3}
       count: 1
