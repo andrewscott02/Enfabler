@@ -324,7 +324,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         animator.speed = currentAttackSpeed * currentAnimationSpeed;
 
         animator.SetInteger("MeleeAttackCount", currentAttack.variations[currentAttackIndex].currentAttackAnimModifier);
-        animator.SetTrigger(attackData.attackType.ToString());
+        animator.SetTrigger(currentAttack.variations[currentAttackIndex].animation.ToString());
     }
 
     void StartCharge(E_AttackType attackType)
