@@ -9357,7 +9357,7 @@ PrefabInstance:
     - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: attacks.Array.data[0].variations.Array.data[3].canCharge
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
@@ -9367,7 +9367,7 @@ PrefabInstance:
     - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: attacks.Array.data[0].variations.Array.data[4].canCharge
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
@@ -9565,8 +9565,18 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[3].autoUnblockable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
       propertyPath: attacks.Array.data[0].variations.Array.data[3].nextAttackIndex
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[0].variations.Array.data[4].autoUnblockable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
@@ -9607,6 +9617,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attacks.Array.data[4].variations.Array.data[0].nextAttackIndex
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: attacks.Array.data[4].variations.Array.data[3].autoUnblockable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
@@ -10121,7 +10136,7 @@ PrefabInstance:
     - target: {fileID: 7460243065040470235, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7460243065040470235, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
