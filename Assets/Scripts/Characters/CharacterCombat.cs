@@ -352,7 +352,13 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void CheckCharge()
     {
-        if (chargingAttack == E_AttackType.None || animator == null || currentAttack.variations[currentAttackIndex].canCharge == false) return;
+        if (chargingAttack == E_AttackType.None || animator == null || currentAttack.variations[currentAttackIndex].canCharge == false)
+        {
+            animator.speed = currentAnimationSpeed;
+
+            ReleaseAttack();
+            return;
+        }
 
         if (chargeCoroutine != null)
             StopCoroutine(chargeCoroutine);
@@ -1251,7 +1257,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         if (canSlideInput)
         {
+            Debug.Log("Lunge input");
             dodgeStartDelegate();
+            Block(false);
+            ForceEndAttack();
             Attack(attackType: E_AttackType.LungeAttack, enableModifiers: false, interupt: true);
             return;
         }
