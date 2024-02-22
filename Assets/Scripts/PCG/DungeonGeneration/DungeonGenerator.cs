@@ -18,6 +18,7 @@ public class DungeonGenerator : MonoBehaviour
 
     public List<E_RoomTypes> rooms;
     public int currentRoom = 0;
+    List<PCGRoom> createdRooms;
 
     [ContextMenu("Generate Dungeon")]
     public void GenerateDungeon()
@@ -43,12 +44,10 @@ public class DungeonGenerator : MonoBehaviour
 
         string dungeonLayout = ConvertToString(rooms);
 
-        //Debug.Log(dungeonLayout);
-
         GenerateRoom(rooms[0], grammarsDungeonData.startingThemes[randTheme], transform, true, 0);
         BakeNavmesh();
 
-        //PopulateRooms
+        PopulateRooms();
     }
 
     [ContextMenu("Cleanup Dungeon")]
@@ -79,6 +78,8 @@ public class DungeonGenerator : MonoBehaviour
 
         currentRoom = 0;
         roomCount = 0;
+
+        createdRooms = new List<PCGRoom>();
     }
 
     #region Grammars
@@ -155,6 +156,10 @@ public class DungeonGenerator : MonoBehaviour
         if (removedFromMainPath > grammarsDungeonData.mainPathRemoveLimit)
             return;
 
+        if (removedFromMainPath == grammarsDungeonData.mainPathRemoveLimit)
+            roomType = E_RoomTypes.Treasure;
+
+
         if (mainPath)
             currentRoom++;
 
@@ -168,6 +173,12 @@ public class DungeonGenerator : MonoBehaviour
         go.transform.SetParent(transform, true);
 
         //Rotate room if reversed
+        createdRooms.Add(goRoom);
+    }
+
+    void PopulateRooms()
+    {
+
     }
 
     #region Navmesh
