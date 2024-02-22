@@ -18,6 +18,9 @@ public class PCGRoom : MonoBehaviour
             mainDoorPoint = value;
     }
 
+    public Collider roomBounds;
+    public LayerMask boundsLayer;
+
     public ObjectSpawner[] doorPoints;
     public Volume localVolume, localVolumeNext;
     public Object tempSpawnerObjects;
@@ -46,8 +49,17 @@ public class PCGRoom : MonoBehaviour
     public E_RoomTypes roomType { get; private set; }
     public GrammarsDungeonData dungeonData { get; private set; }
 
-    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, ThemeData theme, ThemeData nextTheme, bool reversed, bool mainPath, int removedFromPath)
+    public bool Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, ThemeData theme, ThemeData nextTheme, bool reversed, bool mainPath, int removedFromPath)
     {
+        Collider[] cols = Physics.OverlapBox(roomBounds.bounds.center, roomBounds.bounds.extents, roomBounds.transform.rotation, boundsLayer);
+        
+        if (cols.Length > 1)
+        {
+            Debug.Log("Destroying room, intersects with another");
+            //Spawn another room in place - In Dungeon generator and destroy room
+            return false;
+        }
+
         this.roomType = roomType;
         this.dungeonData = dungeonData;
 
@@ -81,6 +93,8 @@ public class PCGRoom : MonoBehaviour
 
         SpawnAdditionalRooms();
         SetupVolumes();
+
+        return true;
     }
 
     void GetDoorPoints()

@@ -165,15 +165,29 @@ public class DungeonGenerator : MonoBehaviour
 
         roomCount++;
 
-        Object roomPrefab = grammarsDungeonData.GetRandomRoomPrefab(roomType, theme, out ThemeData nextTheme, out bool reversed);
-        GameObject go = Instantiate(roomPrefab, spawnTransform) as GameObject;
-        PCGRoom goRoom = go.GetComponent<PCGRoom>();
-        goRoom.Setup(roomType, grammarsDungeonData, theme, nextTheme, reversed, mainPath, mainPath ? 0 : removedFromMainPath);
+        int iterations = 0;
 
-        go.transform.SetParent(transform, true);
+        while(iterations < 100)
+        {
+            Object roomPrefab = grammarsDungeonData.GetRandomRoomPrefab(roomType, theme, out ThemeData nextTheme, out bool reversed);
+            GameObject go = Instantiate(roomPrefab, spawnTransform) as GameObject;
+            go.transform.SetParent(transform, true);
+            PCGRoom goRoom = go.GetComponent<PCGRoom>();
+            bool success = goRoom.Setup(roomType, grammarsDungeonData, theme, nextTheme, reversed, mainPath, mainPath ? 0 : removedFromMainPath);
 
-        //Rotate room if reversed
-        createdRooms.Add(goRoom);
+            if (success)
+            {
+                //Rotate room if reversed
+                createdRooms.Add(goRoom);
+                iterations = 1000;
+            }
+            else
+            {
+                DestroyImmediate(go);
+            }
+
+            iterations++;
+        }
     }
 
     void PopulateRooms()
