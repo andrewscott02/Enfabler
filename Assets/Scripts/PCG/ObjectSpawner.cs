@@ -112,6 +112,16 @@ public class ObjectSpawner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Matrix4x4 rotationMatrix = transform.localToWorldMatrix;
+
+        if (objectType == E_ObjectSpawnTypes.Door)
+        {
+            Gizmos.color = (changeTheme ? Color.red : Color.green) - new Color(0, 0, 0, 0.5f);
+            Gizmos.matrix = rotationMatrix;
+            Gizmos.DrawCube(transform.up * 2.3f, new Vector3(4.75f, 4.6f, 1));
+            return;
+        }
+
         Gizmos.color = (changeTheme ? Color.red : Color.blue) - new Color(0, 0, 0, 0.5f);
 
         Gizmos.DrawSphere(transform.position, 0.5f);
@@ -121,7 +131,6 @@ public class ObjectSpawner : MonoBehaviour
 
         Gizmos.color -= new Color(0, 0, 0, 0.2f);
 
-        Matrix4x4 rotationMatrix = transform.localToWorldMatrix;
         Gizmos.matrix = rotationMatrix;
         Gizmos.DrawCube(boundingBoxData.offset, boundingBoxData.size);
     }
@@ -146,7 +155,7 @@ public class ObjectSpawner : MonoBehaviour
 [System.Serializable]
 public enum E_ObjectSpawnTypes
 {
-    Corner, Side, Center, SetPiece, WallDecor, WallLight, BesideDoor, CeilingLight, CeilingDecor, Prop, PropSmall
+    Corner, Side, Center, SetPiece, WallDecor, WallLight, BesideDoor, CeilingLight, CeilingDecor, Prop, PropSmall, Door
 }
 
 [System.Serializable]

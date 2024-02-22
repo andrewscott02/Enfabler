@@ -481,7 +481,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2845171596351020900}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -501,7 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0a5013bc51b264f9ab03ea04e5aa6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectType: 0
+  objectType: 11
   boundingBoxData:
     offset: {x: 0, y: 0, z: 0}
     size: {x: 0, y: 0, z: 0}
@@ -676,7 +676,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockOverride: 0
   lockDoor: 0
-  doorPoint: {fileID: 6885247599024351053}
+  exit: {fileID: 3688193081782744877}
+  mainDoorPoint: {fileID: 0}
+  doorPoints: []
   localVolume: {fileID: 1700809140553355625}
   localVolumeNext: {fileID: 5631533364371346879}
   tempSpawnerObjects: {fileID: 8365603084591658663, guid: ec162ece2df892046ba15066ae0a7082,

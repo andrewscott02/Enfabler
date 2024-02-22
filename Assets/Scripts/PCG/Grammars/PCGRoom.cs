@@ -8,7 +8,17 @@ public class PCGRoom : MonoBehaviour
 {
     public bool lockOverride = false;
     public bool lockDoor = false;
-    public ObjectSpawner doorPoint;
+    public GameObject exit;
+
+    public ObjectSpawner mainDoorPoint;
+
+    public void TrySetMainDoorPoint(ObjectSpawner value)
+    {
+        if (mainDoorPoint == null)
+            mainDoorPoint = value;
+    }
+
+    public ObjectSpawner[] doorPoints;
     public Volume localVolume, localVolumeNext;
     public Object tempSpawnerObjects;
 
@@ -16,7 +26,9 @@ public class PCGRoom : MonoBehaviour
     public Transform[] enemySpawnerChildren { get; private set; }
     public ObjectSpawner[] objectSpawnerChildren { get; private set; }
 
-    ThemeData theme, nextTheme;
+    public ThemeData theme { get; private set; }
+    public ThemeData nextTheme { get; private set; }
+
     bool reversed = false;
     int roomNumber;
 
@@ -58,7 +70,19 @@ public class PCGRoom : MonoBehaviour
                 item.SetupRoom(item.changeTheme ? theme : nextTheme);
         }
 
+        GetDoorPoints();
+
         SetupVolumes();
+    }
+
+    void GetDoorPoints()
+    {
+        doorPoints = exit.GetComponentsInChildren<ObjectSpawner>();
+    }
+
+    public ObjectSpawner GetRandomDoorPoint()
+    {
+        return doorPoints[Random.Range(0, doorPoints.Length)];
     }
 
     void SetupVolumes()
@@ -78,7 +102,7 @@ public class PCGRoom : MonoBehaviour
         if (generated)
             return;
 
-        SpawnDoor();
+        SpawnDoors();
         SpawnTraps();
         SpawnObjects();
 
@@ -94,23 +118,40 @@ public class PCGRoom : MonoBehaviour
         SetPuzzleElements();
 
         generated = true;
+
+        SpawnSideRooms();
     }
 
     Door door;
 
-    void SpawnDoor()
+    void SpawnDoors()
     {
-        ThemeData doorTheme = doorPoint.changeTheme ? nextTheme : theme;
-        GameObject go = Instantiate(dungeonData.GetRandomDoor(doorTheme), doorPoint.transform) as GameObject;
-        go.transform.position = doorPoint.transform.position;
-        go.transform.rotation = doorPoint.transform.rotation;
-        itemsInRoom.Add(go);
+        //Check if door can spawn room
+        foreach (var item in doorPoints)
+        {
+            ThemeData doorTheme = item.changeTheme ? nextTheme : theme;
+            GameObject go = Instantiate(dungeonData.GetRandomDoor(doorTheme), item.transform) as GameObject;
+            go.transform.position = item.transform.position;
+            go.transform.rotation = item.transform.rotation;
+            itemsInRoom.Add(go);
 
-        door = go.GetComponentInChildren<Door>();
-        door.lockedInteraction = lockOverride ? lockDoor : dungeonData.GetDoorLocked(roomType);
+            door = go.GetComponentInChildren<Door>();
+            door.lockedInteraction = lockOverride ? lockDoor : dungeonData.GetDoorLocked(roomType);
 
-        door.interactDelegate += DoorOpened;
-        //Debug.Log("Added delegate to room " + roomNumber);
+            door.interactDelegate += DoorOpened;
+            //Debug.Log("Added delegate to room " + roomNumber);
+        }
+    }
+
+    void SpawnSideRooms()
+    {
+        foreach (var item in doorPoints)
+        {
+            if (item != mainDoorPoint)
+            {
+                GrammarsDungeonGeneration.instance.GenerateSideRoom(this, item);
+            }
+        }
     }
 
     bool doorOpenedLogic = false;
@@ -323,7 +364,6 @@ public class PCGRoom : MonoBehaviour
         Gizmos.DrawCube(transform.position + new Vector3(0, 2.3f, 0), new Vector3(4.75f, 4.6f, 1));
 
         Gizmos.color = Color.red - new Color(0, 0, 0, 0.5f);
-        Gizmos.DrawCube(doorPoint.transform.position + new Vector3(0, 2.3f, 0), new Vector3(4.75f, 4.6f, 1));
 
         if (enemySpawnerChildren != null)
         {

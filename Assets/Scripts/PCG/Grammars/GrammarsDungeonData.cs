@@ -73,6 +73,12 @@ public class GrammarsDungeonData : ScriptableObject
         }
     }
 
+    public E_RoomTypes GetRandomRoomTypeIgnoreLimits()
+    {
+        int startIndex = Random.Range(0, additionalRoomTypes.Length);
+        return additionalRoomTypes[startIndex];
+    }
+
     public int GetRoomDataIndex(E_RoomTypes roomType)
     {
         for (int i = 0; i < roomData.Length; i++)
