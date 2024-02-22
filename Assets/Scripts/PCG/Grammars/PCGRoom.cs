@@ -30,7 +30,8 @@ public class PCGRoom : MonoBehaviour
     public ThemeData nextTheme { get; private set; }
 
     bool reversed = false;
-    int roomNumber;
+    bool mainPath = false;
+    int removedFromMainPath = 0;
 
     [ContextMenu("Show Debug")]
     public void SetupTransforms()
@@ -45,18 +46,21 @@ public class PCGRoom : MonoBehaviour
     public E_RoomTypes roomType { get; private set; }
     public GrammarsDungeonData dungeonData { get; private set; }
 
-    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, ThemeData theme, ThemeData nextTheme, int index, bool reversed)
+    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, ThemeData theme, ThemeData nextTheme, bool reversed, bool mainPath, int removedFromPath)
     {
         this.roomType = roomType;
         this.dungeonData = dungeonData;
 
         this.theme = theme;
         this.nextTheme = nextTheme;
-
-        roomNumber = index;
         this.reversed = reversed;
+        this.mainPath = mainPath;
 
-        name += " " + roomType.ToString() + " room (PCG) - " + theme.ToString();
+        this.removedFromMainPath = removedFromPath;
+
+        string mainPathString = mainPath ? " MAIN " : " SIDE ";
+
+        name += " " + mainPathString + roomType.ToString() + " room (PCG) - " + theme.ToString();
 
         SetupTransforms();
 
@@ -72,12 +76,41 @@ public class PCGRoom : MonoBehaviour
 
         GetDoorPoints();
 
+        if (mainPath)
+            SpawnNextMainRoom();
+
+        SpawnAdditionalRooms();
         SetupVolumes();
     }
 
     void GetDoorPoints()
     {
         doorPoints = exit.GetComponentsInChildren<ObjectSpawner>();
+
+        if (mainPath)
+            mainDoorPoint = doorPoints[Random.Range(0, doorPoints.Length)];
+    }
+
+    void SpawnNextMainRoom()
+    {
+        if (DungeonGenerator.instance.currentRoom >= DungeonGenerator.instance.rooms.Count)
+            return;
+
+        E_RoomTypes roomType = DungeonGenerator.instance.rooms[DungeonGenerator.instance.currentRoom];
+        DungeonGenerator.instance.GenerateRoom(roomType, mainDoorPoint.changeTheme ? nextTheme : theme, mainDoorPoint.transform, true, 0);
+    }
+
+    void SpawnAdditionalRooms()
+    {
+        foreach (var item in doorPoints)
+        {
+            if (item != mainDoorPoint || mainDoorPoint == null)
+            {
+                Debug.Log("Spawning side room");
+                E_RoomTypes roomType = dungeonData.GetRandomRoomType();
+                DungeonGenerator.instance.GenerateRoom(roomType, item.changeTheme ? nextTheme : theme, item.transform, false, removedFromMainPath + 1);
+            }
+        }
     }
 
     public ObjectSpawner GetRandomDoorPoint()
@@ -158,7 +191,7 @@ public class PCGRoom : MonoBehaviour
 
     public void DoorOpened()
     {
-        GrammarsDungeonGeneration.instance.CullRooms(roomNumber);
+        //GrammarsDungeonGeneration.instance.CullRooms(roomNumber);
 
         if (doorOpenedLogic)
             return;
@@ -166,7 +199,7 @@ public class PCGRoom : MonoBehaviour
         doorOpenedLogic = true;
 
         //Debug.Log("Door opened - from delegate : Room " + roomNumber);
-        GrammarsDungeonGeneration.instance.PopulateRoom(roomNumber + GrammarsDungeonGeneration.instance.preloadRooms);
+        //GrammarsDungeonGeneration.instance.PopulateRoom(roomNumber + GrammarsDungeonGeneration.instance.preloadRooms);
 
         if (nextTheme != theme)
             GameCanvasManager.instance.ShowRegionText(nextTheme.regionName);

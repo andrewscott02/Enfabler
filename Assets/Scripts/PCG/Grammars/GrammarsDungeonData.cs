@@ -12,6 +12,8 @@ public class GrammarsDungeonData : ScriptableObject
     public int additionalHealingRooms = 0;
     Dictionary<E_RoomTypes, int> roomDict;
     public Vector2Int roomsCountMinMax;
+    public float sideRoomChance = 0.75f;
+    public float mainPathRemoveLimit = 2;
 
     public List<ThemeData> startingThemes;
     public List<ThemeData> allThemes;

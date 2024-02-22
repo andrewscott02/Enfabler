@@ -170,7 +170,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.23333333
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 757c10c89b615094cae6043b1065261e, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: e9ba056003b1f33448b99a84938f06ad, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &65792388
 Transform:
@@ -782,12 +782,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1930224111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a77bfae52fc858a49b5d968ae48a2511, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ab02a2889e70c249bd0021b5c4e8a64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   grammarsDungeonData: {fileID: 11400000, guid: 996e674689bbf0d45bdc6e0aa1846885,
     type: 2}
-  preloadRooms: 2
+  rooms: 0000000003000000050000000300000008000000060000000300000005000000040000000800000006000000090000000400000003000000060000000100000002000000
+  currentRoom: 0
   navMeshSurface: {fileID: 65792387}
 --- !u!1001 &1997381791
 PrefabInstance:
@@ -911,6 +912,11 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 1997381793}
+    - target: {fileID: 2378270986583974647, guid: b1afd8a9ce613d44c9a98273b587705d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6760001
+      objectReference: {fileID: 0}
     - target: {fileID: 2378270986583974647, guid: b1afd8a9ce613d44c9a98273b587705d,
         type: 3}
       propertyPath: m_LocalPosition.y

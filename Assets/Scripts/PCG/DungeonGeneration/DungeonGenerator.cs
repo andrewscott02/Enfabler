@@ -5,22 +5,29 @@ using Unity.AI.Navigation;
 
 public class DungeonGenerator : MonoBehaviour
 {
+    public static DungeonGenerator instance;
     public GrammarsDungeonData grammarsDungeonData;
 
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         GenerateDungeon();
+        //GameCanvasManager.instance.ShowRegionText(firstTheme.regionName);
     }
+
+    public List<E_RoomTypes> rooms;
+    public int currentRoom = 0;
 
     [ContextMenu("Generate Dungeon")]
     public void GenerateDungeon()
     {
+        instance = this;
         CleanupDungeon();
 
         int randTheme = Random.Range(0, grammarsDungeonData.startingThemes.Count);
 
-        List<E_RoomTypes> rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Healing, E_RoomTypes.Boss, E_RoomTypes.End };
+        rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Healing, E_RoomTypes.Boss, E_RoomTypes.End };
 
         List<E_RoomTypes> additionalRooms = GenerateAdditionalRooms();
         additionalRooms = GenerateHealingRooms(additionalRooms);
@@ -38,7 +45,7 @@ public class DungeonGenerator : MonoBehaviour
 
         //Debug.Log(dungeonLayout);
 
-        GenerateMainRooms(rooms[0], grammarsDungeonData.startingThemes[randTheme]);
+        GenerateRoom(rooms[0], grammarsDungeonData.startingThemes[randTheme], transform, true, 0);
         BakeNavmesh();
 
         //PopulateRooms
@@ -69,6 +76,9 @@ public class DungeonGenerator : MonoBehaviour
         //createdRooms = new List<PCGRoom>();
 
         grammarsDungeonData.ResetAllDungeonData();
+
+        currentRoom = 0;
+        roomCount = 0;
     }
 
     #region Grammars
@@ -134,12 +144,28 @@ public class DungeonGenerator : MonoBehaviour
 
     #endregion
 
-    void GenerateMainRooms(E_RoomTypes roomType, ThemeData theme)
+    int maxRooms = 50;
+    int roomCount = 0;
+
+    public void GenerateRoom(E_RoomTypes roomType, ThemeData theme, Transform spawnTransform, bool mainPath, int removedFromMainPath)
     {
+        if (roomCount >= maxRooms && mainPath == false)
+            return;
+
+        if (removedFromMainPath > grammarsDungeonData.mainPathRemoveLimit)
+            return;
+
+        if (mainPath)
+            currentRoom++;
+
+        roomCount++;
+
         Object roomPrefab = grammarsDungeonData.GetRandomRoomPrefab(roomType, theme, out ThemeData nextTheme, out bool reversed);
-        GameObject go = Instantiate(roomPrefab, transform) as GameObject;
+        GameObject go = Instantiate(roomPrefab, spawnTransform) as GameObject;
         PCGRoom goRoom = go.GetComponent<PCGRoom>();
-        goRoom.Setup(roomType, grammarsDungeonData, theme, theme, 0, reversed);
+        goRoom.Setup(roomType, grammarsDungeonData, theme, nextTheme, reversed, mainPath, mainPath ? 0 : removedFromMainPath);
+
+        go.transform.SetParent(transform, true);
 
         //Rotate room if reversed
     }

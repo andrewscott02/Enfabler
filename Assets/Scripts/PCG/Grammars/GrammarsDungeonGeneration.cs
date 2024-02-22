@@ -189,7 +189,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
                 {
                     GameObject go = Instantiate(prefabs[i], transform) as GameObject;
                     PCGRoom goRoom = go.GetComponent<PCGRoom>();
-                    goRoom.Setup(rooms[i], grammarsDungeonData, themes[i], themes[i + 1], i, reversedRooms[i]);
+                    //goRoom.Setup(rooms[i], grammarsDungeonData, themes[i], themes[i + 1], i, reversedRooms[i]);
 
                     if (data.roomType != E_RoomTypes.Start)
                     {
@@ -235,7 +235,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         Object prefab = grammarsDungeonData.GetRandomRoomPrefab(roomType, theme, out ThemeData nextRoom, out bool reversed);
         GameObject go = Instantiate(prefab, transform) as GameObject;
         PCGRoom goRoom = go.GetComponent<PCGRoom>();
-        goRoom.Setup(roomType, grammarsDungeonData, theme, theme, 0, reversed);
+        //goRoom.Setup(roomType, grammarsDungeonData, theme, theme, 0, reversed);
 
         foreach(var data in grammarsDungeonData.roomData)
         {
