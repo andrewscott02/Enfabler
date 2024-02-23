@@ -116,7 +116,7 @@ public class PCGRoom : MonoBehaviour
 
         PCGRoom generatedRoom = DungeonGenerator.instance.GenerateRoom(roomType, mainDoorPoint.changeTheme ? nextTheme : theme, mainDoorPoint.transform, true, 0);
         
-        if (roomBounds!= null)
+        if (generatedRoom != null)
         {
             attachedRooms.Add(generatedRoom);
             generatedRoom.attachedRooms.Add(this);
@@ -134,7 +134,7 @@ public class PCGRoom : MonoBehaviour
 
                 PCGRoom generatedRoom = DungeonGenerator.instance.GenerateRoom(roomType, item.changeTheme ? nextTheme : theme, item.transform, false, removedFromMainPath + 1);
                 
-                if (roomBounds != null)
+                if (generatedRoom != null)
                 {
                     attachedRooms.Add(generatedRoom);
                     generatedRoom.attachedRooms.Add(this);
@@ -386,6 +386,8 @@ public class PCGRoom : MonoBehaviour
         {
             item.SetActive(!cull);
         }
+
+        return;
 
         if (cull)
             CloseDoor();

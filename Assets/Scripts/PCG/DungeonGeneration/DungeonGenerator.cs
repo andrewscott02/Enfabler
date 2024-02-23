@@ -179,7 +179,7 @@ public class DungeonGenerator : MonoBehaviour
                 PCGRoom goRoom = go.GetComponent<PCGRoom>();
                 bool success = goRoom.Setup(roomType, grammarsDungeonData, theme, nextTheme, reversed, mainPath, mainPath ? 0 : removedFromMainPath);
 
-                if (success)
+                if (success && goRoom != null)
                 {
                     //Rotate room if reversed
                     createdRooms.Add(goRoom);
