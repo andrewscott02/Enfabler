@@ -154,7 +154,6 @@ public class DungeonGenerator : MonoBehaviour
 
     #endregion
 
-    int maxRooms = 50;
     int roomCount = 0;
 
     #endregion
@@ -163,7 +162,7 @@ public class DungeonGenerator : MonoBehaviour
 
     public PCGRoom GenerateRoom(E_RoomTypes roomType, ThemeData theme, Transform spawnTransform, bool mainPath, int removedFromMainPath)
     {
-        if (roomCount >= maxRooms && mainPath == false)
+        if (roomCount >= grammarsDungeonData.maxTotalRooms && mainPath == false)
             return null;
 
         if (removedFromMainPath > grammarsDungeonData.mainPathRemoveLimit)
