@@ -36,6 +36,8 @@ public class PCGRoom : MonoBehaviour
     bool mainPath = false;
     int removedFromMainPath = 0;
 
+    public List<PCGRoom> attachedRooms = new List<PCGRoom>();
+
     [ContextMenu("Show Debug")]
     public void SetupTransforms()
     {
@@ -111,7 +113,14 @@ public class PCGRoom : MonoBehaviour
             return;
 
         E_RoomTypes roomType = DungeonGenerator.instance.rooms[DungeonGenerator.instance.currentRoom];
-        DungeonGenerator.instance.GenerateRoom(roomType, mainDoorPoint.changeTheme ? nextTheme : theme, mainDoorPoint.transform, true, 0);
+
+        PCGRoom generatedRoom = DungeonGenerator.instance.GenerateRoom(roomType, mainDoorPoint.changeTheme ? nextTheme : theme, mainDoorPoint.transform, true, 0);
+        
+        if (roomBounds!= null)
+        {
+            attachedRooms.Add(generatedRoom);
+            generatedRoom.attachedRooms.Add(this);
+        }
     }
 
     void SpawnAdditionalRooms()
@@ -122,7 +131,14 @@ public class PCGRoom : MonoBehaviour
             {
                 Debug.Log("Spawning side room");
                 E_RoomTypes roomType = dungeonData.GetRandomRoomType();
-                DungeonGenerator.instance.GenerateRoom(roomType, item.changeTheme ? nextTheme : theme, item.transform, false, removedFromMainPath + 1);
+
+                PCGRoom generatedRoom = DungeonGenerator.instance.GenerateRoom(roomType, item.changeTheme ? nextTheme : theme, item.transform, false, removedFromMainPath + 1);
+                
+                if (roomBounds != null)
+                {
+                    attachedRooms.Add(generatedRoom);
+                    generatedRoom.attachedRooms.Add(this);
+                }
             }
         }
     }
@@ -166,7 +182,7 @@ public class PCGRoom : MonoBehaviour
 
         generated = true;
 
-        SpawnSideRooms();
+        SpawnAdditionalRooms();
     }
 
     Door door;
@@ -187,17 +203,6 @@ public class PCGRoom : MonoBehaviour
 
             door.interactDelegate += DoorOpened;
             //Debug.Log("Added delegate to room " + roomNumber);
-        }
-    }
-
-    void SpawnSideRooms()
-    {
-        foreach (var item in doorPoints)
-        {
-            if (item != mainDoorPoint)
-            {
-                GrammarsDungeonGeneration.instance.GenerateSideRoom(this, item);
-            }
         }
     }
 

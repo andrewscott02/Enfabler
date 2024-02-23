@@ -7,7 +7,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 {
     #region Setup
 
-    public static GrammarsDungeonGeneration instance;
+    // static GrammarsDungeonGeneration instance;
     public GrammarsDungeonData grammarsDungeonData;
     public int preloadRooms = 2;
 
@@ -15,7 +15,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
     private void Start()
     {
-        instance = this;
+        //instance = this;
         GenerateGrammarsDungeon();
         GameCanvasManager.instance.ShowRegionText(firstTheme.regionName);
     }

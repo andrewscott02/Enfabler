@@ -44,10 +44,9 @@ public class DungeonGenerator : MonoBehaviour
 
         string dungeonLayout = ConvertToString(rooms);
 
-        GenerateRoom(rooms[0], grammarsDungeonData.startingThemes[randTheme], transform, true, 0);
+        PCGRoom start = GenerateRoom(rooms[0], grammarsDungeonData.startingThemes[randTheme], transform, true, 0);
         BakeNavmesh();
-
-        PopulateRooms();
+        CullRooms(start);
     }
 
     [ContextMenu("Cleanup Dungeon")]
@@ -148,17 +147,19 @@ public class DungeonGenerator : MonoBehaviour
     int maxRooms = 50;
     int roomCount = 0;
 
-    public void GenerateRoom(E_RoomTypes roomType, ThemeData theme, Transform spawnTransform, bool mainPath, int removedFromMainPath)
+    public PCGRoom GenerateRoom(E_RoomTypes roomType, ThemeData theme, Transform spawnTransform, bool mainPath, int removedFromMainPath)
     {
         if (roomCount >= maxRooms && mainPath == false)
-            return;
+            return null;
 
         if (removedFromMainPath > grammarsDungeonData.mainPathRemoveLimit)
-            return;
+            return null;
 
         if (removedFromMainPath == grammarsDungeonData.mainPathRemoveLimit)
-            roomType = E_RoomTypes.Treasure;
-
+        {
+            int randInt = Random.Range(0, grammarsDungeonData.sidePathEndRoomTypes.Length);
+            roomType = grammarsDungeonData.sidePathEndRoomTypes[randInt];
+        }
 
         if (mainPath)
             currentRoom++;
@@ -170,29 +171,44 @@ public class DungeonGenerator : MonoBehaviour
         while(iterations < 100)
         {
             Object roomPrefab = grammarsDungeonData.GetRandomRoomPrefab(roomType, theme, out ThemeData nextTheme, out bool reversed);
-            GameObject go = Instantiate(roomPrefab, spawnTransform) as GameObject;
-            go.transform.SetParent(transform, true);
-            PCGRoom goRoom = go.GetComponent<PCGRoom>();
-            bool success = goRoom.Setup(roomType, grammarsDungeonData, theme, nextTheme, reversed, mainPath, mainPath ? 0 : removedFromMainPath);
 
-            if (success)
+            if (roomPrefab != null)
             {
-                //Rotate room if reversed
-                createdRooms.Add(goRoom);
-                iterations = 1000;
-            }
-            else
-            {
-                DestroyImmediate(go);
+                GameObject go = Instantiate(roomPrefab, spawnTransform) as GameObject;
+                go.transform.SetParent(transform, true);
+                PCGRoom goRoom = go.GetComponent<PCGRoom>();
+                bool success = goRoom.Setup(roomType, grammarsDungeonData, theme, nextTheme, reversed, mainPath, mainPath ? 0 : removedFromMainPath);
+
+                if (success)
+                {
+                    //Rotate room if reversed
+                    createdRooms.Add(goRoom);
+                    PopulateRoom(goRoom);
+                    return goRoom;
+                }
+                else
+                {
+                    DestroyImmediate(go);
+                }
             }
 
             iterations++;
         }
+
+        return null;
     }
 
-    void PopulateRooms()
+    void PopulateRoom(PCGRoom room)
     {
+        room.PopulateRoom();
+    }
 
+    public void CullRooms(PCGRoom currentRoom)
+    {
+        foreach (var item in createdRooms)
+        {
+            item.CullRoom(!(item == currentRoom || currentRoom.attachedRooms.Contains(item)));
+        }
     }
 
     #region Navmesh

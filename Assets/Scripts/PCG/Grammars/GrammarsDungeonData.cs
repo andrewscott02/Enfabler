@@ -9,7 +9,7 @@ public class GrammarsDungeonData : ScriptableObject
 
     public RoomData[] roomData;
     public E_RoomTypes[] additionalRoomTypes;
-    //public RoomData sidePathEndRoomType;
+    public E_RoomTypes[] sidePathEndRoomTypes;
     public int additionalHealingRooms = 0;
     Dictionary<E_RoomTypes, int> roomDict;
     public Vector2Int roomsCountMinMax;
