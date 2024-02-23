@@ -13110,11 +13110,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PCGModularAsset (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 9052951166879614478, guid: a91f0bce6fd31d34f921a2fbeacdb920,
-        type: 3}
-      propertyPath: changeTheme
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a91f0bce6fd31d34f921a2fbeacdb920, type: 3}
 --- !u!1001 &1206264512045229979
@@ -13199,11 +13194,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PCGModularAsset (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 9052951166879614478, guid: a91f0bce6fd31d34f921a2fbeacdb920,
-        type: 3}
-      propertyPath: changeTheme
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a91f0bce6fd31d34f921a2fbeacdb920, type: 3}
 --- !u!1001 &1273569891687058506
@@ -13241,12 +13231,12 @@ PrefabInstance:
     - target: {fileID: 247890460645902200, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 289129340606967763, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 374938946941071322, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13328,14 +13318,24 @@ PrefabInstance:
       propertyPath: changeTheme
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1310158711556533770, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1376331058511552101, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1540302779157276155, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1560603561905740689, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
+    - target: {fileID: 1559265335750600918, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
-      propertyPath: changeTheme
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1560603561905740693, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
@@ -13361,6 +13361,16 @@ PrefabInstance:
     - target: {fileID: 1672967070967211580, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1680697526119664615, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697434020853407919, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1738779224413418810, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
@@ -13406,7 +13416,7 @@ PrefabInstance:
     - target: {fileID: 2147390362616350998, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2218786807692142072, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13435,11 +13445,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2919453752570158937, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
-      propertyPath: mainDoorPoint
-      value: 
-      objectReference: {fileID: 3741282316714022534}
-    - target: {fileID: 2919453752570158937, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
-        type: 3}
       propertyPath: resetTransformsGizmo
       value: 1
       objectReference: {fileID: 0}
@@ -13452,6 +13457,11 @@ PrefabInstance:
         type: 3}
       propertyPath: changeTheme
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3071274714947921777, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3154371329108902558, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13481,7 +13491,7 @@ PrefabInstance:
     - target: {fileID: 3250541223233950488, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3482985472272228998, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13501,11 +13511,16 @@ PrefabInstance:
     - target: {fileID: 3692648151104521597, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3865119934682776826, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932341175408150292, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4023906877925032089, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
@@ -13516,7 +13531,7 @@ PrefabInstance:
     - target: {fileID: 4023906877925032089, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4129459349646203734, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13526,7 +13541,7 @@ PrefabInstance:
     - target: {fileID: 4129459349646203734, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4170185155870365429, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13536,7 +13551,7 @@ PrefabInstance:
     - target: {fileID: 4277050047724019332, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4375116877947622125, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13566,7 +13581,7 @@ PrefabInstance:
     - target: {fileID: 4528297380963715056, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4645643823462646736, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13586,7 +13601,7 @@ PrefabInstance:
     - target: {fileID: 4846279232856383616, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4903527386364447739, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13616,7 +13631,7 @@ PrefabInstance:
     - target: {fileID: 5205519815082766047, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5326752769719376851, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13743,6 +13758,11 @@ PrefabInstance:
       propertyPath: changeTheme
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6219497517099810535, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6268190770360372859, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -13768,6 +13788,11 @@ PrefabInstance:
       propertyPath: changeTheme
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6646277556914977512, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6810610930660252533, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
@@ -13781,7 +13806,7 @@ PrefabInstance:
     - target: {fileID: 6966062718941038027, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7173197059747186364, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13811,7 +13836,7 @@ PrefabInstance:
     - target: {fileID: 7571249980851595208, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7707910341233532981, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13826,7 +13851,7 @@ PrefabInstance:
     - target: {fileID: 7722070751150368578, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7951450762718972707, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13837,11 +13862,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -18.625
-      objectReference: {fileID: 0}
-    - target: {fileID: 7951450762718972711, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
-        type: 3}
-      propertyPath: changeTheme
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7981095540736196824, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13871,12 +13891,17 @@ PrefabInstance:
     - target: {fileID: 8409110700851428021, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416101189131891931, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8417196246716244701, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494157785575578811, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13893,10 +13918,15 @@ PrefabInstance:
       propertyPath: changeTheme
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8734415802752754696, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8777860187313445592, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8842114636561933203, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
@@ -13931,7 +13961,7 @@ PrefabInstance:
     - target: {fileID: 9208354228913497586, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
         type: 3}
       propertyPath: changeTheme
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c9fc99bb090ead42ba55cb8d8ca659c, type: 3}
@@ -13941,18 +13971,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1273569891687058506}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3741282316714022534 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2469966424753527500, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1273569891687058506}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d0a5013bc51b264f9ab03ea04e5aa6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &6866296556702201980 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5685052665459586102, guid: 7c9fc99bb090ead42ba55cb8d8ca659c,
@@ -13985,7 +14003,7 @@ PrefabInstance:
     - target: {fileID: 9052951166879614474, guid: a91f0bce6fd31d34f921a2fbeacdb920,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 4
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 9052951166879614474, guid: a91f0bce6fd31d34f921a2fbeacdb920,
         type: 3}
@@ -14057,17 +14075,6 @@ PrefabInstance:
       propertyPath: moduleType
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 9052951166879614478, guid: a91f0bce6fd31d34f921a2fbeacdb920,
-        type: 3}
-      propertyPath: changeTheme
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9052951166879614478, guid: a91f0bce6fd31d34f921a2fbeacdb920,
-        type: 3}
-      propertyPath: overrideThemeData
-      value: 
-      objectReference: {fileID: 11400000, guid: b6df89e3cd862654f8d438106752ce6a,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a91f0bce6fd31d34f921a2fbeacdb920, type: 3}
 --- !u!1001 &1598619912760457461
@@ -14194,7 +14201,7 @@ PrefabInstance:
     - target: {fileID: 9052951166879614474, guid: a91f0bce6fd31d34f921a2fbeacdb920,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.82
+      value: 15.75
       objectReference: {fileID: 0}
     - target: {fileID: 9052951166879614474, guid: a91f0bce6fd31d34f921a2fbeacdb920,
         type: 3}
@@ -14240,11 +14247,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PCGModularAsset (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9052951166879614478, guid: a91f0bce6fd31d34f921a2fbeacdb920,
-        type: 3}
-      propertyPath: changeTheme
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a91f0bce6fd31d34f921a2fbeacdb920, type: 3}
@@ -14743,11 +14745,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PCGModularAsset (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9052951166879614478, guid: a91f0bce6fd31d34f921a2fbeacdb920,
-        type: 3}
-      propertyPath: changeTheme
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a91f0bce6fd31d34f921a2fbeacdb920, type: 3}
