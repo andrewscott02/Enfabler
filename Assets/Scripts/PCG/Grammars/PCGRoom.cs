@@ -121,6 +121,8 @@ public class PCGRoom : MonoBehaviour
             attachedRooms.Add(generatedRoom);
             generatedRoom.attachedRooms.Add(this);
         }
+
+        //TODO: If no main room can be spawned, try another door point
     }
 
     void SpawnAdditionalRooms()
@@ -225,6 +227,16 @@ public class PCGRoom : MonoBehaviour
     }
 
     int enemiesInRoom = 0;
+    public int ForceAddEnemyToRoom()
+    {
+        enemiesInRoom++;
+        return enemiesInRoom;
+    }
+    public int ForceRemoveEnemyFromRoom(BaseCharacterController enemy = null)
+    {
+        EnemyKilled(enemy);
+        return enemiesInRoom;
+    }
 
     void SpawnEnemies()
     {
