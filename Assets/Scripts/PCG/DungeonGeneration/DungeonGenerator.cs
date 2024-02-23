@@ -5,6 +5,8 @@ using Unity.AI.Navigation;
 
 public class DungeonGenerator : MonoBehaviour
 {
+    #region Setup
+
     public static DungeonGenerator instance;
     public GrammarsDungeonData grammarsDungeonData;
 
@@ -15,6 +17,10 @@ public class DungeonGenerator : MonoBehaviour
         GenerateDungeon();
         //GameCanvasManager.instance.ShowRegionText(firstTheme.regionName);
     }
+
+    #endregion
+
+    #region Dungeon Generation - Grammars
 
     public List<E_RoomTypes> rooms;
     public int currentRoom = 0;
@@ -151,6 +157,10 @@ public class DungeonGenerator : MonoBehaviour
     int maxRooms = 50;
     int roomCount = 0;
 
+    #endregion
+
+    #region Dungeon Generation - Prefabs
+
     public PCGRoom GenerateRoom(E_RoomTypes roomType, ThemeData theme, Transform spawnTransform, bool mainPath, int removedFromMainPath)
     {
         if (roomCount >= maxRooms && mainPath == false)
@@ -205,6 +215,8 @@ public class DungeonGenerator : MonoBehaviour
 
         return roomFits;
     }
+
+    #endregion
 
     void PopulateRooms()
     {

@@ -121,15 +121,19 @@ public class PCGRoom : MonoBehaviour
         if (success)
             return;
 
-        return;
         //If no main room can be spawned, try another door point
         foreach (var item in doorPoints)
         {
             if (TrySpawnRoom(item, roomType, true, 0))
             {
+                success = true;
                 mainDoorPoint = item;
+                return;
             }
         }
+
+        //Tries next room, skipping current room data
+        SpawnNextMainRoom();
     }
 
     void SpawnAdditionalRooms()
