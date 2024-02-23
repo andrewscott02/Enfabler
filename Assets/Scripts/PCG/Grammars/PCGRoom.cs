@@ -94,8 +94,7 @@ public class PCGRoom : MonoBehaviour
 
         if (cols.Length > 1)
         {
-            Debug.Log("Destroying room, intersects with another");
-            //Spawn another room in place - In Dungeon generator and destroy room
+            //Debug.Log("Destroying room, intersects with another");
             return true;
         }
 
@@ -119,7 +118,10 @@ public class PCGRoom : MonoBehaviour
         bool success = TrySpawnRoom(mainDoorPoint, roomType, true, 0);
 
         if (success)
+        {
+            SpawnDoors(mainDoorPoint, true);
             return;
+        }
 
         //If no main room can be spawned, try another door point
         foreach (var item in doorPoints)
@@ -128,6 +130,7 @@ public class PCGRoom : MonoBehaviour
             {
                 success = true;
                 mainDoorPoint = item;
+                SpawnDoors(item, true);
                 return;
             }
         }
@@ -138,21 +141,21 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnAdditionalRooms()
     {
-        bool success = false;
         foreach (var item in doorPoints)
         {
             if (item != mainDoorPoint || mainDoorPoint == null)
             {
-                Debug.Log("Spawning side room");
+                //Debug.Log("Spawning side room");
                 E_RoomTypes roomType = dungeonData.GetRandomRoomType();
                 if (TrySpawnRoom(item, roomType, false, removedFromMainPath + 1))
-                    success = true;
+                {
+                    SpawnDoors(item, true);
+                }
+                else
+                {
+                    SpawnDoors(item, false);
+                }
             }
-        }
-
-        if (!success)
-        {
-            CloseOffPath();
         }
     }
 
@@ -168,11 +171,6 @@ public class PCGRoom : MonoBehaviour
         }
 
         return false;
-    }
-
-    void CloseOffPath()
-    {
-        Debug.LogWarning("Close off path not implemented");
     }
 
     public ObjectSpawner GetRandomDoorPoint()
@@ -197,7 +195,7 @@ public class PCGRoom : MonoBehaviour
         if (generated)
             return;
 
-        SpawnDoors();
+        //SpawnDoors();
         SpawnTraps();
         SpawnObjects();
 
@@ -214,29 +212,23 @@ public class PCGRoom : MonoBehaviour
         SetPuzzleElements();
 
         generated = true;
-
-        SpawnAdditionalRooms();
     }
 
     Door door;
 
-    void SpawnDoors()
+    void SpawnDoors(ObjectSpawner doorSpawner, bool open)
     {
-        //Check if door can spawn room
-        foreach (var item in doorPoints)
-        {
-            ThemeData doorTheme = item.changeTheme ? nextTheme : theme;
-            GameObject go = Instantiate(dungeonData.GetRandomDoor(doorTheme), item.transform) as GameObject;
-            go.transform.position = item.transform.position;
-            go.transform.rotation = item.transform.rotation;
-            itemsInRoom.Add(go);
+        ThemeData doorTheme = doorSpawner.changeTheme ? nextTheme : theme;
+        GameObject go = Instantiate(open ? dungeonData.GetRandomDoor(doorTheme) : dungeonData.GetRandomDoorClosedOff(doorTheme), doorSpawner.transform) as GameObject;
+        go.transform.position = doorSpawner.transform.position;
+        go.transform.rotation = doorSpawner.transform.rotation;
+        itemsInRoom.Add(go);
 
-            door = go.GetComponentInChildren<Door>();
-            door.lockedInteraction = lockOverride ? lockDoor : dungeonData.GetDoorLocked(roomType);
+        door = go.GetComponentInChildren<Door>();
+        door.lockedInteraction = lockOverride ? lockDoor : dungeonData.GetDoorLocked(roomType);
 
-            door.interactDelegate += DoorOpened;
-            //Debug.Log("Added delegate to room " + roomNumber);
-        }
+        door.interactDelegate += DoorOpened;
+        //Debug.Log("Added delegate to room " + roomNumber);
     }
 
     bool doorOpenedLogic = false;

@@ -150,6 +150,11 @@ public class GrammarsDungeonData : ScriptableObject
         return theme.doors[Random.Range(0, theme.doors.Length)];
     }
 
+    public Object GetRandomDoorClosedOff(ThemeData theme)
+    {
+        return theme.closedDoors[Random.Range(0, theme.closedDoors.Length)];
+    }
+
     #endregion
 
     #region Enemies
