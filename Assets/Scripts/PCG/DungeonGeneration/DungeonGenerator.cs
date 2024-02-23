@@ -220,15 +220,17 @@ public class DungeonGenerator : MonoBehaviour
 
     void PopulateRooms()
     {
-        foreach (var item in createdRooms)
-            item.PopulateRoom();
+        for (int i = 0; i < createdRooms.Count; i++)
+        {
+            createdRooms[i].PopulateRoom();
+        }
     }
 
     public void CullRooms(PCGRoom currentRoom)
     {
-        foreach (var item in createdRooms)
+        for (int i = 0; i < createdRooms.Count; i++)
         {
-            item.CullRoom(!(item == currentRoom || currentRoom.attachedRooms.Contains(item)));
+            createdRooms[i].CullRoom(!(createdRooms[i] == currentRoom || currentRoom.attachedRooms.Contains(createdRooms[i])));
         }
     }
 
