@@ -51,17 +51,8 @@ public class PCGRoom : MonoBehaviour
     public E_RoomTypes roomType { get; private set; }
     public GrammarsDungeonData dungeonData { get; private set; }
 
-    public bool Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, ThemeData theme, ThemeData nextTheme, bool reversed, bool mainPath, int removedFromPath)
+    public void Setup(E_RoomTypes roomType, GrammarsDungeonData dungeonData, ThemeData theme, ThemeData nextTheme, bool reversed, bool mainPath, int removedFromPath)
     {
-        Collider[] cols = Physics.OverlapBox(roomBounds.bounds.center, roomBounds.bounds.extents, roomBounds.transform.rotation, boundsLayer);
-        
-        if (cols.Length > 1)
-        {
-            Debug.Log("Destroying room, intersects with another");
-            //Spawn another room in place - In Dungeon generator and destroy room
-            return false;
-        }
-
         this.roomType = roomType;
         this.dungeonData = dungeonData;
 
@@ -95,8 +86,20 @@ public class PCGRoom : MonoBehaviour
 
         SpawnAdditionalRooms();
         SetupVolumes();
+    }
 
-        return true;
+    public bool Overlaps()
+    {
+        Collider[] cols = Physics.OverlapBox(roomBounds.bounds.center, roomBounds.bounds.extents, roomBounds.transform.rotation, boundsLayer);
+
+        if (cols.Length > 1)
+        {
+            Debug.Log("Destroying room, intersects with another");
+            //Spawn another room in place - In Dungeon generator and destroy room
+            return true;
+        }
+
+        return false;
     }
 
     void GetDoorPoints()
@@ -113,36 +116,59 @@ public class PCGRoom : MonoBehaviour
             return;
 
         E_RoomTypes roomType = DungeonGenerator.instance.rooms[DungeonGenerator.instance.currentRoom];
+        bool success = TrySpawnRoom(mainDoorPoint, roomType, true, 0);
 
-        PCGRoom generatedRoom = DungeonGenerator.instance.GenerateRoom(roomType, mainDoorPoint.changeTheme ? nextTheme : theme, mainDoorPoint.transform, true, 0);
-        
-        if (generatedRoom != null)
+        if (success)
+            return;
+
+        return;
+        //If no main room can be spawned, try another door point
+        foreach (var item in doorPoints)
         {
-            attachedRooms.Add(generatedRoom);
-            generatedRoom.attachedRooms.Add(this);
+            if (TrySpawnRoom(item, roomType, true, 0))
+            {
+                mainDoorPoint = item;
+            }
         }
-
-        //TODO: If no main room can be spawned, try another door point
     }
 
     void SpawnAdditionalRooms()
     {
+        bool success = false;
         foreach (var item in doorPoints)
         {
             if (item != mainDoorPoint || mainDoorPoint == null)
             {
                 Debug.Log("Spawning side room");
                 E_RoomTypes roomType = dungeonData.GetRandomRoomType();
-
-                PCGRoom generatedRoom = DungeonGenerator.instance.GenerateRoom(roomType, item.changeTheme ? nextTheme : theme, item.transform, false, removedFromMainPath + 1);
-                
-                if (generatedRoom != null)
-                {
-                    attachedRooms.Add(generatedRoom);
-                    generatedRoom.attachedRooms.Add(this);
-                }
+                if (TrySpawnRoom(item, roomType, false, removedFromMainPath + 1))
+                    success = true;
             }
         }
+
+        if (!success)
+        {
+            CloseOffPath();
+        }
+    }
+
+    bool TrySpawnRoom(ObjectSpawner doorPoint, E_RoomTypes roomType, bool mainPath, int removedFromMainPath)
+    {
+        PCGRoom generatedRoom = DungeonGenerator.instance.GenerateRoom(roomType, doorPoint.changeTheme ? nextTheme : theme, doorPoint.transform, mainPath, removedFromMainPath);
+
+        if (generatedRoom != null)
+        {
+            attachedRooms.Add(generatedRoom);
+            generatedRoom.attachedRooms.Add(this);
+            return true;
+        }
+
+        return false;
+    }
+
+    void CloseOffPath()
+    {
+        Debug.LogWarning("Close off path not implemented");
     }
 
     public ObjectSpawner GetRandomDoorPoint()
@@ -177,7 +203,8 @@ public class PCGRoom : MonoBehaviour
                 cullObjects.Add(transform.GetChild(i).gameObject);
         }
 
-        Invoke("SpawnEnemies", 0.5f);
+        //Invoke("SpawnEnemies", 0.5f);
+        SpawnEnemies();
         SpawnBoss();
 
         SetPuzzleElements();
@@ -267,7 +294,7 @@ public class PCGRoom : MonoBehaviour
 
             BaseCharacterController enemy = go.GetComponent<BaseCharacterController>();
             enemy.characterDied += EnemyKilled;
-            enemiesInRoom++;
+            //enemiesInRoom++;
         }
 
         nextRoundThreshold = Mathf.RoundToInt((float)enemiesInRoom * 0.25f);
@@ -372,7 +399,7 @@ public class PCGRoom : MonoBehaviour
 
         BaseCharacterController enemy = go.GetComponent<BaseCharacterController>();
         enemy.characterDied += EnemyKilled;
-        enemiesInRoom++;
+        //enemiesInRoom++;
     }
 
     void SetPuzzleElements()

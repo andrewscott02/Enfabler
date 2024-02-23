@@ -46,6 +46,7 @@ public class DungeonGenerator : MonoBehaviour
 
         PCGRoom start = GenerateRoom(rooms[0], grammarsDungeonData.startingThemes[randTheme], transform, true, 0);
         BakeNavmesh();
+        PopulateRooms();
         CullRooms(start);
     }
 
@@ -78,7 +79,10 @@ public class DungeonGenerator : MonoBehaviour
         currentRoom = 0;
         roomCount = 0;
 
+        rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Healing, E_RoomTypes.Boss, E_RoomTypes.End };
         createdRooms = new List<PCGRoom>();
+
+        BakeNavmesh();
     }
 
     #region Grammars
@@ -166,41 +170,46 @@ public class DungeonGenerator : MonoBehaviour
 
         roomCount++;
 
-        int iterations = 0;
+        Object roomPrefab = grammarsDungeonData.GetRandomRoomPrefab(roomType, theme, out ThemeData nextTheme, out bool reversed, spawnTransform);
 
-        while(iterations < 100)
+        if (roomPrefab != null)
         {
-            Object roomPrefab = grammarsDungeonData.GetRandomRoomPrefab(roomType, theme, out ThemeData nextTheme, out bool reversed);
+            GameObject go = Instantiate(roomPrefab, spawnTransform) as GameObject;
+            go.transform.SetParent(transform, true);
+            PCGRoom goRoom = go.GetComponent<PCGRoom>();
+            goRoom.Setup(roomType, grammarsDungeonData, theme, nextTheme, reversed, mainPath, mainPath ? 0 : removedFromMainPath);
 
-            if (roomPrefab != null)
+            if (goRoom != null)
             {
-                GameObject go = Instantiate(roomPrefab, spawnTransform) as GameObject;
-                go.transform.SetParent(transform, true);
-                PCGRoom goRoom = go.GetComponent<PCGRoom>();
-                bool success = goRoom.Setup(roomType, grammarsDungeonData, theme, nextTheme, reversed, mainPath, mainPath ? 0 : removedFromMainPath);
-
-                if (success && goRoom != null)
-                {
-                    //Rotate room if reversed
-                    createdRooms.Add(goRoom);
-                    PopulateRoom(goRoom);
-                    return goRoom;
-                }
-                else
-                {
-                    DestroyImmediate(go);
-                }
+                //TODO: Rotate room if reversed
+                createdRooms.Add(goRoom);
+                return goRoom;
             }
-
-            iterations++;
+            else
+            {
+                DestroyImmediate(go);
+            }
         }
 
         return null;
     }
 
-    void PopulateRoom(PCGRoom room)
+    public bool RoomFits(Object roomPrefab, Transform spawnTransform)
     {
-        room.PopulateRoom();
+        GameObject go = Instantiate(roomPrefab, spawnTransform) as GameObject;
+        go.transform.SetParent(transform, true);
+        PCGRoom goRoom = go.GetComponent<PCGRoom>();
+
+        bool roomFits = !goRoom.Overlaps();
+        DestroyImmediate(go);
+
+        return roomFits;
+    }
+
+    void PopulateRooms()
+    {
+        foreach (var item in createdRooms)
+            item.PopulateRoom();
     }
 
     public void CullRooms(PCGRoom currentRoom)

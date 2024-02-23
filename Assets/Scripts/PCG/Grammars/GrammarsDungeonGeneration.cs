@@ -152,7 +152,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         themes = new List<ThemeData>();
 
         reversedRooms = new List<bool>();
-
+        /*
         for(int i = 0; i < rooms.Count; i++)
         {
             Object prefab = grammarsDungeonData.GetRandomRoomPrefab(rooms[i], currentTheme, out ThemeData nextRoom, out bool reversed);
@@ -170,7 +170,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         }
 
         //TODO: Use grammars to change rooms
-
+        */
         return prefabs;
     }
 
@@ -229,6 +229,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
     public void GenerateSideRoom(PCGRoom previousRoom, ObjectSpawner previousDoorPoint)
     {
+        /*
         E_RoomTypes roomType = grammarsDungeonData.GetRandomRoomTypeIgnoreLimits();
         ThemeData theme = previousDoorPoint.changeTheme ? previousRoom.nextTheme : previousRoom.theme;
 
@@ -267,6 +268,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
             createdRooms.Add(goRoom);
         }
+        */
     }
 
     void PopulateRooms()

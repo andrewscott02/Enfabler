@@ -17,8 +17,12 @@ public class RoomBounds : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             //Debug.Log("ROOMBOUNDS - Collided with enemy");
-            room.cullObjects.Add(other.gameObject);
-            other.gameObject.transform.SetParent(room.transform, true);
+            if (!room.cullObjects.Contains(other.gameObject))
+            {
+                room.cullObjects.Add(other.gameObject);
+                room.ForceAddEnemyToRoom();
+                other.gameObject.transform.SetParent(room.transform, true);
+            }
         }
     }
 
@@ -27,8 +31,11 @@ public class RoomBounds : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             //Debug.Log("ROOMBOUNDS - Collided with enemy");
-            room.cullObjects.Remove(other.gameObject);
-            room.ForceRemoveEnemyFromRoom(null);
+            if (room.cullObjects.Contains(other.gameObject))
+            {
+                room.cullObjects.Remove(other.gameObject);
+                room.ForceRemoveEnemyFromRoom(null);
+            }
         }
     }
 }
