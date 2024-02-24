@@ -8,10 +8,13 @@ public class GrammarsDungeonData : ScriptableObject
     #region Variables
 
     public RoomData[] roomData;
+
     public E_RoomTypes emptyRoomType;
     public E_RoomTypes[] additionalRoomTypes;
     public E_RoomTypes[] sidePathRoomTypes;
     public E_RoomTypes[] sidePathEndRoomTypes;
+    public float sideRoomEndChance = 0.05f;
+
     public int additionalHealingRooms = 0;
     Dictionary<E_RoomTypes, int> roomDict;
     public Vector2Int roomsCountMinMax;

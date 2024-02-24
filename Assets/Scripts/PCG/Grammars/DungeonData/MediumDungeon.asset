@@ -55,7 +55,7 @@ MonoBehaviour:
   - roomType: 2
     prefabData:
     - {fileID: 11400000, guid: c61980e88fe934b4980546143413c376, type: 2}
-    countMinMax: {x: 0, y: 1}
+    countMinMax: {x: 0, y: 9999}
     lockDoor: 1
     enemySpawnInfo: []
     trapsMinMax: {x: 0, y: 0}
@@ -121,6 +121,7 @@ MonoBehaviour:
   additionalRoomTypes: 03000000040000000700000009000000
   sidePathRoomTypes: 030000000400000007000000
   sidePathEndRoomTypes: 0a00000006000000
+  sideRoomEndChance: 0.05
   additionalHealingRooms: 2
   roomsCountMinMax: {x: 8, y: 10}
   maxTotalRooms: 100
