@@ -8,8 +8,7 @@ public class TextPopupManager : MonoBehaviour
 
     public TextPopup regionText, messageText;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;
     }

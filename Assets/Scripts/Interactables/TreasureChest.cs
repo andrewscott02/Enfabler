@@ -6,6 +6,8 @@ public class TreasureChest : Interactable, IInteractable
 {
     Animator animator;
 
+    public Vector2Int goldAmount = new Vector2Int(40, 100);
+
     protected override void Start()
     {
         base.Start();
@@ -17,7 +19,11 @@ public class TreasureChest : Interactable, IInteractable
     {
         base.Interacted(interactCharacter);
         animator.SetTrigger("OpenChest");
-        //TODO: Add gold
+
+        int gold = Random.Range(goldAmount.x, goldAmount.y);
+        Debug.Log("GOLD FROM CHEST: " + gold);
+        TreasureManager.instance.D_GiveGold(gold);
+
         interactDelegate();
     }
 
