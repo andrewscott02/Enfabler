@@ -51,9 +51,10 @@ public class DungeonGenerator : MonoBehaviour
         string dungeonLayout = ConvertToString(rooms);
 
         PCGRoom start = GenerateRoom(rooms[0], grammarsDungeonData.startingThemes[randTheme], transform, true, 0);
+
         BakeNavmesh();
-        PopulateRooms();
-        CullRooms(start);
+        //PopulateRooms();
+        //CullRooms(start);
     }
 
     [ContextMenu("Cleanup Dungeon")]
@@ -179,13 +180,14 @@ public class DungeonGenerator : MonoBehaviour
 
         roomCount++;
 
-        Object roomPrefab = grammarsDungeonData.GetRandomRoomPrefab(roomType, theme, out ThemeData nextTheme, out bool reversed, spawnTransform);
+        Object roomPrefab = grammarsDungeonData.GetRandomRoomPrefab(roomType, theme, out ThemeData nextTheme, out bool reversed, out int doorIndex, spawnTransform);
 
         if (roomPrefab != null)
         {
             GameObject go = Instantiate(roomPrefab, spawnTransform) as GameObject;
             go.transform.SetParent(transform, true);
             PCGRoom goRoom = go.GetComponent<PCGRoom>();
+            goRoom.randomDoorPoint = doorIndex;
             goRoom.Setup(roomType, grammarsDungeonData, theme, nextTheme, reversed, mainPath, mainPath ? 0 : removedFromMainPath);
 
             if (goRoom != null)
@@ -203,11 +205,15 @@ public class DungeonGenerator : MonoBehaviour
         return null;
     }
 
-    public bool RoomFits(Object roomPrefab, Transform spawnTransform)
+    public bool RoomFits(Object roomPrefab, Transform spawnTransform, out int doorIndex)
     {
         GameObject go = Instantiate(roomPrefab, spawnTransform) as GameObject;
         go.transform.SetParent(transform, true);
         PCGRoom goRoom = go.GetComponent<PCGRoom>();
+
+        doorIndex = Random.Range(0, goRoom.doorPoints.Length);
+        goRoom.randomDoorPoint = doorIndex;
+        goRoom.GetDoorPoints();
 
         bool roomFits = !goRoom.Overlaps();
         DestroyImmediate(go);

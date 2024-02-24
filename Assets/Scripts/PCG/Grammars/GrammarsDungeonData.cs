@@ -102,15 +102,16 @@ public class GrammarsDungeonData : ScriptableObject
 
     #region Room
 
-    public Object GetRandomRoomPrefab(E_RoomTypes roomType, ThemeData currentTheme, out ThemeData nextRoomTheme, out bool reversed, Transform spawnTransform)
+    public Object GetRandomRoomPrefab(E_RoomTypes roomType, ThemeData currentTheme, out ThemeData nextRoomTheme, out bool reversed, out int doorIndex, Transform spawnTransform)
     {
         int index = GetRoomDataIndex(roomType);
         nextRoomTheme = currentTheme;
         reversed = false;
+        doorIndex = 0;
 
         if (index >= 0 && index < roomData.Length)
         {
-            Object prefab = DeterminePrefab(roomData[index].prefabData, currentTheme, out nextRoomTheme, out reversed, spawnTransform);
+            Object prefab = DeterminePrefab(roomData[index].prefabData, currentTheme, out nextRoomTheme, out reversed, out doorIndex, spawnTransform);
 
             return prefab;
         }
@@ -118,12 +119,13 @@ public class GrammarsDungeonData : ScriptableObject
         return null;
     }
 
-    Object DeterminePrefab(RoomPrefabData[] prefabData, ThemeData currentTheme, out ThemeData nextRoomTheme, out bool reversed, Transform spawnTransform)
+    Object DeterminePrefab(RoomPrefabData[] prefabData, ThemeData currentTheme, out ThemeData nextRoomTheme, out bool reversed, out int doorIndex, Transform spawnTransform)
     {
         nextRoomTheme = currentTheme;
         int startIndex = Random.Range(0, prefabData.Length);
         int currentIndex = startIndex;
         reversed = false;
+        doorIndex = 0;
 
         while (true)
         {
@@ -132,7 +134,7 @@ public class GrammarsDungeonData : ScriptableObject
                 prefabData[currentIndex].Used();
                 nextRoomTheme = prefabData[currentIndex].GetNextRoomTheme(currentTheme);
                 reversed = prefabData[currentIndex].reverseRooms;
-                return prefabData[currentIndex].GetRandomPrefab(spawnTransform);
+                return prefabData[currentIndex].GetRandomPrefab(spawnTransform, out doorIndex);
             }
 
             currentIndex++;

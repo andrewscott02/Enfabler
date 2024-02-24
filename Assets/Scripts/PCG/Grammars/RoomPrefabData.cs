@@ -23,14 +23,14 @@ public class RoomPrefabData : ScriptableObject
         timesUsed++;
     }
 
-    public Object GetRandomPrefab(Transform spawnTransform)
+    public Object GetRandomPrefab(Transform spawnTransform, out int doorIndex)
     {
         int startIndex = Random.Range(0, roomPrefabs.Length);
         int currentIndex = startIndex;
 
         while (true)
         {
-            if (DungeonGenerator.instance.RoomFits(roomPrefabs[currentIndex], spawnTransform))
+            if (DungeonGenerator.instance.RoomFits(roomPrefabs[currentIndex], spawnTransform, out doorIndex))
             {
                 return roomPrefabs[currentIndex];
             }

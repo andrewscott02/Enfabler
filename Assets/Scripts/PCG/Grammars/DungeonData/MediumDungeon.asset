@@ -32,7 +32,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: bfd71299a52c034409df53d61b9c8cc1, type: 2}
     - {fileID: 11400000, guid: cebf278ea26218042aa9a2874725882f, type: 2}
     - {fileID: 11400000, guid: 9829b9d8e945d934b9eac0bf35bda11a, type: 2}
-    countMinMax: {x: 0, y: 3}
+    countMinMax: {x: 0, y: 5}
     lockDoor: 0
     enemySpawnInfo:
     - enemiesMax: 4
@@ -65,7 +65,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
     - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
     - {fileID: 11400000, guid: cf7d8e8e063ad4f42a8de9bc385d5b74, type: 2}
-    countMinMax: {x: 1, y: 4}
+    countMinMax: {x: 1, y: 15}
     lockDoor: 1
     enemySpawnInfo:
     - enemiesMax: 10
@@ -74,7 +74,7 @@ MonoBehaviour:
   - roomType: 9
     prefabData:
     - {fileID: 11400000, guid: 98b37e6c6955ef7418a3f5ebbb6c6b70, type: 2}
-    countMinMax: {x: 0, y: 1}
+    countMinMax: {x: 0, y: 3}
     lockDoor: 1
     enemySpawnInfo:
     - enemiesMax: 3
@@ -89,7 +89,7 @@ MonoBehaviour:
   - roomType: 4
     prefabData:
     - {fileID: 11400000, guid: 0d2468f8b99cc83438a2fe3d8c03d282, type: 2}
-    countMinMax: {x: 1, y: 3}
+    countMinMax: {x: 1, y: 10}
     lockDoor: 1
     enemySpawnInfo: []
     trapsMinMax: {x: 0, y: 0}
@@ -99,7 +99,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
     - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
     - {fileID: 11400000, guid: cf7d8e8e063ad4f42a8de9bc385d5b74, type: 2}
-    countMinMax: {x: 0, y: 3}
+    countMinMax: {x: 0, y: 10}
     lockDoor: 0
     enemySpawnInfo:
     - enemiesMax: 4
@@ -111,7 +111,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
     - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
     - {fileID: 11400000, guid: cf7d8e8e063ad4f42a8de9bc385d5b74, type: 2}
-    countMinMax: {x: 0, y: 3}
+    countMinMax: {x: 0, y: 10}
     lockDoor: 0
     enemySpawnInfo: []
     trapsMinMax: {x: 3, y: 6}
@@ -119,6 +119,7 @@ MonoBehaviour:
   sidePathEndRoomTypes: 0500000006000000
   additionalHealingRooms: 2
   roomsCountMinMax: {x: 8, y: 10}
+  maxTotalRooms: 100
   sideRoomChance: 0.75
   mainPathRemoveLimit: 4
   startingThemes:

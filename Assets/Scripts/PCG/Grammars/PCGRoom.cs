@@ -11,6 +11,8 @@ public class PCGRoom : MonoBehaviour
     public GameObject exit;
 
     public ObjectSpawner mainDoorPoint;
+    public ObjectSpawner entranceDoorPoint;
+    public ObjectSpawner defaultReverseRoomDoorPoint;
 
     public void TrySetMainDoorPoint(ObjectSpawner value)
     {
@@ -101,12 +103,49 @@ public class PCGRoom : MonoBehaviour
         return false;
     }
 
-    void GetDoorPoints()
+    public int randomDoorPoint = 0;
+
+    public void GetDoorPoints()
     {
         doorPoints = exit.GetComponentsInChildren<ObjectSpawner>();
 
+        if (reversed)
+        {
+            int index = randomDoorPoint;
+            ObjectSpawner newEntrance = doorPoints[index];
+
+            if (defaultReverseRoomDoorPoint != null)
+            {
+                newEntrance = defaultReverseRoomDoorPoint;
+
+                for (int i = 0; i < doorPoints.Length; i++)
+                {
+                    if (doorPoints[i] == newEntrance)
+                        index = i;
+                }
+            }
+
+            doorPoints[index] = entranceDoorPoint;
+            entranceDoorPoint = newEntrance;
+
+            ReverseTransform();
+        }
+
         if (mainPath)
             mainDoorPoint = doorPoints[Random.Range(0, doorPoints.Length)];
+    }
+
+    void ReverseTransform()
+    {
+        //Debug.Log("Reverse room " + i);
+        Vector3 rot = entranceDoorPoint.transform.rotation.eulerAngles + new Vector3(0, 180, 0);
+        transform.rotation = Quaternion.Euler(rot);
+
+        Vector3 offset = transform.position - entranceDoorPoint.transform.position;
+        transform.position = transform.position + offset;
+
+        //Vector3 rot = entranceDoorPoint.transform.rotation.eulerAngles + new Vector3(0, 180, 0);
+        //transform.rotation = Quaternion.Euler(rot);
     }
 
     void SpawnNextMainRoom()
@@ -139,7 +178,7 @@ public class PCGRoom : MonoBehaviour
         SpawnNextMainRoom();
     }
 
-    void SpawnAdditionalRooms()
+    public void SpawnAdditionalRooms()
     {
         foreach (var item in doorPoints)
         {
@@ -161,7 +200,7 @@ public class PCGRoom : MonoBehaviour
 
     bool TrySpawnRoom(ObjectSpawner doorPoint, E_RoomTypes roomType, bool mainPath, int removedFromMainPath)
     {
-        PCGRoom generatedRoom = DungeonGenerator.instance.GenerateRoom(roomType, doorPoint.changeTheme ? nextTheme : theme, doorPoint.transform, mainPath, removedFromMainPath);
+        PCGRoom generatedRoom = DungeonGenerator.instance.GenerateRoom(roomType, doorPoint.changeTheme ^ reversed ? nextTheme : theme, doorPoint.transform, mainPath, removedFromMainPath);
 
         if (generatedRoom != null)
         {
@@ -218,7 +257,7 @@ public class PCGRoom : MonoBehaviour
 
     void SpawnDoors(ObjectSpawner doorSpawner, bool open)
     {
-        ThemeData doorTheme = doorSpawner.changeTheme ? nextTheme : theme;
+        ThemeData doorTheme = doorSpawner.changeTheme ^ reversed ? nextTheme : theme;
         GameObject go = Instantiate(open ? dungeonData.GetRandomDoor(doorTheme) : dungeonData.GetRandomDoorClosedOff(doorTheme), doorSpawner.transform) as GameObject;
         go.transform.position = doorSpawner.transform.position;
         go.transform.rotation = doorSpawner.transform.rotation;
