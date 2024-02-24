@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da2330bc5807aff4d9bf32cf6628fd2d, type: 3}
-  m_Name: Axe
+  m_Name: Club
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 8460293430998555839, guid: c72deb470d60e66449e54f68b0d60a97, type: 3}
+  - {fileID: 8460293430998555839, guid: b893e8d4890f5fc4f8143402207860cd, type: 3}
   - {fileID: 8460293430998555839, guid: 48613acbfa4e99147b89e2adfc8d1ca7, type: 3}
   offhandWeapons: []
   attacks:
@@ -23,9 +23,9 @@ MonoBehaviour:
     arrowCost: 0
     variations:
     - animation: PrimaryAttack
-      damage: 4
+      damage: 3
       attackSpeed: 1
-      currentAttackAnimModifier: 1
+      currentAttackAnimModifier: 0
       canCharge: 1
       autoUnblockable: 0
       chargeDamageScaling: 2
@@ -39,9 +39,9 @@ MonoBehaviour:
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
     - animation: PrimaryAttack
-      damage: 4
+      damage: 3
       attackSpeed: 1
-      currentAttackAnimModifier: 2
+      currentAttackAnimModifier: 1
       canCharge: 1
       autoUnblockable: 0
       chargeDamageScaling: 2
@@ -55,23 +55,23 @@ MonoBehaviour:
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
     - animation: PrimaryAttack
-      damage: 6
+      damage: 5
       attackSpeed: 1
-      currentAttackAnimModifier: 0
-      canCharge: 0
-      autoUnblockable: 1
+      currentAttackAnimModifier: 2
+      canCharge: 1
+      autoUnblockable: 0
       chargeDamageScaling: 2
-      overideChargeAttack: 0
+      overideChargeAttack: 1
       chargedAttackIndex: 10
       nextAttackIndex: 0
-      overrideNextAttackOnHit: 1
-      nextAttackHitIndex: 11
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
     - animation: RipostePrimaryAttack
-      damage: 8
+      damage: 7
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
     - animation: RipostePrimaryAttack
-      damage: 8
+      damage: 7
       attackSpeed: 1
       currentAttackAnimModifier: 1
       canCharge: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
     - animation: DodgePrimaryAttack
-      damage: 4
+      damage: 3
       attackSpeed: 1.5
       currentAttackAnimModifier: 1
       canCharge: 1
@@ -119,25 +119,25 @@ MonoBehaviour:
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
     - animation: DodgePrimaryAttack
-      damage: 6
+      damage: 5
       attackSpeed: 1.5
-      currentAttackAnimModifier: 0
-      canCharge: 0
-      autoUnblockable: 1
+      currentAttackAnimModifier: 2
+      canCharge: 1
+      autoUnblockable: 0
       chargeDamageScaling: 2
-      overideChargeAttack: 0
+      overideChargeAttack: 1
       chargedAttackIndex: 10
       nextAttackIndex: 0
-      overrideNextAttackOnHit: 1
-      nextAttackHitIndex: 11
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
     - animation: DodgePrimaryAttack
-      damage: 4
+      damage: 3
       attackSpeed: 0.8
-      currentAttackAnimModifier: 2
+      currentAttackAnimModifier: 1
       canCharge: 1
       autoUnblockable: 0
       chargeDamageScaling: 2
@@ -150,24 +150,24 @@ MonoBehaviour:
       projectileFX: {fileID: 0}
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
-    - animation: PrimaryAttack
-      damage: 6
+    - animation: DodgePrimaryAttack
+      damage: 5
       attackSpeed: 0.8
-      currentAttackAnimModifier: 0
+      currentAttackAnimModifier: 2
       canCharge: 0
-      autoUnblockable: 1
+      autoUnblockable: 0
       chargeDamageScaling: 2
-      overideChargeAttack: 0
+      overideChargeAttack: 1
       chargedAttackIndex: 10
       nextAttackIndex: 0
-      overrideNextAttackOnHit: 1
-      nextAttackHitIndex: 11
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
     - animation: ChargePrimaryAttack
-      damage: 12
+      damage: 10
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
@@ -183,44 +183,12 @@ MonoBehaviour:
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
     - animation: ChargePrimaryAttack
-      damage: 12
-      attackSpeed: 1
-      currentAttackAnimModifier: 1
-      canCharge: 0
-      autoUnblockable: 1
-      chargeDamageScaling: 2
-      overideChargeAttack: 0
-      chargedAttackIndex: 0
-      nextAttackIndex: 0
-      overrideNextAttackOnHit: 1
-      nextAttackHitIndex: 11
-      projectileData: {fileID: 0}
-      projectileFX: {fileID: 0}
-      additionalShotAngle: []
-      additionalProjectileDamageMultiplier: 0
-    - animation: PrimaryAttackFinisher
-      damage: 5
-      attackSpeed: 1
-      currentAttackAnimModifier: 0
-      canCharge: 0
-      autoUnblockable: 0
-      chargeDamageScaling: 0
-      overideChargeAttack: 0
-      chargedAttackIndex: 0
-      nextAttackIndex: 0
-      overrideNextAttackOnHit: 1
-      nextAttackHitIndex: 12
-      projectileData: {fileID: 0}
-      projectileFX: {fileID: 0}
-      additionalShotAngle: []
-      additionalProjectileDamageMultiplier: 0
-    - animation: PrimaryAttackFinisher
       damage: 10
       attackSpeed: 1
       currentAttackAnimModifier: 1
       canCharge: 0
       autoUnblockable: 1
-      chargeDamageScaling: 0
+      chargeDamageScaling: 2
       overideChargeAttack: 0
       chargedAttackIndex: 0
       nextAttackIndex: 0
@@ -236,7 +204,7 @@ MonoBehaviour:
     arrowCost: 0
     variations:
     - animation: DodgePrimaryAttack
-      damage: 4
+      damage: 3
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
@@ -278,7 +246,7 @@ MonoBehaviour:
     arrowCost: 0
     variations:
     - animation: SwitchPrimaryAttack
-      damage: 5
+      damage: 4
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
@@ -299,7 +267,7 @@ MonoBehaviour:
     arrowCost: 0
     variations:
     - animation: LungeAttack
-      damage: 2
+      damage: 1
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
@@ -339,66 +307,6 @@ MonoBehaviour:
       - 3.4
       - 3.5
       additionalProjectileDamageMultiplier: 0.5
-    - animation: SecondaryAttack
-      damage: 3
-      attackSpeed: 1
-      currentAttackAnimModifier: 0
-      canCharge: 1
-      autoUnblockable: 0
-      chargeDamageScaling: 1
-      overideChargeAttack: 0
-      chargedAttackIndex: 0
-      nextAttackIndex: 2
-      overrideNextAttackOnHit: 0
-      nextAttackHitIndex: 0
-      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
-      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
-        type: 3}
-      additionalShotAngle:
-      - 5
-      - 3.4
-      - 3.5
-      additionalProjectileDamageMultiplier: 3
-    - animation: SecondaryAttack
-      damage: 3
-      attackSpeed: 1
-      currentAttackAnimModifier: 2
-      canCharge: 1
-      autoUnblockable: 0
-      chargeDamageScaling: 1
-      overideChargeAttack: 0
-      chargedAttackIndex: 0
-      nextAttackIndex: 0
-      overrideNextAttackOnHit: 0
-      nextAttackHitIndex: 0
-      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
-      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
-        type: 3}
-      additionalShotAngle:
-      - 5
-      - 3.4
-      - 3.5
-      additionalProjectileDamageMultiplier: 3
-    - animation: SecondaryAttack
-      damage: 3
-      attackSpeed: 1
-      currentAttackAnimModifier: 3
-      canCharge: 1
-      autoUnblockable: 0
-      chargeDamageScaling: 1
-      overideChargeAttack: 0
-      chargedAttackIndex: 0
-      nextAttackIndex: 0
-      overrideNextAttackOnHit: 0
-      nextAttackHitIndex: 0
-      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
-      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
-        type: 3}
-      additionalShotAngle:
-      - 5
-      - 3.4
-      - 3.5
-      additionalProjectileDamageMultiplier: 3
   - attackType: 9
     weaponIndex: 1
     rangedInput: 1

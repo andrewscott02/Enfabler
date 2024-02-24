@@ -288,7 +288,7 @@ MonoBehaviour:
     arrowCost: 1
     variations:
     - animation: SecondaryAttack
-      damage: 2
+      damage: 3
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 1
@@ -307,73 +307,13 @@ MonoBehaviour:
       - 3.4
       - 3.5
       additionalProjectileDamageMultiplier: 0.5
-    - animation: SecondaryAttack
-      damage: 2
-      attackSpeed: 1
-      currentAttackAnimModifier: 0
-      canCharge: 1
-      autoUnblockable: 0
-      chargeDamageScaling: 1
-      overideChargeAttack: 0
-      chargedAttackIndex: 0
-      nextAttackIndex: 2
-      overrideNextAttackOnHit: 0
-      nextAttackHitIndex: 0
-      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
-      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
-        type: 3}
-      additionalShotAngle:
-      - 5
-      - 3.4
-      - 3.5
-      additionalProjectileDamageMultiplier: 3
-    - animation: SecondaryAttack
-      damage: 2
-      attackSpeed: 1
-      currentAttackAnimModifier: 2
-      canCharge: 1
-      autoUnblockable: 0
-      chargeDamageScaling: 1
-      overideChargeAttack: 0
-      chargedAttackIndex: 0
-      nextAttackIndex: 0
-      overrideNextAttackOnHit: 0
-      nextAttackHitIndex: 0
-      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
-      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
-        type: 3}
-      additionalShotAngle:
-      - 5
-      - 3.4
-      - 3.5
-      additionalProjectileDamageMultiplier: 3
-    - animation: SecondaryAttack
-      damage: 2
-      attackSpeed: 1
-      currentAttackAnimModifier: 3
-      canCharge: 1
-      autoUnblockable: 0
-      chargeDamageScaling: 1
-      overideChargeAttack: 0
-      chargedAttackIndex: 0
-      nextAttackIndex: 0
-      overrideNextAttackOnHit: 0
-      nextAttackHitIndex: 0
-      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
-      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
-        type: 3}
-      additionalShotAngle:
-      - 5
-      - 3.4
-      - 3.5
-      additionalProjectileDamageMultiplier: 3
   - attackType: 9
     weaponIndex: 1
     rangedInput: 1
     arrowCost: 1
     variations:
     - animation: SprintSecondaryAttack
-      damage: 2
+      damage: 3
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
@@ -398,7 +338,7 @@ MonoBehaviour:
     arrowCost: 1
     variations:
     - animation: SprintSecondaryAttack
-      damage: 2
+      damage: 3
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
@@ -423,7 +363,7 @@ MonoBehaviour:
     arrowCost: 1
     variations:
     - animation: SwitchSecondaryAttack
-      damage: 1
+      damage: 2
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
