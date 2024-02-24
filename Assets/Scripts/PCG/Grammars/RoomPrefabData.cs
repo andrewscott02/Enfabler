@@ -30,7 +30,7 @@ public class RoomPrefabData : ScriptableObject
 
         while (true)
         {
-            if (DungeonGenerator.instance.RoomFits(roomPrefabs[currentIndex], spawnTransform, out doorIndex))
+            if (DungeonGenerator.instance.RoomFits(roomPrefabs[currentIndex], spawnTransform, reverseRooms, out doorIndex))
             {
                 return roomPrefabs[currentIndex];
             }

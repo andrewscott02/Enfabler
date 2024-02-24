@@ -92,6 +92,14 @@ public class DungeonGenerator : MonoBehaviour
         BakeNavmesh();
     }
 
+    public void ForceIncrementRoomCounts(bool mainPath)
+    {
+        if (mainPath)
+            currentRoom++;
+
+        roomCount++;
+    }
+
     #region Grammars
 
     List<E_RoomTypes> GenerateHealingRooms(List<E_RoomTypes> rooms)
@@ -175,15 +183,15 @@ public class DungeonGenerator : MonoBehaviour
             roomType = grammarsDungeonData.sidePathEndRoomTypes[randInt];
         }
 
-        if (mainPath)
-            currentRoom++;
-
-        roomCount++;
-
         Object roomPrefab = grammarsDungeonData.GetRandomRoomPrefab(roomType, theme, out ThemeData nextTheme, out bool reversed, out int doorIndex, spawnTransform);
 
         if (roomPrefab != null)
         {
+            if (mainPath)
+                currentRoom++;
+
+            roomCount++;
+
             GameObject go = Instantiate(roomPrefab, spawnTransform) as GameObject;
             go.transform.SetParent(transform, true);
             PCGRoom goRoom = go.GetComponent<PCGRoom>();
@@ -205,7 +213,7 @@ public class DungeonGenerator : MonoBehaviour
         return null;
     }
 
-    public bool RoomFits(Object roomPrefab, Transform spawnTransform, out int doorIndex)
+    public bool RoomFits(Object roomPrefab, Transform spawnTransform, bool reversed, out int doorIndex)
     {
         GameObject go = Instantiate(roomPrefab, spawnTransform) as GameObject;
         go.transform.SetParent(transform, true);
@@ -213,7 +221,7 @@ public class DungeonGenerator : MonoBehaviour
 
         doorIndex = Random.Range(0, goRoom.doorPoints.Length);
         goRoom.randomDoorPoint = doorIndex;
-        goRoom.GetDoorPoints();
+        goRoom.GetDoorPoints(reversed);
 
         bool roomFits = !goRoom.Overlaps();
         DestroyImmediate(go);

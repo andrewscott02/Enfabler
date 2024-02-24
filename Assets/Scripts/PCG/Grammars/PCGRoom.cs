@@ -81,7 +81,7 @@ public class PCGRoom : MonoBehaviour
                 item.SetupRoom(item.changeTheme ? theme : nextTheme);
         }
 
-        GetDoorPoints();
+        GetDoorPoints(reversed);
 
         if (mainPath)
             SpawnNextMainRoom();
@@ -105,11 +105,11 @@ public class PCGRoom : MonoBehaviour
 
     public int randomDoorPoint = 0;
 
-    public void GetDoorPoints()
+    public void GetDoorPoints(bool reversedRoom)
     {
         doorPoints = exit.GetComponentsInChildren<ObjectSpawner>();
 
-        if (reversed)
+        if (reversedRoom)
         {
             int index = randomDoorPoint;
             ObjectSpawner newEntrance = doorPoints[index];
@@ -175,6 +175,7 @@ public class PCGRoom : MonoBehaviour
         }
 
         //Tries next room, skipping current room data
+        DungeonGenerator.instance.ForceIncrementRoomCounts(true);
         SpawnNextMainRoom();
     }
 
