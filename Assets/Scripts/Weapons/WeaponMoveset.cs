@@ -6,6 +6,12 @@ using Enfabler.Attacking;
 [CreateAssetMenu(fileName = "NewWeapon", menuName = "Weapons/Weapon", order = 0)]
 public class WeaponMoveset : ScriptableObject
 {
+    public string weaponName;
+    [TextArea(3, 10)]
+    public string weaponDescription;
+
+    public int goldCost;
+
     public Object[] weapons, offhandWeapons;
 
     public AttackTypes[] attacks;

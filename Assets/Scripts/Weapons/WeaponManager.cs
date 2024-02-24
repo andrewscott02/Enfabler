@@ -8,6 +8,7 @@ public class WeaponManager : MonoBehaviour
     public static WeaponMoveset equippedWeapon;
 
     public WeaponMoveset startingWeapon;
+    public List<WeaponMoveset> ownedWeapons = new List<WeaponMoveset>();
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,21 @@ public class WeaponManager : MonoBehaviour
 
         equippedWeapon = startingWeapon;
 
+        if (!ownedWeapons.Contains(startingWeapon))
+        {
+            ownedWeapons.Add(startingWeapon);
+        }
+
         DontDestroyOnLoad(gameObject);
+
+        equipDelegate += EquipWeapon;
     }
+
+    void EquipWeapon(WeaponMoveset weapon)
+    {
+        equippedWeapon = weapon;
+    }
+
+    public delegate void EquipDelegate(WeaponMoveset weapon);
+    public EquipDelegate equipDelegate;
 }

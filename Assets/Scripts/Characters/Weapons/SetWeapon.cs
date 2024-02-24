@@ -42,18 +42,32 @@ public class SetWeapon : MonoBehaviour
         return null;
     }
 
-    public void EquipMoveset()
+    public void EquipMoveset(WeaponMoveset weapon)
     {
         if (overrideWeapon == null)
             return;
 
-        if (WeaponManager.equippedWeapon == null)
+        if (weapon == null)
             return;
 
-        weapons = WeaponManager.equippedWeapon.weapons;
-        offhandWeapons = WeaponManager.equippedWeapon.offhandWeapons;
+        weapons = weapon.weapons;
+        offhandWeapons = weapon.offhandWeapons;
 
         overrideWeapon.EquipWeapon();
+
+        CreateWeapon(0, 0, weapons);
+        CreateWeapon(0, 1, offhandWeapons);
+    }
+
+    private void Start()
+    {
+        Invoke("Setup", 0.1f);
+    }
+
+    void Setup()
+    {
+        WeaponManager.instance.equipDelegate += EquipMoveset;
+        WeaponManager.instance.equipDelegate(WeaponManager.equippedWeapon);
     }
 
     IEnumerator IDelayDestroy(GameObject obj, float delay)

@@ -204,7 +204,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         if (setWeapon.currentWeapon == weaponIndex) return;
 
-        setWeapon.EquipMoveset();
+        setWeapon.EquipMoveset(WeaponManager.equippedWeapon);
 
         //Main Hand
         this.weapon = setWeapon.CreateWeapon(weaponIndex, 0, setWeapon.weapons);
