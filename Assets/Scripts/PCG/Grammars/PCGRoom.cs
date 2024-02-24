@@ -175,7 +175,7 @@ public class PCGRoom : MonoBehaviour
         }
 
         //Tries next room, skipping current room data
-        DungeonGenerator.instance.ForceIncrementRoomCounts(true);
+        DungeonGenerator.instance.InsertEmptyRoom();
         SpawnNextMainRoom();
     }
 

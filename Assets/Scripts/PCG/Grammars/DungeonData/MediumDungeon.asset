@@ -93,18 +93,6 @@ MonoBehaviour:
     lockDoor: 1
     enemySpawnInfo: []
     trapsMinMax: {x: 0, y: 0}
-  - roomType: 5
-    prefabData:
-    - {fileID: 11400000, guid: 09f8624f4109a6d4eaf4ee16040f6758, type: 2}
-    - {fileID: 11400000, guid: 9810c36d945b41a41a34cfb92bb045b8, type: 2}
-    - {fileID: 11400000, guid: 8b57c2dd00c676b418571889d09fce84, type: 2}
-    - {fileID: 11400000, guid: cf7d8e8e063ad4f42a8de9bc385d5b74, type: 2}
-    countMinMax: {x: 0, y: 10}
-    lockDoor: 0
-    enemySpawnInfo:
-    - enemiesMax: 4
-      enemiesSeverityMax: 18
-    trapsMinMax: {x: 1, y: 2}
   - roomType: 7
     prefabData:
     - {fileID: 11400000, guid: 09f8624f4109a6d4eaf4ee16040f6758, type: 2}
@@ -115,8 +103,24 @@ MonoBehaviour:
     lockDoor: 0
     enemySpawnInfo: []
     trapsMinMax: {x: 3, y: 6}
+  - roomType: 5
+    prefabData:
+    - {fileID: 11400000, guid: a09315563307315409a758c25e3450da, type: 2}
+    countMinMax: {x: 0, y: 9999}
+    lockDoor: 0
+    enemySpawnInfo: []
+    trapsMinMax: {x: 0, y: 0}
+  - roomType: 10
+    prefabData:
+    - {fileID: 11400000, guid: ca90c8c8c81bbf5479c70a94ed5b47e7, type: 2}
+    countMinMax: {x: 0, y: 9999}
+    lockDoor: 0
+    enemySpawnInfo: []
+    trapsMinMax: {x: 0, y: 0}
+  emptyRoomType: 3
   additionalRoomTypes: 03000000040000000700000009000000
-  sidePathEndRoomTypes: 0500000006000000
+  sidePathRoomTypes: 030000000400000007000000
+  sidePathEndRoomTypes: 0a00000006000000
   additionalHealingRooms: 2
   roomsCountMinMax: {x: 8, y: 10}
   maxTotalRooms: 100

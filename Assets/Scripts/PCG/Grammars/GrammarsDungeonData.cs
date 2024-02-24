@@ -8,7 +8,9 @@ public class GrammarsDungeonData : ScriptableObject
     #region Variables
 
     public RoomData[] roomData;
+    public E_RoomTypes emptyRoomType;
     public E_RoomTypes[] additionalRoomTypes;
+    public E_RoomTypes[] sidePathRoomTypes;
     public E_RoomTypes[] sidePathEndRoomTypes;
     public int additionalHealingRooms = 0;
     Dictionary<E_RoomTypes, int> roomDict;
@@ -511,7 +513,7 @@ public struct RoundData
 public enum E_RoomTypes
 {
     Start, Boss, End,
-    Encounter, Puzzle, Treasure, Healing, Trap, ChangeTheme, Arena
+    Encounter, Puzzle, Treasure, Healing, Trap, ChangeTheme, Arena, TreasureEnd
 }
 
 [System.Serializable]

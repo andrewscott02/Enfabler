@@ -34,7 +34,7 @@ public class DungeonGenerator : MonoBehaviour
 
         int randTheme = Random.Range(0, grammarsDungeonData.startingThemes.Count);
 
-        rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Healing, E_RoomTypes.Boss, E_RoomTypes.End };
+        rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Healing, E_RoomTypes.Boss, E_RoomTypes.Treasure, E_RoomTypes.End };
 
         List<E_RoomTypes> additionalRooms = GenerateAdditionalRooms();
         additionalRooms = GenerateHealingRooms(additionalRooms);
@@ -53,8 +53,8 @@ public class DungeonGenerator : MonoBehaviour
         PCGRoom start = GenerateRoom(rooms[0], grammarsDungeonData.startingThemes[randTheme], transform, true, 0);
 
         BakeNavmesh();
-        //PopulateRooms();
-        //CullRooms(start);
+        PopulateRooms();
+        CullRooms(start);
     }
 
     [ContextMenu("Cleanup Dungeon")]
@@ -161,6 +161,11 @@ public class DungeonGenerator : MonoBehaviour
         return dungeonLayout;
     }
 
+    public void InsertEmptyRoom()
+    {
+        rooms.Insert(currentRoom, grammarsDungeonData.emptyRoomType);
+    }
+
     #endregion
 
     int roomCount = 0;
@@ -231,6 +236,8 @@ public class DungeonGenerator : MonoBehaviour
 
     #endregion
 
+    #region Dungeon Generation - Populating and Culling Rooms
+
     void PopulateRooms()
     {
         for (int i = 0; i < createdRooms.Count; i++)
@@ -246,6 +253,8 @@ public class DungeonGenerator : MonoBehaviour
             createdRooms[i].CullRoom(!(createdRooms[i] == currentRoom || currentRoom.attachedRooms.Contains(createdRooms[i])));
         }
     }
+
+    #endregion
 
     #region Navmesh
 
