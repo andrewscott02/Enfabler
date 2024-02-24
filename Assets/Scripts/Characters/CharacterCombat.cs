@@ -204,7 +204,11 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         if (setWeapon.currentWeapon == weaponIndex) return;
 
+        setWeapon.EquipMoveset();
+
+        //Main Hand
         this.weapon = setWeapon.CreateWeapon(weaponIndex, 0, setWeapon.weapons);
+        //Offhand
         setWeapon.CreateWeapon(weaponIndex, 1, setWeapon.offhandWeapons);
     }
 
@@ -231,16 +235,21 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         #region Ammo Checks
 
-        switch (attackType)
+        if (switchAttack && canSwitchAttack)
         {
-            case E_AttackType.SecondaryAttack:
+            E_AttackType attack = (E_AttackType)System.Enum.Parse(typeof(E_AttackType), "Switch" + attackType.ToString());
+            if (attacks.GetAttackData(attack).arrowCost)
+            {
                 if (!CanShoot()) return;
-                break;
-            case E_AttackType.SwitchSecondaryAttack:
+            }
+        }
+        else
+        {
+            E_AttackType attack = (E_AttackType)System.Enum.Parse(typeof(E_AttackType), sprinting && enableModifiers ? "Sprint" + attackType.ToString() : attackType.ToString());
+            if (attacks.GetAttackData(attack).arrowCost)
+            {
                 if (!CanShoot()) return;
-                break;
-            default:
-                break;
+            }
         }
 
         #endregion
@@ -1030,6 +1039,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     void ConsumeArrow()
     {
+        if (!currentAttack.arrowCost)
+            return;
+
         currentArrows = Mathf.Clamp(currentArrows - 1, 0, maxArrows);
         StopCoroutine(regenArrowsCoroutine);
         regenArrowsCoroutine = StartCoroutine(IRegenArrows(regenArrowDelay));

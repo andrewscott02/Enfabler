@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SetWeapon : MonoBehaviour
 {
+    public OverrideWeapon overrideWeapon;
+
     public Transform[] handTransforms;
     public Object[] weapons, offhandWeapons;
 
@@ -38,6 +40,20 @@ public class SetWeapon : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void EquipMoveset()
+    {
+        if (overrideWeapon == null)
+            return;
+
+        if (WeaponManager.equippedWeapon == null)
+            return;
+
+        weapons = WeaponManager.equippedWeapon.weapons;
+        offhandWeapons = WeaponManager.equippedWeapon.offhandWeapons;
+
+        overrideWeapon.EquipWeapon();
     }
 
     IEnumerator IDelayDestroy(GameObject obj, float delay)

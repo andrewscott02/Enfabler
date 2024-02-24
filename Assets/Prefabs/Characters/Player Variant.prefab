@@ -10453,6 +10453,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7288625259200014074, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: overrideWeapon
+      value: 
+      objectReference: {fileID: 5766536011121495626}
     - target: {fileID: 7460243065040470228, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: m_RootOrder
@@ -12686,6 +12691,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maleAvatar: {fileID: 9000000, guid: 7e30eee73c241d5448ce0ac372cf6602, type: 3}
   femaleAvatar: {fileID: 9000000, guid: d4bc8aeee1248da43a4176631929bc9d, type: 3}
+--- !u!114 &5766536011121495626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69781569185968667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b7467b25ded014e9cf31425e1f5455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attacks: {fileID: 6947974789751390360}
 --- !u!4 &71032393463596341 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9040079046989352861, guid: 8383457b08cdeee42a59a4975fae37de,
@@ -13168,3 +13186,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 9045643038095903400}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6947974789751390360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
+    type: 3}
+  m_PrefabInstance: {fileID: 9045643038095903400}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873655639226321523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994a48aafd0590f4596271d84dc5a1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1118,12 +1118,14 @@ MonoBehaviour:
   - attackType: 1
     weaponIndex: 0
     rangedInput: 0
+    arrowCost: 0
     variations:
     - animation: PrimaryAttack
       damage: 4
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 1
+      autoUnblockable: 0
       chargeDamageScaling: 2
       overideChargeAttack: 0
       chargedAttackIndex: 0
@@ -1139,6 +1141,7 @@ MonoBehaviour:
       attackSpeed: 1
       currentAttackAnimModifier: 1
       canCharge: 1
+      autoUnblockable: 0
       chargeDamageScaling: 2
       overideChargeAttack: 0
       chargedAttackIndex: 0
@@ -1154,6 +1157,7 @@ MonoBehaviour:
       attackSpeed: 1
       currentAttackAnimModifier: 2
       canCharge: 1
+      autoUnblockable: 0
       chargeDamageScaling: 2
       overideChargeAttack: 0
       chargedAttackIndex: 0
@@ -1167,12 +1171,14 @@ MonoBehaviour:
   - attackType: 8
     weaponIndex: 0
     rangedInput: 0
+    arrowCost: 0
     variations:
     - animation: DodgePrimaryAttack
       damage: 4
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
+      autoUnblockable: 0
       chargeDamageScaling: 2
       overideChargeAttack: 0
       chargedAttackIndex: 0
@@ -1186,12 +1192,14 @@ MonoBehaviour:
   - attackType: 6
     weaponIndex: 0
     rangedInput: 0
+    arrowCost: 0
     variations:
     - animation: SprintPrimaryAttack
       damage: 4
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
+      autoUnblockable: 0
       chargeDamageScaling: 1
       overideChargeAttack: 0
       chargedAttackIndex: 0
@@ -1205,12 +1213,14 @@ MonoBehaviour:
   - attackType: 3
     weaponIndex: 0
     rangedInput: 0
+    arrowCost: 0
     variations:
     - animation: SwitchPrimaryAttack
       damage: 5
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
+      autoUnblockable: 0
       chargeDamageScaling: 1
       overideChargeAttack: 0
       chargedAttackIndex: 0
@@ -1224,12 +1234,14 @@ MonoBehaviour:
   - attackType: 5
     weaponIndex: 0
     rangedInput: 0
+    arrowCost: 0
     variations:
     - animation: LungeAttack
       damage: 2
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
+      autoUnblockable: 0
       chargeDamageScaling: 1
       overideChargeAttack: 0
       chargedAttackIndex: 0
@@ -1243,12 +1255,14 @@ MonoBehaviour:
   - attackType: 2
     weaponIndex: 1
     rangedInput: 1
+    arrowCost: 1
     variations:
     - animation: SecondaryAttack
       damage: 3
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 1
+      autoUnblockable: 0
       chargeDamageScaling: 1
       overideChargeAttack: 0
       chargedAttackIndex: 0
@@ -1268,6 +1282,7 @@ MonoBehaviour:
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 1
+      autoUnblockable: 0
       chargeDamageScaling: 1
       overideChargeAttack: 0
       chargedAttackIndex: 0
@@ -1285,12 +1300,14 @@ MonoBehaviour:
   - attackType: 9
     weaponIndex: 1
     rangedInput: 1
+    arrowCost: 1
     variations:
     - animation: SprintSecondaryAttack
       damage: 3
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
+      autoUnblockable: 0
       chargeDamageScaling: 1
       overideChargeAttack: 0
       chargedAttackIndex: 0
@@ -1308,12 +1325,14 @@ MonoBehaviour:
   - attackType: 7
     weaponIndex: 1
     rangedInput: 1
+    arrowCost: 1
     variations:
     - animation: SprintSecondaryAttack
       damage: 3
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
+      autoUnblockable: 0
       chargeDamageScaling: 1
       overideChargeAttack: 0
       chargedAttackIndex: 0
@@ -1331,12 +1350,14 @@ MonoBehaviour:
   - attackType: 4
     weaponIndex: 1
     rangedInput: 1
+    arrowCost: 1
     variations:
     - animation: SwitchSecondaryAttack
       damage: 2
       attackSpeed: 1
       currentAttackAnimModifier: 0
       canCharge: 0
+      autoUnblockable: 0
       chargeDamageScaling: 1
       overideChargeAttack: 0
       chargedAttackIndex: 0
@@ -4301,6 +4322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aaf6ebf2e5e8dd4db915d4684c82a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overrideWeapon: {fileID: 0}
   handTransforms:
   - {fileID: 2590908609328772485}
   - {fileID: 2728933261463631432}
