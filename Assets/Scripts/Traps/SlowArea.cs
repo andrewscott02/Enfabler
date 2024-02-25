@@ -57,7 +57,7 @@ public class SlowArea : MonoBehaviour
 
     #region Collision Events
 
-    List<SlowCharacter> slowedCharacters;
+    List<SlowCharacter> slowedCharacters = new List<SlowCharacter>();
 
     private void OnTriggerEnter(Collider other)
     {

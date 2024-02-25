@@ -45,6 +45,7 @@ namespace Enfabler.Attacking
         public E_AttackType attackType;
         public int weaponIndex;
         public bool rangedInput;
+        public bool arrowCost;
         public AttackData[] variations;
     }
 

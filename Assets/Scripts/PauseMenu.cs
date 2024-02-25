@@ -88,6 +88,16 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(mainMenu.ToString());
     }
 
+    bool inVendorMenu = false;
+
+    public void ShowVendorMenu(bool open)
+    {
+        inVendorMenu = open;
+        ShowMouse(open);
+        paused = open;
+        VendorManager.instance.OpenVendorMenu(open);
+    }
+
     void ShowMouse(bool visible)
     {
         Cursor.visible = visible;

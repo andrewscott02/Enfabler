@@ -7,7 +7,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 {
     #region Setup
 
-    public static GrammarsDungeonGeneration instance;
+    // static GrammarsDungeonGeneration instance;
     public GrammarsDungeonData grammarsDungeonData;
     public int preloadRooms = 2;
 
@@ -15,7 +15,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
 
     private void Start()
     {
-        instance = this;
+        //instance = this;
         GenerateGrammarsDungeon();
         GameCanvasManager.instance.ShowRegionText(firstTheme.regionName);
     }
@@ -152,7 +152,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         themes = new List<ThemeData>();
 
         reversedRooms = new List<bool>();
-
+        /*
         for(int i = 0; i < rooms.Count; i++)
         {
             Object prefab = grammarsDungeonData.GetRandomRoomPrefab(rooms[i], currentTheme, out ThemeData nextRoom, out bool reversed);
@@ -170,7 +170,7 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         }
 
         //TODO: Use grammars to change rooms
-
+        */
         return prefabs;
     }
 
@@ -189,12 +189,16 @@ public class GrammarsDungeonGeneration : MonoBehaviour
                 {
                     GameObject go = Instantiate(prefabs[i], transform) as GameObject;
                     PCGRoom goRoom = go.GetComponent<PCGRoom>();
-                    goRoom.Setup(rooms[i], grammarsDungeonData, themes[i], themes[i + 1], i, reversedRooms[i]);
+                    //goRoom.Setup(rooms[i], grammarsDungeonData, themes[i], themes[i + 1], i, reversedRooms[i]);
 
                     if (data.roomType != E_RoomTypes.Start)
                     {
-                        go.transform.position = createdRooms[i - 1].doorPoint.transform.position;
-                        Quaternion rot = createdRooms[i - 1].doorPoint.transform.rotation;
+                        ObjectSpawner doorPoint = createdRooms[i - 1].GetRandomDoorPoint();
+                        createdRooms[i - 1].TrySetMainDoorPoint(doorPoint);
+                        doorPoint = createdRooms[i - 1].mainDoorPoint;
+
+                        go.transform.position = doorPoint.transform.position;
+                        Quaternion rot = doorPoint.transform.rotation;
 
                         if (reversedRooms[i])
                         {
@@ -203,12 +207,12 @@ public class GrammarsDungeonGeneration : MonoBehaviour
                             rot.y += 180;
                             go.transform.rotation = rot;
 
-                            Vector3 offset = go.transform.position - goRoom.doorPoint.transform.position;
+                            Vector3 offset = go.transform.position - doorPoint.transform.position;
 
                             go.transform.position = go.transform.position + offset;
 
-                            goRoom.doorPoint.transform.position = go.transform.position;
-                            goRoom.doorPoint.transform.rotation = Quaternion.identity;
+                            doorPoint.transform.position = go.transform.position;
+                            doorPoint.transform.rotation = Quaternion.identity;
                         }
                     }
                     else
@@ -221,6 +225,50 @@ public class GrammarsDungeonGeneration : MonoBehaviour
                 }
             };
         }
+    }
+
+    public void GenerateSideRoom(PCGRoom previousRoom, ObjectSpawner previousDoorPoint)
+    {
+        /*
+        E_RoomTypes roomType = grammarsDungeonData.GetRandomRoomTypeIgnoreLimits();
+        ThemeData theme = previousDoorPoint.changeTheme ? previousRoom.nextTheme : previousRoom.theme;
+
+        Object prefab = grammarsDungeonData.GetRandomRoomPrefab(roomType, theme, out ThemeData nextRoom, out bool reversed);
+        GameObject go = Instantiate(prefab, transform) as GameObject;
+        PCGRoom goRoom = go.GetComponent<PCGRoom>();
+        //goRoom.Setup(roomType, grammarsDungeonData, theme, theme, 0, reversed);
+
+        foreach(var data in grammarsDungeonData.roomData)
+        {
+            if (data.roomType != E_RoomTypes.Start)
+            {
+                go.transform.position = previousDoorPoint.transform.position;
+                Quaternion rot = previousDoorPoint.transform.rotation;
+
+                if (reversed)
+                {
+                    //Debug.Log("Reverse room " + i);
+
+                    rot.y += 180;
+                    go.transform.rotation = rot;
+
+                    Vector3 offset = go.transform.position - previousDoorPoint.transform.position;
+
+                    go.transform.position = go.transform.position + offset;
+
+                    previousDoorPoint.transform.position = go.transform.position;
+                    previousDoorPoint.transform.rotation = Quaternion.identity;
+                }
+            }
+            else
+            {
+                go.transform.position = transform.position;
+                go.transform.rotation = Quaternion.identity;
+            }
+
+            createdRooms.Add(goRoom);
+        }
+        */
     }
 
     void PopulateRooms()

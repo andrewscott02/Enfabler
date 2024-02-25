@@ -1,0 +1,681 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2330bc5807aff4d9bf32cf6628fd2d, type: 3}
+  m_Name: Greatsword
+  m_EditorClassIdentifier: 
+  weaponName: Greatsword
+  weaponDescription: 'Heavier weapon with slower attacks, but hits hard and has unblockable
+    attacks in its basic combo chain.
+
+
+    Can perform a lunge attack in place of
+    riposte attacks or at certain points in the combo to get to the combo finisher
+    quicker.
+
+
+    Has a powerful combo finisher.'
+  baseAttackPwr: 7
+  goldCost: 350
+  weapons:
+  - {fileID: 8460293430998555839, guid: f6b7edf39cf29514092f0e4b95810ae4, type: 3}
+  - {fileID: 8460293430998555839, guid: 48613acbfa4e99147b89e2adfc8d1ca7, type: 3}
+  offhandWeapons: []
+  attacks:
+  - attackType: 1
+    weaponIndex: 0
+    rangedInput: 0
+    arrowCost: 0
+    variations:
+    - animation: PrimaryAttack
+      damage: 7
+      attackSpeed: 0.8
+      currentAttackAnimModifier: 1
+      canCharge: 1
+      autoUnblockable: 0
+      chargeDamageScaling: 2
+      overideChargeAttack: 1
+      chargedAttackIndex: 9
+      nextAttackIndex: 1
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 7
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: PrimaryAttack
+      damage: 7
+      attackSpeed: 0.8
+      currentAttackAnimModifier: 2
+      canCharge: 1
+      autoUnblockable: 0
+      chargeDamageScaling: 2
+      overideChargeAttack: 1
+      chargedAttackIndex: 10
+      nextAttackIndex: 2
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 8
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: PrimaryAttack
+      damage: 9
+      attackSpeed: 0.8
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 2
+      overideChargeAttack: 1
+      chargedAttackIndex: 9
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 11
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: RipostePrimaryAttack
+      damage: 10
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 2
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 4
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: RipostePrimaryAttack
+      damage: 10
+      attackSpeed: 1
+      currentAttackAnimModifier: 1
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 2
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 2
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 11
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: DodgePrimaryAttack
+      damage: 7
+      attackSpeed: 1.2
+      currentAttackAnimModifier: 1
+      canCharge: 1
+      autoUnblockable: 0
+      chargeDamageScaling: 2
+      overideChargeAttack: 1
+      chargedAttackIndex: 10
+      nextAttackIndex: 2
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 6
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: DodgePrimaryAttack
+      damage: 9
+      attackSpeed: 1.2
+      currentAttackAnimModifier: 0
+      canCharge: 1
+      autoUnblockable: 0
+      chargeDamageScaling: 2
+      overideChargeAttack: 0
+      chargedAttackIndex: 9
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 11
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: DodgePrimaryAttack
+      damage: 7
+      attackSpeed: 0.65
+      currentAttackAnimModifier: 2
+      canCharge: 1
+      autoUnblockable: 0
+      chargeDamageScaling: 2
+      overideChargeAttack: 1
+      chargedAttackIndex: 10
+      nextAttackIndex: 2
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 8
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: PrimaryAttack
+      damage: 9
+      attackSpeed: 0.65
+      currentAttackAnimModifier: 0
+      canCharge: 1
+      autoUnblockable: 0
+      chargeDamageScaling: 2
+      overideChargeAttack: 1
+      chargedAttackIndex: 9
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 11
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: ChargePrimaryAttack
+      damage: 16
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 1
+      chargeDamageScaling: 2
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 1
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 7
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: ChargePrimaryAttack
+      damage: 16
+      attackSpeed: 1
+      currentAttackAnimModifier: 1
+      canCharge: 0
+      autoUnblockable: 1
+      chargeDamageScaling: 2
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 11
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: PrimaryAttackFinisher
+      damage: 7
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 0
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 12
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: PrimaryAttackFinisher
+      damage: 13
+      attackSpeed: 1
+      currentAttackAnimModifier: 1
+      canCharge: 0
+      autoUnblockable: 1
+      chargeDamageScaling: 0
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+  - attackType: 8
+    weaponIndex: 0
+    rangedInput: 0
+    arrowCost: 0
+    variations:
+    - animation: DodgePrimaryAttack
+      damage: 4
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 2
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 5
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+  - attackType: 6
+    weaponIndex: 0
+    rangedInput: 0
+    arrowCost: 0
+    variations:
+    - animation: SprintPrimaryAttack
+      damage: 4
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+  - attackType: 3
+    weaponIndex: 0
+    rangedInput: 0
+    arrowCost: 0
+    variations:
+    - animation: SwitchPrimaryAttack
+      damage: 5
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 1
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 11
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+  - attackType: 5
+    weaponIndex: 0
+    rangedInput: 0
+    arrowCost: 0
+    variations:
+    - animation: LungeAttack
+      damage: 2
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: LungeAttack
+      damage: 2
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: LungeAttack
+      damage: 2
+      attackSpeed: 1
+      currentAttackAnimModifier: 1
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 12
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: LungeAttack
+      damage: 4
+      attackSpeed: 1
+      currentAttackAnimModifier: 1
+      canCharge: 0
+      autoUnblockable: 1
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 12
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: LungeAttack
+      damage: 4
+      attackSpeed: 1
+      currentAttackAnimModifier: 1
+      canCharge: 0
+      autoUnblockable: 1
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 12
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: LungeAttack
+      damage: 2
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 2
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: LungeAttack
+      damage: 2
+      attackSpeed: 1
+      currentAttackAnimModifier: 1
+      canCharge: 0
+      autoUnblockable: 1
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 2
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 12
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: LungeAttack
+      damage: 2
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 1
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 2
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 12
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: LungeAttack
+      damage: 2
+      attackSpeed: 1
+      currentAttackAnimModifier: 1
+      canCharge: 0
+      autoUnblockable: 1
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 2
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 12
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: LungeAttack
+      damage: 4
+      attackSpeed: 1
+      currentAttackAnimModifier: 1
+      canCharge: 0
+      autoUnblockable: 1
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 12
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: LungeAttack
+      damage: 4
+      attackSpeed: 1
+      currentAttackAnimModifier: 1
+      canCharge: 0
+      autoUnblockable: 1
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 12
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: LungeAttack
+      damage: 4
+      attackSpeed: 1
+      currentAttackAnimModifier: 1
+      canCharge: 0
+      autoUnblockable: 1
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 12
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+    - animation: LungeAttack
+      damage: 4
+      attackSpeed: 1
+      currentAttackAnimModifier: 1
+      canCharge: 0
+      autoUnblockable: 1
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 1
+      nextAttackHitIndex: 12
+      projectileData: {fileID: 0}
+      projectileFX: {fileID: 0}
+      additionalShotAngle: []
+      additionalProjectileDamageMultiplier: 0
+  - attackType: 2
+    weaponIndex: 1
+    rangedInput: 1
+    arrowCost: 1
+    variations:
+    - animation: SecondaryAttack
+      damage: 3
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 1
+      autoUnblockable: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 1
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
+      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      additionalShotAngle:
+      - 3.3
+      - 3.4
+      - 3.5
+      additionalProjectileDamageMultiplier: 0.5
+    - animation: SecondaryAttack
+      damage: 3
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 1
+      autoUnblockable: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 2
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
+      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      additionalShotAngle:
+      - 5
+      - 3.4
+      - 3.5
+      additionalProjectileDamageMultiplier: 3
+    - animation: SecondaryAttack
+      damage: 3
+      attackSpeed: 1
+      currentAttackAnimModifier: 2
+      canCharge: 1
+      autoUnblockable: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
+      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      additionalShotAngle:
+      - 5
+      - 3.4
+      - 3.5
+      additionalProjectileDamageMultiplier: 3
+    - animation: SecondaryAttack
+      damage: 3
+      attackSpeed: 1
+      currentAttackAnimModifier: 3
+      canCharge: 1
+      autoUnblockable: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
+      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      additionalShotAngle:
+      - 5
+      - 3.4
+      - 3.5
+      additionalProjectileDamageMultiplier: 3
+  - attackType: 9
+    weaponIndex: 1
+    rangedInput: 1
+    arrowCost: 1
+    variations:
+    - animation: SprintSecondaryAttack
+      damage: 3
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 1
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
+      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      additionalShotAngle:
+      - 3.3
+      - 3.4
+      - 3.5
+      additionalProjectileDamageMultiplier: 0.5
+  - attackType: 7
+    weaponIndex: 1
+    rangedInput: 1
+    arrowCost: 1
+    variations:
+    - animation: SprintSecondaryAttack
+      damage: 3
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
+      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      additionalShotAngle:
+      - 3.3
+      - 3.4
+      - 3.5
+      additionalProjectileDamageMultiplier: 0.5
+  - attackType: 4
+    weaponIndex: 1
+    rangedInput: 1
+    arrowCost: 1
+    variations:
+    - animation: SwitchSecondaryAttack
+      damage: 2
+      attackSpeed: 1
+      currentAttackAnimModifier: 0
+      canCharge: 0
+      autoUnblockable: 0
+      chargeDamageScaling: 1
+      overideChargeAttack: 0
+      chargedAttackIndex: 0
+      nextAttackIndex: 0
+      overrideNextAttackOnHit: 0
+      nextAttackHitIndex: 0
+      projectileData: {fileID: 11400000, guid: 566eea7de4ef551479a73b33ef361d3d, type: 2}
+      projectileFX: {fileID: 5831885752641907103, guid: 1a0d165a48f50af41a481504169452c5,
+        type: 3}
+      additionalShotAngle:
+      - 3.3
+      - 3.4
+      - 3.5
+      additionalProjectileDamageMultiplier: 0.5

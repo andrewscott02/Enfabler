@@ -8,10 +8,19 @@ public class GrammarsDungeonData : ScriptableObject
     #region Variables
 
     public RoomData[] roomData;
+
+    public E_RoomTypes emptyRoomType;
     public E_RoomTypes[] additionalRoomTypes;
+    public E_RoomTypes[] sidePathRoomTypes;
+    public E_RoomTypes[] sidePathEndRoomTypes;
+    public float sideRoomEndChance = 0.05f;
+
     public int additionalHealingRooms = 0;
     Dictionary<E_RoomTypes, int> roomDict;
     public Vector2Int roomsCountMinMax;
+    public int maxTotalRooms = 100;
+    public float sideRoomChance = 0.75f;
+    public float mainPathRemoveLimit = 2;
 
     public List<ThemeData> startingThemes;
     public List<ThemeData> allThemes;
@@ -73,6 +82,12 @@ public class GrammarsDungeonData : ScriptableObject
         }
     }
 
+    public E_RoomTypes GetRandomRoomTypeIgnoreLimits()
+    {
+        int startIndex = Random.Range(0, additionalRoomTypes.Length);
+        return additionalRoomTypes[startIndex];
+    }
+
     public int GetRoomDataIndex(E_RoomTypes roomType)
     {
         for (int i = 0; i < roomData.Length; i++)
@@ -92,15 +107,16 @@ public class GrammarsDungeonData : ScriptableObject
 
     #region Room
 
-    public Object GetRandomRoomPrefab(E_RoomTypes roomType, ThemeData currentTheme, out ThemeData nextRoomTheme, out bool reversed)
+    public Object GetRandomRoomPrefab(E_RoomTypes roomType, ThemeData currentTheme, out ThemeData nextRoomTheme, out bool reversed, out int doorIndex, Transform spawnTransform)
     {
         int index = GetRoomDataIndex(roomType);
         nextRoomTheme = currentTheme;
         reversed = false;
+        doorIndex = 0;
 
         if (index >= 0 && index < roomData.Length)
         {
-            Object prefab = DeterminePrefab(roomData[index].prefabData, currentTheme, out nextRoomTheme, out reversed);
+            Object prefab = DeterminePrefab(roomData[index].prefabData, currentTheme, out nextRoomTheme, out reversed, out doorIndex, spawnTransform);
 
             return prefab;
         }
@@ -108,12 +124,13 @@ public class GrammarsDungeonData : ScriptableObject
         return null;
     }
 
-    Object DeterminePrefab(RoomPrefabData[] prefabData, ThemeData currentTheme, out ThemeData nextRoomTheme, out bool reversed)
+    Object DeterminePrefab(RoomPrefabData[] prefabData, ThemeData currentTheme, out ThemeData nextRoomTheme, out bool reversed, out int doorIndex, Transform spawnTransform)
     {
         nextRoomTheme = currentTheme;
         int startIndex = Random.Range(0, prefabData.Length);
         int currentIndex = startIndex;
         reversed = false;
+        doorIndex = 0;
 
         while (true)
         {
@@ -122,7 +139,7 @@ public class GrammarsDungeonData : ScriptableObject
                 prefabData[currentIndex].Used();
                 nextRoomTheme = prefabData[currentIndex].GetNextRoomTheme(currentTheme);
                 reversed = prefabData[currentIndex].reverseRooms;
-                return prefabData[currentIndex].GetRandomPrefab();
+                return prefabData[currentIndex].GetRandomPrefab(spawnTransform, out doorIndex);
             }
 
             currentIndex++;
@@ -138,6 +155,11 @@ public class GrammarsDungeonData : ScriptableObject
     public Object GetRandomDoor(ThemeData theme)
     {
         return theme.doors[Random.Range(0, theme.doors.Length)];
+    }
+
+    public Object GetRandomDoorClosedOff(ThemeData theme)
+    {
+        return theme.closedDoors[Random.Range(0, theme.closedDoors.Length)];
     }
 
     #endregion
@@ -494,7 +516,7 @@ public struct RoundData
 public enum E_RoomTypes
 {
     Start, Boss, End,
-    Encounter, Puzzle, Treasure, Healing, Trap, ChangeTheme, Arena
+    Encounter, Puzzle, Treasure, Healing, Trap, ChangeTheme, Arena, TreasureEnd
 }
 
 [System.Serializable]

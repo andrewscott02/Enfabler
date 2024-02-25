@@ -48,6 +48,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     #region Attack Logic Data
 
     [Header("Target Snap Data")]
+    public LayerMask defaultLayerMask;
     public LayerMask hitLayerMask, snapLayerMask;
     public float targetSphereRadius = 3f;
     public Vector2 moveDistanceThreshold = new Vector2(0.5f, 5f);
@@ -204,7 +205,17 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         if (setWeapon.currentWeapon == weaponIndex) return;
 
+        //Main Hand
         this.weapon = setWeapon.CreateWeapon(weaponIndex, 0, setWeapon.weapons);
+        //Offhand
+        setWeapon.CreateWeapon(weaponIndex, 1, setWeapon.offhandWeapons);
+    }
+
+    public void ForceSetupWeapon(int weaponIndex)
+    {
+        //Main Hand
+        this.weapon = setWeapon.CreateWeapon(weaponIndex, 0, setWeapon.weapons);
+        //Offhand
         setWeapon.CreateWeapon(weaponIndex, 1, setWeapon.offhandWeapons);
     }
 
@@ -231,16 +242,21 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         #region Ammo Checks
 
-        switch (attackType)
+        if (switchAttack && canSwitchAttack)
         {
-            case E_AttackType.SecondaryAttack:
+            E_AttackType attack = (E_AttackType)System.Enum.Parse(typeof(E_AttackType), "Switch" + attackType.ToString());
+            if (attacks.GetAttackData(attack).arrowCost)
+            {
                 if (!CanShoot()) return;
-                break;
-            case E_AttackType.SwitchSecondaryAttack:
+            }
+        }
+        else
+        {
+            E_AttackType attack = (E_AttackType)System.Enum.Parse(typeof(E_AttackType), sprinting && enableModifiers ? "Sprint" + attackType.ToString() : attackType.ToString());
+            if (attacks.GetAttackData(attack).arrowCost)
+            {
                 if (!CanShoot()) return;
-                break;
-            default:
-                break;
+            }
         }
 
         #endregion
@@ -609,8 +625,21 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
                 }
             }
 
-            MoveToTarget(transform.position - (dir * moveDistanceThreshold.x));
+            //No target, move a small distance
+            //SmallDistanceStep(origin, dir);
         }
+    }
+
+    void SmallDistanceStep(Vector3 origin, Vector3 dir)
+    {
+        Collider[] cols = Physics.OverlapSphere(origin, targetSphereRadius, defaultLayerMask);
+        if (cols.Length > 0)
+        {
+            //Returns if anything is blocking path
+            return;
+        }
+
+        MoveToTarget(transform.position - (dir * moveDistanceThreshold.x));
     }
 
     public void RotateTowardsTarget(Vector3 target)
@@ -1030,6 +1059,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     void ConsumeArrow()
     {
+        if (!currentAttack.arrowCost)
+            return;
+
         currentArrows = Mathf.Clamp(currentArrows - 1, 0, maxArrows);
         StopCoroutine(regenArrowsCoroutine);
         regenArrowsCoroutine = StartCoroutine(IRegenArrows(regenArrowDelay));

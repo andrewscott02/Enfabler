@@ -23,9 +23,26 @@ public class RoomPrefabData : ScriptableObject
         timesUsed++;
     }
 
-    public Object GetRandomPrefab()
+    public Object GetRandomPrefab(Transform spawnTransform, out int doorIndex)
     {
-        return roomPrefabs[Random.Range(0, roomPrefabs.Length)];
+        int startIndex = Random.Range(0, roomPrefabs.Length);
+        int currentIndex = startIndex;
+
+        while (true)
+        {
+            if (DungeonGenerator.instance.RoomFits(roomPrefabs[currentIndex], spawnTransform, reverseRooms, out doorIndex))
+            {
+                return roomPrefabs[currentIndex];
+            }
+
+            currentIndex++;
+
+            if (currentIndex >= roomPrefabs.Length)
+                currentIndex = 0;
+
+            if (currentIndex == startIndex)
+                return null;
+        }
     }
 
     public bool CanUse(ThemeData currentTheme)
