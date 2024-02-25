@@ -330,26 +330,25 @@ public class PCGRoom : MonoBehaviour
 
             BaseCharacterController enemy = go.GetComponent<BaseCharacterController>();
             enemy.characterDied += EnemyKilled;
-
-            if (EnemySpawnedInRoom(enemy))
-                enemiesInRoom++;
         }
 
+        StartCoroutine(ICheckEnemies());
+    }
+
+    IEnumerator ICheckEnemies()
+    {
+        yield return new WaitForSeconds(1f);
+
+        enemiesInRoom = GetEnemiesSpawnedInRoom();
         nextRoundThreshold = Mathf.RoundToInt((float)enemiesInRoom * 0.25f);
         if (nextRoundThreshold <= 0) nextRoundThreshold = 1;
     }
 
-    bool EnemySpawnedInRoom(BaseCharacterController enemy)
+    int GetEnemiesSpawnedInRoom()
     {
         Collider[] cols = Physics.OverlapBox(roomBounds.bounds.center, roomBounds.bounds.extents, roomBounds.transform.rotation, enemyLayer);
 
-        foreach(var item in cols)
-        {
-            if (item.gameObject == enemy.gameObject)
-                return true;
-        }
-
-        return false;
+        return cols.Length;
     }
 
     int currentRound = 0;
