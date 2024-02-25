@@ -8,16 +8,15 @@ public class DungeonGenerator : MonoBehaviour
     #region Setup
 
     public static DungeonGenerator instance;
-    public static GrammarsDungeonData grammarsDungeonData;
-    public GrammarsDungeonData defaultDungeonData;
+    public GrammarsDungeonData grammarsDungeonData;
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
 
-        if (grammarsDungeonData == null)
-            grammarsDungeonData = defaultDungeonData;
+        if (DungeonManager.grammarsDungeonData != null)
+            grammarsDungeonData = DungeonManager.grammarsDungeonData;
 
         GenerateDungeon();
         //GameCanvasManager.instance.ShowRegionText(firstTheme.regionName);
@@ -35,8 +34,8 @@ public class DungeonGenerator : MonoBehaviour
     public void GenerateDungeon()
     {
         instance = this;
-        if (grammarsDungeonData == null)
-            grammarsDungeonData = defaultDungeonData;
+        if (DungeonManager.grammarsDungeonData != null)
+            grammarsDungeonData = DungeonManager.grammarsDungeonData;
 
         CleanupDungeon();
 

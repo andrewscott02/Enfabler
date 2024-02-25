@@ -36,6 +36,12 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(E_Scenes.Tutorial.ToString());
     }
 
+    public void PlayGame()
+    {
+        ShowMouse(false);
+        SceneManager.LoadScene(E_Scenes.HubArea.ToString());
+    }
+
     public void DungeonCrawl()
     {
         ShowMouse(false);
