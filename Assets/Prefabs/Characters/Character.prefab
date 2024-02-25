@@ -984,14 +984,17 @@ MonoBehaviour:
   canSaveAttackInput: 0
   savingAttackInput: 0
   savingChargeInput: 0
+  defaultLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
   hitLayerMask:
     serializedVersion: 2
     m_Bits: 1051840
   snapLayerMask:
     serializedVersion: 2
     m_Bits: 3072
-  targetSphereRadius: 1.5
-  moveDistanceThreshold: {x: 0.5, y: 2}
+  targetSphereRadius: 1
+  moveDistanceThreshold: {x: 0, y: 0}
   targetSnapSpeed: 0.01
   targetSnapInterval: 0.001
   currentTargetCastInterval: 0.6

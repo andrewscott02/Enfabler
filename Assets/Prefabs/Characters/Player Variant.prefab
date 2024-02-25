@@ -9206,6 +9206,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
+      propertyPath: targetSphereRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
       propertyPath: hitLayerMask.m_Bits
       value: 7360
       objectReference: {fileID: 0}
@@ -9221,8 +9226,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
+      propertyPath: moveDistanceThreshold.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
       propertyPath: moveDistanceThreshold.y
-      value: 1.8
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}

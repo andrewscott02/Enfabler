@@ -48,6 +48,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     #region Attack Logic Data
 
     [Header("Target Snap Data")]
+    public LayerMask defaultLayerMask;
     public LayerMask hitLayerMask, snapLayerMask;
     public float targetSphereRadius = 3f;
     public Vector2 moveDistanceThreshold = new Vector2(0.5f, 5f);
@@ -624,8 +625,21 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
                 }
             }
 
-            MoveToTarget(transform.position - (dir * moveDistanceThreshold.x));
+            //No target, move a small distance
+            //SmallDistanceStep(origin, dir);
         }
+    }
+
+    void SmallDistanceStep(Vector3 origin, Vector3 dir)
+    {
+        Collider[] cols = Physics.OverlapSphere(origin, targetSphereRadius, defaultLayerMask);
+        if (cols.Length > 0)
+        {
+            //Returns if anything is blocking path
+            return;
+        }
+
+        MoveToTarget(transform.position - (dir * moveDistanceThreshold.x));
     }
 
     public void RotateTowardsTarget(Vector3 target)
