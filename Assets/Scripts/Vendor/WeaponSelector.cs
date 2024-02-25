@@ -69,6 +69,9 @@ public class WeaponSelector : MonoBehaviour
         switch (weaponState)
         {
             case E_WeaponStates.equipped:
+                WeaponManager.instance.equipDelegate(weapon);
+                weaponState = E_WeaponStates.equipped;
+                SetButtonInteractivity();
                 return;
             case E_WeaponStates.owned:
                 WeaponManager.instance.equipDelegate(weapon);
@@ -78,6 +81,7 @@ public class WeaponSelector : MonoBehaviour
             case E_WeaponStates.purchase:
                 if (CanBuy())
                 {
+                    TreasureManager.instance.D_GiveGold(-weapon.goldCost);
                     WeaponManager.instance.ownedWeapons.Add(weapon);
                     weaponState = E_WeaponStates.owned;
                     SetButtonInteractivity();

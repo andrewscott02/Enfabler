@@ -54,9 +54,6 @@ public class SetWeapon : MonoBehaviour
         offhandWeapons = weapon.offhandWeapons;
 
         overrideWeapon.EquipWeapon();
-
-        CreateWeapon(0, 0, weapons);
-        CreateWeapon(0, 1, offhandWeapons);
     }
 
     private void Start()

@@ -1277,6 +1277,7 @@ MonoBehaviour:
   - {fileID: 1491854123}
   - {fileID: 4981491154706495644}
   weaponContainer: {fileID: 7305315716630241522}
+  goldUI: {fileID: 2432728944422619013}
 --- !u!1 &2466819907250767350
 GameObject:
   m_ObjectHideFlags: 0
@@ -3041,8 +3042,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4673606801709794577}
         m_TargetAssemblyTypeName: VendorManager, Assembly-CSharp
-        m_MethodName: OpenVendorMenu
-        m_Mode: 6
+        m_MethodName: CloseVendorMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5442,6 +5443,37 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8837533394831680246}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &785982181107740132 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8092237825471057682, guid: 7d51ec8380e67e4449c61ae6a80a5c8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8837533394831680246}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &4816557394605888056 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4067560403085553870, guid: 7d51ec8380e67e4449c61ae6a80a5c8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8837533394831680246}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2432728944422619013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4816557394605888056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eca13349654dbf34b89d80c8316495fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldText: {fileID: 785982181107740132}
 --- !u!1001 &9030613823683037266
 PrefabInstance:
   m_ObjectHideFlags: 0

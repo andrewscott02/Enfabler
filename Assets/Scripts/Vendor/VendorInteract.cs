@@ -8,6 +8,6 @@ public class VendorInteract : Interactable, IInteractable
     {
         base.Interacted(interactCharacter);
 
-        VendorManager.instance.OpenVendorMenu(true);
+        PauseMenu.instance.ShowVendorMenu(true);
     }
 }

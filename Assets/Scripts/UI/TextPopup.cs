@@ -18,7 +18,14 @@ public class TextPopup : MonoBehaviour
         //TODO: Fade in
         active = true;
 
-        StartCoroutine(IDelayHideText(duration));
+        StopAllCoroutines();
+        if (active)
+            StartCoroutine(IDelayHideText(duration));
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     IEnumerator IDelayHideText(float delay)

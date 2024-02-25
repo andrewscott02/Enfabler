@@ -14,7 +14,9 @@ public class VendorManager : MonoBehaviour
     public GameObject vendorMenu;
     public List<GameObject> disable;
 
-    public GameObject weaponContainer; 
+    public GameObject weaponContainer;
+
+    public GoldUI goldUI;
 
     public void OpenVendorMenu(bool open)
     {
@@ -28,7 +30,15 @@ public class VendorManager : MonoBehaviour
         if (open)
             CheckWeapons();
 
-        ShowMouse(open);
+        if (open)
+            goldUI.Setup();
+        else
+            goldUI.RemoveDelegate();
+    }
+
+    public void CloseVendorMenu()
+    {
+        PauseMenu.instance.ShowVendorMenu(false);
     }
 
     void CheckWeapons()
