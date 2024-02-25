@@ -20,7 +20,7 @@ public class RoomBounds : MonoBehaviour
             if (!room.cullObjects.Contains(other.gameObject))
             {
                 room.cullObjects.Add(other.gameObject);
-                room.ForceAddEnemyToRoom();
+                //room.ForceAddEnemyToRoom();
                 //other.gameObject.transform.SetParent(room.transform, true);
             }
         }

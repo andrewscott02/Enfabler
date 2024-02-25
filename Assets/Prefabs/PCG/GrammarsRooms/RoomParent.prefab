@@ -744,6 +744,9 @@ MonoBehaviour:
   boundsLayer:
     serializedVersion: 2
     m_Bits: 16777216
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   doorPoints: []
   localVolume: {fileID: 1700809140553355625}
   localVolumeNext: {fileID: 5631533364371346879}
@@ -752,6 +755,7 @@ MonoBehaviour:
   enemySpawners: {fileID: 5691532340985619734}
   objectSpawners: {fileID: 4879353158944947427}
   attachedRooms: []
+  randomDoorPoint: 0
   cullObjects: []
   resetTransformsGizmo: 0
 --- !u!1 &3688193081782744877

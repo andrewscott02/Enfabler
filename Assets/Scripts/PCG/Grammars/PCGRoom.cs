@@ -21,7 +21,7 @@ public class PCGRoom : MonoBehaviour
     }
 
     public Collider roomBounds;
-    public LayerMask boundsLayer;
+    public LayerMask boundsLayer, enemyLayer;
 
     public ObjectSpawner[] doorPoints;
     public Volume localVolume, localVolumeNext;
@@ -330,11 +330,26 @@ public class PCGRoom : MonoBehaviour
 
             BaseCharacterController enemy = go.GetComponent<BaseCharacterController>();
             enemy.characterDied += EnemyKilled;
-            //enemiesInRoom++;
+
+            if (EnemySpawnedInRoom(enemy))
+                enemiesInRoom++;
         }
 
         nextRoundThreshold = Mathf.RoundToInt((float)enemiesInRoom * 0.25f);
         if (nextRoundThreshold <= 0) nextRoundThreshold = 1;
+    }
+
+    bool EnemySpawnedInRoom(BaseCharacterController enemy)
+    {
+        Collider[] cols = Physics.OverlapBox(roomBounds.bounds.center, roomBounds.bounds.extents, roomBounds.transform.rotation, enemyLayer);
+
+        foreach(var item in cols)
+        {
+            if (item.gameObject == enemy.gameObject)
+                return true;
+        }
+
+        return false;
     }
 
     int currentRound = 0;
