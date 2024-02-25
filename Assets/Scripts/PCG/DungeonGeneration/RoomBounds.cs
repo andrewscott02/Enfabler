@@ -21,7 +21,7 @@ public class RoomBounds : MonoBehaviour
             {
                 room.cullObjects.Add(other.gameObject);
                 room.ForceAddEnemyToRoom();
-                other.gameObject.transform.SetParent(room.transform, true);
+                //other.gameObject.transform.SetParent(room.transform, true);
             }
         }
     }

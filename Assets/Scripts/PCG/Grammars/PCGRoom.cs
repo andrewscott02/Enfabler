@@ -457,9 +457,10 @@ public class PCGRoom : MonoBehaviour
 
     public void CullRoom(bool cull)
     {
-        foreach (var item in cullObjects)
+        for (int i = 0; i < cullObjects.Count; i++)
         {
-            item.SetActive(!cull);
+            if (cullObjects[i] != null)
+                cullObjects[i].SetActive(!cull);
         }
 
         return;

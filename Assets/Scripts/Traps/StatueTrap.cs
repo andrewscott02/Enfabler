@@ -48,7 +48,8 @@ public class StatueTrap : MonoBehaviour
         health.hitReactData.killDestroyTime = 0f;
 
         Animator animator = GetComponentInChildren<Animator>();
-        animator.SetBool("StandingGuard", true);
+        if (animator != null)
+            animator.SetBool("StandingGuard", true);
 
         AIController ai = GetComponentInChildren<AIController>();
         ai.enabled = false;
