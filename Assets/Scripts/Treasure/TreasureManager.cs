@@ -20,6 +20,6 @@ public class TreasureManager : MonoBehaviour
     void GiveGoldFunc(int amount)
     {
         goldCount += amount;
-        Debug.Log("GOLD COUNT: " + goldCount + " | " + amount);
+        //Debug.Log("GOLD COUNT: " + goldCount + " | " + amount);
     }
 }

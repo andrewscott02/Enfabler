@@ -15,8 +15,12 @@ public class WeaponSelector : MonoBehaviour
 
     E_WeaponStates weaponState = E_WeaponStates.purchase;
 
-    public void Setup()
+    VendorManager vendorManager;
+
+    public void Setup(VendorManager vendorManager)
     {
+        this.vendorManager = vendorManager;
+
         nameText.text = weapon.weaponName;
 
         weaponState = E_WeaponStates.purchase;
@@ -95,5 +99,10 @@ public class WeaponSelector : MonoBehaviour
     public bool CanBuy()
     {
         return TreasureManager.goldCount >= weapon.goldCost;
+    }
+
+    public void OnHover()
+    {
+        vendorManager.ShowWeaponDescription(weapon);
     }
 }

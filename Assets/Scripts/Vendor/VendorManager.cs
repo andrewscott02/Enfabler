@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using TMPro;
 
 public class VendorManager : MonoBehaviour
 {
@@ -47,13 +49,18 @@ public class VendorManager : MonoBehaviour
 
         foreach(var item in weaponSelectors)
         {
-            item.Setup();
+            item.Setup(this);
         }
+
+        EventSystem.current.SetSelectedGameObject(weaponSelectors[0].button.gameObject);
     }
 
-    void ShowMouse(bool visible)
+    public TextMeshProUGUI weaponName, weaponAttack, weaponDesc;
+
+    public void ShowWeaponDescription(WeaponMoveset weaponDisplay)
     {
-        Cursor.visible = visible;
-        Cursor.lockState = visible ? CursorLockMode.Confined : CursorLockMode.Locked;
+        weaponName.text = weaponDisplay.weaponName;
+        weaponAttack.text = weaponDisplay.baseAttackPwr.ToString();
+        weaponDesc.text = weaponDisplay.weaponDescription;
     }
 }

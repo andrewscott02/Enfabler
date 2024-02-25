@@ -9,6 +9,7 @@ public class WeaponMoveset : ScriptableObject
     public string weaponName;
     [TextArea(3, 10)]
     public string weaponDescription;
+    public int baseAttackPwr = 3;
 
     public int goldCost;
 
