@@ -7,6 +7,8 @@ public class Interactable : MonoBehaviour, IInteractable
     public static PlayerController player;
 
     public E_InteractTypes interactType;
+    public string interactMessage = "Press O to Interact";
+
     public bool lockedInteraction = false;
     public bool interactOnUnlock = false;
 
@@ -124,6 +126,6 @@ public class Interactable : MonoBehaviour, IInteractable
 
     public void ShowInteractMessage(bool show)
     {
-        GameCanvasManager.instance.ShowInteractMessage(show);
+        GameCanvasManager.instance.ShowInteractMessage(show, interactMessage);
     }
 }
