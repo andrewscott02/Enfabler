@@ -64,6 +64,9 @@ public class DungeonGenerator : MonoBehaviour
         BakeNavmesh();
         PopulateRooms();
         CullRooms(start);
+
+        loadProgress = 1f;
+        ProgressLoad("Dungeon Generated...");
     }
 
     float loadProgress = 0;
@@ -80,7 +83,7 @@ public class DungeonGenerator : MonoBehaviour
 
     void ProgressLoad(string message = "Loading...")
     {
-        Debug.Log("PCG - Loading message: " + message);
+        //Debug.Log("PCG - Loading: " + progress.ToString() + " Message: " + message);
         LoadingScreen.instance.LoadProgress(loadProgress, message);
     }
 
@@ -289,9 +292,6 @@ public class DungeonGenerator : MonoBehaviour
         {
             createdRooms[i].CullRoom(!(createdRooms[i] == currentRoom || currentRoom.attachedRooms.Contains(createdRooms[i])));
         }
-
-        loadProgress = 1f;
-        ProgressLoad("Dungeon Generated...");
     }
 
     #endregion

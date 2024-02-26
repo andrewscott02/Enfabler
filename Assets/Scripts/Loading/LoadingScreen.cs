@@ -24,7 +24,7 @@ public class LoadingScreen : MonoBehaviour
 
     IEnumerator IDelayStopLoad()
     {
-        yield return new WaitForSeconds(loadDelay);
+        yield return new WaitForSecondsRealtime(loadDelay);
         EndLoadingScreen();
     }
 
@@ -32,38 +32,36 @@ public class LoadingScreen : MonoBehaviour
     public Slider slider;
     public TextMeshProUGUI text;
     static bool loading = false;
-    static float loadProgress = 0;
 
     public void StartLoadingScreen()
     {
-        Debug.Log("Start loading");
+        //Debug.Log("Start loading");
 
         loading = true;
-        loadProgress = 0;
         animator.SetTrigger("StartLoading");
 
-        LoadProgress(loadProgress);
+        LoadProgress(0);
     }
 
     public void LoadProgress(float progress, string loadMessage = "Loading...")
     {
-        Debug.Log("Loading " + loadProgress);
-        loadProgress = progress;
+        if (!loading)
+            return;
+
+        //Debug.Log("Loading " + progress);
 
         text.text = loadMessage;
-        slider.value = Mathf.Clamp(loadProgress, 0f, 1f);
+        slider.value = Mathf.Clamp(progress, 0f, 1f);
 
-        if (loadProgress >= 1f)
+        if (progress >= 1f)
             EndLoadingScreen();
     }
 
     public void EndLoadingScreen()
     {
-        Debug.Log("End loading");
+        //Debug.Log("End loading");
 
         loading = false;
-        animator.SetBool("Loading", loading);
-        loadProgress = 0;
         animator.SetTrigger("EndLoading");
     }
 }

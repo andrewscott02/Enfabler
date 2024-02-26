@@ -15,19 +15,19 @@ public class EndDungeon : Interactable, IInteractable
         base.Interacted(interactCharacter);
 
         TextPopupManager.instance.ShowMessageText(message);
-        StartCoroutine(ILoadScene(2f));
+        StartCoroutine(ILoadScene(1.5f));
     }
 
     IEnumerator ILoadScene(float delay)
     {
+        LoadingScreen.instance.StartLoadingScreen();
+
         yield return new WaitForSeconds(delay);
 
         if (dungeonData != null)
         {
             DungeonManager.grammarsDungeonData = dungeonData;
         }
-
-        LoadingScreen.instance.StartLoadingScreen();
 
         SceneManager.LoadScene(sceneToLoad.ToString());
     }

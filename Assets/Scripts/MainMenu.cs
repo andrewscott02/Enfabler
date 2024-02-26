@@ -61,7 +61,7 @@ public class MainMenu : MonoBehaviour
     IEnumerator ILoadScene(string sceneName)
     {
         LoadingScreen.instance.StartLoadingScreen();
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSecondsRealtime(1.5f);
         SceneManager.LoadScene(sceneName);
     }
 
