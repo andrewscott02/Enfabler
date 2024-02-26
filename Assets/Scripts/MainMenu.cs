@@ -33,29 +33,36 @@ public class MainMenu : MonoBehaviour
     public void Tutorial()
     {
         ShowMouse(false);
-        SceneManager.LoadScene(E_Scenes.Tutorial.ToString());
+        StartCoroutine(ILoadScene(E_Scenes.Tutorial.ToString()));
     }
 
     public void PlayGame()
     {
         ShowMouse(false);
-        SceneManager.LoadScene(E_Scenes.HubArea.ToString());
+        StartCoroutine(ILoadScene(E_Scenes.HubArea.ToString()));
     }
 
     public void DungeonCrawl()
     {
         ShowMouse(false);
-        SceneManager.LoadScene(E_Scenes.PCGGrammars.ToString());
+        StartCoroutine(ILoadScene(E_Scenes.PCGGrammars.ToString()));
     }
 
     public void ArenaMode()
     {
-        SceneManager.LoadScene(E_Scenes.ArenaScene.ToString());
+        StartCoroutine(ILoadScene(E_Scenes.ArenaScene.ToString()));
     }
 
     public void CharacterCreation()
     {
-        SceneManager.LoadScene(E_Scenes.CharacterCreation.ToString());
+        StartCoroutine(ILoadScene(E_Scenes.CharacterCreation.ToString()));
+    }
+
+    IEnumerator ILoadScene(string sceneName)
+    {
+        LoadingScreen.instance.StartLoadingScreen();
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void ShowControls(bool show)

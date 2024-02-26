@@ -57,11 +57,31 @@ public class DungeonGenerator : MonoBehaviour
 
         string dungeonLayout = ConvertToString(rooms);
 
+        LoadingScreenValues(rooms.Count);
+
         PCGRoom start = GenerateRoom(rooms[0], grammarsDungeonData.startingThemes[randTheme], transform, true, 0);
 
         BakeNavmesh();
         PopulateRooms();
         CullRooms(start);
+    }
+
+    float loadProgress = 0;
+    float progressPerSection = 0;
+    float roomGenerationLoadMax = 0;
+
+    void LoadingScreenValues(int roomCount)
+    {
+        int divisions = roomCount + 3;
+
+        progressPerSection = 1f / ((float)divisions);
+        roomGenerationLoadMax = 1f - (progressPerSection * 3);
+    }
+
+    void ProgressLoad(string message = "Loading...")
+    {
+        Debug.Log("PCG - Loading message: " + message);
+        LoadingScreen.instance.LoadProgress(loadProgress, message);
     }
 
     [ContextMenu("Cleanup Dungeon")]
@@ -203,7 +223,11 @@ public class DungeonGenerator : MonoBehaviour
         if (roomPrefab != null)
         {
             if (mainPath)
+            {
                 currentRoom++;
+                loadProgress = Mathf.Clamp(loadProgress + progressPerSection, 0, roomGenerationLoadMax);
+                ProgressLoad("Generating Rooms...");
+            }
 
             roomCount++;
 
@@ -254,6 +278,9 @@ public class DungeonGenerator : MonoBehaviour
         {
             createdRooms[i].PopulateRoom();
         }
+
+        loadProgress = Mathf.Clamp(loadProgress + progressPerSection, 0, 0.95f);
+        ProgressLoad("Rooms Populated...");
     }
 
     public void CullRooms(PCGRoom currentRoom)
@@ -262,6 +289,9 @@ public class DungeonGenerator : MonoBehaviour
         {
             createdRooms[i].CullRoom(!(createdRooms[i] == currentRoom || currentRoom.attachedRooms.Contains(createdRooms[i])));
         }
+
+        loadProgress = 1f;
+        ProgressLoad("Dungeon Generated...");
     }
 
     #endregion
@@ -273,6 +303,8 @@ public class DungeonGenerator : MonoBehaviour
     void BakeNavmesh()
     {
         navMeshSurface.BuildNavMesh();
+        loadProgress = Mathf.Clamp(loadProgress + progressPerSection, 0, 0.95f);
+        ProgressLoad("Navmesh Baked...");
     }
 
     #endregion

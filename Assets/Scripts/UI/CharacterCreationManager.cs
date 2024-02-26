@@ -143,6 +143,7 @@ public class CharacterCreationManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        LoadingScreen.instance.StartLoadingScreen();
         SceneManager.LoadScene(E_Scenes.MainMenu.ToString());
     }
 }

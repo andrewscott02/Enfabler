@@ -15,7 +15,7 @@ public class EndDungeon : Interactable, IInteractable
         base.Interacted(interactCharacter);
 
         TextPopupManager.instance.ShowMessageText(message);
-        StartCoroutine(ILoadScene(5f));
+        StartCoroutine(ILoadScene(2f));
     }
 
     IEnumerator ILoadScene(float delay)
@@ -26,6 +26,8 @@ public class EndDungeon : Interactable, IInteractable
         {
             DungeonManager.grammarsDungeonData = dungeonData;
         }
+
+        LoadingScreen.instance.StartLoadingScreen();
 
         SceneManager.LoadScene(sceneToLoad.ToString());
     }
