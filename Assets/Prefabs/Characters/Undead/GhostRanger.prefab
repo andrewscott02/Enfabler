@@ -2783,6 +2783,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
+      propertyPath: maxHealth
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
       propertyPath: hitReactData.bloodFX
       value: 
       objectReference: {fileID: 4983520532681786520, guid: 519711c44e578224f93314968deaddf2,
@@ -2822,6 +2827,16 @@ PrefabInstance:
         type: 3}
       propertyPath: hitReactData.hitImpulseMultiplier
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: hitReactData.heavyHitReactThreshold
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: hitReactData.lightHitReactThreshold
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2268985484870110960, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}

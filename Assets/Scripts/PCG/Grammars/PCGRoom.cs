@@ -340,6 +340,13 @@ public class PCGRoom : MonoBehaviour
         enemiesInRoom = GetEnemiesSpawnedInRoom();
         nextRoundThreshold = Mathf.RoundToInt((float)enemiesInRoom * 0.25f);
         if (nextRoundThreshold <= 0) nextRoundThreshold = 1;
+
+        if (enemiesInRoom <= 0)
+        {
+            Debug.Log("Unlocking Doors");
+            foreach (var item in doors)
+                item.UnlockInteraction();
+        }
     }
 
     int GetEnemiesSpawnedInRoom()

@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aaf6ebf2e5e8dd4db915d4684c82a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overrideWeapon: {fileID: 0}
   handTransforms:
   - {fileID: 8394707066069217295}
   - {fileID: 3795948990591585957}
@@ -518,6 +519,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
+      propertyPath: maxHealth
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
       propertyPath: hitReactData.killAnim
       value: 1
       objectReference: {fileID: 0}
@@ -540,6 +546,16 @@ PrefabInstance:
         type: 3}
       propertyPath: hitReactData.killDestroyTime
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: hitReactData.heavyHitReactThreshold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132783429004968690, guid: 9259463fa317d1c41aec05c50edaee45,
+        type: 3}
+      propertyPath: hitReactData.lightHitReactThreshold
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2146426552241563578, guid: 9259463fa317d1c41aec05c50edaee45,
         type: 3}
