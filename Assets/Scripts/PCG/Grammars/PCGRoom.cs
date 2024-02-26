@@ -296,21 +296,11 @@ public class PCGRoom : MonoBehaviour
     }
 
     int enemiesInRoom = 0;
-    public int ForceAddEnemyToRoom()
-    {
-        enemiesInRoom++;
-        return enemiesInRoom;
-    }
-    public int ForceRemoveEnemyFromRoom(BaseCharacterController enemy = null)
-    {
-        EnemyKilled(enemy);
-        return enemiesInRoom;
-    }
 
     void SpawnEnemies()
     {
         int roomIndex = dungeonData.GetRoomDataIndex(roomType);
-        int roundsMax = dungeonData.roomData[roomIndex].enemySpawnInfo.Length;
+        roundsMax = dungeonData.roomData[roomIndex].enemySpawnInfo.Length;
 
         if (currentRound >= roundsMax)
             return;
@@ -328,33 +318,30 @@ public class PCGRoom : MonoBehaviour
             go.transform.position = spawnPos;
             go.transform.rotation = Quaternion.identity;
             itemsInRoom.Add(go);
+
+            BaseCharacterController enemy = go.GetComponent<BaseCharacterController>();
+            enemy.characterDied += EnemyKilled;
+            enemiesInRoom++;
         }
-
-        StartCoroutine(ICheckEnemies());
     }
 
-    IEnumerator ICheckEnemies()
+    public void ForceRemoveEnemyFromRoom()
     {
-        yield return new WaitForSeconds(1f);
-
-        CheckEnemies();
+        EnemyKilled(null);
     }
 
-    void CheckEnemies()
+    public void EnemyKilled(BaseCharacterController controller)
     {
         enemiesInRoom = GetEnemiesSpawnedInRoom();
-        nextRoundThreshold = Mathf.RoundToInt((float)enemiesInRoom * 0.25f);
-        if (nextRoundThreshold <= 0) nextRoundThreshold = 1;
 
         if (enemiesInRoom <= nextRoundThreshold)
         {
             CheckRound();
-            return;
         }
 
         if (enemiesInRoom <= 0)
         {
-            Debug.Log("Unlocking Doors");
+            //Debug.Log("Unlocking Doors");
             foreach (var item in doors)
                 item.UnlockInteraction();
         }
@@ -374,7 +361,6 @@ public class PCGRoom : MonoBehaviour
             {
                 if (enemy.checkedInRoomBounds)
                 {
-                    enemy.characterDied += EnemyKilled;
                     enemies++;
                 }
             }
@@ -384,32 +370,16 @@ public class PCGRoom : MonoBehaviour
     }
 
     int currentRound = 0;
+    int roundsMax;
     int nextRoundThreshold;
 
-    void EnemyKilled(BaseCharacterController controller)
-    {
-        Debug.Log("Enemy killed in room");
-        enemiesInRoom--;
-
-        if (enemiesInRoom <= nextRoundThreshold)
-        {
-            CheckRound();
-            return;
-        }
-
-        if (enemiesInRoom <= 0)
-        {
-            Debug.Log("Unlocking Doors");
-            foreach(var item in doors)
-                item.UnlockInteraction();
-        }
-    }
-
-    void CheckRound()
+    bool CheckRound()
     {
         currentRound++;
 
         SpawnEnemies();
+
+        return currentRound < roundsMax;
     }
 
     void SpawnTraps()
@@ -489,7 +459,7 @@ public class PCGRoom : MonoBehaviour
 
         BaseCharacterController enemy = go.GetComponent<BaseCharacterController>();
         enemy.characterDied += EnemyKilled;
-        //enemiesInRoom++;
+        enemiesInRoom++;
     }
 
     void SetPuzzleElements()
@@ -508,6 +478,7 @@ public class PCGRoom : MonoBehaviour
     }
 
     public List<GameObject> cullObjects = new List<GameObject>();
+    bool culled = false;
 
     public void CullRoom(bool cull)
     {
@@ -516,6 +487,8 @@ public class PCGRoom : MonoBehaviour
             if (cullObjects[i] != null)
                 cullObjects[i].SetActive(!cull);
         }
+
+        culled = cull;
 
         return;
 

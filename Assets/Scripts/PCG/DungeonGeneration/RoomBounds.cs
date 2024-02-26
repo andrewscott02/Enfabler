@@ -34,7 +34,7 @@ public class RoomBounds : MonoBehaviour
             if (room.cullObjects.Contains(other.gameObject))
             {
                 room.cullObjects.Remove(other.gameObject);
-                room.ForceRemoveEnemyFromRoom(null);
+                room.ForceRemoveEnemyFromRoom();
             }
         }
     }
