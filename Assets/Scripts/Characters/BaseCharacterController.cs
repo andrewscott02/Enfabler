@@ -114,6 +114,8 @@ public class BaseCharacterController : MonoBehaviour
 
     public virtual void Killed()
     {
+        checkedInRoomBounds = false;
+
         characterDied(this);
         CameraManager.instance.CombatZoom();
         TreasureManager.instance.D_GiveGold(Random.Range(goldOnKill.x, goldOnKill.y + 1));

@@ -332,7 +332,7 @@ public class PCGRoom : MonoBehaviour
 
     public void EnemyKilled(BaseCharacterController controller)
     {
-        enemiesInRoom = GetEnemiesSpawnedInRoom();
+        enemiesInRoom--;
 
         if (enemiesInRoom <= nextRoundThreshold)
         {
