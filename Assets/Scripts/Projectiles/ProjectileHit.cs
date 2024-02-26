@@ -87,11 +87,11 @@ public class ProjectileHit : MonoBehaviour
 
     void DetermineEffect(IDamageable target)
     {
-        Debug.Log("Determine effect - Hit = " + alreadyHit);
+        //Debug.Log("Determine effect - Hit = " + alreadyHit);
         if (alreadyHit) return;
         alreadyHit = true;
 
-        Debug.Log("hitting target" + target.GetScript().gameObject + " for " + trapStats.damage);
+        //Debug.Log("hitting target" + target.GetScript().gameObject + " for " + trapStats.damage);
         E_DamageEvents hitData = E_DamageEvents.Hit;
         MonoBehaviour targetMono = target.GetScript();
 

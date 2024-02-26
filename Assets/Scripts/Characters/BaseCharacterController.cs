@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class BaseCharacterController : MonoBehaviour
 {
     public bool invisible = false;
+    public bool checkedInRoomBounds = true;
     protected Animator animator;
     protected CharacterCombat combat; public CharacterCombat GetCharacterCombat() { return combat; }
     protected Health health; public Health GetHealth() { return health; }

@@ -254,7 +254,8 @@ public class PCGRoom : MonoBehaviour
         generated = true;
     }
 
-    Door door;
+    Door mainDoor;
+    List<Door> doors = new List<Door>();
 
     void SpawnDoors(ObjectSpawner doorSpawner, bool open)
     {
@@ -264,10 +265,15 @@ public class PCGRoom : MonoBehaviour
         go.transform.rotation = doorSpawner.transform.rotation;
         itemsInRoom.Add(go);
 
-        door = go.GetComponentInChildren<Door>();
+        Door door = go.GetComponentInChildren<Door>();
         door.lockedInteraction = lockOverride ? lockDoor : dungeonData.GetDoorLocked(roomType);
 
         door.interactDelegate += DoorOpened;
+
+        doors.Add(door);
+
+        if (doorSpawner == mainDoorPoint)
+            mainDoor = door;
         //Debug.Log("Added delegate to room " + roomNumber);
     }
 
@@ -316,20 +322,12 @@ public class PCGRoom : MonoBehaviour
             int spawnerIndex = Random.Range(0, enemySpawnerChildren.Length);
 
             Vector3 spawnPos = enemySpawnerChildren[spawnerIndex].position;
-            spawnPos.y += 2f;
-
-            if (HelperFunctions.GetRandomPoint(spawnPos, 3f, 1f, 100, out Vector3 point))
-            {
-                spawnPos = point;
-            }
+            spawnPos.y += 1f;
 
             GameObject go = Instantiate(item, transform) as GameObject;
             go.transform.position = spawnPos;
             go.transform.rotation = Quaternion.identity;
             itemsInRoom.Add(go);
-
-            BaseCharacterController enemy = go.GetComponent<BaseCharacterController>();
-            enemy.characterDied += EnemyKilled;
         }
 
         StartCoroutine(ICheckEnemies());
@@ -348,7 +346,23 @@ public class PCGRoom : MonoBehaviour
     {
         Collider[] cols = Physics.OverlapBox(roomBounds.bounds.center, roomBounds.bounds.extents, roomBounds.transform.rotation, enemyLayer);
 
-        return cols.Length;
+        int enemies = 0;
+
+        foreach (var item in cols)
+        {
+            BaseCharacterController enemy = item.gameObject.GetComponent<BaseCharacterController>();
+
+            if (enemy != null)
+            {
+                if (enemy.checkedInRoomBounds)
+                {
+                    enemy.characterDied += EnemyKilled;
+                    enemies++;
+                }
+            }
+        }
+
+        return enemies;
     }
 
     int currentRound = 0;
@@ -356,7 +370,7 @@ public class PCGRoom : MonoBehaviour
 
     void EnemyKilled(BaseCharacterController controller)
     {
-        //Debug.Log("Enemy killed in room");
+        Debug.Log("Enemy killed in room");
         enemiesInRoom--;
 
         if (enemiesInRoom <= nextRoundThreshold)
@@ -368,7 +382,9 @@ public class PCGRoom : MonoBehaviour
 
         if (enemiesInRoom <= 0)
         {
-            door.UnlockInteraction();
+            Debug.Log("Unlocking Doors");
+            foreach(var item in doors)
+                item.UnlockInteraction();
         }
     }
 
@@ -462,7 +478,7 @@ public class PCGRoom : MonoBehaviour
         {
             if (item.unlockMainDoor)
             {
-                item.interactable = door;
+                item.interactable = mainDoor;
             }
         }
     }
@@ -485,8 +501,8 @@ public class PCGRoom : MonoBehaviour
 
     public void CloseDoor()
     {
-        if (door != null)
-            door.CloseDoor();
+        foreach (var item in doors)
+            item.CloseDoor();
     }
 
     public void DeleteRoom()

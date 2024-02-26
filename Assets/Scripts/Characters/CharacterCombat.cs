@@ -585,7 +585,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         RaycastHit hit;
 
-        Debug.Log("Combat - Checking move to target");
+        //Debug.Log("Combat - Checking move to target");
 
         if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: maxDistance, layerMask))
         {

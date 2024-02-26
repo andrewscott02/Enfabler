@@ -47,7 +47,7 @@ public class Interactable : MonoBehaviour, IInteractable
 
     public void UnlockInteraction()
     {
-        Debug.Log("Unlock Interaction");
+        //Debug.Log("Unlock Interaction");
         lockedInteraction = false;
 
         if (interactOnUnlock)

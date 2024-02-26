@@ -9227,12 +9227,12 @@ PrefabInstance:
     - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: moveDistanceThreshold.x
-      value: 0.2
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: moveDistanceThreshold.y
-      value: 0.75
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
@@ -12931,6 +12931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invisible: 0
+  checkedInRoomBounds: 0
   model: {fileID: 64041285362746459}
   playerTeam: 1
   yRotateThresholds: {x: 300, y: 60}

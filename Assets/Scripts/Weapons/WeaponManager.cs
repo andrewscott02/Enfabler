@@ -19,7 +19,7 @@ public class WeaponManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("Weapon manager setup");
+        //Debug.Log("Weapon manager setup");
 
         instance = this;
         transform.SetParent(null);

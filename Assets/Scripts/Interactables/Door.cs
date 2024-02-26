@@ -33,6 +33,6 @@ public class Door : Interactable, IInteractable
     void InteractedDelegate()
     {
         //Blank delegate
-        Debug.Log("Interacted delegate");
+        //Debug.Log("Interacted delegate");
     }
 }
