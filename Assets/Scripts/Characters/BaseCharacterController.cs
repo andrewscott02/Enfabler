@@ -110,10 +110,13 @@ public class BaseCharacterController : MonoBehaviour
     public delegate void DiedDelegate(BaseCharacterController controller);
     public DiedDelegate characterDied;
 
+    public Vector2Int goldOnKill;
+
     public virtual void Killed()
     {
         characterDied(this);
         CameraManager.instance.CombatZoom();
+        TreasureManager.instance.D_GiveGold(Random.Range(goldOnKill.x, goldOnKill.y + 1));
     }
 
     public void Died(BaseCharacterController controller)

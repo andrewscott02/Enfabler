@@ -337,9 +337,20 @@ public class PCGRoom : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
+        CheckEnemies();
+    }
+
+    void CheckEnemies()
+    {
         enemiesInRoom = GetEnemiesSpawnedInRoom();
         nextRoundThreshold = Mathf.RoundToInt((float)enemiesInRoom * 0.25f);
         if (nextRoundThreshold <= 0) nextRoundThreshold = 1;
+
+        if (enemiesInRoom <= nextRoundThreshold)
+        {
+            CheckRound();
+            return;
+        }
 
         if (enemiesInRoom <= 0)
         {
@@ -382,9 +393,8 @@ public class PCGRoom : MonoBehaviour
 
         if (enemiesInRoom <= nextRoundThreshold)
         {
-            currentRound++;
-
-            SpawnEnemies();
+            CheckRound();
+            return;
         }
 
         if (enemiesInRoom <= 0)
@@ -393,6 +403,13 @@ public class PCGRoom : MonoBehaviour
             foreach(var item in doors)
                 item.UnlockInteraction();
         }
+    }
+
+    void CheckRound()
+    {
+        currentRound++;
+
+        SpawnEnemies();
     }
 
     void SpawnTraps()
