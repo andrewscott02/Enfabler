@@ -16,16 +16,19 @@ public class LoadingScreen : MonoBehaviour
         instance = this;
 
         if (loading)
+        {
             animator.SetTrigger("Loading");
 
-        if (endLoadingScreenOnStart)
-            StartCoroutine(IDelayStopLoad());
+            if (endLoadingScreenOnStart)
+                StartCoroutine(IDelayStopLoad());
+        }
     }
 
     IEnumerator IDelayStopLoad()
     {
+        loading = true;
         yield return new WaitForSecondsRealtime(loadDelay);
-        EndLoadingScreen();
+        LoadProgress(1f);
     }
 
     public Animator animator;
