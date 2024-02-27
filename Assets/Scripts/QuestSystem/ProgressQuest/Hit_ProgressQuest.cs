@@ -17,7 +17,7 @@ public class Hit_ProgressQuest : ProgressQuest
 
     public void OnHit(int damage, Vector3 dir, E_AttackType attackType = E_AttackType.None)
     {
-        Debug.Log(attackType);
+        //Debug.Log(attackType);
 
         if (stage >= specifiedAttacks.Length)
             return;
