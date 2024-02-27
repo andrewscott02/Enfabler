@@ -8,6 +8,10 @@ public class MoveableObject : PuzzleElement
     public float moveDelay = 1f;
     public float moveSpeed = 5f;
     public Vector3 endOffset;
+    Vector3 GetEndOffset()
+    {
+        return transform.rotation * endOffset;
+    }
 
     Vector3 startPosition, endPosition;
     Vector3 targetPosition;
@@ -18,7 +22,7 @@ public class MoveableObject : PuzzleElement
         base.Start();
 
         startPosition = transform.position;
-        endPosition = startPosition + endOffset;
+        endPosition = startPosition + GetEndOffset();
 
         switch (movementType)
         {
@@ -36,7 +40,7 @@ public class MoveableObject : PuzzleElement
                 break;
             case E_MovementType.EnableMovementEndless:
                 moving = false;
-                targetPosition = endOffset;
+                targetPosition = GetEndOffset();
                 break;
         }
     }
@@ -147,7 +151,7 @@ public class MoveableObject : PuzzleElement
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, 0.2f);
-        Gizmos.DrawWireSphere(transform.position + endOffset, 0.2f);
+        Gizmos.DrawWireSphere(transform.position + GetEndOffset(), 0.2f);
     }
 }
 

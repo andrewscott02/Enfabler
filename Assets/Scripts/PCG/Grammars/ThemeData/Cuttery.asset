@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   regionName: The Cuttery
   volumeProfile: {fileID: 11400000, guid: e42945aa6f9288b4ea8a8cfb9834f81e, type: 2}
+  genericMaterial: {fileID: 2100000, guid: 5c844a6fff3a3854eaef03ac3dac6cea, type: 2}
   wallPiece: {fileID: 2541946485368774830, guid: f681b9aeccc44d34e9f0eedd30dd99bd,
     type: 3}
   wallPieceSize: {x: 3, y: 3, z: 1}
@@ -32,17 +33,17 @@ MonoBehaviour:
   enemies:
   - enemyPrefab: {fileID: 7535070001232547612, guid: 60852a8de2fda81479e00ddb3729d863,
       type: 3}
-    severity: 3
+    severity: 5
     maxCount: 8
     timesUsed: 0
   - enemyPrefab: {fileID: 65003227609108772, guid: 7b4c02ca5771431418539708dbb6b0be,
       type: 3}
-    severity: 5
+    severity: 7
     maxCount: 5
     timesUsed: 0
   - enemyPrefab: {fileID: 1674516667667474496, guid: d284b34eb484d6d45ab2464c365a0e4a,
       type: 3}
-    severity: 8
+    severity: 9
     maxCount: 2
     timesUsed: 0
   - enemyPrefab: {fileID: 8084795209297945531, guid: 355b2e5add83d3a47abdccf09b5e77a0,
@@ -52,7 +53,7 @@ MonoBehaviour:
     timesUsed: 0
   - enemyPrefab: {fileID: 8084795209297945531, guid: 7913b7b2d47af884d861a54235035b7e,
       type: 3}
-    severity: 24
+    severity: 26
     maxCount: 1
     timesUsed: 0
   traps:

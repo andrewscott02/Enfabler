@@ -19,7 +19,11 @@ public class WeaponManager : MonoBehaviour
             return;
         }
 
+        //Debug.Log("Weapon manager setup");
+
         instance = this;
+        transform.SetParent(null);
+        DontDestroyOnLoad(this.gameObject);
 
         equippedWeapon = startingWeapon;
 
@@ -27,8 +31,6 @@ public class WeaponManager : MonoBehaviour
         {
             ownedWeapons.Add(startingWeapon);
         }
-
-        DontDestroyOnLoad(gameObject);
 
         equipDelegate += EquipWeapon;
     }

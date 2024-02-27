@@ -585,7 +585,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         RaycastHit hit;
 
-        Debug.Log("Combat - Checking move to target");
+        //Debug.Log("Combat - Checking move to target");
 
         if (Physics.SphereCast(origin, radius: targetSphereRadius, direction: dir, out hit, maxDistance: maxDistance, layerMask))
         {
@@ -706,7 +706,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         {
             if (item.gameObject != gameObject)
             {
-                CallDamage(item, item.transform.position, Vector3.zero);
+                Vector3 hitDir = origin - transform.position;
+                hitDir.y = 0;
+                CallDamage(item, origin, hitDir);
             }
         }
     }
@@ -722,11 +724,13 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         if (Physics.SphereCast(origin, radius: weaponSphereRadius, direction: dir, out hit, maxDistance: distance, hitLayerMask))
         {
-            CallDamage(hit.collider, hit.point, hit.normal);
+            Vector3 hitDir = hit.point - transform.position;
+            hitDir.y = 0;
+            CallDamage(hit.collider, hit.point, hitDir);
         }
     }
 
-    void CallDamage(Collider collider, Vector3 hitPos, Vector3 hitNormal)
+    void CallDamage(Collider collider, Vector3 hitPos, Vector3 hitDir)
     {
         IDamageable hitDamageable = collider.GetComponent<IDamageable>();
 
@@ -757,7 +761,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         //If it can be hit, deal damage to target and add it to the hit targets list
         hitTargets.Add(hitDamageable);
-        E_DamageEvents damageEvent = DealDamage(hitDamageable, damage, hitPos, hitNormal, currentAttack.attackType);
+
+        hitDir.Normalize();
+        Quaternion rotation = Quaternion.LookRotation(hitDir, Vector3.up);
+        E_DamageEvents damageEvent = DealDamage(hitDamageable, damage, hitPos, rotation.eulerAngles, currentAttack.attackType);
 
         onAttackHit(damageEvent);
     }

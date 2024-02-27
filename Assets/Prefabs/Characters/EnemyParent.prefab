@@ -273,7 +273,7 @@ PrefabInstance:
     - target: {fileID: 732605661954093454, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: maxHealth
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 732605661954093454, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
@@ -762,8 +762,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invisible: 0
+  checkedInRoomBounds: 1
   model: {fileID: 7699051525656051087}
   playerTeam: 0
+  goldOnKill: {x: 2, y: 5}
   distanceAllowance: 0.8
   lerpSpeed: 0.01
   sightMask:

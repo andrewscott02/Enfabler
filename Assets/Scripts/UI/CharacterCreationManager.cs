@@ -143,6 +143,13 @@ public class CharacterCreationManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        StartCoroutine(IDelayLoad());
+    }
+
+    IEnumerator IDelayLoad()
+    {
+        LoadingScreen.instance.StartLoadingScreen();
+        yield return new WaitForSecondsRealtime(1.5f);
         SceneManager.LoadScene(E_Scenes.MainMenu.ToString());
     }
 }

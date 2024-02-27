@@ -20,7 +20,7 @@ public class TreasureChest : Interactable, IInteractable
         base.Interacted(interactCharacter);
         animator.SetTrigger("OpenChest");
 
-        int gold = Random.Range(goldAmount.x, goldAmount.y);
+        int gold = Random.Range(goldAmount.x, goldAmount.y + 1);
         Debug.Log("GOLD FROM CHEST: " + gold);
         TreasureManager.instance.D_GiveGold(gold);
 

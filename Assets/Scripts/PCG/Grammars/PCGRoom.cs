@@ -71,6 +71,20 @@ public class PCGRoom : MonoBehaviour
 
         SetupTransforms();
 
+        GenerateWalls();
+        SetGenericMaterials();
+
+        GetDoorPoints(reversed);
+
+        if (mainPath)
+            SpawnNextMainRoom();
+
+        SpawnAdditionalRooms();
+        SetupVolumes();
+    }
+
+    void GenerateWalls()
+    {
         WallGenerator[] wallGenerators = GetComponentsInChildren<WallGenerator>();
 
         foreach (var item in wallGenerators)
@@ -80,14 +94,19 @@ public class PCGRoom : MonoBehaviour
             else
                 item.SetupRoom(item.changeTheme ? theme : nextTheme);
         }
+    }
 
-        GetDoorPoints(reversed);
+    void SetGenericMaterials()
+    {
+        SetMaterialPCG[] setMats = GetComponentsInChildren<SetMaterialPCG>();
 
-        if (mainPath)
-            SpawnNextMainRoom();
-
-        SpawnAdditionalRooms();
-        SetupVolumes();
+        foreach (var item in setMats)
+        {
+            if (!reversed)
+                item.Setup(item.changeTheme ? nextTheme : theme);
+            else
+                item.Setup(item.changeTheme ? theme : nextTheme);
+        }
     }
 
     public bool Overlaps()
@@ -254,7 +273,8 @@ public class PCGRoom : MonoBehaviour
         generated = true;
     }
 
-    Door door;
+    Door mainDoor;
+    List<Door> doors = new List<Door>();
 
     void SpawnDoors(ObjectSpawner doorSpawner, bool open)
     {
@@ -264,10 +284,15 @@ public class PCGRoom : MonoBehaviour
         go.transform.rotation = doorSpawner.transform.rotation;
         itemsInRoom.Add(go);
 
-        door = go.GetComponentInChildren<Door>();
+        Door door = go.GetComponentInChildren<Door>();
         door.lockedInteraction = lockOverride ? lockDoor : dungeonData.GetDoorLocked(roomType);
 
         door.interactDelegate += DoorOpened;
+
+        doors.Add(door);
+
+        if (doorSpawner == mainDoorPoint)
+            mainDoor = door;
         //Debug.Log("Added delegate to room " + roomNumber);
     }
 
@@ -290,21 +315,11 @@ public class PCGRoom : MonoBehaviour
     }
 
     int enemiesInRoom = 0;
-    public int ForceAddEnemyToRoom()
-    {
-        enemiesInRoom++;
-        return enemiesInRoom;
-    }
-    public int ForceRemoveEnemyFromRoom(BaseCharacterController enemy = null)
-    {
-        EnemyKilled(enemy);
-        return enemiesInRoom;
-    }
 
     void SpawnEnemies()
     {
         int roomIndex = dungeonData.GetRoomDataIndex(roomType);
-        int roundsMax = dungeonData.roomData[roomIndex].enemySpawnInfo.Length;
+        roundsMax = dungeonData.roomData[roomIndex].enemySpawnInfo.Length;
 
         if (currentRound >= roundsMax)
             return;
@@ -316,12 +331,7 @@ public class PCGRoom : MonoBehaviour
             int spawnerIndex = Random.Range(0, enemySpawnerChildren.Length);
 
             Vector3 spawnPos = enemySpawnerChildren[spawnerIndex].position;
-            spawnPos.y += 2f;
-
-            if (HelperFunctions.GetRandomPoint(spawnPos, 3f, 1f, 100, out Vector3 point))
-            {
-                spawnPos = point;
-            }
+            spawnPos.y += 1f;
 
             GameObject go = Instantiate(item, transform) as GameObject;
             go.transform.position = spawnPos;
@@ -330,46 +340,65 @@ public class PCGRoom : MonoBehaviour
 
             BaseCharacterController enemy = go.GetComponent<BaseCharacterController>();
             enemy.characterDied += EnemyKilled;
+            enemiesInRoom++;
         }
-
-        StartCoroutine(ICheckEnemies());
     }
 
-    IEnumerator ICheckEnemies()
+    public void ForceRemoveEnemyFromRoom()
     {
-        yield return new WaitForSeconds(1f);
+        EnemyKilled(null);
+    }
 
-        enemiesInRoom = GetEnemiesSpawnedInRoom();
-        nextRoundThreshold = Mathf.RoundToInt((float)enemiesInRoom * 0.25f);
-        if (nextRoundThreshold <= 0) nextRoundThreshold = 1;
+    public void EnemyKilled(BaseCharacterController controller)
+    {
+        enemiesInRoom--;
+
+        if (enemiesInRoom <= nextRoundThreshold)
+        {
+            CheckRound();
+        }
+
+        if (enemiesInRoom <= 0)
+        {
+            //Debug.Log("Unlocking Doors");
+            foreach (var item in doors)
+                item.UnlockInteraction();
+        }
     }
 
     int GetEnemiesSpawnedInRoom()
     {
         Collider[] cols = Physics.OverlapBox(roomBounds.bounds.center, roomBounds.bounds.extents, roomBounds.transform.rotation, enemyLayer);
 
-        return cols.Length;
+        int enemies = 0;
+
+        foreach (var item in cols)
+        {
+            BaseCharacterController enemy = item.gameObject.GetComponent<BaseCharacterController>();
+
+            if (enemy != null)
+            {
+                if (enemy.checkedInRoomBounds)
+                {
+                    enemies++;
+                }
+            }
+        }
+
+        return enemies;
     }
 
     int currentRound = 0;
+    int roundsMax;
     int nextRoundThreshold;
 
-    void EnemyKilled(BaseCharacterController controller)
+    bool CheckRound()
     {
-        //Debug.Log("Enemy killed in room");
-        enemiesInRoom--;
+        currentRound++;
 
-        if (enemiesInRoom <= nextRoundThreshold)
-        {
-            currentRound++;
+        SpawnEnemies();
 
-            SpawnEnemies();
-        }
-
-        if (enemiesInRoom <= 0)
-        {
-            door.UnlockInteraction();
-        }
+        return currentRound < roundsMax;
     }
 
     void SpawnTraps()
@@ -449,7 +478,7 @@ public class PCGRoom : MonoBehaviour
 
         BaseCharacterController enemy = go.GetComponent<BaseCharacterController>();
         enemy.characterDied += EnemyKilled;
-        //enemiesInRoom++;
+        enemiesInRoom++;
     }
 
     void SetPuzzleElements()
@@ -462,12 +491,13 @@ public class PCGRoom : MonoBehaviour
         {
             if (item.unlockMainDoor)
             {
-                item.interactable = door;
+                item.interactable = mainDoor;
             }
         }
     }
 
     public List<GameObject> cullObjects = new List<GameObject>();
+    bool culled = false;
 
     public void CullRoom(bool cull)
     {
@@ -477,6 +507,8 @@ public class PCGRoom : MonoBehaviour
                 cullObjects[i].SetActive(!cull);
         }
 
+        culled = cull;
+
         return;
 
         if (cull)
@@ -485,8 +517,8 @@ public class PCGRoom : MonoBehaviour
 
     public void CloseDoor()
     {
-        if (door != null)
-            door.CloseDoor();
+        foreach (var item in doors)
+            item.CloseDoor();
     }
 
     public void DeleteRoom()

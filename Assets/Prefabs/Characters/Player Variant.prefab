@@ -9227,12 +9227,12 @@ PrefabInstance:
     - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: moveDistanceThreshold.x
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: moveDistanceThreshold.y
-      value: 0.75
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
@@ -12894,7 +12894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpeed: 0
-  gravityMultiplier: 850
+  gravityMultiplier: 600
   stepData:
     footstepObject: {fileID: 5831885752641907103, guid: 0c64f327b547b814e944a952f00d0e1c,
       type: 3}
@@ -12931,8 +12931,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invisible: 0
+  checkedInRoomBounds: 0
   model: {fileID: 64041285362746459}
   playerTeam: 1
+  goldOnKill: {x: 0, y: 0}
   yRotateThresholds: {x: 300, y: 60}
   rotateInterval: {x: 1.5, y: 1.5}
   rotateDeadZone: 0.1

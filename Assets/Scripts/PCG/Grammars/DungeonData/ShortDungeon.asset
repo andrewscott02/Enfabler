@@ -78,9 +78,9 @@ MonoBehaviour:
     lockDoor: 1
     enemySpawnInfo:
     - enemiesMax: 2
-      enemiesSeverityMax: 6
+      enemiesSeverityMax: 14
     - enemiesMax: 4
-      enemiesSeverityMax: 15
+      enemiesSeverityMax: 16
     - enemiesMax: 5
       enemiesSeverityMax: 20
     - enemiesMax: 8
@@ -118,13 +118,13 @@ MonoBehaviour:
     enemySpawnInfo: []
     trapsMinMax: {x: 0, y: 0}
   emptyRoomType: 3
-  additionalRoomTypes: 030000000400000007000000
+  additionalRoomTypes: 03000000040000000700000009000000
   sidePathRoomTypes: 030000000400000007000000
   sidePathEndRoomTypes: 0a00000006000000
   sideRoomEndChance: 0.35
-  additionalHealingRooms: 2
-  roomsCountMinMax: {x: 3, y: 5}
-  maxTotalRooms: 20
+  additionalHealingRooms: 1
+  roomsCountMinMax: {x: 4, y: 6}
+  maxTotalRooms: 50
   sideRoomChance: 0.75
   mainPathRemoveLimit: 3
   startingThemes:
