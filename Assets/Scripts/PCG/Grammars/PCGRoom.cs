@@ -71,6 +71,20 @@ public class PCGRoom : MonoBehaviour
 
         SetupTransforms();
 
+        GenerateWalls();
+        SetGenericMaterials();
+
+        GetDoorPoints(reversed);
+
+        if (mainPath)
+            SpawnNextMainRoom();
+
+        SpawnAdditionalRooms();
+        SetupVolumes();
+    }
+
+    void GenerateWalls()
+    {
         WallGenerator[] wallGenerators = GetComponentsInChildren<WallGenerator>();
 
         foreach (var item in wallGenerators)
@@ -80,14 +94,19 @@ public class PCGRoom : MonoBehaviour
             else
                 item.SetupRoom(item.changeTheme ? theme : nextTheme);
         }
+    }
 
-        GetDoorPoints(reversed);
+    void SetGenericMaterials()
+    {
+        SetMaterialPCG[] setMats = GetComponentsInChildren<SetMaterialPCG>();
 
-        if (mainPath)
-            SpawnNextMainRoom();
-
-        SpawnAdditionalRooms();
-        SetupVolumes();
+        foreach (var item in setMats)
+        {
+            if (!reversed)
+                item.Setup(item.changeTheme ? nextTheme : theme);
+            else
+                item.Setup(item.changeTheme ? theme : nextTheme);
+        }
     }
 
     public bool Overlaps()

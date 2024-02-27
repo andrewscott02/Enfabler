@@ -10,6 +10,7 @@ public class ThemeData : ScriptableObject
     public VolumeProfile volumeProfile;
 
     [Header("Room Generation Data")]
+    public Material genericMaterial;
     public Object wallPiece;
     public Vector3 wallPieceSize = new Vector3(4, 2.9f, 1);
     public Object ceilingPiece;
