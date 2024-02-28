@@ -30,7 +30,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
-        StartCoroutine(IDelayPause(0.15f));
+        StartCoroutine(IDelayPause(0.1f));
     }
 
     IEnumerator IDelayPause(float delay)
@@ -41,6 +41,9 @@ public class PauseMenu : MonoBehaviour
         paused = true;
         ShowControls(false);
 
+        inVendorMenu = false;
+        VendorManager.instance.OpenVendorMenu(false);
+
         ShowQuestUI(false);
 
         Time.timeScale = 0;
@@ -48,7 +51,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        StartCoroutine(IDelayResume(0.15f));
+        StartCoroutine(IDelayResume(0.1f));
     }
 
     IEnumerator IDelayResume(float delay)
@@ -60,6 +63,9 @@ public class PauseMenu : MonoBehaviour
         ShowControls(false);
         pauseMenu.SetActive(false);
         controls.SetActive(false);
+
+        inVendorMenu = false;
+        VendorManager.instance.OpenVendorMenu(false);
 
         ShowQuestUI(true);
 
@@ -92,6 +98,12 @@ public class PauseMenu : MonoBehaviour
 
     public void ShowVendorMenu(bool open)
     {
+        StartCoroutine(IDelayVendor(open, 0.1f));
+    }
+
+    IEnumerator IDelayVendor(bool open, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
         inVendorMenu = open;
         ShowMouse(open);
         paused = open;

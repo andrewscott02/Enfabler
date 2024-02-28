@@ -288,8 +288,7 @@ public class PlayerController : BaseCharacterController
 
     #endregion
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         #region Camera Rotation
 
@@ -322,10 +321,7 @@ public class PlayerController : BaseCharacterController
         followTarget.transform.localEulerAngles = angles;
 
         #endregion
-    }
 
-    private void FixedUpdate()
-    {
         if (combat.canMove || combat.chargingAttack != E_AttackType.None)
         {
             playerMovement.Move(moveInput);

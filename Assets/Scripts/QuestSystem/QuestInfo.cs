@@ -69,8 +69,11 @@ namespace Enfabler.Quests
                     title.text = "No Quest";
                     number.text = "0";
                     description.text = "You are not tracking a quest, open the inventory with i and then open the journal to see your quests";
+                    questInfoGO.SetActive(false);
                 }
             }
+            else
+                questInfoGO.SetActive(false);
         }
     }
 }
