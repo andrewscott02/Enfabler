@@ -784,13 +784,13 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         Freeze();
         RumbleManager.instance.ControllerRumble(0.2f, 0.85f, 0.25f);
 
-        lastAttackEvent = damageEvent;
         bool hit = damageEvent == E_DamageEvents.Hit;
 
         PlaySoundEffect(hit ? weapon.hitClip : weapon.blockClip, weapon.soundVolume);
 
         if (hit)
         {
+            lastAttackEvent = damageEvent;
             weapon.bloodTrail.SetActive(true);
         }
     }
