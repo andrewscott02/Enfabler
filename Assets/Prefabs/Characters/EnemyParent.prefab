@@ -340,10 +340,15 @@ PrefabInstance:
       propertyPath: weaponSphereRadius
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1814884579404440104, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
+      propertyPath: parryWindowDuration
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 1888215991265255819, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
       propertyPath: maxArmour
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2154055603770706480, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
@@ -815,7 +820,9 @@ MonoBehaviour:
   spells: []
   preparedAttack: -1
   blockChance: 0.8
-  blockDuration: 2
+  blockDuration: 3
+  canParry: 1
+  parryHitThreshold: 2
   dodgeChance: 0.4
   dodgeCooldown: 1
   hitResponse: 1

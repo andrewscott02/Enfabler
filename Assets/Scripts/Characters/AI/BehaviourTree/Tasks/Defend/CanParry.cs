@@ -18,7 +18,7 @@ public class CanParry : Node
 
     public override NodeState Evaluate()
     {
-        if (agent.CanBlock())
+        if (agent.CanParry())
         {
             state = NodeState.Success;
         }

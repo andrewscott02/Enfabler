@@ -110,6 +110,9 @@ public class AIController : BaseCharacterController
 
         health.HitReactionDelegate += OnHit;
         combat.dodgeEndDelegate += OnEndDodge;
+
+        combat.blockedDelegate += BlockedAttack;
+        combat.parriedDelegate += ParriedAttack;
     }
 
     public virtual void ActivateAI()
@@ -196,6 +199,7 @@ public class AIController : BaseCharacterController
         {
             hitCooldownT = 0;
             recentHitsTaken = Mathf.Clamp(recentHitsTaken - 1, 0, forceHitResponse + 3);
+            blockedAttacks = Mathf.Clamp(blockedAttacks - 1, 0, parryHitThreshold + 3);
         }
     }
 
@@ -536,6 +540,39 @@ public class AIController : BaseCharacterController
     {
         yield return new WaitForSeconds(delay);
         combat.Block(false, false);
+    }
+
+    void BlockedAttack()
+    {
+        blockedAttacks++;
+
+        //TODO Weapon flash to show parry is available if threshold is met
+    }
+
+    #endregion
+
+    #region Parrying
+
+    public bool canParry = false;
+    public int parryHitThreshold = 2;
+    int blockedAttacks = 0;
+
+    public bool CanParry()
+    {
+        return canParry && blockedAttacks > parryHitThreshold;
+    }
+
+    public void ActivateParry(float duration)
+    {
+        Debug.Log("Activating parry");
+        combat.Block(false);
+        combat.Block(true, true);
+        StartCoroutine(IDelayDeactivateBlock(duration));
+    }
+
+    void ParriedAttack(ICanDealDamage attacker)
+    {
+        blockedAttacks = 0;
     }
 
     #endregion
