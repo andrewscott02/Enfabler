@@ -84,7 +84,8 @@ public class DungeonGenerator : MonoBehaviour
     void ProgressLoad(string message = "Loading...")
     {
         //Debug.Log("PCG - Loading: " + progress.ToString() + " Message: " + message);
-        LoadingScreen.instance.LoadProgress(loadProgress, message);
+        if (LoadingScreen.instance != null)
+            LoadingScreen.instance.LoadProgress(loadProgress, message);
     }
 
     [ContextMenu("Cleanup Dungeon")]

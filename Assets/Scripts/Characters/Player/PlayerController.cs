@@ -16,7 +16,7 @@ public class PlayerController : BaseCharacterController
     float xRotateInput;
     float yRotateInput;
     public Vector2 yRotateThresholds = new Vector2(340, 40);
-    public Vector2 rotateInterval;
+    public Vector2 rotateIntervalGamePad, rotateIntervalMouse;
     public float rotateDeadZone = 0.1f;
     public FollowTarget followTarget;
 
@@ -299,6 +299,8 @@ public class PlayerController : BaseCharacterController
             if (xRotateInput < 0.5f && xRotateInput > -0.5f)
                 xRotateValue = xMoveRotateInput;
         }
+
+        Vector2 rotateInterval = usingGamepad ? rotateIntervalGamePad : rotateIntervalMouse;
 
         followTarget.transform.rotation *= Quaternion.AngleAxis(xRotateValue * rotateInterval.x, Vector3.up);
 

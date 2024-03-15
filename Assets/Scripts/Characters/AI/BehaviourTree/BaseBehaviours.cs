@@ -220,18 +220,26 @@ namespace BehaviourTrees
                 );
         }
 
-        public static Sequence DefensiveAction(AIController agent)
+        public static Selector DefensiveAction(AIController agent)
         {
-            return new Sequence(
-                new BeingAttacked(agent),
+            return new Selector(
                 new Selector(
-                    new Sequence(
-                        new CanDodge(agent),
-                        new Dodge(agent, agent.distanceAllowance)
-                        ),
                     new Sequence(
                         new CanParry(agent),
                         new Parry(agent)
+                        ),
+                    new Sequence(
+                        new BeingAttacked(agent),
+                        new Selector(
+                            new Sequence(
+                                new CanDodge(agent),
+                                new Dodge(agent, agent.distanceAllowance)
+                                ),
+                            new Sequence(
+                                new CanBlock(agent),
+                                new Block(agent)
+                                )
+                            )
                         )
                     )
                 );

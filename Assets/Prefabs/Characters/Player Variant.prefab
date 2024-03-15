@@ -9246,6 +9246,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1888215991265255819, guid: 8383457b08cdeee42a59a4975fae37de,
         type: 3}
+      propertyPath: maxArmour
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1888215991265255819, guid: 8383457b08cdeee42a59a4975fae37de,
+        type: 3}
       propertyPath: armourOnHit
       value: 2
       objectReference: {fileID: 0}
@@ -12936,7 +12941,8 @@ MonoBehaviour:
   playerTeam: 1
   goldOnKill: {x: 0, y: 0}
   yRotateThresholds: {x: 300, y: 60}
-  rotateInterval: {x: 5, y: 5}
+  rotateIntervalGamePad: {x: 5.5, y: 5.5}
+  rotateIntervalMouse: {x: 2.5, y: 2.5}
   rotateDeadZone: 0.1
   followTarget: {fileID: 2018895536}
   moveRotateMultiplier: 0.1
