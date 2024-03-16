@@ -172,6 +172,13 @@ public class GrammarsDungeonData : ScriptableObject
 
         int index = GetRoomDataIndex(roomType);
         int budget = roomData[index].enemySpawnInfo[round].enemiesSeverityMax;
+        int enemiesMax = roomData[index].enemySpawnInfo[round].enemiesMax;
+
+        if (DifficultyManager.instance != null)
+        {
+            budget = (int)((float)budget * DifficultyManager.instance.difficulty.enemySeverityMultiplier);
+            enemiesMax = (int)((float)enemiesMax * DifficultyManager.instance.difficulty.enemyCountMultiplier);
+        }
 
         bool budgetLeft = budget > 0;
 
@@ -190,7 +197,7 @@ public class GrammarsDungeonData : ScriptableObject
                 budgetLeft = false;
             }
 
-            if (totalEnemies >= roomData[index].enemySpawnInfo[round].enemiesMax)
+            if (totalEnemies >= enemiesMax)
                 budgetLeft = false;
         }
 
@@ -487,6 +494,12 @@ public class GrammarsDungeonData : ScriptableObject
 
         return rooms;
     }
+
+    #endregion
+
+    #region Rewards
+
+    public float treasureMultiplier;
 
     #endregion
 }

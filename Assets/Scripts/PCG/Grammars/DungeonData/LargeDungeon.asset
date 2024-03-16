@@ -68,8 +68,8 @@ MonoBehaviour:
     countMinMax: {x: 1, y: 4}
     lockDoor: 1
     enemySpawnInfo:
-    - enemiesMax: 7
-      enemiesSeverityMax: 40
+    - enemiesMax: 5
+      enemiesSeverityMax: 20
     trapsMinMax: {x: 1, y: 2}
   - roomType: 9
     prefabData:
@@ -77,14 +77,14 @@ MonoBehaviour:
     countMinMax: {x: 0, y: 1}
     lockDoor: 1
     enemySpawnInfo:
-    - enemiesMax: 3
-      enemiesSeverityMax: 20
+    - enemiesMax: 2
+      enemiesSeverityMax: 14
+    - enemiesMax: 4
+      enemiesSeverityMax: 16
     - enemiesMax: 5
-      enemiesSeverityMax: 30
-    - enemiesMax: 7
-      enemiesSeverityMax: 40
-    - enemiesMax: 10
-      enemiesSeverityMax: 70
+      enemiesSeverityMax: 20
+    - enemiesMax: 8
+      enemiesSeverityMax: 35
     trapsMinMax: {x: 2, y: 4}
   - roomType: 4
     prefabData:
@@ -139,3 +139,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 25191121aee93394993c83562ae6b62e, type: 2}
   themeChanges: {x: 1, y: 2}
   allowDuplicates: 0
+  treasureMultiplier: 0

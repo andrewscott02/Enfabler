@@ -559,7 +559,7 @@ public class AIController : BaseCharacterController
 
     public bool CanParry()
     {
-        return canParry && blockedAttacks > parryHitThreshold;
+        return canParry && blockedAttacks >= parryHitThreshold;
     }
 
     public void ActivateParry(float duration)
