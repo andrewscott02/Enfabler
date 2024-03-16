@@ -20,6 +20,8 @@ public class DifficultyData : ScriptableObject
     public float enemySeverityMultiplier;
     public float enemyCountMultiplier;
 
+    public Vector2Int bossSeverity;
+
     #endregion
 
     #region Enemy Stat Modifiers
@@ -31,5 +33,10 @@ public class DifficultyData : ScriptableObject
 
     #endregion
 
-    //TODO: Available Dungeon Themes
+    #region DungeonThemes
+
+    public List<ThemeData> startingThemes;
+    public List<ThemeData> allThemes;
+
+    #endregion
 }

@@ -416,7 +416,18 @@ public class GrammarsDungeonData : ScriptableObject
 
     public Object GetRandomBoss(ThemeData theme)
     {
-        return theme.bosses[Random.Range(0, theme.bosses.Length)];
+        List<Object> availableBosses = new List<Object>();
+        foreach (var item in theme.bosses)
+        {
+            if (item.bossSeverityRange.y >= DifficultyManager.instance.difficulty.bossSeverity.x ||
+                item.bossSeverityRange.x <= DifficultyManager.instance.difficulty.bossSeverity.y)
+                availableBosses.Add(item.bossPrefab);
+        }
+
+        if (availableBosses.Count != 0)
+            return availableBosses[Random.Range(0, availableBosses.Count)];
+
+        return theme.bosses[Random.Range(0, theme.bosses.Length)].bossPrefab;
     }
 
     public bool GetDoorLocked(E_RoomTypes roomType)

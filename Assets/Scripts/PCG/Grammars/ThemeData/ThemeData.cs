@@ -25,5 +25,14 @@ public class ThemeData : ScriptableObject
     [Header("Populate Room Data")]
     public EnemyData[] enemies;
     public ObjectData[] traps, objects;
-    public Object[] doors, closedDoors, bosses;
+    public Object[] doors, closedDoors;
+
+    public BossSeverityData[] bosses;
+}
+
+[System.Serializable]
+public struct BossSeverityData
+{
+    public Object bossPrefab;
+    public Vector2Int bossSeverityRange;
 }
