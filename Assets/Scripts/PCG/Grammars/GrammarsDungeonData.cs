@@ -7,6 +7,10 @@ public class GrammarsDungeonData : ScriptableObject
 {
     #region Variables
 
+    public string dungeonName;
+    [TextArea(3, 10)]
+    public string dungeonDescription;
+
     public RoomData[] roomData;
 
     public E_RoomTypes emptyRoomType;

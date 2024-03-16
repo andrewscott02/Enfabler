@@ -14,22 +14,23 @@ public class DifficultyManager : MonoBehaviour
         {
             Debug.Log("Difficulty singleton exists - Destroying");
 
-            Destroy(this.gameObject);
+            DestroyImmediate(this.gameObject);
         }
-
-        Debug.Log("Setting up difficulty singleton");
-
-        instance = this;
-        gameObject.transform.parent = null;
-        DontDestroyOnLoad(this.gameObject);
-
-        StartCoroutine(IDelayAssignDelegate(2f));
+        else
+        {
+            StartCoroutine(IDelaySetup(0.5f));
+        }
     }
 
-    IEnumerator IDelayAssignDelegate(float delay)
+    IEnumerator IDelaySetup(float delay)
     {
         yield return new WaitForSeconds(delay);
         TreasureManager.instance.D_GetGoldMultiplier += GetGoldReward;
+
+        Debug.Log("Setting up difficulty singleton");
+        gameObject.transform.parent = null;
+        DontDestroyOnLoad(this.gameObject);
+        instance = this;
     }
 
     float GetGoldReward()

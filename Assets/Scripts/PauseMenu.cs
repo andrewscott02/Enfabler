@@ -67,8 +67,8 @@ public class PauseMenu : MonoBehaviour
         inVendorMenu = false;
         VendorManager.instance.OpenVendorMenu(false);
 
-        inDifficultyMenu = false;
-        DifficultyMenuManager.instance.OpenDifficultyMenu(false);
+        inDungeonMasterMenu = false;
+        DungeonMasterManager.instance.OpenDungeonMenu(false);
 
         ShowQuestUI(true);
 
@@ -113,20 +113,20 @@ public class PauseMenu : MonoBehaviour
         VendorManager.instance.OpenVendorMenu(open);
     }
 
-    bool inDifficultyMenu = false;
+    bool inDungeonMasterMenu = false;
 
-    public void ShowDifficultyMenu(bool open)
+    public void ShowDungeonMasterMenu(bool open)
     {
-        StartCoroutine(IDelayDifficulty(open, 0.1f));
+        StartCoroutine(IDelayDungeonMaster(open, 0.1f));
     }
 
-    IEnumerator IDelayDifficulty(bool open, float delay)
+    IEnumerator IDelayDungeonMaster(bool open, float delay)
     {
         yield return new WaitForSecondsRealtime(delay);
-        inDifficultyMenu = open;
+        inDungeonMasterMenu = open;
         ShowMouse(open);
         paused = open;
-        DifficultyMenuManager.instance.OpenDifficultyMenu(open);
+        DungeonMasterManager.instance.OpenDungeonMenu(open);
     }
 
     void ShowMouse(bool visible)
