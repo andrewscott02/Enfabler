@@ -564,7 +564,7 @@ public class AIController : BaseCharacterController
 
     public void ActivateParry(float duration)
     {
-        Debug.Log("Activating parry");
+        //Debug.Log("Activating parry");
         combat.Block(false);
         combat.Block(true, true);
         StartCoroutine(IDelayDeactivateBlock(duration));
@@ -606,7 +606,7 @@ public class AIController : BaseCharacterController
         Quaternion desiredrot = Quaternion.LookRotation(direction, transform.up);
         transform.rotation = desiredrot;
         characterMovement.targetRotation = desiredrot;
-        Debug.Log("Rotating " + gameObject.name + " towards direction " + direction + " with a rotation of " + desiredrot.eulerAngles + " || " + transform.rotation.eulerAngles);
+        //Debug.Log("Rotating " + gameObject.name + " towards direction " + direction + " with a rotation of " + desiredrot.eulerAngles + " || " + transform.rotation.eulerAngles);
 
         combat.Dodge();
     }

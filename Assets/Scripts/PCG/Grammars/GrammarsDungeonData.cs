@@ -178,6 +178,11 @@ public class GrammarsDungeonData : ScriptableObject
         {
             budget = (int)((float)budget * DifficultyManager.instance.difficulty.enemySeverityMultiplier);
             enemiesMax = (int)((float)enemiesMax * DifficultyManager.instance.difficulty.enemyCountMultiplier);
+
+            /*
+            Debug.Log("Difficulty changed spawned enemy severity max from " + roomData[index].enemySpawnInfo[round].enemiesSeverityMax.ToString() + " to " + budget.ToString()
+                        + " and count max from " + roomData[index].enemySpawnInfo[round].enemiesMax.ToString() + " to " + enemiesMax.ToString());
+            */
         }
 
         bool budgetLeft = budget > 0;

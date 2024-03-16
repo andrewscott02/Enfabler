@@ -8,14 +8,19 @@ public class DifficultyManager : MonoBehaviour
 
     public DifficultyData difficulty;
 
-    private void Awake()
+    private void Start()
     {
         if (instance != null)
         {
+            Debug.Log("Difficulty singleton exists - Destroying");
+
             Destroy(this.gameObject);
         }
 
+        Debug.Log("Setting up difficulty singleton");
+
         instance = this;
+        gameObject.transform.parent = null;
         DontDestroyOnLoad(this.gameObject);
 
         StartCoroutine(IDelayAssignDelegate(2f));

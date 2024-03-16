@@ -24,8 +24,10 @@ public class DifficultyData : ScriptableObject
 
     #region Enemy Stat Modifiers
 
-    public float enemyHealthMultiplier;
-    public float enemyDamageMultiplier;
+    //TODO: Enemy Stat Modifiers
+
+    //public float enemyHealthMultiplier;
+    //public float enemyDamageMultiplier;
 
     #endregion
 

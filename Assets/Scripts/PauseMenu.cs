@@ -67,6 +67,9 @@ public class PauseMenu : MonoBehaviour
         inVendorMenu = false;
         VendorManager.instance.OpenVendorMenu(false);
 
+        inDifficultyMenu = false;
+        DifficultyMenuManager.instance.OpenDifficultyMenu(false);
+
         ShowQuestUI(true);
 
         Time.timeScale = unpausedTimeScale;
@@ -108,6 +111,22 @@ public class PauseMenu : MonoBehaviour
         ShowMouse(open);
         paused = open;
         VendorManager.instance.OpenVendorMenu(open);
+    }
+
+    bool inDifficultyMenu = false;
+
+    public void ShowDifficultyMenu(bool open)
+    {
+        StartCoroutine(IDelayDifficulty(open, 0.1f));
+    }
+
+    IEnumerator IDelayDifficulty(bool open, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        inDifficultyMenu = open;
+        ShowMouse(open);
+        paused = open;
+        DifficultyMenuManager.instance.OpenDifficultyMenu(open);
     }
 
     void ShowMouse(bool visible)
