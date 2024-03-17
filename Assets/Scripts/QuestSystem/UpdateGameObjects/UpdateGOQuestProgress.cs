@@ -11,13 +11,17 @@ public class UpdateGOQuestProgress : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        Debug.Log("Added to quest delegate " + quest.name);
-        quest.updateQuestDelegate += CheckUpdate;
+        if (quest != null)
+        {
+            Debug.Log("Added to quest delegate " + quest.name);
+            quest.updateQuestDelegate += CheckUpdate;
+        }
     }
 
     private void OnDestroy()
     {
-        quest.updateQuestDelegate -= CheckUpdate;
+        if (quest != null)
+            quest.updateQuestDelegate -= CheckUpdate;
     }
 
     public void CheckUpdate(E_QuestStates questState, int progress)

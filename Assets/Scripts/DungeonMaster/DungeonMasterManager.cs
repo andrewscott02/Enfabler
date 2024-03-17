@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+using Enfabler.Quests;
+
 public class DungeonMasterManager : MonoBehaviour
 {
     public static DungeonMasterManager instance;
@@ -88,6 +90,8 @@ public class DungeonMasterManager : MonoBehaviour
         StartCoroutine(ILoadScene(1.5f));
     }
 
+    Quest tutorialQuest;
+
     IEnumerator ILoadScene(float delay)
     {
         LoadingScreen.instance.StartLoadingScreen();
@@ -101,6 +105,7 @@ public class DungeonMasterManager : MonoBehaviour
         }
         else
         {
+            tutorialQuest.ForceRestartQuest();
             SceneManager.LoadScene(E_Scenes.Tutorial.ToString());
         }
     }
