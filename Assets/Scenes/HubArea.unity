@@ -945,6 +945,7 @@ Transform:
   - {fileID: 873081561}
   - {fileID: 340662273}
   - {fileID: 1946770521}
+  - {fileID: 3246075060654367217}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2353,6 +2354,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enter Level - Short Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 8253154736220698371, guid: a1a3a0aca2a11094aafd3e5cd05ca936,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1a3a0aca2a11094aafd3e5cd05ca936, type: 3}
@@ -6302,6 +6308,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enter Level - Large Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 8253154736220698371, guid: a1a3a0aca2a11094aafd3e5cd05ca936,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1a3a0aca2a11094aafd3e5cd05ca936, type: 3}
@@ -15333,6 +15344,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enter Level - Tutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 8253154736220698371, guid: a1a3a0aca2a11094aafd3e5cd05ca936,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1a3a0aca2a11094aafd3e5cd05ca936, type: 3}
 --- !u!4 &1946770521 stripped
@@ -16499,6 +16515,80 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1001 &1453385558517509817
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 90120451}
+    m_Modifications:
+    - target: {fileID: 2890760603061942425, guid: 2370b254a4da17147ac229a4f05eaaf1,
+        type: 3}
+      propertyPath: interactMessage
+      value: Press O to Select Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890760603061942438, guid: 2370b254a4da17147ac229a4f05eaaf1,
+        type: 3}
+      propertyPath: m_Name
+      value: DungeonMaster
+      objectReference: {fileID: 0}
+    - target: {fileID: 4118285014440906568, guid: 2370b254a4da17147ac229a4f05eaaf1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4118285014440906568, guid: 2370b254a4da17147ac229a4f05eaaf1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 339.76825
+      objectReference: {fileID: 0}
+    - target: {fileID: 4118285014440906568, guid: 2370b254a4da17147ac229a4f05eaaf1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 321.46857
+      objectReference: {fileID: 0}
+    - target: {fileID: 4118285014440906568, guid: 2370b254a4da17147ac229a4f05eaaf1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -450.3174
+      objectReference: {fileID: 0}
+    - target: {fileID: 4118285014440906568, guid: 2370b254a4da17147ac229a4f05eaaf1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8049686
+      objectReference: {fileID: 0}
+    - target: {fileID: 4118285014440906568, guid: 2370b254a4da17147ac229a4f05eaaf1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4118285014440906568, guid: 2370b254a4da17147ac229a4f05eaaf1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.59331745
+      objectReference: {fileID: 0}
+    - target: {fileID: 4118285014440906568, guid: 2370b254a4da17147ac229a4f05eaaf1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4118285014440906568, guid: 2370b254a4da17147ac229a4f05eaaf1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4118285014440906568, guid: 2370b254a4da17147ac229a4f05eaaf1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -72.786
+      objectReference: {fileID: 0}
+    - target: {fileID: 4118285014440906568, guid: 2370b254a4da17147ac229a4f05eaaf1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2370b254a4da17147ac229a4f05eaaf1, type: 3}
 --- !u!4 &1873655637616601125 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2018895537, guid: ca73a26060d92b6499d216633e016d23,
@@ -18546,6 +18636,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2256116851059681977}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &3246075060654367217 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4118285014440906568, guid: 2370b254a4da17147ac229a4f05eaaf1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1453385558517509817}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8928750309083163466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18582,6 +18678,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153716247143825547, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.5999756
       objectReference: {fileID: 0}
     - target: {fileID: 1016585006209599966, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
         type: 3}
@@ -18762,6 +18863,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3459981435764244940, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -559.8901
+      objectReference: {fileID: 0}
+    - target: {fileID: 3459981435764244940, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00012207031
       objectReference: {fileID: 0}
     - target: {fileID: 3860879772624846090, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
         type: 3}

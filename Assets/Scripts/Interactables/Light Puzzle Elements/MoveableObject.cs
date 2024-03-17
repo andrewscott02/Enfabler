@@ -70,7 +70,7 @@ public class MoveableObject : PuzzleElement
 
     protected override void Deactivate()
     {
-        Debug.Log("Unlock Interaction");
+        //Debug.Log("Unlock Interaction");
 
         StopAllCoroutines();
 

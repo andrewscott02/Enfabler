@@ -18,6 +18,13 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         //instance = this;
         GenerateGrammarsDungeon();
         GameCanvasManager.instance.ShowRegionText(firstTheme.regionName);
+
+        StartCoroutine(IDelayAssignDelegate(2f));
+    }
+
+    private void OnDestroy()
+    {
+        TreasureManager.instance.D_GetGoldMultiplier -= GetGoldReward;
     }
 
     [ContextMenu("Generate Grammars Dungeon")]
@@ -312,4 +319,19 @@ public class GrammarsDungeonGeneration : MonoBehaviour
     {
         navMeshSurface.BuildNavMesh();
     }
+
+    #region Treasure
+
+    IEnumerator IDelayAssignDelegate(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        TreasureManager.instance.D_GetGoldMultiplier += GetGoldReward;
+    }
+
+    float GetGoldReward()
+    {
+        return grammarsDungeonData.treasureMultiplier;
+    }
+
+    #endregion
 }

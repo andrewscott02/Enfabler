@@ -288,11 +288,12 @@ public class PlayerController : BaseCharacterController
 
     #endregion
 
-    private void FixedUpdate()
+    private void Update()
     {
         #region Camera Rotation
 
-        float xRotateValue = xRotateInput;
+        float xRotateValue = xRotateInput * Time.deltaTime;
+        float yRotateValue = yRotateInput * Time.deltaTime;
 
         if (useMoveRotation)
         {
@@ -304,7 +305,7 @@ public class PlayerController : BaseCharacterController
 
         followTarget.transform.rotation *= Quaternion.AngleAxis(xRotateValue * rotateInterval.x, Vector3.up);
 
-        followTarget.transform.rotation *= Quaternion.AngleAxis(yRotateInput * rotateInterval.y, Vector3.right);
+        followTarget.transform.rotation *= Quaternion.AngleAxis(yRotateValue * rotateInterval.y, Vector3.right);
 
         Vector3 angles = followTarget.transform.localEulerAngles;
         angles.z = 0;

@@ -7,6 +7,10 @@ public class GrammarsDungeonData : ScriptableObject
 {
     #region Variables
 
+    public string dungeonName;
+    [TextArea(3, 10)]
+    public string dungeonDescription;
+
     public RoomData[] roomData;
 
     public E_RoomTypes emptyRoomType;
@@ -172,6 +176,18 @@ public class GrammarsDungeonData : ScriptableObject
 
         int index = GetRoomDataIndex(roomType);
         int budget = roomData[index].enemySpawnInfo[round].enemiesSeverityMax;
+        int enemiesMax = roomData[index].enemySpawnInfo[round].enemiesMax;
+
+        if (DifficultyManager.instance != null)
+        {
+            budget = (int)((float)budget * DifficultyManager.instance.difficulty.enemySeverityMultiplier);
+            enemiesMax = (int)((float)enemiesMax * DifficultyManager.instance.difficulty.enemyCountMultiplier);
+
+            /*
+            Debug.Log("Difficulty changed spawned enemy severity max from " + roomData[index].enemySpawnInfo[round].enemiesSeverityMax.ToString() + " to " + budget.ToString()
+                        + " and count max from " + roomData[index].enemySpawnInfo[round].enemiesMax.ToString() + " to " + enemiesMax.ToString());
+            */
+        }
 
         bool budgetLeft = budget > 0;
 
@@ -190,7 +206,7 @@ public class GrammarsDungeonData : ScriptableObject
                 budgetLeft = false;
             }
 
-            if (totalEnemies >= roomData[index].enemySpawnInfo[round].enemiesMax)
+            if (totalEnemies >= enemiesMax)
                 budgetLeft = false;
         }
 
@@ -400,7 +416,18 @@ public class GrammarsDungeonData : ScriptableObject
 
     public Object GetRandomBoss(ThemeData theme)
     {
-        return theme.bosses[Random.Range(0, theme.bosses.Length)];
+        List<Object> availableBosses = new List<Object>();
+        foreach (var item in theme.bosses)
+        {
+            if (item.bossSeverityRange.y >= DifficultyManager.instance.difficulty.bossSeverity.x ||
+                item.bossSeverityRange.x <= DifficultyManager.instance.difficulty.bossSeverity.y)
+                availableBosses.Add(item.bossPrefab);
+        }
+
+        if (availableBosses.Count != 0)
+            return availableBosses[Random.Range(0, availableBosses.Count)];
+
+        return theme.bosses[Random.Range(0, theme.bosses.Length)].bossPrefab;
     }
 
     public bool GetDoorLocked(E_RoomTypes roomType)
@@ -487,6 +514,12 @@ public class GrammarsDungeonData : ScriptableObject
 
         return rooms;
     }
+
+    #endregion
+
+    #region Rewards
+
+    public float treasureMultiplier;
 
     #endregion
 }

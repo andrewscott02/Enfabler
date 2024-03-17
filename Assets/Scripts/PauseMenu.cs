@@ -67,6 +67,9 @@ public class PauseMenu : MonoBehaviour
         inVendorMenu = false;
         VendorManager.instance.OpenVendorMenu(false);
 
+        inDungeonMasterMenu = false;
+        DungeonMasterManager.instance.OpenDungeonMenu(false);
+
         ShowQuestUI(true);
 
         Time.timeScale = unpausedTimeScale;
@@ -108,6 +111,22 @@ public class PauseMenu : MonoBehaviour
         ShowMouse(open);
         paused = open;
         VendorManager.instance.OpenVendorMenu(open);
+    }
+
+    bool inDungeonMasterMenu = false;
+
+    public void ShowDungeonMasterMenu(bool open)
+    {
+        StartCoroutine(IDelayDungeonMaster(open, 0.1f));
+    }
+
+    IEnumerator IDelayDungeonMaster(bool open, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        inDungeonMasterMenu = open;
+        ShowMouse(open);
+        paused = open;
+        DungeonMasterManager.instance.OpenDungeonMenu(open);
     }
 
     void ShowMouse(bool visible)
