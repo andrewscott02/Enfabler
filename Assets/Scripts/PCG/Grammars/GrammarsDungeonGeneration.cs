@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.AI.Navigation;
 
+//Old Script, do not need any more
+
 public class GrammarsDungeonGeneration : MonoBehaviour
 {
     #region Setup
@@ -18,13 +20,6 @@ public class GrammarsDungeonGeneration : MonoBehaviour
         //instance = this;
         GenerateGrammarsDungeon();
         GameCanvasManager.instance.ShowRegionText(firstTheme.regionName);
-
-        StartCoroutine(IDelayAssignDelegate(2f));
-    }
-
-    private void OnDestroy()
-    {
-        TreasureManager.instance.D_GetGoldMultiplier -= GetGoldReward;
     }
 
     [ContextMenu("Generate Grammars Dungeon")]
@@ -319,19 +314,4 @@ public class GrammarsDungeonGeneration : MonoBehaviour
     {
         navMeshSurface.BuildNavMesh();
     }
-
-    #region Treasure
-
-    IEnumerator IDelayAssignDelegate(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        TreasureManager.instance.D_GetGoldMultiplier += GetGoldReward;
-    }
-
-    float GetGoldReward()
-    {
-        return grammarsDungeonData.treasureMultiplier;
-    }
-
-    #endregion
 }

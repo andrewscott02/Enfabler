@@ -20,6 +20,15 @@ public class DungeonGenerator : MonoBehaviour
 
         GenerateDungeon();
         //GameCanvasManager.instance.ShowRegionText(firstTheme.regionName);
+
+        //Debug.Log("PCG - Start");
+        StartCoroutine(IDelayAssignDelegate(2f));
+    }
+
+    private void OnDestroy()
+    {
+        //Debug.Log("PCG - Removing Treasure Multiplier");
+        TreasureManager.D_GetGoldMultiplier -= GetGoldReward;
     }
 
     #endregion
@@ -306,6 +315,23 @@ public class DungeonGenerator : MonoBehaviour
         navMeshSurface.BuildNavMesh();
         loadProgress = Mathf.Clamp(loadProgress + progressPerSection, 0, 0.95f);
         ProgressLoad("Navmesh Baked...");
+    }
+
+    #endregion
+
+    #region Treasure
+
+    IEnumerator IDelayAssignDelegate(float delay)
+    {
+        //Debug.Log("PCG - Coroutine Called");
+        yield return new WaitForSeconds(delay);
+        //Debug.Log("PCG - Adding Treasure Multiplier");
+        TreasureManager.D_GetGoldMultiplier += GetGoldReward;
+    }
+
+    float GetGoldReward()
+    {
+        return grammarsDungeonData.treasureMultiplier;
     }
 
     #endregion

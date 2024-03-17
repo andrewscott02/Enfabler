@@ -1296,7 +1296,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         if (canSlideInput)
         {
-            Debug.Log("Lunge input");
+            //Debug.Log("Lunge input");
             dodgeStartDelegate();
             Block(false);
             ForceEndAttack();

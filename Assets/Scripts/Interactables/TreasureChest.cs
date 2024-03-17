@@ -23,7 +23,7 @@ public class TreasureChest : Interactable, IInteractable
         Vector2Int goldReward = TreasureManager.instance.GetGoldReward(goldAmount);
 
         int gold = Random.Range(goldReward.x, goldReward.y + 1);
-        Debug.Log("GOLD FROM CHEST: " + gold);
+        //Debug.Log("GOLD FROM CHEST: " + gold);
         TreasureManager.instance.D_GiveGold(gold);
 
         interactDelegate();
@@ -35,6 +35,6 @@ public class TreasureChest : Interactable, IInteractable
     void InteractedDelegate()
     {
         //Blank delegate
-        Debug.Log("Interacted delegate");
+        //Debug.Log("Interacted delegate");
     }
 }

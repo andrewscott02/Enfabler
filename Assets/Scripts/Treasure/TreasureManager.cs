@@ -16,6 +16,7 @@ public class TreasureManager : MonoBehaviour
         }
 
         instance = this;
+        gameObject.transform.parent = null;
         DontDestroyOnLoad(this.gameObject);
 
         D_GiveGold += GiveGoldFunc;
@@ -32,7 +33,7 @@ public class TreasureManager : MonoBehaviour
     }
 
     public delegate float GetGoldMultiplierDelegate();
-    public GetGoldMultiplierDelegate D_GetGoldMultiplier;
+    public static GetGoldMultiplierDelegate D_GetGoldMultiplier;
 
     public Vector2Int GetGoldReward(Vector2Int initialGoldYield)
     {
@@ -44,12 +45,13 @@ public class TreasureManager : MonoBehaviour
         {
             float current = ((GetGoldMultiplierDelegate)invocations[i]).Invoke();
 
-            //Debug.Log("Invocation + " + i + " is " + current);
+            Debug.Log("Invocation + " + i + " is " + current);
 
             goldYield *= current;
         }
 
         Vector2Int goldYieldInt = new Vector2Int((int)goldYield.x, (int)goldYield.y);
+        Debug.Log("Gold yield increased from " + initialGoldYield + " to " + goldYieldInt);
         return goldYieldInt;
     }
 
