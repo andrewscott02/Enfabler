@@ -419,8 +419,10 @@ public class GrammarsDungeonData : ScriptableObject
         List<Object> availableBosses = new List<Object>();
         foreach (var item in theme.bosses)
         {
-            if (item.bossSeverityRange.y >= DifficultyManager.instance.difficulty.bossSeverity.x ||
-                item.bossSeverityRange.x <= DifficultyManager.instance.difficulty.bossSeverity.y)
+            bool xIntersects = item.bossSeverityRange.x >= DifficultyManager.instance.difficulty.bossSeverity.x && item.bossSeverityRange.x <= DifficultyManager.instance.difficulty.bossSeverity.y;
+            bool yIntersects = item.bossSeverityRange.y >= DifficultyManager.instance.difficulty.bossSeverity.x && item.bossSeverityRange.y <= DifficultyManager.instance.difficulty.bossSeverity.y;
+
+            if (xIntersects || yIntersects)
                 availableBosses.Add(item.bossPrefab);
         }
 
