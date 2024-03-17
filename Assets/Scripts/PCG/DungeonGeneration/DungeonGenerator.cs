@@ -228,7 +228,7 @@ public class DungeonGenerator : MonoBehaviour
             roomType = grammarsDungeonData.sidePathEndRoomTypes[randInt];
 
             if (Random.Range(0f, 1f) >= grammarsDungeonData.sideRoomEndChance)
-                roomType = E_RoomTypes.End;
+                roomType = E_RoomTypes.EarlyEnd;
         }
 
         Object roomPrefab = grammarsDungeonData.GetRandomRoomPrefab(roomType, theme, out ThemeData nextTheme, out bool reversed, out int doorIndex, spawnTransform);

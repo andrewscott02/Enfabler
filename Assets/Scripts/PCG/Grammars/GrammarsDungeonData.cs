@@ -551,7 +551,7 @@ public struct RoundData
 public enum E_RoomTypes
 {
     Start, Boss, End,
-    Encounter, Puzzle, Treasure, Healing, Trap, ChangeTheme, Arena, TreasureEnd
+    Encounter, Puzzle, Treasure, Healing, Trap, ChangeTheme, Arena, TreasureEnd, EarlyEnd
 }
 
 [System.Serializable]

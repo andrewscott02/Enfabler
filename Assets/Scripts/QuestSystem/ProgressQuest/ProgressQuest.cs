@@ -37,7 +37,7 @@ public class ProgressQuest : MonoBehaviour
 
     public void CheckUpdate(E_QuestStates questState, int progress)
     {
-        Debug.Log("Quest updated - Received message");
+        //Debug.Log("Quest updated - Received message");
 
         bool showMarker = false;
 
