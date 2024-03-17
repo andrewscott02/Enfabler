@@ -90,7 +90,7 @@ public class DungeonMasterManager : MonoBehaviour
         StartCoroutine(ILoadScene(1.5f));
     }
 
-    Quest tutorialQuest;
+    public Quest tutorialQuest;
 
     IEnumerator ILoadScene(float delay)
     {

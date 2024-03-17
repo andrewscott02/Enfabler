@@ -2123,6 +2123,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 322232331}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &329126180 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7191950098083277165, guid: 5e379924beb428e47903572ada95d4d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2256116851059681977}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &338930785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15438,6 +15444,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1956531451}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1969555879 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2890760603061942438, guid: 2370b254a4da17147ac229a4f05eaaf1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1453385558517509817}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1975968204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18636,12 +18648,48 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2256116851059681977}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2256116851059681982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329126180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a792179fe2984ff4dacbaae0ecff95ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quests:
+  - {fileID: 11400000, guid: 42953fbb957b4104cbf38f7709f225e3, type: 2}
+  overrideParentQuestMarker: {fileID: 0}
+  attachAsParent: 1
+  markerOffset: {x: 0, y: 2.5, z: 0}
 --- !u!4 &3246075060654367217 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4118285014440906568, guid: 2370b254a4da17147ac229a4f05eaaf1,
     type: 3}
   m_PrefabInstance: {fileID: 1453385558517509817}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3246075060654367221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969555879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995e9208ebe880543a4d7b62978da27c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quests:
+  - {fileID: 11400000, guid: e7c3b59a23040fb448647c0a907ef9a4, type: 2}
+  - {fileID: 11400000, guid: cd937799b00213b4d94a79e5783fce5b, type: 2}
+  - {fileID: 11400000, guid: 1f1e7136d8dc0a74f96342763ce659ee, type: 2}
+  overrideParentQuestMarker: {fileID: 0}
+  attachAsParent: 1
+  markerOffset: {x: 0, y: 2.5, z: 0}
 --- !u!1001 &8928750309083163466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18794,6 +18842,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1556454650914875759, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
+        type: 3}
+      propertyPath: baseQuest
+      value: 
+      objectReference: {fileID: 11400000, guid: 45d43f08bd493154187f8453bfac3ba0,
+        type: 2}
     - target: {fileID: 2151636053948511845, guid: 8a5544f4bc6125e42bb17b450d3c82d4,
         type: 3}
       propertyPath: m_AnchorMax.y

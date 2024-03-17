@@ -15,9 +15,11 @@ MonoBehaviour:
   questName: Enfabler Dungeons
   questNumber: 1
   questDescription: 
-  state: 0
-  currentProgress: -1
-  maxProgress: 1
+  state: 1
+  currentProgress: 0
+  maxProgress: 2
   parentQuest: {fileID: 0}
-  subQuests: []
+  subQuests:
+  - {fileID: 11400000, guid: e7c3b59a23040fb448647c0a907ef9a4, type: 2}
+  - {fileID: 11400000, guid: e2f74193a5f57f74c94f65997354853a, type: 2}
   linear: 1
