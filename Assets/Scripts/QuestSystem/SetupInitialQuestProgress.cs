@@ -10,6 +10,7 @@ public class SetupInitialQuestProgress : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(gameObject.name + " is resetting quests");
         foreach(var item in questsToRestart)
         {
             item.ForceRestartQuest();

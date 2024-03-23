@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb91689faed565143ae0bedc1da4e411, type: 3}
+  m_Name: EQ_2CT
+  m_EditorClassIdentifier: 
+  questName: Enfabler Dungeons
+  questNumber: 1
+  questDescription: Complete dungeons with the Crossing the Threshold difficulty.
+  state: 0
+  currentProgress: -1
+  maxProgress: 2
+  parentQuest: {fileID: 11400000, guid: 45d43f08bd493154187f8453bfac3ba0, type: 2}
+  subQuests:
+  - {fileID: 11400000, guid: 747c162602001794ba1bf99e467d5bb4, type: 2}
+  - {fileID: 11400000, guid: 97bb96c0f80c5114981103f2c2dd559e, type: 2}
+  linear: 1

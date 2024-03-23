@@ -61,6 +61,13 @@ MonoBehaviour:
     lockDoor: 1
     enemySpawnInfo: []
     trapsMinMax: {x: 0, y: 0}
+  - roomType: 11
+    prefabData:
+    - {fileID: 11400000, guid: 5d646fcc6ad4ea04f8deae4825b428bd, type: 2}
+    countMinMax: {x: 0, y: 1}
+    lockDoor: 1
+    enemySpawnInfo: []
+    trapsMinMax: {x: 0, y: 0}
   - roomType: 3
     prefabData:
     - {fileID: 11400000, guid: 09f8624f4109a6d4eaf4ee16040f6758, type: 2}
@@ -141,4 +148,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 25191121aee93394993c83562ae6b62e, type: 2}
   themeChanges: {x: 0, y: 1}
   allowDuplicates: 0
-  treasureMultiplier: 0
+  treasureMultiplier: 1

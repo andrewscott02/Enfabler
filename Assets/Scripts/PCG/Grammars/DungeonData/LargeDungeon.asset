@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90910508796e224586996a019006bdf, type: 3}
   m_Name: LargeDungeon
   m_EditorClassIdentifier: 
-  dungeonName: Trial Dungeon
+  dungeonName: Large Dungeon
   dungeonDescription: Complete a trial dungeon to unlock the next difficulty
   roomData:
   - roomType: 0
@@ -57,6 +57,13 @@ MonoBehaviour:
   - roomType: 2
     prefabData:
     - {fileID: 11400000, guid: c61980e88fe934b4980546143413c376, type: 2}
+    countMinMax: {x: 0, y: 1}
+    lockDoor: 1
+    enemySpawnInfo: []
+    trapsMinMax: {x: 0, y: 0}
+  - roomType: 11
+    prefabData:
+    - {fileID: 11400000, guid: 5d646fcc6ad4ea04f8deae4825b428bd, type: 2}
     countMinMax: {x: 0, y: 1}
     lockDoor: 1
     enemySpawnInfo: []
@@ -129,16 +136,6 @@ MonoBehaviour:
   maxTotalRooms: 100
   sideRoomChance: 0.75
   mainPathRemoveLimit: 4
-  startingThemes:
-  - {fileID: 11400000, guid: ec8b9c12d45e8dc41870e9cb5561728b, type: 2}
-  - {fileID: 11400000, guid: f6c6f6c675d89f14db8217272c9510ce, type: 2}
-  - {fileID: 11400000, guid: d1dacfae26c0ff448b2b331c53ccf36b, type: 2}
-  allThemes:
-  - {fileID: 11400000, guid: ec8b9c12d45e8dc41870e9cb5561728b, type: 2}
-  - {fileID: 11400000, guid: f6c6f6c675d89f14db8217272c9510ce, type: 2}
-  - {fileID: 11400000, guid: d1dacfae26c0ff448b2b331c53ccf36b, type: 2}
-  - {fileID: 11400000, guid: 72b9dc47dfcb15249b53ffbdacca8610, type: 2}
-  - {fileID: 11400000, guid: 25191121aee93394993c83562ae6b62e, type: 2}
   themeChanges: {x: 1, y: 2}
   allowDuplicates: 0
-  treasureMultiplier: 0
+  treasureMultiplier: 1.5

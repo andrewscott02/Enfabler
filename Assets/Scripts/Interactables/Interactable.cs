@@ -7,6 +7,7 @@ public class Interactable : MonoBehaviour, IInteractable
     public static PlayerController player;
 
     public E_InteractTypes interactType;
+    [TextArea(3, 10)]
     public string interactMessage = "Press O to Interact";
 
     public bool lockedInteraction = false;

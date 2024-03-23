@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8874713363446805835
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8738645923294715640, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+        type: 3}
+      propertyPath: m_Name
+      value: End-Complete
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738645923294715643, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738645923294715643, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738645923294715643, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738645923294715643, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738645923294715643, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738645923294715643, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738645923294715643, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738645923294715643, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738645923294715643, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738645923294715643, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738645923294715643, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9176007082675680260, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+        type: 3}
+      propertyPath: interactMessage
+      value: Press O to Leave Dungeon
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: baf00196ad11e1b4b8eb16f782ae65fa, type: 3}
+--- !u!1 &1997652779914572081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6958138760219952250, guid: baf00196ad11e1b4b8eb16f782ae65fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 8874713363446805835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8620904015288331098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997652779914572081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb40d54b73bbc1544a940435ab27ed18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quests: []
+  overrideParentQuestMarker: {fileID: 0}
+  attachAsParent: 1
+  markerOffset: {x: 0, y: 2, z: 0}
+  dungeonQuestData:
+  - progressQuest: {fileID: 11400000, guid: cd937799b00213b4d94a79e5783fce5b, type: 2}
+    requireDungeonData: {fileID: 11400000, guid: 4113c8ba08213a348b312763a3987dc8,
+      type: 2}
+    requireDifficultyData: {fileID: 0}
+  - progressQuest: {fileID: 11400000, guid: 1f1e7136d8dc0a74f96342763ce659ee, type: 2}
+    requireDungeonData: {fileID: 11400000, guid: 21c9f5dd34625be42a6a34b80f13273e,
+      type: 2}
+    requireDifficultyData: {fileID: 11400000, guid: fe1e67dbe8156a44eafe950be7b3d6dd,
+      type: 2}
+  - progressQuest: {fileID: 11400000, guid: 97bb96c0f80c5114981103f2c2dd559e, type: 2}
+    requireDungeonData: {fileID: 11400000, guid: 21c9f5dd34625be42a6a34b80f13273e,
+      type: 2}
+    requireDifficultyData: {fileID: 11400000, guid: 503352ea9c19f1842addfa38f253bb15,
+      type: 2}
+  - progressQuest: {fileID: 11400000, guid: ddde3508c4025b944924151f68ac175f, type: 2}
+    requireDungeonData: {fileID: 11400000, guid: 21c9f5dd34625be42a6a34b80f13273e,
+      type: 2}
+    requireDifficultyData: {fileID: 11400000, guid: acb47e45b7973a44daa237999c1d23d4,
+      type: 2}

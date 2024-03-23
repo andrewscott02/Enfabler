@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+using Enfabler.Quests;
+
 public class DungeonMasterManager : MonoBehaviour
 {
     public static DungeonMasterManager instance;
@@ -47,11 +49,17 @@ public class DungeonMasterManager : MonoBehaviour
 
     GrammarsDungeonData displayDungeon;
     public GrammarsDungeonData initialDungeon;
+    int currentDungeonGoldCost = 0;
 
-    public void ShowDungeon(GrammarsDungeonData dungeon)
+    public void ShowDungeon(GrammarsDungeonData dungeon, DifficultyData forceDifficulty = null, int goldCost = 0)
     {
-        displayDungeon = dungeon;
+        if (forceDifficulty != null)
+            DifficultyManager.instance.difficulty = forceDifficulty;
 
+        displayDungeon = dungeon;
+        currentDungeonGoldCost = goldCost;
+
+        CheckDifficultyButton();
         UpdateUI();
     }
 
@@ -62,31 +70,34 @@ public class DungeonMasterManager : MonoBehaviour
         UpdateUI();
     }
 
-    public TextMeshProUGUI difficultyTitleText;
-    public TextMeshProUGUI difficultyDescText;
+    public TextMeshProUGUI dungeonTitleText;
+    public TextMeshProUGUI dungeonDescText;
 
 
     void UpdateUI()
     {
         if (displayDungeon == null)
         {
-            difficultyTitleText.text = "Tutorial";
-            difficultyDescText.text = "Play through the tutorial to learn the basics of playing Enfabler";
+            dungeonTitleText.text = "Tutorial";
+            dungeonDescText.text = "Play through the tutorial to learn the basics of playing Enfabler";
 
             return;
         }
 
-        difficultyTitleText.text = displayDungeon.dungeonName;
-        difficultyDescText.text = displayDungeon.dungeonDescription;
+        dungeonTitleText.text = displayDungeon.dungeonName;
+        dungeonDescText.text = displayDungeon.dungeonDescription;
     }
 
     public void Embark()
     {
-        //TODO Load dungeon with selected difficulty
+        TreasureManager.instance.D_GiveGold(-currentDungeonGoldCost);
+
         OpenDungeonMenu(false);
         TextPopupManager.instance.ShowMessageText(displayDungeon != null ? "Entering " + displayDungeon.dungeonName : "Entering Tutorial" );
         StartCoroutine(ILoadScene(1.5f));
     }
+
+    public Quest tutorialQuest;
 
     IEnumerator ILoadScene(float delay)
     {
@@ -101,6 +112,7 @@ public class DungeonMasterManager : MonoBehaviour
         }
         else
         {
+            tutorialQuest.ForceRestartQuest();
             SceneManager.LoadScene(E_Scenes.Tutorial.ToString());
         }
     }

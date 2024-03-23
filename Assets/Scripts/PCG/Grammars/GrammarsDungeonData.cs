@@ -26,8 +26,6 @@ public class GrammarsDungeonData : ScriptableObject
     public float sideRoomChance = 0.75f;
     public float mainPathRemoveLimit = 2;
 
-    public List<ThemeData> startingThemes;
-    public List<ThemeData> allThemes;
     public Vector2Int themeChanges;
 
     public bool allowDuplicates = false;
@@ -217,7 +215,7 @@ public class GrammarsDungeonData : ScriptableObject
 
     void ResetEnemyData()
     {
-        foreach (var item in allThemes)
+        foreach (var item in DifficultyManager.instance.difficulty.allThemes)
         {
             for (int i = 0; i < item.enemies.Length; i++)
             {
@@ -293,7 +291,7 @@ public class GrammarsDungeonData : ScriptableObject
 
     void ResetTrapData()
     {
-        foreach (var item in allThemes)
+        foreach (var item in DifficultyManager.instance.difficulty.allThemes)
         {
             for (int i = 0; i < item.traps.Length; i++)
             {
@@ -403,7 +401,7 @@ public class GrammarsDungeonData : ScriptableObject
 
     public void ResetObjectData()
     {
-        foreach (var item in allThemes)
+        foreach (var item in DifficultyManager.instance.difficulty.allThemes)
         {
             for (int i = 0; i < item.objects.Length; i++)
             {
@@ -551,7 +549,7 @@ public struct RoundData
 public enum E_RoomTypes
 {
     Start, Boss, End,
-    Encounter, Puzzle, Treasure, Healing, Trap, ChangeTheme, Arena, TreasureEnd
+    Encounter, Puzzle, Treasure, Healing, Trap, ChangeTheme, Arena, TreasureEnd, EarlyEnd
 }
 
 [System.Serializable]

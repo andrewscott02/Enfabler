@@ -27,8 +27,8 @@ public class GrammarsDungeonGeneration : MonoBehaviour
     {
         CleanupDungeon();
 
-        int randTheme = Random.Range(0, grammarsDungeonData.startingThemes.Count);
-        firstTheme = grammarsDungeonData.startingThemes[randTheme];
+        int randTheme = Random.Range(0, DifficultyManager.instance.difficulty.startingThemes.Count);
+        firstTheme = DifficultyManager.instance.difficulty.startingThemes[randTheme];
         currentTheme = firstTheme;
 
         List<E_RoomTypes> rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Healing, E_RoomTypes.Boss, E_RoomTypes.End };

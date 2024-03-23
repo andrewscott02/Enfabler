@@ -26,7 +26,6 @@ public class QuestMarkerManager : MonoBehaviour
         }
         else
         {
-
             marker = Instantiate(questMarkerPrefab, attachGO.transform.position + offset, attachGO.transform.rotation) as GameObject;
         }
 

@@ -24,7 +24,7 @@ namespace Enfabler.Quests
 
             if (baseQuest != null)
             {
-                baseQuest.ForceRestartQuest();
+                //baseQuest.ForceRestartQuest();
 
                 if (trackingQuest == null)
                     SetTrackingQuest(baseQuest);
