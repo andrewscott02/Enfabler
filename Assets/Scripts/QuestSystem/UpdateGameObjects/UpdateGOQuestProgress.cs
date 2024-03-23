@@ -24,6 +24,11 @@ public class UpdateGOQuestProgress : MonoBehaviour
             quest.updateQuestDelegate -= CheckUpdate;
     }
 
+    protected void ForceCheckUpdate()
+    {
+        CheckUpdate(quest.state, quest.currentProgress);
+    }
+
     public void CheckUpdate(E_QuestStates questState, int progress)
     {
         Debug.Log("Quest updated - Received message");

@@ -48,7 +48,7 @@ public class DungeonGenerator : MonoBehaviour
 
         CleanupDungeon();
 
-        int randTheme = Random.Range(0, grammarsDungeonData.startingThemes.Count);
+        int randTheme = Random.Range(0, DifficultyManager.instance.difficulty.startingThemes.Count);
 
         rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Healing, E_RoomTypes.Boss, E_RoomTypes.Treasure, E_RoomTypes.End };
 
@@ -68,7 +68,7 @@ public class DungeonGenerator : MonoBehaviour
 
         LoadingScreenValues(rooms.Count);
 
-        PCGRoom start = GenerateRoom(rooms[0], grammarsDungeonData.startingThemes[randTheme], transform, true, 0);
+        PCGRoom start = GenerateRoom(rooms[0], DifficultyManager.instance.difficulty.startingThemes[randTheme], transform, true, 0);
 
         BakeNavmesh();
         PopulateRooms();

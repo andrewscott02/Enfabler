@@ -50,10 +50,14 @@ public class DungeonMasterManager : MonoBehaviour
     GrammarsDungeonData displayDungeon;
     public GrammarsDungeonData initialDungeon;
 
-    public void ShowDungeon(GrammarsDungeonData dungeon)
+    public void ShowDungeon(GrammarsDungeonData dungeon, DifficultyData forceDifficulty = null)
     {
+        if (forceDifficulty != null)
+            DifficultyManager.instance.difficulty = forceDifficulty;
+
         displayDungeon = dungeon;
 
+        CheckDifficultyButton();
         UpdateUI();
     }
 
@@ -64,22 +68,22 @@ public class DungeonMasterManager : MonoBehaviour
         UpdateUI();
     }
 
-    public TextMeshProUGUI difficultyTitleText;
-    public TextMeshProUGUI difficultyDescText;
+    public TextMeshProUGUI dungeonTitleText;
+    public TextMeshProUGUI dungeonDescText;
 
 
     void UpdateUI()
     {
         if (displayDungeon == null)
         {
-            difficultyTitleText.text = "Tutorial";
-            difficultyDescText.text = "Play through the tutorial to learn the basics of playing Enfabler";
+            dungeonTitleText.text = "Tutorial";
+            dungeonDescText.text = "Play through the tutorial to learn the basics of playing Enfabler";
 
             return;
         }
 
-        difficultyTitleText.text = displayDungeon.dungeonName;
-        difficultyDescText.text = displayDungeon.dungeonDescription;
+        dungeonTitleText.text = displayDungeon.dungeonName;
+        dungeonDescText.text = displayDungeon.dungeonDescription;
     }
 
     public void Embark()

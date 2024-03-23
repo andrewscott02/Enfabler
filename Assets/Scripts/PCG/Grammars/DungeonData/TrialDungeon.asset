@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d90910508796e224586996a019006bdf, type: 3}
-  m_Name: LargeDungeon
+  m_Name: TrialDungeon
   m_EditorClassIdentifier: 
-  dungeonName: Large Dungeon
+  dungeonName: Trial Dungeon
   dungeonDescription: Complete a trial dungeon to unlock the next difficulty
   roomData:
   - roomType: 0
@@ -130,9 +130,9 @@ MonoBehaviour:
   additionalRoomTypes: 03000000040000000700000009000000
   sidePathRoomTypes: 030000000400000007000000
   sidePathEndRoomTypes: 0a00000006000000
-  sideRoomEndChance: 0.2
+  sideRoomEndChance: 0
   additionalHealingRooms: 2
-  roomsCountMinMax: {x: 8, y: 10}
+  roomsCountMinMax: {x: 9, y: 11}
   maxTotalRooms: 100
   sideRoomChance: 0.75
   mainPathRemoveLimit: 4
