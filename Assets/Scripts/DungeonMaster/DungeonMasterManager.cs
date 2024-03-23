@@ -49,13 +49,15 @@ public class DungeonMasterManager : MonoBehaviour
 
     GrammarsDungeonData displayDungeon;
     public GrammarsDungeonData initialDungeon;
+    int currentDungeonGoldCost = 0;
 
-    public void ShowDungeon(GrammarsDungeonData dungeon, DifficultyData forceDifficulty = null)
+    public void ShowDungeon(GrammarsDungeonData dungeon, DifficultyData forceDifficulty = null, int goldCost = 0)
     {
         if (forceDifficulty != null)
             DifficultyManager.instance.difficulty = forceDifficulty;
 
         displayDungeon = dungeon;
+        currentDungeonGoldCost = goldCost;
 
         CheckDifficultyButton();
         UpdateUI();
@@ -88,7 +90,8 @@ public class DungeonMasterManager : MonoBehaviour
 
     public void Embark()
     {
-        //TODO Load dungeon with selected difficulty
+        TreasureManager.instance.D_GiveGold(-currentDungeonGoldCost);
+
         OpenDungeonMenu(false);
         TextPopupManager.instance.ShowMessageText(displayDungeon != null ? "Entering " + displayDungeon.dungeonName : "Entering Tutorial" );
         StartCoroutine(ILoadScene(1.5f));

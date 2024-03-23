@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb91689faed565143ae0bedc1da4e411, type: 3}
-  m_Name: EQ_1CA1
+  m_Name: EQ_2CT
   m_EditorClassIdentifier: 
   questName: Enfabler Dungeons
   questNumber: 1
-  questDescription: Speak with the Dungeon Master and complete a small dungeon
-  state: 3
-  currentProgress: 1
-  maxProgress: 1
-  parentQuest: {fileID: 11400000, guid: e2f74193a5f57f74c94f65997354853a, type: 2}
-  subQuests: []
+  questDescription: Complete dungeons with the Crossing the Threshold difficulty.
+  state: 0
+  currentProgress: -1
+  maxProgress: 2
+  parentQuest: {fileID: 11400000, guid: 45d43f08bd493154187f8453bfac3ba0, type: 2}
+  subQuests:
+  - {fileID: 11400000, guid: 747c162602001794ba1bf99e467d5bb4, type: 2}
+  - {fileID: 11400000, guid: 97bb96c0f80c5114981103f2c2dd559e, type: 2}
   linear: 1

@@ -78,7 +78,7 @@ public class DungeonButton : UpdateGOQuestProgress
     public void ButtonPressed()
     {
         if (dungeonData != null)
-            DungeonMasterManager.instance.ShowDungeon(dungeonData, forceDifficulty);
+            DungeonMasterManager.instance.ShowDungeon(dungeonData, forceDifficulty, goldCost);
         else
             DungeonMasterManager.instance.ShowTutorial();
     }
