@@ -15,6 +15,8 @@ public class UpdateGOQuestProgress : MonoBehaviour
         {
             Debug.Log("Added to quest delegate " + quest.name);
             quest.updateQuestDelegate += CheckUpdate;
+
+            ForceCheckUpdate();
         }
     }
 
