@@ -16,6 +16,11 @@ public class DungeonMasterManager : MonoBehaviour
     void Start()
     {
         instance = this;
+
+        OpenDungeonMenu(true);
+        OpenDifficultyMenu(true);
+        OpenDifficultyMenu(false);
+        OpenDungeonMenu(false);
     }
 
     #region Open/Close Menu

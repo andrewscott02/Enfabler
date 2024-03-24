@@ -6,6 +6,7 @@ using Enfabler.Quests;
 public class ProgressQuest : MonoBehaviour
 {
     public Quest[] quests;
+    public bool progressAll = false;
     protected int stage = 0;
 
     // Start is called before the first frame update
@@ -76,6 +77,16 @@ public class ProgressQuest : MonoBehaviour
 
     protected virtual void ProgressQuestStage()
     {
+        if (progressAll)
+        {
+            foreach (var item in quests)
+            {
+                item.QuestProgress(true);
+            }
+
+            return;
+        }
+
         if (stage >= quests.Length)
             return;
 
