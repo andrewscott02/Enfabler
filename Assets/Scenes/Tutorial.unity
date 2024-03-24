@@ -42692,6 +42692,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1758624101}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1760392690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3857238865640896489, guid: c89907f8edfcb7e4390ff7a7c878458e,
+    type: 3}
+  m_PrefabInstance: {fileID: 772040989}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1760392693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760392690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5069ea6217b84564ab8032e888a7d20e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quests:
+  - {fileID: 11400000, guid: bbd3e98ce1f9ca14db5f5506ad42ad39, type: 2}
+  overrideParentQuestMarker: {fileID: 0}
+  attachAsParent: 1
+  markerOffset: {x: 0, y: 2.5, z: 0}
+  specifiedAttacks: 00000000
 --- !u!1001 &1761995940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50844,7 +50868,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quests:
-  - {fileID: 11400000, guid: bbd3e98ce1f9ca14db5f5506ad42ad39, type: 2}
   - {fileID: 11400000, guid: 9e0fbf12989671f4c99097d67eac8ba6, type: 2}
   overrideParentQuestMarker: {fileID: 1032043319}
   attachAsParent: 1
