@@ -7,6 +7,8 @@ public class DifficultyMenuManager : MonoBehaviour
 {
     public static DifficultyMenuManager instance;
 
+    public bool open = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,8 @@ public class DifficultyMenuManager : MonoBehaviour
 
     public void OpenDifficultyMenu(bool open)
     {
+        this.open = open;
+
         foreach (var item in disable)
         {
             item.SetActive(!open);

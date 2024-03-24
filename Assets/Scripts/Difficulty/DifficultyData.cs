@@ -18,6 +18,7 @@ public class DifficultyData : ScriptableObject
     #region Enemy Spawn Modifiers
 
     public float enemySeverityMultiplier;
+    public float enemySeverityMax;
     public float enemyCountMultiplier;
 
     public Vector2Int bossSeverity;

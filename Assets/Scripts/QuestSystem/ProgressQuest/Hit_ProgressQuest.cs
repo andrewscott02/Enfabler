@@ -12,12 +12,16 @@ public class Hit_ProgressQuest : ProgressQuest
     {
         base.Start();
         Health health = GetComponent<Health>();
-        health.HitReactionDelegate += OnHit;
+        if (health != null)
+            health.HitReactionDelegate += OnHit;
+        RotateOnHit rotateOnHit = GetComponent<RotateOnHit>();
+        if (rotateOnHit != null)
+            rotateOnHit.HitReactionDelegate += OnHit;
     }
 
     public void OnHit(int damage, Vector3 dir, E_AttackType attackType = E_AttackType.None)
     {
-        //Debug.Log(attackType);
+        //Debug.Log(attackType + " to progress quest");
 
         if (stage >= specifiedAttacks.Length)
             return;

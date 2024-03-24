@@ -13,6 +13,7 @@ public class RotateOnHit : MonoBehaviour, IDamageable
     private void Start()
     {
         impulseSource = GetComponent<CinemachineImpulseSource>();
+        HitReactionDelegate += ObjectHit;
     }
 
     public MonoBehaviour GetScript()
@@ -22,6 +23,8 @@ public class RotateOnHit : MonoBehaviour, IDamageable
 
     public E_DamageEvents Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot, E_AttackType attackType = E_AttackType.None)
     {
+        HitReactionDelegate(damage, Vector3.zero);
+
         Instantiate(hitReactData.blockFX, spawnPos, Quaternion.Euler(spawnRot));
         if (hitReactData.hitClip != null)
             PlaySoundEffect(hitReactData.hitClip, hitReactData.hitVolume);
@@ -33,6 +36,14 @@ public class RotateOnHit : MonoBehaviour, IDamageable
         transform.rotation = Quaternion.Euler(rot);
 
         return E_DamageEvents.Block;
+    }
+
+    public delegate void HitDelegate(int damage, Vector3 dir, E_AttackType attackType = E_AttackType.None);
+    public HitDelegate HitReactionDelegate;
+
+    void ObjectHit(int damage, Vector3 dir, E_AttackType attackType = E_AttackType.None)
+    {
+        //Empty Delegate Function
     }
 
     void PlaySoundEffect(AudioClip clip, float volume = 1)

@@ -2,18 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using TMPro;
-
 using Enfabler.Quests;
 
 public class DungeonMasterManager : MonoBehaviour
 {
     public static DungeonMasterManager instance;
 
+    public GameObject dungeonDefaultButton, difficultyDefaultButton;
+
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+
+        OpenDungeonMenu(true);
+        OpenDifficultyMenu(true);
+        OpenDifficultyMenu(false);
+        OpenDungeonMenu(false);
     }
 
     #region Open/Close Menu
@@ -22,19 +29,32 @@ public class DungeonMasterManager : MonoBehaviour
 
     public List<GameObject> disable;
 
+    public bool TryCloseMenu()
+    {
+        if (difficultyMenu.open)
+        {
+            OpenDifficultyMenu(false);
+            return false;
+        }
+
+        return true;
+    }
+
     public void OpenDungeonMenu(bool open)
     {
+        //OpenDifficultyMenu(false);
+
         foreach (var item in disable)
         {
             item.SetActive(!open);
         }
 
         dungeonMasterMenu.SetActive(open);
+        EventSystem.current.SetSelectedGameObject(dungeonDefaultButton);
 
         if (open && displayDungeon == null)
         {
             ShowDungeon(initialDungeon);
-            OpenDifficultyMenu(false);
         }
     }
 
@@ -49,12 +69,12 @@ public class DungeonMasterManager : MonoBehaviour
 
     GrammarsDungeonData displayDungeon;
     public GrammarsDungeonData initialDungeon;
+    DifficultyData forceDifficulty;
     int currentDungeonGoldCost = 0;
 
     public void ShowDungeon(GrammarsDungeonData dungeon, DifficultyData forceDifficulty = null, int goldCost = 0)
     {
-        if (forceDifficulty != null)
-            DifficultyManager.instance.difficulty = forceDifficulty;
+        this.forceDifficulty = forceDifficulty;
 
         displayDungeon = dungeon;
         currentDungeonGoldCost = goldCost;
@@ -63,10 +83,12 @@ public class DungeonMasterManager : MonoBehaviour
         UpdateUI();
     }
 
-    public void ShowTutorial()
+    public void ShowTutorial(DifficultyData forceDifficulty)
     {
+        this.forceDifficulty = forceDifficulty;
         displayDungeon = null;
 
+        CheckDifficultyButton();
         UpdateUI();
     }
 
@@ -90,6 +112,8 @@ public class DungeonMasterManager : MonoBehaviour
 
     public void Embark()
     {
+        if (forceDifficulty != null)
+            DifficultyManager.instance.difficulty = forceDifficulty;
         TreasureManager.instance.D_GiveGold(-currentDungeonGoldCost);
 
         OpenDungeonMenu(false);
@@ -125,6 +149,7 @@ public class DungeonMasterManager : MonoBehaviour
 
     public void OpenDifficultyMenu(bool open)
     {
+        EventSystem.current.SetSelectedGameObject(open ? difficultyDefaultButton : dungeonDefaultButton);
         difficultyMenu.OpenDifficultyMenu(open);
 
         CheckDifficultyButton();
@@ -134,7 +159,8 @@ public class DungeonMasterManager : MonoBehaviour
 
     public void CheckDifficultyButton()
     {
-        difficultyBtnText.text = "Current Difficulty: " + DifficultyManager.instance.difficulty.difficultyName;
+        string difficultyText = forceDifficulty == null ? DifficultyManager.instance.difficulty.difficultyName : forceDifficulty.difficultyName;
+        difficultyBtnText.text = "Current Difficulty: " + difficultyText;
     }
 
     #endregion

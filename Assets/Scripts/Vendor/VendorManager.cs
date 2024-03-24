@@ -11,6 +11,9 @@ public class VendorManager : MonoBehaviour
     private void Start()
     {
         instance = this;
+
+        OpenVendorMenu(true);
+        OpenVendorMenu(false);
     }
 
     public GameObject vendorMenu;
