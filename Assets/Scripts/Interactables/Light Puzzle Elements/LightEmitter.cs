@@ -9,7 +9,7 @@ public class LightEmitter : MonoBehaviour, IEmitLight
     bool emitting = false;
     public bool canHarm = false;
 
-    public LayerMask hitObjects;
+    public LayerMask hitObjects, lightReceivers;
     public GameObject rayObject;
     public float rayRadius = 2f;
     public float maxDistance = 100;
@@ -42,7 +42,7 @@ public class LightEmitter : MonoBehaviour, IEmitLight
         RaycastHit rayHit;
         float distance = maxDistance;
 
-        if (Physics.SphereCast(rayObject.transform.position, rayRadius, transform.forward, out rayHit, maxDistance, hitObjects))
+        if (SphereCast(rayObject.transform.position, out rayHit, maxDistance))
         {
             distance = Vector3.Distance(rayObject.transform.position, rayHit.point);
 
@@ -74,6 +74,40 @@ public class LightEmitter : MonoBehaviour, IEmitLight
         Vector3 scale = rayObject.transform.localScale;
         scale.z = distance / 2;
         rayObject.transform.localScale = scale;
+    }
+
+    bool SphereCast(Vector3 origin, out RaycastHit rayHit, float distance)
+    {
+        if (Physics.SphereCast(origin, rayRadius, transform.forward, out rayHit, distance, hitObjects))
+        {
+            float distanceLeft = distance - Vector3.Distance(origin, rayHit.point);
+
+            if (rayHit.collider.CompareTag("IgnoreProjectiles") && distanceLeft > 0)
+            {
+                Debug.LogWarning("SphereCast: Warning, hit an object with ignore projectiles: " + rayHit.collider.name);
+                SphereTrigger(rayHit.point);
+                SphereCast(rayHit.point, out rayHit, distanceLeft);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    void SphereTrigger(Vector3 origin)
+    {
+        Collider[] cols = Physics.OverlapSphere(origin, rayRadius * 5, lightReceivers);
+        foreach (var item in cols)
+        {
+            IReceiveLight lightReceiver = item.GetComponent<IReceiveLight>();
+
+            if (lightReceiver != null)
+            {
+                lightReceiver.ReceiveLight(canHarm);
+                lastLightReceiver = lightReceiver;
+            }
+        }
     }
 
     private void OnDrawGizmos()
