@@ -28,7 +28,7 @@ public class DungeonMasterManager : MonoBehaviour
     {
         if (difficultyMenu.open)
         {
-            difficultyMenu.OpenDifficultyMenu(false);
+            OpenDifficultyMenu(false);
             return false;
         }
 

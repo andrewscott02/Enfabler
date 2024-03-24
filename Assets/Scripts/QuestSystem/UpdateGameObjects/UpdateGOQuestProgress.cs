@@ -28,7 +28,8 @@ public class UpdateGOQuestProgress : MonoBehaviour
 
     protected void ForceCheckUpdate()
     {
-        CheckUpdate(quest.state, quest.currentProgress);
+        if (quest != null)
+            CheckUpdate(quest.state, quest.currentProgress);
     }
 
     public void CheckUpdate(E_QuestStates questState, int progress)

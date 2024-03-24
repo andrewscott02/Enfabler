@@ -139,6 +139,9 @@ public class PauseMenu : MonoBehaviour
             Cursor.visible = visible;
             Cursor.lockState = visible ? CursorLockMode.Confined : CursorLockMode.Locked;
         }
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     int currentPage = 0;
@@ -165,11 +168,11 @@ public class PauseMenu : MonoBehaviour
 
     public void OnControlsChange(PlayerInput input)
     {
-        bool usingGamepad = input.currentControlScheme == "Gamepad";
+        usingGamepad = input.currentControlScheme == "Gamepad";
 
         if (paused)
         {
-            ShowMouse(!usingGamepad);
+            ShowMouse(true);
         }
         else
         {
