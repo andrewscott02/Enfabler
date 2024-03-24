@@ -42,11 +42,13 @@ public class LightEmitter : MonoBehaviour, IEmitLight
         RaycastHit rayHit;
         float distance = maxDistance;
 
-        if (SphereCast(rayObject.transform.position, out rayHit, maxDistance))
+        if (SphereCast(rayObject.transform.position, out rayHit, maxDistance, out Collider overrideCol))
         {
             distance = Vector3.Distance(rayObject.transform.position, rayHit.point);
 
-            IReceiveLight lightReceiver = rayHit.collider.GetComponent<IReceiveLight>();
+            Collider col = overrideCol == null ? rayHit.collider : overrideCol;
+
+            IReceiveLight lightReceiver = col.GetComponent<IReceiveLight>();
 
             if (lastLightReceiver != null && lightReceiver != lastLightReceiver)
             {
@@ -76,8 +78,9 @@ public class LightEmitter : MonoBehaviour, IEmitLight
         rayObject.transform.localScale = scale;
     }
 
-    bool SphereCast(Vector3 origin, out RaycastHit rayHit, float distance)
+    bool SphereCast(Vector3 origin, out RaycastHit rayHit, float distance, out Collider overrideCol)
     {
+        overrideCol = null;
         if (Physics.SphereCast(origin, rayRadius, transform.forward, out rayHit, distance, hitObjects))
         {
             float distanceLeft = distance - Vector3.Distance(origin, rayHit.point);
@@ -85,8 +88,15 @@ public class LightEmitter : MonoBehaviour, IEmitLight
             if (rayHit.collider.CompareTag("IgnoreProjectiles") && distanceLeft > 0)
             {
                 Debug.LogWarning("SphereCast: Warning, hit an object with ignore projectiles: " + rayHit.collider.name);
-                SphereTrigger(rayHit.point);
-                SphereCast(rayHit.point, out rayHit, distanceLeft);
+                Collider receiverCol = SphereTrigger(rayHit.point);
+                if (receiverCol != null)
+                {
+                    rayHit.point = receiverCol.transform.position;
+                    overrideCol = receiverCol;
+                    return true;
+                }
+
+                SphereCast(rayHit.point, out rayHit, distanceLeft, out overrideCol);
             }
 
             return true;
@@ -95,25 +105,36 @@ public class LightEmitter : MonoBehaviour, IEmitLight
         return false;
     }
 
-    void SphereTrigger(Vector3 origin)
+    Collider SphereTrigger(Vector3 origin)
     {
-        Collider[] cols = Physics.OverlapSphere(origin, rayRadius * 5, lightReceivers);
+        Collider[] cols = Physics.OverlapSphere(origin, rayRadius * 2, lightReceivers);
         foreach (var item in cols)
         {
+            Debug.LogWarning("SphereCast: Warning, checking object with correct layer: " + item.name);
             IReceiveLight lightReceiver = item.GetComponent<IReceiveLight>();
 
             if (lightReceiver != null)
             {
                 lightReceiver.ReceiveLight(canHarm);
                 lastLightReceiver = lightReceiver;
+                return item;
             }
         }
+
+        return null;
     }
+
+    Vector3 hitCheck;
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(rayObject.transform.position, rayRadius);
         Gizmos.DrawWireSphere(rayObject.transform.position + (transform.forward * maxDistance), rayRadius);
+
+        if (hitCheck != null)
+        {
+            Gizmos.DrawWireSphere(hitCheck, rayRadius * 2);
+        }
     }
 
     public void EmitLight()
