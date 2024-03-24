@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using TMPro;
-
 using Enfabler.Quests;
 
 public class DungeonMasterManager : MonoBehaviour
 {
     public static DungeonMasterManager instance;
+
+    public GameObject dungeonDefaultButton, difficultyDefaultButton;
 
     // Start is called before the first frame update
     void Start()
@@ -22,19 +24,32 @@ public class DungeonMasterManager : MonoBehaviour
 
     public List<GameObject> disable;
 
+    public bool TryCloseMenu()
+    {
+        if (difficultyMenu.open)
+        {
+            difficultyMenu.OpenDifficultyMenu(false);
+            return false;
+        }
+
+        return true;
+    }
+
     public void OpenDungeonMenu(bool open)
     {
+        //OpenDifficultyMenu(false);
+
         foreach (var item in disable)
         {
             item.SetActive(!open);
         }
 
         dungeonMasterMenu.SetActive(open);
+        EventSystem.current.SetSelectedGameObject(dungeonDefaultButton);
 
         if (open && displayDungeon == null)
         {
             ShowDungeon(initialDungeon);
-            OpenDifficultyMenu(false);
         }
     }
 
@@ -125,6 +140,7 @@ public class DungeonMasterManager : MonoBehaviour
 
     public void OpenDifficultyMenu(bool open)
     {
+        EventSystem.current.SetSelectedGameObject(open ? difficultyDefaultButton : dungeonDefaultButton);
         difficultyMenu.OpenDifficultyMenu(open);
 
         CheckDifficultyButton();

@@ -58,21 +58,24 @@ public class PauseMenu : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(delay);
 
-        ShowMouse(false);
-        paused = false;
-        ShowControls(false);
-        pauseMenu.SetActive(false);
-        controls.SetActive(false);
+        if (DungeonMasterManager.instance.TryCloseMenu())
+        {
+            ShowMouse(false);
+            paused = false;
+            ShowControls(false);
+            pauseMenu.SetActive(false);
+            controls.SetActive(false);
 
-        inVendorMenu = false;
-        VendorManager.instance.OpenVendorMenu(false);
+            inVendorMenu = false;
+            VendorManager.instance.OpenVendorMenu(false);
 
-        inDungeonMasterMenu = false;
-        DungeonMasterManager.instance.OpenDungeonMenu(false);
+            inDungeonMasterMenu = false;
+            DungeonMasterManager.instance.OpenDungeonMenu(false);
 
-        ShowQuestUI(true);
+            ShowQuestUI(true);
 
-        Time.timeScale = unpausedTimeScale;
+            Time.timeScale = unpausedTimeScale;
+        }
     }
 
     public void ShowControls(bool show)
@@ -131,8 +134,11 @@ public class PauseMenu : MonoBehaviour
 
     void ShowMouse(bool visible)
     {
-        Cursor.visible = visible;
-        Cursor.lockState = visible ? CursorLockMode.Confined : CursorLockMode.Locked;
+        if (!usingGamepad)
+        {
+            Cursor.visible = visible;
+            Cursor.lockState = visible ? CursorLockMode.Confined : CursorLockMode.Locked;
+        }
     }
 
     int currentPage = 0;
@@ -155,6 +161,7 @@ public class PauseMenu : MonoBehaviour
 
     public delegate void ControlsDelegate(PlayerInput input);
     public ControlsDelegate onControlsChange;
+    bool usingGamepad = false;
 
     public void OnControlsChange(PlayerInput input)
     {
