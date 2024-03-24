@@ -31,6 +31,13 @@ public class DifficultyButton : UpdateGOQuestProgress
             button.interactable = false;
             unavailableOverlay.SetActive(true);
         }
+
+        ForceCheckUpdate();
+    }
+
+    private void OnEnable()
+    {
+        ForceCheckUpdate();
     }
 
     public override void QuestUpdated()

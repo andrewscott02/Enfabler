@@ -134,14 +134,15 @@ public class PauseMenu : MonoBehaviour
 
     void ShowMouse(bool visible)
     {
-        if (!usingGamepad)
+        if (usingGamepad)
         {
-            Cursor.visible = visible;
-            Cursor.lockState = visible ? CursorLockMode.Confined : CursorLockMode.Locked;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            return;
         }
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = visible;
+        Cursor.lockState = visible ? CursorLockMode.Confined : CursorLockMode.Locked;
     }
 
     int currentPage = 0;
