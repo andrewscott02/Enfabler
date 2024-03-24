@@ -288,6 +288,8 @@ public class PCGRoom : MonoBehaviour
         door.lockedInteraction = lockOverride ? lockDoor : dungeonData.GetDoorLocked(roomType);
 
         door.interactDelegate += DoorOpened;
+        if (doorTheme != theme)
+            door.interactDelegate += DoorOpenedChangeTheme;
 
         doors.Add(door);
 
@@ -306,12 +308,11 @@ public class PCGRoom : MonoBehaviour
             return;
 
         doorOpenedLogic = true;
+    }
 
-        //Debug.Log("Door opened - from delegate : Room " + roomNumber);
-        //GrammarsDungeonGeneration.instance.PopulateRoom(roomNumber + GrammarsDungeonGeneration.instance.preloadRooms);
-
-        if (nextTheme != theme)
-            GameCanvasManager.instance.ShowRegionText(nextTheme.regionName);
+    public void DoorOpenedChangeTheme()
+    {
+        GameCanvasManager.instance.ShowRegionText(nextTheme.regionName);
     }
 
     int enemiesInRoom = 0;
