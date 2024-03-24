@@ -231,7 +231,9 @@ public class GrammarsDungeonData : ScriptableObject
 
         while (true)
         {
-            if (theme.enemies[enemyIndex].severity <= budgetLeft && theme.enemies[enemyIndex].timesUsed < theme.enemies[enemyIndex].maxCount)
+            if (theme.enemies[enemyIndex].severity <= budgetLeft &&
+                theme.enemies[enemyIndex].severity <= DifficultyManager.instance.difficulty.enemySeverityMax &&
+                theme.enemies[enemyIndex].timesUsed < theme.enemies[enemyIndex].maxCount)
             {
                 theme.enemies[enemyIndex].timesUsed++;
                 return true;
