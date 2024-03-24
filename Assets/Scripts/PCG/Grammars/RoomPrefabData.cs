@@ -50,6 +50,27 @@ public class RoomPrefabData : ScriptableObject
         if (!requireThemes.Contains(currentTheme))
             return false;
 
+        if (changeThemes != null && changeThemes.Count > 0)
+        {
+            bool nextThemesAvailable = false;
+            
+            foreach (var item in changeThemes)
+            {
+                //Debug.Log("ChangeThemes: Checking theme " + item + " for room " + name);
+                if (DifficultyManager.instance.difficulty.allThemes.Contains(item))
+                {
+                    //Debug.LogWarning("ChangeThemes: Warning, theme is available in " + item.regionName + " in " + name);
+                    nextThemesAvailable = true;
+                }
+            }
+            
+            if (!nextThemesAvailable)
+            {
+                Debug.LogWarning("Warning, no themes are available in room " + currentTheme + ": " + name);
+                return false;
+            }
+        }
+
         return (timesUsed < countMinMax.y);
     }
 

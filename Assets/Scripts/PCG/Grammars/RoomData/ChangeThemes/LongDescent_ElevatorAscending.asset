@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c361416d43129ad40a21d1164abbc251, type: 3}
-  m_Name: LongDescent_Descending
+  m_Name: LongDescent_ElevatorAscending
   m_EditorClassIdentifier: 
-  reverseRooms: 0
+  reverseRooms: 1
   roomPrefabs:
-  - {fileID: 6866296556702201983, guid: ecf59a322de623844bf99bed05d364e5, type: 3}
+  - {fileID: 8590093909978449386, guid: e34f6a1c46f6b6049b79873c0c1a7703, type: 3}
   countMinMax: {x: 0, y: 2}
   requireThemes:
-  - {fileID: 11400000, guid: f6c6f6c675d89f14db8217272c9510ce, type: 2}
+  - {fileID: 11400000, guid: ec8b9c12d45e8dc41870e9cb5561728b, type: 2}
   changeThemes:
+  - {fileID: 11400000, guid: f6c6f6c675d89f14db8217272c9510ce, type: 2}
   - {fileID: 11400000, guid: d1dacfae26c0ff448b2b331c53ccf36b, type: 2}
