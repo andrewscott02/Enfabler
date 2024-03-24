@@ -62,7 +62,7 @@ public class RoomPrefabData : ScriptableObject
 
         while (true)
         {
-            if (changeThemes[randTheme] != currentTheme)
+            if (changeThemes[randTheme] != currentTheme && DifficultyManager.instance.difficulty.allThemes.Contains(changeThemes[randTheme]))
             {
                 return changeThemes[randTheme];
             }
