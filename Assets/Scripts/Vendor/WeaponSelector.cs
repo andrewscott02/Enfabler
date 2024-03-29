@@ -9,9 +9,13 @@ public class WeaponSelector : MonoBehaviour
     public WeaponMoveset weapon;
 
     public Button button;
+    ButtonHover buttonHover;
     public TextMeshProUGUI nameText, buttonText;
 
     public string equipped, owned, purchase;
+
+    public Texture2D cursorEquip, cursorEquipped;
+    public Texture2D cursorBuy, cursorCannotBuy;
 
     E_WeaponStates weaponState = E_WeaponStates.purchase;
 
@@ -21,8 +25,27 @@ public class WeaponSelector : MonoBehaviour
     {
         this.vendorManager = vendorManager;
 
+        buttonHover = button.GetComponent<ButtonHover>();
+
         nameText.text = weapon.weaponName;
 
+        weaponState = E_WeaponStates.purchase;
+
+        if (weapon == WeaponManager.equippedWeapon)
+        {
+            weaponState = E_WeaponStates.equipped;
+        }
+        else
+        {
+            if (WeaponManager.instance.ownedWeapons.Contains(weapon))
+                weaponState = E_WeaponStates.owned;
+        }
+
+        SetButtonInteractivity();
+    }
+
+    public void CheckWeapon()
+    {
         weaponState = E_WeaponStates.purchase;
 
         if (weapon == WeaponManager.equippedWeapon)
@@ -45,16 +68,19 @@ public class WeaponSelector : MonoBehaviour
         switch (weaponState)
         {
             case E_WeaponStates.equipped:
-                message = owned;
+                message = equipped;
                 button.interactable = true;
+                buttonHover.overideCursorTexture = cursorEquipped;
                 break;
             case E_WeaponStates.owned:
                 message = owned;
                 button.interactable = true;
+                buttonHover.overideCursorTexture = cursorEquip;
                 break;
             case E_WeaponStates.purchase:
                 message = purchase + weapon.goldCost + "G";
                 button.interactable = true;
+                buttonHover.overideCursorTexture = CanBuy() ? cursorBuy : cursorCannotBuy;
                 break;
             default:
                 break;
@@ -75,12 +101,10 @@ public class WeaponSelector : MonoBehaviour
             case E_WeaponStates.equipped:
                 WeaponManager.instance.equipDelegate(weapon);
                 weaponState = E_WeaponStates.equipped;
-                SetButtonInteractivity();
                 return;
             case E_WeaponStates.owned:
                 WeaponManager.instance.equipDelegate(weapon);
                 weaponState = E_WeaponStates.equipped;
-                SetButtonInteractivity();
                 break;
             case E_WeaponStates.purchase:
                 if (CanBuy())
@@ -88,12 +112,13 @@ public class WeaponSelector : MonoBehaviour
                     TreasureManager.instance.D_GiveGold(-weapon.goldCost);
                     WeaponManager.instance.ownedWeapons.Add(weapon);
                     weaponState = E_WeaponStates.owned;
-                    SetButtonInteractivity();
                 }
                 break;
             default:
                 break;
         }
+
+        vendorManager.CheckWeapons();
     }
 
     public bool CanBuy()

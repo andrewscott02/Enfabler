@@ -23,9 +23,11 @@ public class VendorManager : MonoBehaviour
 
     public GoldUI goldUI;
 
+    WeaponSelector[] weaponSelectors;
+
     public void OpenVendorMenu(bool open)
     {
-        foreach(var item in disable)
+        foreach (var item in disable)
         {
             item.SetActive(!open);
         }
@@ -33,7 +35,7 @@ public class VendorManager : MonoBehaviour
         vendorMenu.SetActive(open);
 
         if (open)
-            CheckWeapons();
+            SetupWeapons();
 
         if (open)
             goldUI.Setup();
@@ -46,16 +48,24 @@ public class VendorManager : MonoBehaviour
         PauseMenu.instance.ShowVendorMenu(false);
     }
 
-    void CheckWeapons()
+    void SetupWeapons()
     {
-        WeaponSelector[] weaponSelectors = weaponContainer.GetComponentsInChildren<WeaponSelector>();
+        weaponSelectors = weaponContainer.GetComponentsInChildren<WeaponSelector>();
 
-        foreach(var item in weaponSelectors)
+        foreach (var item in weaponSelectors)
         {
             item.Setup(this);
         }
 
         EventSystem.current.SetSelectedGameObject(weaponSelectors[0].button.gameObject);
+    }
+
+    public void CheckWeapons()
+    {
+        foreach (var item in weaponSelectors)
+        {
+            item.CheckWeapon();
+        }
     }
 
     public TextMeshProUGUI weaponName, weaponAttack, weaponDesc;
