@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, ISelectHandler
 {
     TextMeshProUGUI text;
     Color defaultColour;
@@ -38,6 +38,12 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
     public void OnPointerClick(PointerEventData eventData)
+    {
+        CursorManager.instance.SetCursor(overideCursorTexture == null ? CursorManager.instance.hoverCursor : overideCursorTexture);
+        text.color = hoverColor;
+    }
+
+    public void OnSelect(BaseEventData eventData)
     {
         CursorManager.instance.SetCursor(overideCursorTexture == null ? CursorManager.instance.hoverCursor : overideCursorTexture);
         text.color = hoverColor;
