@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, ISelectHandler
+public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, ISelectHandler, IDeselectHandler
 {
     TextMeshProUGUI text;
     Color defaultColour;
@@ -19,33 +19,49 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         defaultColour = text.color;
     }
 
+    #region Handler Events
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        CursorManager.instance.SetCursor(overideCursorTexture == null ? CursorManager.instance.hoverCursor : overideCursorTexture);
-        text.color = hoverColor;
+        Selected();
     }
 
     private void OnDisable()
     {
-        CursorManager.instance.SetCursor();
-        text.color = defaultColour;
+        Unselected();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        CursorManager.instance.SetCursor();
-        text.color = defaultColour;
+        Unselected();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        CursorManager.instance.SetCursor(overideCursorTexture == null ? CursorManager.instance.hoverCursor : overideCursorTexture);
-        text.color = hoverColor;
+        Selected();
     }
 
     public void OnSelect(BaseEventData eventData)
     {
+        Selected();
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        Unselected();
+    }
+
+    #endregion
+
+    void Selected()
+    {
         CursorManager.instance.SetCursor(overideCursorTexture == null ? CursorManager.instance.hoverCursor : overideCursorTexture);
         text.color = hoverColor;
+    }
+
+    void Unselected()
+    {
+        CursorManager.instance.SetCursor();
+        text.color = defaultColour;
     }
 }
