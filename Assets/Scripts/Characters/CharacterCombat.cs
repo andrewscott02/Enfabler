@@ -781,6 +781,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     void OnAttackHit(E_DamageEvents damageEvent)
     {
+        if (damageEvent == E_DamageEvents.Dodge)
+            return;
+
         Freeze();
         RumbleManager.instance.ControllerRumble(0.2f, 0.85f, 0.25f);
 
@@ -916,6 +919,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     void Untarget()
     {
+        /*
+        if (lastHit.Count == 0)
+            onAttackHit(E_DamageEvents.Dodge);
+        */
         foreach (var item in lastHit)
         {
             if (item.GetCharacterCombat() != null)
