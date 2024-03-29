@@ -75,6 +75,6 @@ namespace Enfabler.Attacking
 
     public enum E_AttackType
     {
-        None, PrimaryAttack, SecondaryAttack, SwitchPrimaryAttack, SwitchSecondaryAttack, LungeAttack, SprintPrimaryAttack, SprintSecondaryAttack, DodgePrimaryAttack, DodgeSecondaryAttack
+        None, PrimaryAttack, SecondaryAttack, SwitchPrimaryAttack, SwitchSecondaryAttack, LungeAttack, SprintPrimaryAttack, SprintSecondaryAttack, DodgePrimaryAttack, DodgeSecondaryAttack, Forced
     }
 }

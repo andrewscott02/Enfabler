@@ -159,7 +159,12 @@ public class DungeonMasterManager : MonoBehaviour
 
     public void CheckDifficultyButton()
     {
-        string difficultyText = forceDifficulty == null ? DifficultyManager.instance.difficulty.difficultyName : forceDifficulty.difficultyName;
+        string difficultyText = "";
+        if (forceDifficulty != null)
+            difficultyText = forceDifficulty.difficultyName;
+        else if (DifficultyManager.instance != null)
+            difficultyText = DifficultyManager.instance.difficulty.difficultyName;
+
         difficultyBtnText.text = "Current Difficulty: " + difficultyText;
     }
 

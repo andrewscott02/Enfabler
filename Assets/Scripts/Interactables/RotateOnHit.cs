@@ -10,6 +10,8 @@ public class RotateOnHit : MonoBehaviour, IDamageable
     public float hitRotateInterval = 45;
     CinemachineImpulseSource impulseSource;
 
+    public GameObject[] linkedHitDamageables;
+
     private void Start()
     {
         impulseSource = GetComponent<CinemachineImpulseSource>();
@@ -23,6 +25,17 @@ public class RotateOnHit : MonoBehaviour, IDamageable
 
     public E_DamageEvents Damage(ICanDealDamage attacker, int damage, Vector3 spawnPos, Vector3 spawnRot, E_AttackType attackType = E_AttackType.None)
     {
+        if (attackType != E_AttackType.Forced)
+        {
+            foreach (var item in linkedHitDamageables)
+            {
+                IDamageable GODamageable = item.GetComponent<IDamageable>();
+
+                if (GODamageable != null)
+                    GODamageable.Damage(attacker, damage, spawnPos, spawnRot, E_AttackType.Forced);
+            }
+        }
+
         HitReactionDelegate(damage, Vector3.zero);
 
         Instantiate(hitReactData.blockFX, spawnPos, Quaternion.Euler(spawnRot));
