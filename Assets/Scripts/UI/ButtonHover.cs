@@ -9,7 +9,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     TextMeshProUGUI text;
     Color defaultColour;
-    public Color hoverColor = new Color(1, 0, 1, 1);
+    public Color hoverColor = new Color(0.7f, 0.7f, 0.7f, 1);
 
     public Texture2D overideCursorTexture;
 
@@ -23,6 +23,12 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         CursorManager.instance.SetCursor(overideCursorTexture == null ? CursorManager.instance.hoverCursor : overideCursorTexture);
         text.color = hoverColor;
+    }
+
+    private void OnDisable()
+    {
+        CursorManager.instance.SetCursor();
+        text.color = defaultColour;
     }
 
     public void OnPointerExit(PointerEventData eventData)

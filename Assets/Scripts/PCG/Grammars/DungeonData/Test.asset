@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90910508796e224586996a019006bdf, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
+  dungeonName: 
+  dungeonDescription: 
   roomData:
   - roomType: 0
     prefabData:
@@ -115,15 +117,22 @@ MonoBehaviour:
     lockDoor: 0
     enemySpawnInfo: []
     trapsMinMax: {x: 3, y: 6}
+  emptyRoomType: 0
   additionalRoomTypes: 0300000004000000050000000700000009000000
+  sidePathRoomTypes: 
+  sidePathEndRoomTypes: 
+  sideRoomEndChance: 0.05
   additionalHealingRooms: 2
   roomsCountMinMax: {x: 9, y: 12}
-  startingThemes:
-  - {fileID: 11400000, guid: 25191121aee93394993c83562ae6b62e, type: 2}
-  allThemes:
+  maxTotalRooms: 100
+  sideRoomChance: 0.75
+  mainPathRemoveLimit: 2
+  themeChanges: {x: 2, y: 3}
+  allowDuplicates: 0
+  treasureMultiplier: 0
+  allThemesBackup:
   - {fileID: 11400000, guid: ec8b9c12d45e8dc41870e9cb5561728b, type: 2}
   - {fileID: 11400000, guid: f6c6f6c675d89f14db8217272c9510ce, type: 2}
   - {fileID: 11400000, guid: d1dacfae26c0ff448b2b331c53ccf36b, type: 2}
+  - {fileID: 11400000, guid: 72b9dc47dfcb15249b53ffbdacca8610, type: 2}
   - {fileID: 11400000, guid: 25191121aee93394993c83562ae6b62e, type: 2}
-  themeChanges: {x: 2, y: 3}
-  allowDuplicates: 0

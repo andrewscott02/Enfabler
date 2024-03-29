@@ -53,17 +53,18 @@ public class RoomPrefabData : ScriptableObject
         if (changeThemes != null && changeThemes.Count > 0)
         {
             bool nextThemesAvailable = false;
-            
+
             foreach (var item in changeThemes)
             {
                 //Debug.Log("ChangeThemes: Checking theme " + item + " for room " + name);
-                if (DifficultyManager.instance.difficulty.allThemes.Contains(item))
+                if (DifficultyContainsTheme(item))
                 {
                     //Debug.LogWarning("ChangeThemes: Warning, theme is available in " + item.regionName + " in " + name);
                     nextThemesAvailable = true;
+                    break;
                 }
             }
-            
+
             if (!nextThemesAvailable)
             {
                 Debug.LogWarning("Warning, no themes are available in room " + currentTheme + ": " + name);
@@ -83,7 +84,7 @@ public class RoomPrefabData : ScriptableObject
 
         while (true)
         {
-            if (changeThemes[randTheme] != currentTheme && DifficultyManager.instance.difficulty.allThemes.Contains(changeThemes[randTheme]))
+            if (changeThemes[randTheme] != currentTheme && DifficultyContainsTheme(changeThemes[randTheme]))
             {
                 return changeThemes[randTheme];
             }
@@ -96,6 +97,14 @@ public class RoomPrefabData : ScriptableObject
             if (randTheme == randThemeStart)
                 return changeThemes[randTheme];
         }
+    }
+
+    public bool DifficultyContainsTheme(ThemeData theme)
+    {
+        if (DifficultyManager.instance == null)
+            return true;
+
+        return DifficultyManager.instance.difficulty.allThemes.Contains(theme);
     }
 }
 

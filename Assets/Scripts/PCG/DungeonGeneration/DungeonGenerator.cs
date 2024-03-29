@@ -39,16 +39,25 @@ public class DungeonGenerator : MonoBehaviour
     public int currentRoom = 0;
     List<PCGRoom> createdRooms;
 
+    [ContextMenu("Generate Dungeon - No Cull")]
+    public void GenerateDungeonTest()
+    {
+        GenerateDungeon(false);
+    }
+
     [ContextMenu("Generate Dungeon")]
-    public void GenerateDungeon()
+    public void GenerateDungeon(bool cullDungeonRooms = true)
     {
         instance = this;
         if (DungeonManager.grammarsDungeonData != null)
             grammarsDungeonData = DungeonManager.grammarsDungeonData;
 
+        if (DifficultyManager.instance == null)
+            Debug.LogWarning("Warning: Dungeon cannot build from difficulty");
+
         CleanupDungeon();
 
-        int randTheme = Random.Range(0, DifficultyManager.instance.difficulty.startingThemes.Count);
+        ThemeData startTheme = GetStartingTheme();
 
         rooms = new List<E_RoomTypes>() { E_RoomTypes.Start, E_RoomTypes.Healing, E_RoomTypes.Boss, E_RoomTypes.Treasure, E_RoomTypes.End };
 
@@ -68,14 +77,28 @@ public class DungeonGenerator : MonoBehaviour
 
         LoadingScreenValues(rooms.Count);
 
-        PCGRoom start = GenerateRoom(rooms[0], DifficultyManager.instance.difficulty.startingThemes[randTheme], transform, true, 0);
+        PCGRoom start = GenerateRoom(rooms[0], startTheme, transform, true, 0);
 
         BakeNavmesh();
         PopulateRooms();
-        CullRooms(start);
+
+        if (cullDungeonRooms)
+            CullRooms(start);
 
         loadProgress = 1f;
         ProgressLoad("Dungeon Generated...");
+    }
+
+    ThemeData GetStartingTheme()
+    {
+        if(DifficultyManager.instance == null)
+        {
+            return grammarsDungeonData.allThemesBackup[Random.Range(0, grammarsDungeonData.allThemesBackup.Count)];
+        }
+        else
+        {
+            return DifficultyManager.instance.difficulty.startingThemes[Random.Range(0, DifficultyManager.instance.difficulty.startingThemes.Count)];
+        }
     }
 
     float loadProgress = 0;
