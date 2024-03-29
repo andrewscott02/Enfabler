@@ -54,7 +54,7 @@ public class DungeonMasterManager : MonoBehaviour
 
         if (open && displayDungeon == null)
         {
-            ShowDungeon(initialDungeon);
+            ShowTutorial(defaultTutorialDifficulty);
         }
     }
 
@@ -68,7 +68,6 @@ public class DungeonMasterManager : MonoBehaviour
     #region Dungeon Selection
 
     GrammarsDungeonData displayDungeon;
-    public GrammarsDungeonData initialDungeon;
     DifficultyData forceDifficulty;
     int currentDungeonGoldCost = 0;
 
@@ -82,6 +81,8 @@ public class DungeonMasterManager : MonoBehaviour
         CheckDifficultyButton();
         UpdateUI();
     }
+
+    public DifficultyData defaultTutorialDifficulty;
 
     public void ShowTutorial(DifficultyData forceDifficulty)
     {
