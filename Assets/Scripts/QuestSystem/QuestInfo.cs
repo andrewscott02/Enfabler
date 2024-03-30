@@ -61,7 +61,7 @@ namespace Enfabler.Quests
                 {
                     title.text = sub.questName;
                     number.text = sub.questNumber.ToString();
-                    description.text = sub.questDescription;
+                    description.text = TextReplace.instance.ReplaceText(sub.questDescription);
                     progressCount.text = sub.currentProgress.ToString() + "/" + sub.maxProgress.ToString();
                 }
                 else
@@ -75,5 +75,6 @@ namespace Enfabler.Quests
             else
                 questInfoGO.SetActive(false);
         }
+
     }
 }

@@ -373,6 +373,7 @@ GameObject:
   - component: {fileID: 1936289032}
   - component: {fileID: 1936289034}
   - component: {fileID: 1936289033}
+  - component: {fileID: 988655072749315532}
   m_Layer: 5
   m_Name: Quest Description - Text
   m_TagString: Untagged
@@ -497,6 +498,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &988655072749315532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936289031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18f733bb154dae4faa3d603eb4d1374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamepad: {fileID: 11400000, guid: c8c4c459bac37f74b96291e913af2bbb, type: 2}
+  keyboard: {fileID: 11400000, guid: 1c96b0f2d8545f44ea4df3d19567deee, type: 2}
 --- !u!1 &2128776154
 GameObject:
   m_ObjectHideFlags: 0

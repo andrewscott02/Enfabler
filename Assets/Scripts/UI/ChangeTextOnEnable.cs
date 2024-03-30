@@ -7,28 +7,26 @@ using UnityEngine.InputSystem;
 public class ChangeTextOnEnable : MonoBehaviour
 {
     TextMeshProUGUI text;
-    string originalText;
 
     public TMP_SpriteAsset gamepad, keyboard;
 
     bool setup = false;
-    private void Setup()
+    private void Start()
     {
-        setup = true;
-        text = GetComponent<TextMeshProUGUI>();
-        originalText = text.text;
-
         PauseMenu.instance.onControlsChange += CheckText;
         usingGamepad = PlayerController.usingGamepad;
 
         CheckText();
     }
 
+    void Setup()
+    {
+        setup = true;
+        text = GetComponent<TextMeshProUGUI>();
+    }
+
     private void OnEnable()
     {
-        if (!setup)
-            Setup();
-
         Debug.Log("Interact Message Enabled");
         CheckText();
     }
@@ -37,10 +35,15 @@ public class ChangeTextOnEnable : MonoBehaviour
 
     void CheckText(PlayerInput input = null)
     {
+        if (!setup)
+        {
+            Setup();
+        }
         Debug.Log("Interact checking text");
         usingGamepad = PlayerController.usingGamepad;
         text.spriteAsset = usingGamepad ? gamepad : keyboard;
 
-        text.text = TextReplace.instance.ReplaceText(originalText);
+        if (TextReplace.instance != null)
+            text.text = TextReplace.instance.ReplaceText(text.text);
     }
 }
