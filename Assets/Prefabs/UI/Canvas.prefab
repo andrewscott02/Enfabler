@@ -2669,6 +2669,7 @@ GameObject:
   - component: {fileID: 513927999527620164}
   - component: {fileID: 1377491426085224783}
   - component: {fileID: 6191002109330056650}
+  - component: {fileID: 8325761559096117965}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2724,7 +2725,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press O to Interact
+  m_text: Press $Interact$ to Interact
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2743,7 +2744,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: c8c4c459bac37f74b96291e913af2bbb, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -2793,6 +2794,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8325761559096117965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7459055855802480683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18f733bb154dae4faa3d603eb4d1374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamepad: {fileID: 11400000, guid: c8c4c459bac37f74b96291e913af2bbb, type: 2}
+  keyboard: {fileID: 11400000, guid: 1c96b0f2d8545f44ea4df3d19567deee, type: 2}
 --- !u!1001 &9147754419654279
 PrefabInstance:
   m_ObjectHideFlags: 0

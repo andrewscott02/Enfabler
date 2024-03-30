@@ -56,12 +56,14 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     void Selected()
     {
         CursorManager.instance.SetCursor(overideCursorTexture == null ? CursorManager.instance.hoverCursor : overideCursorTexture);
-        text.color = hoverColor;
+        if (text != null)
+            text.color = hoverColor;
     }
 
     void Unselected()
     {
         CursorManager.instance.SetCursor();
-        text.color = defaultColour;
+        if (text != null)
+            text.color = defaultColour;
     }
 }
