@@ -113,6 +113,9 @@ public class AIController : BaseCharacterController
 
         combat.blockedDelegate += BlockedAttack;
         combat.parriedDelegate += ParriedAttack;
+
+        combat.onAttackHit += OnHit;
+        combat.untarget += EndAttackOnTarget;
     }
 
     public virtual void ActivateAI()
@@ -271,6 +274,8 @@ public class AIController : BaseCharacterController
 
     #region Attacking
 
+    #region Data
+
     public BaseCharacterController currentTarget;
     BaseCharacterController lastAttacked;
 
@@ -295,6 +300,8 @@ public class AIController : BaseCharacterController
         public float healthPercentageUse;
 
         public bool lockMovement;
+        public bool forceEndOnHit;
+        public string onHitReaction;
 
         [HideInInspector]
         public int usesLeft;
@@ -328,6 +335,10 @@ public class AIController : BaseCharacterController
     }
 
     public int preparedAttack = -1;
+
+    #endregion
+
+    #region Preparing Attacks and Spells
 
     public int GetValidAttack()
     {
@@ -422,6 +433,10 @@ public class AIController : BaseCharacterController
         currentSpell = identifier;
     }
 
+    #endregion
+
+    #region Attacking and Casting Spells
+
     public bool CastSpell()
     {
         if (!CanCastSpell(currentSpell)) return false;
@@ -471,6 +486,8 @@ public class AIController : BaseCharacterController
 
                 AdjustCooldowns(attackIndex);
                 attacks[attackIndex].usesLeft--;
+
+                onHitReaction = attacks[attackIndex].forceEndOnHit ? attacks[attackIndex].onHitReaction : "";
             }
 
             agent.isStopped = true;
@@ -525,7 +542,7 @@ public class AIController : BaseCharacterController
         }
     }
 
-    public void EndAttackOnTarget()
+    void EndAttackOnTarget()
     {
         agent.isStopped = false;
         rotationLock = false;
@@ -537,6 +554,20 @@ public class AIController : BaseCharacterController
             lastAttacked = null;
         }
     }
+
+    public string onHitReaction = "";
+
+    void OnHit(E_DamageEvents damageEvents)
+    {
+        if (damageEvents == E_DamageEvents.Dodge)
+            return;
+        if (onHitReaction != "")
+        {
+            animator.SetTrigger(onHitReaction);
+        }
+    }
+
+    #endregion
 
     #endregion
 

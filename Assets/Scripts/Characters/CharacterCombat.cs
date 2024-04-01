@@ -150,6 +150,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         onAttackHit += OnAttackHit;
         hitParry += HitParry;
+        untarget += Untarget;
 
         canBlockDelegate += CanBlockDelegateCheck;
         blockingDelegate += Blocking;
@@ -437,13 +438,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         canDodge = true;
         canAttack = true;
 
-        AIController AIController = GetComponent<AIController>();
-
-        if (AIController != null)
-        {
-            AIController.EndAttackOnTarget();
-        }
-
         if (savingAttackInput != E_AttackType.None)
         {
             //Debug.Log("Saved attack input");
@@ -468,16 +462,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         canAttack = true;
         performedSlideInput = false;
 
-        AIController AIController = GetComponent<AIController>();
-
-        if (AIController != null)
-        {
-            AIController.EndAttackOnTarget();
-        }
-
         animator.applyRootMotion = baseUseRootMotion;
 
-        Untarget();
+        untarget();
     }
 
     Coroutine slideCoroutine;
@@ -578,7 +565,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void EndAttack()
     {
-        Untarget();
+        untarget();
         ForceEndAttack();
     }
 
@@ -918,12 +905,11 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         }
     }
 
+    public delegate void D_Untarget();
+    public D_Untarget untarget;
+
     void Untarget()
     {
-        /*
-        if (lastHit.Count == 0)
-            onAttackHit(E_DamageEvents.Dodge);
-        */
         foreach (var item in lastHit)
         {
             if (item.GetCharacterCombat() != null)
@@ -1367,13 +1353,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         canDodge = true;
         canAttack = true;
-
-        AIController AIController = GetComponent<AIController>();
-
-        if (AIController != null)
-        {
-            AIController.EndAttackOnTarget();
-        }
 
         if (savingAttackInput != E_AttackType.None)
         {
