@@ -497,6 +497,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     #region Attacking -> Hit Logic
 
     List<IDamageable> hitTargets = new List<IDamageable>();
+    List<Collider> hitObjects = new List<Collider>();
     public List<IDamageable> ignore = new List<IDamageable>();
     
     int damage;
@@ -556,6 +557,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         }
 
         hitTargets.Clear();
+        hitObjects.Clear();
         damage = 0;
 
         //CancelInvoke("AttackCheck");
@@ -732,8 +734,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         //Return if collided object has no health component
         if (hitDamageable == null)
         {
-            //Debug.LogWarning("No interface");
-            //AttackTrace(hit.point, end);
+            if (!hitObjects.Contains(collider))
+            {
+                hitObjects.Add(collider);
+                HitUndamageableGO(hitPos);
+            }
+
             return;
         }
 
@@ -755,6 +761,15 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         E_DamageEvents damageEvent = DealDamage(hitDamageable, damage, hitPos, rotation.eulerAngles, currentAttack.attackType);
 
         onAttackHit(damageEvent);
+    }
+
+    void HitUndamageableGO(Vector3 hitPos)
+    {
+        Debug.Log("Hit wall");
+        //Spawn particle effect on wall
+        weapon.SpawnDefaultHitFX(hitPos);
+
+        onAttackHit(E_DamageEvents.Environment);
     }
 
     public E_DamageEvents DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot, E_AttackType attackType = E_AttackType.None)
