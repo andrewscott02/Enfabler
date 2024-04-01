@@ -300,8 +300,10 @@ public class AIController : BaseCharacterController
         public float healthPercentageUse;
 
         public bool lockMovement;
+
         public bool forceEndOnHit;
         public string onHitReaction;
+        public string onHitEnvironmentReaction;
 
         [HideInInspector]
         public int usesLeft;
@@ -488,6 +490,7 @@ public class AIController : BaseCharacterController
                 attacks[attackIndex].usesLeft--;
 
                 onHitReaction = attacks[attackIndex].forceEndOnHit ? attacks[attackIndex].onHitReaction : "";
+                onHitEnvironmentReaction = attacks[attackIndex].forceEndOnHit ? attacks[attackIndex].onHitEnvironmentReaction : "";
             }
 
             agent.isStopped = true;
@@ -556,11 +559,22 @@ public class AIController : BaseCharacterController
     }
 
     public string onHitReaction = "";
+    public string onHitEnvironmentReaction = "";
 
     void OnHit(E_DamageEvents damageEvents)
     {
         if (damageEvents == E_DamageEvents.Dodge)
             return;
+
+        if (damageEvents == E_DamageEvents.Environment)
+        {
+            if (onHitEnvironmentReaction != "")
+            {
+                animator.SetTrigger(onHitEnvironmentReaction);
+                return;
+            }
+        }
+
         if (onHitReaction != "")
         {
             animator.SetTrigger(onHitReaction);
