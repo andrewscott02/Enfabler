@@ -27,7 +27,7 @@ public class ChangeTextOnEnable : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("Interact Message Enabled");
+        //Debug.Log("Interact Message Enabled");
         CheckText();
     }
 
@@ -39,7 +39,7 @@ public class ChangeTextOnEnable : MonoBehaviour
         {
             Setup();
         }
-        Debug.Log("Interact checking text");
+        //Debug.Log("Interact checking text");
         usingGamepad = PlayerController.usingGamepad;
         text.spriteAsset = usingGamepad ? gamepad : keyboard;
 

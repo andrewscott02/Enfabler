@@ -153,6 +153,7 @@ public class AIController : BaseCharacterController
 
         if (CanRotate())
         {
+            Debug.Log(name + "is rotating");
             Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
             Quaternion desiredrot = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, desiredrot, Time.deltaTime * agent.angularSpeed);
@@ -220,11 +221,14 @@ public class AIController : BaseCharacterController
         base.Killed();
     }
 
-    bool dodgeLock = false;
+    bool rotationLock = false;
+
+    bool canRotate = false;
 
     public bool CanRotate()
     {
-        return (combat.canSaveAttackInput || characterMovement.currentSpeed > 5) && !dodgeLock && currentTarget != null;
+        canRotate = (combat.canSaveAttackInput || characterMovement.currentSpeed > 5) && rotationLock == false && currentTarget != null;
+        return canRotate;
     }
 
     #endregion
@@ -289,6 +293,8 @@ public class AIController : BaseCharacterController
 
         public int maxUses;
         public float healthPercentageUse;
+
+        public bool lockMovement;
 
         [HideInInspector]
         public int usesLeft;
@@ -461,7 +467,7 @@ public class AIController : BaseCharacterController
 
                 unblockable = Random.Range(0f, 1f) < attacks[attackIndex].unblockableChance;
                 float releaseTime = unblockable ? combat.chargeMaxTime : attacks[attackIndex].attackPauseTime;
-                StartCoroutine(IReleaseAttack(releaseTime));
+                StartCoroutine(IReleaseAttack(attacks[attackIndex], releaseTime));
 
                 AdjustCooldowns(attackIndex);
                 attacks[attackIndex].usesLeft--;
@@ -497,9 +503,21 @@ public class AIController : BaseCharacterController
         }
     }
 
-    IEnumerator IReleaseAttack(float delay)
+    IEnumerator IReleaseAttack(AIAttackData attackData, float delay)
     {
+        if (attackData.lockMovement)
+        {
+            agent.isStopped = true;
+            agent.enabled = false;
+        }
+
         yield return new WaitForSeconds(delay);
+
+        if (attackData.lockMovement)
+        {
+            rotationLock = true;
+        }
+
         if (!health.dying)
         {
             combat.ReleaseAttack();
@@ -509,6 +527,10 @@ public class AIController : BaseCharacterController
 
     public void EndAttackOnTarget()
     {
+        agent.isStopped = false;
+        rotationLock = false;
+        agent.enabled = true;
+
         if (lastAttacked != null)
         {
             //lastAttacked.GetCharacterCombat().StopBeingAttacked();
@@ -600,7 +622,7 @@ public class AIController : BaseCharacterController
     public void Dodge()
     {
         recentHitsTaken = 0;
-        dodgeLock = true;
+        rotationLock = true;
 
         Vector3 direction = (transform.position - player.transform.position).normalized;
         Quaternion desiredrot = Quaternion.LookRotation(direction, transform.up);
@@ -613,7 +635,7 @@ public class AIController : BaseCharacterController
 
     void OnEndDodge()
     {
-        dodgeLock = false;
+        rotationLock = false;
     }
 
     #endregion
