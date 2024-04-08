@@ -32,7 +32,7 @@ public class DifficultyMenuManager : MonoBehaviour
 
         difficultyMenu.SetActive(open);
 
-        if (open && displayDifficulty == null)
+        if (open && displayDifficulty == null && DifficultyManager.instance != null)
         {
             ShowDifficulty(DifficultyManager.instance.difficulty);
         }

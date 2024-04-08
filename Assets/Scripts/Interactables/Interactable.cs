@@ -8,7 +8,7 @@ public class Interactable : MonoBehaviour, IInteractable
 
     public E_InteractTypes interactType;
     [TextArea(3, 10)]
-    public string interactMessage = "Press O to Interact";
+    public string interactMessage = "Press $Interact$ to Interact";
 
     public bool lockedInteraction = false;
     public bool interactOnUnlock = false;

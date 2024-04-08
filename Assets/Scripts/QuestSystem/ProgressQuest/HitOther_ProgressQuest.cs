@@ -5,7 +5,7 @@ using Enfabler.Attacking;
 
 public class HitOther_ProgressQuest : ProgressQuest
 {
-    public E_DamageEvents[] damageEvents;
+    public S_DamageEventCollection[] damageEvents;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -22,7 +22,21 @@ public class HitOther_ProgressQuest : ProgressQuest
         if (stage >= damageEvents.Length)
             return;
 
-        if (damageEvent == damageEvents[stage])
+        bool damageEventMatches = false;
+
+        for (int i = 0; i < damageEvents[stage].damageEvents.Length; i++)
+        {
+            if (damageEvents[stage].damageEvents[i] == damageEvent)
+                damageEventMatches = true;
+        }
+
+        if (damageEventMatches)
             ProgressQuestStage();
     }
+}
+
+[System.Serializable]
+public struct S_DamageEventCollection
+{
+    public E_DamageEvents[] damageEvents;
 }

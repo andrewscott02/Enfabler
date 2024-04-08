@@ -18,6 +18,7 @@ public class GameCanvasManager : MonoBehaviour
 
     public void ShowInteractMessage(bool show, string message)
     {
+        message = TextReplace.instance.ReplaceText(message);
         interactObject.SetActive(show);
         text.text = message;
     }

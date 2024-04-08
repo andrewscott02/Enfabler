@@ -215,7 +215,8 @@ public class GrammarsDungeonData : ScriptableObject
 
     void ResetEnemyData()
     {
-        foreach (var item in DifficultyManager.instance.difficulty.allThemes)
+        List<ThemeData> themes = DifficultyManager.instance == null ? allThemesBackup : DifficultyManager.instance.difficulty.allThemes;
+        foreach (var item in themes)
         {
             for (int i = 0; i < item.enemies.Length; i++)
             {
@@ -231,9 +232,7 @@ public class GrammarsDungeonData : ScriptableObject
 
         while (true)
         {
-            if (theme.enemies[enemyIndex].severity <= budgetLeft &&
-                theme.enemies[enemyIndex].severity <= DifficultyManager.instance.difficulty.enemySeverityMax &&
-                theme.enemies[enemyIndex].timesUsed < theme.enemies[enemyIndex].maxCount)
+            if (CanUseEnemy(theme.enemies[enemyIndex], budgetLeft))
             {
                 theme.enemies[enemyIndex].timesUsed++;
                 return true;
@@ -247,6 +246,19 @@ public class GrammarsDungeonData : ScriptableObject
             if (enemyIndex == startIndex)
                 return false;
         }
+    }
+
+    bool CanUseEnemy(EnemyData enemy, int budgetLeft)
+    {
+        if (DifficultyManager.instance == null)
+        {
+            return enemy.severity <= budgetLeft &&
+                enemy.timesUsed < enemy.maxCount;
+        }
+
+        return enemy.severity <= budgetLeft &&
+                enemy.severity <= DifficultyManager.instance.difficulty.enemySeverityMax &&
+                enemy.timesUsed < enemy.maxCount;
     }
 
     #endregion
@@ -293,7 +305,9 @@ public class GrammarsDungeonData : ScriptableObject
 
     void ResetTrapData()
     {
-        foreach (var item in DifficultyManager.instance.difficulty.allThemes)
+        List<ThemeData> resetThemes = DifficultyManager.instance == null ? allThemesBackup : DifficultyManager.instance.difficulty.allThemes;
+
+        foreach (var item in resetThemes)
         {
             for (int i = 0; i < item.traps.Length; i++)
             {
@@ -403,7 +417,9 @@ public class GrammarsDungeonData : ScriptableObject
 
     public void ResetObjectData()
     {
-        foreach (var item in DifficultyManager.instance.difficulty.allThemes)
+        List<ThemeData> resetThemes = DifficultyManager.instance == null ? allThemesBackup : DifficultyManager.instance.difficulty.allThemes;
+
+        foreach (var item in resetThemes)
         {
             for (int i = 0; i < item.objects.Length; i++)
             {
@@ -416,6 +432,11 @@ public class GrammarsDungeonData : ScriptableObject
 
     public Object GetRandomBoss(ThemeData theme)
     {
+        if (DifficultyManager.instance == null)
+        {
+            return theme.bosses[Random.Range(0, theme.bosses.Length)].bossPrefab;
+        }
+
         List<Object> availableBosses = new List<Object>();
         foreach (var item in theme.bosses)
         {
@@ -522,6 +543,12 @@ public class GrammarsDungeonData : ScriptableObject
     #region Rewards
 
     public float treasureMultiplier;
+
+    #endregion
+
+    #region Backup Values
+
+    public List<ThemeData> allThemesBackup;
 
     #endregion
 }

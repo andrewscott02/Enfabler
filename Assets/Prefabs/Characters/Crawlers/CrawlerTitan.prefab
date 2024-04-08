@@ -57,6 +57,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2.1225
       objectReference: {fileID: 0}
+    - target: {fileID: 1368346190555727351, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: attacks.Array.data[4].variations.Array.data[0].damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368346190555727351, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: attacks.Array.data[4].variations.Array.data[0].attackSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368346190555727351, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: attacks.Array.data[4].variations.Array.data[0].autoUnblockable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1600513293264907759, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
       propertyPath: allies
@@ -102,7 +117,7 @@ PrefabInstance:
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
       propertyPath: attacks.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
@@ -140,7 +155,7 @@ PrefabInstance:
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
       propertyPath: attacks.Array.data[3].maxUses
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
@@ -240,7 +255,7 @@ PrefabInstance:
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
       propertyPath: attacks.Array.data[3].attackType
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
@@ -269,6 +284,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
+      propertyPath: attacks.Array.data[3].lockMovement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: attacks.Array.data[3].forceEndOnHit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
+      propertyPath: attacks.Array.data[3].onHitReaction
+      value: HitReactLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
+        type: 3}
       propertyPath: attacks.Array.data[1].attackPauseTime
       value: 0.4
       objectReference: {fileID: 0}
@@ -280,7 +310,7 @@ PrefabInstance:
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
       propertyPath: attacks.Array.data[3].attackPauseTime
-      value: 0.4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
@@ -310,7 +340,7 @@ PrefabInstance:
     - target: {fileID: 1711659129308967593, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}
       propertyPath: attacks.Array.data[3].healthPercentageUse
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2873375001359456832, guid: c23e9eb38e33e2d4798cfd6a0d78c974,
         type: 3}

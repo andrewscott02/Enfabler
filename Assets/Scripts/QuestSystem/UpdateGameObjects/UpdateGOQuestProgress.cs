@@ -34,13 +34,13 @@ public class UpdateGOQuestProgress : MonoBehaviour
 
     public void CheckUpdate(E_QuestStates questState, int progress)
     {
-        Debug.Log("Quest updated - Received message");
+        //Debug.Log("Quest updated - Received message");
 
         foreach (var item in states)
         {
             if (item == questState)
             {
-                Debug.Log("Quest updated - Quest state is correct");
+                //Debug.Log("Quest updated - Quest state is correct");
                 QuestUpdated();
                 return;
             }

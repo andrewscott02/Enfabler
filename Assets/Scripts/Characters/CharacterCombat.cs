@@ -150,6 +150,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         onAttackHit += OnAttackHit;
         hitParry += HitParry;
+        untarget += Untarget;
 
         canBlockDelegate += CanBlockDelegateCheck;
         blockingDelegate += Blocking;
@@ -341,6 +342,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         animator.SetInteger("MeleeAttackCount", currentAttack.variations[currentAttackIndex].currentAttackAnimModifier);
         animator.SetTrigger(currentAttack.variations[currentAttackIndex].animation.ToString());
+        animator.applyRootMotion = true;
     }
 
     void StartCharge(E_AttackType attackType)
@@ -436,13 +438,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         canDodge = true;
         canAttack = true;
 
-        AIController AIController = GetComponent<AIController>();
-
-        if (AIController != null)
-        {
-            AIController.EndAttackOnTarget();
-        }
-
         if (savingAttackInput != E_AttackType.None)
         {
             //Debug.Log("Saved attack input");
@@ -467,16 +462,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         canAttack = true;
         performedSlideInput = false;
 
-        AIController AIController = GetComponent<AIController>();
-
-        if (AIController != null)
-        {
-            AIController.EndAttackOnTarget();
-        }
-
         animator.applyRootMotion = baseUseRootMotion;
 
-        Untarget();
+        untarget();
     }
 
     Coroutine slideCoroutine;
@@ -509,6 +497,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     #region Attacking -> Hit Logic
 
     List<IDamageable> hitTargets = new List<IDamageable>();
+    List<Collider> hitObjects = new List<Collider>();
     public List<IDamageable> ignore = new List<IDamageable>();
     
     int damage;
@@ -568,6 +557,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         }
 
         hitTargets.Clear();
+        hitObjects.Clear();
         damage = 0;
 
         //CancelInvoke("AttackCheck");
@@ -577,7 +567,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void EndAttack()
     {
-        Untarget();
+        untarget();
         ForceEndAttack();
     }
 
@@ -744,8 +734,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         //Return if collided object has no health component
         if (hitDamageable == null)
         {
-            //Debug.LogWarning("No interface");
-            //AttackTrace(hit.point, end);
+            if (!hitObjects.Contains(collider))
+            {
+                hitObjects.Add(collider);
+                HitUndamageableGO(hitPos);
+            }
+
             return;
         }
 
@@ -769,6 +763,15 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         onAttackHit(damageEvent);
     }
 
+    void HitUndamageableGO(Vector3 hitPos)
+    {
+        Debug.Log("Hit wall");
+        //Spawn particle effect on wall
+        weapon.SpawnDefaultHitFX(hitPos);
+
+        onAttackHit(E_DamageEvents.Environment);
+    }
+
     public E_DamageEvents DealDamage(IDamageable target, int damage, Vector3 spawnPos, Vector3 spawnRot, E_AttackType attackType = E_AttackType.None)
     {
         return target.Damage(this, damage, spawnPos, spawnRot, attackType);
@@ -781,6 +784,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     void OnAttackHit(E_DamageEvents damageEvent)
     {
+        if (damageEvent == E_DamageEvents.Dodge)
+            return;
+
         Freeze();
         RumbleManager.instance.ControllerRumble(0.2f, 0.85f, 0.25f);
 
@@ -913,6 +919,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             }
         }
     }
+
+    public delegate void D_Untarget();
+    public D_Untarget untarget;
 
     void Untarget()
     {
@@ -1359,13 +1368,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         canDodge = true;
         canAttack = true;
-
-        AIController AIController = GetComponent<AIController>();
-
-        if (AIController != null)
-        {
-            AIController.EndAttackOnTarget();
-        }
 
         if (savingAttackInput != E_AttackType.None)
         {

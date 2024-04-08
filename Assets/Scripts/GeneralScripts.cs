@@ -313,7 +313,7 @@ public interface IReceiveLight
 
 public enum E_DamageEvents
 {
-    Hit, Block, Parry, Dodge
+    Hit, Block, Parry, Dodge, Environment
 }
 
 public enum E_InteractTypes

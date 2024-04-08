@@ -113,6 +113,9 @@ public class AIController : BaseCharacterController
 
         combat.blockedDelegate += BlockedAttack;
         combat.parriedDelegate += ParriedAttack;
+
+        combat.onAttackHit += OnHit;
+        combat.untarget += EndAttackOnTarget;
     }
 
     public virtual void ActivateAI()
@@ -153,6 +156,7 @@ public class AIController : BaseCharacterController
 
         if (CanRotate())
         {
+            Debug.Log(name + "is rotating");
             Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
             Quaternion desiredrot = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, desiredrot, Time.deltaTime * agent.angularSpeed);
@@ -220,11 +224,14 @@ public class AIController : BaseCharacterController
         base.Killed();
     }
 
-    bool dodgeLock = false;
+    bool rotationLock = false;
+
+    bool canRotate = false;
 
     public bool CanRotate()
     {
-        return (combat.canSaveAttackInput || characterMovement.currentSpeed > 5) && !dodgeLock && currentTarget != null;
+        canRotate = (combat.canSaveAttackInput || characterMovement.currentSpeed > 5) && rotationLock == false && currentTarget != null;
+        return canRotate;
     }
 
     #endregion
@@ -267,6 +274,8 @@ public class AIController : BaseCharacterController
 
     #region Attacking
 
+    #region Data
+
     public BaseCharacterController currentTarget;
     BaseCharacterController lastAttacked;
 
@@ -289,6 +298,12 @@ public class AIController : BaseCharacterController
 
         public int maxUses;
         public float healthPercentageUse;
+
+        public bool lockMovement;
+
+        public bool forceEndOnHit;
+        public string onHitReaction;
+        public string onHitEnvironmentReaction;
 
         [HideInInspector]
         public int usesLeft;
@@ -322,6 +337,10 @@ public class AIController : BaseCharacterController
     }
 
     public int preparedAttack = -1;
+
+    #endregion
+
+    #region Preparing Attacks and Spells
 
     public int GetValidAttack()
     {
@@ -416,6 +435,10 @@ public class AIController : BaseCharacterController
         currentSpell = identifier;
     }
 
+    #endregion
+
+    #region Attacking and Casting Spells
+
     public bool CastSpell()
     {
         if (!CanCastSpell(currentSpell)) return false;
@@ -461,10 +484,13 @@ public class AIController : BaseCharacterController
 
                 unblockable = Random.Range(0f, 1f) < attacks[attackIndex].unblockableChance;
                 float releaseTime = unblockable ? combat.chargeMaxTime : attacks[attackIndex].attackPauseTime;
-                StartCoroutine(IReleaseAttack(releaseTime));
+                StartCoroutine(IReleaseAttack(attacks[attackIndex], releaseTime));
 
                 AdjustCooldowns(attackIndex);
                 attacks[attackIndex].usesLeft--;
+
+                onHitReaction = attacks[attackIndex].forceEndOnHit ? attacks[attackIndex].onHitReaction : "";
+                onHitEnvironmentReaction = attacks[attackIndex].forceEndOnHit ? attacks[attackIndex].onHitEnvironmentReaction : "";
             }
 
             agent.isStopped = true;
@@ -497,9 +523,21 @@ public class AIController : BaseCharacterController
         }
     }
 
-    IEnumerator IReleaseAttack(float delay)
+    IEnumerator IReleaseAttack(AIAttackData attackData, float delay)
     {
+        if (attackData.lockMovement)
+        {
+            agent.isStopped = true;
+            agent.enabled = false;
+        }
+
         yield return new WaitForSeconds(delay);
+
+        if (attackData.lockMovement)
+        {
+            rotationLock = true;
+        }
+
         if (!health.dying)
         {
             combat.ReleaseAttack();
@@ -507,14 +545,43 @@ public class AIController : BaseCharacterController
         }
     }
 
-    public void EndAttackOnTarget()
+    void EndAttackOnTarget()
     {
+        agent.isStopped = false;
+        rotationLock = false;
+        agent.enabled = true;
+
         if (lastAttacked != null)
         {
             //lastAttacked.GetCharacterCombat().StopBeingAttacked();
             lastAttacked = null;
         }
     }
+
+    public string onHitReaction = "";
+    public string onHitEnvironmentReaction = "";
+
+    void OnHit(E_DamageEvents damageEvents)
+    {
+        if (damageEvents == E_DamageEvents.Dodge)
+            return;
+
+        if (damageEvents == E_DamageEvents.Environment)
+        {
+            if (onHitEnvironmentReaction != "")
+            {
+                animator.SetTrigger(onHitEnvironmentReaction);
+                return;
+            }
+        }
+
+        if (onHitReaction != "")
+        {
+            animator.SetTrigger(onHitReaction);
+        }
+    }
+
+    #endregion
 
     #endregion
 
@@ -600,7 +667,7 @@ public class AIController : BaseCharacterController
     public void Dodge()
     {
         recentHitsTaken = 0;
-        dodgeLock = true;
+        rotationLock = true;
 
         Vector3 direction = (transform.position - player.transform.position).normalized;
         Quaternion desiredrot = Quaternion.LookRotation(direction, transform.up);
@@ -613,7 +680,7 @@ public class AIController : BaseCharacterController
 
     void OnEndDodge()
     {
-        dodgeLock = false;
+        rotationLock = false;
     }
 
     #endregion

@@ -8,6 +8,8 @@ public class Weapon : MonoBehaviour
     public GameObject weaponBase, weaponTip;
     public GameObject weaponBaseHit, weaponTipHit;
 
+    public Object hitEnvironmentFX;
+
     public AudioClip attackClip, chargeClip;
     public AudioClip hitClip, blockClip;
 
@@ -67,5 +69,10 @@ public class Weapon : MonoBehaviour
         {
             meshMatDict.Add(item, item.material);
         }
+    }
+
+    public void SpawnDefaultHitFX(Vector3 hitPos)
+    {
+        Instantiate(hitEnvironmentFX, hitPos, new Quaternion(0, 0, 0, 0));
     }
 }

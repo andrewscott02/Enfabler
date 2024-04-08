@@ -19,7 +19,7 @@ public class TextPopup : MonoBehaviour
         active = true;
 
         StopAllCoroutines();
-        if (active)
+        if (active && gameObject.activeSelf)
             StartCoroutine(IDelayHideText(duration));
     }
 

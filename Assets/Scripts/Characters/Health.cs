@@ -20,7 +20,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     public HitReactData hitReactData;
 
     BaseCharacterController controller;
-    AIController AIController;
 
     private void Start()
     {
@@ -30,7 +29,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         combat = GetComponent<CharacterCombat>();
 
         controller = GetComponent<BaseCharacterController>();
-        AIController = GetComponent<AIController>();
         animator = GetComponent<Animator>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
 
@@ -86,11 +84,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
         if (modelConstructor != null)
             modelConstructor.PlayerHit();
-
-        if (AIController != null)
-        {
-            AIController.EndAttackOnTarget();
-        }
 
         if (CheckKill())
         {
