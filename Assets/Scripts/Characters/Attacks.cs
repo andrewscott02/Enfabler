@@ -67,6 +67,9 @@ namespace Enfabler.Attacking
         public bool overrideNextAttackOnHit;
         public int nextAttackHitIndex;
 
+        public bool overrideAttackSphereRadius;
+        public float attackSphereRadius;
+
         public TrapStats projectileData;
         public Object projectileFX;
         public float[] additionalShotAngle;

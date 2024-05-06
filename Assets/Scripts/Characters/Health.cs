@@ -134,10 +134,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
                     PlaySoundEffect(hitReactData.hitClip, hitReactData.hitVolume);
             }
         }
-        else
-        {
-            combat.ResetAttack();
-        }
     }
 
     void PlaySoundEffect(AudioClip clip, float volume = 1)

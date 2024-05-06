@@ -115,7 +115,7 @@ public class AIController : BaseCharacterController
         combat.parriedDelegate += ParriedAttack;
 
         combat.onAttackHit += OnHit;
-        combat.untarget += EndAttackOnTarget;
+        combat.onAttackEnd += EndAttack;
     }
 
     public virtual void ActivateAI()
@@ -289,6 +289,7 @@ public class AIController : BaseCharacterController
     {
         public E_AttackType attackType;
 
+        public Vector2 range;
         public float distance;
 
         public float doubleAttackChance;
@@ -381,6 +382,9 @@ public class AIController : BaseCharacterController
         if (currentTarget == null || !combat.canAttack)
             return false;
 
+        if (attacks[attackIndex].range.x > Vector3.Distance(transform.position, currentTarget.transform.position))
+            return false;
+
         if (attacks[attackIndex].timeSinceLastAttack >= attacks[attackIndex].currentCooldown && attacks[attackIndex].usesLeft != 0 && attacks[attackIndex].healthPercentageUse >= (float)health.GetCurrentHealth() / (float)health.maxHealth)
         {
             //Debug.Log("Can attack for " + attackType);
@@ -464,7 +468,7 @@ public class AIController : BaseCharacterController
         float distance = Vector3.Distance(this.gameObject.transform.position, currentTarget.gameObject.transform.position);
         //Debug.Log("Attack called + " + attackType);
 
-        if (distance < attacks[attackIndex].distance)
+        if (distance > attacks[attackIndex].range.x && distance < attacks[attackIndex].range.y)
         {
             bool unblockable = false;
 
@@ -527,6 +531,7 @@ public class AIController : BaseCharacterController
     {
         if (attackData.lockMovement)
         {
+            rotationLock = true;
             agent.isStopped = true;
             agent.enabled = false;
         }
@@ -536,6 +541,7 @@ public class AIController : BaseCharacterController
         if (attackData.lockMovement)
         {
             rotationLock = true;
+            animator.applyRootMotion = true;
         }
 
         if (!health.dying)
@@ -545,7 +551,7 @@ public class AIController : BaseCharacterController
         }
     }
 
-    void EndAttackOnTarget()
+    void EndAttack()
     {
         agent.isStopped = false;
         rotationLock = false;

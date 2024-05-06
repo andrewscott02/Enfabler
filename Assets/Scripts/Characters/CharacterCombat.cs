@@ -74,7 +74,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     [Header("Weapon Data")]
     public bool useGenerousHitDetection = false;
-    public float weaponSphereRadius = 0.45f;
+    public float baseAttackSphereRadius = 0.2f;
+    float currentAttackSphereRadius = 0.2f;
+
     public Weapon weapon { get; private set; }
     protected SetWeapon setWeapon;
 
@@ -146,6 +148,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         impulseSource = GetComponent<CinemachineImpulseSource>();
 
         onAttackHit += OnAttackHit;
+        onAttackEnd += EndAttack;
         hitParry += HitParry;
         untarget += Untarget;
 
@@ -180,19 +183,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             {
                 SetUnblockable();
             }
-        }
-
-        if (attackCheck)
-        {
-            AttackCheck();
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (attackCheck)
-        {
-            AttackCheck();
         }
     }
 
@@ -410,7 +400,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         if (currentAttack.variations[currentAttackIndex].overideChargeAttack)
         {
-            EndAttack();
+            onAttackEnd();
             currentAttackIndex = currentAttack.variations[currentAttackIndex].chargedAttackIndex;
             InitiateAttack(currentAttack);
         }
@@ -511,8 +501,6 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     #region Start and End Attacks
 
-    bool attackCheck = false;
-
     public void StartAttack()
     {
         if (weapon != null)
@@ -532,6 +520,8 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         //Clear damage and list of enemies hit
         hitTargets.Clear();
         damage = currentAttack.variations[currentAttackIndex].damage + additionalDamage;
+        bool overrideAttackSphere = currentAttack.variations[currentAttackIndex].overrideAttackSphereRadius;
+        currentAttackSphereRadius = overrideAttackSphere ? currentAttack.variations[currentAttackIndex].attackSphereRadius : baseAttackSphereRadius;
         //Debug.Log(damage + " from " + currentDamage + " and " + additionalDamage);
 
         CheckMoveToTarget(transform.position + (transform.forward * targetSphereRadius), transform.forward, snapLayerMask, moveDistanceThreshold.y);
@@ -544,12 +534,12 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     public void ForceEndAttack()
     {
-        EndAttack();
+        onAttackEnd();
         chargingAttack = E_AttackType.None;
         canSaveAttackInput = false;
     }
 
-    public void EndAttack()
+    void EndAttack()
     {
         untarget();
 
@@ -577,6 +567,9 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         CancelInvoke("AttackCheck");
     }
+
+    public delegate void EndAttackDeletate();
+    public EndAttackDeletate onAttackEnd;
 
     public void CheckMoveToTarget(Vector3 origin, Vector3 dir, LayerMask layerMask, float maxDistance = 5)
     {
@@ -698,7 +691,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
     void AttackOverlap(Vector3 origin)
     {
-        Collider[] cols = Physics.OverlapSphere(origin, weaponSphereRadius, hitLayerMask);
+        Collider[] cols = Physics.OverlapSphere(origin, currentAttackSphereRadius, hitLayerMask);
         foreach (var item in cols)
         {
             if (item.gameObject != gameObject)
@@ -719,7 +712,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         float distance = Vector3.Distance(start, end);
         Vector3 dir = end - start;
 
-        if (Physics.SphereCast(origin, radius: weaponSphereRadius, direction: dir, out hit, maxDistance: distance, hitLayerMask))
+        if (Physics.SphereCast(origin, radius: currentAttackSphereRadius, direction: dir, out hit, maxDistance: distance, hitLayerMask))
         {
             Vector3 hitDir = hit.point - transform.position;
             hitDir.y = 0;

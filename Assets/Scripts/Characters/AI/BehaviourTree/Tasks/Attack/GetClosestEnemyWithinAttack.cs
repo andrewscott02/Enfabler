@@ -19,9 +19,9 @@ public class GetClosestEnemyWithinAttack : Node
 
     public override NodeState Evaluate()
     {
-        float distance = agent.attacks[agent.preparedAttack].distance;
+        Vector2 range = agent.attacks[agent.preparedAttack].range;
 
-        BaseCharacterController enemy = HelperFunctions.GetClosestEnemy(agent, agent.transform.position, distance, false);
+        BaseCharacterController enemy = HelperFunctions.GetClosestEnemy(agent, agent.transform.position, range.y, false);
         if (enemy != null)
         {
             agent.SetDestinationPos(enemy.transform.position);
