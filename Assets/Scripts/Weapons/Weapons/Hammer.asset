@@ -33,7 +33,7 @@ MonoBehaviour:
     - animation: PrimaryAttack
       damage: 7
       attackSpeed: 0.8
-      currentAttackAnimModifier: 1
+      currentAttackAnimModifier: 0
       canCharge: 1
       autoUnblockable: 0
       chargeDamageScaling: 2
@@ -46,10 +46,10 @@ MonoBehaviour:
       projectileFX: {fileID: 0}
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
-    - animation: PrimaryAttack
+    - animation: ChargePrimaryAttack
       damage: 7
       attackSpeed: 0.8
-      currentAttackAnimModifier: 2
+      currentAttackAnimModifier: 1
       canCharge: 1
       autoUnblockable: 0
       chargeDamageScaling: 2
@@ -65,7 +65,7 @@ MonoBehaviour:
     - animation: PrimaryAttack
       damage: 10
       attackSpeed: 0.8
-      currentAttackAnimModifier: 0
+      currentAttackAnimModifier: 2
       canCharge: 0
       autoUnblockable: 1
       chargeDamageScaling: 2
@@ -142,10 +142,10 @@ MonoBehaviour:
       projectileFX: {fileID: 0}
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
-    - animation: DodgePrimaryAttack
+    - animation: ChargePrimaryAttack
       damage: 7
-      attackSpeed: 0.65
-      currentAttackAnimModifier: 2
+      attackSpeed: 1
+      currentAttackAnimModifier: 1
       canCharge: 1
       autoUnblockable: 0
       chargeDamageScaling: 2
@@ -160,8 +160,8 @@ MonoBehaviour:
       additionalProjectileDamageMultiplier: 0
     - animation: PrimaryAttack
       damage: 10
-      attackSpeed: 0.65
-      currentAttackAnimModifier: 0
+      attackSpeed: 1
+      currentAttackAnimModifier: 2
       canCharge: 0
       autoUnblockable: 1
       chargeDamageScaling: 2
@@ -222,7 +222,7 @@ MonoBehaviour:
       projectileFX: {fileID: 0}
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
-    - animation: PrimaryAttackFinisher
+    - animation: ChargePrimaryAttack
       damage: 14
       attackSpeed: 1
       currentAttackAnimModifier: 1

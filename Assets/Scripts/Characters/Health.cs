@@ -114,6 +114,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     void HitReaction(int damage, Vector3 dir, E_AttackType attackType = E_AttackType.None)
     {
+        float impulseStrength = Mathf.Clamp(damage * hitReactData.hitImpulseMultiplier, 0, hitReactData.impulseMax);
+        SpawnImpulse(impulseStrength);
+
+        Slomo(hitReactData.hitSlomoScale, hitReactData.hitSlomoDuration);
+
         if (combat == null) { return; }
 
         combat.GotHit();
@@ -133,11 +138,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         {
             combat.ResetAttack();
         }
-
-        float impulseStrength = Mathf.Clamp(damage * hitReactData.hitImpulseMultiplier, 0, hitReactData.impulseMax);
-        SpawnImpulse(impulseStrength);
-        
-        Slomo(hitReactData.hitSlomoScale, hitReactData.hitSlomoDuration);
     }
 
     void PlaySoundEffect(AudioClip clip, float volume = 1)

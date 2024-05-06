@@ -33,7 +33,7 @@ MonoBehaviour:
     - animation: PrimaryAttack
       damage: 5
       attackSpeed: 1
-      currentAttackAnimModifier: 1
+      currentAttackAnimModifier: 0
       canCharge: 1
       autoUnblockable: 0
       chargeDamageScaling: 2
@@ -55,9 +55,9 @@ MonoBehaviour:
       chargeDamageScaling: 2
       overideChargeAttack: 1
       chargedAttackIndex: 10
-      nextAttackIndex: 2
+      nextAttackIndex: 0
       overrideNextAttackOnHit: 1
-      nextAttackHitIndex: 8
+      nextAttackHitIndex: 11
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
@@ -65,7 +65,7 @@ MonoBehaviour:
     - animation: PrimaryAttack
       damage: 7
       attackSpeed: 1
-      currentAttackAnimModifier: 0
+      currentAttackAnimModifier: 2
       canCharge: 0
       autoUnblockable: 1
       chargeDamageScaling: 2
@@ -142,26 +142,26 @@ MonoBehaviour:
       projectileFX: {fileID: 0}
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
-    - animation: DodgePrimaryAttack
+    - animation: PrimaryAttack
       damage: 5
-      attackSpeed: 0.8
+      attackSpeed: 1.2
       currentAttackAnimModifier: 2
       canCharge: 1
       autoUnblockable: 0
       chargeDamageScaling: 2
       overideChargeAttack: 1
       chargedAttackIndex: 10
-      nextAttackIndex: 2
+      nextAttackIndex: 0
       overrideNextAttackOnHit: 1
-      nextAttackHitIndex: 8
+      nextAttackHitIndex: 11
       projectileData: {fileID: 0}
       projectileFX: {fileID: 0}
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
     - animation: PrimaryAttack
       damage: 7
-      attackSpeed: 0.8
-      currentAttackAnimModifier: 0
+      attackSpeed: 1.2
+      currentAttackAnimModifier: 2
       canCharge: 0
       autoUnblockable: 1
       chargeDamageScaling: 2
@@ -222,7 +222,7 @@ MonoBehaviour:
       projectileFX: {fileID: 0}
       additionalShotAngle: []
       additionalProjectileDamageMultiplier: 0
-    - animation: PrimaryAttackFinisher
+    - animation: ChargePrimaryAttack
       damage: 12
       attackSpeed: 1
       currentAttackAnimModifier: 1

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 using Enfabler.Attacking;
 
 public class CharacterCombat : MonoBehaviour, ICanDealDamage
@@ -12,6 +13,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     protected Health health;
     protected BaseCharacterController controller;
     protected CharacterMovement characterMovement;
+    CinemachineImpulseSource impulseSource;
     protected Attacks attacks;
 
     [Header("Movement")]
@@ -131,22 +133,17 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
     {
         controller = GetComponent<BaseCharacterController>();
         characterMovement = GetComponent<CharacterMovement>();
+
         animator = GetComponent<Animator>();
         animator.SetBool("UseFastRoll", fastdodge);
         baseUseRootMotion = animator.applyRootMotion;
         baseAnimationSpeed = animator.speed;
         ResetAnimSpeed();
+
         health = GetComponent<Health>();
         ignore.Add(health);
-        InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
-        ForceEndAttack();
-        attacks = GetComponent<Attacks>();
 
-        setWeapon = GetComponentInChildren<SetWeapon>();
-        SetupWeapon(0);
-
-        arrowCapacity = GetComponentInChildren<ArrowCapacityUI>();
-        SetupArrows();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
 
         onAttackHit += OnAttackHit;
         hitParry += HitParry;
@@ -161,6 +158,16 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         dodgeStartDelegate += OnDodgeStart;
         dodgeEndDelegate += OnDodgeEnd;
         phaseDelegate += Phase;
+
+        InvokeRepeating("CurrentTarget", 0, currentTargetCastInterval);
+        ForceEndAttack();
+        attacks = GetComponent<Attacks>();
+
+        setWeapon = GetComponentInChildren<SetWeapon>();
+        SetupWeapon(0);
+
+        arrowCapacity = GetComponentInChildren<ArrowCapacityUI>();
+        SetupArrows();
     }
 
     private void Update()
@@ -529,18 +536,26 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
 
         CheckMoveToTarget(transform.position + (transform.forward * targetSphereRadius), transform.forward, snapLayerMask, moveDistanceThreshold.y);
 
-        //InvokeRepeating("AttackCheck", 0f, 0.0001f);
-        attackCheck = true;
+        InvokeRepeating("AttackCheck", 0f, 0.0001f);
+        //attackCheck = true;
 
         PlaySoundEffect(weapon.attackClip, weapon.soundVolume);
     }
 
     public void ForceEndAttack()
     {
+        EndAttack();
+        chargingAttack = E_AttackType.None;
+        canSaveAttackInput = false;
+    }
+
+    public void EndAttack()
+    {
+        untarget();
+
         animator.speed = currentAnimationSpeed;
         animator.applyRootMotion = baseUseRootMotion;
         unblockable = false;
-        chargingAttack = E_AttackType.None;
         additionalDamage = 0;
 
         //Clear damage and list of enemies hit
@@ -560,15 +575,7 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
         hitObjects.Clear();
         damage = 0;
 
-        //CancelInvoke("AttackCheck");
-        attackCheck = false;
-        canSaveAttackInput = false;
-    }
-
-    public void EndAttack()
-    {
-        untarget();
-        ForceEndAttack();
+        CancelInvoke("AttackCheck");
     }
 
     public void CheckMoveToTarget(Vector3 origin, Vector3 dir, LayerMask layerMask, float maxDistance = 5)
@@ -738,6 +745,10 @@ public class CharacterCombat : MonoBehaviour, ICanDealDamage
             {
                 hitObjects.Add(collider);
                 HitUndamageableGO(hitPos);
+
+                if (impulseSource == null) return;
+
+                impulseSource.GenerateImpulseWithForce(damage * 0.05f);
             }
 
             return;
